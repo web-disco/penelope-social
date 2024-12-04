@@ -1,13 +1,13 @@
 import gsap from "gsap";
-import lenisInstance from "../utils/lenis";
 
 const navbarEffect = () => {
   const navbar = document.querySelector(".navbar");
 
   if (!navbar) return;
 
-  lenisInstance.on("scroll", (e) => {
-    const { targetScroll } = e;
+  // Add a scroll event listener to the window
+  window.addEventListener("scroll", () => {
+    const targetScroll = window.scrollY; // Get the vertical scroll position
 
     if (targetScroll > 100) {
       // Apply background with slight transparency and blur effect
@@ -22,6 +22,8 @@ const navbarEffect = () => {
       gsap.to(navbar, {
         background: "rgba(40, 38, 41, 0)", // Fully transparent
         backdropFilter: "blur(0px)", // Remove blur
+        ease: "none",
+        duration: 0.3,
       });
     }
   });

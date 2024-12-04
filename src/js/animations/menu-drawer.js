@@ -94,8 +94,10 @@ const menuDrawer = () => {
   menuButton.addEventListener("click", () => {
     if (isOpen) {
       closeMenu();
+      lenisInstance.start();
     } else {
       openMenu();
+      lenisInstance.stop();
     }
     isOpen = !isOpen;
   });

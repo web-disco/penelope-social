@@ -30,8 +30,8 @@ const pageLoader = () => {
             delay: 0.2,
             duration: 1.3,
             onComplete: () => {
-              lenisInstance.start();
               loader.remove();
+              lenisInstance.start();
             },
           }
         );

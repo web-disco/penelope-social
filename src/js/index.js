@@ -5,9 +5,9 @@ import "lenis/dist/lenis.css";
 
 import { navbarEffect } from "./animations/navbar-effect";
 
+import lenisInstance from "./utils/lenis";
 import { homeMenusAnimation } from "./animations/home-menus";
 import { menuDrawer } from "./animations/menu-drawer";
-import lenisInstance from "./utils/lenis";
 import { productSlider } from "./sliders/product-slider";
 import { titleAnimations } from "./animations/title-animations";
 import { textAnimations } from "./animations/text-animations";
@@ -18,8 +18,7 @@ import { pageLoader } from "./animations/page-loader";
 document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger, SplitText);
 
-  ScrollTrigger.normalizeScroll(true);
-
+  // smooth scroll
   lenisInstance.start();
 
   // animations
