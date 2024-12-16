@@ -1,13 +1,27 @@
 import gsap from "gsap";
 
 const navbarEffect = () => {
+  let scrollPos = 0;
+
   const navbar = document.querySelector(".navbar");
 
   if (!navbar) return;
 
   // Add a scroll event listener to the window
-  window.addEventListener("scroll", () => {
+  window.addEventListener("scroll", (e) => {
     const targetScroll = window.scrollY; // Get the vertical scroll position
+
+    // detects new state and compares it with the new one
+    if (document.body.getBoundingClientRect().top > scrollPos)
+      gsap.to(navbar, {
+        yPercent: 0,
+      });
+    else
+      gsap.to(navbar, {
+        yPercent: -100,
+      });
+    // saves the new position for iteration.
+    scrollPos = document.body.getBoundingClientRect().top;
 
     if (targetScroll > 100) {
       // Apply background with slight transparency and blur effect
