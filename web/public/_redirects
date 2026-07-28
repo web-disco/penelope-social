@@ -1,0 +1,3 @@
+# Redirects the Webflow site served. Verified against the live responses.
+/reservations  https://tables.toasttab.com/restaurants/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/reserve?partySize=2  301
+/events        /catering-events                                                                                  301

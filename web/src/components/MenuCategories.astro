@@ -1,0 +1,69 @@
+---
+/**
+ * .menu-category sections — one per course, each an anchor target for the
+ * quick-links row above.
+ *
+ * On Webflow these were CMS collection lists; Webflow rendered the empty state
+ * (`.w-dyn-empty` "No items found.") for categories with no published items,
+ * which /menus/lunch still shows. That is reproduced so the page matches.
+ */
+import { container, pageSubHeading } from '../lib/ui'
+import LineText from './LineText.astro'
+
+interface Props {
+  categories: any[]
+}
+const { categories } = Astro.props
+---
+
+{
+  categories.map((category) => (
+    <div id={category.anchorId} class="menu-category">
+      <div class={container}>
+        <h2 class={pageSubHeading}>{category.title}</h2>
+        {category.description && (
+          <p class="menu-description mt-[-30px] mb-10">
+            <LineText text={category.description} />
+          </p>
+        )}
+        <div class="menu-category-wrapper w-dyn-list">
+          {category.items?.length ? (
+            <div
+              role="list"
+              class="menu-category-list grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-[60px] wf-md:grid-cols-2 wf-md:gap-10 wf-sm:grid-cols-1 wf-xs:gap-5"
+            >
+              {category.items.map((item: any) => (
+                <div role="listitem" class="menu-category-item border-t-2 border-charcoal">
+                  <div class="menu-item-heading mt-5 flex items-start justify-between gap-10 pb-5 wf-sm:gap-5 wf-xs:gap-5">
+                    <div class="menu-item-title-wrap flex items-center justify-center gap-[10px]">
+                      <h3 class="menu-item-title mt-0 mb-0 font-body text-[24px] font-medium text-charcoal wf-xs:text-[18px]">
+                        {item.title}
+                      </h3>
+                    </div>
+                    {/* A few items have no price. Webflow still emitted the
+                        heading and hid it with `.w-dyn-bind-empty`; omitting it
+                        renders identically. */}
+                    {item.price && (
+                      <h3 class="heading-menu-price mt-0 mb-0 font-body font-medium text-charcoal wf-xs:text-[18px]">
+                        {item.price}
+                      </h3>
+                    )}
+                  </div>
+                  {item.description && (
+                    <div class="menu-item-description">
+                      <p>{item.description}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="w-dyn-empty">
+              <div>No items found.</div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  ))
+}

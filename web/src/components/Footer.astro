@@ -1,0 +1,200 @@
+---
+/**
+ * .footer — newsletter band (green) + the four-column footer grid.
+ *
+ * The homepage variant omits `.is-not-home`, which only changes the mobile
+ * bottom padding (the homepage has a fixed order/reservations bar at ≤767px).
+ *
+ * Grid placement note: Webflow keyed the footer's column spans to `#w-node-*`
+ * IDs. All of them resolve to `span 1 / span 1` (the grid default) except the
+ * three paragraphs inside `.hours-wrap`, which span both columns — reproduced
+ * below as `col-span-2`.
+ */
+import { heading, containerFooter, container } from '../lib/ui'
+import { imageUrl } from '../lib/image'
+import NewsletterForm from './NewsletterForm.astro'
+import LineText from './LineText.astro'
+
+interface Props {
+  settings: any
+  isHome?: boolean
+}
+const { settings, isHome = false } = Astro.props
+
+const footer = settings.footer ?? {}
+const newsletter = footer.newsletter ?? {}
+const menus = footer.menus ?? {}
+const hours = footer.hours ?? {}
+const contact = footer.contact ?? {}
+const copyright = footer.copyright ?? {}
+
+const logoSrc = imageUrl(footer.logo) || '/penelope-logo-lockup-white.svg'
+
+/* .footer-text — 14px/160% beige, 180% line-height at ≤767 */
+const footerText = 'footer-text text-beige font-body text-[14px] font-medium leading-[160%] wf-sm:leading-[180%]'
+const footerTextHours = footerText.replace('font-medium', 'font-normal')
+const footerTextSpan = 'footer-text-span text-beige font-normal no-underline'
+---
+
+<div
+  class:list={[
+    'footer -z-[1] mt-20 bg-charcoal',
+    isHome ? 'wf-sm:pb-20' : 'is-not-home wf-sm:pb-5',
+  ]}
+>
+  <!-- .footer-newsletter — the green band -->
+  <div class="footer-newsletter bg-green">
+    <div class={container}>
+      <h2 class={heading.light}>{newsletter.heading}</h2>
+      <div class="footer-newsletter-wrap mx-auto max-w-[650px] text-center">
+        <p
+          class="is-light newsletter-text mb-[10px] font-body text-[26px] leading-[150%] text-beige wf-sm:text-[24px] wf-xs:text-[18px]"
+        >
+          {newsletter.text}
+        </p>
+        <NewsletterForm newsletter={newsletter} variant="footer" />
+      </div>
+    </div>
+  </div>
+
+  <div class={containerFooter}>
+    <div
+      class="footer-grid grid auto-cols-[1fr] grid-cols-4 grid-rows-[auto] gap-10 wf-md:grid-cols-1"
+    >
+      <!-- logo -->
+      <div class="footer-content">
+        <a
+          href="/"
+          aria-current={isHome ? 'page' : undefined}
+          class:list={[
+            'footer-logo-link w-inline-block wf-md:w-full',
+            isHome && 'w--current w-full pb-10',
+          ]}
+        >
+          <img
+            src={logoSrc}
+            loading="lazy"
+            alt={footer.logoAlt ?? 'Penelope Social Logo'}
+            class="footer-logo w-full max-w-[75%] wf-md:mx-auto wf-md:mb-10 wf-md:block wf-md:max-w-[50%] wf-md:text-left wf-xs:mb-0 wf-xs:max-w-full"
+          />
+        </a>
+      </div>
+
+      <!-- menus -->
+      <div class="footer-content">
+        <h4
+          class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
+        >
+          {menus.heading}
+        </h4>
+        <div class={footerText}>
+          <a href={menus.blurbUrl ?? '/menus'} class={footerTextSpan}>
+            <LineText text={menus.blurb} />
+          </a>
+        </div>
+        <div class="footer-menu-wrap flex flex-col gap-[10px]">
+          {
+            (menus.links ?? []).map((link: any) => (
+              <a
+                href={link.url}
+                class="footer-menu-link mb-[3px] inline-block font-body font-medium leading-none text-beige uppercase no-underline"
+              >
+                {link.label}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- hours & location -->
+      <div class="footer-content is-hours">
+        <h4
+          class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
+        >
+          {hours.heading}
+        </h4>
+        <div class="hours-wrap grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-0 wf-xs:grid-cols-1">
+          <p class={`${footerText} is-location col-span-2 mb-0 normal-case`}>
+            <strong>{hours.locationLabel}</strong>
+            <br />
+            <a href={hours.mapUrl} target="_blank" class={footerTextSpan}>
+              <LineText text={hours.address} />
+            </a>
+          </p>
+          {
+            (hours.blocks ?? []).map((block: any) => (
+              <p class={`${footerTextHours} is-hours col-span-2`}>
+                <strong>
+                  {block.label}
+                  <br />
+                </strong>
+                {(block.lines ?? []).map((line: string) => (
+                  <>
+                    {line}
+                    <br />
+                  </>
+                ))}
+              </p>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- contact -->
+      <div class="footer-content">
+        <h4
+          class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
+        >
+          {contact.heading}
+        </h4>
+        <p class={footerText}>
+          P: <a href={`tel:${contact.phoneDigits}`} class={footerTextSpan}>{contact.phone}</a>
+          <br />
+          E: <a href={contact.emailHref} class={footerTextSpan}><LineText text={contact.email} /></a>
+        </p>
+        <div class="footer-socials gap-3">
+          <div class={footerText}>{contact.socialsLabel}</div>
+          <div class="footer-socials-wrap mt-[5px] flex gap-3">
+            {
+              (contact.socials ?? []).map((social: any) => (
+                <a href={social.url} target="_blank" class="footer-social-link w-inline-block">
+                  <img
+                    src={social.icon ?? `/icons/${social.platform}.svg`}
+                    loading="lazy"
+                    alt=""
+                    class="footer-social-icon w-7"
+                  />
+                </a>
+              ))
+            }
+          </div>
+        </div>
+        {
+          contact.googleReview?.url && (
+            <div class="footer-google-review mt-[60px] wf-sm:mt-10">
+              <a
+                href={contact.googleReview.url}
+                target="_blank"
+                class="btn secondary is-google-review border-2 border-beige bg-beige px-6 py-[18px] text-center font-body font-medium leading-none text-charcoal uppercase no-underline transition-[background-color,color] duration-[350ms] hover:bg-brand-transparent hover:text-beige wf-md:hidden wf-sm:block wf-xs:w-full"
+              >
+                {contact.googleReview.label}
+              </a>
+            </div>
+          )
+        }
+      </div>
+    </div>
+
+    <div class="footer-copyright mt-20 flex justify-between">
+      <div class="copyright-text font-body text-[12px] text-beige no-underline">{copyright.text}</div>
+      <div class="copyright-text font-body text-[12px] text-beige no-underline">
+        {copyright.creditPrefix}{' '}
+        <a
+          href={copyright.creditUrl}
+          target="_blank"
+          class="copyright-text font-body text-[12px] text-beige no-underline">{copyright.creditLabel}</a
+        >
+      </div>
+    </div>
+  </div>
+</div>

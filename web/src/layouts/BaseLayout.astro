@@ -1,0 +1,82 @@
+---
+import '../styles/global.css'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+import NewsletterModal from '../components/NewsletterModal.astro'
+import { getSiteSettings } from '../lib/data'
+import { imageUrl } from '../lib/image'
+
+interface Props {
+  title: string
+  description?: string
+  ogImage?: any
+  canonical?: string
+  noIndex?: boolean
+  /** The homepage carries the page loader and the hidden newsletter modal. */
+  isHome?: boolean
+}
+
+const { title, description, ogImage, canonical, noIndex = false, isHome = false } = Astro.props
+
+const settings = await getSiteSettings()
+const seo = settings.seo ?? {}
+
+const metaDescription = description ?? seo.metaDescription ?? ''
+const ogImageUrl = imageUrl(ogImage) || imageUrl(seo.ogImage)
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '')
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    {metaDescription && <meta name="description" content={metaDescription} />}
+    <meta property="og:title" content={title} />
+    {metaDescription && <meta property="og:description" content={metaDescription} />}
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta property="og:type" content="website" />
+    <meta name="twitter:title" content={title} />
+    {metaDescription && <meta name="twitter:description" content={metaDescription} />}
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {noIndex && <meta name="robots" content="noindex" />}
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/webclip.png" />
+    <link rel="canonical" href={canonicalUrl} />
+  </head>
+
+  <body>
+    <div class="page-wrapper relative">
+      <Navbar settings={settings} isHome={isHome} />
+
+      {isHome && <NewsletterModal settings={settings} />}
+
+      <div class="main-wrapper">
+        <slot />
+      </div>
+
+      <Footer settings={settings} isHome={isHome} />
+
+      {
+        isHome && (
+          /* .page-loader — grid on the homepage (Webflow shipped a per-page
+             `display:grid` override); hidden everywhere else. */
+          <div class="page-loader fixed inset-0 z-100 grid place-items-center gap-4 bg-charcoal">
+            <img
+              src="/penelope-logo-lockup-white.svg"
+              loading="lazy"
+              alt="Penelope Social Logo"
+              class="page-loader-logo px-10"
+            />
+          </div>
+        )
+      }
+    </div>
+
+    <script>
+      import '../scripts/main'
+    </script>
+  </body>
+</html>

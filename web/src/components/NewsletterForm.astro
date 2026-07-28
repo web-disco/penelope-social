@@ -1,0 +1,133 @@
+---
+/**
+ * Newsletter signup — posts to the Mailchimp list-manage endpoint.
+ *
+ * Webflow showed inline `.w-form-done` / `.w-form-fail` messages after an AJAX
+ * submit. To keep that exact behaviour the ported JS (src/scripts/newsletter.ts)
+ * submits to Mailchimp's `post-json` endpoint over JSONP and toggles the same
+ * two divs. If JS is unavailable the form still natively posts to the plain
+ * `subscribe/post` action, so it degrades to Mailchimp's own hosted
+ * confirmation page.
+ *
+ * Two variants, matching the two places the form appears:
+ *   footer — the green band at the bottom of every page
+ *   modal  — inside the (permanently hidden) `.newsletter` overlay on /
+ */
+interface Props {
+  newsletter: any
+  variant: 'footer' | 'modal'
+}
+const { newsletter, variant } = Astro.props
+
+const action: string = newsletter.formAction ?? ''
+/* Mailchimp's bot-trap field is named b_<u>_<id>, taken from the action URL. */
+let honeypotName = ''
+try {
+  const params = new URL(action).searchParams
+  const u = params.get('u')
+  const id = params.get('id')
+  if (u && id) honeypotName = `b_${u}_${id}`
+} catch {
+  /* no action configured yet — the form still renders */
+}
+
+const doneMessage = newsletter.successMessage ?? 'Thank you! Your submission has been received!'
+const failMessage = newsletter.errorMessage ?? 'Oops! Something went wrong while submitting the form.'
+---
+
+{
+  variant === 'footer' ? (
+    <div class="footer-newsletter-form-block w-form mx-auto mt-10 max-w-[600px]">
+      <form
+        id="newsletter-form"
+        name="Newsletter Form"
+        action={action}
+        method="post"
+        data-newsletter
+        class="footer-newsletter-form"
+      >
+        <div class="footer-newsletter-form-wrap flex wf-sm:flex-col wf-sm:gap-5">
+          <input
+            class="footer-newsletter-text-field wf-footer-newsletter-field block h-full min-h-[60px] w-full mb-0 border-y-2 border-l-2 border-r-0 border-solid border-beige bg-brand-transparent px-3 py-4 align-middle text-[14px] leading-[1.42857143] text-beige wf-sm:border-r-2"
+            maxlength="256"
+            name="EMAIL"
+            placeholder={newsletter.placeholder ?? 'Enter your email address'}
+            type="email"
+            id="Newsletter-Email"
+            required
+          />
+          <input
+            type="submit"
+            data-wait="Please wait..."
+            class="newsletter-btn inline-block cursor-pointer rounded-none border-2 border-beige bg-beige px-6 py-[18px] font-body leading-[inherit] text-charcoal uppercase no-underline transition-[background-color] duration-[350ms] hover:bg-brand-transparent hover:text-beige"
+            value={newsletter.buttonLabel ?? 'Subscribe'}
+          />
+        </div>
+        {honeypotName && (
+          <div class="mc-honeypot" style="position:absolute;left:-5000px" aria-hidden="true">
+            <input type="text" name={honeypotName} tabindex="-1" value="" />
+          </div>
+        )}
+      </form>
+      <div class="success-message w-form-done bg-charcoal p-5 text-center font-body font-medium text-beige">
+        <div>{doneMessage}</div>
+      </div>
+      <div class="error-message w-form-fail mt-[10px] bg-[#cc2020] p-[10px] text-beige">
+        <div>{failMessage}</div>
+      </div>
+    </div>
+  ) : (
+    <div class="w-form mb-[15px]">
+      <form
+        id="newsletter-modal-form"
+        name="Email Form"
+        action={action}
+        method="post"
+        data-newsletter
+        class="newsletter-form mt-5"
+      >
+        <input
+          class="text-field wf-newsletter-field mb-[10px] block h-[38px] w-full border-2 border-charcoal px-3 py-2 align-middle text-[14px] leading-[1.42857143] text-[#333]"
+          maxlength="256"
+          name="EMAIL"
+          placeholder="Email Address"
+          type="email"
+          id="email"
+          required
+        />
+        <div class="newsletter-consent-wrap mb-10">
+          <label class="w-checkbox newsletter-checkbox-wrap">
+            <div class="w-checkbox-input w-checkbox-input--inputType-custom newsletter-checkbox border-2 border-charcoal" />
+            <input
+              type="checkbox"
+              id="checkbox"
+              name="checkbox"
+              style="opacity:0;position:absolute;z-index:-1"
+            />
+            <span class="newsletter-checkbox-label w-form-label font-body text-[12px] font-medium" for="checkbox">
+              {newsletter.consentText ??
+                'I agree to receive marketing emails from Penelope Social. Unsubscribe at any time.'}
+            </span>
+          </label>
+        </div>
+        <input
+          type="submit"
+          data-wait="Please wait..."
+          class="btn primary w-button inline-block cursor-pointer rounded-none border-2 border-charcoal bg-charcoal px-6 py-[18px] text-center font-body font-medium leading-none text-beige uppercase no-underline transition-[background-color,color] duration-[350ms] hover:bg-beige hover:text-charcoal"
+          value="Subscribe"
+        />
+        {honeypotName && (
+          <div class="mc-honeypot" style="position:absolute;left:-5000px" aria-hidden="true">
+            <input type="text" name={honeypotName} tabindex="-1" value="" />
+          </div>
+        )}
+      </form>
+      <div class="w-form-done bg-[#ddd] p-5 text-center">
+        <div>{doneMessage}</div>
+      </div>
+      <div class="w-form-fail mt-[10px] bg-[#ffdede] p-[10px]">
+        <div>{failMessage}</div>
+      </div>
+    </div>
+  )
+}

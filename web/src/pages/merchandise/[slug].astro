@@ -1,0 +1,90 @@
+---
+/**
+ * .section-merch-details — sticky copy column beside a gallery of product
+ * shots. Each image carries `stagger-animation` on the live site and opens the
+ * lightbox; both are reproduced.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PageBanner from '../../components/blocks/PageBanner.astro'
+import { getAll, getSingleton } from '../../lib/data'
+import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
+import { container, heading, btn } from '../../lib/ui'
+
+export async function getStaticPaths() {
+  const products = await getAll<any>('merchProduct')
+  return products
+    .filter((product) => product.slug?.current)
+    .map((product) => ({ params: { slug: product.slug.current }, props: { product } }))
+}
+
+const { product } = Astro.props
+const seo = product.seo ?? {}
+const settings = await getSingleton<any>('siteSettings')
+const banner = product.banner ?? settings?.merchBanner
+const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charcoal wf-md:text-[38px] wf-sm:text-[28px] wf-xs:flex-none wf-xs:text-[22px]'
+---
+
+<BaseLayout
+  title={seo.metaTitle ?? product.title}
+  description={seo.metaDescription}
+  ogImage={seo.ogImage}
+  noIndex={seo.noIndex}
+>
+  <PageBanner block={{ image: banner }} />
+
+  <div class="section-merch-details">
+    <div class={container}>
+      <div
+        class="merch-details grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-10 wf-md:grid-cols-1"
+      >
+        <div class="merch-details-images-wrap w-dyn-list">
+          <div
+            role="list"
+            class="merch-details-images-list grid auto-cols-[1fr] grid-cols-1 grid-rows-[auto] gap-4 wf-md:grid-cols-2 wf-sm:grid-cols-2"
+          >
+            {
+              (product.images ?? []).map((image: any) => (
+                <div stagger-animation role="listitem" class="merch-details-images-item w-dyn-item">
+                  <a
+                    href={imageUrl(image)}
+                    data-gallery={`merch-${product.slug.current}`}
+                    class="merch-lightbox w-inline-block glightbox w-full"
+                  >
+                    <img
+                      src={imageUrl(image)}
+                      loading="lazy"
+                      alt={imageAlt(image)}
+                      sizes={imageSizes(image)}
+                      srcset={imageSrcset(image)}
+                      class="merch-image w-full"
+                    />
+                  </a>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="merch-details-content">
+          <div class="merch-details-content-wrap sticky top-[150px]">
+            <h1 class={heading.left}>{product.title}</h1>
+            <div class="merch-details-price-wrap flex pb-5 wf-md:mt-5 wf-sm:mt-0">
+              <h2 class={price}>$</h2>
+              <h2 class={price}>{product.price}</h2>
+            </div>
+            <p>{product.description}</p>
+            {
+              product.cta?.url && (
+                <div class="merch-details-link mt-10">
+                  <a href={product.cta.url} class={btn.primary}>
+                    {product.cta.label}
+                  </a>
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,94 @@
+---
+/**
+ * .navbar > .navbar-wrap + .menu-drawer
+ *
+ * The drawer is a *child* of the navbar on the live site (it inherits the
+ * navbar's z-index context), so the nesting is reproduced exactly here.
+ * The hamburger, the drawer slide and the bar-to-X morph are all driven by
+ * GSAP in src/scripts/menu.ts, keyed off `.menu-toggle` / `.menu-drawer`.
+ */
+import { btn, heading } from '../lib/ui'
+import { imageUrl } from '../lib/image'
+
+interface Props {
+  settings: any
+  isHome?: boolean
+}
+const { settings, isHome = false } = Astro.props
+
+const header = settings.header ?? {}
+const drawerLinks: any[] = header.drawerLinks ?? []
+const logoSrc = imageUrl(header.logo) || '/penelope-logo.svg'
+---
+
+<div
+  class="navbar fixed inset-x-0 top-0 bottom-auto z-20 w-full justify-between py-5 wf-sm:py-6"
+>
+  <div
+    class="navbar-wrap relative mx-auto flex w-full max-w-[1920px] items-center justify-between px-[25px] wf-md:justify-end"
+  >
+    <!-- .menu-toggle — three bars; GSAP rotates bars 0 and 2 into an X -->
+    <div class="menu-toggle relative z-40 flex cursor-pointer flex-col gap-2 wf-xs:gap-[6px]">
+      <div class="menu-toggle-bar h-0.5 w-10 bg-beige wf-xs:w-[30px]"></div>
+      <div class="menu-toggle-bar h-0.5 w-10 bg-beige wf-xs:w-[30px]"></div>
+      <div class="menu-toggle-bar h-0.5 w-10 bg-beige wf-xs:w-[30px]"></div>
+    </div>
+
+    <a
+      href="/"
+      aria-current={isHome ? 'page' : undefined}
+      class:list={[
+        'navbar-logo-link w-inline-block absolute left-1/2 z-30 -translate-x-1/2',
+        isHome && 'w--current',
+      ]}
+    >
+      <img
+        src={logoSrc}
+        loading="lazy"
+        alt={header.logoAlt ?? 'Penelope Logo'}
+        class="navbar-logo h-full w-[200px] wf-md:w-[180px] wf-xs:w-[120px]"
+      />
+    </a>
+
+    <div class="nav-btn-group flex gap-4">
+      {
+        header.orderOnline?.url && (
+          <a href={header.orderOnline.url} target="_blank" class={btn.navOutline}>
+            {header.orderOnline.label}
+          </a>
+        )
+      }
+      {
+        header.reservations?.url && (
+          <a href={header.reservations.url} target="_blank" class={btn.navSolid}>
+            {header.reservations.label}
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- .menu-drawer — slid in from left:-100vw to left:0 by GSAP -->
+  <div
+    data-lenis-prevent
+    class="menu-drawer fixed top-0 left-[-100vw] h-dvh min-h-dvh w-full overflow-auto bg-charcoal no-underline"
+  >
+    <div
+      class="menu-drawer-container mx-auto flex h-full w-full max-w-[1920px] items-center justify-start px-[25px]"
+    >
+      <div class="home-menu-items flex flex-col items-start justify-start gap-[5px]">
+        {
+          drawerLinks.map((link) => (
+            <a
+              href={link.url}
+              target={link.newTab ? '_blank' : undefined}
+              class="menu-drawer-link w-inline-block no-underline"
+            >
+              <h2 class={heading.menuItem}>{link.label}</h2>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>

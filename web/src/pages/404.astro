@@ -1,0 +1,33 @@
+---
+/**
+ * Webflow's 404. It renders outside the usual page chrome (no navbar/footer),
+ * so it doesn't use BaseLayout's shell.
+ */
+import '../styles/global.css'
+import { btn } from '../lib/ui'
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>404 | Penelope Social</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/webclip.png" />
+  </head>
+  <body>
+    <div class="utility-page-wrap flex h-screen max-h-full w-screen max-w-full items-center justify-center">
+      <div class="utility-page-content flex w-[420px] flex-col gap-5 text-center wf-xs:px-5">
+        <div class="_404-title font-heading text-[200px] leading-[90%] wf-sm:text-[150px] wf-xs:text-[100px]">
+          404
+        </div>
+        <div class="_404-text font-body text-[16px]">
+          The page you are looking for does not exist or has been moved.
+        </div>
+        <a href="/" class={`${btn.primary} w-button`}>Return home</a>
+      </div>
+    </div>
+  </body>
+</html>

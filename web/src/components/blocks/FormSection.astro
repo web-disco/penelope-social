@@ -1,0 +1,112 @@
+---
+/**
+ * .section-events-form — the two-column enquiry form used on /catering-events
+ * and /contact.
+ *
+ * The `_2-col` field wrappers and `.form-btn-wrap` carried `#w-node-*` grid
+ * rules of `span 1 / span 2`, reproduced here as `col-span-2`.
+ *
+ * Submission now goes to the Cloudflare Worker (`data-endpoint`), which
+ * verifies Turnstile and emails the submission on — see web/worker/index.ts.
+ */
+import { container, containerHalfTop, pageSubHeadingSmall, formField, formFieldTextarea, btn } from '../../lib/ui'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+
+const isEvents = block.variant === 'events'
+const fields: any[] = block.fields ?? []
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
+---
+
+<div class="section-events-form">
+  <div class={isEvents ? containerHalfTop : container}>
+    <div class="form-block w-form mx-auto mb-0 max-w-[900px] text-center">
+      <h2 class={pageSubHeadingSmall}>{block.heading}</h2>
+      <p>{block.intro}</p>
+
+      <form
+        id={isEvents ? 'events-form' : 'contact-form'}
+        name={isEvents ? 'Events Form' : 'Contact Form'}
+        data-endpoint={isEvents ? '/api/events' : '/api/contact'}
+        class="form mt-10 grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-4"
+      >
+        {
+          fields.map((field) => (
+            <div
+              class:list={[
+                'form-field-wrap',
+                field.fullWidth && '_2-col col-span-2',
+              ]}
+            >
+              {field.type === 'select' ? (
+                <select
+                  id={field.id}
+                  name={field.name}
+                  required={field.required}
+                  class={`${formField} w-select`}
+                >
+                  <option value="">{field.placeholder}</option>
+                  {(field.options ?? []).map((option: string) => (
+                    <option value={option}>{option}</option>
+                  ))}
+                </select>
+              ) : field.type === 'textarea' ? (
+                <textarea
+                  id={field.id}
+                  name={field.name}
+                  maxlength="5000"
+                  placeholder={field.placeholder}
+                  required={field.required}
+                  class={`${formFieldTextarea} textarea w-input`}
+                />
+              ) : (
+                <input
+                  class={`${formField} w-input`}
+                  maxlength="256"
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  type={field.type ?? 'text'}
+                  id={field.id}
+                  required={field.required}
+                />
+              )}
+              {field.note && (
+                <div class="form-field-text mb-6 text-left font-body text-[14px] font-normal italic text-charcoal">
+                  {field.note}
+                </div>
+              )}
+            </div>
+          ))
+        }
+
+        <div class="form-btn-wrap col-span-2 flex items-end justify-center">
+          {
+            turnstileKey && (
+              <div class="cf-turnstile" data-sitekey={turnstileKey} data-size="flexible" />
+            )
+          }
+          <input
+            type="submit"
+            data-wait="Please wait..."
+            class={`${btn.primary} w-button cursor-pointer rounded-none`}
+            value={block.submitLabel ?? 'Submit'}
+          />
+        </div>
+      </form>
+
+      <div class="success-message-3 w-form-done bg-charcoal p-5 text-center font-body text-beige">
+        <div>{block.successMessage ?? 'Thank you! Your submission has been received!'}</div>
+      </div>
+      <div class="w-form-fail mt-[10px] bg-[#ffdede] p-[10px]">
+        <div>
+          {block.errorMessage ?? 'Oops! Something went wrong while submitting the form.'}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{turnstileKey && <script is:inline async src="https://challenges.cloudflare.com/turnstile/v0/api.js" />}

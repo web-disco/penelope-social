@@ -1,0 +1,79 @@
+---
+/**
+ * The two-column image/copy sections on the homepage:
+ *   .section-home-bread  — image first, copy second
+ *   .home-events         — copy first, image second
+ *
+ * Both collapse to one column at ≤991px. The events variant additionally
+ * switches to `display:flex` with `wrap-reverse`, which is what pushes the
+ * image above the copy on mobile.
+ */
+import { container, heading, btn } from '../../lib/ui'
+import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+const imageFirst = block.layout !== 'copy-first'
+
+const wrapClass = imageFirst
+  ? 'home-bread-wrap grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-[60px] wf-md:grid-cols-1 wf-md:gap-[30px]'
+  : 'home-events-wrap grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-[60px] wf-md:flex wf-md:flex-wrap-reverse wf-md:grid-cols-1 wf-md:gap-[30px]'
+
+const imageClass = imageFirst
+  ? 'home-bread-image aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]'
+  : 'home-events-image aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]'
+
+const contentClass = imageFirst
+  ? 'home-bread-content flex flex-col items-start justify-center'
+  : 'home-events-content flex flex-col items-start justify-center'
+
+const ctaClass = imageFirst ? 'home-bread-cta mt-10 wf-sm:mt-5' : 'events-cta mt-10 wf-sm:mt-5'
+---
+
+<div class={imageFirst ? 'section-home-bread' : 'home-events'}>
+  <div class={container}>
+    <div class={wrapClass}>
+      {
+        imageFirst && (
+          <img
+            src={imageUrl(block.image)}
+            loading="eager"
+            sizes={imageSizes(block.image)}
+            srcset={imageSrcset(block.image)}
+            alt={imageAlt(block.image)}
+            class={imageClass}
+          />
+        )
+      }
+
+      <div class={contentClass}>
+        <h2 class={heading.medium}>{block.heading}</h2>
+        <p>{block.body}</p>
+        {
+          block.cta?.url && (
+            <div class={ctaClass}>
+              <a href={block.cta.url} class={btn.primary}>
+                {block.cta.label}
+              </a>
+            </div>
+          )
+        }
+      </div>
+
+      {
+        !imageFirst && (
+          <img
+            src={imageUrl(block.image)}
+            loading="eager"
+            sizes={imageSizes(block.image)}
+            srcset={imageSrcset(block.image)}
+            alt={imageAlt(block.image)}
+            class={imageClass}
+          />
+        )
+      }
+    </div>
+  </div>
+</div>

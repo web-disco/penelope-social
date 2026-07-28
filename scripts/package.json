@@ -1,0 +1,14 @@
+{
+  "name": "@penelope/scripts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "migrate": "node migrate.js",
+    "migrate:dry": "node migrate.js --dry",
+    "compare": "node compare.js"
+  },
+  "dependencies": {
+    "@sanity/client": "^7.25.0",
+    "jsdom": "^30.0.0"
+  }
+}

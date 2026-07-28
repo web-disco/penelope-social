@@ -1,0 +1,27 @@
+---
+/**
+ * .section-image-grid — a 4x2 grid placeholder that ships on the contact and
+ * catering pages. Both render it empty on the live site; kept for DOM parity
+ * and so an editor can drop images in later.
+ */
+import { container } from '../../lib/ui'
+import { imageUrl, imageAlt } from '../../lib/image'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+const images: any[] = block.images ?? []
+---
+
+<div
+  class="section-image-grid auto-cols-[1fr] grid-cols-[1fr_1fr_1fr_1fr] grid-rows-[auto_auto] gap-4"
+>
+  <div class={container}>
+    {
+      images.map((image) => (
+        <img src={imageUrl(image)} loading="lazy" alt={imageAlt(image)} class="w-full object-cover" />
+      ))
+    }
+  </div>
+</div>

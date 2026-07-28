@@ -1,0 +1,58 @@
+---
+/**
+ * .about-content — a centred 900px column used to tell the bakery story.
+ * Each instance can hold body copy, an inline video, and/or a three-up image
+ * gallery. On the live site the gallery images open Webflow's native lightbox;
+ * here they open GLightbox (see src/scripts/lightbox.ts).
+ */
+import { PortableText } from 'astro-portabletext'
+import { containerNoTop } from '../../lib/ui'
+import { imageUrl, imageAlt } from '../../lib/image'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+const gallery: any[] = block.gallery ?? []
+const galleryId = block.galleryId ?? 'story'
+---
+
+<div class="about-content mx-auto max-w-[900px] text-center">
+  <div class={containerNoTop}>
+    {block.body && <PortableText value={block.body} />}
+
+    {
+      block.video?.mp4Url && (
+        <div class="about-video-wrap flex items-center justify-center pt-[60px] pb-0">
+          <div class="video-code-block w-embed flex w-full items-center justify-center">
+            <video autoplay muted playsinline controls loop class="about-video">
+              <source src={block.video.mp4Url} type="video/mp4" />
+              {block.video.webmUrl && <source src={block.video.webmUrl} type="video/webm" />}
+            </video>
+          </div>
+        </div>
+      )
+    }
+
+    {
+      gallery.length > 0 && (
+        <div class="about-images-wrap grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-4">
+          {gallery.map((image) => (
+            <a
+              href={imageUrl(image)}
+              data-gallery={galleryId}
+              class="about-lightbox w-inline-block glightbox"
+            >
+              <img
+                src={imageUrl(image)}
+                loading="lazy"
+                alt={imageAlt(image)}
+                class="about-lightbox-image w-full"
+              />
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</div>

@@ -1,0 +1,38 @@
+---
+/**
+ * /menus/lunch, /menus/dinner, /menus/bar, /menus/catering
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import PageBanner from '../../components/blocks/PageBanner.astro'
+import PageHeading from '../../components/blocks/PageHeading.astro'
+import MenuCategories from '../../components/MenuCategories.astro'
+import { getAll } from '../../lib/data'
+
+export async function getStaticPaths() {
+  const menus = await getAll<any>('menu')
+  return menus
+    .filter((menu) => menu.slug?.current)
+    .map((menu) => ({ params: { slug: menu.slug.current }, props: { menu } }))
+}
+
+const { menu } = Astro.props
+const seo = menu.seo ?? {}
+---
+
+<BaseLayout
+  title={seo.metaTitle ?? menu.title}
+  description={seo.metaDescription}
+  ogImage={seo.ogImage}
+  noIndex={seo.noIndex}
+>
+  <PageBanner block={{ image: menu.banner }} />
+  <PageHeading
+    block={{
+      heading: menu.heading,
+      intro: menu.intro,
+      align: 'left',
+      quickLinks: menu.quickLinks,
+    }}
+  />
+  <MenuCategories categories={menu.categories ?? []} />
+</BaseLayout>

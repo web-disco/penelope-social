@@ -1,0 +1,47 @@
+---
+/**
+ * .section-intro — centred H1, a max-width intro paragraph and an optional
+ * pair of CTA buttons.
+ */
+import { container, heading, paragraph, btn } from '../../lib/ui'
+import LineText from '../LineText.astro'
+
+interface Props {
+  block: any
+  /** The homepage carries the site's only H1 here; inner pages do too. */
+  headingLevel?: 'h1' | 'h2'
+}
+const { block, headingLevel = 'h1' } = Astro.props
+const Heading = headingLevel
+const ctas: any[] = block.ctas ?? []
+---
+
+<div class="section-intro">
+  <div class={container}>
+    <Heading class={heading.base}><LineText text={block.heading} /></Heading>
+    {
+      block.intro && (
+        <div class="intro-text mx-auto max-w-[1000px]">
+          <p class={paragraph.intro}>
+            <LineText text={block.intro} />
+          </p>
+        </div>
+      )
+    }
+    {
+      ctas.length > 0 && (
+        <div class="intros-cta mt-10 flex items-center justify-center gap-5 wf-xs:flex-col">
+          {ctas.map((cta) => (
+            <a
+              href={cta.url}
+              target={cta.newTab ? '_blank' : undefined}
+              class={cta.style === 'outline' ? btn.outline : btn.primary}
+            >
+              {cta.label}
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+</div>

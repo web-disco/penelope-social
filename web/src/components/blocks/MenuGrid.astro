@@ -1,0 +1,57 @@
+---
+/**
+ * .section-menus — the four square menu cards.
+ *
+ * `.menu-btn-wrap` is `display:none` at every breakpoint on the live site, so
+ * the "View menu" link never renders visibly; the whole image is the link.
+ * It is kept in the DOM to match.
+ */
+import { containerNoTop, heading, menuBtn } from '../../lib/ui'
+import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+const cards: any[] = block.cards ?? []
+---
+
+<div id="menu" class="section-menus">
+  <div class={containerNoTop}>
+    {
+      block.heading && (
+        <div class="home-menu-heading mt-20 mb-10">
+          <h2 class={heading.medium}>{block.heading}</h2>
+        </div>
+      )
+    }
+    <div
+      class="menu-wrap grid auto-cols-[1fr] grid-cols-4 grid-rows-[auto] gap-10 wf-md:grid-cols-2 wf-md:gap-[30px] wf-sm:gap-5 wf-xs:grid-cols-1 wf-xs:gap-10"
+    >
+      {
+        cards.map((card) => (
+          <div class="menu flex flex-col">
+            <a href={card.url} class="menu-link w-inline-block relative h-full max-h-[550px] w-full no-underline">
+              <img
+                src={imageUrl(card.image)}
+                loading="lazy"
+                sizes={imageSizes(card.image)}
+                srcset={imageSrcset(card.image)}
+                alt={imageAlt(card.image)}
+                class="home-menu-image aspect-square h-full w-full object-cover"
+              />
+            </a>
+            <h2 class="menu-title mt-[15px] mb-0 font-heading text-[28px] font-normal text-charcoal">
+              {card.title}
+            </h2>
+            <div class="menu-btn-wrap mt-0 hidden">
+              <a href={card.buttonUrl ?? card.url} class={menuBtn}>
+                {card.buttonLabel ?? 'View menu'}
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>

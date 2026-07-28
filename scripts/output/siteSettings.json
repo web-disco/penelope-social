@@ -1,0 +1,219 @@
+[
+  {
+    "_id": "siteSettings",
+    "_type": "siteSettings",
+    "title": "Site Settings",
+    "header": {
+      "_type": "header",
+      "logo": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/67390753f54ebe0d0284a0b4_penelope-logo.svg",
+        "alt": "Penelope Logo"
+      },
+      "logoAlt": "Penelope Logo",
+      "orderOnline": {
+        "_type": "link",
+        "label": "Order Online",
+        "url": "https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard",
+        "newTab": true
+      },
+      "reservations": {
+        "_type": "link",
+        "label": "reservations",
+        "url": "/reservations",
+        "newTab": true
+      },
+      "drawerLinks": [
+        {
+          "_type": "navLink",
+          "_key": "our-menus",
+          "label": "Our Menus",
+          "url": "/menus",
+          "newTab": false
+        },
+        {
+          "_type": "navLink",
+          "_key": "bakery",
+          "label": "Bakery",
+          "url": "/sourdough-bakery",
+          "newTab": false
+        },
+        {
+          "_type": "navLink",
+          "_key": "about-us",
+          "label": "About Us",
+          "url": "/about",
+          "newTab": false
+        },
+        {
+          "_type": "navLink",
+          "_key": "events",
+          "label": "Events",
+          "url": "/catering-events",
+          "newTab": false
+        },
+        {
+          "_type": "navLink",
+          "_key": "gift-cards",
+          "label": "Gift Cards",
+          "url": "https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard",
+          "newTab": true
+        },
+        {
+          "_type": "navLink",
+          "_key": "merch",
+          "label": "Merch",
+          "url": "/merchandise",
+          "newTab": false
+        },
+        {
+          "_type": "navLink",
+          "_key": "catering-events",
+          "label": "Catering & Events",
+          "url": "/events?general-inquiry",
+          "newTab": false
+        }
+      ]
+    },
+    "footer": {
+      "_type": "footer",
+      "logo": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673d1abe9e2b07f98cf17a5e_Penelope_logo-lockup-white%201.svg",
+        "alt": "Penelope Social Logo"
+      },
+      "logoAlt": "Penelope Social Logo",
+      "newsletter": {
+        "_type": "newsletter",
+        "heading": "stay in the loop.",
+        "text": "Sign up for our newsletter and be the first to know about exclusive offers.",
+        "formAction": "https://penelopesocial.us7.list-manage.com/subscribe/post?u=f142c39dc20574d54b2aaee71&id=855bbd4ecf&f_id=00104ae4f0",
+        "placeholder": "Enter your email address",
+        "buttonLabel": "Subscribe",
+        "successMessage": "Thank you! Your submission has been received!",
+        "errorMessage": "Oops! Something went wrong while submitting the form."
+      },
+      "menus": {
+        "_type": "footerMenus",
+        "heading": "menus",
+        "blurb": "Explore our menus featuring the best sourdough focaccia sandwiches, pizzas , shareable's and handcrafted cocktails.\n‍",
+        "blurbUrl": "/menus",
+        "links": [
+          {
+            "_type": "navLink",
+            "_key": "lunch",
+            "label": "lunch",
+            "url": "/menus/lunch"
+          },
+          {
+            "_type": "navLink",
+            "_key": "bar",
+            "label": "BAR",
+            "url": "/menus/bar"
+          },
+          {
+            "_type": "navLink",
+            "_key": "dinner",
+            "label": "DINNER",
+            "url": "/menus/dinner"
+          },
+          {
+            "_type": "navLink",
+            "_key": "catering",
+            "label": "Catering",
+            "url": "/menus/catering"
+          }
+        ]
+      },
+      "hours": {
+        "_type": "footerHours",
+        "heading": "hours & location",
+        "locationLabel": "LOCATION",
+        "address": "125 Hawkview Blvd, Woodbridge, ON L4H 2E2\n‍",
+        "mapUrl": "https://www.google.com/maps/dir//125+Hawkview+Blvd,+Woodbridge,+ON+L4H+2E2/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x882b2f5c52cae66f:0xd9f3c33a869788c9?sa=X&ved=1t:707&ictx=111",
+        "blocks": [
+          {
+            "_type": "hoursBlock",
+            "_key": "cafe",
+            "label": "CAFE",
+            "lines": [
+              "Mon — Sat, 9am - 3pm",
+              "Sun — 8am - 12pm",
+              "‍"
+            ]
+          },
+          {
+            "_type": "hoursBlock",
+            "_key": "bar",
+            "label": "BAR",
+            "lines": [
+              "Mon — Thur, 5pm - 10pm",
+              "Fri — Sat, 5pm - 1am"
+            ]
+          }
+        ]
+      },
+      "contact": {
+        "_type": "footerContact",
+        "heading": "contact",
+        "phone": "(905) 607 0606",
+        "phoneDigits": "9056070606",
+        "email": "info@penelopesocial.com\n‍",
+        "emailHref": "mailto:info@penelopesocial.com?subject=Hey%2C%20Penelope!",
+        "socialsLabel": "FOLLOW OUR SOCIALS",
+        "socials": [
+          {
+            "_type": "social",
+            "_key": "instagram",
+            "platform": "instagram",
+            "url": "https://www.instagram.com/penelope.social/?hl=en",
+            "icon": "/icons/instagram.svg"
+          },
+          {
+            "_type": "social",
+            "_key": "tiktok",
+            "platform": "tiktok",
+            "url": "https://www.tiktok.com/@penelope.social?_t=8rVjknXtEaF&_r=1",
+            "icon": "/icons/tiktok.svg"
+          }
+        ],
+        "googleReview": {
+          "_type": "link",
+          "label": "Google Reviews",
+          "url": "https://www.google.com/search?q=penelope+social&oq=penelope+social&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDsyBggCEEUYQTIGCAMQRRg8MgYIBBBFGDwyBggFEC4YQNIBCDM0NTRqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8#lrd=0x882b2f14f3cd3fbb:0x3e54ffff5191a9bd,1,,,,",
+          "newTab": true
+        }
+      },
+      "copyright": {
+        "_type": "copyright",
+        "text": "© 2024 Penelope Social",
+        "creditPrefix": "Website by",
+        "creditLabel": "Web Disco",
+        "creditUrl": "https://www.webdisco.digital"
+      }
+    },
+    "newsletterModal": {
+      "_type": "newsletterModal",
+      "heading": "stay in the loop",
+      "text": "Get exclusive updates, special offers, and a first look at new menu items, events and merch.",
+      "consentText": "I agree to receive marketing emails from Penelope Social. Unsubscribe at any time."
+    },
+    "merchBanner": {
+      "_type": "image",
+      "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
+      "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-500.png 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-800.png 800w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-1080.png 1080w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png 1200w",
+      "_migrationSizes": "(max-width: 1200px) 100vw, 1200px",
+      "alt": "Image of Lunch menu platter"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Sourdough Bakery & Restaurant in Vaughan | Penelope Social",
+      "metaDescription": "Experience Penelope Social, a Sourdough Bakery & Restaurant in Vaughan. Indulge in freshly baked goods and delicious meals. Visit us today!",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
+        "alt": ""
+      }
+    }
+  }
+]

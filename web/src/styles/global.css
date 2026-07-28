@@ -1,0 +1,155 @@
+@import 'tailwindcss';
+
+/* Webflow's normalize + base typography + the w-* component rules the site
+   uses, carried over verbatim. The design is built on top of these defaults
+   (h2 = 32px/36px/700, .w-input = 38px/8px 12px, etc.), so reproducing them
+   exactly is what makes the Tailwind translation land pixel-for-pixel.
+   Imported into the base layer so utilities always win over it. */
+@import './webflow-base.css' layer(base);
+
+@import 'glightbox/dist/css/glightbox.min.css';
+
+/* ---------------------------------------------------------------------------
+   Theme — translated 1:1 from the compiled Webflow stylesheet
+   (penelope-social.webflow.shared.0467e5148.min.css)
+   --------------------------------------------------------------------------- */
+@theme {
+  /* :root { --colors--* } in the Webflow build */
+  --color-beige: #f7f3df;
+  --color-charcoal: #282629;
+  --color-green: #2e442e;
+  /* Webflow's `--colors--color` token is transparent (#fff0) */
+  --color-brand-transparent: #fff0;
+
+  --font-heading: Elmoder, Arial, sans-serif;
+  --font-body: 'Sweet Sans Pro', Arial, sans-serif;
+
+  --breakpoint-md: 768px;
+}
+
+/* Webflow authors its responsive overrides as max-width queries, cascading
+   991 -> 767 -> 479. Registering the variants in that order reproduces the
+   same cascade in the generated stylesheet. */
+@custom-variant wf-md (@media (max-width: 991px));
+@custom-variant wf-sm (@media (max-width: 767px));
+@custom-variant wf-xs (@media (max-width: 479px));
+
+/* ---------------------------------------------------------------------------
+   Fonts — self-hosted copies of the OTFs Webflow served from its CDN
+   --------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Sweet Sans Pro';
+  src: url('/fonts/SweetSansPro-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Sweet Sans Pro';
+  src: url('/fonts/SweetSansPro-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Sweet Sans Pro';
+  src: url('/fonts/SweetSansPro-Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Elmoder';
+  src: url('/fonts/Elmoder-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------------------
+   Site-level element defaults (Webflow's `body` and `p` rules)
+   --------------------------------------------------------------------------- */
+@layer base {
+  body {
+    background-color: var(--color-beige);
+    color: #333;
+    font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  p {
+    color: var(--color-charcoal);
+    margin-bottom: 10px;
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 150%;
+  }
+  @media screen and (max-width: 479px) {
+    p {
+      font-size: 16px;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   The thin custom layer — things that are clearer (or only possible) as real
+   CSS. Everything else in this port is Tailwind utilities.
+   --------------------------------------------------------------------------- */
+@layer components {
+  /* Custom scrollbar — from the site's per-page <style> block */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f7f3df;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #282629;
+  }
+
+  /* iOS rounded-border fix — from the site's per-page <style> block */
+  textarea,
+  input {
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+
+  /* GSAP SplitText line wrapper — from the site's <style> block */
+  .line {
+    overflow: hidden;
+  }
+
+  /* NOTE: the live site ships a `.home-menu-btn::after` underline rule in its
+     homepage embed, but nothing carries that class (the buttons are
+     `.menu-btn`), so it renders nothing — verified against the live DOM, where
+     `::after` computes to `content: none`. Deliberately not ported. */
+
+  /* Webflow's per-variant placeholder styling */
+  .wf-field::placeholder {
+    color: var(--color-charcoal);
+  }
+  .wf-newsletter-field::placeholder {
+    color: var(--color-charcoal);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 130%;
+  }
+  .wf-footer-newsletter-field::placeholder {
+    color: var(--color-beige);
+    font-family: var(--font-body);
+    font-weight: 500;
+  }
+
+  /* .about-video — from the bakery page's embedded <style> block */
+  .about-video {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  /* .page-loader-logo starts invisible; the loader timeline fades it in.
+     Webflow shipped this as a homepage embed. */
+  .page-loader-logo {
+    opacity: 0;
+  }
+}

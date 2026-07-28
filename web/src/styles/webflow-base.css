@@ -1,0 +1,691 @@
+/* Webflow normalize + base + the w-* component rules this site uses.
+   Extracted verbatim from penelope-social.webflow.shared.0467e5148.min.css.
+   This is the reset the design sits on; carrying it exactly is what keeps the
+   Tailwind translation pixel-identical. Do not hand-edit — regenerate from the
+   source stylesheet if it ever changes. */
+
+html {
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+  font-family:sans-serif}
+
+body {
+  margin:0}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {
+  display:block}
+
+audio,canvas,progress,video {
+  vertical-align:baseline;
+  display:inline-block}
+
+audio:not([controls]) {
+  height:0;
+  display:none}
+
+[hidden],template {
+  display:none}
+
+a {
+  background-color:#0000}
+
+a:active,a:hover {
+  outline:0}
+
+abbr[title] {
+  border-bottom:1px dotted}
+
+b,strong {
+  font-weight:700}
+
+dfn {
+  font-style:italic}
+
+h1 {
+  margin:.67em 0;
+  font-size:2em}
+
+mark {
+  color:#000;
+  background:#ff0}
+
+small {
+  font-size:80%}
+
+sub,sup {
+  vertical-align:baseline;
+  font-size:75%;
+  line-height:0;
+  position:relative}
+
+sup {
+  top:-.5em}
+
+sub {
+  bottom:-.25em}
+
+img {
+  border:0}
+
+svg:not(:root) {
+  overflow:hidden}
+
+hr {
+  box-sizing:content-box;
+  height:0}
+
+pre {
+  overflow:auto}
+
+code,kbd,pre,samp {
+  font-family:monospace;
+  font-size:1em}
+
+button,input,optgroup,select,textarea {
+  color:inherit;
+  font:inherit;
+  margin:0}
+
+button {
+  overflow:visible}
+
+button,select {
+  text-transform:none}
+
+button,html input[type=button],input[type=reset] {
+  -webkit-appearance:button;
+  cursor:pointer}
+
+button[disabled],html input[disabled] {
+  cursor:default}
+
+button::-moz-focus-inner,input::-moz-focus-inner {
+  border:0;
+  padding:0}
+
+input {
+  line-height:normal}
+
+input[type=checkbox],input[type=radio] {
+  box-sizing:border-box;
+  padding:0}
+
+input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button {
+  height:auto}
+
+input[type=search] {
+  -webkit-appearance:none}
+
+input[type=search]::-webkit-search-cancel-button,input[type=search]::-webkit-search-decoration {
+  -webkit-appearance:none}
+
+legend {
+  border:0;
+  padding:0}
+
+textarea {
+  overflow:auto}
+
+optgroup {
+  font-weight:700}
+
+table {
+  border-collapse:collapse;
+  border-spacing:0}
+
+td,th {
+  padding:0}
+
+* {
+  box-sizing:border-box}
+
+html {
+  height:100%}
+
+body {
+  color:#333;
+  background-color:#fff;
+  min-height:100%;
+  margin:0;
+  font-family:Arial,sans-serif;
+  font-size:14px;
+  line-height:20px}
+
+img {
+  vertical-align:middle;
+  max-width:100%;
+  display:inline-block}
+
+html.w-mod-touch * {
+  background-attachment:scroll!important}
+
+.w-inline-block {
+  max-width:100%;
+  display:inline-block}
+
+.w-clearfix:before,.w-clearfix:after {
+  content:" ";
+  grid-area:1/1/2/2;
+  display:table}
+
+.w-clearfix:after {
+  clear:both}
+
+.w-button {
+  color:#fff;
+  line-height:inherit;
+  cursor:pointer;
+  background-color:#3898ec;
+  border:0;
+  border-radius:0;
+  padding:9px 15px;
+  text-decoration:none;
+  display:inline-block}
+
+input.w-button {
+  -webkit-appearance:button}
+
+html[data-w-dynpage] [data-w-cloak] {
+  color:#0000!important}
+
+.w-webflow-badge,.w-webflow-badge>img {
+  box-sizing:unset;
+  width:unset;
+  height:unset;
+  max-height:unset;
+  max-width:unset;
+  min-height:unset;
+  min-width:unset;
+  margin:unset;
+  padding:unset;
+  float:unset;
+  clear:unset;
+  border:unset;
+  border-radius:unset;
+  background:unset;
+  background-image:unset;
+  background-position:unset;
+  background-size:unset;
+  background-repeat:unset;
+  background-origin:unset;
+  background-clip:unset;
+  background-attachment:unset;
+  background-color:unset;
+  box-shadow:unset;
+  transform:unset;
+  direction:unset;
+  font-family:unset;
+  font-weight:unset;
+  color:unset;
+  font-size:unset;
+  line-height:unset;
+  font-style:unset;
+  font-variant:unset;
+  text-align:unset;
+  letter-spacing:unset;
+  -webkit-text-decoration:unset;
+  text-decoration:unset;
+  text-indent:unset;
+  text-transform:unset;
+  list-style-type:unset;
+  text-shadow:unset;
+  vertical-align:unset;
+  cursor:unset;
+  white-space:unset;
+  word-break:unset;
+  word-spacing:unset;
+  word-wrap:unset;
+  transition:unset}
+
+.w-webflow-badge {
+  white-space:nowrap;
+  cursor:pointer;
+  box-shadow:0 0 0 1px #0000001a,0 1px 3px #0000001a;
+  visibility:visible!important;
+  opacity:1!important;
+  z-index:2147483647!important;
+  color:#aaadb0!important;
+  width:auto!important;
+  height:auto!important;
+  overflow:unset!important;
+  background-color:#fff!important;
+  border-radius:3px!important;
+  margin:0!important;
+  padding:6px!important;
+  font-size:12px!important;
+  line-height:14px!important;
+  text-decoration:none!important;
+  display:inline-block!important;
+  position:fixed!important;
+  inset:auto 12px 12px auto!important;
+  transform:none!important}
+
+.w-webflow-badge>img {
+  position:unset;
+  visibility:unset!important;
+  opacity:1!important;
+  vertical-align:middle!important;
+  display:inline-block!important}
+
+h1,h2,h3,h4,h5,h6 {
+  margin-bottom:10px;
+  font-weight:700}
+
+h1 {
+  margin-top:20px;
+  font-size:38px;
+  line-height:44px}
+
+h2 {
+  margin-top:20px;
+  font-size:32px;
+  line-height:36px}
+
+h3 {
+  margin-top:20px;
+  font-size:24px;
+  line-height:30px}
+
+h4 {
+  margin-top:10px;
+  font-size:18px;
+  line-height:24px}
+
+h5 {
+  margin-top:10px;
+  font-size:14px;
+  line-height:20px}
+
+h6 {
+  margin-top:10px;
+  font-size:12px;
+  line-height:18px}
+
+p {
+  margin-top:0;
+  margin-bottom:10px}
+
+blockquote {
+  border-left:5px solid #e2e2e2;
+  margin:0 0 10px;
+  padding:10px 20px;
+  font-size:18px;
+  line-height:22px}
+
+figure {
+  margin:0 0 10px}
+
+figcaption {
+  text-align:center;
+  margin-top:5px}
+
+ul,ol {
+  margin-top:0;
+  margin-bottom:10px;
+  padding-left:40px}
+
+.w-embed:before,.w-embed:after {
+  content:" ";
+  grid-area:1/1/2/2;
+  display:table}
+
+.w-embed:after {
+  clear:both}
+
+fieldset {
+  border:0;
+  margin:0;
+  padding:0}
+
+button,[type=button],[type=reset] {
+  cursor:pointer;
+  -webkit-appearance:button;
+  border:0}
+
+.w-form {
+  margin:0 0 15px}
+
+.w-form-done {
+  text-align:center;
+  background-color:#ddd;
+  padding:20px;
+  display:none}
+
+.w-form-fail {
+  background-color:#ffdede;
+  margin-top:10px;
+  padding:10px;
+  display:none}
+
+label {
+  margin-bottom:5px;
+  font-weight:700;
+  display:block}
+
+.w-input,.w-select {
+  color:#333;
+  vertical-align:middle;
+  background-color:#fff;
+  border:1px solid #ccc;
+  width:100%;
+  height:38px;
+  margin-bottom:10px;
+  padding:8px 12px;
+  font-size:14px;
+  line-height:1.42857;
+  display:block}
+
+.w-input::placeholder,.w-select::placeholder {
+  color:#999}
+
+.w-input:focus,.w-select:focus {
+  border-color:#3898ec;
+  outline:0}
+
+.w-input[disabled],.w-select[disabled],.w-input[readonly],.w-select[readonly],fieldset[disabled] .w-input,fieldset[disabled] .w-select {
+  cursor:not-allowed}
+
+.w-input[readonly],.w-select[readonly] {
+  background-color:#eee}
+
+textarea.w-input,textarea.w-select {
+  height:auto}
+
+.w-select {
+  background-color:#f3f3f3}
+
+.w-select[multiple] {
+  height:auto}
+
+.w-form-label {
+  cursor:pointer;
+  margin-bottom:0;
+  font-weight:400;
+  display:inline-block}
+
+@media screen and (max-width:991px) {
+  .w-container {
+  max-width:728px}
+.w-hidden-main {
+  display:inherit!important}
+.w-hidden-medium {
+  display:none!important}
+.w-col-medium-1 {
+  width:8.33333%}
+.w-col-medium-2 {
+  width:16.6667%}
+.w-col-medium-3 {
+  width:25%}
+.w-col-medium-4 {
+  width:33.3333%}
+.w-col-medium-5 {
+  width:41.6667%}
+.w-col-medium-6 {
+  width:50%}
+.w-col-medium-7 {
+  width:58.3333%}
+.w-col-medium-8 {
+  width:66.6667%}
+.w-col-medium-9 {
+  width:75%}
+.w-col-medium-10 {
+  width:83.3333%}
+.w-col-medium-11 {
+  width:91.6667%}
+.w-col-medium-12 {
+  width:100%}
+.w-col-stack {
+  width:100%;
+  left:auto;
+  right:auto}
+}
+
+@media screen and (max-width:767px) {
+  .w-hidden-main,.w-hidden-medium {
+  display:inherit!important}
+.w-hidden-small {
+  display:none!important}
+.w-row,.w-container .w-row {
+  margin-left:0;
+  margin-right:0}
+.w-col {
+  width:100%;
+  left:auto;
+  right:auto}
+.w-col-small-1 {
+  width:8.33333%}
+.w-col-small-2 {
+  width:16.6667%}
+.w-col-small-3 {
+  width:25%}
+.w-col-small-4 {
+  width:33.3333%}
+.w-col-small-5 {
+  width:41.6667%}
+.w-col-small-6 {
+  width:50%}
+.w-col-small-7 {
+  width:58.3333%}
+.w-col-small-8 {
+  width:66.6667%}
+.w-col-small-9 {
+  width:75%}
+.w-col-small-10 {
+  width:83.3333%}
+.w-col-small-11 {
+  width:91.6667%}
+.w-col-small-12 {
+  width:100%}
+}
+
+@media screen and (max-width:479px) {
+  .w-container {
+  max-width:none}
+.w-hidden-main,.w-hidden-medium,.w-hidden-small {
+  display:inherit!important}
+.w-hidden-tiny {
+  display:none!important}
+.w-col {
+  width:100%}
+.w-col-tiny-1 {
+  width:8.33333%}
+.w-col-tiny-2 {
+  width:16.6667%}
+.w-col-tiny-3 {
+  width:25%}
+.w-col-tiny-4 {
+  width:33.3333%}
+.w-col-tiny-5 {
+  width:41.6667%}
+.w-col-tiny-6 {
+  width:50%}
+.w-col-tiny-7 {
+  width:58.3333%}
+.w-col-tiny-8 {
+  width:66.6667%}
+.w-col-tiny-9 {
+  width:75%}
+.w-col-tiny-10 {
+  width:83.3333%}
+.w-col-tiny-11 {
+  width:91.6667%}
+.w-col-tiny-12 {
+  width:100%}
+}
+
+@media (min-width:768px) {
+  .w-lightbox-content {
+  height:96vh;
+  margin-top:2vh}
+.w-lightbox-view,.w-lightbox-view:before {
+  height:96vh}
+.w-lightbox-group,.w-lightbox-group .w-lightbox-view,.w-lightbox-group .w-lightbox-view:before {
+  height:84vh}
+.w-lightbox-image {
+  max-width:96vw;
+  max-height:96vh}
+.w-lightbox-group .w-lightbox-image {
+  max-width:82.3vw;
+  max-height:84vh}
+.w-lightbox-left,.w-lightbox-right {
+  opacity:.5;
+  display:block}
+.w-lightbox-close {
+  opacity:.8}
+.w-lightbox-control:hover {
+  opacity:1}
+}
+
+.w-richtext:before,.w-richtext:after {
+  content:" ";
+  grid-area:1/1/2/2;
+  display:table}
+
+.w-richtext:after {
+  clear:both}
+
+.w-richtext[contenteditable=true]:before,.w-richtext[contenteditable=true]:after {
+  white-space:initial}
+
+.w-richtext ol,.w-richtext ul {
+  overflow:hidden}
+
+.w-richtext figure[data-rt-type=video]>div:after {
+  content:"";
+  display:none;
+  position:absolute;
+  inset:0}
+
+.w-richtext figure {
+  max-width:60%;
+  position:relative}
+
+.w-richtext figure>div:before {
+  cursor:default!important}
+
+.w-richtext figure img {
+  width:100%}
+
+.w-richtext figure div {
+  color:#0000;
+  font-size:0}
+
+.w-richtext figure[data-rt-type=image] {
+  display:table}
+
+.w-richtext figure[data-rt-type=image]>div {
+  display:inline-block}
+
+.w-richtext figure[data-rt-type=image]>figcaption {
+  caption-side:bottom;
+  display:table-caption}
+
+.w-richtext figure[data-rt-type=video] {
+  width:60%;
+  height:0}
+
+.w-richtext figure[data-rt-type=video] iframe {
+  width:100%;
+  height:100%;
+  position:absolute;
+  top:0;
+  left:0}
+
+.w-richtext figure[data-rt-type=video]>div {
+  width:100%}
+
+[data-nav-menu-open] {
+  text-align:center;
+  background:#c8c8c8;
+  min-width:200px;
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  overflow:visible;
+  display:block!important}
+
+@media screen and (max-width:991px) {
+  .w-nav[data-collapse=medium] .w-nav-menu {
+  display:none}
+.w-nav[data-collapse=medium] .w-nav-button {
+  display:block}
+}
+
+@media screen and (max-width:767px) {
+  .w-nav[data-collapse=small] .w-nav-menu {
+  display:none}
+.w-nav[data-collapse=small] .w-nav-button {
+  display:block}
+.w-nav-brand {
+  padding-left:10px}
+}
+
+@media screen and (max-width:479px) {
+  .w-nav[data-collapse=tiny] .w-nav-menu {
+  display:none}
+.w-nav[data-collapse=tiny] .w-nav-button {
+  display:block}
+}
+
+@media screen and (max-width:479px) {
+  .w-tab-link {
+  display:block}
+}
+
+@keyframes spin {
+  0% {
+  transform:rotate(0)}
+to {
+  transform:rotate(360deg)}
+}
+
+.w-dyn-empty {
+  background-color:#ddd;
+  padding:10px}
+
+.w-dyn-hide,.w-dyn-bind-empty {
+  display:none!important}
+
+/* Webflow's custom-checkbox rules. These sit after the site @font-face block in
+   the compiled file, so they are appended here rather than swept up by the
+   extraction above. The checkmark SVG is inlined so nothing is fetched from
+   Webflow's CDN at runtime. */
+.w-checkbox {
+  margin-bottom: 5px;
+  padding-left: 20px;
+  display: block;
+}
+.w-checkbox:before {
+  content: " ";
+  grid-area: 1/1/2/2;
+  display: table;
+}
+.w-checkbox:after {
+  content: " ";
+  clear: both;
+  grid-area: 1/1/2/2;
+  display: table;
+}
+.w-checkbox-input {
+  float: left;
+  margin: 4px 0 0 -20px;
+  line-height: normal;
+}
+.w-checkbox-input--inputType-custom {
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  width: 12px;
+  height: 12px;
+}
+.w-checkbox-input--inputType-custom.w--redirected-checked {
+  background-color: #3898ec;
+  background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="%23fff" d="M6.0016 11.1069 2.8945 7.9998l1.0607-1.0606 2.0464 2.0463 5.0433-5.0433 1.0606 1.0607z"/%3E%3C/svg%3E');
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-color: #3898ec;
+}
+.w-checkbox-input--inputType-custom.w--redirected-focus {
+  box-shadow: 0 0 3px 1px #3898ec;
+}

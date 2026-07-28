@@ -1,0 +1,212 @@
+/**
+ * Computed-style probe.
+ *
+ * Paste-and-run in a browser console (or via a devtools bridge) on both the
+ * live Webflow page and the local rebuild, then diff the two outputs. It
+ * returns one compact line per selector rather than a full style dump, so the
+ * two results can be compared by eye or with `diff`.
+ *
+ * The port keeps the original Webflow class names as inert markers precisely so
+ * the same selector list resolves on both sides.
+ *
+ * Usage in the console:
+ *   copy(__probe(__SELECTORS.home))
+ */
+;(() => {
+  const PROPS = [
+    'display',
+    'position',
+    'fontFamily',
+    'fontSize',
+    'fontWeight',
+    'lineHeight',
+    'letterSpacing',
+    'textAlign',
+    'textTransform',
+    'color',
+    'backgroundColor',
+    'width',
+    'height',
+    'maxWidth',
+    'minHeight',
+    'marginTop',
+    'marginBottom',
+    'marginLeft',
+    'marginRight',
+    'paddingTop',
+    'paddingBottom',
+    'paddingLeft',
+    'paddingRight',
+    'flexDirection',
+    'justifyContent',
+    'alignItems',
+    'gap',
+    'gridTemplateColumns',
+    'gridColumnStart',
+    'gridColumnEnd',
+    'borderTopWidth',
+    'borderTopColor',
+    'borderRadius',
+    'aspectRatio',
+    'objectFit',
+    'overflow',
+    'zIndex',
+    'opacity',
+  ]
+
+  /* Sub-pixel noise differs between engines/zoom; round to whole pixels. */
+  const round = (value) =>
+    String(value).replace(/(\d+\.\d+)px/g, (_, n) => `${Math.round(parseFloat(n))}px`)
+
+  window.__probe = (selectors) =>
+    selectors
+      .map((selector) => {
+        const el = document.querySelector(selector)
+        if (!el) return `${selector}\tMISSING`
+        const cs = getComputedStyle(el)
+        return `${selector}\t${PROPS.map((p) => `${p}=${round(cs[p])}`).join(' ')}`
+      })
+      .join('\n')
+
+  window.__SELECTORS = {
+    shell: [
+      '.page-wrapper',
+      '.navbar',
+      '.navbar-wrap',
+      '.menu-toggle',
+      '.menu-toggle-bar',
+      '.navbar-logo-link',
+      '.navbar-logo',
+      '.nav-btn-group',
+      '.btn.secondary.is-nav.is-outline',
+      '.menu-drawer',
+      '.menu-drawer-container',
+      '.home-menu-items',
+      '.heading.is-menu-item',
+      '.footer',
+      '.footer-newsletter',
+      '.container.is-footer',
+      '.footer-grid',
+      '.footer-content',
+      '.footer-heading',
+      '.footer-text',
+      '.footer-text.is-location',
+      '.footer-text.is-hours',
+      '.hours-wrap',
+      '.footer-menu-wrap',
+      '.footer-menu-link',
+      '.footer-socials-wrap',
+      '.footer-social-icon',
+      '.footer-logo',
+      '.footer-copyright',
+      '.copyright-text',
+      '.footer-newsletter-wrap',
+      '.newsletter-text',
+      '.footer-newsletter-form-block',
+      '.footer-newsletter-form-wrap',
+      '.footer-newsletter-text-field',
+      '.newsletter-btn',
+    ],
+    home: [
+      '.section-home-hero',
+      '.home-hero',
+      '.home-hero-image',
+      '.home-hero-overlay',
+      '.home-hero-cta',
+      '.home-hero-menu',
+      '.home-hero-menu-text',
+      '.section-intro',
+      '.section-intro .container',
+      '.section-intro .heading',
+      '.intro-text',
+      '.paragraph.is-intro',
+      '.intros-cta',
+      '.btn.primary',
+      '.btn.outline',
+      '.section-menus',
+      '.home-menu-heading',
+      '.heading.is-medium',
+      '.menu-wrap',
+      '.menu',
+      '.menu-link',
+      '.home-menu-image',
+      '.menu-title',
+      '.menu-btn-wrap',
+      '.section-home-bread',
+      '.home-bread-wrap',
+      '.home-bread-image',
+      '.home-bread-content',
+      '.home-bread-cta',
+      '.home-events',
+      '.home-events-wrap',
+      '.home-events-content',
+      '.home-events-image',
+      '.events-cta',
+    ],
+    menu: [
+      '.page-banner',
+      '.page-banner-image',
+      '.page-banner-overlay',
+      '.page-heading',
+      '.page-heading-wrap',
+      '.page-heading .heading',
+      '.paragraph.is-intro.is-left',
+      '.page-heading-quick-links',
+      '.page-heading-quick-links .btn.outline',
+      '.menu-category',
+      '.menu-category .container',
+      '.page-sub-heading',
+      '.menu-category-list',
+      '.menu-category-item',
+      '.menu-item-heading',
+      '.menu-item-title-wrap',
+      '.menu-item-title',
+      '.heading-menu-price',
+      '.menu-item-description p',
+    ],
+    about: ['.section-intro', '.section-team-grid', '.team-grid', '.team-card', '.team-image', '.team-title', '.team-text'],
+    bakery: [
+      '.page-heading.is-center',
+      '.about-content',
+      '.about-content .container',
+      '.about-content p',
+      '.about-video-wrap',
+      '.video-code-block',
+      '.about-video',
+      '.about-images-wrap',
+      '.about-lightbox-image',
+    ],
+    form: [
+      '.section-events-form',
+      '.form-block',
+      '.page-sub-heading.small-margin',
+      '.form',
+      '.form-field-wrap',
+      '.form-field-wrap._2-col',
+      '.form-field',
+      '.form-field.textarea',
+      '.form-field-text',
+      '.form-btn-wrap',
+      '.section-image-grid',
+    ],
+    merch: [
+      '.section-merch-listing',
+      '.merch-listing',
+      '.merch-listing-item',
+      '.merch-item-image',
+      '.merch-item-heading',
+      '.merch-item-title',
+      '.merch-item-price-wrap',
+      '.menu-btn-wrap.is-product',
+      '.section-merch-details',
+      '.merch-details',
+      '.merch-details-images-list',
+      '.merch-details-images-item',
+      '.merch-image',
+      '.merch-details-content-wrap',
+      '.merch-details-price-wrap',
+      '.merch-details-price',
+      '.merch-details-link',
+    ],
+  }
+})()

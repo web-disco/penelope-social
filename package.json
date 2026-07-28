@@ -1,0 +1,16 @@
+{
+  "name": "penelope-social",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "pnpm --filter web dev",
+    "build": "pnpm --filter web build",
+    "preview": "pnpm --filter web preview",
+    "studio": "pnpm --filter studio dev",
+    "studio:deploy": "pnpm --filter studio deploy",
+    "migrate": "pnpm --filter scripts migrate",
+    "migrate:dry": "pnpm --filter scripts migrate:dry",
+    "compare": "pnpm --filter scripts compare"
+  },
+  "packageManager": "pnpm@9.0.0"
+}

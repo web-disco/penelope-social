@@ -1,0 +1,37 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "penelope-social",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-07-01",
+  // `nodejs_compat` is required by the Cloudflare Email path in worker/email.ts
+  // (mimetext). Harmless when EMAIL_PROVIDER is unset or set to "resend".
+  "compatibility_flags": ["nodejs_compat"],
+
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+    // Only the form endpoints hit the Worker; everything else is a static hit.
+    "run_worker_first": ["/api/*"]
+  },
+
+  "observability": {
+    "enabled": true
+  },
+
+  "vars": {
+    // Set to "resend" or "cloudflare" at go-live. Unset means submissions are
+    // accepted but no notification email is sent.
+    // "EMAIL_PROVIDER": "resend",
+    // "NOTIFY_EMAIL_TO": "info@penelopesocial.com",
+    // "NOTIFY_EMAIL_FROM": "website@penelopesocial.com"
+  }
+
+  // Secrets are set with `wrangler secret put`, never committed:
+  //   TURNSTILE_SECRET_KEY
+  //   RESEND_API_KEY
+  //
+  // For EMAIL_PROVIDER=cloudflare, add a send_email binding and verify the
+  // destination address in Email Routing first:
+  // "send_email": [{ "name": "SEND_EMAIL", "destination_address": "info@penelopesocial.com" }]
+}

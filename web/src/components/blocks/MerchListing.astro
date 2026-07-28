@@ -1,0 +1,62 @@
+---
+/**
+ * .section-merch-listing — three product cards.
+ *
+ * As with the menu cards, `.menu-btn-wrap.is-product` ("View Product") is
+ * `display:none` at every breakpoint on the live site; the image is the link.
+ */
+import { containerNoTop, menuBtn } from '../../lib/ui'
+import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
+import { getAll } from '../../lib/data'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+
+const products = (await getAll<any>('merchProduct')).sort(
+  (a, b) => (a.order ?? 0) - (b.order ?? 0),
+)
+
+const title = 'merch-item-title font-heading text-[28px] text-charcoal'
+---
+
+<div class="section-merch-listing">
+  <div class={containerNoTop}>
+    <div class="merch-listing-wrap w-dyn-list">
+      <div
+        role="list"
+        class="merch-listing w-dyn-items grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-[60px] wf-md:grid-cols-2 wf-sm:grid-cols-1"
+      >
+        {
+          products.map((product) => (
+            <div role="listitem" class="merch-listing-item w-dyn-item">
+              <a href={`/merchandise/${product.slug.current}`} class="merch-item-link-wrap w-inline-block w-full">
+                <img
+                  src={imageUrl(product.images?.[0])}
+                  loading="lazy"
+                  alt={imageAlt(product.images?.[0]) || product.title}
+                  sizes={imageSizes(product.images?.[0])}
+                  srcset={imageSrcset(product.images?.[0])}
+                  class="merch-item-image w-full"
+                />
+              </a>
+              <div class="merch-item-heading flex justify-between">
+                <h2 class={title}>{product.title}</h2>
+                <div class="merch-item-price-wrap flex">
+                  <h2 class={title}>$</h2>
+                  <h2 class={title}>{product.price}</h2>
+                </div>
+              </div>
+              <div class="menu-btn-wrap is-product mt-[15px] hidden wf-sm:mt-[5px]">
+                <a href={`/merchandise/${product.slug.current}`} class={menuBtn}>
+                  View Product
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>

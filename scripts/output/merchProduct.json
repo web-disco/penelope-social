@@ -1,0 +1,147 @@
+[
+  {
+    "_id": "merchProduct-tote-bag",
+    "_type": "merchProduct",
+    "title": "Tote Bag",
+    "slug": {
+      "_type": "slug",
+      "current": "tote-bag"
+    },
+    "order": 0,
+    "price": "10",
+    "description": "This grey tote bag combines style and function, featuring Penelope’s iconic bicycle and bread graphic on one side and the Penelope Social logo on the other. Perfectly sized for daily essentials or market runs, it’s durable, lightweight, and versatile—making it an eco-friendly companion for any occasion.",
+    "banner": {
+      "_type": "image",
+      "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
+      "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-500.png 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-800.png 800w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-1080.png 1080w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png 1200w",
+      "_migrationSizes": "(max-width: 1200px) 100vw, 1200px",
+      "alt": "Image of Lunch menu platter"
+    },
+    "images": [
+      {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6eab0e4957d95b7e92e1_tote-bag.jpg",
+        "_migrationSrcset": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6eab0e4957d95b7e92e1_tote-bag-p-500.jpg 500w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6eab0e4957d95b7e92e1_tote-bag-p-800.jpg 800w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6eab0e4957d95b7e92e1_tote-bag.jpg 1080w",
+        "_migrationSizes": "100vw",
+        "alt": ""
+      }
+    ],
+    "cta": {
+      "_type": "link",
+      "label": "available in store",
+      "url": "/events?general-inquiry",
+      "newTab": false
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Tote Bag | Penelope Social",
+      "metaDescription": "This grey tote bag combines style and function, featuring Penelope’s iconic bicycle and bread graphic on one side and the Penelope Social logo on the other. Perfectly sized for daily essentials or market runs, it’s durable, lightweight, and versatile—making it an eco-friendly companion for any occasion."
+    }
+  },
+  {
+    "_id": "merchProduct-hoodie",
+    "_type": "merchProduct",
+    "title": "Hoodie",
+    "slug": {
+      "_type": "slug",
+      "current": "hoodie"
+    },
+    "order": 1,
+    "price": "40",
+    "description": "Stay cozy while representing Penelope Social with this stylish hoodie, available in grey. Featuring the Penelope logo on the front left chest and a playful back design of a bicycle carrying sourdough and coffee, this hoodie combines comfort with charm. Perfect for cooler days, it’s crafted for a relaxed fit and everyday wear.",
+    "banner": {
+      "_type": "image",
+      "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
+      "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-500.png 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-800.png 800w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-1080.png 1080w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png 1200w",
+      "_migrationSizes": "(max-width: 1200px) 100vw, 1200px",
+      "alt": "Image of Lunch menu platter"
+    },
+    "images": [
+      {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6e4d710b843f9a3bc646_hoodie-grey-front.jpg",
+        "_migrationSrcset": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6e4d710b843f9a3bc646_hoodie-grey-front-p-500.jpg 500w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6e4d710b843f9a3bc646_hoodie-grey-front-p-800.jpg 800w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6e4d710b843f9a3bc646_hoodie-grey-front.jpg 1080w",
+        "_migrationSizes": "100vw",
+        "alt": ""
+      },
+      {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6e4d65dc85b813d40159_hoodie-grey-back.jpg",
+        "_migrationSrcset": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6e4d65dc85b813d40159_hoodie-grey-back-p-500.jpg 500w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6e4d65dc85b813d40159_hoodie-grey-back-p-800.jpg 800w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6e4d65dc85b813d40159_hoodie-grey-back.jpg 1080w",
+        "_migrationSizes": "100vw",
+        "alt": ""
+      }
+    ],
+    "cta": {
+      "_type": "link",
+      "label": "available in store",
+      "url": "/events?general-inquiry",
+      "newTab": false
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Hoodie | Penelope Social",
+      "metaDescription": "Stay cozy while representing Penelope Social with this stylish hoodie, available in grey. Featuring the Penelope logo on the front left chest and a playful back design of a bicycle carrying sourdough and coffee, this hoodie combines comfort with charm. Perfect for cooler days, it’s crafted for a relaxed fit and everyday wear."
+    }
+  },
+  {
+    "_id": "merchProduct-t-shirt",
+    "_type": "merchProduct",
+    "title": "T-Shirt",
+    "slug": {
+      "_type": "slug",
+      "current": "t-shirt"
+    },
+    "order": 2,
+    "price": "20",
+    "description": "Show off your love for Penelope Social with this versatile t-shirt, available in green or white. Featuring the Penelope Social logo on the front left chest, the white version adds charm with a playful back design of a bicycle carrying sourdough and coffee. Both styles are crafted for a relaxed, comfortable fit, perfect for casual wear.",
+    "banner": {
+      "_type": "image",
+      "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
+      "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-500.png 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-800.png 800w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-1080.png 1080w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png 1200w",
+      "_migrationSizes": "(max-width: 1200px) 100vw, 1200px",
+      "alt": "Image of Lunch menu platter"
+    },
+    "images": [
+      {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6db5fc22b6b36d13d2f0_shirt-white-front-min.jpg",
+        "_migrationSrcset": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6db5fc22b6b36d13d2f0_shirt-white-front-min-p-500.jpg 500w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6db5fc22b6b36d13d2f0_shirt-white-front-min-p-800.jpg 800w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6db5fc22b6b36d13d2f0_shirt-white-front-min.jpg 1080w",
+        "_migrationSizes": "100vw",
+        "alt": ""
+      },
+      {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbbbd9474df8e46254f_shirt-white-back-min.jpg",
+        "_migrationSrcset": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbbbd9474df8e46254f_shirt-white-back-min-p-500.jpg 500w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbbbd9474df8e46254f_shirt-white-back-min-p-800.jpg 800w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbbbd9474df8e46254f_shirt-white-back-min.jpg 1080w",
+        "_migrationSizes": "100vw",
+        "alt": ""
+      },
+      {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbb24ce4848d1413c2b_shirt-green-front-min.jpg",
+        "_migrationSrcset": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbb24ce4848d1413c2b_shirt-green-front-min-p-500.jpg 500w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbb24ce4848d1413c2b_shirt-green-front-min-p-800.jpg 800w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbb24ce4848d1413c2b_shirt-green-front-min.jpg 1080w",
+        "_migrationSizes": "100vw",
+        "alt": ""
+      },
+      {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbb9aa0efa0f08cfc71_shirt-green-back-min.jpg",
+        "_migrationSrcset": "https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbb9aa0efa0f08cfc71_shirt-green-back-min-p-500.jpg 500w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbb9aa0efa0f08cfc71_shirt-green-back-min-p-800.jpg 800w, https://cdn.prod.website-files.com/6738f2ee022685bac345ab9b/673e6dbb9aa0efa0f08cfc71_shirt-green-back-min.jpg 1080w",
+        "_migrationSizes": "100vw",
+        "alt": ""
+      }
+    ],
+    "cta": {
+      "_type": "link",
+      "label": "available in store",
+      "url": "/events?general-inquiry",
+      "newTab": false
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "T-Shirt | Penelope Social",
+      "metaDescription": "Show off your love for Penelope Social with this versatile t-shirt, available in green or white. Featuring the Penelope Social logo on the front left chest, the white version adds charm with a playful back design of a bicycle carrying sourdough and coffee. Both styles are crafted for a relaxed, comfortable fit, perfect for casual wear."
+    }
+  }
+]

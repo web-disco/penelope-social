@@ -1,0 +1,800 @@
+[
+  {
+    "_id": "page-home",
+    "_type": "page",
+    "title": "Home",
+    "slug": {
+      "_type": "slug",
+      "current": "home"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Sourdough Bakery & Restaurant in Vaughan | Penelope Social",
+      "metaDescription": "Experience Penelope Social, a Sourdough Bakery & Restaurant in Vaughan. Indulge in freshly baked goods and delicious meals. Visit us today!",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
+        "alt": ""
+      }
+    },
+    "sections": [
+      {
+        "_type": "homeHero",
+        "_key": "hero",
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/6738fc337434df480308980c_penelope-social-gathering.avif",
+          "alt": "People having dinner at Penelope Social"
+        },
+        "orderOnline": {
+          "_type": "link",
+          "label": "Order Online",
+          "url": "https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard",
+          "newTab": true
+        },
+        "reservations": {
+          "_type": "link",
+          "label": "Reservations",
+          "url": "/reservations",
+          "newTab": true
+        }
+      },
+      {
+        "_type": "introSection",
+        "_key": "intro",
+        "heading": "Sourdough Bakery\n& Restaurant",
+        "intro": "Penelope Social is a hidden gem in Vaughan, offering the best New York-style sourdough pizza, artisanal handhelds, and creative cocktails, all made with love in our micro sourdough bakery. Whether you're stopping by for a quick bite or a relaxing evening, our welcoming atmosphere feels like home.",
+        "ctas": [
+          {
+            "_type": "cta",
+            "_key": "cta0",
+            "label": "reservations",
+            "url": "/reservations",
+            "style": "primary"
+          },
+          {
+            "_type": "cta",
+            "_key": "cta1",
+            "label": "our story",
+            "url": "/about",
+            "style": "outline"
+          }
+        ]
+      },
+      {
+        "_type": "menuGrid",
+        "_key": "menus",
+        "heading": "Explore our menus",
+        "cards": [
+          {
+            "_type": "menuCard",
+            "_key": "card0",
+            "title": "lunch",
+            "url": "/menus/lunch",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand.avif",
+              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand.avif 1080w",
+              "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
+              "alt": "Focaccia Sandwich"
+            },
+            "buttonLabel": "View menu",
+            "buttonUrl": "/menus/lunch"
+          },
+          {
+            "_type": "menuCard",
+            "_key": "card1",
+            "title": "bar",
+            "url": "/menus/bar",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif",
+              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif 1080w",
+              "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
+              "alt": "Crafted Cocktail"
+            },
+            "buttonLabel": "View menu",
+            "buttonUrl": "/menus/bar"
+          },
+          {
+            "_type": "menuCard",
+            "_key": "card2",
+            "title": "dinner",
+            "url": "/menus/dinner",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger.avif",
+              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger.avif 1080w",
+              "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
+              "alt": "Penelope Burger"
+            },
+            "buttonLabel": "View menu",
+            "buttonUrl": "/menus/dinner"
+          },
+          {
+            "_type": "menuCard",
+            "_key": "card3",
+            "title": "Catering",
+            "url": "/menus/catering",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201.avif",
+              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201.avif 700w",
+              "_migrationSizes": "(max-width: 700px) 100vw, 700px",
+              "alt": "Penelope Burger"
+            },
+            "buttonLabel": "View menu",
+            "buttonUrl": "/menus/catering"
+          }
+        ]
+      },
+      {
+        "_type": "splitFeature",
+        "_key": "bread",
+        "layout": "image-first",
+        "heading": "crafted Sourdough",
+        "body": "At Penelope, we craft naturally leavened sourdough with the finest local and imported flours. Our 40-hour fermentation creates a flavorful, gut-friendly loaf that's easy to digest. Experience the best sourdough in Vaughan, baked with care and time.",
+        "cta": {
+          "_type": "link",
+          "label": "Sourdough Bakery",
+          "url": "/sourdough-bakery",
+          "newTab": false
+        },
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1.avif",
+          "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1.avif 700w",
+          "_migrationSizes": "(max-width: 700px) 100vw, 700px",
+          "alt": "Loaves of Sourdough Bread"
+        }
+      },
+      {
+        "_type": "splitFeature",
+        "_key": "events",
+        "layout": "copy-first",
+        "heading": "Events At Penelope",
+        "body": "Celebrate at Penelope Social, Vaughan's perfect spot for any event. Whether it’s a birthday, corporate gathering, or special occasion, we offer artisanal dishes, handcrafted cocktails, and a warm, inviting atmosphere. Let our dedicated team handle the details while you relax, enjoy exceptional flavors, and create unforgettable memories with your guests.",
+        "cta": {
+          "_type": "link",
+          "label": "plan event",
+          "url": "/catering-events",
+          "newTab": false
+        },
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd6a82f4cc92b24d53393_DSC_9066%201.avif",
+          "alt": "Event at Penelope"
+        }
+      }
+    ]
+  },
+  {
+    "_id": "page-menus",
+    "_type": "page",
+    "title": "Menus",
+    "slug": {
+      "_type": "slug",
+      "current": "menus"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Penelope Social Menu Vaughan | Lunch, Dinner & Catering",
+      "metaDescription": "Explore Penelope Social's menu in Vaughan, featuring artisanal pizzas, sandwiches, pastas, and cocktails. Perfect for lunch, dinner, and catering events.",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a8dfb734293806a5b_menu-og-image.png",
+        "alt": ""
+      }
+    },
+    "sections": [
+      {
+        "_type": "pageBanner",
+        "_key": "banner",
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe7a6af381401438e4b5d_menus.avif",
+          "alt": "Image of Lunch menu platter"
+        }
+      },
+      {
+        "_type": "pageHeading",
+        "_key": "heading",
+        "variant": "default",
+        "align": "center",
+        "heading": "Penelope Social\nMenus Vaughan",
+        "intro": "From savory focaccia sandwiches at lunch to refreshing cocktails after work and gut-friendly pizzas for dinner, Penelope offers an unforgettable dining experience at every moment of the day.",
+        "quickLinks": []
+      },
+      {
+        "_type": "menuGrid",
+        "_key": "menus",
+        "cards": [
+          {
+            "_type": "menuCard",
+            "_key": "card0",
+            "title": "lunch",
+            "url": "/menus/lunch",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand.avif",
+              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand.avif 1080w",
+              "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
+              "alt": "Focaccia Sandwich"
+            },
+            "buttonLabel": "View menu",
+            "buttonUrl": "/menus/lunch"
+          },
+          {
+            "_type": "menuCard",
+            "_key": "card1",
+            "title": "bar",
+            "url": "/menus/bar",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif",
+              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif 1080w",
+              "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
+              "alt": "Crafted Cocktail"
+            },
+            "buttonLabel": "View menu",
+            "buttonUrl": "/menus/bar"
+          },
+          {
+            "_type": "menuCard",
+            "_key": "card2",
+            "title": "dinner",
+            "url": "/menus/dinner",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger.avif",
+              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger.avif 1080w",
+              "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
+              "alt": "Penelope Burger"
+            },
+            "buttonLabel": "View menu",
+            "buttonUrl": "/menus/dinner"
+          },
+          {
+            "_type": "menuCard",
+            "_key": "card3",
+            "title": "Catering",
+            "url": "/menus/catering",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201.avif",
+              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201.avif 700w",
+              "_migrationSizes": "(max-width: 700px) 100vw, 700px",
+              "alt": "Penelope Burger"
+            },
+            "buttonLabel": "View menu",
+            "buttonUrl": "/menus/dinner"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "page-about",
+    "_type": "page",
+    "title": "About",
+    "slug": {
+      "_type": "slug",
+      "current": "about"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "About Penelope Social Vaughan | Neighborhood Gem for Food & Drinks",
+      "metaDescription": "Learn about Penelope Social in Vaughan, a neighborhood gem for fresh sourdough, comfort food, and crafted cocktails. Great flavors, good times, and memories.",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
+        "alt": ""
+      }
+    },
+    "sections": [
+      {
+        "_type": "pageBanner",
+        "_key": "banner",
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673feab787ea61dbd3013e50_about-banner.avif",
+          "alt": "Image of Lunch menu platter"
+        }
+      },
+      {
+        "_type": "introSection",
+        "_key": "intro",
+        "heading": "About\nPenelope Social",
+        "intro": "Penelope is a neighborhood gem in the heart of Vaughan. Born from the passion of three brothers who believe in the power of great food, refreshing drinks, and bringing people together. With a focus on fresh sourdough, comfort food, and carefully crafted cocktails, we’ve created a space where every detail feels like home. It’s all about great flavors, good times, and making memories with the people you care about.",
+        "ctas": []
+      },
+      {
+        "_type": "teamGrid",
+        "_key": "team",
+        "members": [
+          {
+            "_type": "teamMember",
+            "_key": "member0",
+            "name": "Franco",
+            "role": "Front of House Manager",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe98afe8d786f0342f293_franco.avif",
+              "alt": "Photo of Franco Stalteri"
+            }
+          },
+          {
+            "_type": "teamMember",
+            "_key": "member1",
+            "name": "Vince",
+            "role": "Kitchen Manager",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe992d904d89c7a46eacd_vince.avif",
+              "alt": "Photo of Vince Stalteri"
+            }
+          },
+          {
+            "_type": "teamMember",
+            "_key": "member2",
+            "name": "Giuliano",
+            "role": "Bar Manager",
+            "image": {
+              "_type": "image",
+              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe9941bae78e36375ba83_giuliano.avif",
+              "alt": "Photo of Giuliano Stalteri"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "page-sourdough-bakery",
+    "_type": "page",
+    "title": "Sourdough Bakery",
+    "slug": {
+      "_type": "slug",
+      "current": "sourdough-bakery"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Best Sourdough Bakery in Vaughan | Penelope Social",
+      "metaDescription": "\"Discover Vaughan's finest sourdough bakery. Enjoy fresh-baked sourdough, focaccia, and artisanal treats made daily with premium ingredients.",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3989ef36fc1365b4e3_bread-og-image.png",
+        "alt": ""
+      }
+    },
+    "sections": [
+      {
+        "_type": "pageBanner",
+        "_key": "banner",
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe4fbd904d89c7a43b7f4_bakery-banner.avif",
+          "alt": "Image of Sourdough Bread"
+        }
+      },
+      {
+        "_type": "pageHeading",
+        "_key": "heading",
+        "variant": "center",
+        "align": "center",
+        "heading": "sourdough bakery\nin vaughan",
+        "intro": "\"On May 17, 2017 I decided to make a big change in my life. I left my career in the construction industry as a project manager and engineer to follow my passion; food.\" - Vince Stalteri.",
+        "quickLinks": []
+      },
+      {
+        "_type": "storySection",
+        "_key": "story0",
+        "galleryId": "bakery",
+        "body": [
+          {
+            "_type": "block",
+            "_key": "p0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "s0",
+                "text": "After years of success in a field that provided a good salary, stability, and work-life balance, I realized something was missing. Despite solving problems and advancing in my role, I felt unfulfilled. I spent time reflecting on what truly inspired me, and after exploring several alternatives within construction, I discovered my love for cooking. The decision to leave behind a well-established career for something as uncertain as bread-making wasn’t easy, and I kept it to myself, knowing it would be hard for others to understand. But I knew it was the right path for me.",
+                "marks": []
+              }
+            ]
+          }
+        ],
+        "video": {
+          "_type": "storyVideo",
+          "mp4Url": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc19b8d4f507a7318ec10_PENNY%20BREAD-transcode.mp4",
+          "webmUrl": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc19b8d4f507a7318ec10_PENNY%20BREAD-transcode.webm"
+        }
+      },
+      {
+        "_type": "storySection",
+        "_key": "story1",
+        "galleryId": "bakery",
+        "body": [
+          {
+            "_type": "block",
+            "_key": "p0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "s0",
+                "text": "On January 1, 2018, I set out to learn sourdough bread-making, a hobby that quickly became an obsession. The blend of art and science in bread-making fascinated me, revealing the complexities of chemistry, biology, and physics at play. In February, I created my first starter, Anastasia, but after neglecting it for three weeks while opening my restaurant, it nearly died. Rather than discard it, I revived it, and when it bounced back, I renamed it Penelope. For the past five years, Penelope has been my guide, teaching me resilience and the value of persistence.",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "storySection",
+        "_key": "story2",
+        "galleryId": "bakery",
+        "gallery": [
+          {
+            "_type": "image",
+            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb2137a2a75edea0ec_bread-1.avif",
+            "alt": "Sourdough Bread"
+          },
+          {
+            "_type": "image",
+            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bcb06174393143f07c_bread-2.avif",
+            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bcb06174393143f07c_bread-2-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bcb06174393143f07c_bread-2.avif 1080w",
+            "_migrationSizes": "100vw",
+            "alt": "Sourdough Bread"
+          },
+          {
+            "_type": "image",
+            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba90442973261207a0_bread-3.avif",
+            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba90442973261207a0_bread-3-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba90442973261207a0_bread-3.avif 1080w",
+            "_migrationSizes": "100vw",
+            "alt": "Sourdough Bread"
+          }
+        ]
+      },
+      {
+        "_type": "storySection",
+        "_key": "story3",
+        "galleryId": "bakery",
+        "body": [
+          {
+            "_type": "block",
+            "_key": "p0",
+            "style": "normal",
+            "markDefs": [],
+            "children": [
+              {
+                "_type": "span",
+                "_key": "s0",
+                "text": "By 2024, Penelope has become the foundation for all our doughs at Penelope Social, where we offer a variety of sourdough-based breads and pizzas. We constantly experiment with new recipes, drawing inspiration from Italy and global bread traditions. Our goal is to change how people view bread—not as an unhealthy carb, but as a gut-friendly, nourishing food that provides energy without the bloat. This mission has become my life’s passion, and I’m dedicated to sharing the benefits of our breads with as many people as possible.",
+                "marks": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "_type": "storySection",
+        "_key": "story4",
+        "galleryId": "bakery",
+        "gallery": [
+          {
+            "_type": "image",
+            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69824e_bread-4.avif",
+            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69824e_bread-4-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69824e_bread-4.avif 1080w",
+            "_migrationSizes": "100vw",
+            "alt": "Sourdough Bread"
+          },
+          {
+            "_type": "image",
+            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb91ec686f6576eef0_bread-5.avif",
+            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb91ec686f6576eef0_bread-5-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb91ec686f6576eef0_bread-5.avif 1080w",
+            "_migrationSizes": "100vw",
+            "alt": "Sourdough Bread"
+          },
+          {
+            "_type": "image",
+            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69820b_bread-6.avif",
+            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69820b_bread-6-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69820b_bread-6.avif 1080w",
+            "_migrationSizes": "100vw",
+            "alt": "Sourdough Bread"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "page-catering-events",
+    "_type": "page",
+    "title": "Catering & Events",
+    "slug": {
+      "_type": "slug",
+      "current": "catering-events"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Event Space Vaughan | Penelope Social",
+      "metaDescription": "Looking for an event space in Vaughan? Host your celebration, corporate gathering, or special occasion at Penelope Social with exceptional food and drinks.",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
+        "alt": ""
+      }
+    },
+    "sections": [
+      {
+        "_type": "pageBanner",
+        "_key": "banner",
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe31b6e85dcbc330d0069_penelope-event.avif",
+          "alt": "Image of Lunch menu platter"
+        }
+      },
+      {
+        "_type": "introSection",
+        "_key": "intro",
+        "heading": "Event space vaughan",
+        "intro": "Celebrate your special moments at Penelope Social in Vaughan. From intimate gatherings to corporate events, we offer a warm atmosphere, exceptional dishes, and handcrafted cocktails. Our team will collaborate with you to design a personalized experience, ensuring every detail is exactly what you envisioned.",
+        "ctas": []
+      },
+      {
+        "_type": "formSection",
+        "_key": "form",
+        "variant": "events",
+        "heading": "plan your event",
+        "intro": "Submit the form below and someone from our team will reach back out to you within 24 to 48 hours.",
+        "submitLabel": "Submit",
+        "successMessage": "Thank you! Your submission has been received!",
+        "errorMessage": "Oops! Something went wrong while submitting the form.",
+        "fields": [
+          {
+            "_type": "formField",
+            "_key": "field0",
+            "name": "Event-Form-Name",
+            "id": "Event-Form-Name",
+            "placeholder": "First Name",
+            "type": "text",
+            "required": true,
+            "fullWidth": false
+          },
+          {
+            "_type": "formField",
+            "_key": "field1",
+            "name": "Event-Form-Last-Name",
+            "id": "Event-Form-Last-Name",
+            "placeholder": "Last Name",
+            "type": "text",
+            "required": true,
+            "fullWidth": false
+          },
+          {
+            "_type": "formField",
+            "_key": "field2",
+            "name": "Event-Form-Email",
+            "id": "Event-Form-Email",
+            "placeholder": "Email",
+            "type": "email",
+            "required": true,
+            "fullWidth": false
+          },
+          {
+            "_type": "formField",
+            "_key": "field3",
+            "name": "Event-Form-Phone",
+            "id": "Event-Form-Phone",
+            "placeholder": "Phone Number",
+            "type": "tel",
+            "required": true,
+            "fullWidth": false
+          },
+          {
+            "_type": "formField",
+            "_key": "field4",
+            "name": "Reason-For-Inquiry",
+            "id": "Reason-For-Inquiry",
+            "placeholder": "Reason For Inquiry",
+            "type": "select",
+            "required": true,
+            "fullWidth": false,
+            "options": [
+              "Catering",
+              "Event",
+              "General Inquiry"
+            ]
+          },
+          {
+            "_type": "formField",
+            "_key": "field5",
+            "name": "Event-Form-Amount-of-Guests",
+            "id": "Event-Form-Amount-of-Guests",
+            "placeholder": "Number of Guests",
+            "type": "number",
+            "required": true,
+            "fullWidth": false
+          },
+          {
+            "_type": "formField",
+            "_key": "field6",
+            "name": "Date",
+            "id": "Date",
+            "placeholder": "Date",
+            "type": "text",
+            "required": true,
+            "fullWidth": true,
+            "note": "We need 24 hrs notice for catering orders. *"
+          },
+          {
+            "_type": "formField",
+            "_key": "field7",
+            "name": "Event-Form-Message",
+            "id": "Event-Form-Message",
+            "placeholder": "Let us know how we can make your day special.",
+            "type": "textarea",
+            "required": true,
+            "fullWidth": true
+          }
+        ]
+      },
+      {
+        "_type": "imageGrid",
+        "_key": "grid",
+        "images": []
+      }
+    ]
+  },
+  {
+    "_id": "page-contact",
+    "_type": "page",
+    "title": "Contact",
+    "slug": {
+      "_type": "slug",
+      "current": "contact"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Contact Penelope Social Vaughan | Get in Touch Today",
+      "metaDescription": "Reach out to Penelope Social in Vaughan for inquiries, reservations, or event bookings. We're here to help with all your needs. Contact us today!",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
+        "alt": ""
+      }
+    },
+    "sections": [
+      {
+        "_type": "pageBanner",
+        "_key": "banner",
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bffc95f3addba8463d026_lunch-menu-banner.avif",
+          "alt": "Image of Lunch menu platter"
+        }
+      },
+      {
+        "_type": "introSection",
+        "_key": "intro",
+        "heading": "Get in Touch with\nPenelope Social Vaughan",
+        "intro": "We’d love to hear from you! Whether you have questions, want to book a table, or are planning your next event, the Penelope team is here to help. Reach out via phone, email, or visit us in Vaughan to experience our warm hospitality, artisanal dishes, and creative cocktails firsthand.\n\nLet’s connect and make your Penelope experience unforgettable.",
+        "ctas": []
+      },
+      {
+        "_type": "formSection",
+        "_key": "form",
+        "variant": "contact",
+        "heading": "Leave Us a Message",
+        "intro": "Submit the form below and someone from our team will reach back out to you within 24 to 48 hours.",
+        "submitLabel": "Submit",
+        "successMessage": "Thank you! Your submission has been received!",
+        "errorMessage": "Oops! Something went wrong while submitting the form.",
+        "fields": [
+          {
+            "_type": "formField",
+            "_key": "field0",
+            "name": "Contact-Form-Name",
+            "id": "Contact-Form-Name",
+            "placeholder": "First Name",
+            "type": "text",
+            "required": true,
+            "fullWidth": false
+          },
+          {
+            "_type": "formField",
+            "_key": "field1",
+            "name": "Contact-Form-Last-Name",
+            "id": "Contact-Form-Last-Name",
+            "placeholder": "Last Name",
+            "type": "text",
+            "required": true,
+            "fullWidth": false
+          },
+          {
+            "_type": "formField",
+            "_key": "field2",
+            "name": "Contact-Form-Email",
+            "id": "Contact-Form-Email",
+            "placeholder": "Email",
+            "type": "email",
+            "required": true,
+            "fullWidth": false
+          },
+          {
+            "_type": "formField",
+            "_key": "field3",
+            "name": "Contact-Form-Phone",
+            "id": "Contact-Form-Phone",
+            "placeholder": "Phone Number",
+            "type": "tel",
+            "required": true,
+            "fullWidth": false
+          },
+          {
+            "_type": "formField",
+            "_key": "field4",
+            "name": "Contact-Form-Message",
+            "id": "Contact-Form-Message",
+            "placeholder": "Leave a message!",
+            "type": "textarea",
+            "required": true,
+            "fullWidth": true
+          }
+        ]
+      },
+      {
+        "_type": "imageGrid",
+        "_key": "grid",
+        "images": []
+      }
+    ]
+  },
+  {
+    "_id": "page-merchandise",
+    "_type": "page",
+    "title": "Merchandise",
+    "slug": {
+      "_type": "slug",
+      "current": "merchandise"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Penelope Social Merch Vaughan | Shop Exclusive Apparel",
+      "metaDescription": "Browse Penelope Social's exclusive merch in Vaughan. Shop unique apparel and accessories to take a piece of the experience home.",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
+        "alt": ""
+      }
+    },
+    "sections": [
+      {
+        "_type": "pageBanner",
+        "_key": "banner",
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe645dd6506bf32e0602c_penelope-merch-2.avif",
+          "alt": "Photo of Penlope Merch"
+        }
+      },
+      {
+        "_type": "pageHeading",
+        "_key": "heading",
+        "variant": "center",
+        "align": "center",
+        "heading": "Penelope Merch",
+        "intro": "Browse Penelope Social's exclusive collection of tees, hoodies, and totes. Featuring our bold logo, these items are designed for both comfort and style, available in multiple colours.",
+        "quickLinks": []
+      },
+      {
+        "_type": "merchListing",
+        "_key": "listing"
+      }
+    ]
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "penelope-web",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "@penelope/web", "dev", "--port", "4380"],
+      "port": 4380,
+      "autoPort": false
+    }
+  ]
+}

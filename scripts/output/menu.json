@@ -1,0 +1,1042 @@
+[
+  {
+    "_id": "menu-lunch",
+    "_type": "menu",
+    "title": "Lunch menu",
+    "slug": {
+      "_type": "slug",
+      "current": "lunch"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Lunch Menu | Sourdough Focaccia, Pizzas & Salads at Penelope Social",
+      "metaDescription": "Discover the best lunch in Vaughan at Penelope Social. Enjoy freshly baked sourdough focaccia sandwiches, artisanal pizzas, and crisp salads made with premium ingredients. Perfect for a quick bite or a relaxed midday meal.",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3981daa85bcd03e403_lunch-og-image.png",
+        "alt": ""
+      }
+    },
+    "banner": {
+      "_type": "image",
+      "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe4fb0bfc3f62e7c7cc01_lunch-banner.avif",
+      "alt": "Image of Lunch menu platter"
+    },
+    "heading": "Lunch menu",
+    "intro": "Discover the best lunch in Vaughan at Penelope Social. Enjoy freshly baked sourdough focaccia sandwiches, artisanal New York-style pizzas, and crisp salads.\n\nExclusively Available | Monday - Saturday 10:00am -3:00pm",
+    "quickLinks": [
+      {
+        "_type": "quickLink",
+        "label": "Focaccia",
+        "anchor": "focaccia",
+        "_key": "focaccia"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Pizza Bianca",
+        "anchor": "pizza-bianca",
+        "_key": "pizza-bianca"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Pizza Rossa",
+        "anchor": "pizza-rossa",
+        "_key": "pizza-rossa"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Salads",
+        "anchor": "salads",
+        "_key": "salads"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Treats",
+        "anchor": "treats",
+        "_key": "treats"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Cafe",
+        "anchor": "cafe",
+        "_key": "cafe"
+      }
+    ],
+    "categories": [
+      {
+        "_type": "menuCategory",
+        "_key": "category-focaccia",
+        "title": "Focaccia",
+        "anchorId": "focaccia",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Chicken",
+            "price": "23",
+            "description": "Roasted Chicken, Sundried Tomatoes, Arugula, Asiago, Basil Aioli"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Bistecca",
+            "price": "23",
+            "description": "Grilled Striploin Steak, Arugula, Horseradish Aioli, Dijon"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Bianca",
+            "price": "21",
+            "description": "Mortadella, Prosciutto Cotto, Stracciatella, Arugula, Pistachio Pesto"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Classico",
+            "price": "21",
+            "description": "Prosciutto, Arugula, Parmigiano Stracciatella, Olive Oil"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item4",
+            "title": "Italian",
+            "price": "20",
+            "description": "Salami, Capocollo, Prosciutto, Olives, Peperoncino, Iceberg, Garlic Aioli"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item5",
+            "title": "Calabrese",
+            "price": "20",
+            "description": "Soppressata, Fior DI Latte, 'Nduja, Pickled Peppers, Black Olives"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item6",
+            "title": "Spicy Mushroom",
+            "price": "23",
+            "description": "Wild Mushrooms, Provolone, Arugula, Spicy Chili Jam, Garlic Aioli"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item7",
+            "title": "Veggie",
+            "price": "19",
+            "description": "Mixed Roasted Veggies, Goat Cheese, Basil Pesto, Garlic Aioli"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-pizza-bianca",
+        "title": "Pizza Bianca",
+        "anchorId": "pizza-bianca",
+        "items": []
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-pizza-rossa",
+        "title": "Pizza Rossa",
+        "anchorId": "pizza-rossa",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Vodka Pizza",
+            "price": "6",
+            "description": "Penny Vodka Sauce, Mozzarella, Basil Pesto"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Margherita DOP",
+            "price": "6",
+            "description": "Fior Di Latte, Basil, EVOO"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "NY Pepperoni",
+            "price": "7",
+            "description": "Pepperoni, Mozzarella, Oregano"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Bee Sting",
+            "price": "7",
+            "description": "Soppressata, Stracciatella, Hot Honey"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-salads",
+        "title": "Salads",
+        "anchorId": "salads",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Kale Caesar",
+            "price": "15",
+            "description": "Sandy’s Farm Kale, Crispy Prosciutto, Shaved Parmigiano, Sourdough Croutons, Homemade Caesar Dressing"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Amaro Salad",
+            "price": "14",
+            "description": "Kale, Cabbage, Endive, Lemon, Oregano Vinaigrette"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Arugula Salad",
+            "price": "15",
+            "description": "Arugula, Cherry Tomatoes, Shaved Parmigiano, Aged Balsamic, Shallot Vinaigrette"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Chicken Breast",
+            "price": "10",
+            "description": "Add-on"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item4",
+            "title": "Striploin Steak",
+            "price": "13",
+            "description": "Add-on"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-treats",
+        "title": "Treats",
+        "anchorId": "treats",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Nutella Bombe",
+            "price": "5",
+            "description": "Nutella Filled Doughnuts Tossed in Sugar"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Cruller",
+            "price": "5",
+            "description": "Vanilla Glazed or Cinnamon Sugar"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Cookies of the Day",
+            "price": "5",
+            "description": ""
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-cafe",
+        "title": "Cafe",
+        "anchorId": "cafe",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Espresso",
+            "price": "3",
+            "description": ""
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Cappucino",
+            "price": "5",
+            "description": ""
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Latte",
+            "price": "5",
+            "description": ""
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Tea",
+            "price": "3",
+            "description": ""
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item4",
+            "title": "Water",
+            "price": "3",
+            "description": ""
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item5",
+            "title": "Pop",
+            "price": "3",
+            "description": ""
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "menu-dinner",
+    "_type": "menu",
+    "title": "dinner menu",
+    "slug": {
+      "_type": "slug",
+      "current": "dinner"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Dinner Menu | Pizzas, Handhelds & Shareables at Penelope Social",
+      "metaDescription": "Savor a delicious dinner at Penelope Social with fresh pizzas, hearty handhelds, and shareable plates. From flavorful pizzas to light salads and savory olives, enjoy a memorable dining experience with premium ingredients in Vaughan.",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd396541130c2bde544c_dinner-og-image.png",
+        "alt": ""
+      }
+    },
+    "banner": {
+      "_type": "image",
+      "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bffb125533c6e03daf470_dinner-menu-banner.avif",
+      "alt": "Image of dinner plate"
+    },
+    "heading": "dinner menu",
+    "intro": "At Penelope, enjoy the best dinner in Vaughan with our fresh, gut-friendly pizzas and delicious dishes. Whether it's a date night or a gathering with friends, our menu has something for every craving.\n\nExclusively Available | Monday- Saturday 5:00pm-Close",
+    "quickLinks": [
+      {
+        "_type": "quickLink",
+        "label": "salads",
+        "anchor": "salads",
+        "_key": "salads"
+      },
+      {
+        "_type": "quickLink",
+        "label": "pizzas",
+        "anchor": "pizzas",
+        "_key": "pizzas"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Middle Table",
+        "anchor": "middle-table",
+        "_key": "middle-table"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Handhelds",
+        "anchor": "handhelds",
+        "_key": "handhelds"
+      }
+    ],
+    "categories": [
+      {
+        "_type": "menuCategory",
+        "_key": "category-salads",
+        "title": "Salads",
+        "anchorId": "salads",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Smashed Cucumber Salad",
+            "price": "19",
+            "description": "Cucumber, Sweet Sesame Vinaigrette, Asian Chili Crisp, Cilantro, Scallions, Toasted Sesame Seeds, Crispy Onions"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Greek Salad",
+            "price": "19",
+            "description": "Cucumber, Tomato, Red Onion, Kalamata Olives, Feta Cheese, Greek Dressing"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Caesar Salad",
+            "price": "19",
+            "description": "Romaine Lettuce, Housemade Sourdough Croutons, Crispy Prosciutto Crudo, Penny Caesar Dressing, Shaved Parmiggiano Reggiano"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Beet Salad",
+            "price": "19",
+            "description": "Slow-Roasted Ontario Beets, Penny Tzatziki, Oregano Vinaigrette, Pumpkin Seed Dukkah Crisp"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-pizzas",
+        "title": "the pizzas",
+        "anchorId": "pizzas",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Spicy Vodka Pepp",
+            "price": "29",
+            "description": "Penny Rosé Sauce, Mozzarella, Mini Pepperoni, Jalapeño, Hot Honey"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Big Mac Pizza",
+            "price": "27",
+            "description": "Burger Beef, American Cheese, Iceberg Lettuce, White Onion, Bread & Butter Pickles, Penny Mac Sauce"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Margherita",
+            "price": "25",
+            "description": "Tomato Sauce, Mozzarella, Fior di Latte Mozzarella, Fresh Basil"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "NY Pepperoni",
+            "price": "25",
+            "description": "Tomato Sauce, Mozzarella, Mini Pepperoni, Oregano"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item4",
+            "title": "Calabrese",
+            "price": "25",
+            "description": "Tomato Sauce, Mozzarella, Calabrese Soppressata, Cured Black Olives, Pepperoncini"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item5",
+            "title": "Vodka",
+            "price": "25",
+            "description": "Penny Rosé Sauce, Mozzarella, Basil Pesto"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item6",
+            "title": "Truffle Mushroom",
+            "price": "31",
+            "description": "Wild Mushrooms, White Truffle Oil, Shaved Parmigiano Reggiano, Arugula"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item7",
+            "title": "Lovechild",
+            "price": "29",
+            "description": "Mozzarella, Calabrese Soppressata, Housemade ‘Nduja, Cured Black Olives, Sweety Drop Peppers, Stracciatella, Hot Honey"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-middle-table",
+        "title": "Middle table",
+        "anchorId": "middle-table",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Jerk Chicken",
+            "price": "25",
+            "description": "Jerk Chicken, Pineapple Habanero Coleslaw"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "NY Striploin",
+            "price": "45",
+            "description": "8 oz Canadian Prime Striploin, Nonna's Herb & Garlic Oil"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Spicy Rapini",
+            "price": "15",
+            "description": "Sauteed Rapini, Garlic, Chili Oil"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Truffle Fries",
+            "price": "15",
+            "description": "Hand Cut Fries, Parsley, White Truffle Oil, Shaved Parmiggiano Reggiano"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item4",
+            "title": "Bread & Butter",
+            "price": "6",
+            "description": "Fresh Housemade Sourdough Bread, Whipped Butter, EVOO"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item5",
+            "title": "Marinated Olives",
+            "price": "11",
+            "description": "Assorted Olives, Citrus Mix, Penny Chili Oil, Herb & Spice Blend"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item6",
+            "title": "Mexican Octopus",
+            "price": "35",
+            "description": "Grilled Octopus, Mexican Chili Crisp, Tangerine, Citrus Mignonette, Citrus Yogurt, Fingerling Chips, Cilantro"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item7",
+            "title": "Fritto Misto",
+            "price": "27",
+            "description": "Fried Calamari, Black Tiger Shrimp, Jalapenos, Penny Calabrese Aioli"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item8",
+            "title": "Korean Cauliflower",
+            "price": "17",
+            "description": "Fried Cauliflower, Penny Gochujang, Toasted Sesame Seeds, Scallions"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-handhelds",
+        "title": "handhelds",
+        "anchorId": "handhelds",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Paella Arancini (1pc)",
+            "price": "5",
+            "description": "Seafood Paella Risotto, Mozzarella, Penny Chipotle Mayo"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Carnitas Tacos (2pc)",
+            "price": "19",
+            "description": "Corn Tortilla, Confit Pork Shoulder, White Onion, Cilantro, Penny Salsa Verde, Lime"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Chef's Toast (1pc)",
+            "price": "",
+            "description": "Our sourdough is good, so the chef put some good stuff on it!"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Crunchwrap Supreme",
+            "price": "19",
+            "description": "Taco Beef, Penny Queso, Sour Cream, Tomato, Iceberg Lettuce, Tostado, Nacho Cheese"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item4",
+            "title": "General Tao Bao (2 pcs)",
+            "price": "19",
+            "description": "Housemade Steamed Bao Bun, Double-Fried General Tso Chicken, Kewpie Mayo, House-Pickled Daikon, Scallions, Cilantro, Toasted Sesame Seeds"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item5",
+            "title": "Penny Burger Sliders (2 pcs)",
+            "price": "19",
+            "description": "Housemade Milk Bun, Double Chuck/Brisket Smashburger Patty, American Cheese, Onion, Jalapeño, Penny Queso, Sour Cream, Mayo"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item6",
+            "title": "Korean Fried Chicken Sliders (2pcs)",
+            "price": "19",
+            "description": "Housemade Milk Bun, Korean Fried Chicken, Penny Gochujang, Penny Kimchi, Kewpie Mayo, Scallions, Sesame Seeds"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "menu-bar",
+    "_type": "menu",
+    "title": "Bar menu",
+    "slug": {
+      "_type": "slug",
+      "current": "bar"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Bar Menu | Craft Cocktails & Drinks at Penelope Social",
+      "metaDescription": "Unwind at Penelope Social with our expertly crafted cocktails in Vaughan. Whether you're in the mood for something bold or light, our bar menu offers refreshing drinks to suit every taste. The perfect stop to relax after a busy day.",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd39418af7ad259a1808_bar-og-image.png",
+        "alt": ""
+      }
+    },
+    "banner": {
+      "_type": "image",
+      "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe4166312cea8be54d250_penelope-bar-2.avif",
+      "alt": "Image of Bar Tender"
+    },
+    "heading": "Bar menu",
+    "intro": "Skip the traffic and relax at Penelope in Vaughan. Our expert bartenders will craft the perfect cocktail to match your mood, whether you’re in the mood for something bold or light and bubbly.",
+    "quickLinks": [
+      {
+        "_type": "quickLink",
+        "label": "cocktails",
+        "anchor": "cocktails",
+        "_key": "cocktails"
+      },
+      {
+        "_type": "quickLink",
+        "label": "red wine",
+        "anchor": "red-wine",
+        "_key": "red-wine"
+      },
+      {
+        "_type": "quickLink",
+        "label": "white wine",
+        "anchor": "white-wine",
+        "_key": "white-wine"
+      }
+    ],
+    "categories": [
+      {
+        "_type": "menuCategory",
+        "_key": "category-cocktails",
+        "title": "cocktails",
+        "anchorId": "cocktails",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Rotating Marg (2oz)",
+            "price": "19",
+            "description": "El Jimador Blanco Tequila, Cointreau, Lime, Rotating Fruit - Regular or Spicy"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Buona Notte (3oz)",
+            "price": "18",
+            "description": "Aperol, Montenegro, Lillet Blanc, Tonic, Orange"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "White Linen (2oz)",
+            "price": "17",
+            "description": "Beefeater London Dry Gin, St-Germain, Cucumber, Mint, Lemon"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Bar Feature",
+            "price": "",
+            "description": "Ask Your Server"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item4",
+            "title": "Chinchilla (2 oz)",
+            "price": "19",
+            "description": "Beefeater London Dry Gin, Peach Soju, St Germain, Lemon, Honey, Egg White, Ango Bitters"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item5",
+            "title": "Cocchi Cola (2oz)",
+            "price": "17",
+            "description": "Amaro Canaja, Cocchi Vermouth di Torino, Lemon"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-red-wine",
+        "title": "Red wine",
+        "anchorId": "red-wine",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Doline Primitivo 2020",
+            "price": "17/68",
+            "description": "Puglia (ITA)"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Commisso Estate Winery Cabernet Franc 2021",
+            "price": "16/64",
+            "description": "Niagara Bench (CAN)"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Grotta Del Ninfeo Valpolicella 2024",
+            "price": "16/64",
+            "description": "Veneto (ITA)"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Andeluna 1300 Malbec 2024",
+            "price": "17/68",
+            "description": "Valle De Uco (ARG)"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-white-wine",
+        "title": "White Wine",
+        "anchorId": "white-wine",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Crowded House Sauvignon Blanc 2024",
+            "price": "17/68",
+            "description": "Malborough (NZ)"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Vinicola Tombacco Pecorino 2022",
+            "price": "17/68",
+            "description": "Abruzzo (ITA)"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Forchir Pinot Grigio 2023",
+            "price": "17/68",
+            "description": "Friuli (ITA)"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Commisso Estate Winery Gewurztraminer 2023",
+            "price": "16/64",
+            "description": "Beamsville Bench (CAN)"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "_id": "menu-catering",
+    "_type": "menu",
+    "title": "Catering menu",
+    "slug": {
+      "_type": "slug",
+      "current": "catering"
+    },
+    "seo": {
+      "_type": "seo",
+      "metaTitle": "Catering Menu | Fresh Salads, Pizzas & Sandwiches at Penelope",
+      "metaDescription": "Explore Penelope Social's catering menu. Enjoy fresh salads, pizzas, focaccia sandwiches, and more for your next event. Perfect for any occasion!",
+      "ogImage": {
+        "_type": "image",
+        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a810cc63ea87effc8_catering-og-image.png",
+        "alt": ""
+      }
+    },
+    "banner": {
+      "_type": "image",
+      "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cbe3a00fc531a1733e0c5_catering-banner.avif",
+      "alt": "Image of Bar Tender"
+    },
+    "heading": "Catering menu",
+    "intro": "Bring the flavours of Penelope home with you with our Catering Menu. Whether its a party size pizza or a tray of our delicious focaccia sandwiches we have a little something for everyone.",
+    "quickLinks": [
+      {
+        "_type": "quickLink",
+        "label": "Appetizers",
+        "anchor": "appetizers",
+        "_key": "appetizers"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Pasta",
+        "anchor": "pasta",
+        "_key": "pasta"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Bread",
+        "anchor": "bread",
+        "_key": "bread"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Pizza",
+        "anchor": "pizza",
+        "_key": "pizza"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Sandwiches",
+        "anchor": "sandwiches",
+        "_key": "sandwiches"
+      },
+      {
+        "_type": "quickLink",
+        "label": "Salads",
+        "anchor": "salads",
+        "_key": "salads"
+      }
+    ],
+    "categories": [
+      {
+        "_type": "menuCategory",
+        "_key": "category-appetizers",
+        "title": "Appetizers",
+        "anchorId": "appetizers",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Items Currently Unavailable",
+            "price": "",
+            "description": ""
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-pasta",
+        "title": "Pasta",
+        "anchorId": "pasta",
+        "description": "Comes with your choice of Penne or Spaghetti.",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Pasta Catering Offering is Currently Unavailable",
+            "price": "",
+            "description": ""
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-bread",
+        "title": "Bread",
+        "anchorId": "bread",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Sourdough Loaf",
+            "price": "9",
+            "description": "Country Style Sourdough Loaf"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Focaccia Romana",
+            "price": "15",
+            "description": ""
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Focaccia Semolina",
+            "price": "15",
+            "description": ""
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Focaccia Barese",
+            "price": "20",
+            "description": "Tomato, Black Olive, EVOO"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-pizza",
+        "title": "Pizza",
+        "anchorId": "pizza",
+        "description": "Each pizza comes with 24 slices.",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Vodka Pizza",
+            "price": "50",
+            "description": "Penny Vodka Sauce, Mozzarella, Basil Pesto"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Focaccia Bianca",
+            "price": "20",
+            "description": "Olive Oil, Salt, Oregano"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Focaccia Rossa",
+            "price": "25",
+            "description": "Olive Oil, Tomato Sauce, Oregano"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Margherita",
+            "price": "45",
+            "description": "Tomato Sauce, Mozzarella, Fior di Latte, Basil"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item4",
+            "title": "NY Pepperoni",
+            "price": "50",
+            "description": "Tomato Sauce, Mozzarella, Pepperoni"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item5",
+            "title": "Bee Sting",
+            "price": "55",
+            "description": "Tomato Sauce, Mozzarella, Hot Soppressata, Stracciatella, Hot Honey"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item6",
+            "title": "Funghi",
+            "price": "100",
+            "description": "Mozzarella, Mixed Mushrooms, Truffle Paste"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-sandwiches",
+        "title": "Focaccia Sandwiches",
+        "anchorId": "sandwiches",
+        "description": "Minimum of 6 sandwiches\nAll sandwiches are cut into 4 pcs",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Roasted Chicken",
+            "price": "23",
+            "description": "Roasted Marinated Chicken, Sundried Tomatoes, Basil Pesto, Asiago, Arugula"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Spicy Mushroom",
+            "price": "19",
+            "description": "Wild Mushrooms, Provolone, Arugula, Spicy Chili Jam, Garlic Aioli"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Classico",
+            "price": "20",
+            "description": "Proscuitto, Arugula, Parmigiano, Stracciatella,"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item3",
+            "title": "Bianca",
+            "price": "21",
+            "description": "Mortadella, Proscuitto Cotto, Stracciatella, Arugula, Pistachio Pesto"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item4",
+            "title": "Bistecca",
+            "price": "23",
+            "description": "Grilled Striploin Steak, Arugula, Horseradish Aioli, Dijon"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item5",
+            "title": "Veggie",
+            "price": "19",
+            "description": "Mixed roasted veggies, Goat Cheese, Basil pesto, Garlic Aioli"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item6",
+            "title": "Ham & Cheese",
+            "price": "21",
+            "description": "Rosemary Ham, Aged Gouda, Iceberg, Gherkins, Mayo, Dijon"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item7",
+            "title": "Calabrese",
+            "price": "20",
+            "description": "Soppressata, Fior Di Latte, Nauja, Pickled Peppers, Olives"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item8",
+            "title": "Italian",
+            "price": "20",
+            "description": "Salami, Capicollo, Proscuitto, Olives, Pepperoncino, Iceberg, Garlic"
+          }
+        ]
+      },
+      {
+        "_type": "menuCategory",
+        "_key": "category-salads",
+        "title": "Salads",
+        "anchorId": "salads",
+        "description": "Each salad serves between 8 to 10 people.",
+        "items": [
+          {
+            "_type": "menuItem",
+            "_key": "item0",
+            "title": "Mixed Green Salad",
+            "price": "50",
+            "description": "Mixed Greens, Balsamic Vinaigrette"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item1",
+            "title": "Amaro Salad",
+            "price": "60",
+            "description": "Kale, Cabbage, Endive, Oregano Vinaigrette"
+          },
+          {
+            "_type": "menuItem",
+            "_key": "item2",
+            "title": "Caesar Salad",
+            "price": "95",
+            "description": "Kale, Crispy Prosciutto, Parmigiano, Croutons Homemade Caesar Dressing"
+          }
+        ]
+      }
+    ]
+  }
+]

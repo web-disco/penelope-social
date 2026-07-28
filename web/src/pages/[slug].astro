@@ -1,0 +1,28 @@
+---
+/**
+ * Static pages driven by the page builder: /about, /catering-events, /contact,
+ * /sourdough-bakery, /merchandise, /menus.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageBuilder from '../components/PageBuilder.astro'
+import { getAll } from '../lib/data'
+
+export async function getStaticPaths() {
+  const pages = await getAll<any>('page')
+  return pages
+    .filter((page) => page.slug?.current && page.slug.current !== 'home')
+    .map((page) => ({ params: { slug: page.slug.current }, props: { page } }))
+}
+
+const { page } = Astro.props
+const seo = page.seo ?? {}
+---
+
+<BaseLayout
+  title={seo.metaTitle ?? page.title}
+  description={seo.metaDescription}
+  ogImage={seo.ogImage}
+  noIndex={seo.noIndex}
+>
+  <PageBuilder sections={page.sections ?? []} />
+</BaseLayout>

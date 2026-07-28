@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.wrangler/
+.env
+.env.local
+.DS_Store
+*.log
+
+# scripts/output/*.json is intentionally committed: it is the file-fallback
+# content that lets the site build before Sanity is configured.
+# Regenerate with `pnpm migrate:dry`.

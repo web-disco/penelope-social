@@ -1,0 +1,49 @@
+---
+/**
+ * Maps a `page.sections` entry to its component.
+ *
+ * The rule that keeps this scalable: a new section on the site = one Sanity
+ * object schema + one component in `blocks/` + one entry in this map.
+ */
+import HomeHero from './blocks/HomeHero.astro'
+import IntroSection from './blocks/IntroSection.astro'
+import PageBanner from './blocks/PageBanner.astro'
+import PageHeading from './blocks/PageHeading.astro'
+import MenuGrid from './blocks/MenuGrid.astro'
+import SplitFeature from './blocks/SplitFeature.astro'
+import TeamGrid from './blocks/TeamGrid.astro'
+import StorySection from './blocks/StorySection.astro'
+import MerchListing from './blocks/MerchListing.astro'
+import FormSection from './blocks/FormSection.astro'
+import ImageGrid from './blocks/ImageGrid.astro'
+
+const COMPONENTS: Record<string, any> = {
+  homeHero: HomeHero,
+  introSection: IntroSection,
+  pageBanner: PageBanner,
+  pageHeading: PageHeading,
+  menuGrid: MenuGrid,
+  splitFeature: SplitFeature,
+  teamGrid: TeamGrid,
+  storySection: StorySection,
+  merchListing: MerchListing,
+  formSection: FormSection,
+  imageGrid: ImageGrid,
+}
+
+interface Props {
+  sections: any[]
+}
+const { sections = [] } = Astro.props
+---
+
+{
+  sections.map((block) => {
+    const Component = COMPONENTS[block._type]
+    if (!Component) {
+      console.warn(`[PageBuilder] no component registered for block type "${block._type}"`)
+      return null
+    }
+    return <Component block={block} />
+  })
+}

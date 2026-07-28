@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PageBuilder from '../components/PageBuilder.astro'
+import { getOne } from '../lib/data'
+
+const page = await getOne<any>('page', 'home')
+if (!page) throw new Error('Missing `page` document with slug "home"')
+const seo = page.seo ?? {}
+---
+
+<BaseLayout
+  title={seo.metaTitle ?? page.title}
+  description={seo.metaDescription}
+  ogImage={seo.ogImage}
+  noIndex={seo.noIndex}
+  isHome
+>
+  <PageBuilder sections={page.sections ?? []} />
+</BaseLayout>
