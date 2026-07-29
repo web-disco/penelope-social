@@ -15,13 +15,15 @@ import {
 import { initPageLoader } from './page-loader'
 import { initMerchSwiper } from './merch-swiper'
 import { initNewsletter } from './newsletter'
-import { initSiteForms, initEventForm } from './forms'
+import { initSiteForms, initEventForm, initTurnstileSpacing } from './forms'
 import { initLightbox } from './lightbox'
-import { initCustomCheckboxes } from './checkbox'
 
 /* Same order as the live site's DOMContentLoaded handler, with the additions
-   that replace behaviour webflow.js used to provide (lightbox, checkbox
-   visuals) and the form wiring. */
+   that replace behaviour webflow.js used to provide (lightbox) and the form
+   wiring.
+
+   initCustomCheckboxes() used to sit alongside initLightbox(). Its only consumer
+   was the newsletter pop-up's consent checkbox, which is gone. */
 declare global {
   interface Window {
     gsap: typeof gsap
@@ -47,12 +49,12 @@ function boot() {
 
   // Replaces webflow.js behaviour
   initLightbox()
-  initCustomCheckboxes()
 
   // Forms
   initNewsletter()
   initSiteForms()
   initEventForm()
+  initTurnstileSpacing()
 
   ScrollTrigger.refresh()
 }

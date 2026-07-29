@@ -5,6 +5,11 @@
  * `.menu-btn-wrap` is `display:none` at every breakpoint on the live site, so
  * the "View menu" link never renders visibly; the whole image is the link.
  * It is kept in the DOM to match.
+ *
+ * Its href and label are derived rather than authored. They used to be two
+ * per-card fields, which is how the live /menus page ended up pointing the
+ * Catering card's invisible button at /menus/dinner — nothing renders it, so
+ * nothing surfaced the mistake. Deriving from `url` makes that unrepresentable.
  */
 import { containerNoTop, heading, menuBtn } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
@@ -45,8 +50,8 @@ const cards: any[] = block.cards ?? []
               {card.title}
             </h2>
             <div class="menu-btn-wrap mt-0 hidden">
-              <a href={card.buttonUrl ?? card.url} class={menuBtn}>
-                {card.buttonLabel ?? 'View menu'}
+              <a href={card.url} class={menuBtn}>
+                View menu
               </a>
             </div>
           </div>

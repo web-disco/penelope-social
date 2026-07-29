@@ -10,6 +10,7 @@
  * verifies Turnstile and emails the submission on — see web/worker/index.ts.
  */
 import { container, containerHalfTop, pageSubHeadingSmall, formField, formFieldTextarea, btn } from '../../lib/ui'
+import Turnstile from '../Turnstile.astro'
 
 interface Props {
   block: any
@@ -18,7 +19,6 @@ const { block } = Astro.props
 
 const isEvents = block.variant === 'events'
 const fields: any[] = block.fields ?? []
-const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
 ---
 
 <div class="section-events-form">
@@ -82,12 +82,16 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
           ))
         }
 
-        <div class="form-btn-wrap col-span-2 flex items-end justify-center">
-          {
-            turnstileKey && (
-              <div class="cf-turnstile" data-sitekey={turnstileKey} data-size="flexible" />
-            )
-          }
+        {/*
+          The Turnstile slot shares this cell rather than taking a grid row of
+          its own: the form grid has a 16px `gap-4`, which a separate item would
+          cost even while the widget measures 0x0. Column rather than row so the
+          challenge appears above the button instead of beside it — with one
+          child (the usual case, widget hidden) this renders identically to the
+          row it replaces: horizontally centred, bottom-aligned.
+        */}
+        <div class="form-btn-wrap col-span-2 flex flex-col items-center justify-end">
+          <Turnstile class="w-full text-center [&.is-visible]:mb-[20px]" theme="light" />
           <input
             type="submit"
             data-wait="Please wait..."
@@ -108,5 +112,3 @@ const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
     </div>
   </div>
 </div>
-
-{turnstileKey && <script is:inline async src="https://challenges.cloudflare.com/turnstile/v0/api.js" />}

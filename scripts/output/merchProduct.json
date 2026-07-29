@@ -27,10 +27,11 @@
       }
     ],
     "cta": {
-      "_type": "link",
+      "_type": "button",
       "label": "available in store",
       "url": "/events?general-inquiry",
-      "newTab": false
+      "newTab": false,
+      "style": "primary"
     },
     "seo": {
       "_type": "seo",
@@ -73,10 +74,11 @@
       }
     ],
     "cta": {
-      "_type": "link",
+      "_type": "button",
       "label": "available in store",
       "url": "/events?general-inquiry",
-      "newTab": false
+      "newTab": false,
+      "style": "primary"
     },
     "seo": {
       "_type": "seo",
@@ -133,10 +135,11 @@
       }
     ],
     "cta": {
-      "_type": "link",
+      "_type": "button",
       "label": "available in store",
       "url": "/events?general-inquiry",
-      "newTab": false
+      "newTab": false,
+      "style": "primary"
     },
     "seo": {
       "_type": "seo",

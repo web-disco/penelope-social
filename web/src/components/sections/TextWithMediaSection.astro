@@ -54,7 +54,11 @@ const ctaClass = imageFirst ? 'home-bread-cta mt-10 wf-sm:mt-5' : 'events-cta mt
         {
           block.cta?.url && (
             <div class={ctaClass}>
-              <a href={block.cta.url} class={btn.primary}>
+              <a
+                href={block.cta.url}
+                target={block.cta.newTab ? '_blank' : undefined}
+                class={block.cta.style === 'outline' ? btn.outline : btn.primary}
+              >
                 {block.cta.label}
               </a>
             </div>

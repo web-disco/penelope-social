@@ -2,7 +2,7 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemaTypes'
-import { structure } from './structure'
+import { structure, singletonActions, singletonTypes } from './structure'
 
 export default defineConfig({
   name: 'penelope-social',
@@ -12,13 +12,16 @@ export default defineConfig({
   plugins: [structureTool({ structure }), visionTool()],
   schema: {
     types: schemaTypes,
-    /* Site Settings is a singleton — keep it out of the "create new" menu. */
-    templates: (templates) => templates.filter((template) => template.schemaType !== 'siteSettings'),
+    // Keep singletons out of the global "create new" menu.
+    templates: (templates) => templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
   },
   document: {
-    actions: (actions, context) =>
-      context.schemaType === 'siteSettings'
-        ? actions.filter(({ action }) => action !== 'duplicate' && action !== 'delete')
-        : actions,
+    // No create / duplicate / delete on singletons — there is exactly one
+    // Homepage and one Site Settings, and neither can be removed. The previous
+    // filter only stripped duplicate/delete, and only for siteSettings.
+    actions: (input, context) =>
+      singletonTypes.has(context.schemaType)
+        ? input.filter(({ action }) => action && singletonActions.has(action))
+        : input,
   },
 })

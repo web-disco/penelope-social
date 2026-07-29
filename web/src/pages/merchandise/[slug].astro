@@ -5,7 +5,7 @@
  * lightbox; both are reproduced.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro'
-import PageBanner from '../../components/blocks/PageBanner.astro'
+import PageHero from '../../components/sections/PageHero.astro'
 import { getAll, getSingleton } from '../../lib/data'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
 import { container, heading, btn } from '../../lib/ui'
@@ -30,7 +30,7 @@ const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charc
   ogImage={seo.ogImage}
   noIndex={seo.noIndex}
 >
-  <PageBanner block={{ image: banner }} />
+  <PageHero block={{ image: banner }} />
 
   <div class="section-merch-details">
     <div class={container}>
@@ -76,7 +76,11 @@ const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charc
             {
               product.cta?.url && (
                 <div class="merch-details-link mt-10">
-                  <a href={product.cta.url} class={btn.primary}>
+                  <a
+                    href={product.cta.url}
+                    target={product.cta.newTab ? '_blank' : undefined}
+                    class={product.cta.style === 'outline' ? btn.outline : btn.primary}
+                  >
                     {product.cta.label}
                   </a>
                 </div>

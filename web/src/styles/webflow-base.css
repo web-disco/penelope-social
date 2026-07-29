@@ -647,45 +647,7 @@ to {
 .w-dyn-hide,.w-dyn-bind-empty {
   display:none!important}
 
-/* Webflow's custom-checkbox rules. These sit after the site @font-face block in
-   the compiled file, so they are appended here rather than swept up by the
-   extraction above. The checkmark SVG is inlined so nothing is fetched from
-   Webflow's CDN at runtime. */
-.w-checkbox {
-  margin-bottom: 5px;
-  padding-left: 20px;
-  display: block;
-}
-.w-checkbox:before {
-  content: " ";
-  grid-area: 1/1/2/2;
-  display: table;
-}
-.w-checkbox:after {
-  content: " ";
-  clear: both;
-  grid-area: 1/1/2/2;
-  display: table;
-}
-.w-checkbox-input {
-  float: left;
-  margin: 4px 0 0 -20px;
-  line-height: normal;
-}
-.w-checkbox-input--inputType-custom {
-  border: 1px solid #ccc;
-  border-radius: 2px;
-  width: 12px;
-  height: 12px;
-}
-.w-checkbox-input--inputType-custom.w--redirected-checked {
-  background-color: #3898ec;
-  background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"%3E%3Cpath fill="%23fff" d="M6.0016 11.1069 2.8945 7.9998l1.0607-1.0606 2.0464 2.0463 5.0433-5.0433 1.0606 1.0607z"/%3E%3C/svg%3E');
-  background-position: 50%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-color: #3898ec;
-}
-.w-checkbox-input--inputType-custom.w--redirected-focus {
-  box-shadow: 0 0 3px 1px #3898ec;
-}
+/* Webflow's custom-checkbox rules used to be appended here. Their only consumer
+   was the newsletter pop-up's consent checkbox, and that pop-up is gone — see
+   the note in studio/schemaTypes/documents/siteSettings.ts. The footer signup
+   uses a real styled input, so nothing on the site renders a `.w-checkbox`. */

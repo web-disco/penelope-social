@@ -49,6 +49,11 @@ const SKIP_TAGS = new Set(['script', 'style', 'noscript', 'svg', 'iframe', 'link
  *                  port simply doesn't render it; nothing is visible either way.
  *  - `cf-turnstile` the captcha widget, which has no Webflow counterpart.
  *  - `mc-honeypot`  Mailchimp's required bot-trap field.
+ *  - `newsletter`   the homepage signup overlay. Webflow ships the markup but
+ *                   sets `display:none` on it with no override, no trigger and
+ *                   no close button, so it never renders for anyone. The port
+ *                   drops it rather than carrying a full-screen modal that can
+ *                   only ever appear by accident.
  */
 const IGNORE_CLASSES = [
   'w-json',
@@ -56,6 +61,7 @@ const IGNORE_CLASSES = [
   'w-dyn-bind-empty',
   'cf-turnstile',
   'mc-honeypot',
+  'newsletter',
 ]
 
 function outline(doc) {

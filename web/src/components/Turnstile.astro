@@ -1,0 +1,54 @@
+---
+/**
+ * Cloudflare Turnstile widget.
+ *
+ * Renders only once the client's own sitekey is in `PUBLIC_TURNSTILE_SITE_KEY`
+ * — until then the forms work unprotected, and the Worker's verify step passes
+ * through for the same reason (no secret configured).
+ *
+ * `appearance="interaction-only"` keeps the widget invisible for the visitors
+ * who never need a challenge, which is nearly all of them on a Managed widget.
+ * It still runs and still produces the token the Worker verifies — it just does
+ * not put a grey Cloudflare box in the middle of the form to say so. The
+ * previous markup used Turnstile's defaults, which meant a visible box in both
+ * forms.
+ *
+ * `theme` is set per placement rather than left on Turnstile's default of
+ * `auto`, which follows the VISITOR'S OS preference and so clashes with
+ * whichever background it lands on for half the audience.
+ */
+interface Props {
+  /** Match the surrounding background. */
+  theme?: 'light' | 'dark'
+  /** Layout classes for the wrapper — spacing and alignment vary per form. */
+  class?: string
+}
+
+const { theme = 'light', class: className = '' } = Astro.props
+
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
+---
+
+{
+  siteKey && (
+    <div class={className} data-turnstile-slot>
+      {/*
+        A plain block div, not inline-block: on a widget that measures 0x0 while
+        hidden, an inline box still generates a line box, so the slot would
+        silently reserve a row of empty space on every page.
+
+        Spacing is applied by the caller through an `.is-visible` variant, set by
+        initTurnstileSpacing() only once the widget actually occupies space. It
+        cannot be a plain margin: `interaction-only` means the widget is
+        invisible for nearly every visitor, and a permanent margin would push the
+        submit button down for a challenge almost nobody is shown.
+      */}
+      <div
+        class="cf-turnstile"
+        data-sitekey={siteKey}
+        data-appearance="interaction-only"
+        data-theme={theme}
+      />
+    </div>
+  )
+}

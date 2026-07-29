@@ -1,174 +1,5 @@
 [
   {
-    "_id": "page-home",
-    "_type": "page",
-    "title": "Home",
-    "slug": {
-      "_type": "slug",
-      "current": "home"
-    },
-    "seo": {
-      "_type": "seo",
-      "metaTitle": "Sourdough Bakery & Restaurant in Vaughan | Penelope Social",
-      "metaDescription": "Experience Penelope Social, a Sourdough Bakery & Restaurant in Vaughan. Indulge in freshly baked goods and delicious meals. Visit us today!",
-      "ogImage": {
-        "_type": "image",
-        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
-        "alt": ""
-      }
-    },
-    "sections": [
-      {
-        "_type": "homeHero",
-        "_key": "hero",
-        "image": {
-          "_type": "image",
-          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/6738fc337434df480308980c_penelope-social-gathering.avif",
-          "alt": "People having dinner at Penelope Social"
-        },
-        "orderOnline": {
-          "_type": "link",
-          "label": "Order Online",
-          "url": "https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard",
-          "newTab": true
-        },
-        "reservations": {
-          "_type": "link",
-          "label": "Reservations",
-          "url": "/reservations",
-          "newTab": true
-        }
-      },
-      {
-        "_type": "introSection",
-        "_key": "intro",
-        "heading": "Sourdough Bakery\n& Restaurant",
-        "intro": "Penelope Social is a hidden gem in Vaughan, offering the best New York-style sourdough pizza, artisanal handhelds, and creative cocktails, all made with love in our micro sourdough bakery. Whether you're stopping by for a quick bite or a relaxing evening, our welcoming atmosphere feels like home.",
-        "ctas": [
-          {
-            "_type": "cta",
-            "_key": "cta0",
-            "label": "reservations",
-            "url": "/reservations",
-            "style": "primary"
-          },
-          {
-            "_type": "cta",
-            "_key": "cta1",
-            "label": "our story",
-            "url": "/about",
-            "style": "outline"
-          }
-        ]
-      },
-      {
-        "_type": "menuGrid",
-        "_key": "menus",
-        "heading": "Explore our menus",
-        "cards": [
-          {
-            "_type": "menuCard",
-            "_key": "card0",
-            "title": "lunch",
-            "url": "/menus/lunch",
-            "image": {
-              "_type": "image",
-              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand.avif",
-              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand.avif 1080w",
-              "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
-              "alt": "Focaccia Sandwich"
-            },
-            "buttonLabel": "View menu",
-            "buttonUrl": "/menus/lunch"
-          },
-          {
-            "_type": "menuCard",
-            "_key": "card1",
-            "title": "bar",
-            "url": "/menus/bar",
-            "image": {
-              "_type": "image",
-              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif",
-              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif 1080w",
-              "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
-              "alt": "Crafted Cocktail"
-            },
-            "buttonLabel": "View menu",
-            "buttonUrl": "/menus/bar"
-          },
-          {
-            "_type": "menuCard",
-            "_key": "card2",
-            "title": "dinner",
-            "url": "/menus/dinner",
-            "image": {
-              "_type": "image",
-              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger.avif",
-              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger.avif 1080w",
-              "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
-              "alt": "Penelope Burger"
-            },
-            "buttonLabel": "View menu",
-            "buttonUrl": "/menus/dinner"
-          },
-          {
-            "_type": "menuCard",
-            "_key": "card3",
-            "title": "Catering",
-            "url": "/menus/catering",
-            "image": {
-              "_type": "image",
-              "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201.avif",
-              "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201.avif 700w",
-              "_migrationSizes": "(max-width: 700px) 100vw, 700px",
-              "alt": "Penelope Burger"
-            },
-            "buttonLabel": "View menu",
-            "buttonUrl": "/menus/catering"
-          }
-        ]
-      },
-      {
-        "_type": "splitFeature",
-        "_key": "bread",
-        "layout": "image-first",
-        "heading": "crafted Sourdough",
-        "body": "At Penelope, we craft naturally leavened sourdough with the finest local and imported flours. Our 40-hour fermentation creates a flavorful, gut-friendly loaf that's easy to digest. Experience the best sourdough in Vaughan, baked with care and time.",
-        "cta": {
-          "_type": "link",
-          "label": "Sourdough Bakery",
-          "url": "/sourdough-bakery",
-          "newTab": false
-        },
-        "image": {
-          "_type": "image",
-          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1.avif",
-          "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1.avif 700w",
-          "_migrationSizes": "(max-width: 700px) 100vw, 700px",
-          "alt": "Loaves of Sourdough Bread"
-        }
-      },
-      {
-        "_type": "splitFeature",
-        "_key": "events",
-        "layout": "copy-first",
-        "heading": "Events At Penelope",
-        "body": "Celebrate at Penelope Social, Vaughan's perfect spot for any event. Whether it’s a birthday, corporate gathering, or special occasion, we offer artisanal dishes, handcrafted cocktails, and a warm, inviting atmosphere. Let our dedicated team handle the details while you relax, enjoy exceptional flavors, and create unforgettable memories with your guests.",
-        "cta": {
-          "_type": "link",
-          "label": "plan event",
-          "url": "/catering-events",
-          "newTab": false
-        },
-        "image": {
-          "_type": "image",
-          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd6a82f4cc92b24d53393_DSC_9066%201.avif",
-          "alt": "Event at Penelope"
-        }
-      }
-    ]
-  },
-  {
     "_id": "page-menus",
     "_type": "page",
     "title": "Menus",
@@ -188,7 +19,7 @@
     },
     "sections": [
       {
-        "_type": "pageBanner",
+        "_type": "pageHero",
         "_key": "banner",
         "image": {
           "_type": "image",
@@ -206,7 +37,7 @@
         "quickLinks": []
       },
       {
-        "_type": "menuGrid",
+        "_type": "menuCards",
         "_key": "menus",
         "cards": [
           {
@@ -220,9 +51,7 @@
               "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abc416ccbf2bcc13f0325_focaccia-in-hand.avif 1080w",
               "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
               "alt": "Focaccia Sandwich"
-            },
-            "buttonLabel": "View menu",
-            "buttonUrl": "/menus/lunch"
+            }
           },
           {
             "_type": "menuCard",
@@ -235,9 +64,7 @@
               "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif 1080w",
               "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
               "alt": "Crafted Cocktail"
-            },
-            "buttonLabel": "View menu",
-            "buttonUrl": "/menus/bar"
+            }
           },
           {
             "_type": "menuCard",
@@ -250,9 +77,7 @@
               "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcbda6ff68067b01dd95_penny-burger.avif 1080w",
               "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
               "alt": "Penelope Burger"
-            },
-            "buttonLabel": "View menu",
-            "buttonUrl": "/menus/dinner"
+            }
           },
           {
             "_type": "menuCard",
@@ -265,9 +90,7 @@
               "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc0c0714fc3b7bc69c60d_DSC_9308%201.avif 700w",
               "_migrationSizes": "(max-width: 700px) 100vw, 700px",
               "alt": "Penelope Burger"
-            },
-            "buttonLabel": "View menu",
-            "buttonUrl": "/menus/dinner"
+            }
           }
         ]
       }
@@ -293,7 +116,7 @@
     },
     "sections": [
       {
-        "_type": "pageBanner",
+        "_type": "pageHero",
         "_key": "banner",
         "image": {
           "_type": "image",
@@ -369,7 +192,7 @@
     },
     "sections": [
       {
-        "_type": "pageBanner",
+        "_type": "pageHero",
         "_key": "banner",
         "image": {
           "_type": "image",
@@ -530,7 +353,7 @@
     },
     "sections": [
       {
-        "_type": "pageBanner",
+        "_type": "pageHero",
         "_key": "banner",
         "image": {
           "_type": "image",
@@ -546,7 +369,7 @@
         "ctas": []
       },
       {
-        "_type": "formSection",
+        "_type": "contactFormSection",
         "_key": "form",
         "variant": "events",
         "heading": "plan your event",
@@ -670,7 +493,7 @@
     },
     "sections": [
       {
-        "_type": "pageBanner",
+        "_type": "pageHero",
         "_key": "banner",
         "image": {
           "_type": "image",
@@ -686,7 +509,7 @@
         "ctas": []
       },
       {
-        "_type": "formSection",
+        "_type": "contactFormSection",
         "_key": "form",
         "variant": "contact",
         "heading": "Leave Us a Message",
@@ -774,7 +597,7 @@
     },
     "sections": [
       {
-        "_type": "pageBanner",
+        "_type": "pageHero",
         "_key": "banner",
         "image": {
           "_type": "image",

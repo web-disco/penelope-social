@@ -13,12 +13,23 @@ import path from 'node:path'
 const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production'
 
+/**
+ * `useCdn: false` is deliberate.
+ *
+ * This site is fully static, so every query runs at build time and is then
+ * baked into HTML — there is no runtime client left to benefit from the CDN.
+ * Worse, the CDN caches per query+params including *negative* results, so a
+ * build kicked off moments after a publish (exactly what a publish webhook
+ * does) can be served the pre-publish answer and bake in stale or missing
+ * content. Fetching live costs one round trip per query at build time and
+ * removes that whole class of bug.
+ */
 export const sanity: SanityClient | null = projectId
   ? createClient({
       projectId,
       dataset,
       apiVersion: '2024-10-01',
-      useCdn: true,
+      useCdn: false,
       perspective: 'published',
     })
   : null

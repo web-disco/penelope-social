@@ -27,22 +27,34 @@ lets the whole thing be reviewed before any accounts exist.
 | --- | --- |
 | `pnpm dev` | Astro dev server |
 | `pnpm build` | Static build into `web/dist` |
-| `pnpm studio` | Sanity Studio on :3333 |
+| `pnpm studio` | Sanity Studio on :3333 (pass `--port` to change it; the port must be an allowed CORS origin on the project) |
 | `pnpm migrate:dry` | Scrape the live site → `scripts/output/*.json` |
 | `pnpm migrate` | Upload assets and import into Sanity (needs a write token) |
 | `pnpm compare` | Structural DOM diff of every route vs the live site |
 
 ## How it fits together
 
-**Page builder.** Static pages are `page` documents whose `sections` array holds
-typed blocks. Each block is one Sanity schema (`studio/schemaTypes/blocks/`) +
-one component (`web/src/components/blocks/`) + one entry in
-`web/src/components/PageBuilder.astro`. Adding a section is those three edits and
-nothing else.
+**Page builder.** Pages hold a `sections` array of typed blocks, shared between
+the homepage and every other page via `pageBuilderField`
+(`studio/schemaTypes/objects/pageBuilder.ts`). Adding a section is four edits:
+one schema in `studio/schemaTypes/sections/`, one entry in that shared field, one
+component in `web/src/components/sections/`, and one entry in
+`web/src/components/PageBuilder.astro`. Nothing else.
 
-**Content types.** `siteSettings` (a pinned singleton: header, drawer, footer,
-newsletter, SEO), `page`, `menu` (the four menus, each with its categories and
-items inline), and `merchProduct`.
+Every section is one file, named for what it is rather than for the copy that
+happens to be in it, and every one carries the shared `blockIcon` so the builder
+reads as a uniform stack rather than a mix of photo thumbnails and generic
+icons. The insert menu is set to grid view.
+
+**Content types.** Two singletons — `homepage` and `siteSettings` (header,
+drawer, footer, newsletter, SEO) — plus `page`, `menu` (the four menus, each
+with its categories and items inline), and `merchProduct`.
+
+The homepage is its **own document type**, not a `page` with the slug "home". It
+cannot be created, duplicated or deleted, and the `page` schema rejects a "home"
+slug, so a second homepage is unrepresentable. `structure.ts` owns the
+`singletonTypes` / `singletonActions` sets that `sanity.config.ts` reads to strip
+those actions and hide singletons from the global "create new" menu.
 
 **Styling.** The design is re-expressed in Tailwind v4, with every value read
 from Webflow's compiled stylesheet rather than eyeballed.
@@ -55,8 +67,16 @@ at the top of that file before editing it.
 **JavaScript.** `web/src/scripts/` is the site's Slater bundle rewritten as ES
 modules: Lenis smooth scroll, the navbar hide/reveal, the drawer, the
 scroll-triggered animations, and the page loader — all transcribed from the live
-bundle. GLightbox replaces Webflow's native lightbox, and a small script
-replaces the custom-checkbox behaviour webflow.js used to provide.
+bundle. GLightbox replaces Webflow's native lightbox.
+
+**Forms.** Contact and events POST to the Cloudflare Worker in `web/worker/`,
+which verifies the Turnstile token and emails the submission on. The widget is
+`appearance="interaction-only"`, so it stays invisible for the visitors who never
+get challenged — it still issues the token the Worker verifies. Because it is
+invisible, its spacing is applied by `initTurnstileSpacing()` only once the
+widget actually occupies space (measured, since hidden and visible widgets have
+identical markup), and a failed submit calls `turnstile.reset()` so the retry
+gets a fresh token instead of re-sending a spent one.
 
 ## Verifying parity
 
@@ -120,6 +140,12 @@ These need a human — none of them block development.
   "Handhelds" at `#desserts`. The links worked, but the ids read as mismatched.
   Anchors are now derived from the button label, which is a no-op on every other
   menu.
+- **The Catering menu card's button pointed at the dinner menu** on `/menus`
+  (the same card on `/` was correct). Nothing surfaced the mistake because
+  `.menu-btn-wrap` is `display:none` at every breakpoint, so the link renders for
+  nobody. The card's button label and URL are no longer editable fields at all —
+  both are derived from the card's own `url`, which makes the mismatch
+  unrepresentable rather than merely fixed.
 
 ### Deliberate differences
 
@@ -129,5 +155,12 @@ These need a human — none of them block development.
 - **Swiper loads lazily.** The original bundle initialises a `.swiper.is-merch`
   slider, but no page renders that element. The call is kept for parity and the
   library is only fetched if such an element ever appears.
-- **The newsletter pop-up is reproduced but stays hidden**, exactly as on the
-  live site, where `.newsletter { display: none }` has no override anywhere.
+- **The newsletter pop-up is removed, not reproduced.** Webflow ships a
+  `.newsletter` overlay on the homepage that never runs: `display:none` with no
+  override anywhere, no trigger, and no close button in the markup. Carrying it
+  meant shipping a `fixed inset-0 z-50` full-screen overlay whose only possible
+  future was appearing by accident with no way to dismiss it. Removed along with
+  the things it was the sole consumer of — the `modal` variant of
+  `NewsletterForm`, the Webflow custom-checkbox CSS, and the
+  `initCustomCheckboxes()` script. `compare.js` ignores the class so parity stays
+  at 14/14.

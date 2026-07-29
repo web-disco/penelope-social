@@ -42,7 +42,7 @@ async function buildSiteSettings() {
   const home = await fetchDoc('/')
 
   const drawerLinks = [...doc.querySelectorAll('.menu-drawer-link')].map((link) => ({
-    _type: 'navLink',
+    _type: 'link',
     _key: slugify(text(link)),
     label: text(link),
     url: link.getAttribute('href'),
@@ -55,7 +55,7 @@ async function buildSiteSettings() {
 
   const footerMenuLinks = [...doc.querySelectorAll('.footer-menu-wrap .footer-menu-link')].map(
     (link) => ({
-      _type: 'navLink',
+      _type: 'link',
       _key: slugify(text(link)),
       label: text(link),
       url: link.getAttribute('href'),
@@ -179,20 +179,8 @@ async function buildSiteSettings() {
         creditUrl: creditLink?.getAttribute('href') ?? '',
       },
     },
-    newsletterModal: modalFrom(home),
     merchBanner: null, // filled in from the merch listing page below
     seo: seoFrom(home),
-  }
-}
-
-function modalFrom(home) {
-  const modal = home.querySelector('.newsletter')
-  if (!modal) return undefined
-  return {
-    _type: 'newsletterModal',
-    heading: text(modal.querySelector('.newsletter-heading')),
-    text: text(modal.querySelector('p')),
-    consentText: text(modal.querySelector('.newsletter-checkbox-label')),
   }
 }
 
@@ -206,6 +194,20 @@ function linkFrom(el) {
   }
 }
 
+/** Same as linkFrom, plus the fill Webflow expressed as `.btn.is-outline`. */
+function buttonFrom(el) {
+  if (!el) return undefined
+  return {
+    _type: 'button',
+    label: text(el),
+    url: el.getAttribute('href'),
+    newTab: el.getAttribute('target') === '_blank',
+    style: el.classList.contains('is-outline') || el.classList.contains('outline')
+      ? 'outline'
+      : 'primary',
+  }
+}
+
 function normaliseAction(action) {
   if (!action) return ''
   return action.replace(/&amp;/g, '&')
@@ -215,6 +217,10 @@ function normaliseAction(action) {
    Pages
    -------------------------------------------------------------------------- */
 
+/**
+ * The front page is the `homepage` singleton, not a `page` with slug "home" —
+ * fixed id so there can only ever be one of it.
+ */
 async function buildHome() {
   const doc = await fetchDoc('/')
   const hero = doc.querySelector('.section-home-hero')
@@ -223,14 +229,13 @@ async function buildHome() {
   const events = doc.querySelector('.home-events')
 
   return {
-    _id: 'page-home',
-    _type: 'page',
+    _id: 'homepage',
+    _type: 'homepage',
     title: 'Home',
-    slug: { _type: 'slug', current: 'home' },
     seo: seoFrom(doc),
     sections: [
       {
-        _type: 'homeHero',
+        _type: 'hero',
         _key: 'hero',
         image: image(hero.querySelector('.home-hero-image')),
         orderOnline: linkFrom(hero.querySelector('.home-hero-menu')),
@@ -242,66 +247,67 @@ async function buildHome() {
         heading: textWithBreaks(intro.querySelector('.heading')),
         intro: textWithBreaks(intro.querySelector('.paragraph.is-intro')),
         ctas: [...intro.querySelectorAll('.intros-cta .btn')].map((btn, index) => ({
-          _type: 'cta',
+          _type: 'button',
           _key: `cta${index}`,
           label: text(btn),
           url: btn.getAttribute('href'),
           style: btn.classList.contains('outline') ? 'outline' : 'primary',
         })),
       },
-      menuGridFrom(doc, 'menus'),
+      menuCardsFrom(doc, 'menus'),
       {
-        _type: 'splitFeature',
+        _type: 'textWithMediaSection',
         _key: 'bread',
         layout: 'image-first',
         heading: text(bread.querySelector('.heading.is-medium')),
         body: text(bread.querySelector('.home-bread-content p')),
-        cta: linkFrom(bread.querySelector('.home-bread-cta a')),
+        cta: buttonFrom(bread.querySelector('.home-bread-cta a')),
         image: image(bread.querySelector('.home-bread-image')),
       },
       {
-        _type: 'splitFeature',
+        _type: 'textWithMediaSection',
         _key: 'events',
         layout: 'copy-first',
         heading: text(events.querySelector('.heading.is-medium')),
         body: text(events.querySelector('.home-events-content p')),
-        cta: linkFrom(events.querySelector('.events-cta a')),
+        cta: buttonFrom(events.querySelector('.events-cta a')),
         image: image(events.querySelector('.home-events-image')),
       },
     ],
   }
 }
 
-function menuGridFrom(doc, key) {
+/**
+ * The card's `.menu-btn` is deliberately not scraped. `.menu-btn-wrap` is
+ * `display:none` at every breakpoint, so its label and href render for nobody —
+ * and on the live /menus page the Catering card's button points at
+ * /menus/dinner. The template derives both from `url` instead, which drops that
+ * inconsistency rather than importing it.
+ */
+function menuCardsFrom(doc, key) {
   const section = doc.querySelector('.section-menus')
   return {
-    _type: 'menuGrid',
+    _type: 'menuCards',
     _key: key,
     heading: text(section.querySelector('.home-menu-heading .heading')) || undefined,
-    cards: [...section.querySelectorAll('.menu')].map((card, index) => {
-      const link = card.querySelector('.menu-link')
-      const button = card.querySelector('.menu-btn')
-      return {
-        _type: 'menuCard',
-        _key: `card${index}`,
-        title: text(card.querySelector('.menu-title')),
-        url: link.getAttribute('href'),
-        image: image(card.querySelector('.home-menu-image')),
-        buttonLabel: text(button),
-        buttonUrl: button?.getAttribute('href'),
-      }
-    }),
+    cards: [...section.querySelectorAll('.menu')].map((card, index) => ({
+      _type: 'menuCard',
+      _key: `card${index}`,
+      title: text(card.querySelector('.menu-title')),
+      url: card.querySelector('.menu-link').getAttribute('href'),
+      image: image(card.querySelector('.home-menu-image')),
+    })),
   }
 }
 
-function bannerFrom(doc) {
+function pageHeroFrom(doc) {
   const banner = doc.querySelector('.page-banner')
   /* Target `.page-banner-image` specifically — the sibling
      `.page-banner-overlay` is a decorative div, and on other Webflow layouts
      the decorative node is itself an <img> that would win a bare
      querySelector('img'). */
   return {
-    _type: 'pageBanner',
+    _type: 'pageHero',
     _key: 'banner',
     image: image(banner.querySelector('.page-banner-image')),
   }
@@ -333,7 +339,7 @@ async function buildMenusIndex() {
     title: 'Menus',
     slug: { _type: 'slug', current: 'menus' },
     seo: seoFrom(doc),
-    sections: [bannerFrom(doc), pageHeadingFrom(doc), menuGridFrom(doc, 'menus')],
+    sections: [pageHeroFrom(doc), pageHeadingFrom(doc), menuCardsFrom(doc, 'menus')],
   }
 }
 
@@ -348,7 +354,7 @@ async function buildAbout() {
     slug: { _type: 'slug', current: 'about' },
     seo: seoFrom(doc),
     sections: [
-      bannerFrom(doc),
+      pageHeroFrom(doc),
       {
         _type: 'introSection',
         _key: 'intro',
@@ -404,11 +410,11 @@ async function buildBakery() {
     title: 'Sourdough Bakery',
     slug: { _type: 'slug', current: 'sourdough-bakery' },
     seo: seoFrom(doc),
-    sections: [bannerFrom(doc), pageHeadingFrom(doc, { center: true }), ...stories],
+    sections: [pageHeroFrom(doc), pageHeadingFrom(doc, { center: true }), ...stories],
   }
 }
 
-function formSectionFrom(doc, variant) {
+function contactFormSectionFrom(doc, variant) {
   const block = doc.querySelector('.form-block')
   const form = block.querySelector('form')
 
@@ -439,7 +445,7 @@ function formSectionFrom(doc, variant) {
   })
 
   return {
-    _type: 'formSection',
+    _type: 'contactFormSection',
     _key: 'form',
     variant,
     heading: text(block.querySelector('.page-sub-heading')),
@@ -462,7 +468,7 @@ async function buildCateringEvents() {
     slug: { _type: 'slug', current: 'catering-events' },
     seo: seoFrom(doc),
     sections: [
-      bannerFrom(doc),
+      pageHeroFrom(doc),
       {
         _type: 'introSection',
         _key: 'intro',
@@ -470,7 +476,7 @@ async function buildCateringEvents() {
         intro: textWithBreaks(intro.querySelector('.paragraph.is-intro')),
         ctas: [],
       },
-      formSectionFrom(doc, 'events'),
+      contactFormSectionFrom(doc, 'events'),
       { _type: 'imageGrid', _key: 'grid', images: [] },
     ],
   }
@@ -487,7 +493,7 @@ async function buildContact() {
     slug: { _type: 'slug', current: 'contact' },
     seo: seoFrom(doc),
     sections: [
-      bannerFrom(doc),
+      pageHeroFrom(doc),
       {
         _type: 'introSection',
         _key: 'intro',
@@ -495,7 +501,7 @@ async function buildContact() {
         intro: textWithBreaks(intro.querySelector('.paragraph.is-intro')),
         ctas: [],
       },
-      formSectionFrom(doc, 'contact'),
+      contactFormSectionFrom(doc, 'contact'),
       { _type: 'imageGrid', _key: 'grid', images: [] },
     ],
   }
@@ -510,7 +516,7 @@ async function buildMerchandisePage() {
     slug: { _type: 'slug', current: 'merchandise' },
     seo: seoFrom(doc),
     sections: [
-      bannerFrom(doc),
+      pageHeroFrom(doc),
       pageHeadingFrom(doc, { center: true }),
       { _type: 'merchListing', _key: 'listing' },
     ],
@@ -630,7 +636,7 @@ async function buildMerchProducts() {
         description: text(content.querySelector('p')),
         banner: image(doc.querySelector('.page-banner-image')),
         images: [...doc.querySelectorAll('.merch-image')].map((img) => image(img)),
-        cta: linkFrom(content.querySelector('.merch-details-link a')),
+        cta: buttonFrom(content.querySelector('.merch-details-link a')),
         seo: seoFrom(doc),
       }
     }),
@@ -652,8 +658,10 @@ async function main() {
   console.log(`[migrate] scraping ${SITE}${DRY ? ' (dry run)' : ''}`)
 
   const settings = await buildSiteSettings()
+  /* The homepage is its own singleton type, so it is built alongside the pages
+     but written to its own file rather than into the page list. */
+  const homepage = await buildHome()
   const pages = [
-    await buildHome(),
     await buildMenusIndex(),
     await buildAbout(),
     await buildBakery(),
@@ -670,6 +678,7 @@ async function main() {
 
   const byType = {
     siteSettings: [settings],
+    homepage: [homepage],
     page: pages,
     menu: menus,
     merchProduct: merchProducts,

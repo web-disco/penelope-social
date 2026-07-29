@@ -9,8 +9,10 @@ import { getAll } from '../lib/data'
 
 export async function getStaticPaths() {
   const pages = await getAll<any>('page')
+  // No need to exclude "home": the front page is the `homepage` singleton, and
+  // the page schema rejects that slug outright.
   return pages
-    .filter((page) => page.slug?.current && page.slug.current !== 'home')
+    .filter((page) => page.slug?.current)
     .map((page) => ({ params: { slug: page.slug.current }, props: { page } }))
 }
 

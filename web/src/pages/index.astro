@@ -1,19 +1,29 @@
 ---
+/**
+ * The front page reads the `homepage` singleton, not a `page` with the slug
+ * "home", so there is no way to end up with two of them — and no way to delete
+ * the one there is.
+ */
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
-import { getOne } from '../lib/data'
+import { getSingleton } from '../lib/data'
 
-const page = await getOne<any>('page', 'home')
-if (!page) throw new Error('Missing `page` document with slug "home"')
-const seo = page.seo ?? {}
+const home = await getSingleton<any>('homepage')
+if (!home) {
+  throw new Error(
+    'No `homepage` document. Run `pnpm migrate:dry` to regenerate scripts/output, ' +
+      'or set PUBLIC_SANITY_PROJECT_ID to read from Sanity.',
+  )
+}
+const seo = home.seo ?? {}
 ---
 
 <BaseLayout
-  title={seo.metaTitle ?? page.title}
+  title={seo.metaTitle ?? home.title}
   description={seo.metaDescription}
   ogImage={seo.ogImage}
   noIndex={seo.noIndex}
   isHome
 >
-  <PageBuilder sections={page.sections ?? []} />
+  <PageBuilder sections={home.sections ?? []} />
 </BaseLayout>

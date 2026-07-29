@@ -1,33 +1,34 @@
 ---
 /**
- * Maps a `page.sections` entry to its component.
+ * Maps a page-builder section's `_type` to its component.
  *
- * The rule that keeps this scalable: a new section on the site = one Sanity
- * object schema + one component in `blocks/` + one entry in this map.
+ * The rule that keeps this scalable: a new section on the site = one schema in
+ * studio/schemaTypes/sections/ + one entry in studio/schemaTypes/objects/pageBuilder.ts
+ * + one component in `sections/` + one entry in this map.
  */
-import HomeHero from './blocks/HomeHero.astro'
-import IntroSection from './blocks/IntroSection.astro'
-import PageBanner from './blocks/PageBanner.astro'
-import PageHeading from './blocks/PageHeading.astro'
-import MenuGrid from './blocks/MenuGrid.astro'
-import SplitFeature from './blocks/SplitFeature.astro'
-import TeamGrid from './blocks/TeamGrid.astro'
-import StorySection from './blocks/StorySection.astro'
-import MerchListing from './blocks/MerchListing.astro'
-import FormSection from './blocks/FormSection.astro'
-import ImageGrid from './blocks/ImageGrid.astro'
+import Hero from './sections/Hero.astro'
+import PageHero from './sections/PageHero.astro'
+import IntroSection from './sections/IntroSection.astro'
+import PageHeading from './sections/PageHeading.astro'
+import MenuCards from './sections/MenuCards.astro'
+import TextWithMediaSection from './sections/TextWithMediaSection.astro'
+import TeamGrid from './sections/TeamGrid.astro'
+import StorySection from './sections/StorySection.astro'
+import MerchListing from './sections/MerchListing.astro'
+import ContactFormSection from './sections/ContactFormSection.astro'
+import ImageGrid from './sections/ImageGrid.astro'
 
 const COMPONENTS: Record<string, any> = {
-  homeHero: HomeHero,
+  hero: Hero,
+  pageHero: PageHero,
   introSection: IntroSection,
-  pageBanner: PageBanner,
   pageHeading: PageHeading,
-  menuGrid: MenuGrid,
-  splitFeature: SplitFeature,
+  menuCards: MenuCards,
+  textWithMediaSection: TextWithMediaSection,
   teamGrid: TeamGrid,
   storySection: StorySection,
   merchListing: MerchListing,
-  formSection: FormSection,
+  contactFormSection: ContactFormSection,
   imageGrid: ImageGrid,
 }
 
@@ -41,7 +42,7 @@ const { sections = [] } = Astro.props
   sections.map((block) => {
     const Component = COMPONENTS[block._type]
     if (!Component) {
-      console.warn(`[PageBuilder] no component registered for block type "${block._type}"`)
+      console.warn(`[PageBuilder] no component registered for section type "${block._type}"`)
       return null
     }
     return <Component block={block} />

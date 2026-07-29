@@ -1,6 +1,16 @@
-import { defineField, defineType } from 'sanity'
-import { blockNames } from '../blocks'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 
+/**
+ * Site-wide chrome: header, footer, and the default SEO. A singleton — see
+ * structure.ts's `singletonTypes`.
+ *
+ * The newsletter pop-up that used to live here is gone. Webflow shipped a
+ * `.newsletter` overlay that never ran (`display:none` in the compiled CSS, no
+ * trigger, no close button), and it was ported in that same hidden state behind
+ * fields an editor could fill in with no way to ever see the result. Filling
+ * them in was the trap: the wrapper is fixed/inset-0/z-50, so anything that
+ * revealed it would cover the homepage on every visit with nothing to dismiss.
+ */
 export const siteSettings = defineType({
   name: 'siteSettings',
   title: 'Site Settings',
@@ -8,7 +18,7 @@ export const siteSettings = defineType({
   groups: [
     { name: 'header', title: 'Header & Menu', default: true },
     { name: 'footer', title: 'Footer' },
-    { name: 'newsletter', title: 'Newsletter' },
+    { name: 'merch', title: 'Merch' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -20,7 +30,12 @@ export const siteSettings = defineType({
       type: 'object',
       group: 'header',
       fields: [
-        defineField({ name: 'logo', title: 'Logo', type: 'image' }),
+        defineField({
+          name: 'logo',
+          title: 'Logo',
+          type: 'image',
+          fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+        }),
         defineField({ name: 'logoAlt', title: 'Logo alt text', type: 'string' }),
         defineField({ name: 'orderOnline', title: 'Order online button', type: 'link' }),
         defineField({ name: 'reservations', title: 'Reservations button', type: 'link' }),
@@ -28,7 +43,7 @@ export const siteSettings = defineType({
           name: 'drawerLinks',
           title: 'Menu drawer links',
           type: 'array',
-          of: [{ type: 'navLink' }],
+          of: [defineArrayMember({ type: 'link' })],
         }),
       ],
     }),
@@ -39,7 +54,12 @@ export const siteSettings = defineType({
       type: 'object',
       group: 'footer',
       fields: [
-        defineField({ name: 'logo', title: 'Logo', type: 'image' }),
+        defineField({
+          name: 'logo',
+          title: 'Logo',
+          type: 'image',
+          fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+        }),
         defineField({ name: 'logoAlt', title: 'Logo alt text', type: 'string' }),
         defineField({
           name: 'newsletter',
@@ -69,7 +89,12 @@ export const siteSettings = defineType({
             defineField({ name: 'heading', title: 'Heading', type: 'string' }),
             defineField({ name: 'blurb', title: 'Blurb', type: 'text', rows: 3 }),
             defineField({ name: 'blurbUrl', title: 'Blurb links to', type: 'string' }),
-            defineField({ name: 'links', title: 'Links', type: 'array', of: [{ type: 'navLink' }] }),
+            defineField({
+              name: 'links',
+              title: 'Links',
+              type: 'array',
+              of: [defineArrayMember({ type: 'link' })],
+            }),
           ],
         }),
         defineField({
@@ -81,7 +106,12 @@ export const siteSettings = defineType({
             defineField({ name: 'locationLabel', title: 'Location label', type: 'string' }),
             defineField({ name: 'address', title: 'Address', type: 'string' }),
             defineField({ name: 'mapUrl', title: 'Map link', type: 'url' }),
-            defineField({ name: 'blocks', title: 'Hours', type: 'array', of: [{ type: 'hoursBlock' }] }),
+            defineField({
+              name: 'blocks',
+              title: 'Hours',
+              type: 'array',
+              of: [defineArrayMember({ type: 'hoursBlock' })],
+            }),
           ],
         }),
         defineField({
@@ -95,7 +125,12 @@ export const siteSettings = defineType({
             defineField({ name: 'email', title: 'Email (display)', type: 'string' }),
             defineField({ name: 'emailHref', title: 'Email link', type: 'string' }),
             defineField({ name: 'socialsLabel', title: 'Socials label', type: 'string' }),
-            defineField({ name: 'socials', title: 'Socials', type: 'array', of: [{ type: 'social' }] }),
+            defineField({
+              name: 'socials',
+              title: 'Socials',
+              type: 'array',
+              of: [defineArrayMember({ type: 'social' })],
+            }),
             defineField({ name: 'googleReview', title: 'Google Reviews button', type: 'link' }),
           ],
         }),
@@ -114,24 +149,12 @@ export const siteSettings = defineType({
     }),
 
     defineField({
-      name: 'newsletterModal',
-      title: 'Newsletter pop-up',
-      type: 'object',
-      group: 'newsletter',
-      description:
-        'The full-screen signup overlay on the homepage. It is hidden by CSS on the live site and stays hidden in this build.',
-      fields: [
-        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-        defineField({ name: 'text', title: 'Copy', type: 'text', rows: 3 }),
-        defineField({ name: 'consentText', title: 'Consent checkbox label', type: 'text', rows: 2 }),
-      ],
-    }),
-
-    defineField({
       name: 'merchBanner',
       title: 'Default merch banner',
       type: 'image',
-      group: 'footer',
+      group: 'merch',
+      options: { hotspot: true },
+      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
       description: 'Used on a merch product page that has no banner of its own.',
     }),
 
@@ -139,91 +162,3 @@ export const siteSettings = defineType({
   ],
   preview: { prepare: () => ({ title: 'Site Settings' }) },
 })
-
-export const page = defineType({
-  name: 'page',
-  title: 'Page',
-  type: 'document',
-  fields: [
-    defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
-    defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: { source: 'title' },
-      description: 'Use "home" for the homepage.',
-      validation: (r) => r.required(),
-    }),
-    defineField({ name: 'sections', title: 'Sections', type: 'array', of: blockNames }),
-    defineField({ name: 'seo', title: 'SEO', type: 'seo' }),
-  ],
-  preview: {
-    select: { title: 'title', slug: 'slug.current' },
-    prepare: ({ title, slug }) => ({ title, subtitle: slug === 'home' ? '/' : `/${slug}` }),
-  },
-})
-
-export const menu = defineType({
-  name: 'menu',
-  title: 'Menu',
-  type: 'document',
-  fields: [
-    defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
-    defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: { source: 'title' },
-      description: 'Published at /menus/<slug>.',
-      validation: (r) => r.required(),
-    }),
-    defineField({ name: 'banner', title: 'Banner image', type: 'image', options: { hotspot: true } }),
-    defineField({ name: 'heading', title: 'Heading', type: 'text', rows: 2 }),
-    defineField({ name: 'intro', title: 'Intro copy', type: 'text', rows: 5 }),
-    defineField({ name: 'quickLinks', title: 'Quick links', type: 'array', of: [{ type: 'quickLink' }] }),
-    defineField({ name: 'categories', title: 'Categories', type: 'array', of: [{ type: 'menuCategory' }] }),
-    defineField({ name: 'seo', title: 'SEO', type: 'seo' }),
-  ],
-  preview: {
-    select: { title: 'title', slug: 'slug.current', media: 'banner' },
-    prepare: ({ title, slug, media }) => ({ title, subtitle: `/menus/${slug}`, media }),
-  },
-})
-
-export const merchProduct = defineType({
-  name: 'merchProduct',
-  title: 'Merch product',
-  type: 'document',
-  orderings: [
-    { title: 'Display order', name: 'order', by: [{ field: 'order', direction: 'asc' }] },
-  ],
-  fields: [
-    defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
-    defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: { source: 'title' },
-      description: 'Published at /merchandise/<slug>.',
-      validation: (r) => r.required(),
-    }),
-    defineField({ name: 'order', title: 'Order', type: 'number' }),
-    defineField({ name: 'price', title: 'Price', type: 'string', description: 'Amount only — the $ is added by the template.' }),
-    defineField({ name: 'description', title: 'Description', type: 'text', rows: 5 }),
-    defineField({ name: 'banner', title: 'Banner image', type: 'image', options: { hotspot: true } }),
-    defineField({
-      name: 'images',
-      title: 'Product images',
-      type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
-    }),
-    defineField({ name: 'cta', title: 'Button', type: 'link' }),
-    defineField({ name: 'seo', title: 'SEO', type: 'seo' }),
-  ],
-  preview: {
-    select: { title: 'title', subtitle: 'price', media: 'images.0' },
-    prepare: ({ title, subtitle, media }) => ({ title, subtitle: subtitle ? `$${subtitle}` : '', media }),
-  },
-})
-
-export const documentTypes = [siteSettings, page, menu, merchProduct]

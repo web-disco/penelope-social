@@ -2,7 +2,6 @@
 import '../styles/global.css'
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
-import NewsletterModal from '../components/NewsletterModal.astro'
 import { getSiteSettings } from '../lib/data'
 import { imageUrl } from '../lib/image'
 
@@ -12,7 +11,7 @@ interface Props {
   ogImage?: any
   canonical?: string
   noIndex?: boolean
-  /** The homepage carries the page loader and the hidden newsletter modal. */
+  /** The homepage carries the page loader. */
   isHome?: boolean
 }
 
@@ -24,6 +23,10 @@ const seo = settings.seo ?? {}
 const metaDescription = description ?? seo.metaDescription ?? ''
 const ogImageUrl = imageUrl(ogImage) || imageUrl(seo.ogImage)
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '')
+
+// Loaded once per page, not per form: two forms on a page would otherwise pull
+// the script twice. Only when the client's own sitekey exists — see Turnstile.astro.
+const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
 ---
 
 <!doctype html>
@@ -45,13 +48,16 @@ const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href.r
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/webclip.png" />
     <link rel="canonical" href={canonicalUrl} />
+    {
+      turnstileSiteKey && (
+        <script is:inline async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js" />
+      )
+    }
   </head>
 
   <body>
     <div class="page-wrapper relative">
       <Navbar settings={settings} isHome={isHome} />
-
-      {isHome && <NewsletterModal settings={settings} />}
 
       <div class="main-wrapper">
         <slot />

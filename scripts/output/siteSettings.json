@@ -25,49 +25,49 @@
       },
       "drawerLinks": [
         {
-          "_type": "navLink",
+          "_type": "link",
           "_key": "our-menus",
           "label": "Our Menus",
           "url": "/menus",
           "newTab": false
         },
         {
-          "_type": "navLink",
+          "_type": "link",
           "_key": "bakery",
           "label": "Bakery",
           "url": "/sourdough-bakery",
           "newTab": false
         },
         {
-          "_type": "navLink",
+          "_type": "link",
           "_key": "about-us",
           "label": "About Us",
           "url": "/about",
           "newTab": false
         },
         {
-          "_type": "navLink",
+          "_type": "link",
           "_key": "events",
           "label": "Events",
           "url": "/catering-events",
           "newTab": false
         },
         {
-          "_type": "navLink",
+          "_type": "link",
           "_key": "gift-cards",
           "label": "Gift Cards",
           "url": "https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard",
           "newTab": true
         },
         {
-          "_type": "navLink",
+          "_type": "link",
           "_key": "merch",
           "label": "Merch",
           "url": "/merchandise",
           "newTab": false
         },
         {
-          "_type": "navLink",
+          "_type": "link",
           "_key": "catering-events",
           "label": "Catering & Events",
           "url": "/events?general-inquiry",
@@ -100,25 +100,25 @@
         "blurbUrl": "/menus",
         "links": [
           {
-            "_type": "navLink",
+            "_type": "link",
             "_key": "lunch",
             "label": "lunch",
             "url": "/menus/lunch"
           },
           {
-            "_type": "navLink",
+            "_type": "link",
             "_key": "bar",
             "label": "BAR",
             "url": "/menus/bar"
           },
           {
-            "_type": "navLink",
+            "_type": "link",
             "_key": "dinner",
             "label": "DINNER",
             "url": "/menus/dinner"
           },
           {
-            "_type": "navLink",
+            "_type": "link",
             "_key": "catering",
             "label": "Catering",
             "url": "/menus/catering"
@@ -191,12 +191,6 @@
         "creditLabel": "Web Disco",
         "creditUrl": "https://www.webdisco.digital"
       }
-    },
-    "newsletterModal": {
-      "_type": "newsletterModal",
-      "heading": "stay in the loop",
-      "text": "Get exclusive updates, special offers, and a first look at new menu items, events and merch.",
-      "consentText": "I agree to receive marketing emails from Penelope Social. Unsubscribe at any time."
     },
     "merchBanner": {
       "_type": "image",
