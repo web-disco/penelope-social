@@ -27,10 +27,12 @@ lets the whole thing be reviewed before any accounts exist.
 | --- | --- |
 | `pnpm dev` | Astro dev server |
 | `pnpm build` | Static build into `web/dist` |
-| `pnpm studio` | Sanity Studio on :3333 (pass `--port` to change it; the port must be an allowed CORS origin on the project) |
+| `pnpm studio` | Sanity Studio on :3333 (pass `--port` to change it; the port must be an allowed CORS origin — `sanity cors add http://localhost:<port> --credentials`) |
 | `pnpm migrate:dry` | Scrape the live site → `scripts/output/*.json` |
 | `pnpm migrate` | Upload assets and import into Sanity (needs a write token) |
 | `pnpm compare` | Structural DOM diff of every route vs the live site |
+| `pnpm deploy:web` | Build and deploy the Worker (`deploy:web:dry` to validate only) |
+| `pnpm deploy:studio` | Deploy the hosted Studio |
 
 ## How it fits together
 
@@ -96,15 +98,22 @@ height matches the live site exactly at 1440 / 991 / 767 / 479px.
 
 These need a human — none of them block development.
 
-1. **Create the Sanity project.** `pnpm dlx sanity@latest login`, create the
-   project, put the ids in `.env` (see `.env.example`).
+1. **Sanity project.** Already created: `wlwg9juj` ("Penelope Social"), and it is
+   the `DEFAULT_PROJECT_ID` in `web/src/lib/data.ts`. Symlink the env into both
+   workspaces — the Sanity CLI and Astro each resolve env from their own
+   directory, not the repo root: `ln -sfn ../.env studio/.env && ln -sfn ../.env web/.env`.
 2. **Import the content.** Create an editor token, set `SANITY_WRITE_TOKEN`, run
    `pnpm migrate`. This uploads every image to Sanity and replaces the
-   `_migrationSrc` markers. Re-runnable — documents use deterministic ids.
-3. **Deploy the Studio:** `pnpm studio:deploy`.
-4. **Deploy the site:** `cd web && pnpm wrangler deploy` (validate first with
-   `pnpm wrangler deploy --dry-run --outdir /tmp/check`). Then point the domain
-   at the Worker.
+   `_migrationSrc` markers. Re-runnable — documents use deterministic ids. Until
+   this runs the dataset is empty, so `.env` keeps `PUBLIC_SANITY_PROJECT_ID=`
+   empty to build from `scripts/output`; clear that line afterwards. Re-run
+   `pnpm build && pnpm compare` once it is populated — image URLs move to
+   Sanity's CDN, so parity is only proven for the fallback path before then.
+3. **Deploy the Studio:** `pnpm deploy:studio`. Consider pinning the app id and
+   `autoUpdates` under `deployment` in `studio/sanity.cli.ts` so later deploys
+   never prompt for (or retarget) the application.
+4. **Deploy the site:** `pnpm deploy:web`, or `pnpm deploy:web:dry` to validate
+   first. Then point the domain at the Worker.
 5. **Rebuild on publish.** Create a Cloudflare deploy hook and add it as a Sanity
    webhook on publish.
 6. **Turnstile.** Create a widget, set `PUBLIC_TURNSTILE_SITE_KEY` and

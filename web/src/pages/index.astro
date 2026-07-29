@@ -6,15 +6,10 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
-import { getSingleton } from '../lib/data'
+import { getSingleton, missingContentMessage } from '../lib/data'
 
 const home = await getSingleton<any>('homepage')
-if (!home) {
-  throw new Error(
-    'No `homepage` document. Run `pnpm migrate:dry` to regenerate scripts/output, ' +
-      'or set PUBLIC_SANITY_PROJECT_ID to read from Sanity.',
-  )
-}
+if (!home) throw new Error(missingContentMessage('homepage'))
 const seo = home.seo ?? {}
 ---
 

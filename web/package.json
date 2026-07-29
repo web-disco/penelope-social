@@ -8,7 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "astro build && wrangler deploy"
+    "deploy": "astro build && wrangler deploy",
+    "deploy:dry": "astro build && wrangler deploy --dry-run --outdir .wrangler/dry"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",

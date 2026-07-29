@@ -1,16 +1,33 @@
 /**
  * Data layer with a file fallback.
  *
- * When PUBLIC_SANITY_PROJECT_ID is set the site reads from Sanity. Until then
- * it reads the JSON the migration script writes in `--dry` mode
- * (`scripts/output/<type>.json`), so the whole project builds and can be
- * reviewed before the Sanity project exists.
+ * With a project id the site reads from Sanity; otherwise it reads the JSON the
+ * migration script writes in `--dry` mode (`scripts/output/<type>.json`), so the
+ * whole project builds and can be reviewed before the dataset is populated.
  */
 import { createClient, type SanityClient } from '@sanity/client'
 import fs from 'node:fs'
 import path from 'node:path'
 
-const projectId = import.meta.env.PUBLIC_SANITY_PROJECT_ID
+/**
+ * The Sanity project this site is bound to.
+ *
+ * Defaulted in code rather than required from the environment. A project id is
+ * not a secret — it ships in the client bundle — and making it env-only created a
+ * silent failure mode: a build with the variable unset falls back to the
+ * committed JSON fixtures and deploys stale content with no error and no
+ * warning. Hard to notice, easy to ship.
+ *
+ * Set PUBLIC_SANITY_PROJECT_ID to point at a different project, or to an empty
+ * string to force the file-fallback layer. An explicit empty value is honoured;
+ * only an *absent* variable falls back to this default, which is what makes the
+ * distinction between "use the fixtures on purpose" and "forgot to configure
+ * the build" representable at all.
+ */
+const DEFAULT_PROJECT_ID = 'wlwg9juj'
+
+const configured = import.meta.env.PUBLIC_SANITY_PROJECT_ID as string | undefined
+const projectId = configured === undefined ? DEFAULT_PROJECT_ID : configured
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production'
 
 /**
@@ -35,6 +52,21 @@ export const sanity: SanityClient | null = projectId
   : null
 
 export const usingSanity = Boolean(sanity)
+
+/**
+ * Why a required document is missing, and what to do about it — which differs
+ * entirely by mode. Reading from Sanity, the answer is to import content; on the
+ * file-fallback layer, it is to regenerate the fixtures. A single message that
+ * mentions both sends you looking in the wrong place half the time.
+ */
+export function missingContentMessage(type: string): string {
+  return sanity
+    ? `No \`${type}\` document in Sanity project ${projectId} (dataset "${dataset}"). ` +
+        'Run `pnpm migrate` to import the scraped content, or set ' +
+        'PUBLIC_SANITY_PROJECT_ID to an empty string to build from scripts/output instead.'
+    : `No \`${type}\` document in scripts/output. Run \`pnpm migrate:dry\` to regenerate it, ` +
+        'or unset PUBLIC_SANITY_PROJECT_ID to read from Sanity.'
+}
 
 /* Resolved from the working directory (always `web/` for astro dev|build)
    rather than import.meta.url, which points into the bundled server chunk. */
@@ -125,8 +157,5 @@ export async function resolveRefs<T = any>(refs: any[] | undefined): Promise<T[]
 export async function getSiteSettings(): Promise<any> {
   const settings = await getSingleton('siteSettings')
   if (settings) return settings
-  throw new Error(
-    'No siteSettings found. Run `pnpm migrate:dry` to generate scripts/output, ' +
-      'or set PUBLIC_SANITY_PROJECT_ID to read from Sanity.',
-  )
+  throw new Error(missingContentMessage('siteSettings'))
 }
