@@ -16,7 +16,9 @@ export const menuItem = defineType({
       name: 'price',
       title: 'Price',
       type: 'string',
-      description: 'Shown exactly as typed — the menus print bare numbers, with no $.',
+      description:
+        'Printed exactly as typed, with no $ added — the menus show bare figures, unlike Merch. ' +
+        'A slash is glass/bottle on the wine lists (“17/68”).',
     }),
     defineField({ name: 'description', title: 'Description', type: 'text', rows: 2 }),
   ],
