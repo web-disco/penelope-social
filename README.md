@@ -138,20 +138,24 @@ These need a human — none of them block development.
    up yet; pointing penelopesocial.com at the Worker is the actual cutover.
 5. **Rebuild on publish.** Create a Cloudflare deploy hook and add it as a Sanity
    webhook on publish.
-6. **Turnstile.** Create a widget, set `PUBLIC_TURNSTILE_SITE_KEY` and
-   `wrangler secret put TURNSTILE_SECRET_KEY`. Until then the forms work but
-   aren't bot-protected.
+6. ~~**Turnstile.**~~ **Done.** Widget "penelopesocial.com" (Managed), scoped to
+   the apex, `www`, and the workers.dev host so it works on staging too. The
+   site key is in `.env`; the secret is a Worker secret. Verified: a POST with
+   no token is rejected on every form.
 7. **Decide where form submissions go.** Set `EMAIL_PROVIDER` to `resend` or
    `cloudflare` plus `NOTIFY_EMAIL_TO`/`NOTIFY_EMAIL_FROM` (see
    `web/worker/email.ts`). Unset means submissions succeed but nobody is
    emailed — don't ship it that way.
-8. **Set the subscriber export credentials:** `wrangler secret put SUBSCRIBERS_USER`
-   and `wrangler secret put SUBSCRIBERS_PASSWORD`. Until both exist
-   `/api/subscribers.csv` returns 503 — signups are still recorded, they just
-   can't be exported. Basic Auth rather than a `?key=` token because the export
-   is a list of customer email addresses, and a token in a URL ends up in
-   browser history and leaks via `Referer`.
-9. **Send one test submission through each form** (contact, events, newsletter)
+8. ~~**Set the subscriber export credentials.**~~ **Done.** `SUBSCRIBERS_USER`
+   and `SUBSCRIBERS_PASSWORD` are Worker secrets; `/api/subscribers.csv` returns
+   401 without them and 200 with. Basic Auth rather than a `?key=` token because
+   the export is a list of customer email addresses, and a token in a URL ends
+   up in browser history and leaks via `Referer`.
+9. **Point penelopesocial.com at the Worker.** The apex still serves the Webflow
+   site; this is the actual cutover. Check the existing MX records first if
+   Cloudflare Email Routing is ever added for the notification emails — changing
+   them would break the client's inbound mail.
+10. **Send one test submission through each form** (contact, events, newsletter)
    before switching DNS. For the newsletter, confirm the row landed:
    `wrangler d1 execute penelope-social-subscribers --remote --command "SELECT * FROM subscribers"`.
 
