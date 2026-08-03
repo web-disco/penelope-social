@@ -30,11 +30,13 @@
     {
       "binding": "SUBSCRIBERS",
       "database_name": "penelope-social-subscribers",
-      "database_id": "fff4209a-ecc0-4181-801b-b937373a17f9"
+      "database_id": "fff4209a-ecc0-4181-801b-b937373a17f9",
+      // Per-binding, not top-level: wrangler warns "unexpected field" on the
+      // latter and then ignores it, so a schema change would apply from
+      // wrangler's default directory rather than this one.
+      "migrations_dir": "migrations"
     }
   ],
-
-  "migrations_dir": "migrations",
 
   "observability": {
     "enabled": true
