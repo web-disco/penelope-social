@@ -14,7 +14,6 @@ import {
 } from './animations'
 import { initPageLoader } from './page-loader'
 import { initMerchSwiper } from './merch-swiper'
-import { initNewsletter } from './newsletter'
 import { initSiteForms, initEventForm, initTurnstileSpacing } from './forms'
 import { initLightbox } from './lightbox'
 
@@ -50,8 +49,8 @@ function boot() {
   // Replaces webflow.js behaviour
   initLightbox()
 
-  // Forms
-  initNewsletter()
+  // Forms — the newsletter is one of them now that it posts to the Worker
+  // rather than to Mailchimp over JSONP.
   initSiteForms()
   initEventForm()
   initTurnstileSpacing()

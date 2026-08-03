@@ -24,50 +24,11 @@
     },
     "heading": "Lunch menu",
     "intro": "Discover the best lunch in Vaughan at Penelope Social. Enjoy freshly baked sourdough focaccia sandwiches, artisanal New York-style pizzas, and crisp salads.\n\nExclusively Available | Monday - Saturday 10:00am -3:00pm",
-    "quickLinks": [
-      {
-        "_type": "quickLink",
-        "label": "Focaccia",
-        "anchor": "focaccia",
-        "_key": "focaccia"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Pizza Bianca",
-        "anchor": "pizza-bianca",
-        "_key": "pizza-bianca"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Pizza Rossa",
-        "anchor": "pizza-rossa",
-        "_key": "pizza-rossa"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Salads",
-        "anchor": "salads",
-        "_key": "salads"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Treats",
-        "anchor": "treats",
-        "_key": "treats"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Cafe",
-        "anchor": "cafe",
-        "_key": "cafe"
-      }
-    ],
     "categories": [
       {
         "_type": "menuCategory",
         "_key": "category-focaccia",
         "title": "Focaccia",
-        "anchorId": "focaccia",
         "items": [
           {
             "_type": "menuItem",
@@ -125,20 +86,26 @@
             "price": "19",
             "description": "Mixed Roasted Veggies, Goat Cheese, Basil Pesto, Garlic Aioli"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "focaccia"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-pizza-bianca",
         "title": "Pizza Bianca",
-        "anchorId": "pizza-bianca",
-        "items": []
+        "items": [],
+        "anchor": {
+          "_type": "slug",
+          "current": "pizza-bianca"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-pizza-rossa",
         "title": "Pizza Rossa",
-        "anchorId": "pizza-rossa",
         "items": [
           {
             "_type": "menuItem",
@@ -168,13 +135,16 @@
             "price": "7",
             "description": "Soppressata, Stracciatella, Hot Honey"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "pizza-rossa"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-salads",
         "title": "Salads",
-        "anchorId": "salads",
         "items": [
           {
             "_type": "menuItem",
@@ -211,13 +181,16 @@
             "price": "13",
             "description": "Add-on"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "salads"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-treats",
         "title": "Treats",
-        "anchorId": "treats",
         "items": [
           {
             "_type": "menuItem",
@@ -240,13 +213,16 @@
             "price": "5",
             "description": ""
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "treats"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-cafe",
         "title": "Cafe",
-        "anchorId": "cafe",
         "items": [
           {
             "_type": "menuItem",
@@ -290,7 +266,11 @@
             "price": "3",
             "description": ""
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "cafe"
+        }
       }
     ]
   },
@@ -319,38 +299,11 @@
     },
     "heading": "dinner menu",
     "intro": "At Penelope, enjoy the best dinner in Vaughan with our fresh, gut-friendly pizzas and delicious dishes. Whether it's a date night or a gathering with friends, our menu has something for every craving.\n\nExclusively Available | Monday- Saturday 5:00pm-Close",
-    "quickLinks": [
-      {
-        "_type": "quickLink",
-        "label": "salads",
-        "anchor": "salads",
-        "_key": "salads"
-      },
-      {
-        "_type": "quickLink",
-        "label": "pizzas",
-        "anchor": "pizzas",
-        "_key": "pizzas"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Middle Table",
-        "anchor": "middle-table",
-        "_key": "middle-table"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Handhelds",
-        "anchor": "handhelds",
-        "_key": "handhelds"
-      }
-    ],
     "categories": [
       {
         "_type": "menuCategory",
         "_key": "category-salads",
         "title": "Salads",
-        "anchorId": "salads",
         "items": [
           {
             "_type": "menuItem",
@@ -380,13 +333,16 @@
             "price": "19",
             "description": "Slow-Roasted Ontario Beets, Penny Tzatziki, Oregano Vinaigrette, Pumpkin Seed Dukkah Crisp"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "salads"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-pizzas",
         "title": "the pizzas",
-        "anchorId": "pizzas",
         "items": [
           {
             "_type": "menuItem",
@@ -444,13 +400,16 @@
             "price": "29",
             "description": "Mozzarella, Calabrese Soppressata, Housemade ‘Nduja, Cured Black Olives, Sweety Drop Peppers, Stracciatella, Hot Honey"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "pizzas"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-middle-table",
         "title": "Middle table",
-        "anchorId": "middle-table",
         "items": [
           {
             "_type": "menuItem",
@@ -515,13 +474,16 @@
             "price": "17",
             "description": "Fried Cauliflower, Penny Gochujang, Toasted Sesame Seeds, Scallions"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "middle-table"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-handhelds",
         "title": "handhelds",
-        "anchorId": "handhelds",
         "items": [
           {
             "_type": "menuItem",
@@ -572,7 +534,11 @@
             "price": "19",
             "description": "Housemade Milk Bun, Korean Fried Chicken, Penny Gochujang, Penny Kimchi, Kewpie Mayo, Scallions, Sesame Seeds"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "handhelds"
+        }
       }
     ]
   },
@@ -601,32 +567,11 @@
     },
     "heading": "Bar menu",
     "intro": "Skip the traffic and relax at Penelope in Vaughan. Our expert bartenders will craft the perfect cocktail to match your mood, whether you’re in the mood for something bold or light and bubbly.",
-    "quickLinks": [
-      {
-        "_type": "quickLink",
-        "label": "cocktails",
-        "anchor": "cocktails",
-        "_key": "cocktails"
-      },
-      {
-        "_type": "quickLink",
-        "label": "red wine",
-        "anchor": "red-wine",
-        "_key": "red-wine"
-      },
-      {
-        "_type": "quickLink",
-        "label": "white wine",
-        "anchor": "white-wine",
-        "_key": "white-wine"
-      }
-    ],
     "categories": [
       {
         "_type": "menuCategory",
         "_key": "category-cocktails",
         "title": "cocktails",
-        "anchorId": "cocktails",
         "items": [
           {
             "_type": "menuItem",
@@ -670,13 +615,16 @@
             "price": "17",
             "description": "Amaro Canaja, Cocchi Vermouth di Torino, Lemon"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "cocktails"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-red-wine",
         "title": "Red wine",
-        "anchorId": "red-wine",
         "items": [
           {
             "_type": "menuItem",
@@ -706,13 +654,16 @@
             "price": "17/68",
             "description": "Valle De Uco (ARG)"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "red-wine"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-white-wine",
         "title": "White Wine",
-        "anchorId": "white-wine",
         "items": [
           {
             "_type": "menuItem",
@@ -742,7 +693,11 @@
             "price": "16/64",
             "description": "Beamsville Bench (CAN)"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "white-wine"
+        }
       }
     ]
   },
@@ -771,50 +726,11 @@
     },
     "heading": "Catering menu",
     "intro": "Bring the flavours of Penelope home with you with our Catering Menu. Whether its a party size pizza or a tray of our delicious focaccia sandwiches we have a little something for everyone.",
-    "quickLinks": [
-      {
-        "_type": "quickLink",
-        "label": "Appetizers",
-        "anchor": "appetizers",
-        "_key": "appetizers"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Pasta",
-        "anchor": "pasta",
-        "_key": "pasta"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Bread",
-        "anchor": "bread",
-        "_key": "bread"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Pizza",
-        "anchor": "pizza",
-        "_key": "pizza"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Sandwiches",
-        "anchor": "sandwiches",
-        "_key": "sandwiches"
-      },
-      {
-        "_type": "quickLink",
-        "label": "Salads",
-        "anchor": "salads",
-        "_key": "salads"
-      }
-    ],
     "categories": [
       {
         "_type": "menuCategory",
         "_key": "category-appetizers",
         "title": "Appetizers",
-        "anchorId": "appetizers",
         "items": [
           {
             "_type": "menuItem",
@@ -823,13 +739,16 @@
             "price": "",
             "description": ""
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "appetizers"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-pasta",
         "title": "Pasta",
-        "anchorId": "pasta",
         "description": "Comes with your choice of Penne or Spaghetti.",
         "items": [
           {
@@ -839,13 +758,16 @@
             "price": "",
             "description": ""
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "pasta"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-bread",
         "title": "Bread",
-        "anchorId": "bread",
         "items": [
           {
             "_type": "menuItem",
@@ -875,13 +797,16 @@
             "price": "20",
             "description": "Tomato, Black Olive, EVOO"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "bread"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-pizza",
         "title": "Pizza",
-        "anchorId": "pizza",
         "description": "Each pizza comes with 24 slices.",
         "items": [
           {
@@ -933,13 +858,16 @@
             "price": "100",
             "description": "Mozzarella, Mixed Mushrooms, Truffle Paste"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "pizza"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-sandwiches",
         "title": "Focaccia Sandwiches",
-        "anchorId": "sandwiches",
         "description": "Minimum of 6 sandwiches\nAll sandwiches are cut into 4 pcs",
         "items": [
           {
@@ -998,13 +926,16 @@
             "price": "20",
             "description": "Salami, Capicollo, Proscuitto, Olives, Pepperoncino, Iceberg, Garlic"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "sandwiches"
+        }
       },
       {
         "_type": "menuCategory",
         "_key": "category-salads",
         "title": "Salads",
-        "anchorId": "salads",
         "description": "Each salad serves between 8 to 10 people.",
         "items": [
           {
@@ -1028,7 +959,11 @@
             "price": "95",
             "description": "Kale, Crispy Prosciutto, Parmigiano, Croutons Homemade Caesar Dressing"
           }
-        ]
+        ],
+        "anchor": {
+          "_type": "slug",
+          "current": "salads"
+        }
       }
     ]
   }

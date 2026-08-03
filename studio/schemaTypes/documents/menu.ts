@@ -1,6 +1,17 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
-/** A menu page at /menus/<slug>: banner, heading, quick links, categories. */
+/**
+ * A menu page at /menus/<slug>: banner, heading, and its categories.
+ *
+ * Categories and their items are nested here rather than living as their own
+ * document types, so a menu reads in the Studio as the thing it is and position
+ * in the array *is* the order — reordering is dragging, not editing numbers.
+ *
+ * The quick-link buttons under the intro used to be a hand-written array beside
+ * the categories, duplicating each one's label and anchor. They are derived
+ * from the categories now (see objects/menuCategory.ts), which is one list
+ * fewer to keep in sync and makes a stale jump link unrepresentable.
+ */
 export const menu = defineType({
   name: 'menu',
   title: 'Menu',
@@ -8,6 +19,7 @@ export const menu = defineType({
   groups: [
     { name: 'page', title: 'Page', default: true },
     { name: 'content', title: 'Content' },
+    { name: 'categories', title: 'Categories' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -45,19 +57,14 @@ export const menu = defineType({
     }),
     defineField({ name: 'intro', title: 'Intro copy', type: 'text', rows: 5, group: 'content' }),
     defineField({
-      name: 'quickLinks',
-      title: 'Quick links',
-      type: 'array',
-      of: [defineArrayMember({ type: 'quickLink' })],
-      group: 'content',
-      description: 'Anchor buttons above the menu; each targets a category anchor below.',
-    }),
-    defineField({
       name: 'categories',
       title: 'Categories',
       type: 'array',
       of: [defineArrayMember({ type: 'menuCategory' })],
-      group: 'content',
+      group: 'categories',
+      description:
+        'Drag to reorder — the order here is the order on the page, and the order of the quick-link buttons above it.',
+      validation: (Rule) => Rule.min(1),
     }),
     defineField({ name: 'seo', title: 'SEO', type: 'seo', group: 'seo' }),
   ],
@@ -65,9 +72,9 @@ export const menu = defineType({
     select: { title: 'title', slug: 'slug.current', media: 'banner', categories: 'categories' },
     prepare: ({ title, slug, media, categories }) => ({
       title,
-      subtitle: [slug && `/menus/${slug}`, `${categories?.length ?? 0} category/ies`]
+      subtitle: [slug && `/menus/${slug}`, `${categories?.length ?? 0} categories`]
         .filter(Boolean)
-        .join(' — '),
+        .join('  —  '),
       media,
     }),
   },

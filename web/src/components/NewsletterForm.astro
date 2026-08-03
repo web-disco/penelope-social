@@ -1,58 +1,51 @@
 ---
 /**
- * Newsletter signup — the band at the bottom of every page. Posts to the
- * Mailchimp list-manage endpoint.
+ * Newsletter signup — the band at the bottom of every page.
  *
  * Webflow showed inline `.w-form-done` / `.w-form-fail` messages after an AJAX
- * submit. To keep that exact behaviour the ported JS (src/scripts/newsletter.ts)
- * submits to Mailchimp's `post-json` endpoint over JSONP and toggles the same
- * two divs. If JS is unavailable the form still natively posts to the plain
- * `subscribe/post` action, so it degrades to Mailchimp's own hosted
- * confirmation page.
+ * submit, and the port reproduced that against Mailchimp's `post-json` endpoint
+ * over JSONP. Signups now go to `/api/newsletter` on the Cloudflare Worker,
+ * which stores them in D1 (see web/worker/subscribers.ts) — same inline
+ * messages, same visitor experience, but the write happens server-side where a
+ * failure can actually be reported instead of vanishing into a JSONP callback.
  *
  * There used to be a second `modal` variant, for the `.newsletter` overlay on
  * the homepage. That overlay never rendered — see the note in
  * studio/schemaTypes/documents/siteSettings.ts — so this is the only form now,
  * and the `variant` prop it needed is gone with it.
  */
+import Turnstile from './Turnstile.astro'
+
 interface Props {
   newsletter: any
 }
 const { newsletter } = Astro.props
 
-const action: string = newsletter.formAction ?? ''
-/* Mailchimp's bot-trap field is named b_<u>_<id>, taken from the action URL. */
-let honeypotName = ''
-try {
-  const params = new URL(action).searchParams
-  const u = params.get('u')
-  const id = params.get('id')
-  if (u && id) honeypotName = `b_${u}_${id}`
-} catch {
-  /* no action configured yet — the form still renders */
-}
-
 const doneMessage = newsletter.successMessage ?? 'Thank you! Your submission has been received!'
 const failMessage = newsletter.errorMessage ?? 'Oops! Something went wrong while submitting the form.'
+const consentText =
+  newsletter.consentText ??
+  'I agree to receive marketing emails from Penelope Social. Unsubscribe at any time.'
 ---
 
 <div class="footer-newsletter-form-block w-form mx-auto mt-10 max-w-[600px]">
   <form
     id="newsletter-form"
     name="Newsletter Form"
-    action={action}
+    action="/api/newsletter"
     method="post"
-    data-newsletter
+    data-endpoint="/api/newsletter"
     class="footer-newsletter-form"
   >
     <div class="footer-newsletter-form-wrap flex wf-sm:flex-col wf-sm:gap-5">
       <input
         class="footer-newsletter-text-field wf-footer-newsletter-field block h-full min-h-[60px] w-full mb-0 border-y-2 border-l-2 border-r-0 border-solid border-beige bg-brand-transparent px-3 py-4 align-middle text-[14px] leading-[1.42857143] text-beige wf-sm:border-r-2"
         maxlength="256"
-        name="EMAIL"
+        name="email"
         placeholder={newsletter.placeholder ?? 'Enter your email address'}
         type="email"
         id="Newsletter-Email"
+        aria-label="Email address"
         required
       />
       <input
@@ -62,13 +55,38 @@ const failMessage = newsletter.errorMessage ?? 'Oops! Something went wrong while
         value={newsletter.buttonLabel ?? 'Subscribe'}
       />
     </div>
-    {
-      honeypotName && (
-        <div class="mc-honeypot" style="position:absolute;left:-5000px" aria-hidden="true">
-          <input type="text" name={honeypotName} tabindex="-1" value="" />
-        </div>
-      )
-    }
+
+    <!--
+      Consent checkbox. Not on the Webflow original — the footer form had none —
+      but sending marketing email in Canada means being able to prove express
+      consent under CASL, and an unticked box is proof you don't have it. Styled
+      to sit quietly under the field rather than compete with it.
+    -->
+    <label class="newsletter-consent mt-3 flex cursor-pointer items-start gap-2">
+      <!--
+        `required` is the whole point of the box: a signup that skips it is a
+        record the client can never legally email. The browser blocks the submit
+        before our handler runs and prompts on the control itself. That works
+        because this input is visible and focusable — a `required` control that
+        is visually hidden deadlocks the form instead, since the browser refuses
+        to submit but has nothing it can focus to say why.
+      -->
+      <input type="checkbox" name="consent" value="yes" required class="consent-checkbox" />
+      <!--
+        line-height is 18px on purpose: the same height as the .consent-checkbox
+        box. `items-start` then aligns two boxes of identical height, so the
+        first line of text centres against the checkbox with no nudging — and it
+        stays aligned when the text wraps to two lines on narrow screens.
+      -->
+      <span class="text-left font-body text-[12px] font-normal leading-[18px] text-beige">
+        {consentText}
+      </span>
+    </label>
+
+    <!-- Centred by .footer-newsletter-wrap above; `dark` matches the green band
+         it sits on, and the top margin only applies once a challenge is
+         actually on screen. -->
+    <Turnstile class="text-center [&.is-visible]:mt-5" theme="dark" />
   </form>
   <div
     class="success-message w-form-done bg-charcoal p-5 text-center font-body font-medium text-beige"

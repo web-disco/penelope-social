@@ -18,7 +18,7 @@ const { categories } = Astro.props
 
 {
   categories.map((category) => (
-    <div id={category.anchorId} class="menu-category">
+    <div id={category.anchor?.current} class="menu-category">
       <div class={container}>
         <h2 class={pageSubHeading}>{category.title}</h2>
         {category.description && (

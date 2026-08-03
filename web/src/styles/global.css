@@ -141,6 +141,52 @@
     font-weight: 500;
   }
 
+  /* Newsletter consent checkbox.
+   *
+   * Custom-drawn rather than native, because the iOS fix above sets
+   * `-webkit-appearance: none` on EVERY input — which strips a checkbox of all
+   * its chrome and leaves an invisible 18px gap. Nothing to do with this
+   * checkbox specifically; any native checkbox on this site would vanish the
+   * same way.
+   *
+   * Styled off `.footer-newsletter-text-field` beside it: same 2px beige
+   * border, same transparent fill, so the pair reads as one control.
+   */
+  .consent-checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--color-beige);
+    background-color: var(--color-brand-transparent);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    /* No vertical nudge: the label text carries line-height:18px, matching this
+       box exactly, so `items-start` on the <label> lines the two up on its own.
+       Aligning to line one rather than the block keeps the box beside the text
+       when it wraps to two lines on narrow screens. */
+  }
+
+  .consent-checkbox:hover {
+    background-color: #f7f3df26;
+  }
+
+  .consent-checkbox:checked {
+    background-color: var(--color-beige);
+    /* Charcoal tick, sized to sit inside the 2px border. */
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2012%2012'%3E%3Cpath%20d='M2.5%206.5L5%209L9.5%203.5'%20fill='none'%20stroke='%23282629'%20stroke-width='2'%20stroke-linecap='round'%20stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 12px 12px;
+  }
+
+  /* Keyboard focus only — a mouse click shouldn't leave a ring behind. */
+  .consent-checkbox:focus-visible {
+    outline: 2px solid var(--color-beige);
+    outline-offset: 2px;
+  }
+
   /* .about-video — from the bakery page's embedded <style> block */
   .about-video {
     width: 100%;

@@ -24,6 +24,18 @@
     "run_worker_first": ["/api/*"]
   },
 
+  // Newsletter signups. Penelope's own database — Arti runs the same code
+  // against `arti-ristorante-subscribers`, and the two never share a row.
+  "d1_databases": [
+    {
+      "binding": "SUBSCRIBERS",
+      "database_name": "penelope-social-subscribers",
+      "database_id": "fff4209a-ecc0-4181-801b-b937373a17f9"
+    }
+  ],
+
+  "migrations_dir": "migrations",
+
   "observability": {
     "enabled": true
   },
@@ -39,6 +51,8 @@
   // Secrets are set with `wrangler secret put`, never committed:
   //   TURNSTILE_SECRET_KEY
   //   RESEND_API_KEY
+  //   SUBSCRIBERS_USER       (Basic Auth user for /api/subscribers.csv)
+  //   SUBSCRIBERS_PASSWORD   (Basic Auth password for the same)
   //
   // For EMAIL_PROVIDER=cloudflare, add a send_email binding and verify the
   // destination address in Email Routing first:

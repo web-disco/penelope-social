@@ -87,11 +87,11 @@
         "_type": "newsletter",
         "heading": "stay in the loop.",
         "text": "Sign up for our newsletter and be the first to know about exclusive offers.",
-        "formAction": "https://penelopesocial.us7.list-manage.com/subscribe/post?u=f142c39dc20574d54b2aaee71&id=855bbd4ecf&f_id=00104ae4f0",
         "placeholder": "Enter your email address",
         "buttonLabel": "Subscribe",
         "successMessage": "Thank you! Your submission has been received!",
-        "errorMessage": "Oops! Something went wrong while submitting the form."
+        "errorMessage": "Oops! Something went wrong while submitting the form.",
+        "consentText": "I agree to receive marketing emails from Penelope Social. Unsubscribe at any time."
       },
       "menus": {
         "_type": "footerMenus",
@@ -183,13 +183,6 @@
           "url": "https://www.google.com/search?q=penelope+social&oq=penelope+social&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDsyBggCEEUYQTIGCAMQRRg8MgYIBBBFGDwyBggFEC4YQNIBCDM0NTRqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8#lrd=0x882b2f14f3cd3fbb:0x3e54ffff5191a9bd,1,,,,",
           "newTab": true
         }
-      },
-      "copyright": {
-        "_type": "copyright",
-        "text": "© 2024 Penelope Social",
-        "creditPrefix": "Website by",
-        "creditLabel": "Web Disco",
-        "creditUrl": "https://www.webdisco.digital"
       }
     },
     "merchBanner": {

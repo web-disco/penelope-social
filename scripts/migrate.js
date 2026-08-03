@@ -92,10 +92,6 @@ async function buildSiteSettings() {
     return { _type: 'social', _key: platform, platform, url, icon: `/icons/${platform}.svg` }
   })
 
-  const newsletterForm = doc.querySelector('.footer-newsletter-form')
-  const copyrightBlocks = [...doc.querySelectorAll('.footer-copyright .copyright-text')]
-  const creditLink = doc.querySelector('.footer-copyright a')
-
   /* Report the homepage's stale footer copy rather than silently picking one. */
   const homeInstagram = home.querySelector('.footer-social-link')?.getAttribute('href')
   const aboutInstagram = socials[0]?.url
@@ -126,14 +122,17 @@ async function buildSiteSettings() {
         _type: 'newsletter',
         heading: text(doc.querySelector('.footer-newsletter .heading')),
         text: text(doc.querySelector('.newsletter-text')),
-        /* The live action attribute is double-escaped (`&amp;amp;`), which sends
-           Mailchimp a param literally named `amp;id`. Normalised here. */
-        formAction: normaliseAction(newsletterForm?.getAttribute('action')),
+        /* No `formAction`: signups go to /api/newsletter on the Worker and into
+           D1, not to the Mailchimp list the live markup posts at. */
         placeholder:
           doc.querySelector('.footer-newsletter-text-field')?.getAttribute('placeholder') ?? '',
         buttonLabel: doc.querySelector('.newsletter-btn')?.getAttribute('value') ?? 'Subscribe',
         successMessage: text(doc.querySelector('.success-message')),
         errorMessage: text(doc.querySelector('.error-message')),
+        /* Not on the Webflow original — the D1 signup needs provable express
+           consent under CASL. See web/src/components/NewsletterForm.astro. */
+        consentText:
+          'I agree to receive marketing emails from Penelope Social. Unsubscribe at any time.',
       },
       menus: {
         _type: 'footerMenus',
@@ -171,13 +170,9 @@ async function buildSiteSettings() {
         socials,
         googleReview: linkFrom(googleReview),
       },
-      copyright: {
-        _type: 'copyright',
-        text: text(copyrightBlocks[0]),
-        creditPrefix: text(copyrightBlocks[1]).replace(text(creditLink), '').trim(),
-        creditLabel: text(creditLink),
-        creditUrl: creditLink?.getAttribute('href') ?? '',
-      },
+      /* No `copyright`: the year is derived at build time and the Web Disco
+         credit is fixed in web/src/components/Footer.astro. The scraped line
+         was “© 2024” — exactly the drift a text field invites. */
     },
     merchBanner: null, // filled in from the merch listing page below
     seo: seoFrom(home),
@@ -206,11 +201,6 @@ function buttonFrom(el) {
       ? 'outline'
       : 'primary',
   }
-}
-
-function normaliseAction(action) {
-  if (!action) return ''
-  return action.replace(/&amp;/g, '&')
 }
 
 /* --------------------------------------------------------------------------
@@ -552,15 +542,17 @@ async function buildMenu(slug) {
       _type: 'menuCategory',
       _key: `category${index}`,
       title: text(section.querySelector('.page-sub-heading')),
-      anchorId,
+      anchor: { _type: 'slug', current: anchorId },
       description: textWithBreaks(section.querySelector('.menu-description')) || undefined,
       items,
     }
   })
 
+  /* Scraped only to rename the anchors below. The buttons themselves are
+     rendered from the categories now — see studio/schemaTypes/objects/
+     menuCategory.ts for why they are no longer a field of their own. */
   const quickLinks = [...headingSection.querySelectorAll('.page-heading-quick-links a')].map(
     (link) => ({
-      _type: 'quickLink',
       label: text(link),
       anchor: link.getAttribute('href').replace('#', ''),
     }),
@@ -582,8 +574,7 @@ async function buildMenu(slug) {
     quickLinks.forEach((link, index) => {
       const anchor = slugify(link.label)
       if (!anchor) return
-      link.anchor = anchor
-      categories[index].anchorId = anchor
+      categories[index].anchor.current = anchor
     })
   } else {
     console.warn(
@@ -592,8 +583,7 @@ async function buildMenu(slug) {
     )
   }
 
-  for (const link of quickLinks) link._key = link.anchor
-  for (const category of categories) category._key = `category-${category.anchorId}`
+  for (const category of categories) category._key = `category-${category.anchor.current}`
 
   return {
     _id: `menu-${slug}`,
@@ -604,7 +594,6 @@ async function buildMenu(slug) {
     banner: image(doc.querySelector('.page-banner-image')),
     heading: textWithBreaks(headingSection.querySelector('.heading')),
     intro: textWithBreaks(headingSection.querySelector('.paragraph.is-intro')),
-    quickLinks,
     categories,
   }
 }

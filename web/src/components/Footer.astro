@@ -26,14 +26,32 @@ const newsletter = footer.newsletter ?? {}
 const menus = footer.menus ?? {}
 const hours = footer.hours ?? {}
 const contact = footer.contact ?? {}
-const copyright = footer.copyright ?? {}
 
 const logoSrc = imageUrl(footer.logo) || '/penelope-logo-lockup-white.svg'
+
+/* Fixed chrome. These were Sanity fields; they are never meaningfully edited
+   and a text field only invites drift — the copyright still read “© 2024”. */
+const CREDIT = { prefix: 'Website by', label: 'Web Disco', href: 'https://www.webdisco.digital' }
+
+/* The year is derived, never typed. Toronto, not the build machine: CI builds
+   in UTC, which turns over five hours before the restaurant does, so a 31
+   December evening deploy would otherwise ship next year's footer. */
+const YEAR = new Intl.DateTimeFormat('en-CA', {
+  year: 'numeric',
+  timeZone: 'America/Toronto',
+}).format(new Date())
+
+const copyrightText = `© ${YEAR} Penelope Social`
+
+/* Subtle hover for every footer link, matching the .35s of the buttons around
+   it. Not applied to the Google Reviews button, which has its own colour
+   hover, nor to the logo, which is a graphic rather than a text link. */
+const hover = '[transition:opacity_.35s] hover:opacity-70'
 
 /* .footer-text — 14px/160% beige, 180% line-height at ≤767 */
 const footerText = 'footer-text text-beige font-body text-[14px] font-medium leading-[160%] wf-sm:leading-[180%]'
 const footerTextHours = footerText.replace('font-medium', 'font-normal')
-const footerTextSpan = 'footer-text-span text-beige font-normal no-underline'
+const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${hover}`
 ---
 
 <div
@@ -58,6 +76,8 @@ const footerTextSpan = 'footer-text-span text-beige font-normal no-underline'
   </div>
 
   <div class={containerFooter}>
+    <!-- Four equal columns. The contact column right-aligns its own contents so
+         it lands flush with the credit in the copyright row below. -->
     <div
       class="footer-grid grid auto-cols-[1fr] grid-cols-4 grid-rows-[auto] gap-10 wf-md:grid-cols-1"
     >
@@ -87,7 +107,9 @@ const footerTextSpan = 'footer-text-span text-beige font-normal no-underline'
         >
           {menus.heading}
         </h4>
-        <div class={footerText}>
+        <!-- Capped so the blurb wraps inside its column instead of setting the
+             column's natural width from its longest line. -->
+        <div class={`${footerText} max-w-[300px]`}>
           <a href={menus.blurbUrl ?? '/menus'} class={footerTextSpan}>
             <LineText text={menus.blurb} />
           </a>
@@ -97,7 +119,10 @@ const footerTextSpan = 'footer-text-span text-beige font-normal no-underline'
             (menus.links ?? []).map((link: any) => (
               <a
                 href={link.url}
-                class="footer-menu-link mb-[3px] inline-block font-body font-medium leading-none text-beige uppercase no-underline"
+                class:list={[
+                  'footer-menu-link mb-[3px] inline-block font-body font-medium leading-none text-beige uppercase no-underline',
+                  hover,
+                ]}
               >
                 {link.label}
               </a>
@@ -140,8 +165,12 @@ const footerTextSpan = 'footer-text-span text-beige font-normal no-underline'
         </div>
       </div>
 
-      <!-- contact -->
-      <div class="footer-content">
+      <!-- contact — right-aligned so the column ends flush with the container,
+           which is where the “Website by Web Disco” credit below it sits. The
+           four columns stay equal width; only the text inside this one moves.
+           Reverted below 992px, where the grid collapses to a single column and
+           everything reads left-aligned again. -->
+      <div class="footer-content text-right wf-md:text-left">
         <h4
           class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
         >
@@ -154,10 +183,15 @@ const footerTextSpan = 'footer-text-span text-beige font-normal no-underline'
         </p>
         <div class="footer-socials gap-3">
           <div class={footerText}>{contact.socialsLabel}</div>
-          <div class="footer-socials-wrap mt-[5px] flex gap-3">
+          <div class="footer-socials-wrap mt-[5px] flex justify-end gap-3 wf-md:justify-start">
             {
               (contact.socials ?? []).map((social: any) => (
-                <a href={social.url} target="_blank" class="footer-social-link w-inline-block">
+                <a
+                  href={social.url}
+                  target="_blank"
+                  aria-label={social.platform}
+                  class={`footer-social-link w-inline-block ${hover}`}
+                >
                   <img
                     src={social.icon ?? `/icons/${social.platform}.svg`}
                     loading="lazy"
@@ -186,13 +220,16 @@ const footerTextSpan = 'footer-text-span text-beige font-normal no-underline'
     </div>
 
     <div class="footer-copyright mt-20 flex justify-between">
-      <div class="copyright-text font-body text-[12px] text-beige no-underline">{copyright.text}</div>
+      <div class="copyright-text font-body text-[12px] text-beige no-underline">{copyrightText}</div>
       <div class="copyright-text font-body text-[12px] text-beige no-underline">
-        {copyright.creditPrefix}{' '}
+        {CREDIT.prefix}{' '}
         <a
-          href={copyright.creditUrl}
+          href={CREDIT.href}
           target="_blank"
-          class="copyright-text font-body text-[12px] text-beige no-underline">{copyright.creditLabel}</a
+          class:list={[
+            'copyright-text font-body text-[12px] text-beige no-underline',
+            hover,
+          ]}>{CREDIT.label}</a
         >
       </div>
     </div>

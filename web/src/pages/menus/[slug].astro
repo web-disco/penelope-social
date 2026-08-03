@@ -17,6 +17,14 @@ export async function getStaticPaths() {
 
 const { menu } = Astro.props
 const seo = menu.seo ?? {}
+
+/* The quick-link buttons are derived from the categories rather than authored
+   beside them. They were a parallel array in Sanity that repeated each
+   category's label and anchor — identical in all four menus, and one rename
+   away from pointing at a section that no longer existed. */
+const quickLinks = (menu.categories ?? [])
+  .filter((category: any) => category.anchor?.current)
+  .map((category: any) => ({ label: category.title, anchor: category.anchor.current }))
 ---
 
 <BaseLayout
@@ -31,7 +39,7 @@ const seo = menu.seo ?? {}
       heading: menu.heading,
       intro: menu.intro,
       align: 'left',
-      quickLinks: menu.quickLinks,
+      quickLinks,
     }}
   />
   <MenuCategories categories={menu.categories ?? []} />

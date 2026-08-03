@@ -71,14 +71,34 @@ modules: Lenis smooth scroll, the navbar hide/reveal, the drawer, the
 scroll-triggered animations, and the page loader — all transcribed from the live
 bundle. GLightbox replaces Webflow's native lightbox.
 
-**Forms.** Contact and events POST to the Cloudflare Worker in `web/worker/`,
-which verifies the Turnstile token and emails the submission on. The widget is
+**Forms.** Contact, events and the footer newsletter all POST to the Cloudflare
+Worker in `web/worker/`, which verifies the Turnstile token and then either
+emails the submission on or — for the newsletter — writes the subscriber to D1.
+The widget is
 `appearance="interaction-only"`, so it stays invisible for the visitors who never
 get challenged — it still issues the token the Worker verifies. Because it is
 invisible, its spacing is applied by `initTurnstileSpacing()` only once the
 widget actually occupies space (measured, since hidden and visible widgets have
 identical markup), and a failed submit calls `turnstile.reset()` so the retry
 gets a fresh token instead of re-sending a spent one.
+
+**Newsletter subscribers.** The footer signup used to post straight to a
+Mailchimp list from the browser — an endpoint that 404s for this account (see
+Known issues). Signups now go to `POST /api/newsletter` and land in the D1
+database `penelope-social-subscribers`, which is Penelope's own: Arti runs the
+same code against its own database and the two never share a row. The client
+pulls the list from `GET /api/subscribers.csv`, behind HTTP Basic Auth.
+
+The form carries a **required consent checkbox**, which the Webflow original did
+not. Sending marketing email in Canada means being able to *prove* express
+consent under CASL, so the row records consent, timestamp and IP, and a POST
+without consent is rejected rather than stored — a subscriber the client can
+never legally email is worse than no row at all.
+
+```bash
+# Schema changes go in web/migrations/ and apply with:
+pnpm --filter web exec wrangler d1 migrations apply penelope-social-subscribers --remote
+```
 
 ## Verifying parity
 
@@ -125,19 +145,26 @@ These need a human — none of them block development.
    `cloudflare` plus `NOTIFY_EMAIL_TO`/`NOTIFY_EMAIL_FROM` (see
    `web/worker/email.ts`). Unset means submissions succeed but nobody is
    emailed — don't ship it that way.
-8. **Send one test submission through each form** (contact, events, newsletter)
-   before switching DNS.
+8. **Set the subscriber export credentials:** `wrangler secret put SUBSCRIBERS_USER`
+   and `wrangler secret put SUBSCRIBERS_PASSWORD`. Until both exist
+   `/api/subscribers.csv` returns 503 — signups are still recorded, they just
+   can't be exported. Basic Auth rather than a `?key=` token because the export
+   is a list of customer email addresses, and a token in a URL ends up in
+   browser history and leaks via `Referer`.
+9. **Send one test submission through each form** (contact, events, newsletter)
+   before switching DNS. For the newsletter, confirm the row landed:
+   `wrangler d1 execute penelope-social-subscribers --remote --command "SELECT * FROM subscribers"`.
 
 ### Known issues inherited from the Webflow site
 
-- **The Mailchimp newsletter endpoint returns 404.** Every `subscribe/*` path on
-  `penelopesocial.us7.list-manage.com` 404s for the `u`/`id` pair in the form
-  action, so signups are almost certainly not reaching the list today either.
-  The form is wired to the URL as supplied; grab the current embed code from
-  Mailchimp and update `siteSettings → Footer → Newsletter → form action`.
-  (Note the live site's markup double-escapes the URL — its action contains
-  `&amp;id=`, which would send Mailchimp a parameter literally named `amp;id`.
-  That is corrected here.)
+- **The Mailchimp newsletter endpoint returned 404.** Every `subscribe/*` path
+  on `penelopesocial.us7.list-manage.com` 404s for the `u`/`id` pair in the live
+  form action, so signups were almost certainly not reaching the list on the
+  Webflow site either. Rather than re-wire a dead third-party endpoint, the form
+  now writes to D1 and the list is exported as CSV — the write happens inside
+  the Worker that answers the visitor, so nothing can fail out of band while the
+  page says it worked. If the client wants those addresses in an email platform,
+  upload the export; there is no longer a form action to keep current.
 - **The homepage footer is stale** relative to the other thirteen pages: it
   still shows `Sun - 8-12 pm` and links the old `instagram.com/penelopesocial`
   handle. The migration takes the inner-page version (`Sun — 8am - 12pm`,
@@ -149,8 +176,13 @@ These need a human — none of them block development.
   `web/src/scripts/forms.ts`, so it now does what the links intend.
 - **Dinner menu anchors were misnamed** — "Salads" sat at `#snacks` and
   "Handhelds" at `#desserts`. The links worked, but the ids read as mismatched.
-  Anchors are now derived from the button label, which is a no-op on every other
-  menu.
+  Anchors are now derived from the category title, which is a no-op on every
+  other menu.
+- **The quick links were a parallel list.** Each menu carried a `quickLinks`
+  array beside its categories, repeating every category's label and anchor — in
+  all four menus an exact duplicate, and one rename away from pointing at a
+  section that no longer existed. They are derived from the categories now, so
+  adding, renaming or dragging a category moves its quick link with it.
 - **The Catering menu card's button pointed at the dinner menu** on `/menus`
   (the same card on `/` was correct). Nothing surfaced the mistake because
   `.menu-btn-wrap` is `display:none` at every breakpoint, so the link renders for
@@ -184,3 +216,14 @@ These need a human — none of them block development.
   `NewsletterForm`, the Webflow custom-checkbox CSS, and the
   `initCustomCheckboxes()` script. `compare.js` ignores the class so parity stays
   at 14/14.
+- **The footer copyright row is not editable.** It was four Sanity fields —
+  copyright line, credit prefix, credit label, credit URL — none of which anyone
+  ever meaningfully changes, and the one that mattered had already drifted to
+  “© 2024”. The year is now derived at build time in `America/Toronto` (CI
+  builds in UTC, which turns over five hours before the restaurant does, so a 31
+  December evening deploy would otherwise ship next year's footer) and the Web
+  Disco credit is fixed in `Footer.astro`.
+- **The contact column is right-aligned** at ≥992px. The four footer columns are
+  equal width, so left-aligned contact text ended a quarter of the page short of
+  the “Website by Web Disco” credit directly beneath it. Alignment is reverted
+  below 992px, where the grid collapses to one column.

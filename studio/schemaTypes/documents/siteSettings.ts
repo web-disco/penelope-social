@@ -68,15 +68,18 @@ export const siteSettings = defineType({
           fields: [
             defineField({ name: 'heading', title: 'Heading', type: 'string' }),
             defineField({ name: 'text', title: 'Copy', type: 'text', rows: 2 }),
-            defineField({
-              name: 'formAction',
-              title: 'Mailchimp form action',
-              type: 'url',
-              description:
-                'The list-manage subscribe/post URL. The site submits to its post-json twin so the inline success message still works.',
-            }),
             defineField({ name: 'placeholder', title: 'Input placeholder', type: 'string' }),
             defineField({ name: 'buttonLabel', title: 'Button label', type: 'string' }),
+            defineField({
+              name: 'consentText',
+              title: 'Consent checkbox text',
+              type: 'text',
+              rows: 2,
+              description:
+                'Shown beside the consent checkbox. Canadian anti-spam law (CASL) requires provable express consent, so this wording matters.',
+              initialValue:
+                'I agree to receive marketing emails from Penelope Social. Unsubscribe at any time.',
+            }),
             defineField({ name: 'successMessage', title: 'Success message', type: 'string' }),
             defineField({ name: 'errorMessage', title: 'Error message', type: 'string' }),
           ],
@@ -134,17 +137,13 @@ export const siteSettings = defineType({
             defineField({ name: 'googleReview', title: 'Google Reviews button', type: 'link' }),
           ],
         }),
-        defineField({
-          name: 'copyright',
-          title: 'Copyright row',
-          type: 'object',
-          fields: [
-            defineField({ name: 'text', title: 'Copyright', type: 'string' }),
-            defineField({ name: 'creditPrefix', title: 'Credit prefix', type: 'string' }),
-            defineField({ name: 'creditLabel', title: 'Credit label', type: 'string' }),
-            defineField({ name: 'creditUrl', title: 'Credit URL', type: 'url' }),
-          ],
-        }),
+        /*
+         * The copyright row is not editable. It was four fields — copyright
+         * line, credit prefix, credit label, credit URL — none of which anyone
+         * ever meaningfully changes, and the one that mattered had already
+         * drifted: the line still read “© 2024”. The year is now derived at
+         * build time and the Web Disco credit is fixed in Footer.astro.
+         */
       ],
     }),
 

@@ -1,10 +1,11 @@
 /**
- * Contact + events forms.
+ * Every form on the site — contact, events, and the footer newsletter.
  *
  * Webflow posted these to its own form endpoint and swapped in an inline
- * success/failure message. They now POST to the Cloudflare Worker at
- * `/api/contact` and `/api/events` (see web/worker/index.ts), which verifies
- * Turnstile and emails the submission on. The success/failure UX is unchanged.
+ * success/failure message. They now POST to the Cloudflare Worker (see
+ * web/worker/index.ts), which verifies Turnstile and then either emails the
+ * submission on (`/api/contact`, `/api/events`) or stores the subscriber in D1
+ * (`/api/newsletter`). The success/failure UX is unchanged.
  */
 export function initSiteForms() {
   document.querySelectorAll<HTMLFormElement>('form[data-endpoint]').forEach((form) => {
