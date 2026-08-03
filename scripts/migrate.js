@@ -751,7 +751,53 @@ async function importToSanity(byType) {
     for (const value of Object.values(node)) await uploadAssets(value)
   }
 
+  /**
+   * Rehost the video sources.
+   *
+   * `storyVideo` holds plain URLs rather than image objects, so the walker
+   * above skips them and the bakery page keeps streaming its two transcodes
+   * (~28MB) straight from Webflow's CDN. That is a live dependency on the
+   * platform we are leaving: the day the Webflow site is cancelled, the video
+   * on /sourdough-bakery breaks. Uploading them as Sanity file assets and
+   * rewriting the URLs is what actually completes the migration.
+   *
+   * Runs on the documents, so a re-run re-points at the same uploads rather
+   * than reintroducing the Webflow URLs.
+   */
+  async function rehostVideos(node) {
+    if (Array.isArray(node)) {
+      for (const item of node) await rehostVideos(item)
+      return
+    }
+    if (!node || typeof node !== 'object') return
+
+    if (node._type === 'storyVideo') {
+      for (const key of ['mp4Url', 'webmUrl']) {
+        const src = node[key]
+        if (!src || !src.includes('website-files.com')) continue
+
+        if (!uploaded.has(src)) {
+          const response = await fetch(src)
+          if (!response.ok) {
+            console.warn(`[migrate] could not fetch video ${src} (${response.status})`)
+            continue
+          }
+          const buffer = Buffer.from(await response.arrayBuffer())
+          const filename = decodeURIComponent(src.split('/').pop().split('?')[0])
+          const asset = await client.assets.upload('file', buffer, { filename })
+          uploaded.set(src, asset.url)
+          console.log(`[migrate] uploaded ${filename} (${(buffer.length / 1e6).toFixed(1)}MB)`)
+        }
+        node[key] = uploaded.get(src)
+      }
+      return
+    }
+
+    for (const value of Object.values(node)) await rehostVideos(value)
+  }
+
   for (const docs of Object.values(byType)) await uploadAssets(docs)
+  for (const docs of Object.values(byType)) await rehostVideos(docs)
 
   let transaction = client.transaction()
   for (const docs of Object.values(byType)) {

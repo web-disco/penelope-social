@@ -102,18 +102,20 @@ These need a human — none of them block development.
    the `DEFAULT_PROJECT_ID` in `web/src/lib/data.ts`. Symlink the env into both
    workspaces — the Sanity CLI and Astro each resolve env from their own
    directory, not the repo root: `ln -sfn ../.env studio/.env && ln -sfn ../.env web/.env`.
-2. **Import the content.** Create an editor token, set `SANITY_WRITE_TOKEN`, run
-   `pnpm migrate`. This uploads every image to Sanity and replaces the
-   `_migrationSrc` markers. Re-runnable — documents use deterministic ids. Until
-   this runs the dataset is empty, so `.env` keeps `PUBLIC_SANITY_PROJECT_ID=`
-   empty to build from `scripts/output`; clear that line afterwards. Re-run
-   `pnpm build && pnpm compare` once it is populated — image URLs move to
-   Sanity's CDN, so parity is only proven for the fallback path before then.
+2. ~~**Import the content.**~~ **Done.** The dataset holds 1 siteSettings,
+   1 homepage, 6 pages, 4 menus, 3 merch products and 43 image assets, plus the
+   two bakery video transcodes. `pnpm migrate` is re-runnable — it re-scrapes
+   the live site and uses deterministic ids, and Sanity dedupes assets by
+   content hash. The token it needs was created with
+   `sanity tokens create "content-migration" --role=editor`; revoke it with
+   `sanity tokens delete` once the site no longer needs re-importing.
 3. **Deploy the Studio:** `pnpm deploy:studio`. Consider pinning the app id and
    `autoUpdates` under `deployment` in `studio/sanity.cli.ts` so later deploys
    never prompt for (or retarget) the application.
-4. **Deploy the site:** `pnpm deploy:web`, or `pnpm deploy:web:dry` to validate
-   first. Then point the domain at the Worker.
+4. ~~**Deploy the site.**~~ **Done** — live at
+   https://penelope-social.web-disco.workers.dev (`pnpm deploy:web`, or
+   `pnpm deploy:web:dry` to validate first). The custom domain is **not** wired
+   up yet; pointing penelopesocial.com at the Worker is the actual cutover.
 5. **Rebuild on publish.** Create a Cloudflare deploy hook and add it as a Sanity
    webhook on publish.
 6. **Turnstile.** Create a widget, set `PUBLIC_TURNSTILE_SITE_KEY` and
@@ -155,6 +157,15 @@ These need a human — none of them block development.
   nobody. The card's button label and URL are no longer editable fields at all —
   both are derived from the card's own `url`, which makes the mismatch
   unrepresentable rather than merely fixed.
+
+### Workers gotchas
+
+- **Trailing slashes.** Cloudflare's asset handler defaults to
+  `auto-trailing-slash`, which 307s `/menus` -> `/menus/`. That adds a redirect
+  hop to every internal link and changes the canonical URL of all 14 pages.
+  `wrangler.jsonc` sets `html_handling: "drop-trailing-slash"` to match the
+  Webflow site and Astro's `trailingSlash: 'never'`. It does not reproduce
+  locally — `astro dev` and the static build both serve unslashed.
 
 ### Deliberate differences
 

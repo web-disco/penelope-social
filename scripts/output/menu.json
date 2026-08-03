@@ -953,7 +953,7 @@
             "_type": "menuItem",
             "_key": "item1",
             "title": "Spicy Mushroom",
-            "price": "19",
+            "price": "21",
             "description": "Wild Mushrooms, Provolone, Arugula, Spicy Chili Jam, Garlic Aioli"
           },
           {
@@ -987,20 +987,13 @@
           {
             "_type": "menuItem",
             "_key": "item6",
-            "title": "Ham & Cheese",
-            "price": "21",
-            "description": "Rosemary Ham, Aged Gouda, Iceberg, Gherkins, Mayo, Dijon"
-          },
-          {
-            "_type": "menuItem",
-            "_key": "item7",
             "title": "Calabrese",
             "price": "20",
             "description": "Soppressata, Fior Di Latte, Nauja, Pickled Peppers, Olives"
           },
           {
             "_type": "menuItem",
-            "_key": "item8",
+            "_key": "item7",
             "title": "Italian",
             "price": "20",
             "description": "Salami, Capicollo, Proscuitto, Olives, Pepperoncino, Iceberg, Garlic"
