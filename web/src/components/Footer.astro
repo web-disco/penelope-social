@@ -76,10 +76,17 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
   </div>
 
   <div class={containerFooter}>
-    <!-- Four equal columns. The contact column right-aligns its own contents so
-         it lands flush with the credit in the copyright row below. -->
+    <!-- Columns size to their content and spread with space-between, so the gaps
+         between the four blocks are even. Four equal-width tracks made the gaps
+         uneven instead: each column's content starts at its own track's left
+         edge, so a narrow column (hours) sat close to its neighbour while the
+         right-aligned contact column left a wide empty stretch beside it.
+
+         The logo track is capped rather than fixed — a hard 318px starves the
+         menus column at ~992px. The contact column still right-aligns, so it
+         lands flush with the credit in the copyright row below. -->
     <div
-      class="footer-grid grid auto-cols-[1fr] grid-cols-4 grid-rows-[auto] gap-10 wf-md:grid-cols-1"
+      class="footer-grid grid grid-cols-[minmax(200px,318px)_auto_auto_auto] grid-rows-[auto] justify-between gap-10 wf-md:grid-cols-1 wf-md:justify-normal"
     >
       <!-- logo -->
       <div class="footer-content">
