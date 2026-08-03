@@ -41,13 +41,28 @@ async function buildSiteSettings() {
   const doc = await fetchDoc('/about')
   const home = await fetchDoc('/')
 
-  const drawerLinks = [...doc.querySelectorAll('.menu-drawer-link')].map((link) => ({
-    _type: 'link',
-    _key: slugify(text(link)),
-    label: text(link),
-    url: link.getAttribute('href'),
-    newTab: link.getAttribute('target') === '_blank',
-  }))
+  /*
+   * The live drawer lists the same destination twice: "Events" -> /catering-events
+   * and "Catering & Events" -> /events?general-inquiry, where /events is a 301 to
+   * /catering-events. So one label is wrong, one URL takes a redirect hop, and the
+   * menu shows two entries for one page.
+   *
+   * Collapsed to the entry that already points at the real page, relabelled
+   * "Catering & Events". Done here rather than only in the dataset so re-running
+   * the scrape doesn't quietly restore the duplicate.
+   */
+  const drawerLinks = [...doc.querySelectorAll('.menu-drawer-link')]
+    .map((link) => ({
+      _type: 'link',
+      _key: slugify(text(link)),
+      label: text(link),
+      url: link.getAttribute('href'),
+      newTab: link.getAttribute('target') === '_blank',
+    }))
+    .filter((link) => !link.url.startsWith('/events'))
+    .map((link) =>
+      link.url === '/catering-events' ? { ...link, label: 'Catering & Events' } : link,
+    )
 
   const navButtons = [...doc.querySelectorAll('.nav-btn-group .btn')]
   const orderBtn = navButtons.find((b) => b.classList.contains('is-outline')) ?? navButtons[0]

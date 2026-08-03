@@ -165,6 +165,13 @@ These need a human — none of them block development.
   the Worker that answers the visitor, so nothing can fail out of band while the
   page says it worked. If the client wants those addresses in an email platform,
   upload the export; there is no longer a form action to keep current.
+- **The menu drawer listed the catering page twice** — "Events" pointing at
+  `/catering-events`, and "Catering & Events" pointing at
+  `/events?general-inquiry`, where `/events` is itself a 301 to
+  `/catering-events`. So one label was wrong, the other took a redirect hop, and
+  the menu offered two entries for one page. Collapsed to a single
+  "Catering & Events" entry pointing straight at the page. `compare.js` records
+  the dropped link as a deliberate omission (`IGNORE_HREFS`).
 - **The homepage footer is stale** relative to the other thirteen pages: it
   still shows `Sun - 8-12 pm` and links the old `instagram.com/penelopesocial`
   handle. The migration takes the inner-page version (`Sun — 8am - 12pm`,

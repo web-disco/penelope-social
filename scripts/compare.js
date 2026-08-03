@@ -67,6 +67,17 @@ const IGNORE_CLASSES = [
   'newsletter',
 ]
 
+/**
+ * Links dropped from the port on purpose, matched on the live site's href.
+ *
+ * The drawer lists the catering page twice: "Events" -> /catering-events and
+ * "Catering & Events" -> /events?general-inquiry, where /events is itself a 301
+ * to /catering-events. One menu entry per page, pointing straight at it, so the
+ * second one is gone — which makes its `<a>` (and the `<h2>` inside it)
+ * live-only on all fourteen routes.
+ */
+const IGNORE_HREFS = ['/events?general-inquiry']
+
 function outline(doc) {
   const root = doc.querySelector('.page-wrapper')
   if (!root) return []
@@ -75,7 +86,8 @@ function outline(doc) {
   const isIgnored = (el) => {
     const className = typeof el.className === 'string' ? el.className : ''
     const classes = className.split(/\s+/)
-    return IGNORE_CLASSES.some((c) => classes.includes(c))
+    if (IGNORE_CLASSES.some((c) => classes.includes(c))) return true
+    return IGNORE_HREFS.includes(el.getAttribute?.('href') ?? '')
   }
 
   /** True once every descendant has been ignored — i.e. the node renders nothing. */

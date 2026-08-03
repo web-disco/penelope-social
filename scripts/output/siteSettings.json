@@ -48,7 +48,7 @@
         {
           "_type": "link",
           "_key": "events",
-          "label": "Events",
+          "label": "Catering & Events",
           "url": "/catering-events",
           "newTab": false
         },
@@ -64,13 +64,6 @@
           "_key": "merch",
           "label": "Merch",
           "url": "/merchandise",
-          "newTab": false
-        },
-        {
-          "_type": "link",
-          "_key": "catering-events",
-          "label": "Catering & Events",
-          "url": "/events?general-inquiry",
           "newTab": false
         }
       ]
