@@ -50,7 +50,15 @@ export const merchProduct = defineType({
       group: 'page',
       options: { hotspot: true },
       fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
-      description: 'Falls back to the default merch banner in Site Settings.',
+      description: 'The wide image at the top of the product page.',
+      /*
+       * Required, because there is nothing to fall back to. Site Settings used
+       * to carry a default that a product could borrow, but every product has
+       * always set its own — so the default never rendered, and its only real
+       * effect was to turn a forgotten banner into a silently wrong image
+       * instead of an error the editor can see.
+       */
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'images',

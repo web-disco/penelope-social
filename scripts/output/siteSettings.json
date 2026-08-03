@@ -178,13 +178,6 @@
         }
       }
     },
-    "merchBanner": {
-      "_type": "image",
-      "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
-      "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-500.png 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-800.png 800w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image-p-1080.png 1080w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png 1200w",
-      "_migrationSizes": "(max-width: 1200px) 100vw, 1200px",
-      "alt": "Image of Lunch menu platter"
-    },
     "seo": {
       "_type": "seo",
       "metaTitle": "Sourdough Bakery & Restaurant in Vaughan | Penelope Social",

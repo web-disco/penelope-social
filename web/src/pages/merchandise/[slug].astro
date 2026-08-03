@@ -6,7 +6,7 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
-import { getAll, getSingleton } from '../../lib/data'
+import { getAll } from '../../lib/data'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
 import { container, heading, btn } from '../../lib/ui'
 
@@ -19,8 +19,6 @@ export async function getStaticPaths() {
 
 const { product } = Astro.props
 const seo = product.seo ?? {}
-const settings = await getSingleton<any>('siteSettings')
-const banner = product.banner ?? settings?.merchBanner
 const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charcoal wf-md:text-[38px] wf-sm:text-[28px] wf-xs:flex-none wf-xs:text-[22px]'
 ---
 
@@ -30,7 +28,7 @@ const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charc
   ogImage={seo.ogImage}
   noIndex={seo.noIndex}
 >
-  <PageHero block={{ image: banner }} />
+  <PageHero block={{ image: product.banner }} />
 
   <div class="section-merch-details">
     <div class={container}>

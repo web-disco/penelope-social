@@ -189,7 +189,6 @@ async function buildSiteSettings() {
          credit is fixed in web/src/components/Footer.astro. The scraped line
          was “© 2024” — exactly the drift a text field invites. */
     },
-    merchBanner: null, // filled in from the merch listing page below
     seo: seoFrom(home),
   }
 }
@@ -675,10 +674,6 @@ async function main() {
   ]
   const menus = await Promise.all(MENU_SLUGS.map(buildMenu))
   const merchProducts = await buildMerchProducts()
-
-  /* The merch detail pages share a banner; hold it on settings so a product
-     without its own banner still renders one. */
-  settings.merchBanner = merchProducts[0]?.banner ?? null
 
   const byType = {
     siteSettings: [settings],

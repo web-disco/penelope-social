@@ -18,7 +18,6 @@ export const siteSettings = defineType({
   groups: [
     { name: 'header', title: 'Header & Menu', default: true },
     { name: 'footer', title: 'Footer' },
-    { name: 'merch', title: 'Merch' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -145,16 +144,6 @@ export const siteSettings = defineType({
          * build time and the Web Disco credit is fixed in Footer.astro.
          */
       ],
-    }),
-
-    defineField({
-      name: 'merchBanner',
-      title: 'Default merch banner',
-      type: 'image',
-      group: 'merch',
-      options: { hotspot: true },
-      fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
-      description: 'Used on a merch product page that has no banner of its own.',
     }),
 
     defineField({ name: 'seo', title: 'Default SEO', type: 'seo', group: 'seo' }),
