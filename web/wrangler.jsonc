@@ -11,6 +11,15 @@
     "directory": "./dist",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
+
+    // The Webflow site served every URL without a trailing slash and Astro is
+    // built the same way (`trailingSlash: 'never'`). Cloudflare's default
+    // ("auto-trailing-slash") disagrees: it 307s /menus -> /menus/, which adds
+    // a redirect hop to every internal link and changes the canonical URL of
+    // all 14 pages. "drop-trailing-slash" serves /menus straight from
+    // /menus/index.html and redirects the slashed form instead.
+    "html_handling": "drop-trailing-slash",
+
     // Only the form endpoints hit the Worker; everything else is a static hit.
     "run_worker_first": ["/api/*"]
   },
