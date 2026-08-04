@@ -24,27 +24,20 @@
     "run_worker_first": ["/api/*"]
   },
 
-  // Two databases rather than two tables in one: they hold different things
-  // with different retention answers — a marketing list the visitor opted into,
-  // and enquiries they expect to be read and actioned. Separate also keeps each
-  // name honest. Both are Penelope's own; Arti runs the same code against its
-  // own pair and the two sites never share a row.
+  // Newsletter signups — the only thing this site stores. Contact and events
+  // submissions are emailed and not kept; see worker/index.ts for what that
+  // costs. Penelope's own database: Arti runs the same code against
+  // `arti-ristorante-subscribers` and the two never share a row.
   //
-  // `migrations_dir` is per-binding (wrangler warns "unexpected field" and then
-  // ignores it at the top level), which is what lets each database keep its own
-  // numbered migrations.
+  // `migrations_dir` is per-binding — wrangler warns "unexpected field" and then
+  // ignores it at the top level, which would silently apply migrations from the
+  // wrong directory.
   "d1_databases": [
     {
       "binding": "SUBSCRIBERS",
       "database_name": "penelope-social-subscribers",
       "database_id": "fff4209a-ecc0-4181-801b-b937373a17f9",
       "migrations_dir": "migrations/subscribers"
-    },
-    {
-      "binding": "ENQUIRIES",
-      "database_name": "penelope-social-enquiries",
-      "database_id": "cab856a1-69e5-4f08-a75f-5d508b284fd2",
-      "migrations_dir": "migrations/enquiries"
     }
   ],
 

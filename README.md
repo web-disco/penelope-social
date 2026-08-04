@@ -95,18 +95,17 @@ consent under CASL, so the row records consent, timestamp and IP, and a POST
 without consent is rejected rather than stored — a subscriber the client can
 never legally email is worse than no row at all.
 
-**Contact and events enquiries** are stored the same way, in their own database
-`penelope-social-enquiries`, and exported from `GET /api/enquiries.csv` behind
-the same credentials. The email is a *notification*, not the record: it is sent
-after the row is written, and `notified` records whether that send actually
-worked — so "which enquiries did nobody get told about?" is a query rather than
-a guess. Two databases rather than two tables because they hold different things
-with different retention answers, and it keeps each name honest.
+**Contact and events submissions are deliberately not stored.** They are emailed
+and nothing else — no database row, no export. That keeps the site holding only
+data someone opted into, at the cost of the notification being the sole copy: if
+a send fails, the only record is the `[forms] notification failed` line in the
+Worker log, which is retained for days rather than forever. Storing them is a
+small change (a table, a write before the send, a `notified` flag) if that
+trade stops being the right one.
 
 ```bash
-# Each database keeps its own numbered migrations:
+# Schema changes go in web/migrations/subscribers/ and apply with:
 pnpm --filter web exec wrangler d1 migrations apply penelope-social-subscribers --remote
-pnpm --filter web exec wrangler d1 migrations apply penelope-social-enquiries --remote
 ```
 
 ## Verifying parity
