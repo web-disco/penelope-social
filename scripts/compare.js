@@ -68,15 +68,21 @@ const IGNORE_CLASSES = [
 ]
 
 /**
- * Links dropped from the port on purpose, matched on the live site's href.
+ * Links dropped from the port on purpose.
  *
  * The drawer lists the catering page twice: "Events" -> /catering-events and
  * "Catering & Events" -> /events?general-inquiry, where /events is itself a 301
  * to /catering-events. One menu entry per page, pointing straight at it, so the
  * second one is gone — which makes its `<a>` (and the `<h2>` inside it)
  * live-only on all fourteen routes.
+ *
+ * Matched on class AND href, not href alone. The merch pages' "available in
+ * store" button carries that same href on the live site but is *kept* in the
+ * port (repointed at /contact), so an href-only rule would drop it from the
+ * live side while the port still renders it — turning a deliberate href change
+ * into three phantom local-only nodes.
  */
-const IGNORE_HREFS = ['/events?general-inquiry']
+const IGNORE_LINKS = [{ className: 'menu-drawer-link', href: '/events?general-inquiry' }]
 
 function outline(doc) {
   const root = doc.querySelector('.page-wrapper')
@@ -87,7 +93,8 @@ function outline(doc) {
     const className = typeof el.className === 'string' ? el.className : ''
     const classes = className.split(/\s+/)
     if (IGNORE_CLASSES.some((c) => classes.includes(c))) return true
-    return IGNORE_HREFS.includes(el.getAttribute?.('href') ?? '')
+    const href = el.getAttribute?.('href') ?? ''
+    return IGNORE_LINKS.some((l) => classes.includes(l.className) && href === l.href)
   }
 
   /** True once every descendant has been ignored — i.e. the node renders nothing. */

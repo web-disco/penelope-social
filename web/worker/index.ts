@@ -4,10 +4,11 @@
  * `run_worker_first: ["/api/*"]` in wrangler.jsonc routes only these endpoints
  * here; everything else is served straight from the static assets.
  *
- *   POST /api/contact         → email notification
- *   POST /api/events          → email notification
+ *   POST /api/contact         → store in D1, then email the notification
+ *   POST /api/events          → store in D1, then email the notification
  *   POST /api/newsletter      → store the footer signup in D1
  *   GET  /api/subscribers.csv → export, behind Basic Auth
+ *   GET  /api/enquiries.csv   → export, behind the same Basic Auth
  */
 import { sendNotification, verifyTurnstile, type Env as EmailEnv } from './email'
 import {
@@ -16,12 +17,22 @@ import {
   subscribersCsv,
   type SubscribersEnv,
 } from './subscribers'
+import {
+  addEnquiry,
+  enquiriesCsv,
+  markNotified,
+  type EnquiriesEnv,
+  type EnquiryForm,
+} from './enquiries'
 
-type Env = EmailEnv & SubscribersEnv
+type Env = EmailEnv & SubscribersEnv & EnquiriesEnv
 
-const FORMS: Record<string, { subject: string }> = {
-  '/api/contact': { subject: 'New contact form submission — penelopesocial.com' },
-  '/api/events': { subject: 'New events enquiry — penelopesocial.com' },
+const FORMS: Record<string, { subject: string; form: EnquiryForm }> = {
+  '/api/contact': {
+    subject: 'New contact form submission — penelopesocial.com',
+    form: 'contact',
+  },
+  '/api/events': { subject: 'New events enquiry — penelopesocial.com', form: 'events' },
 }
 
 const json = (body: unknown, status = 200) =>
@@ -89,6 +100,26 @@ export default {
       })
     }
 
+    if (url.pathname === '/api/enquiries.csv') {
+      if (request.method !== 'GET') return json({ error: 'Method not allowed' }, 405)
+
+      const unauthorised = checkExportAuth(request, env)
+      if (unauthorised) return unauthorised
+
+      if (!env.ENQUIRIES) return json({ error: 'Enquiry storage is not configured' }, 503)
+
+      const csv = await enquiriesCsv(env.ENQUIRIES)
+      const stamp = new Date().toISOString().slice(0, 10)
+      return new Response(csv, {
+        headers: {
+          'content-type': 'text/csv; charset=utf-8',
+          'content-disposition': `attachment; filename="penelope-enquiries-${stamp}.csv"`,
+          // Names, emails and phone numbers — never cache this.
+          'cache-control': 'no-store',
+        },
+      })
+    }
+
     const form = FORMS[url.pathname]
 
     if (!form) return env.ASSETS.fetch(request)
@@ -99,12 +130,9 @@ export default {
     try {
       const data = await request.formData()
 
+      const ip = request.headers.get('cf-connecting-ip')
       const token = data.get('cf-turnstile-response')
-      const ok = await verifyTurnstile(
-        env,
-        typeof token === 'string' ? token : null,
-        request.headers.get('cf-connecting-ip'),
-      )
+      const ok = await verifyTurnstile(env, typeof token === 'string' ? token : null, ip)
       if (!ok) {
         return new Response(JSON.stringify({ error: 'Captcha verification failed' }), {
           status: 400,
@@ -126,26 +154,36 @@ export default {
       const replyTo = fields['Event-Form-Email'] || fields['Contact-Form-Email'] || undefined
 
       /*
-       * A failed notification must not fail the visitor's submission.
+       * Store first, notify second.
        *
-       * Sending is the part most likely to break for reasons that have nothing
-       * to do with them — an unonboarded sending domain, a provider outage, a
-       * revoked key — and telling someone their enquiry failed when we simply
-       * couldn't forward it just loses the enquiry twice: they don't retry, and
-       * we didn't keep it. So the whole submission goes to the log, where it
-       * can be recovered, and the visitor is told it worked (it did: we have
-       * it).
-       *
-       * The log is a backstop, not storage — Workers logs are retained for days,
-       * not forever. If enquiries matter beyond that window they belong in D1
-       * next to the subscribers.
+       * The email is a notification, not the record. Sending is the part most
+       * likely to break for reasons that have nothing to do with the visitor —
+       * an unonboarded sending domain, a provider outage, a revoked key — and
+       * an inbox is a poor archive even when it works: messages get deleted,
+       * filed, or lost with the staff member who read them. Writing the row
+       * before the send means the enquiry survives all of it.
+       */
+      const enquiryId = env.ENQUIRIES
+        ? await addEnquiry(env.ENQUIRIES, { form: form.form, fields, ip })
+        : null
+
+      /*
+       * And a failed notification must not fail the visitor's submission.
+       * Telling someone their enquiry failed when we merely couldn't forward it
+       * loses it twice — they don't retry, and if we hadn't stored it we'd have
+       * nothing. So: log it, mark it un-notified, and tell them it worked,
+       * because it did.
        */
       try {
         await sendNotification(env, { subject: form.subject, fields, replyTo })
+        if (enquiryId !== null && env.ENQUIRIES) await markNotified(env.ENQUIRIES, enquiryId)
       } catch (error) {
         console.error(
-          `[forms] notification failed for ${url.pathname} — submission follows so it is not lost`,
-          JSON.stringify(fields),
+          `[forms] notification failed for ${url.pathname}` +
+            (enquiryId === null
+              ? ' — AND the enquiry was not stored; the submission follows so it is not lost'
+              : ` — stored as enquiry #${enquiryId}, findable with "notified = 0"`),
+          enquiryId === null ? JSON.stringify(fields) : '',
           error,
         )
       }

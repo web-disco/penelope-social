@@ -639,7 +639,14 @@ async function buildMerchProducts() {
         description: text(content.querySelector('p')),
         banner: image(doc.querySelector('.page-banner-image')),
         images: [...doc.querySelectorAll('.merch-image')].map((img) => image(img)),
-        cta: buttonFrom(content.querySelector('.merch-details-link a')),
+        /*
+         * The live button says "available in store" and links to
+         * /events?general-inquiry — the catering enquiry form, with its reason
+         * dropdown preset to "general inquiry". Someone asking about a $20
+         * t-shirt landed on an events enquiry. Repointed at /contact, which is
+         * what a button with that label is asking the visitor to do.
+         */
+        cta: { ...buttonFrom(content.querySelector('.merch-details-link a')), url: '/contact' },
         seo: seoFrom(doc),
       }
     }),
