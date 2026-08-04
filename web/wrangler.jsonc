@@ -3,9 +3,9 @@
   "name": "penelope-social",
   "main": "worker/index.ts",
   "compatibility_date": "2026-07-01",
-  // `nodejs_compat` is required by the Cloudflare Email path in worker/email.ts
-  // (mimetext). Harmless when EMAIL_PROVIDER is unset or set to "resend".
-  "compatibility_flags": ["nodejs_compat"],
+  // No `nodejs_compat`: it existed only for `mimetext`, which the old Email
+  // Routing send path needed to build a MIME message by hand. Email Service
+  // takes a plain object, so both are gone.
 
   "assets": {
     "directory": "./dist",
@@ -42,21 +42,34 @@
     "enabled": true
   },
 
+  // Contact + events notifications. Cloudflare Email Service, via the binding.
+  //
+  // No restriction attribute on the binding: `destination_address` would pin it
+  // to one address, and the destination is expected to move to the client's own
+  // inbox once penelopesocial.com is onboarded. The binding can only reach
+  // verified destination addresses on the account either way.
+  "send_email": [{ "name": "EMAIL" }],
+
   "vars": {
-    // Set to "resend" or "cloudflare" at go-live. Unset means submissions are
-    // accepted but no notification email is sent.
-    // "EMAIL_PROVIDER": "resend",
-    // "NOTIFY_EMAIL_TO": "info@penelopesocial.com",
-    // "NOTIFY_EMAIL_FROM": "website@penelopesocial.com"
+    "EMAIL_PROVIDER": "cloudflare",
+
+    // Going to Web Disco for now — it is the only verified destination address
+    // on the account. Switch to the client's inbox at cutover.
+    "NOTIFY_EMAIL_TO": "hello@webdisco.digital",
+
+    // NOT YET DELIVERABLE. The sender address must belong to a domain onboarded
+    // to Email Service, and neither penelopesocial.com nor webdisco.digital is
+    // — every send currently fails with `email.sending.error.email.invalid`.
+    // Submissions still succeed for the visitor and the full payload is written
+    // to the Worker log (see worker/index.ts). Onboard the domain that matches
+    // this address to finish the wiring:
+    //   npx wrangler email sending enable penelopesocial.com
+    "NOTIFY_EMAIL_FROM": "website@penelopesocial.com"
   }
 
   // Secrets are set with `wrangler secret put`, never committed:
   //   TURNSTILE_SECRET_KEY
-  //   RESEND_API_KEY
   //   SUBSCRIBERS_USER       (Basic Auth user for /api/subscribers.csv)
   //   SUBSCRIBERS_PASSWORD   (Basic Auth password for the same)
-  //
-  // For EMAIL_PROVIDER=cloudflare, add a send_email binding and verify the
-  // destination address in Email Routing first:
-  // "send_email": [{ "name": "SEND_EMAIL", "destination_address": "info@penelopesocial.com" }]
+  //   RESEND_API_KEY         (only if EMAIL_PROVIDER is switched to "resend")
 }

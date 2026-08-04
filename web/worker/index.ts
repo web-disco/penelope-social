@@ -118,7 +118,37 @@ export default {
         if (typeof value === 'string') fields[key] = value
       }
 
-      await sendNotification(env, { subject: form.subject, fields })
+      /*
+       * Both forms name their email field `<Form>-Form-Email`; whichever is
+       * present becomes the Reply-To, so the client answers the enquirer
+       * directly instead of the site's own sending address.
+       */
+      const replyTo = fields['Event-Form-Email'] || fields['Contact-Form-Email'] || undefined
+
+      /*
+       * A failed notification must not fail the visitor's submission.
+       *
+       * Sending is the part most likely to break for reasons that have nothing
+       * to do with them — an unonboarded sending domain, a provider outage, a
+       * revoked key — and telling someone their enquiry failed when we simply
+       * couldn't forward it just loses the enquiry twice: they don't retry, and
+       * we didn't keep it. So the whole submission goes to the log, where it
+       * can be recovered, and the visitor is told it worked (it did: we have
+       * it).
+       *
+       * The log is a backstop, not storage — Workers logs are retained for days,
+       * not forever. If enquiries matter beyond that window they belong in D1
+       * next to the subscribers.
+       */
+      try {
+        await sendNotification(env, { subject: form.subject, fields, replyTo })
+      } catch (error) {
+        console.error(
+          `[forms] notification failed for ${url.pathname} — submission follows so it is not lost`,
+          JSON.stringify(fields),
+          error,
+        )
+      }
 
       return new Response(JSON.stringify({ ok: true }), {
         headers: { 'content-type': 'application/json' },

@@ -1,22 +1,45 @@
 /**
- * Pluggable email sender.
+ * Pluggable email sender for the contact and events forms.
  *
- * The Webflow site delivered form submissions through Webflow's own form
- * handling, which doesn't come with us. Rather than hardcode a provider before
- * the client has picked one, both options sit behind `EMAIL_PROVIDER`:
+ * The Webflow site delivered submissions through Webflow's own form handling,
+ * which doesn't come with us. Two providers sit behind `EMAIL_PROVIDER`:
  *
+ *   cloudflare  the EMAIL binding (Cloudflare Email Service)
  *   resend      POST to api.resend.com with RESEND_API_KEY
- *   cloudflare  the SEND_EMAIL binding (Cloudflare Email Routing)
  *   (unset)     no email is sent and the submission still succeeds
  *
- * Flipping the env var is the whole switch — no code change at go-live.
+ * Flipping the env var is the whole switch — no code change.
+ *
+ * The `cloudflare` path used to build a MIME message with `mimetext` and hand it
+ * to Email Routing's old `send_email` API, which is why the Worker carried the
+ * `nodejs_compat` flag. Email Service takes a plain object now, so both the
+ * dependency and the flag are gone.
+ *
+ * IMPORTANT: the sender address must belong to a domain onboarded to Email
+ * Service. Until one is, every send fails with
+ * `email.sending.error.email.invalid` — which is why a failure here is logged
+ * loudly with the whole submission but never fails the visitor's request. See
+ * worker/index.ts.
  */
+
+/** The subset of the Email Service binding this Worker uses. */
+export interface EmailBinding {
+  send(message: {
+    to: string
+    from: string
+    subject: string
+    text?: string
+    html?: string
+    replyTo?: string
+  }): Promise<unknown>
+}
+
 export interface Env {
   EMAIL_PROVIDER?: string
   RESEND_API_KEY?: string
   NOTIFY_EMAIL_TO?: string
   NOTIFY_EMAIL_FROM?: string
-  SEND_EMAIL?: { send(message: unknown): Promise<void> }
+  EMAIL?: EmailBinding
   TURNSTILE_SECRET_KEY?: string
   ASSETS: { fetch(request: Request): Promise<Response> }
 }
@@ -24,6 +47,12 @@ export interface Env {
 export interface Submission {
   subject: string
   fields: Record<string, string>
+  /**
+   * The enquirer's own address, so the client can just hit reply. Without it
+   * every reply goes back to the site's own sending address, which nobody
+   * reads.
+   */
+  replyTo?: string
 }
 
 function asText(submission: Submission): string {
@@ -43,6 +72,21 @@ export async function sendNotification(env: Env, submission: Submission): Promis
     return
   }
 
+  if (provider === 'cloudflare') {
+    if (!env.EMAIL) {
+      console.warn('[forms] EMAIL_PROVIDER=cloudflare but the EMAIL binding is missing')
+      return
+    }
+    await env.EMAIL.send({
+      to,
+      from,
+      subject: submission.subject,
+      text: asText(submission),
+      ...(submission.replyTo ? { replyTo: submission.replyTo } : {}),
+    })
+    return
+  }
+
   if (provider === 'resend') {
     if (!env.RESEND_API_KEY) {
       console.warn('[forms] EMAIL_PROVIDER=resend but RESEND_API_KEY is missing')
@@ -54,30 +98,19 @@ export async function sendNotification(env: Env, submission: Submission): Promis
         authorization: `Bearer ${env.RESEND_API_KEY}`,
         'content-type': 'application/json',
       },
-      body: JSON.stringify({ from, to: [to], subject: submission.subject, text: asText(submission) }),
+      body: JSON.stringify({
+        from,
+        to: [to],
+        subject: submission.subject,
+        text: asText(submission),
+        ...(submission.replyTo ? { reply_to: submission.replyTo } : {}),
+      }),
     })
+    /* Throw rather than log-and-continue: the caller decides what a failed
+       notification means for the visitor, and it needs to know one happened. */
     if (!response.ok) {
-      console.error('[forms] Resend rejected the message', response.status, await response.text())
+      throw new Error(`Resend rejected the message: ${response.status} ${await response.text()}`)
     }
-    return
-  }
-
-  if (provider === 'cloudflare') {
-    if (!env.SEND_EMAIL) {
-      console.warn('[forms] EMAIL_PROVIDER=cloudflare but the SEND_EMAIL binding is missing')
-      return
-    }
-    // `mimetext` needs the nodejs_compat flag, which wrangler.jsonc sets.
-    const { createMimeMessage } = await import('mimetext')
-    const { EmailMessage } = await import('cloudflare:email')
-
-    const message = createMimeMessage()
-    message.setSender({ addr: from })
-    message.setRecipient(to)
-    message.setSubject(submission.subject)
-    message.addMessage({ contentType: 'text/plain', data: asText(submission) })
-
-    await env.SEND_EMAIL.send(new EmailMessage(from, to, message.asRaw()))
     return
   }
 
