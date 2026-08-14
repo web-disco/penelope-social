@@ -54,25 +54,26 @@
   "send_email": [{ "name": "EMAIL" }],
 
   "vars": {
-    "EMAIL_PROVIDER": "cloudflare",
+    // Postmark rather than the EMAIL binding: Cloudflare Email Service can only
+    // deliver to destination addresses verified on the account, which makes a
+    // client-owned Gmail inbox a per-address opt-in dance. The `cloudflare` and
+    // `resend` paths are still in worker/email.ts if this ever flips back.
+    "EMAIL_PROVIDER": "postmark",
 
-    // Going to Web Disco for now — it is the only verified destination address
-    // on the account. Switch to the client's inbox at cutover.
-    "NOTIFY_EMAIL_TO": "hello@webdisco.digital",
+    // Comma-separated — both addresses get a copy of every contact and events
+    // enquiry, in one Postmark call.
+    "NOTIFY_EMAIL_TO": "info@penelopesocial.com,penelopesocial23@gmail.com",
 
-    // NOT YET DELIVERABLE. The sender address must belong to a domain onboarded
-    // to Email Service, and neither penelopesocial.com nor webdisco.digital is
-    // — every send currently fails with `email.sending.error.email.invalid`.
-    // Submissions still succeed for the visitor and the full payload is written
-    // to the Worker log (see worker/index.ts). Onboard the domain that matches
-    // this address to finish the wiring:
-    //   npx wrangler email sending enable penelopesocial.com
+    // Must stay a penelopesocial.com address: Postmark will only send from a
+    // domain confirmed under Sender Signatures, and the DKIM + Return-Path
+    // records for that live in this domain's Cloudflare zone.
     "NOTIFY_EMAIL_FROM": "website@penelopesocial.com"
   }
 
   // Secrets are set with `wrangler secret put`, never committed:
   //   TURNSTILE_SECRET_KEY
-  //   SUBSCRIBERS_USER       (Basic Auth user for /api/subscribers.csv)
-  //   SUBSCRIBERS_PASSWORD   (Basic Auth password for the same)
-  //   RESEND_API_KEY         (only if EMAIL_PROVIDER is switched to "resend")
+  //   SUBSCRIBERS_USER        (Basic Auth user for /api/subscribers.csv)
+  //   SUBSCRIBERS_PASSWORD    (Basic Auth password for the same)
+  //   POSTMARK_SERVER_TOKEN   (the Server API token, not the Account token)
+  //   RESEND_API_KEY          (only if EMAIL_PROVIDER is switched to "resend")
 }
