@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# The form endpoints answer POST only, and /api/subscribers.csv is a list of
+# customer email addresses behind Basic Auth. Nothing here is a page.
+Disallow: /api/
+
+Sitemap: https://penelopesocial.com/sitemap-index.xml
