@@ -2,9 +2,11 @@
 /**
  * Cloudflare Turnstile widget.
  *
- * Renders only once the client's own sitekey is in `PUBLIC_TURNSTILE_SITE_KEY`
- * — until then the forms work unprotected, and the Worker's verify step passes
- * through for the same reason (no secret configured).
+ * Renders only when a sitekey is configured — with none the forms work
+ * unprotected, and the Worker's verify step passes through for the same reason
+ * (no secret configured). That has to be a *deliberate* empty value: an absent
+ * `PUBLIC_TURNSTILE_SITE_KEY` fails the build instead, because a silently
+ * missing widget looks exactly like a working one. See lib/turnstile.ts.
  *
  * `appearance="interaction-only"` keeps the widget invisible for the visitors
  * who never need a challenge, which is nearly all of them on a Managed widget.
@@ -17,6 +19,8 @@
  * `auto`, which follows the VISITOR'S OS preference and so clashes with
  * whichever background it lands on for half the audience.
  */
+import { siteKey } from '../lib/turnstile'
+
 interface Props {
   /** Match the surrounding background. */
   theme?: 'light' | 'dark'
@@ -25,8 +29,6 @@ interface Props {
 }
 
 const { theme = 'light', class: className = '' } = Astro.props
-
-const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
 ---
 
 {

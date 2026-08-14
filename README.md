@@ -122,6 +122,44 @@ the browser against both the live page and the local one).
 At the time of writing, all 14 routes are structurally identical and total page
 height matches the Webflow original exactly at 1440 / 991 / 767 / 479px.
 
+## Continuous deployment
+
+Workers Builds builds `main` and deploys the Worker. The site is also
+deployable by hand with `pnpm deploy:web`, which builds first — note that
+`wrangler deploy` on its own does **not** build, so running it against a stale
+`web/dist` republishes whatever that directory happens to hold.
+
+| Setting | Value |
+| --- | --- |
+| Root directory | `/` |
+| Build command | `pnpm build` |
+| Deploy command | `pnpm --filter web exec wrangler deploy` |
+
+The deploy command goes through the workspace rather than a bare
+`npx wrangler deploy` for two reasons: `wrangler.jsonc` lives in `web/`, so a
+bare invocation at the root fails on workspace detection, and `npx` would fetch
+whatever wrangler version it resolves that day instead of the one in the
+lockfile.
+
+**Build variables must be set in Cloudflare.** There is no `.env` in CI — it is
+gitignored, and rightly so, since it also holds the Sanity write token and the
+Turnstile secret. Anything the build reads has to come from the build
+environment:
+
+| Variable | Value | Omitted |
+| --- | --- | --- |
+| `PUBLIC_TURNSTILE_SITE_KEY` | the widget's sitekey | build fails, deliberately |
+| `PUBLIC_SANITY_DATASET` | `production` | defaults to `production` |
+| `PUBLIC_SANITY_PROJECT_ID` | leave unset | falls back to `DEFAULT_PROJECT_ID` |
+
+Leave `PUBLIC_SANITY_PROJECT_ID` genuinely unset rather than blank — `data.ts`
+treats an empty value as "use the committed fixtures on purpose" and would
+deploy stale content without complaint.
+
+Publishing in Sanity triggers a rebuild through a Workers Builds **Deploy Hook**
+registered as a Sanity webhook. Builds read the dataset live (`useCdn: false`),
+so a build kicked off moments after a publish still sees the new content.
+
 ## Go-live checklist
 
 These need a human — none of them block development.
