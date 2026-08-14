@@ -14,7 +14,7 @@ penelope/
 
 ```bash
 pnpm install
-pnpm migrate:dry   # scrape the live site into scripts/output/*.json
+pnpm migrate:dry   # scrape the Webflow original into scripts/output/*.json
 pnpm dev           # http://localhost:4380
 ```
 
@@ -28,9 +28,9 @@ lets the whole thing be reviewed before any accounts exist.
 | `pnpm dev` | Astro dev server |
 | `pnpm build` | Static build into `web/dist` |
 | `pnpm studio` | Sanity Studio on :3333 (pass `--port` to change it; the port must be an allowed CORS origin — `sanity cors add http://localhost:<port> --credentials`) |
-| `pnpm migrate:dry` | Scrape the live site → `scripts/output/*.json` |
+| `pnpm migrate:dry` | Scrape the Webflow original → `scripts/output/*.json` |
 | `pnpm migrate` | Upload assets and import into Sanity (needs a write token) |
-| `pnpm compare` | Structural DOM diff of every route vs the live site |
+| `pnpm compare` | Structural DOM diff of every route vs the Webflow original |
 | `pnpm deploy:web` | Build and deploy the Worker (`deploy:web:dry` to validate only) |
 | `pnpm deploy:studio` | Deploy the hosted Studio |
 
@@ -120,7 +120,7 @@ verified separately with a computed-style diff (`scripts/style-probe.js`, run in
 the browser against both the live page and the local one).
 
 At the time of writing, all 14 routes are structurally identical and total page
-height matches the live site exactly at 1440 / 991 / 767 / 479px.
+height matches the Webflow original exactly at 1440 / 991 / 767 / 479px.
 
 ## Go-live checklist
 
@@ -133,13 +133,15 @@ These need a human — none of them block development.
 2. ~~**Import the content.**~~ **Done.** The dataset holds 1 siteSettings,
    1 homepage, 6 pages, 4 menus, 3 merch products and 43 image assets, plus the
    two bakery video transcodes. `pnpm migrate` is re-runnable — it re-scrapes
-   the live site and uses deterministic ids, and Sanity dedupes assets by
+   the Webflow original and uses deterministic ids, and Sanity dedupes assets by
    content hash. The token it needs was created with
    `sanity tokens create "content-migration" --role=editor`; revoke it with
    `sanity tokens delete` once the site no longer needs re-importing.
-3. **Deploy the Studio:** `pnpm deploy:studio`. Consider pinning the app id and
-   `autoUpdates` under `deployment` in `studio/sanity.cli.ts` so later deploys
-   never prompt for (or retarget) the application.
+3. ~~**Deploy the Studio.**~~ **Done** — live at
+   https://penelope-social.sanity.studio/ (`pnpm deploy:studio`). `studioHost`
+   and the `deployment.appId` are pinned in `studio/sanity.cli.ts`, so a later
+   deploy can neither prompt for a hostname nor quietly create a second
+   application and strand the client on a Studio URL that stops updating.
 4. ~~**Deploy the site.**~~ **Done** — live at https://penelopesocial.com and at
    https://penelope-social.web-disco.workers.dev (`pnpm deploy:web`, or
    `pnpm deploy:web:dry` to validate first).

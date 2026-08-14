@@ -1,6 +1,19 @@
 import { JSDOM } from 'jsdom'
 
-export const SITE = 'https://www.penelopesocial.com'
+/**
+ * The Webflow original this project was ported from.
+ *
+ * Deliberately not penelopesocial.com. Since the cutover that hostname serves
+ * the Astro port, so pointing the scraper at it would make `compare` diff the
+ * port against itself — always clean, never useful — and would make `migrate`
+ * rewrite `scripts/output/*.json` from the port's own markup, quietly replacing
+ * the reference content with a copy of the thing it exists to check. Both
+ * failures look like success, which is what makes them worth a comment.
+ *
+ * The Webflow staging host still publishes the original. Override with
+ * SCRAPE_SITE if it is ever unpublished.
+ */
+export const SITE = process.env.SCRAPE_SITE || 'https://penelope-social.webflow.io'
 
 const UA =
   'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
