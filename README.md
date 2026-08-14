@@ -140,32 +140,60 @@ These need a human — none of them block development.
 3. **Deploy the Studio:** `pnpm deploy:studio`. Consider pinning the app id and
    `autoUpdates` under `deployment` in `studio/sanity.cli.ts` so later deploys
    never prompt for (or retarget) the application.
-4. ~~**Deploy the site.**~~ **Done** — live at
+4. ~~**Deploy the site.**~~ **Done** — live at https://penelopesocial.com and at
    https://penelope-social.web-disco.workers.dev (`pnpm deploy:web`, or
-   `pnpm deploy:web:dry` to validate first). The custom domain is **not** wired
-   up yet; pointing penelopesocial.com at the Worker is the actual cutover.
+   `pnpm deploy:web:dry` to validate first).
 5. **Rebuild on publish.** Create a Cloudflare deploy hook and add it as a Sanity
    webhook on publish.
 6. ~~**Turnstile.**~~ **Done.** Widget "penelopesocial.com" (Managed), scoped to
    the apex, `www`, and the workers.dev host so it works on staging too. The
    site key is in `.env`; the secret is a Worker secret. Verified: a POST with
    no token is rejected on every form.
-7. **Decide where form submissions go.** Set `EMAIL_PROVIDER` to `resend` or
-   `cloudflare` plus `NOTIFY_EMAIL_TO`/`NOTIFY_EMAIL_FROM` (see
-   `web/worker/email.ts`). Unset means submissions succeed but nobody is
-   emailed — don't ship it that way.
+7. **Form notifications go through Postmark.** `EMAIL_PROVIDER=postmark` and
+   `NOTIFY_EMAIL_TO` (comma-separated: `info@penelopesocial.com` and
+   `penelopesocial23@gmail.com`) are committed in `web/wrangler.jsonc`. Two
+   things are **not** done and both are required before a single notification
+   arrives:
+   - `npx wrangler secret put POSTMARK_SERVER_TOKEN` — the *Server* API token
+     from the Postmark server's API Tokens tab, not the Account token.
+   - Confirm `penelopesocial.com` in Postmark under **Sender Signatures →
+     Domains**, then add the DKIM and Return-Path records it gives you to the
+     Cloudflare zone. Postmark will not send from an unverified domain.
+
+   Do **not** touch the existing SPF record while doing this. The zone has one
+   `v=spf1 include:_spf.google.com ~all` for the client's Google Workspace mail,
+   a domain may only have one SPF record, and Postmark does not need a change to
+   it — a custom Return-Path moves the SPF check onto Postmark's own bounce
+   domain. Adding a second SPF record, or appending Postmark's include to this
+   one, risks the client's outbound mail.
 8. ~~**Set the subscriber export credentials.**~~ **Done.** `SUBSCRIBERS_USER`
    and `SUBSCRIBERS_PASSWORD` are Worker secrets; `/api/subscribers.csv` returns
    401 without them and 200 with. Basic Auth rather than a `?key=` token because
    the export is a list of customer email addresses, and a token in a URL ends
    up in browser history and leaks via `Referer`.
-9. **Point penelopesocial.com at the Worker.** The apex still serves the Webflow
-   site; this is the actual cutover. Check the existing MX records first if
-   Cloudflare Email Routing is ever added for the notification emails — changing
-   them would break the client's inbound mail.
-10. **Send one test submission through each form** (contact, events, newsletter)
-   before switching DNS. For the newsletter, confirm the row landed:
+9. ~~**Point penelopesocial.com at the Worker.**~~ **Done.** The domain is on
+   Cloudflare (`bethany`/`miguel` nameservers) and both the apex and `www` are
+   attached to the Worker as custom domains. The Webflow A and `www` CNAME
+   records are gone; the Google Workspace MX records, the SPF TXT and the
+   `google._domainkey` DKIM record were left untouched and verified intact.
+
+   **The apex is canonical.** A Cloudflare Redirect Rule 301s `https://www.*` to
+   the root, so `site` in `web/astro.config.mjs` is the apex — canonical tags and
+   the sitemap derive from it, and they must not name a host that redirects away
+   from itself. The rule lives in Cloudflare rather than the Worker on purpose:
+   redirect rules run before Workers, so a `www` hit never bills a Worker
+   request.
+
+   Never enable Cloudflare Email **Routing** on this zone. It rewrites the MX
+   records and would take down the client's Google Workspace inbox. Email
+   *Sending* is a different product and does not touch MX — but the site uses
+   Postmark now, so neither is needed.
+10. **Send one test submission through each form** (contact, events, newsletter).
+   For the newsletter, confirm the row landed:
    `wrangler d1 execute penelope-social-subscribers --remote --command "SELECT * FROM subscribers"`.
+   For contact and events, confirm the mail actually arrives at **both**
+   addresses — a Postmark send that is accepted by the API can still be dropped
+   downstream, and these two submissions are not stored anywhere.
 
 ### Known issues inherited from the Webflow site
 
