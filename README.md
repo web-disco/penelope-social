@@ -162,7 +162,11 @@ so a build kicked off moments after a publish still sees the new content.
 
 ## Go-live checklist
 
-These need a human — none of them block development.
+**The site is live.** Everything below is done; it is kept as the record of what
+was set up and why, because most of it is invisible from the code — which
+records are in the DNS zone, which values the build needs, and which of them
+fail silently when they are missing. Item 1 is the only one a new developer
+still has to do, and only to run the project locally.
 
 1. **Sanity project.** Already created: `wlwg9juj` ("Penelope Social"), and it is
    the `DEFAULT_PROJECT_ID` in `web/src/lib/data.ts`. Symlink the env into both
@@ -183,24 +187,34 @@ These need a human — none of them block development.
 4. ~~**Deploy the site.**~~ **Done** — live at https://penelopesocial.com and at
    https://penelope-social.web-disco.workers.dev (`pnpm deploy:web`, or
    `pnpm deploy:web:dry` to validate first).
-5. **Rebuild on publish.** Create a Cloudflare deploy hook and add it as a Sanity
-   webhook on publish.
+5. ~~**Rebuild on publish.**~~ **Done.** A Workers Builds Deploy Hook is
+   registered as a Sanity webhook on publish — see Continuous deployment above.
+   The webhook filters drafts with `!(_id in path("drafts.**"))`; without that
+   it fires on every draft autosave, so editing a page in the Studio would queue
+   a build every few seconds. Verified end to end: publishing in the Studio
+   produced a deployment whose output matched a local build of the same content.
 6. ~~**Turnstile.**~~ **Done.** Widget "penelopesocial.com" (Managed), scoped to
    the apex, `www`, and the workers.dev host so it works on staging too. The
    site key is in `.env`; the secret is a Worker secret. Verified: a POST with
    no token is rejected on every form.
-7. **Form notifications go through Postmark.** `EMAIL_PROVIDER=postmark` and
-   `NOTIFY_EMAIL_TO` (comma-separated: `info@penelopesocial.com` and
-   `penelopesocial23@gmail.com`) are committed in `web/wrangler.jsonc`. Two
-   things are **not** done and both are required before a single notification
-   arrives:
-   - `npx wrangler secret put POSTMARK_SERVER_TOKEN` — the *Server* API token
-     from the Postmark server's API Tokens tab, not the Account token.
-   - Confirm `penelopesocial.com` in Postmark under **Sender Signatures →
-     Domains**, then add the DKIM and Return-Path records it gives you to the
-     Cloudflare zone. Postmark will not send from an unverified domain.
+7. ~~**Decide where form submissions go.**~~ **Done** — Postmark.
+   `EMAIL_PROVIDER=postmark` and `NOTIFY_EMAIL_TO` (comma-separated:
+   `info@penelopesocial.com` and `penelopesocial23@gmail.com`) are in
+   `web/wrangler.jsonc`; `POSTMARK_SERVER_TOKEN` is a Worker secret, and
+   `penelopesocial.com` is verified in Postmark with its DKIM and Return-Path
+   records in the Cloudflare zone. Verified by real submissions through both
+   forms.
 
-   Do **not** touch the existing SPF record while doing this. The zone has one
+   Postmark rather than the Cloudflare Email Service binding because Email
+   Service only delivers to destination addresses verified on the account,
+   which makes a client-owned Gmail inbox a per-address opt-in dance. The
+   `cloudflare` and `resend` paths are still in `web/worker/email.ts`.
+
+   The Return-Path CNAME must stay **DNS-only** in Cloudflare. Proxying it
+   (the default for new CNAMEs) points it at Cloudflare's IPs instead of
+   Postmark's and breaks bounce handling and SPF alignment.
+
+   Do **not** touch the existing SPF record. The zone has one
    `v=spf1 include:_spf.google.com ~all` for the client's Google Workspace mail,
    a domain may only have one SPF record, and Postmark does not need a change to
    it — a custom Return-Path moves the SPF check onto Postmark's own bounce
@@ -228,12 +242,40 @@ These need a human — none of them block development.
    records and would take down the client's Google Workspace inbox. Email
    *Sending* is a different product and does not touch MX — but the site uses
    Postmark now, so neither is needed.
-10. **Send one test submission through each form** (contact, events, newsletter).
-   For the newsletter, confirm the row landed:
-   `wrangler d1 execute penelope-social-subscribers --remote --command "SELECT * FROM subscribers"`.
-   For contact and events, confirm the mail actually arrives at **both**
-   addresses — a Postmark send that is accepted by the API can still be dropped
-   downstream, and these two submissions are not stored anywhere.
+10. ~~**Send one test submission through each form.**~~ **Done** — submissions
+   go through and the notifications arrive.
+
+   Worth repeating after any change to the forms, the Worker, or the Postmark
+   configuration, because most of this path fails silently. Contact and events
+   submissions are not stored anywhere, so a send that the API accepts and
+   something downstream drops leaves only a `[forms] notification failed` line
+   in the Worker log, which is retained for days. For the newsletter the row is
+   the receipt:
+
+   ```bash
+   wrangler d1 execute penelope-social-subscribers --remote --command "SELECT * FROM subscribers"
+   ```
+
+### If the forms ever go quiet
+
+They did once, and nothing about the site looked wrong. The pages render
+identically with or without Turnstile — the widget is `interaction-only` and so
+invisible even when working — while `TURNSTILE_SECRET_KEY` is a Worker secret
+that survives every deploy. So a build that drops `PUBLIC_TURNSTILE_SITE_KEY`
+ships pages that send no token to a Worker that still demands one, and every
+submission comes back "Captcha verification failed".
+
+An absent sitekey now fails the build (`web/src/lib/turnstile.ts`), so this
+particular version cannot recur. The general shape can. Check first:
+
+```bash
+curl -s https://penelopesocial.com/contact | grep -c data-sitekey   # expect 2
+curl -s -X POST https://penelopesocial.com/api/contact -d x=1       # expect a 400
+```
+
+Two widgets on `/contact` (the form and the footer newsletter) and a rejected
+tokenless POST together prove the client and server halves are still wired to
+each other, which is the thing that broke.
 
 ### Known issues inherited from the Webflow site
 
