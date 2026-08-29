@@ -1,17 +1,9 @@
 ---
 /**
- * .section-menus — the four square menu cards.
- *
- * `.menu-btn-wrap` is `display:none` at every breakpoint on the live site, so
- * the "View menu" link never renders visibly; the whole image is the link.
- * It is kept in the DOM to match.
- *
- * Its href and label are derived rather than authored. They used to be two
- * per-card fields, which is how the live /menus page ended up pointing the
- * Catering card's invisible button at /menus/dinner — nothing renders it, so
- * nothing surfaced the mistake. Deriving from `url` makes that unrepresentable.
+ * Menu mosaic — image-led cards, Bakehouse pattern with 4 tiles.
+ * Desktop: 4-up. Mobile: Swiper at 1.1 slides so a sliver of the next card peeks.
  */
-import { containerNoTop, heading, menuBtn } from '../../lib/ui'
+import { btn, heading, layout, radius, space, typeScale } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
 
 interface Props {
@@ -19,44 +11,118 @@ interface Props {
 }
 const { block } = Astro.props
 const cards: any[] = block.cards ?? []
+
+const tileClass = 'menu-mosaic-tile flex h-full flex-col no-underline'
+const frameClass = `overflow-hidden ${radius.none}`
+const imageClass = 'block w-full aspect-[4/5] object-cover'
+const labelClass = `mt-space-16 mb-0 text-charcoal ${typeScale.title}`
+const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
 ---
 
-<div id="menu" class="section-menus">
-  <div class={containerNoTop}>
+<section id="menu" class="section-menu-mosaic reveal overflow-x-hidden">
+  <div class:list={[layout.shell, space.sectionYFirst]}>
     {
       block.heading && (
-        <div class="home-menu-heading mt-20 mb-10">
-          <h2 class={heading.medium}>{block.heading}</h2>
+        <h2
+          class:list={[
+            heading.base,
+            'text-center',
+            block.intro ? 'mb-0' : 'mb-space-48 wf-sm:mb-space-32',
+          ]}
+        >
+          {block.heading}
+        </h2>
+      )
+    }
+    {
+      block.intro && (
+        <p
+          class:list={[
+            'mx-auto mt-space-16 mb-space-48 text-center text-charcoal',
+            'wf-sm:mb-space-32',
+            layout.measureNarrow,
+            typeScale.intro,
+          ]}
+        >
+          {block.intro}
+        </p>
+      )
+    }
+    <div class="swiper menu-mosaic-swiper w-full" data-menu-mosaic-swiper>
+      <div class="swiper-wrapper">
+        {
+          cards.map((card) => (
+            <div class="swiper-slide">
+              <a href={card.url} class={tileClass}>
+                <div class={frameClass}>
+                  <img
+                    src={imageUrl(card.image)}
+                    srcset={imageSrcset(card.image)}
+                    sizes={imageSizes(card.image) ?? '(min-width: 992px) 25vw, 90vw'}
+                    loading="lazy"
+                    alt={imageAlt(card.image)}
+                    width="800"
+                    height="1000"
+                    draggable="false"
+                    class={imageClass}
+                  />
+                </div>
+                <p class={labelClass}>{card.title}</p>
+                {card.line && <p class={lineClass}>{card.line}</p>}
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    {
+      block.cta?.url && (
+        <div class="mt-space-48 flex justify-center wf-sm:mt-space-32">
+          <a
+            href={block.cta.url}
+            target={block.cta.newTab ? '_blank' : undefined}
+            class={btn.outline}
+          >
+            {block.cta.label}
+          </a>
         </div>
       )
     }
-    <div
-      class="menu-wrap grid auto-cols-[1fr] grid-cols-4 grid-rows-[auto] gap-10 wf-md:grid-cols-2 wf-md:gap-[30px] wf-sm:gap-5 wf-xs:grid-cols-1 wf-xs:gap-10"
-    >
-      {
-        cards.map((card) => (
-          <div class="menu flex flex-col">
-            <a href={card.url} class="menu-link w-inline-block relative h-full max-h-[550px] w-full no-underline">
-              <img
-                src={imageUrl(card.image)}
-                loading="lazy"
-                sizes={imageSizes(card.image)}
-                srcset={imageSrcset(card.image)}
-                alt={imageAlt(card.image)}
-                class="home-menu-image aspect-square h-full w-full object-cover"
-              />
-            </a>
-            <h2 class="menu-title mt-[15px] mb-0 font-heading text-[28px] font-normal text-charcoal">
-              {card.title}
-            </h2>
-            <div class="menu-btn-wrap mt-0 hidden">
-              <a href={card.url} class={menuBtn}>
-                View menu
-              </a>
-            </div>
-          </div>
-        ))
-      }
-    </div>
   </div>
-</div>
+</section>
+
+<style>
+  .menu-mosaic-swiper.swiper {
+    overflow: visible;
+    width: 100%;
+  }
+
+  .menu-mosaic-swiper .swiper-slide {
+    height: auto;
+  }
+
+  @media (min-width: 992px) {
+    .menu-mosaic-swiper.swiper {
+      overflow: visible;
+      width: 100%;
+    }
+
+    :global(.menu-mosaic-swiper .swiper-wrapper) {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      width: 100%;
+      transform: none;
+    }
+
+    :global(.menu-mosaic-swiper .swiper-slide) {
+      width: 100%;
+      margin: 0;
+    }
+  }
+</style>
+
+<script>
+  import { initMenuMosaicSwiper } from '../../scripts/menu-mosaic-swiper'
+  initMenuMosaicSwiper()
+</script>

@@ -2,21 +2,11 @@ import { defineArrayMember, defineField, defineType } from 'sanity'
 import { BlockIcon } from '../blockIcon'
 
 /**
- * Grid of menu cards — square artwork, title, and the whole image as the link.
- *
- * Was `menuGrid`; the title already read "Menu cards", so the schema name was
- * the last thing still calling it a grid.
+ * Menu mosaic — image-led cards (4-up on desktop, swipe on mobile).
  *
  * Cards are authored here rather than referencing `menu` documents because the
  * artwork is its own thing: none of the four card images is the banner of the
  * menu it links to.
- *
- * There is deliberately no button label or button URL. The markup carries a
- * `.menu-btn-wrap` "View menu" link, but it is `display:none` at every
- * breakpoint on the live site, so no visitor ever sees it — it stays in the DOM
- * for parity and takes its href from `url`. As editable fields they were pure
- * drift surface, and they had already drifted: the Catering card on /menus
- * pointed its invisible button at /menus/dinner.
  */
 export const menuCards = defineType({
   name: 'menuCards',
@@ -29,6 +19,13 @@ export const menuCards = defineType({
       title: 'Heading',
       type: 'string',
       description: 'Optional — the /menus page shows the cards with no heading.',
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Intro',
+      type: 'text',
+      rows: 2,
+      description: 'Optional supporting line under the heading.',
     }),
     defineField({
       name: 'cards',
@@ -44,6 +41,12 @@ export const menuCards = defineType({
               title: 'Title',
               type: 'string',
               validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: 'line',
+              title: 'Line',
+              type: 'string',
+              description: 'Optional one-liner under the title.',
             }),
             defineField({
               name: 'url',
@@ -64,7 +67,13 @@ export const menuCards = defineType({
           preview: { select: { title: 'title', subtitle: 'url', media: 'image' } },
         }),
       ],
-      validation: (Rule) => Rule.min(1),
+      validation: (Rule) => Rule.min(1).max(4),
+    }),
+    defineField({
+      name: 'cta',
+      title: 'Section button',
+      type: 'link',
+      description: 'Optional button under the cards, e.g. “Explore all menus”.',
     }),
   ],
   preview: {

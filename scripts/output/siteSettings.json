@@ -26,30 +26,23 @@
       "drawerLinks": [
         {
           "_type": "link",
-          "_key": "our-menus",
-          "label": "Our Menus",
+          "_key": "menu",
+          "label": "Menu",
           "url": "/menus",
           "newTab": false
         },
         {
           "_type": "link",
-          "_key": "bakery",
-          "label": "Bakery",
-          "url": "/sourdough-bakery",
-          "newTab": false
-        },
-        {
-          "_type": "link",
-          "_key": "about-us",
-          "label": "About Us",
+          "_key": "about",
+          "label": "About",
           "url": "/about",
           "newTab": false
         },
         {
           "_type": "link",
-          "_key": "events",
-          "label": "Catering & Events",
-          "url": "/catering-events",
+          "_key": "locations",
+          "label": "Locations",
+          "url": "/locations",
           "newTab": false
         },
         {
@@ -58,6 +51,13 @@
           "label": "Gift Cards",
           "url": "https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard",
           "newTab": true
+        },
+        {
+          "_type": "link",
+          "_key": "catering",
+          "label": "Catering",
+          "url": "/catering-events",
+          "newTab": false
         },
         {
           "_type": "link",
@@ -159,7 +159,7 @@
             "_type": "social",
             "_key": "instagram",
             "platform": "instagram",
-            "url": "https://www.instagram.com/penelope.social/?hl=en",
+            "url": "https://www.instagram.com/penelopesocial/?hl=en",
             "icon": "/icons/instagram.svg"
           },
           {

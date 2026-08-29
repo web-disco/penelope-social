@@ -45,6 +45,10 @@ const { sections = [] } = Astro.props
       console.warn(`[PageBuilder] no component registered for section type "${block._type}"`)
       return null
     }
+    /* Homepage hero now carries the H1, so the intro under it drops to h2. */
+    if (block._type === 'introSection' && sections.some((section) => section._type === 'hero')) {
+      return <Component block={block} headingLevel="h2" />
+    }
     return <Component block={block} />
   })
 }

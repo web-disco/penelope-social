@@ -2,10 +2,7 @@ import { defineField, defineType } from 'sanity'
 import { BlockIcon } from '../blockIcon'
 
 /**
- * Full-viewport image hero with the two action buttons over it.
- *
- * Was `homeHero`. The name baked in where it happens to be used rather than
- * what it is — nothing about the block is homepage-specific.
+ * Full-viewport image hero with overlay H1, supporting copy, and two CTAs.
  */
 export const hero = defineType({
   name: 'hero',
@@ -21,11 +18,27 @@ export const hero = defineType({
       fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
       validation: (Rule) => Rule.required(),
     }),
-    defineField({ name: 'orderOnline', title: 'Order online button', type: 'link' }),
-    defineField({ name: 'reservations', title: 'Reservations button', type: 'link' }),
+    defineField({
+      name: 'heading',
+      title: 'Heading',
+      type: 'string',
+      description: 'The page H1, overlaid on the image.',
+    }),
+    defineField({
+      name: 'body',
+      title: 'Supporting line',
+      type: 'text',
+      rows: 2,
+    }),
+    defineField({ name: 'orderOnline', title: 'Primary button', type: 'link' }),
+    defineField({ name: 'reservations', title: 'Secondary button', type: 'link' }),
   ],
   preview: {
-    select: { alt: 'image.alt' },
-    prepare: ({ alt }) => ({ title: 'Hero', subtitle: alt, media: BlockIcon }),
+    select: { heading: 'heading', alt: 'image.alt' },
+    prepare: ({ heading, alt }) => ({
+      title: heading || 'Hero',
+      subtitle: alt,
+      media: BlockIcon,
+    }),
   },
 })

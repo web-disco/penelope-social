@@ -11,11 +11,20 @@ interface Props {
   ogImage?: any
   canonical?: string
   noIndex?: boolean
-  /** The homepage carries the page loader. */
   isHome?: boolean
+  /** Charcoal nav from first paint (pages without a dark hero). */
+  solidNav?: boolean
 }
 
-const { title, description, ogImage, canonical, noIndex = false, isHome = false } = Astro.props
+const {
+  title,
+  description,
+  ogImage,
+  canonical,
+  noIndex = false,
+  isHome = false,
+  solidNav = false,
+} = Astro.props
 
 const settings = await getSiteSettings()
 const seo = settings.seo ?? {}
@@ -45,6 +54,8 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {noIndex && <meta name="robots" content="noindex" />}
+    <link rel="preload" href="/fonts/SweetSansPro-Medium.otf" as="font" type="font/otf" crossorigin />
+    <link rel="preload" href="/fonts/SweetSansPro-Regular.otf" as="font" type="font/otf" crossorigin />
     <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/webclip.png" />
     <link rel="canonical" href={canonicalUrl} />
@@ -57,28 +68,13 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
 
   <body>
     <div class="page-wrapper relative">
-      <Navbar settings={settings} isHome={isHome} />
+      <Navbar settings={settings} isHome={isHome} solidNav={solidNav} />
 
       <div class="main-wrapper">
         <slot />
       </div>
 
       <Footer settings={settings} isHome={isHome} />
-
-      {
-        isHome && (
-          /* .page-loader — grid on the homepage (Webflow shipped a per-page
-             `display:grid` override); hidden everywhere else. */
-          <div class="page-loader fixed inset-0 z-100 grid place-items-center gap-4 bg-charcoal">
-            <img
-              src="/penelope-logo-lockup-white.svg"
-              loading="lazy"
-              alt="Penelope Social Logo"
-              class="page-loader-logo px-10"
-            />
-          </div>
-        )
-      }
     </div>
 
     <script>

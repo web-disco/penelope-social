@@ -1,66 +1,117 @@
 ---
 /**
- * .navbar > .navbar-wrap + .menu-drawer
- *
- * The drawer is a *child* of the navbar on the live site (it inherits the
- * navbar's z-index context), so the nesting is reproduced exactly here.
- * The hamburger, the drawer slide and the bar-to-X morph are all driven by
- * GSAP in src/scripts/menu.ts, keyed off `.menu-toggle` / `.menu-drawer`.
+ * Navbar — inline links + CTAs on wide screens; hamburger drawer below 1200px.
+ * Pattern copied from Bakehouse. Nav items are the new Social IA;
+ * Order / Reservations still come from site settings.
+ * Scroll hides nothing — the bar stays put and fills charcoal past 48px.
  */
-import { btn, heading } from '../lib/ui'
+import { btn, heading, layout } from '../lib/ui'
 import { imageUrl } from '../lib/image'
 
 interface Props {
   settings: any
   isHome?: boolean
+  solidNav?: boolean
 }
-const { settings, isHome = false } = Astro.props
+const { settings, isHome = false, solidNav = false } = Astro.props
 
 const header = settings.header ?? {}
-const drawerLinks: any[] = header.drawerLinks ?? []
 const logoSrc = imageUrl(header.logo) || '/penelope-logo.svg'
+
+const GIFT_CARDS_URL =
+  'https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard'
+
+const navLinks = [
+  { label: 'Menu', url: '/menus' },
+  { label: 'About', url: '/about' },
+  { label: 'Locations', url: '/locations' },
+  { label: 'Gift Cards', url: GIFT_CARDS_URL, newTab: true },
+  { label: 'Catering', url: '/catering-events' },
+  { label: 'Merch', url: '/merchandise' },
+]
+
+const pathname = Astro.url.pathname.replace(/\/$/, '') || '/'
+const currentHash = Astro.url.hash
+
+const isCurrent = (url: string) => {
+  const [path, hash = ''] = url.split('#')
+  const normalizedPath = path.replace(/\/$/, '') || '/'
+
+  if (hash) {
+    return pathname === normalizedPath && currentHash === `#${hash}`
+  }
+
+  if (normalizedPath === '/') return pathname === '/'
+  return pathname === normalizedPath || pathname.startsWith(`${normalizedPath}/`)
+}
+
+const linkClass =
+  'nav-link whitespace-nowrap text-beige no-underline font-body font-medium uppercase ' +
+  'text-[13px] tracking-[0.06em] leading-[1.4] transition-opacity duration-[350ms] hover:opacity-70'
+
+const navScrolled = solidNav
 ---
 
 <div
-  class="navbar fixed inset-x-0 top-0 bottom-auto z-20 w-full justify-between py-5 wf-sm:py-6"
+  class:list={[
+    'navbar fixed inset-x-0 top-0 bottom-auto z-20 w-full',
+    'transition-[background-color] duration-300 ease-out',
+    navScrolled && 'is-scrolled',
+  ]}
+  data-navbar
+  data-nav-scroll={solidNav ? 'false' : 'true'}
 >
   <div
-    class="navbar-wrap relative mx-auto flex w-full max-w-[1920px] items-center justify-between px-[25px] wf-md:justify-end"
+    class="navbar-wrap navbar__bar relative flex w-full items-stretch justify-between px-[25px]"
   >
-    <!-- .menu-toggle — three bars; GSAP rotates bars 0 and 2 into an X -->
-    <div class="menu-toggle relative z-40 flex cursor-pointer flex-col gap-2 wf-xs:gap-[6px]">
-      <div class="menu-toggle-bar h-0.5 w-10 bg-beige wf-xs:w-[30px]"></div>
-      <div class="menu-toggle-bar h-0.5 w-10 bg-beige wf-xs:w-[30px]"></div>
-      <div class="menu-toggle-bar h-0.5 w-10 bg-beige wf-xs:w-[30px]"></div>
-    </div>
+    <nav class="navbar__links" aria-label="Primary">
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.url}
+            target={link.newTab ? '_blank' : undefined}
+            rel={link.newTab ? 'noopener noreferrer' : undefined}
+            class={linkClass}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
 
-    <a
-      href="/"
-      aria-current={isHome ? 'page' : undefined}
-      class:list={[
-        'navbar-logo-link w-inline-block absolute left-1/2 z-30 -translate-x-1/2',
-        isHome && 'w--current',
-      ]}
+    <button
+      class="navbar__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu-drawer"
+      aria-label="Open menu"
     >
-      <img
-        src={logoSrc}
-        loading="lazy"
-        alt={header.logoAlt ?? 'Penelope Logo'}
-        class="navbar-logo h-full w-[200px] wf-md:w-[180px] wf-xs:w-[120px]"
-      />
-    </a>
+      <span class="navbar__toggle-bar"></span>
+      <span class="navbar__toggle-bar"></span>
+      <span class="navbar__toggle-bar"></span>
+    </button>
 
-    <div class="nav-btn-group flex gap-4">
+    <div class="navbar__actions flex items-center gap-3">
       {
         header.orderOnline?.url && (
-          <a href={header.orderOnline.url} target="_blank" class={btn.navOutline}>
+          <a
+            href={header.orderOnline.url}
+            target={header.orderOnline.newTab ? '_blank' : undefined}
+            rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
+            class:list={[btn.navSolid, 'navbar__cta']}
+          >
             {header.orderOnline.label}
           </a>
         )
       }
       {
         header.reservations?.url && (
-          <a href={header.reservations.url} target="_blank" class={btn.navSolid}>
+          <a
+            href={header.reservations.url}
+            target={header.reservations.newTab ? '_blank' : undefined}
+            rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
+            class:list={[btn.navOutline, 'navbar__cta']}
+          >
             {header.reservations.label}
           </a>
         )
@@ -68,27 +119,342 @@ const logoSrc = imageUrl(header.logo) || '/penelope-logo.svg'
     </div>
   </div>
 
-  <!-- .menu-drawer — slid in from left:-100vw to left:0 by GSAP -->
-  <div
-    data-lenis-prevent
-    class="menu-drawer fixed top-0 left-[-100vw] h-dvh min-h-dvh w-full overflow-auto bg-charcoal no-underline"
+  <a
+    href="/"
+    aria-current={isHome ? 'page' : undefined}
+    class:list={[
+      'navbar-logo-link navbar__logo pointer-events-auto absolute left-1/2 top-1/2 z-[70] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center no-underline',
+      isHome && 'w--current',
+    ]}
   >
-    <div
-      class="menu-drawer-container mx-auto flex h-full w-full max-w-[1920px] items-center justify-start px-[25px]"
+    <img
+      src={logoSrc}
+      loading="eager"
+      alt={header.logoAlt ?? 'Penelope Logo'}
+      class="navbar-logo block w-[128px] wf-md:w-[110px] wf-xs:w-[84px]"
+    />
+    <span
+      aria-hidden="true"
+      class="navbar-logo-sub mt-space-8 font-body font-medium uppercase leading-none tracking-[0.32em] text-beige text-[10px] wf-md:text-[9px] wf-xs:mt-space-4 wf-xs:text-[7px] wf-xs:tracking-[0.26em]"
     >
-      <div class="home-menu-items flex flex-col items-start justify-start gap-[5px]">
-        {
-          drawerLinks.map((link) => (
-            <a
-              href={link.url}
-              target={link.newTab ? '_blank' : undefined}
-              class="menu-drawer-link w-inline-block no-underline"
-            >
-              <h2 class={heading.menuItem}>{link.label}</h2>
-            </a>
-          ))
-        }
-      </div>
-    </div>
+      Social
+    </span>
+  </a>
+</div>
+
+<div
+  id="menu-drawer"
+  class="menu-drawer"
+  data-lenis-prevent
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menu"
+  hidden
+>
+  <div class:list={['menu-drawer__bar', layout.shell]}>
+    <button class="menu-drawer__close" type="button" aria-label="Close menu">
+      <span class="menu-drawer__close-bar"></span>
+      <span class="menu-drawer__close-bar"></span>
+    </button>
+  </div>
+
+  <nav class:list={['menu-drawer__links', layout.shell]} aria-label="Primary">
+    {
+      navLinks.map((link) => (
+        <a
+          href={link.url}
+          target={link.newTab ? '_blank' : undefined}
+          rel={link.newTab ? 'noopener noreferrer' : undefined}
+          aria-current={isCurrent(link.url) ? 'page' : undefined}
+          class:list={['menu-drawer__link', isCurrent(link.url) && 'is-current']}
+          data-menu-link
+        >
+          <span class={heading.menuItem}>{link.label}</span>
+          <span class="menu-drawer__arrow" aria-hidden="true">→</span>
+        </a>
+      ))
+    }
+  </nav>
+
+  <div class:list={['menu-drawer__foot', layout.shell]}>
+    {
+      header.orderOnline?.url && (
+        <a
+          href={header.orderOnline.url}
+          target={header.orderOnline.newTab ? '_blank' : undefined}
+          rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
+          class:list={[btn.secondary, 'menu-drawer__cta']}
+        >
+          {header.orderOnline.label}
+        </a>
+      )
+    }
+    {
+      header.reservations?.url && (
+        <a
+          href={header.reservations.url}
+          target={header.reservations.newTab ? '_blank' : undefined}
+          rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
+          class:list={[btn.secondaryOutline, 'menu-drawer__cta']}
+        >
+          {header.reservations.label}
+        </a>
+      )
+    }
   </div>
 </div>
+
+<style>
+  /* Desktop inline nav from 1536px — Social has more/longer links than Bakehouse,
+     so the 1200px cut-off let Merch sit under the centered logo. */
+  .navbar {
+    min-height: var(--nav-height);
+  }
+
+  .navbar.is-scrolled {
+    background-color: var(--color-charcoal);
+  }
+
+  .navbar__bar {
+    min-height: var(--nav-height);
+  }
+
+  .navbar__links {
+    display: none;
+    align-items: stretch;
+    align-self: stretch;
+    gap: var(--space-24, 24px);
+  }
+
+  .navbar__links > a {
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar__toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-beige);
+    cursor: pointer;
+    gap: 6px;
+  }
+
+  .navbar__toggle-bar {
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+  }
+
+  .navbar__actions {
+    align-self: stretch;
+  }
+
+  .navbar__actions :global(.navbar__cta) {
+    /* btn.nav* already hide below 992px; keep them from 992 up even with hamburger */
+    position: relative;
+    z-index: 30;
+  }
+
+  @media (min-width: 1536px) {
+    .navbar__links {
+      display: flex;
+    }
+
+    .navbar__toggle {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1535px) {
+    .navbar__bar {
+      min-height: var(--nav-height);
+    }
+  }
+
+  /* Full-screen drawer — Bakehouse layout */
+  .menu-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-charcoal);
+    color: var(--color-beige);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    block-size: 100vh;
+    block-size: 100svh;
+  }
+
+  .menu-drawer > * {
+    flex-shrink: 0;
+  }
+
+  .menu-drawer[hidden] {
+    display: none;
+  }
+
+  .menu-drawer__bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 72px;
+    padding-block: var(--space-16, 16px);
+  }
+
+  .menu-drawer__close {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 44px;
+    height: 44px;
+    margin-inline-start: -10px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-beige);
+    cursor: pointer;
+    position: relative;
+  }
+
+  .menu-drawer__close-bar {
+    position: absolute;
+    left: 10px;
+    width: 24px;
+    height: 2px;
+    background: currentColor;
+  }
+
+  .menu-drawer__close-bar:first-child {
+    transform: rotate(45deg);
+  }
+
+  .menu-drawer__close-bar:last-child {
+    transform: rotate(-45deg);
+  }
+
+  .menu-drawer__links {
+    display: flex;
+    flex-direction: column;
+    padding-block-start: var(--space-24, 24px);
+  }
+
+  .menu-drawer__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-16, 16px);
+    min-height: 72px;
+    color: var(--color-beige);
+    text-decoration: none;
+    border-bottom: 1px solid color-mix(in oklab, var(--color-beige) 20%, transparent);
+    transition: opacity 0.35s ease;
+  }
+
+  .menu-drawer__link:hover,
+  .menu-drawer__link.is-current {
+    opacity: 0.75;
+  }
+
+  .menu-drawer__arrow {
+    font-family: var(--font-body);
+    font-size: 22px;
+    line-height: 1;
+    opacity: 0.6;
+  }
+
+  .menu-drawer__foot {
+    margin-block-start: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16, 16px);
+    padding-block: var(--space-32, 32px) calc(var(--space-48, 48px) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .menu-drawer__foot :global(.menu-drawer__cta) {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar__toggle[data-quiet-focus]:focus-visible,
+  .menu-drawer__close[data-quiet-focus]:focus-visible {
+    outline: none;
+  }
+
+  @media (min-width: 1536px) {
+    .menu-drawer {
+      display: none !important;
+    }
+  }
+</style>
+
+<script>
+  const navbar = document.querySelector('[data-navbar]')
+  if (navbar instanceof HTMLElement && navbar.dataset.navScroll === 'true') {
+    const SCROLL_THRESHOLD = 48
+    const syncNav = () => {
+      if (document.documentElement.style.overflow === 'hidden') return
+      navbar.classList.toggle('is-scrolled', window.scrollY > SCROLL_THRESHOLD)
+    }
+    syncNav()
+    window.addEventListener('scroll', syncNav, { passive: true })
+  }
+
+  const menu = document.getElementById('menu-drawer')
+  const toggle = document.querySelector<HTMLButtonElement>('.navbar__toggle')
+  const close = document.querySelector<HTMLButtonElement>('.menu-drawer__close')
+
+  if (menu && toggle && close) {
+    const focusQuietly = (element: HTMLElement, quiet: boolean) => {
+      if (quiet) {
+        element.dataset.quietFocus = ''
+        document.addEventListener('keydown', () => delete element.dataset.quietFocus, { once: true })
+      }
+      element.focus()
+    }
+
+    const setOpen = (open: boolean, quiet = false) => {
+      delete toggle.dataset.quietFocus
+      delete close.dataset.quietFocus
+
+      menu.hidden = !open
+      toggle.setAttribute('aria-expanded', String(open))
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu')
+      document.documentElement.style.overflow = open ? 'hidden' : ''
+
+      const lenis = window.lenis
+      if (lenis) open ? lenis.stop() : lenis.start()
+
+      if (navbar instanceof HTMLElement && navbar.dataset.navScroll === 'true') {
+        navbar.classList.toggle('is-scrolled', open || window.scrollY > 48)
+      }
+
+      focusQuietly(open ? close : toggle, quiet)
+    }
+
+    toggle.addEventListener('click', (event) => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true'
+      setOpen(!isOpen, event.detail > 0)
+    })
+    close.addEventListener('click', (event) => setOpen(false, event.detail > 0))
+
+    menu.querySelectorAll('[data-menu-link]').forEach((link) => {
+      link.addEventListener('click', (event) => setOpen(false, (event as MouseEvent).detail > 0))
+    })
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !menu.hidden) setOpen(false)
+    })
+  }
+</script>

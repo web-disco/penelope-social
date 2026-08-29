@@ -8,7 +8,7 @@ import LineText from '../LineText.astro'
 
 interface Props {
   block: any
-  /** The homepage carries the site's only H1 here; inner pages do too. */
+  /** Homepage intro sits under the hero H1, so PageBuilder passes h2 there. */
   headingLevel?: 'h1' | 'h2'
 }
 const { block, headingLevel = 'h1' } = Astro.props

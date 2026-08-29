@@ -22,6 +22,8 @@
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/6738fc337434df480308980c_penelope-social-gathering.avif",
           "alt": "People having dinner at Penelope Social"
         },
+        "heading": "Sourdough Bakery & Restaurant in Vaughan.",
+        "body": "New York-style sourdough pizza, artisanal handhelds, and creative cocktails, made in our micro bakery.",
         "orderOnline": {
           "_type": "link",
           "label": "Order Online",
@@ -61,6 +63,12 @@
         "_type": "menuCards",
         "_key": "menus",
         "heading": "Explore our menus",
+        "intro": "Lunch, dinner, the bar, and catering — all made in our sourdough bakery.",
+        "cta": {
+          "_type": "link",
+          "label": "View all menus",
+          "url": "/menus"
+        },
         "cards": [
           {
             "_type": "menuCard",

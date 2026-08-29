@@ -40,8 +40,9 @@ export const siteSettings = defineType({
         defineField({ name: 'reservations', title: 'Reservations button', type: 'link' }),
         defineField({
           name: 'drawerLinks',
-          title: 'Menu drawer links',
+          title: 'Nav links',
           type: 'array',
+          description: 'Shown in the desktop bar and the mobile menu.',
           of: [defineArrayMember({ type: 'link' })],
         }),
       ],

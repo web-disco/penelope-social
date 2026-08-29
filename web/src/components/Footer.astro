@@ -2,8 +2,8 @@
 /**
  * .footer — newsletter band (green) + the four-column footer grid.
  *
- * The homepage variant omits `.is-not-home`, which only changes the mobile
- * bottom padding (the homepage has a fixed order/reservations bar at ≤767px).
+ * `.is-not-home` keeps the mobile bottom padding tight now that the homepage
+ * no longer pins an order/reservations bar.
  *
  * Grid placement note: Webflow keyed the footer's column spans to `#w-node-*`
  * IDs. All of them resolve to `span 1 / span 1` (the grid default) except the
@@ -57,7 +57,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
 <div
   class:list={[
     'footer -z-[1] mt-20 bg-charcoal',
-    isHome ? 'wf-sm:pb-20' : 'is-not-home wf-sm:pb-5',
+    'is-not-home wf-sm:pb-5',
   ]}
 >
   <!-- .footer-newsletter — the green band -->

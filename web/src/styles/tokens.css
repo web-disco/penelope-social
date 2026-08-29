@@ -1,0 +1,83 @@
+/**
+ * Penelope Social design tokens — copied from Bakehouse.
+ * Headings are Sweet Sans Medium; canvas is a lighter cream.
+ */
+
+:root {
+  /* Colour */
+  --color-beige: #f7f3df;
+  --color-cream: #faf8ef; /* lighter canvas — beige washed toward white */
+  --color-charcoal: #282629;
+  --color-green: #2e442e;
+  --color-accent: var(--color-green);
+  --color-clear: #fff0;
+  --color-brand-transparent: var(--color-clear);
+
+  /* Type — Bakehouse headings (Sweet Sans Medium, desktop px) */
+  --font-size-display-xl: 64px;
+  --font-size-display-l: 40px;
+  --font-size-display-m: 36px;
+  --font-size-display-s: 28px;
+  --font-size-heading: 24px;
+  --font-size-title: 20px;
+  --font-size-menu-item: 42px; /* Sweet Sans drawer links */
+  --font-size-faq: 22px;
+  --font-size-intro: 20px;
+  --font-size-body-lg: 18px;
+  --font-size-body: 18px;
+  --font-size-label: 13px;
+  --font-size-caption: 12px;
+
+  /* display-xl responsive */
+  --font-size-display-xl-md: 48px;
+  --font-size-display-xl-sm: 40px;
+  --font-size-display-xl-xs: 34px;
+
+  --font-size-display-l-md: 34px;
+  --font-size-display-l-sm: 30px;
+  --font-size-display-l-xs: 26px;
+
+  --font-size-display-s-sm: 24px;
+  --font-size-display-s-xs: 22px;
+
+  --font-size-intro-md: 18px;
+  --font-size-intro-sm: 17px;
+  --font-size-intro-xs: 16px;
+
+  --font-size-body-xs: 16px;
+
+  /* Space scale (px) */
+  --space-4: 4px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-48: 48px;
+  --space-64: 64px;
+  --space-80: 80px;
+  --space-96: 96px;
+
+  /* Semantic spacing */
+  --section-pad-y: var(--space-80);
+  --section-pad-y-sm: 60px;
+  --section-gap: var(--space-48);
+  --gutter: 25px;
+  --gutter-lg: 25px;
+  --gutter-sm: 25px;
+  --stack-tight: var(--space-8);
+  --stack-tight-lg: var(--space-16);
+  --menu-category-mt: var(--spacing-section-pad, 60px);
+  --menu-category-mb: var(--spacing-section-pad, 60px);
+  --menu-grid-col-gap: var(--space-48);
+  --menu-grid-row-gap: 40px;
+
+  /* Radius soft — 0 / 4 / 8 */
+  --radius-none: 0;
+  --radius-soft-sm: 4px;
+  --radius-soft: 8px;
+
+  /* Fonts */
+  --font-heading: 'Sweet Sans Pro', 'Sweet Sans Fallback', Arial, sans-serif;
+  --font-body: 'Sweet Sans Pro', 'Sweet Sans Fallback', Arial, sans-serif;
+}
