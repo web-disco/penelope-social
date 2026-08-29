@@ -49,25 +49,20 @@ const { sections = [] } = Astro.props
       console.warn(`[PageBuilder] no component registered for section type "${block._type}"`)
       return null
     }
+    const hasPageHero = sections.some((section) => section._type === 'pageHero')
     /* Homepage hero is the H1. The old “Cafe and bar in Woodbridge” intro is gone. */
     if (block._type === 'introSection' && sections.some((section) => section._type === 'hero')) {
       return null
     }
-    /* /menus is one H2 + lede + tiles. Drop the extra cream pageHeading. */
-    if (
-      block._type === 'pageHeading' &&
-      Astro.url.pathname.replace(/\/$/, '') === '/menus'
-    ) {
+    /* Title + lede live on the photo. Never a second cream H1. */
+    if (block._type === 'pageHeading' && hasPageHero) {
       return null
     }
-    /* Catering (and any page hero with an on-image H1) should not repeat that title. */
-    if (block._type === 'introSection') {
-      const pageHero = sections.find((section) => section._type === 'pageHero')
-      const heroHasTitle =
-        Boolean(pageHero?.heading) || Astro.url.pathname.replace(/\/$/, '') === '/catering-events'
-      if (heroHasTitle) {
+    if (block._type === 'introSection' && hasPageHero) {
+      if (block.ctas?.length) {
         return <Component block={{ ...block, heading: '' }} headingLevel="h2" />
       }
+      return null
     }
     /* Menu hub and menu pages have no FAQ block. */
     if (

@@ -5,7 +5,6 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
-import PageHeading from '../../components/sections/PageHeading.astro'
 import MenuCategories from '../../components/MenuCategories.astro'
 import { getAll } from '../../lib/data'
 import { resolveSeo } from '../../data/seo'
@@ -79,14 +78,7 @@ const canonical = `${SITE_ORIGIN}${path}`
   canonical={canonical}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
-  <PageHero block={{ image: menu.banner }} />
-  <PageHeading
-    block={{
-      heading: headingText,
-      intro: introText,
-      align: 'left',
-    }}
-  />
+  <PageHero block={{ image: menu.banner, heading: headingText, intro: introText }} />
   {
     isCateringMenu && (
       <section class="catering-menu-note">

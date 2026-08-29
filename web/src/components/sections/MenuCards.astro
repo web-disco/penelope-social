@@ -32,14 +32,18 @@ const cards = (authored.length ? authored : homeMenusFallback.cards).map((card: 
 
 const staleHeading = /woodbridge|explore our menus|menus at penelope/i.test(block.heading ?? '')
 const staleIntro = /woodbridge|hawkview|125\s|bakehouse/i.test(block.intro ?? '')
-const sectionHeading = isHome || isMenusHub || staleHeading
-  ? homeMenusFallback.heading
-  : displayHeading(block.heading)
-const sectionIntro = isHome
-  ? homeMenusFallback.intro
-  : isMenusHub || staleIntro
-    ? homeMenusFallback.hubIntro
-    : restaurantCopy(block.intro)
+const sectionHeading = isMenusHub
+  ? ''
+  : isHome || staleHeading
+    ? homeMenusFallback.heading
+    : displayHeading(block.heading)
+const sectionIntro = isMenusHub
+  ? ''
+  : isHome
+    ? homeMenusFallback.intro
+    : staleIntro
+      ? homeMenusFallback.hubIntro
+      : restaurantCopy(block.intro)
 const ctaUrl = block.cta?.url || homeMenusFallback.ctaUrl
 const ctaLabel = /view all menus/i.test(block.cta?.label ?? '')
   ? homeMenusFallback.ctaLabel

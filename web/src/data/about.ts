@@ -10,7 +10,7 @@ export const aboutMeta = PAGE_SEO['/about']!
 export const aboutPage = {
   heading: 'About Penelope Social',
   subheading:
-    'This is a Woodbridge cafe and bar. Lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
+    'A Woodbridge cafe and bar, with lunch, dinner, and drinks on Bakehouse sourdough.',
   paragraphs: [
     'We serve lunch, dinner, and drinks, with that sourdough as sandwiches, pizza, and bread.',
     'Three brothers, Franco, Vince, and Giuliano, built the room around good bread and a proper bar.',

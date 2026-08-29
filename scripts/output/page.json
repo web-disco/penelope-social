@@ -25,7 +25,9 @@
           "_type": "image",
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe7a6af381401438e4b5d_menus.avif",
           "alt": "Image of Lunch menu platter"
-        }
+        },
+        "heading": "On the menu",
+        "intro": "Focaccia sandwiches, pizza, shareable plates, and cocktails, plus trays when you want them."
       },
       {
         "_type": "menuCards",
@@ -338,13 +340,15 @@
           "_type": "image",
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bffc95f3addba8463d026_lunch-menu-banner.avif",
           "alt": "Image of Lunch menu platter"
-        }
+        },
+        "heading": "Get in touch",
+        "intro": "Questions, a table, or an event. Call, email, or write us."
       },
       {
         "_type": "introSection",
         "_key": "intro",
-        "heading": "Get in touch",
-        "intro": "Questions, a table, or an event \u2014 call, email, or write us.",
+        "heading": "",
+        "intro": "",
         "ctas": []
       },
       {
@@ -427,7 +431,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "Merch | Penelope Social",
-      "metaDescription": "Hoodies, tees, and totes from Penelope Social \u2014 the Woodbridge cafe and bar.",
+      "metaDescription": "Hoodies, tees, and totes from Penelope Social, the Woodbridge cafe and bar.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
@@ -442,15 +446,17 @@
           "_type": "image",
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe645dd6506bf32e0602c_penelope-merch-2.avif",
           "alt": "Photo of Penlope Merch"
-        }
+        },
+        "heading": "Merch",
+        "intro": "Hoodies, tees, and totes from the Woodbridge cafe and bar."
       },
       {
         "_type": "pageHeading",
         "_key": "heading",
         "variant": "center",
         "align": "center",
-        "heading": "Penelope Merch",
-        "intro": "Browse Penelope Social's exclusive collection of tees, hoodies, and totes. Featuring our bold logo, these items are designed for both comfort and style, available in multiple colours.",
+        "heading": "",
+        "intro": "",
         "quickLinks": []
       },
       {

@@ -22,8 +22,8 @@
       "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe4fb0bfc3f62e7c7cc01_lunch-banner.avif",
       "alt": "Image of Lunch menu platter"
     },
-    "heading": "Lunch menu",
-    "intro": "Focaccia sandwiches, pizza, and salads.\n\nMonday to Saturday, 10am to 3pm",
+    "heading": "Lunch",
+    "intro": "Focaccia sandwiches, pizza, and salads, Monday to Saturday, 10am to 3pm.",
     "categories": [
       {
         "_type": "menuCategory",
@@ -297,8 +297,8 @@
       "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bffb125533c6e03daf470_dinner-menu-banner.avif",
       "alt": "Image of dinner plate"
     },
-    "heading": "Dinner menu",
-    "intro": "Pizza, handhelds, and shareable plates.\n\nMonday to Saturday, 5pm to close",
+    "heading": "Dinner",
+    "intro": "Pizza, handhelds, and shareable plates, Monday to Saturday from 5pm.",
     "categories": [
       {
         "_type": "menuCategory",
@@ -565,8 +565,8 @@
       "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe4166312cea8be54d250_penelope-bar-2.avif",
       "alt": "Image of Bar Tender"
     },
-    "heading": "Bar menu",
-    "intro": "Cocktails, wine, and a late sit.",
+    "heading": "Bar",
+    "intro": "Cocktails, wine, and a late sit, from 5pm Monday to Saturday.",
     "categories": [
       {
         "_type": "menuCategory",
@@ -725,7 +725,7 @@
       "alt": "Image of Bar Tender"
     },
     "heading": "Catering tray menu",
-    "intro": "Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8 to 10. Prices are below. Prefer 24 hours notice. Send the order on Catering and events.",
+    "intro": "Party pizzas, focaccia sandwiches, breads, and salads for 8 to 10.",
     "categories": [
       {
         "_type": "menuCategory",

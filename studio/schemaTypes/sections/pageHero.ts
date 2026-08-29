@@ -25,14 +25,14 @@ export const pageHero = defineType({
       name: 'heading',
       title: 'Heading',
       type: 'string',
-      description: 'Optional H1 painted on the photo (Bakehouse inner-page pattern).',
+      description: 'H1 on the photo (Bakehouse inner-page pattern). No period at the end.',
     }),
     defineField({
       name: 'intro',
       title: 'Intro',
       type: 'text',
       rows: 3,
-      description: 'Optional lede under the on-image heading. No street address.',
+      description: 'One short sentence under the on-image H1. No em dash. No street address.',
     }),
   ],
   preview: {

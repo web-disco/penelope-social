@@ -8,9 +8,11 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
 import { getAll } from '../../lib/data'
 import { resolveSeo } from '../../data/seo'
+import { restaurantCopy } from '../../data/copy'
+import { pageBannerCopy } from '../../data/banners'
 import { breadcrumbSchema, pageGraph, restaurantSchema } from '../../lib/schema'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
-import { container, heading, btn } from '../../lib/ui'
+import { container, btn } from '../../lib/ui'
 
 export async function getStaticPaths() {
   const products = await getAll<any>('merchProduct')
@@ -40,7 +42,13 @@ const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charc
   noIndex={product.seo?.noIndex}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
-  <PageHero block={{ image: product.banner }} />
+  <PageHero
+    block={{
+      image: product.banner,
+      heading: product.title,
+      intro: pageBannerCopy['/merchandise']?.intro,
+    }}
+  />
 
   <div class="section-merch-details">
     <div class={container}>
@@ -77,12 +85,11 @@ const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charc
 
         <div class="merch-details-content">
           <div class="merch-details-content-wrap sticky top-[150px]">
-            <h1 class={heading.left}>{product.title}</h1>
             <div class="merch-details-price-wrap flex pb-5 wf-md:mt-5 wf-sm:mt-0">
               <h2 class={price}>$</h2>
               <h2 class={price}>{product.price}</h2>
             </div>
-            <p>{product.description}</p>
+            <p>{restaurantCopy(product.description)}</p>
             {
               product.cta?.url && (
                 <div class="merch-details-link mt-10">

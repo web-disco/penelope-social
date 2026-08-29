@@ -1,10 +1,11 @@
 ---
 /**
- * Inner-page banner. Image-only on menu pages; H1 on the photo for
- * catering-events (Bakehouse /catering pattern).
+ * Inner-page banner. Always paints H1 + lede on the photo
+ * (Bakehouse catering style). Never a second cream-section title.
  */
 import BannerHero from './BannerHero.astro'
-import { imageUrl, imageAlt } from '../../lib/image'
+import { imageAlt } from '../../lib/image'
+import { bannerCopyFor } from '../../data/banners'
 
 interface Props {
   block: any
@@ -12,35 +13,14 @@ interface Props {
 const { block } = Astro.props
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
-const isCatering = path === '/catering-events'
-const headingText =
-  block.heading || (isCatering ? 'Catering and events' : undefined)
-const intro =
-  block.intro ||
-  (isCatering
-    ? 'Trays to-go or a night in the room, with pizza, focaccia, drinks, and a table we will set.'
-    : undefined)
+const copy = bannerCopyFor(path, { heading: block.heading, intro: block.intro })
 ---
 
-{
-  headingText ? (
-    <BannerHero
-      image={block.image}
-      src={block.src}
-      alt={block.alt || imageAlt(block.image)}
-      headingText={headingText}
-      intro={intro}
-      objectPosition={block.objectPosition}
-    />
-  ) : (
-    <div class="page-banner relative h-[550px] w-full wf-md:h-[350px] wf-sm:h-[300px] wf-xs:h-[225px]">
-      <img
-        src={imageUrl(block.image)}
-        loading="lazy"
-        alt={imageAlt(block.image)}
-        class="page-banner-image relative mb-20 h-full w-full object-cover"
-      />
-      <div class="page-banner-overlay absolute inset-0 bg-[#0000004d]"></div>
-    </div>
-  )
-}
+<BannerHero
+  image={block.image}
+  src={block.src}
+  alt={block.alt || imageAlt(block.image)}
+  headingText={copy.heading}
+  intro={copy.intro}
+  objectPosition={block.objectPosition}
+/>
