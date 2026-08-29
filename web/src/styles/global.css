@@ -212,11 +212,6 @@
     border-radius: 0;
   }
 
-  /* GSAP SplitText line wrapper — from the site's <style> block */
-  .line {
-    overflow: hidden;
-  }
-
   /* NOTE: the live site ships a `.home-menu-btn::after` underline rule in its
      homepage embed, but nothing carries that class (the buttons are
      `.menu-btn`), so it renders nothing — verified against the live DOM, where
