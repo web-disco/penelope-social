@@ -13,7 +13,7 @@ const address = `${woodbridgeNap.street}, ${woodbridgeNap.city}, ${woodbridgeNap
 export const homeFaq: FaqItem[] = [
   {
     question: 'Where is Penelope Social?',
-    answer: `Penelope Social is the restaurant at <a href="/locations/woodbridge">${address}</a>. Phone <a href="tel:${woodbridgeNap.phoneDigits}">${woodbridgeNap.phone}</a>. Woodbridge is the locality; we serve the wider Vaughan area.`,
+    answer: `Penelope Social is at <a href="/locations/woodbridge">${address}</a>. Phone <a href="tel:${woodbridgeNap.phoneDigits}">${woodbridgeNap.phone}</a>.`,
   },
   {
     question: 'What are the cafe and bar hours?',
@@ -25,20 +25,20 @@ export const homeFaq: FaqItem[] = [
     answer: `Yes. <a href="${RESERVATIONS_PATH}">Book a table</a> on Toast for dinner and the bar. Cafe lunch is mostly walk-in.`,
   },
   {
-    question: 'Is this the same as Penelope Bakehouse?',
-    answer: `Penelope Social is the Woodbridge cafe and bar at 125 Hawkview Blvd. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria at 71 Howden Rd — that is where the sourdough is baked. We serve that bread here.`,
+    question: 'How is Penelope Bakehouse related?',
+    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria. We serve that sourdough here. <a href="/sourdough-bakery">Social and Bakehouse</a> has both places.`,
   },
   {
     question: 'Where is the Penelope Bakehouse menu?',
-    answer: `The Scarborough bakehouse menu, hours, and online order live on <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. This site is Penelope Social. <a href="/sourdough-bakery">Social and Bakehouse</a> explains the two places.`,
+    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a> — hours and online order too.`,
   },
   {
     question: 'Do you offer catering and events?',
-    answer: `Yes. Catering trays and private events are booked on our <a href="${CATERING_EVENTS_URL}">catering and events</a> page. The tray menu lives at <a href="${CATERING_MENU_URL}">/menus/catering</a>. We prefer 24 hours' notice for catering.`,
+    answer: `Yes. Book trays or a night in the room on <a href="${CATERING_EVENTS_URL}">catering and events</a>. The tray list is at <a href="${CATERING_MENU_URL}">/menus/catering</a>. We prefer 24 hours' notice for catering.`,
   },
   {
     question: 'Can I order online?',
-    answer: `Yes. <a href="${ORDER_ONLINE_URL}" target="_blank" rel="noopener noreferrer">Order online</a> through Toast for pickup, or come in at 125 Hawkview Blvd.`,
+    answer: `Yes. <a href="${ORDER_ONLINE_URL}" target="_blank" rel="noopener noreferrer">Order online</a> through Toast for pickup.`,
   },
 ]
 
@@ -66,7 +66,7 @@ export const aboutFaq: FaqItem[] = [
 export const cateringFaq: FaqItem[] = [
   {
     question: 'What is the difference between catering and events?',
-    answer: `Catering is food to-go — trays from the <a href="${CATERING_MENU_URL}">catering menu</a>. Events are hosted here at the Woodbridge restaurant: birthdays, work dinners, and private nights. Book both on this page.`,
+    answer: `Catering is food to-go — trays from the <a href="${CATERING_MENU_URL}">catering menu</a>. Events are hosted here: birthdays, work dinners, and private nights. Book both on this page.`,
   },
   {
     question: 'How much notice do you need?',
@@ -82,11 +82,11 @@ export const cateringFaq: FaqItem[] = [
   },
 ]
 
-/** Unique to /menus/catering — tray list, not the events booking page. */
+/** Unique to /menus/catering — tray list and prices. */
 export const cateringMenuFaq: FaqItem[] = [
   {
-    question: 'Is this the catering and events booking page?',
-    answer: `This page is the tray list and prices. To order trays or book a private night in the restaurant, go to <a href="${CATERING_EVENTS_URL}">Catering and events</a>.`,
+    question: 'Where do I book catering or an event?',
+    answer: `This page is the tray list and prices. Book trays or a private night on <a href="${CATERING_EVENTS_URL}">Catering and events</a>.`,
   },
   {
     question: 'What comes on a catering tray?',
@@ -98,8 +98,8 @@ export const cateringMenuFaq: FaqItem[] = [
     answer: `We prefer 24 hours’ notice. Send the order on <a href="${CATERING_EVENTS_URL}">Catering and events</a> and choose “Catering”.`,
   },
   {
-    question: 'Is this the Penelope Bakehouse catering menu?',
-    answer: `These trays come from Penelope Social’s Woodbridge kitchen. For the Scarborough bakehouse menu, go to <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>.`,
+    question: 'Where is the Bakehouse menu?',
+    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. These trays come from the Social kitchen.`,
   },
 ]
 
@@ -134,32 +134,32 @@ export const woodbridgeFaq: FaqItem[] = [
     answer: `Yes. <a href="${RESERVATIONS_PATH}">Book a table</a> on Toast.`,
   },
   {
-    question: 'Is this the same as Penelope Bakehouse?',
-    answer: `This is the Woodbridge restaurant. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse where the bread is baked.`,
+    question: 'How is Penelope Bakehouse related?',
+    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse where the bread is baked. We serve it here.`,
   },
 ]
 
 export const scarboroughFaq: FaqItem[] = [
   {
-    question: 'Is there a Penelope Social dining room in Scarborough?',
-    answer: `Penelope Bakehouse at 71 Howden Rd is a bakehouse and focacceria — counter service, loaves, sandwiches, and pizza by the slice. Dinner and the bar are at <a href="/locations/woodbridge">Penelope Social in Woodbridge</a>.`,
+    question: 'What is Penelope Bakehouse?',
+    answer: `A bakehouse and focacceria at 71 Howden Rd — loaves, sandwiches, and pizza by the slice. Dinner and the bar are at <a href="/locations/woodbridge">Penelope Social</a>.`,
   },
   {
     question: 'Where do I order Bakehouse bread?',
-    answer: `Visit <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a> for the Scarborough bakehouse menu, hours, and online order.`,
+    answer: `Visit <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a> for the menu, hours, and online order.`,
   },
   {
     question: 'Does Social serve Bakehouse bread?',
     answer:
-      'Yes. Sourdough for the Woodbridge restaurant starts at the Scarborough bakehouse and is served here as sandwiches, pizza, and loaves on the menu.',
+      'Yes. Sourdough starts at the Scarborough bakehouse and is served at Social as sandwiches, pizza, and loaves on the menu.',
   },
 ]
 
-/** /sourdough-bakery — bakehouse-confusion queries, not About intent. */
+/** /sourdough-bakery — bakehouse-confusion queries. */
 export const sourdoughFaq: FaqItem[] = [
   {
-    question: 'Is this Penelope Bakehouse?',
-    answer: `This page is on Penelope Social, the Woodbridge cafe and bar. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria at 71 Howden Rd.`,
+    question: 'How are Social and Bakehouse related?',
+    answer: `This page is on Penelope Social, the cafe and bar. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria.`,
   },
   {
     question: 'Where is the Penelope Bakehouse menu?',
@@ -167,10 +167,10 @@ export const sourdoughFaq: FaqItem[] = [
   },
   {
     question: 'Where is the bakery in Scarborough?',
-    answer: `71 Howden Rd, Scarborough. That is Penelope Bakehouse. Penelope Social is at 125 Hawkview Blvd, Woodbridge.`,
+    answer: `71 Howden Rd, Scarborough — Penelope Bakehouse. Penelope Social is at <a href="/locations/woodbridge">${address}</a>.`,
   },
   {
-    question: 'Do you bake the sourdough at the restaurant?',
+    question: 'Where is the sourdough baked?',
     answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social — sandwiches, pizza, and bread on the table.`,
   },
 ]

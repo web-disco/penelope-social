@@ -23,7 +23,7 @@
       "alt": "Image of Lunch menu platter"
     },
     "heading": "Lunch menu",
-    "intro": "Lunch at Penelope Social in Woodbridge. Focaccia sandwiches, New York-style pizzas, and salads.\n\nMonday–Saturday 10:00am–3:00pm",
+    "intro": "Focaccia sandwiches, pizza, and salads.\n\nMonday–Saturday 10:00am–3:00pm",
     "categories": [
       {
         "_type": "menuCategory",
@@ -298,7 +298,7 @@
       "alt": "Image of dinner plate"
     },
     "heading": "Dinner menu",
-    "intro": "Dinner at Penelope Social in Woodbridge. Gut-friendly pizzas, handhelds, and shareable plates.\n\nMonday–Saturday 5:00pm–close",
+    "intro": "Pizza, handhelds, and shareable plates.\n\nMonday–Saturday 5:00pm–close",
     "categories": [
       {
         "_type": "menuCategory",
@@ -566,7 +566,7 @@
       "alt": "Image of Bar Tender"
     },
     "heading": "Bar menu",
-    "intro": "Skip the traffic and sit at the bar in Woodbridge. Cocktails to match the night — bold or light.",
+    "intro": "Cocktails, wine, and a late sit.",
     "categories": [
       {
         "_type": "menuCategory",

@@ -15,6 +15,20 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
     'Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.',
   'Lunch, dinner, the bar, and catering — from the Woodbridge kitchen, on Bakehouse sourdough.':
     'Lunch, dinner, the bar, and catering — on Bakehouse sourdough.',
+  'Focaccia sandwiches at lunch, cocktails after work, and pizza at dinner — all at 125 Hawkview Blvd, Woodbridge.':
+    'Focaccia sandwiches at lunch, pizza at dinner, and cocktails at the bar.',
+  "We'd love to hear from you. Questions, a table, or an event — call, email, or visit us at 125 Hawkview Blvd, Woodbridge.":
+    'Questions, a table, or an event — call, email, or write us.',
+  'Lunch at Penelope Social in Woodbridge. Focaccia sandwiches, New York-style pizzas, and salads.\n\nMonday–Saturday 10:00am–3:00pm':
+    'Focaccia sandwiches, pizza, and salads.\n\nMonday–Saturday 10:00am–3:00pm',
+  'Dinner at Penelope Social in Woodbridge. Gut-friendly pizzas, handhelds, and shareable plates.\n\nMonday–Saturday 5:00pm–close':
+    'Pizza, handhelds, and shareable plates.\n\nMonday–Saturday 5:00pm–close',
+  'Skip the traffic and sit at the bar in Woodbridge. Cocktails to match the night — bold or light.':
+    'Cocktails, wine, and a late sit.',
+  'Explore our menus — focaccia sandwiches, pizza, shareables, and handcrafted cocktails at the Woodbridge restaurant.':
+    'Focaccia sandwiches, pizza, shareables, and cocktails.',
+  'Explore our menus — focaccia sandwiches, pizza, shareables, and handcrafted cocktails at the Woodbridge restaurant.\n‍':
+    'Focaccia sandwiches, pizza, shareables, and cocktails.',
   'Birthdays, work dinners, and nights in the Woodbridge restaurant. Artisanal dishes, handcrafted cocktails, and a room we will set for you. Catering trays if you want the food at yours.':
     'Birthdays, work dinners, and nights in the room. Food, drinks, and a table we will set.',
   'Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you — food, drinks, and the room.':
@@ -47,7 +61,7 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Penelope Social Merch Vaughan | Shop Exclusive Apparel':
     'Merch | Penelope Social',
   'About Penelope Social Vaughan | Neighborhood Gem for Food & Drinks':
-    'About Penelope Social | Woodbridge restaurant',
+    'About Penelope Social | Woodbridge cafe and bar',
   'About\nPenelope Social': 'About Penelope Social',
   'reservations': 'Reservations',
   'stay in the loop.': 'Stay in the loop',

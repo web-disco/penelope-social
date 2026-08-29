@@ -1,8 +1,8 @@
 # Penelope Social
 
-Penelope Social is a restaurant in Woodbridge, Ontario: cafe by day, bar by night.
+Penelope Social is a Woodbridge cafe and bar: lunch, dinner, and drinks, serving Bakehouse sourdough.
 
-It is not a Vaughan bakery. Penelope Bakehouse is the sister micro-bakery in Scarborough.
+Penelope Bakehouse is the Scarborough bakehouse and focacceria.
 
 ## Location (Google Business / NAP)
 
@@ -39,7 +39,7 @@ Bar: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am
 - Locations: https://penelopesocial.com/locations
 - Woodbridge restaurant: https://penelopesocial.com/locations/woodbridge
 - Scarborough bakehouse (sister): https://penelopesocial.com/locations/scarborough
-- Sourdough / two Penelopes: https://penelopesocial.com/sourdough-bakery
+- Bakehouse sourdough, served here: https://penelopesocial.com/sourdough-bakery
 
 ## Reservations
 
@@ -59,10 +59,10 @@ Gift cards: https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-b
 Penelope Bakehouse — 71 Howden Rd, Scarborough, ON M1R 3C7
 https://penelopebakehouse.com
 Phone (647) 812-0104
-Social serves Bakehouse sourdough. Bakehouse is not a second Social dining room.
+Social serves Bakehouse sourdough. Bakehouse is the Scarborough bakehouse and focacceria.
 
 ## Sitemap
 
 Submit only https://penelopesocial.com/sitemap-index.xml on sc-domain:penelopesocial.com.
-/sitemap.xml 301s to the index. It is not a second sitemap to submit.
+/sitemap.xml 301s to the index. Submit the index only.
 Keep /contact in the sitemap. Request indexing for /contact is a GSC click after submit.

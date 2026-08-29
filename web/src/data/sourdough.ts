@@ -16,7 +16,7 @@ export const sourdoughPage = {
   },
   social: {
     heading: 'Eat and drink here',
-    body: 'Penelope Social is the Woodbridge cafe and bar. This is where you sit down with that bread — lunch, dinner, and drinks.',
+    body: 'This is the cafe and bar — lunch, dinner, and drinks on Bakehouse sourdough.',
     image: {
       src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/6738fc337434df480308980c_penelope-social-gathering.avif',
       alt: 'Dinner service at Penelope Social',

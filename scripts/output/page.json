@@ -33,7 +33,7 @@
         "variant": "default",
         "align": "center",
         "heading": "Menus at Penelope Social",
-        "intro": "Focaccia sandwiches at lunch, cocktails after work, and pizza at dinner \u2014 all at 125 Hawkview Blvd, Woodbridge.",
+        "intro": "Focaccia sandwiches at lunch, pizza at dinner, and cocktails at the bar.",
         "quickLinks": []
       },
       {
@@ -128,7 +128,7 @@
         "_type": "introSection",
         "_key": "intro",
         "heading": "About Penelope Social",
-        "intro": "Penelope Social is the restaurant in Woodbridge \u2014 cafe by day, kitchen and bar at night \u2014 at 125 Hawkview Blvd. We serve lunch, dinner, and drinks. The sourdough on the table comes from Penelope Bakehouse, our Scarborough micro-bakery.",
+        "intro": "A Woodbridge cafe and bar. Lunch, dinner, and drinks \u2014 sourdough from Penelope Bakehouse.",
         "ctas": []
       },
       {
@@ -346,7 +346,7 @@
         "_type": "introSection",
         "_key": "intro",
         "heading": "Get in touch",
-        "intro": "We'd love to hear from you. Questions, a table, or an event \u2014 call, email, or visit us at 125 Hawkview Blvd, Woodbridge.",
+        "intro": "Questions, a table, or an event \u2014 call, email, or write us.",
         "ctas": []
       },
       {
