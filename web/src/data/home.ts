@@ -1,8 +1,8 @@
 /** Homepage copy. Repo wins over address-y Sanity so staging matches Bakehouse mood. */
 
 export const homeHeroFallback = {
-  heading: "Woodbridge's Cafe and Bar",
-  body: 'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
+  heading: 'Good food, better company',
+  body: 'Penelope Social, a cafe and bar in Woodbridge.',
 }
 
 export const homeMenusFallback = {
