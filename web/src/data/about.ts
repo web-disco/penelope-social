@@ -12,8 +12,8 @@ export const aboutPage = {
   subheading:
     'A Woodbridge cafe and bar, with lunch, dinner, and drinks.',
   paragraphs: [
-    'We serve lunch, dinner, and drinks, with that sourdough as sandwiches, pizza, and bread.',
-    'Three brothers, Franco, Vince, and Giuliano, built the room around good bread and a proper bar.',
+    'A cafe and bar in Woodbridge. Cafe by day, kitchen and bar at night. Lunch, dinner, and drinks, with Bakehouse sourdough as sandwiches, pizza, and bread on the table.',
+    'Franco, Vince, and Giuliano built Social around good sourdough bread and a proper bar.',
   ],
   timeline: {
     heading: 'How Penelope started',
