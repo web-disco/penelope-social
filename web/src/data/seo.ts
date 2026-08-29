@@ -95,13 +95,6 @@ export function resolveSeo(
   cms?: { metaTitle?: string; metaDescription?: string },
 ): SeoMeta {
   const path = normalizePath(pathname)
-  // Leave /sourdough-bakery meta exactly as authored until Joshua decides.
-  if (path === '/sourdough-bakery') {
-    return {
-      title: cms?.metaTitle?.trim() || 'Best Sourdough Bakery in Vaughan | Penelope Social',
-      description: cms?.metaDescription?.trim() || '',
-    }
-  }
   const defaults = PAGE_SEO[path]
   const cmsTitle = cms?.metaTitle?.trim()
   const cmsDescription = cms?.metaDescription?.trim()

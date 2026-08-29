@@ -1,8 +1,8 @@
 ---
 /**
  * Static pages driven by the page builder: /contact, /catering-events,
- * /sourdough-bakery, /merchandise, /menus.
- * /about is a dedicated page (Bakehouse structure). Do not rewrite /sourdough-bakery.
+ * /merchandise, /menus.
+ * /about is a dedicated page. /sourdough-bakery 301s there — do not emit HTML.
  */
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
@@ -13,33 +13,30 @@ import { cateringFaq, contactFaq } from '../data/faq'
 import { breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
 
 export async function getStaticPaths() {
-  const dedicated = new Set(['about'])
+  const retired = new Set(['about', 'sourdough-bakery'])
   const pages = await getAll<any>('page')
   return pages
-    .filter((page) => page.slug?.current && !dedicated.has(page.slug.current))
+    .filter((page) => page.slug?.current && !retired.has(page.slug.current))
     .map((page) => ({ params: { slug: page.slug.current }, props: { page } }))
 }
 
 const { page } = Astro.props
 const slug = page.slug.current as string
 const path = `/${slug}`
-const isFrozenSourdough = slug === 'sourdough-bakery'
 const seo = resolveSeo(path, page.seo)
 
 const faqItems = slug === 'contact' ? contactFaq : slug === 'catering-events' ? cateringFaq : null
 const crumbName =
   slug === 'contact' ? 'Contact' : slug === 'catering-events' ? 'Catering and events' : page.title
 
-const graph = isFrozenSourdough
-  ? null
-  : pageGraph([
-      restaurantSchema(),
-      breadcrumbSchema([
-        { name: 'Home', path: '/' },
-        { name: crumbName, path },
-      ]),
-      ...(faqItems ? [faqPageSchema(faqItems)] : []),
-    ])
+const graph = pageGraph([
+  restaurantSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: crumbName, path },
+  ]),
+  ...(faqItems ? [faqPageSchema(faqItems)] : []),
+])
 ---
 
 <BaseLayout

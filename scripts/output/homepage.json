@@ -132,8 +132,8 @@
         "body": "Naturally leavened loaves start at Penelope Bakehouse in Scarborough. We serve that bread at the Woodbridge restaurant — sandwiches, pizza, and loaves on the table.",
         "cta": {
           "_type": "button",
-          "label": "Sourdough Bakery",
-          "url": "/sourdough-bakery",
+          "label": "Visit the Bakehouse",
+          "url": "https://penelopebakehouse.com",
           "newTab": false,
           "style": "primary"
         },

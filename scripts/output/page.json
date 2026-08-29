@@ -33,7 +33,7 @@
         "variant": "default",
         "align": "center",
         "heading": "Menus at Penelope Social",
-        "intro": "Focaccia sandwiches at lunch, cocktails after work, and pizza at dinner — all at 125 Hawkview Blvd, Woodbridge.",
+        "intro": "Focaccia sandwiches at lunch, cocktails after work, and pizza at dinner \u2014 all at 125 Hawkview Blvd, Woodbridge.",
         "quickLinks": []
       },
       {
@@ -128,7 +128,7 @@
         "_type": "introSection",
         "_key": "intro",
         "heading": "About Penelope Social",
-        "intro": "Penelope Social is the restaurant in Woodbridge — cafe by day, kitchen and bar at night — at 125 Hawkview Blvd. We serve lunch, dinner, and drinks. The sourdough on the table comes from Penelope Bakehouse, our Scarborough micro-bakery.",
+        "intro": "Penelope Social is the restaurant in Woodbridge \u2014 cafe by day, kitchen and bar at night \u2014 at 125 Hawkview Blvd. We serve lunch, dinner, and drinks. The sourdough on the table comes from Penelope Bakehouse, our Scarborough micro-bakery.",
         "ctas": []
       },
       {
@@ -173,167 +173,6 @@
     ]
   },
   {
-    "_id": "page-sourdough-bakery",
-    "_type": "page",
-    "title": "Sourdough Bakery",
-    "slug": {
-      "_type": "slug",
-      "current": "sourdough-bakery"
-    },
-    "seo": {
-      "_type": "seo",
-      "metaTitle": "Best Sourdough Bakery in Vaughan | Penelope Social",
-      "metaDescription": "\"Discover Vaughan's finest sourdough bakery. Enjoy fresh-baked sourdough, focaccia, and artisanal treats made daily with premium ingredients.",
-      "ogImage": {
-        "_type": "image",
-        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3989ef36fc1365b4e3_bread-og-image.png",
-        "alt": ""
-      }
-    },
-    "sections": [
-      {
-        "_type": "pageHero",
-        "_key": "banner",
-        "image": {
-          "_type": "image",
-          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe4fbd904d89c7a43b7f4_bakery-banner.avif",
-          "alt": "Image of Sourdough Bread"
-        }
-      },
-      {
-        "_type": "pageHeading",
-        "_key": "heading",
-        "variant": "center",
-        "align": "center",
-        "heading": "sourdough bakery\nin vaughan",
-        "intro": "\"On May 17, 2017 I decided to make a big change in my life. I left my career in the construction industry as a project manager and engineer to follow my passion; food.\" - Vince Stalteri.",
-        "quickLinks": []
-      },
-      {
-        "_type": "storySection",
-        "_key": "story0",
-        "galleryId": "bakery",
-        "body": [
-          {
-            "_type": "block",
-            "_key": "p0",
-            "style": "normal",
-            "markDefs": [],
-            "children": [
-              {
-                "_type": "span",
-                "_key": "s0",
-                "text": "After years of success in a field that provided a good salary, stability, and work-life balance, I realized something was missing. Despite solving problems and advancing in my role, I felt unfulfilled. I spent time reflecting on what truly inspired me, and after exploring several alternatives within construction, I discovered my love for cooking. The decision to leave behind a well-established career for something as uncertain as bread-making wasn’t easy, and I kept it to myself, knowing it would be hard for others to understand. But I knew it was the right path for me.",
-                "marks": []
-              }
-            ]
-          }
-        ],
-        "video": {
-          "_type": "storyVideo",
-          "mp4Url": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc19b8d4f507a7318ec10_PENNY%20BREAD-transcode.mp4",
-          "webmUrl": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc19b8d4f507a7318ec10_PENNY%20BREAD-transcode.webm"
-        }
-      },
-      {
-        "_type": "storySection",
-        "_key": "story1",
-        "galleryId": "bakery",
-        "body": [
-          {
-            "_type": "block",
-            "_key": "p0",
-            "style": "normal",
-            "markDefs": [],
-            "children": [
-              {
-                "_type": "span",
-                "_key": "s0",
-                "text": "On January 1, 2018, I set out to learn sourdough bread-making, a hobby that quickly became an obsession. The blend of art and science in bread-making fascinated me, revealing the complexities of chemistry, biology, and physics at play. In February, I created my first starter, Anastasia, but after neglecting it for three weeks while opening my restaurant, it nearly died. Rather than discard it, I revived it, and when it bounced back, I renamed it Penelope. For the past five years, Penelope has been my guide, teaching me resilience and the value of persistence.",
-                "marks": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "_type": "storySection",
-        "_key": "story2",
-        "galleryId": "bakery",
-        "gallery": [
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb2137a2a75edea0ec_bread-1.avif",
-            "alt": "Sourdough Bread"
-          },
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bcb06174393143f07c_bread-2.avif",
-            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bcb06174393143f07c_bread-2-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bcb06174393143f07c_bread-2.avif 1080w",
-            "_migrationSizes": "100vw",
-            "alt": "Sourdough Bread"
-          },
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba90442973261207a0_bread-3.avif",
-            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba90442973261207a0_bread-3-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba90442973261207a0_bread-3.avif 1080w",
-            "_migrationSizes": "100vw",
-            "alt": "Sourdough Bread"
-          }
-        ]
-      },
-      {
-        "_type": "storySection",
-        "_key": "story3",
-        "galleryId": "bakery",
-        "body": [
-          {
-            "_type": "block",
-            "_key": "p0",
-            "style": "normal",
-            "markDefs": [],
-            "children": [
-              {
-                "_type": "span",
-                "_key": "s0",
-                "text": "By 2024, Penelope has become the foundation for all our doughs at Penelope Social, where we offer a variety of sourdough-based breads and pizzas. We constantly experiment with new recipes, drawing inspiration from Italy and global bread traditions. Our goal is to change how people view bread—not as an unhealthy carb, but as a gut-friendly, nourishing food that provides energy without the bloat. This mission has become my life’s passion, and I’m dedicated to sharing the benefits of our breads with as many people as possible.",
-                "marks": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "_type": "storySection",
-        "_key": "story4",
-        "galleryId": "bakery",
-        "gallery": [
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69824e_bread-4.avif",
-            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69824e_bread-4-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69824e_bread-4.avif 1080w",
-            "_migrationSizes": "100vw",
-            "alt": "Sourdough Bread"
-          },
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb91ec686f6576eef0_bread-5.avif",
-            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb91ec686f6576eef0_bread-5-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb91ec686f6576eef0_bread-5.avif 1080w",
-            "_migrationSizes": "100vw",
-            "alt": "Sourdough Bread"
-          },
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69820b_bread-6.avif",
-            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69820b_bread-6-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69820b_bread-6.avif 1080w",
-            "_migrationSizes": "100vw",
-            "alt": "Sourdough Bread"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "_id": "page-catering-events",
     "_type": "page",
     "title": "Catering & Events",
@@ -365,7 +204,7 @@
         "_type": "introSection",
         "_key": "intro",
         "heading": "Catering and events",
-        "intro": "Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you — food, drinks, and the room.",
+        "intro": "Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you \u2014 food, drinks, and the room.",
         "ctas": []
       },
       {
@@ -505,7 +344,7 @@
         "_type": "introSection",
         "_key": "intro",
         "heading": "Get in touch",
-        "intro": "We'd love to hear from you. Questions, a table, or an event — call, email, or visit us at 125 Hawkview Blvd, Woodbridge.",
+        "intro": "We'd love to hear from you. Questions, a table, or an event \u2014 call, email, or visit us at 125 Hawkview Blvd, Woodbridge.",
         "ctas": []
       },
       {
@@ -588,7 +427,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "Merch | Penelope Social",
-      "metaDescription": "Hoodies, tees, and totes from Penelope Social — the Woodbridge cafe and bar.",
+      "metaDescription": "Hoodies, tees, and totes from Penelope Social \u2014 the Woodbridge cafe and bar.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",

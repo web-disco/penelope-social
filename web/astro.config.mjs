@@ -50,7 +50,15 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'never',
   build: { format: 'directory' },
-  integrations: [sitemap(), sitemapXmlAlias()],
+  integrations: [
+    sitemap({
+      filter: (page) => {
+        const path = new URL(page).pathname.replace(/\/$/, '') || '/'
+        return path !== '/sourdough-bakery' && path !== '/reservations' && path !== '/events'
+      },
+    }),
+    sitemapXmlAlias(),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

@@ -52,6 +52,11 @@ export const aboutFaq: FaqItem[] = [
     question: 'How is Penelope Bakehouse related?',
     answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> in Scarborough is the micro-bakery sibling. Loaves, focaccia, and pizza dough for Social start there. It is not a second dining room.`,
   },
+  {
+    question: 'Why is the starter named Penelope?',
+    answer:
+      'Vince made his first starter, Anastasia, in February 2018. He nearly lost it while opening the restaurant, revived it, and renamed it Penelope. The restaurant and the Bakehouse grew from that starter.',
+  },
 ]
 
 export const cateringFaq: FaqItem[] = [

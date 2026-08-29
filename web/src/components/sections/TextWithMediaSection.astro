@@ -12,6 +12,7 @@ import { container, heading, btn } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
 import { displayHeading, restaurantCopy } from '../../data/copy'
 import { homeBreadFallback, homeEventsFallback } from '../../data/home'
+import { BAKEHOUSE_SITE_URL } from '../../data/site'
 
 interface Props {
   block: any
@@ -21,7 +22,14 @@ const imageFirst = block.layout !== 'copy-first'
 const fallback = imageFirst ? homeBreadFallback : homeEventsFallback
 const headingText = displayHeading(block.heading, fallback.heading)
 const bodyText = restaurantCopy(block.body, fallback.body)
-const ctaLabel = displayHeading(block.cta?.label)
+const staleBakeryPath = (block.cta?.url ?? '').replace(/\/$/, '') === '/sourdough-bakery'
+const ctaUrl = staleBakeryPath
+  ? BAKEHOUSE_SITE_URL
+  : (block.cta?.url ?? ('ctaUrl' in fallback ? fallback.ctaUrl : undefined))
+const ctaLabel = displayHeading(
+  staleBakeryPath ? homeBreadFallback.ctaLabel : block.cta?.label,
+  'ctaLabel' in fallback ? fallback.ctaLabel : undefined,
+)
 
 const wrapClass = imageFirst
   ? 'home-bread-wrap grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-[60px] wf-md:grid-cols-1 wf-md:gap-[30px]'
@@ -58,12 +66,12 @@ const ctaClass = imageFirst ? 'home-bread-cta mt-10 wf-sm:mt-5' : 'events-cta mt
         <h2 class={heading.medium}>{headingText}</h2>
         <p>{bodyText}</p>
         {
-          block.cta?.url && (
+          ctaUrl && (
             <div class={ctaClass}>
               <a
-                href={block.cta.url}
+                href={ctaUrl}
                 target={block.cta.newTab ? '_blank' : undefined}
-                data-ga-event={block.cta.url === '/catering-events' ? 'catering_click' : undefined}
+                data-ga-event={ctaUrl === '/catering-events' ? 'catering_click' : undefined}
                 class={block.cta.style === 'outline' ? btn.outline : btn.primary}
               >
                 {ctaLabel}

@@ -7,7 +7,7 @@
  */
 import { container, heading, paragraph, btn } from '../../lib/ui'
 import LineText from '../LineText.astro'
-import { displayHeading, isFrozenSourdoughPath, restaurantCopy } from '../../data/copy'
+import { displayHeading, restaurantCopy } from '../../data/copy'
 
 interface Props {
   block: any
@@ -17,9 +17,8 @@ const { block } = Astro.props
 const isCenter = block.variant === 'center'
 const isLeft = block.align === 'left'
 const quickLinks: any[] = block.quickLinks ?? []
-const freezeSourdough = isFrozenSourdoughPath(Astro.url.pathname)
-const headingText = freezeSourdough ? (block.heading ?? '') : displayHeading(block.heading)
-const introText = freezeSourdough ? (block.intro ?? '') : restaurantCopy(block.intro)
+const headingText = displayHeading(block.heading)
+const introText = restaurantCopy(block.intro)
 ---
 
 <div class:list={['page-heading mx-auto', isCenter && 'is-center max-w-[900px]']}>

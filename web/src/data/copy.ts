@@ -2,15 +2,9 @@
  * Title-case / Woodbridge copy helpers.
  * Vaughan may appear as a region or areaServed — never as the city in titles.
  *
- * /sourdough-bakery is frozen until Joshua decides whether to keep it.
- * Do not 301, rewrite, or delete that route.
+ * /sourdough-bakery 301s to /about (same site). Do not send that URL to
+ * penelopebakehouse.com. Nav "Bakery" is a normal link to the Bakehouse site.
  */
-export const FROZEN_SOURDOUGH_PATH = '/sourdough-bakery'
-
-export function isFrozenSourdoughPath(pathname?: string): boolean {
-  if (!pathname) return false
-  return pathname.replace(/\/$/, '') === FROZEN_SOURDOUGH_PATH
-}
 
 const EXACT_REPLACEMENTS: Record<string, string> = {
   'Sourdough Bakery & Restaurant in Vaughan.': 'A Woodbridge restaurant with Bakehouse sourdough',

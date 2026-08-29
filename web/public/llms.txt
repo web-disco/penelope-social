@@ -46,6 +46,7 @@ Reservations: https://penelopesocial.com/reservations
 Toast: https://tables.toasttab.com/restaurants/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/reserve?partySize=2
 
 /events 301s to /catering-events. Do not rename catering-events to /catering (that would collide with /menus/catering).
+/sourdough-bakery 301s to /about on this site. Do not 301 that URL to penelopebakehouse.com. Nav “Bakery” links to https://penelopebakehouse.com.
 
 ## Order online and gift cards
 
