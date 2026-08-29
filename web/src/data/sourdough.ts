@@ -9,8 +9,7 @@ export const sourdoughMeta = PAGE_SEO['/sourdough-bakery']!
  */
 export const sourdoughPage = {
   heading: 'Bakehouse sourdough, served here',
-  subheading:
-    'Vince’s starter lives at the restaurant, and the loaves are baked at Penelope Bakehouse in Scarborough.',
+  subheading: 'Bakehouse bread on the table at Social.',
   banner: {
     src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe4fbd904d89c7a43b7f4_bakery-banner.avif',
     alt: 'Sourdough loaves from Penelope',

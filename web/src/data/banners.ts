@@ -1,42 +1,41 @@
 /**
  * On-photo H1 + lede for every inner banner (Bakehouse catering style).
- * No periods in H1s. No em dashes. One short sentence.
+ * No periods in H1s. No em dashes. One short sentence that stays one line at 1440.
  */
 import { restaurantCopy } from './copy'
-import { homeMenusFallback } from './home'
 
 export const pageBannerCopy: Record<string, { heading: string; intro: string }> = {
   '/menus': {
     heading: 'On the menu',
-    intro: homeMenusFallback.hubIntro,
+    intro: 'Lunch, dinner, drinks, and catering.',
   },
   '/menus/lunch': {
     heading: 'Lunch',
-    intro: 'Focaccia sandwiches, pizza, and salads, Monday to Saturday, 10am to 3pm.',
+    intro: 'Focaccia sandwiches, pizza, and salads.',
   },
   '/menus/dinner': {
     heading: 'Dinner',
-    intro: 'Pizza, handhelds, and shareable plates, Monday to Saturday from 5pm.',
+    intro: 'Pizza, handhelds, and shareable plates.',
   },
   '/menus/bar': {
     heading: 'Bar',
-    intro: 'Cocktails, wine, and a late sit, from 5pm Monday to Saturday.',
+    intro: 'Cocktails, wine, and beer till late.',
   },
   '/menus/catering': {
     heading: 'Catering tray menu',
-    intro: 'Party pizzas, focaccia sandwiches, breads, and salads for 8 to 10.',
+    intro: 'Party pizzas, sandwiches, breads, and salads.',
   },
   '/catering-events': {
     heading: 'Catering and events',
-    intro: 'Trays to-go or a night in the room, with pizza, focaccia, drinks, and a table we will set.',
+    intro: 'Trays to-go, or a night in the room.',
   },
   '/contact': {
     heading: 'Get in touch',
-    intro: 'Questions, a table, or an event. Call, email, or write us.',
+    intro: 'Questions, a table, or an event.',
   },
   '/merchandise': {
     heading: 'Merch',
-    intro: 'Hoodies, tees, and totes from the Woodbridge cafe and bar.',
+    intro: 'Hoodies, tees, and totes. Pick them up in store.',
   },
 }
 

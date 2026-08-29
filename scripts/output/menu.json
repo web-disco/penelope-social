@@ -23,7 +23,7 @@
       "alt": "Image of Lunch menu platter"
     },
     "heading": "Lunch",
-    "intro": "Focaccia sandwiches, pizza, and salads, Monday to Saturday, 10am to 3pm.",
+    "intro": "Focaccia sandwiches, pizza, and salads.",
     "categories": [
       {
         "_type": "menuCategory",
@@ -298,7 +298,7 @@
       "alt": "Image of dinner plate"
     },
     "heading": "Dinner",
-    "intro": "Pizza, handhelds, and shareable plates, Monday to Saturday from 5pm.",
+    "intro": "Pizza, handhelds, and shareable plates.",
     "categories": [
       {
         "_type": "menuCategory",
@@ -566,7 +566,7 @@
       "alt": "Image of Bar Tender"
     },
     "heading": "Bar",
-    "intro": "Cocktails, wine, and a late sit, from 5pm Monday to Saturday.",
+    "intro": "Cocktails, wine, and beer till late.",
     "categories": [
       {
         "_type": "menuCategory",
@@ -725,7 +725,7 @@
       "alt": "Image of Bar Tender"
     },
     "heading": "Catering tray menu",
-    "intro": "Party pizzas, focaccia sandwiches, breads, and salads for 8 to 10.",
+    "intro": "Party pizzas, sandwiches, breads, and salads.",
     "categories": [
       {
         "_type": "menuCategory",
@@ -868,7 +868,7 @@
         "_type": "menuCategory",
         "_key": "category-sandwiches",
         "title": "Focaccia Sandwiches",
-        "description": "Minimum of 6 sandwiches\nAll sandwiches are cut into 4 pcs",
+        "description": "Minimum of 6 sandwiches, cut into 4.",
         "items": [
           {
             "_type": "menuItem",
@@ -936,7 +936,7 @@
         "_type": "menuCategory",
         "_key": "category-salads",
         "title": "Salads",
-        "description": "Each salad serves between 8 to 10 people.",
+        "description": "Each salad serves 8 to 10.",
         "items": [
           {
             "_type": "menuItem",

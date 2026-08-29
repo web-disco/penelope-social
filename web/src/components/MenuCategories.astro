@@ -1,10 +1,11 @@
 ---
 /**
- * Menu category blocks. Bakehouse rhythm: title, short blurb, hairline, items.
- * “Currently unavailable” lines stay as small body copy, not category-sized headings.
+ * Menu category blocks. Bakehouse /menu type and spacing:
+ * 40px category title, one-line blurb, 60px grid, 24px item / price.
+ * Empty lists stay titled with small body copy. Unavailable categories hide.
  */
 import { layout, typeScale } from '../lib/ui'
-import LineText from './LineText.astro'
+import { restaurantCopy } from '../data/copy'
 
 interface Props {
   categories: any[]
@@ -14,81 +15,113 @@ interface Props {
 const { categories, flushTop = true } = Astro.props
 
 const isUnavailable = (item: any) => /unavailable/i.test(item?.title ?? '')
+
+const isPlaceholderCategory = (category: any) =>
+  /^(appetizers?|pasta)$/i.test(String(category.title ?? '').trim())
+
+const listableItems = (category: any) =>
+  (category.items ?? []).filter((item: any) => item?.title && !isUnavailable(item))
+
+/** Hide unavailable placeholders (catering Appetizers / Pasta). Empty lists stay. */
+const visibleCategories = (categories ?? []).filter((category: any) => {
+  const items = category.items ?? []
+  if (listableItems(category).length > 0) return true
+  if (items.some(isUnavailable) || isPlaceholderCategory(category)) return false
+  return true
+})
+
+function categoryBlurb(text?: string) {
+  const raw = restaurantCopy(text)
+  if (!raw) return ''
+  return raw.replace(/\s*\n+\s*/g, ', ').replace(/\s{2,}/g, ' ').trim()
+}
+
+function splitTitleSize(title: string) {
+  const match = title.match(/^(.*?)(\s*\([^)]+\))$/)
+  if (!match) return { name: title, suffix: '' }
+  return { name: match[1], suffix: match[2] }
+}
+
+function isMultiPrice(price?: string) {
+  return Boolean(price && String(price).includes('/'))
+}
 ---
 
 {
-  categories.map((category, index) => (
-    <section
-      id={category.anchor?.current}
-      class:list={[
-        'menu-category',
-        index === 0
-          ? flushTop
-            ? 'mt-0'
-            : 'mt-section-pad wf-sm:mt-section-pad-sm'
-          : 'mt-section-gap-y mb-0 wf-sm:mt-section-gap-y-sm',
-      ]}
-    >
-      <div class={layout.shell}>
-        <h2
-          class:list={[
-            'page-sub-heading mt-0 mb-0 overflow-hidden text-charcoal',
-            typeScale.displayS,
-          ]}
-        >
-          {category.title}
-        </h2>
-        {category.description && (
-          <p class:list={['menu-description mt-space-8 mb-space-16 text-charcoal', typeScale.body]}>
-            <LineText text={category.description} />
-          </p>
-        )}
-        <div class="menu-category-wrapper w-dyn-list">
-          {category.items?.length ? (
-            <div
-              role="list"
-              class="menu-category-list grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-x-[60px] gap-y-space-24 wf-md:grid-cols-2 wf-md:gap-x-10 wf-sm:grid-cols-1 wf-xs:gap-x-5"
+  visibleCategories.map((category, index) => {
+    const blurb = categoryBlurb(category.description)
+    const items = (category.items ?? []).filter((item: any) => item?.title && !isUnavailable(item))
+    return (
+      <section
+        id={category.anchor?.current}
+        class:list={[
+          'menu-category',
+          index === 0
+            ? flushTop
+              ? 'mt-0'
+              : 'mt-section-pad wf-sm:mt-section-pad-sm'
+            : 'mt-section-gap-y mb-0 wf-sm:mt-section-gap-y-sm',
+        ]}
+      >
+        <div class={layout.shell}>
+          <h2 class:list={['page-sub-heading mt-0 mb-space-12 overflow-hidden text-charcoal', typeScale.displayL]}>
+            {category.title}
+          </h2>
+          {blurb && (
+            <p
+              class:list={[
+                'menu-description mb-space-24 text-charcoal whitespace-nowrap',
+                'wf-md:whitespace-normal',
+                typeScale.bodyLg,
+              ]}
             >
-              {category.items.map((item: any) =>
-                isUnavailable(item) ? (
-                  <div role="listitem" class="menu-category-item border-t-2 border-charcoal">
-                    <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.body]}>
-                      {item.title}
-                    </p>
-                  </div>
-                ) : (
-                  <div role="listitem" class="menu-category-item border-t-2 border-charcoal">
-                    <div class="menu-item-heading mt-space-16 flex items-start justify-between gap-10 pb-space-8 wf-sm:gap-5">
-                      <h3
-                        class:list={[
-                          'menu-item-title mt-0 mb-0 text-charcoal',
-                          typeScale.heading,
-                        ]}
-                      >
-                        {item.title}
-                      </h3>
-                      {item.price && (
-                        <p class:list={['heading-menu-price mt-0 mb-0 text-charcoal', typeScale.heading]}>
-                          {item.price}
-                        </p>
+              {blurb}
+            </p>
+          )}
+          {items.length ? (
+            <div class="menu-category-wrapper w-dyn-list">
+              <div
+                role="list"
+                class="menu-category-list grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-[60px] wf-md:grid-cols-2 wf-md:gap-10 wf-sm:grid-cols-1 wf-xs:gap-5"
+              >
+                {items.map((item: any) => {
+                  const { name, suffix } = splitTitleSize(item.title)
+                  const multi = isMultiPrice(item.price)
+                  return (
+                    <div role="listitem" class="menu-category-item border-t-2 border-charcoal">
+                      <div class="menu-item-heading mt-5 mb-0 flex items-start justify-between pb-5 gap-space-16">
+                        <h3 class="menu-item-title mt-0 mb-0 text-[24px] font-medium leading-[120%] text-pretty text-charcoal">
+                          {name}
+                          {suffix && <span class="whitespace-nowrap">{suffix}</span>}
+                        </h3>
+                        {item.price && (
+                          <p
+                            class:list={[
+                              'heading-menu-price mt-0 mb-0 whitespace-nowrap text-charcoal',
+                              multi ? 'text-[16px] leading-[150%]' : 'text-[24px] leading-[120%]',
+                            ]}
+                          >
+                            {item.price}
+                          </p>
+                        )}
+                      </div>
+                      {item.description && (
+                        <div class="menu-item-description">
+                          <p class:list={['mb-0 text-charcoal', typeScale.body]}>{item.description}</p>
+                        </div>
                       )}
                     </div>
-                    {item.description && (
-                      <div class="menu-item-description">
-                        <p class:list={['mb-0 text-charcoal', typeScale.body]}>{item.description}</p>
-                      </div>
-                    )}
-                  </div>
-                )
-              )}
+                  )
+                })}
+              </div>
             </div>
           ) : (
-            <div class="w-dyn-empty">
-              <div>No items found.</div>
-            </div>
+            <p class:list={['menu-empty mt-0 mb-0 text-charcoal', typeScale.body]}>
+              Nothing on this list right now.
+            </p>
           )}
         </div>
-      </div>
-    </section>
-  ))
+      </section>
+    )
+  })
 }

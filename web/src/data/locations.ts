@@ -16,7 +16,7 @@ export const locationsHubMeta = PAGE_SEO['/locations']!
 
 export const locationsHub = {
   heading: 'Social and Bakehouse',
-  intro: 'The cafe and bar, and the Scarborough bakehouse for loaves, focaccia, and pizza by the slice.',
+  intro: 'Woodbridge cafe and bar. Scarborough bakery.',
 }
 
 export const woodbridgeLocationMeta = PAGE_SEO['/locations/woodbridge']!
@@ -44,7 +44,7 @@ export const woodbridgeLocation = {
       href: `mailto:${woodbridgeNap.email}`,
     },
   },
-  intro: 'Focaccia sandwiches, pizza, and drinks on Bakehouse sourdough, from lunch through a late sit.',
+  intro: 'Cafe, kitchen, and bar in Woodbridge.',
   nap: woodbridgeNap,
   cafeHours,
   barHours,
@@ -84,7 +84,7 @@ export const scarboroughLocation = {
       href: `mailto:${scarboroughBakehouse.email}`,
     },
   },
-  intro: 'Sourdough loaves, focaccia sandwiches, and pizza by the slice, baked fresh at this Scarborough shop.',
+  intro: 'Sourdough, focaccia, and pizza by the slice.',
   offeringsHeading: 'Sourdough and focaccia, baked here',
   offeringsBody:
     'Loaves, focaccia sandwiches, and pizza by the slice. Hours, menu, and orders live on penelopebakehouse.com.',

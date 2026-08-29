@@ -37,36 +37,48 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Lunch, dinner, the bar, and catering — on Bakehouse sourdough.':
     'Lunch, dinner, the bar, and catering trays, all from this kitchen.',
   'Focaccia sandwiches at lunch, cocktails after work, and pizza at dinner — all at 125 Hawkview Blvd, Woodbridge.':
-    'Focaccia sandwiches, pizza, shareable plates, and cocktails, plus trays when you want them.',
+    'Lunch, dinner, drinks, and catering.',
   'Focaccia sandwiches at lunch, pizza at dinner, and cocktails at the bar.':
-    'Focaccia sandwiches, pizza, shareable plates, and cocktails, plus trays when you want them.',
+    'Lunch, dinner, drinks, and catering.',
+  'Focaccia sandwiches, pizza, shareable plates, and cocktails, plus trays when you want them.':
+    'Lunch, dinner, drinks, and catering.',
   'Focaccia sandwiches and pizza': 'Focaccia sandwiches and pizza daily',
   'Cocktails and a late sit': 'Cocktails, wine, and a late sit',
   'Pizza, handhelds, shareables': 'Pizza, handhelds, and shareable plates',
   'Trays for your table': 'Trays of pizza and sandwiches',
   'Birthdays, work dinners, and nights in the room. Food, drinks, and a table we will set.':
     'Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.',
-  'Trays to-go, or a night in the room.':
-    'Trays to-go or a night in the room, with pizza, focaccia, drinks, and a table we will set.',
+  'Trays to-go, or a night in the room.': 'Trays to-go, or a night in the room.',
+  'Trays to-go or a night in the room, with pizza, focaccia, drinks, and a table we will set.':
+    'Trays to-go, or a night in the room.',
   "We'd love to hear from you. Questions, a table, or an event — call, email, or visit us at 125 Hawkview Blvd, Woodbridge.":
-    'Questions, a table, or an event. Call, email, or write us.',
+    'Questions, a table, or an event.',
+  'Questions, a table, or an event. Call, email, or write us.': 'Questions, a table, or an event.',
   'Lunch menu': 'Lunch',
   'Dinner menu': 'Dinner',
   'Bar menu': 'Bar',
   'Lunch at Penelope Social in Woodbridge. Focaccia sandwiches, New York-style pizzas, and salads.\n\nMonday–Saturday 10:00am–3:00pm':
-    'Focaccia sandwiches, pizza, and salads, Monday to Saturday, 10am to 3pm.',
+    'Focaccia sandwiches, pizza, and salads.',
   'Dinner at Penelope Social in Woodbridge. Gut-friendly pizzas, handhelds, and shareable plates.\n\nMonday–Saturday 5:00pm–close':
-    'Pizza, handhelds, and shareable plates, Monday to Saturday from 5pm.',
+    'Pizza, handhelds, and shareable plates.',
   'Focaccia sandwiches, pizza, and salads.\n\nMonday to Saturday, 10am to 3pm':
-    'Focaccia sandwiches, pizza, and salads, Monday to Saturday, 10am to 3pm.',
+    'Focaccia sandwiches, pizza, and salads.',
+  'Focaccia sandwiches, pizza, and salads, Monday to Saturday, 10am to 3pm.':
+    'Focaccia sandwiches, pizza, and salads.',
   'Pizza, handhelds, and shareable plates.\n\nMonday to Saturday, 5pm to close':
-    'Pizza, handhelds, and shareable plates, Monday to Saturday from 5pm.',
+    'Pizza, handhelds, and shareable plates.',
+  'Pizza, handhelds, and shareable plates, Monday to Saturday from 5pm.':
+    'Pizza, handhelds, and shareable plates.',
   'Skip the traffic and sit at the bar in Woodbridge. Cocktails to match the night — bold or light.':
-    'Cocktails, wine, and a late sit, from 5pm Monday to Saturday.',
+    'Cocktails, wine, and beer till late.',
+  'Cocktails, wine, and a late sit, from 5pm Monday to Saturday.':
+    'Cocktails, wine, and beer till late.',
   'Explore our menus — focaccia sandwiches, pizza, shareables, and handcrafted cocktails at the Woodbridge restaurant.':
-    'Focaccia sandwiches, pizza, shareables, and cocktails.',
+    'Lunch, dinner, drinks, and catering.',
   'Explore our menus — focaccia sandwiches, pizza, shareables, and handcrafted cocktails at the Woodbridge restaurant.\n‍':
-    'Focaccia sandwiches, pizza, shareables, and cocktails.',
+    'Lunch, dinner, drinks, and catering.',
+  'Hoodies, tees, and totes from the Woodbridge cafe and bar.':
+    'Hoodies, tees, and totes. Pick them up in store.',
   'Birthdays, work dinners, and nights in the Woodbridge restaurant. Artisanal dishes, handcrafted cocktails, and a room we will set for you. Catering trays if you want the food at yours.':
     'Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.',
   'Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you — food, drinks, and the room.':
@@ -76,9 +88,25 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'A Woodbridge cafe and bar. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.':
     'This is a Woodbridge cafe and bar. Lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
   'Trays from the Woodbridge kitchen — not a private-event booking page, and not the Scarborough bakehouse menu. Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.':
-    'Party pizzas, focaccia sandwiches, breads, and salads for 8 to 10.',
+    'Party pizzas, sandwiches, breads, and salads.',
   'Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8 to 10. Prices are below. Prefer 24 hours notice. Send the order on Catering and events.':
-    'Party pizzas, focaccia sandwiches, breads, and salads for 8 to 10.',
+    'Party pizzas, sandwiches, breads, and salads.',
+  'Party pizzas, focaccia sandwiches, breads, and salads for 8 to 10.':
+    'Party pizzas, sandwiches, breads, and salads.',
+  'Minimum of 6 sandwiches\nAll sandwiches are cut into 4 pcs':
+    'Minimum of 6 sandwiches, cut into 4.',
+  'Minimum of 6 sandwiches All sandwiches are cut into 4 pcs':
+    'Minimum of 6 sandwiches, cut into 4.',
+  'Each salad serves between 8 to 10 people.': 'Each salad serves 8 to 10.',
+  'Comes with your choice of Penne or Spaghetti.': 'Choice of penne or spaghetti.',
+  'Vince’s starter lives at the restaurant, and the loaves are baked at Penelope Bakehouse in Scarborough.':
+    'Bakehouse bread on the table at Social.',
+  'The cafe and bar, and the Scarborough bakehouse for loaves, focaccia, and pizza by the slice.':
+    'Woodbridge cafe and bar. Scarborough bakery.',
+  'Focaccia sandwiches, pizza, and drinks on Bakehouse sourdough, from lunch through a late sit.':
+    'Cafe, kitchen, and bar in Woodbridge.',
+  'Sourdough loaves, focaccia sandwiches, and pizza by the slice, baked fresh at this Scarborough shop.':
+    'Sourdough, focaccia, and pizza by the slice.',
   'Sourdough Bakery & Restaurant in Vaughan | Penelope Social':
     'Penelope Social | Cafe and bar in Woodbridge',
   'Best Sourdough Bakery in Vaughan | Penelope Social':

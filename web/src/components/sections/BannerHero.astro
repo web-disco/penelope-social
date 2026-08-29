@@ -13,7 +13,7 @@ interface Props {
   headingText?: string
   intro?: string
   objectPosition?: string
-  /** Extra classes on the on-photo lede (About keeps one desktop line). */
+  /** Extra classes on the on-photo lede. Desktop stays one line (Bakehouse). */
   introClass?: string
 }
 
@@ -63,7 +63,8 @@ const bannerHeight = 'h-[550px] wf-md:h-[420px] wf-sm:h-[440px] wf-xs:h-[400px]'
           {intro && (
             <p
               class:list={[
-                'mt-space-16 mb-0 max-w-[640px] text-beige text-pretty not-italic',
+                'mt-space-16 mb-0 max-w-none text-beige not-italic whitespace-nowrap',
+                'wf-md:whitespace-normal wf-md:max-w-[720px] wf-md:text-pretty',
                 typeScale.intro,
                 introClass,
               ]}
