@@ -1,30 +1,54 @@
 ---
 /**
- * Static pages driven by the page builder: /about, /catering-events, /contact,
+ * Static pages driven by the page builder: /contact, /catering-events,
  * /sourdough-bakery, /merchandise, /menus.
+ * /about is a dedicated page (Bakehouse structure). Do not rewrite /sourdough-bakery.
  */
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
+import FaqSection from '../components/sections/FaqSection.astro'
 import { getAll } from '../lib/data'
+import { resolveSeo } from '../data/seo'
+import { cateringFaq, contactFaq } from '../data/faq'
+import { breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
 
 export async function getStaticPaths() {
+  const dedicated = new Set(['about'])
   const pages = await getAll<any>('page')
-  // No need to exclude "home": the front page is the `homepage` singleton, and
-  // the page schema rejects that slug outright.
   return pages
-    .filter((page) => page.slug?.current)
+    .filter((page) => page.slug?.current && !dedicated.has(page.slug.current))
     .map((page) => ({ params: { slug: page.slug.current }, props: { page } }))
 }
 
 const { page } = Astro.props
-const seo = page.seo ?? {}
+const slug = page.slug.current as string
+const path = `/${slug}`
+const isFrozenSourdough = slug === 'sourdough-bakery'
+const seo = resolveSeo(path, page.seo)
+
+const faqItems = slug === 'contact' ? contactFaq : slug === 'catering-events' ? cateringFaq : null
+const crumbName =
+  slug === 'contact' ? 'Contact' : slug === 'catering-events' ? 'Catering and events' : page.title
+
+const graph = isFrozenSourdough
+  ? null
+  : pageGraph([
+      restaurantSchema(),
+      breadcrumbSchema([
+        { name: 'Home', path: '/' },
+        { name: crumbName, path },
+      ]),
+      ...(faqItems ? [faqPageSchema(faqItems)] : []),
+    ])
 ---
 
 <BaseLayout
-  title={seo.metaTitle ?? page.title}
-  description={seo.metaDescription}
-  ogImage={seo.ogImage}
-  noIndex={seo.noIndex}
+  title={seo.title}
+  description={seo.description}
+  ogImage={page.seo?.ogImage}
+  noIndex={page.seo?.noIndex}
 >
+  {graph && <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />}
   <PageBuilder sections={page.sections ?? []} />
+  {faqItems && <FaqSection items={faqItems} includeSchema={false} />}
 </BaseLayout>

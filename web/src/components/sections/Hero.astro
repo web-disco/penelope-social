@@ -5,16 +5,16 @@
  */
 import { btn, heading, layout, typeScale } from '../../lib/ui'
 import { imageUrl, imageAlt } from '../../lib/image'
+import { restaurantCopy } from '../../data/copy'
+import { homeHeroFallback } from '../../data/home'
 
 interface Props {
   block: any
 }
 const { block } = Astro.props
 
-const headingText = block.heading || 'Sourdough Bakery & Restaurant in Vaughan.'
-const bodyText =
-  block.body ||
-  'New York-style sourdough pizza, artisanal handhelds, and creative cocktails, made in our micro bakery.'
+const headingText = restaurantCopy(block.heading, homeHeroFallback.heading)
+const bodyText = restaurantCopy(block.body, homeHeroFallback.body)
 const primaryCta = block.orderOnline
 const secondaryCta = block.reservations
 ---
@@ -62,6 +62,8 @@ const secondaryCta = block.reservations
                   href={primaryCta.url}
                   target={primaryCta.newTab ? '_blank' : undefined}
                   rel={primaryCta.newTab ? 'noopener noreferrer' : undefined}
+                  data-ga-event="order_click"
+                  data-ga-placement="hero"
                   class={btn.onMediaPrimary}
                 >
                   {primaryCta.label}
@@ -72,6 +74,7 @@ const secondaryCta = block.reservations
                   href={secondaryCta.url}
                   target={secondaryCta.newTab ? '_blank' : undefined}
                   rel={secondaryCta.newTab ? 'noopener noreferrer' : undefined}
+                  data-ga-event="reservation_click"
                   class={btn.secondaryOutline}
                 >
                   {secondaryCta.label}

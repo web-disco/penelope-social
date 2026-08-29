@@ -34,6 +34,15 @@ export function initSiteForms() {
 
         form.style.display = 'none'
         if (done) done.style.display = 'block'
+
+        const gtag = (window as any).gtag
+        if (typeof gtag === 'function') {
+          if (endpoint === '/api/newsletter') {
+            gtag('event', 'newsletter_signup', { transport_type: 'beacon' })
+          } else if (endpoint === '/api/contact' || endpoint === '/api/events') {
+            gtag('event', 'generate_lead', { transport_type: 'beacon', form: endpoint })
+          }
+        }
       } catch {
         if (fail) fail.style.display = 'block'
       } finally {

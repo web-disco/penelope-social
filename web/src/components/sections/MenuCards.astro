@@ -5,12 +5,16 @@
  */
 import { btn, heading, layout, radius, space, typeScale } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
+import { displayHeading, restaurantCopy } from '../../data/copy'
+import { homeMenusFallback } from '../../data/home'
 
 interface Props {
   block: any
 }
 const { block } = Astro.props
 const cards: any[] = block.cards ?? []
+const sectionHeading = displayHeading(block.heading, homeMenusFallback.heading)
+const sectionIntro = restaurantCopy(block.intro, homeMenusFallback.intro)
 
 const tileClass = 'menu-mosaic-tile flex h-full flex-col no-underline'
 const frameClass = `overflow-hidden ${radius.none}`
@@ -22,20 +26,20 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
 <section id="menu" class="section-menu-mosaic reveal overflow-x-hidden">
   <div class:list={[layout.shell, space.sectionYFirst]}>
     {
-      block.heading && (
+      sectionHeading && (
         <h2
           class:list={[
             heading.base,
             'text-center',
-            block.intro ? 'mb-0' : 'mb-space-48 wf-sm:mb-space-32',
+            sectionIntro ? 'mb-0' : 'mb-space-48 wf-sm:mb-space-32',
           ]}
         >
-          {block.heading}
+          {sectionHeading}
         </h2>
       )
     }
     {
-      block.intro && (
+      sectionIntro && (
         <p
           class:list={[
             'mx-auto mt-space-16 mb-space-48 text-center text-charcoal',
@@ -44,7 +48,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
             typeScale.intro,
           ]}
         >
-          {block.intro}
+          {sectionIntro}
         </p>
       )
     }
@@ -67,7 +71,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
                     class={imageClass}
                   />
                 </div>
-                <p class={labelClass}>{card.title}</p>
+                <p class={labelClass}>{displayHeading(card.title)}</p>
                 {card.line && <p class={lineClass}>{card.line}</p>}
               </a>
             </div>

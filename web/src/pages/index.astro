@@ -6,19 +6,31 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
+import FaqSection from '../components/sections/FaqSection.astro'
 import { getSingleton, missingContentMessage } from '../lib/data'
+import { resolveSeo } from '../data/seo'
+import { homeFaq } from '../data/faq'
+import { breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
 
 const home = await getSingleton<any>('homepage')
 if (!home) throw new Error(missingContentMessage('homepage'))
-const seo = home.seo ?? {}
+const seo = resolveSeo('/', home.seo)
+
+const graph = pageGraph([
+  restaurantSchema(),
+  faqPageSchema(homeFaq),
+  breadcrumbSchema([{ name: 'Home', path: '/' }]),
+])
 ---
 
 <BaseLayout
-  title={seo.metaTitle ?? home.title}
-  description={seo.metaDescription}
-  ogImage={seo.ogImage}
-  noIndex={seo.noIndex}
+  title={seo.title}
+  description={seo.description}
+  ogImage={home.seo?.ogImage}
+  noIndex={home.seo?.noIndex}
   isHome
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
   <PageBuilder sections={home.sections ?? []} />
+  <FaqSection headingText="FAQs" items={homeFaq} includeSchema={false} />
 </BaseLayout>

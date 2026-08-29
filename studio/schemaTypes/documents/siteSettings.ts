@@ -106,8 +106,18 @@ export const siteSettings = defineType({
           type: 'object',
           fields: [
             defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-            defineField({ name: 'locationLabel', title: 'Location label', type: 'string' }),
-            defineField({ name: 'address', title: 'Address', type: 'string' }),
+            defineField({
+              name: 'locationLabel',
+              title: 'Location label',
+              type: 'string',
+              description: 'Woodbridge is the locality. Do not put Vaughan as the city.',
+            }),
+            defineField({
+              name: 'address',
+              title: 'Address',
+              type: 'string',
+              description: 'Must match GBP: 125 Hawkview Blvd, Woodbridge, ON L4H 2E2',
+            }),
             defineField({ name: 'mapUrl', title: 'Map link', type: 'url' }),
             defineField({
               name: 'blocks',
@@ -147,7 +157,14 @@ export const siteSettings = defineType({
       ],
     }),
 
-    defineField({ name: 'seo', title: 'Default SEO', type: 'seo', group: 'seo' }),
+    defineField({
+      name: 'seo',
+      title: 'Default SEO',
+      type: 'seo',
+      group: 'seo',
+      description:
+        'Fallback title/description. Use Woodbridge as the city. Unique per-page SEO lives on each document.',
+    }),
   ],
   preview: { prepare: () => ({ title: 'Site Settings' }) },
 })

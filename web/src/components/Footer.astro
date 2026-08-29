@@ -14,6 +14,7 @@ import { heading, containerFooter, container } from '../lib/ui'
 import { imageUrl } from '../lib/image'
 import NewsletterForm from './NewsletterForm.astro'
 import LineText from './LineText.astro'
+import { displayHeading, displayLinkLabel, restaurantCopy } from '../data/copy'
 
 interface Props {
   settings: any
@@ -63,7 +64,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
   <!-- .footer-newsletter — the green band -->
   <div class="footer-newsletter bg-green">
     <div class={container}>
-      <h2 class={heading.light}>{newsletter.heading}</h2>
+      <h2 class={heading.light}>{displayHeading(newsletter.heading, 'Stay in the loop')}</h2>
       <div class="footer-newsletter-wrap mx-auto max-w-[650px] text-center">
         <p
           class="is-light newsletter-text mb-[10px] font-body text-[26px] leading-[150%] text-beige wf-sm:text-[24px] wf-xs:text-[18px]"
@@ -112,13 +113,13 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         <h4
           class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
         >
-          {menus.heading}
+          {displayHeading(menus.heading, 'Menus')}
         </h4>
         <!-- Capped so the blurb wraps inside its column instead of setting the
              column's natural width from its longest line. -->
         <div class={`${footerText} max-w-[300px]`}>
           <a href={menus.blurbUrl ?? '/menus'} class={footerTextSpan}>
-            <LineText text={menus.blurb} />
+            <LineText text={restaurantCopy(menus.blurb)} />
           </a>
         </div>
         <div class="footer-menu-wrap flex flex-col gap-[10px]">
@@ -131,7 +132,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
                   hover,
                 ]}
               >
-                {link.label}
+                {displayLinkLabel(link.label)}
               </a>
             ))
           }
@@ -143,13 +144,13 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         <h4
           class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
         >
-          {hours.heading}
+          {displayHeading(hours.heading, 'Hours & location')}
         </h4>
         <div class="hours-wrap grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-0 wf-xs:grid-cols-1">
           <p class={`${footerText} is-location col-span-2 mb-0 normal-case`}>
             <strong>{hours.locationLabel}</strong>
             <br />
-            <a href={hours.mapUrl} target="_blank" class={footerTextSpan}>
+            <a href={hours.mapUrl} target="_blank" data-ga-event="get_directions" class={footerTextSpan}>
               <LineText text={hours.address} />
             </a>
           </p>
@@ -157,7 +158,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
             (hours.blocks ?? []).map((block: any) => (
               <p class={`${footerTextHours} is-hours col-span-2`}>
                 <strong>
-                  {block.label}
+                  {displayHeading(block.label)}
                   <br />
                 </strong>
                 {(block.lines ?? []).map((line: string) => (
@@ -181,10 +182,10 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         <h4
           class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
         >
-          {contact.heading}
+          {displayHeading(contact.heading, 'Contact')}
         </h4>
         <p class={footerText}>
-          P: <a href={`tel:${contact.phoneDigits}`} class={footerTextSpan}>{contact.phone}</a>
+          P: <a href={`tel:${contact.phoneDigits}`} data-ga-event="click_to_call" class={footerTextSpan}>{contact.phone}</a>
           <br />
           E: <a href={contact.emailHref} class={footerTextSpan}><LineText text={contact.email} /></a>
         </p>

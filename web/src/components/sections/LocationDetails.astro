@@ -1,0 +1,166 @@
+---
+/**
+ * Location details — copy left, labelled rows right, optional map below.
+ */
+import { btn, typeScale } from '../../lib/ui'
+import type { Cta } from '../../data/types'
+import {
+  isCateringHref,
+  isMapsDirectionsHref,
+  isReservationHref,
+  isSocialOrderHref,
+  isSocialTelHref,
+} from '../../lib/analytics'
+
+const shell =
+  'container w-full mx-auto max-w-[1440px] px-[25px] pt-0 pb-section-pad ' +
+  'wf-sm:pb-section-pad-sm ' +
+  'no-underline transition-[background-color,color] duration-500'
+
+export interface LocationDetailRow {
+  label: string
+  lines: string[]
+  href?: string
+  labelHref?: string
+  external?: boolean
+}
+
+interface Props {
+  headingText?: string
+  intro?: string
+  ctas?: Cta[]
+  rows: LocationDetailRow[]
+  mapQuery?: string
+  mapTitle?: string
+}
+
+const { headingText, intro, ctas = [], rows, mapQuery, mapTitle } = Astro.props
+
+function ctaClass(style?: Cta['style']) {
+  if (style === 'outline') return btn.outline
+  return btn.primary
+}
+
+function gaEventForHref(href: string): string | undefined {
+  if (isSocialOrderHref(href)) return 'order_click'
+  if (isReservationHref(href)) return 'reservation_click'
+  if (isCateringHref(href)) return 'catering_click'
+  if (isSocialTelHref(href)) return 'click_to_call'
+  if (isMapsDirectionsHref(href)) return 'get_directions'
+  return undefined
+}
+
+const linkClass =
+  'text-charcoal font-body no-underline transition-opacity duration-[350ms] hover:opacity-70'
+const rowBorder = 'border-t-2 border-charcoal'
+const mapSrc = mapQuery
+  ? `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`
+  : undefined
+---
+
+<section class="section-location-details reveal">
+  <div class={shell}>
+    <div
+      class="location-details-body grid grid-cols-[1.15fr_0.85fr] items-start gap-space-48 wf-md:gap-space-32 wf-sm:grid-cols-1"
+    >
+      <div class="location-details-copy">
+        {
+          headingText && (
+            <h2 class={`mb-space-24 mt-0 max-w-[640px] text-left text-charcoal ${typeScale.displayL}`}>
+              {headingText}
+            </h2>
+          )
+        }
+        <p class={`mb-0 max-w-[640px] text-left text-charcoal ${typeScale.bodyLg}`}>
+          <slot name="intro">{intro}</slot>
+        </p>
+        {
+          ctas.length > 0 && (
+            <div class="intros-cta mt-space-32 flex flex-wrap items-center gap-space-16 wf-xs:flex-col wf-xs:items-stretch">
+              {ctas.map((cta) => (
+                <a
+                  href={cta.url}
+                  target={cta.newTab ? '_blank' : undefined}
+                  rel={cta.newTab ? 'noopener noreferrer' : undefined}
+                  data-ga-event={gaEventForHref(cta.url)}
+                  class={ctaClass(cta.style)}
+                >
+                  <span>{cta.label}</span>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      <dl class="location-details-rows m-0 flex min-w-0 flex-col">
+        {
+          rows.map((row) => (
+            <div class={`grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-space-16 py-space-16 ${rowBorder}`}>
+              <dt class="mb-0 flex min-h-[calc(18px*1.5)] items-center self-start font-body text-[13px] font-medium uppercase tracking-[0.08em] leading-[150%] text-charcoal/50 wf-xs:min-h-[calc(16px*1.5)]">
+                {row.labelHref ? (
+                  <a
+                    href={row.labelHref}
+                    target={row.external ? '_blank' : undefined}
+                    rel={row.external ? 'noopener' : undefined}
+                    class={linkClass}
+                  >
+                    {row.label}
+                  </a>
+                ) : (
+                  row.label
+                )}
+              </dt>
+              <dd
+                class:list={[
+                  'm-0 text-charcoal font-body',
+                  row.label.toLowerCase() === 'address' && 'location-nap-address',
+                  (row.label.toLowerCase() === 'phone' || row.label.toLowerCase() === 'email') &&
+                    'location-nap-contact',
+                  row.label.toLowerCase() !== 'address' &&
+                    row.label.toLowerCase() !== 'phone' &&
+                    row.label.toLowerCase() !== 'email' &&
+                    `whitespace-nowrap wf-sm:whitespace-normal ${typeScale.body}`,
+                ]}
+              >
+                <ul class="m-0 list-none space-y-1 p-0">
+                  {row.lines.map((line, i) => (
+                    <li>
+                      {row.href && i === 0 ? (
+                        <a
+                          href={row.href}
+                          target={row.external ? '_blank' : undefined}
+                          rel={row.external ? 'noopener noreferrer' : undefined}
+                          data-ga-event={gaEventForHref(row.href)}
+                          class={linkClass}
+                        >
+                          {line}
+                        </a>
+                      ) : (
+                        line
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    {
+      mapSrc && mapTitle && (
+        <div class="location-details-map mt-space-48 w-full overflow-hidden wf-sm:mt-space-32">
+          <iframe
+            title={mapTitle}
+            class="h-[400px] w-full border-0 rounded-none wf-sm:h-[280px]"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src={mapSrc}
+          ></iframe>
+        </div>
+      )
+    }
+  </div>
+</section>

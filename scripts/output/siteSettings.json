@@ -19,7 +19,7 @@
       },
       "reservations": {
         "_type": "link",
-        "label": "reservations",
+        "label": "Reservations",
         "url": "/reservations",
         "newTab": true
       },
@@ -78,7 +78,7 @@
       "logoAlt": "Penelope Social Logo",
       "newsletter": {
         "_type": "newsletter",
-        "heading": "stay in the loop.",
+        "heading": "Stay in the loop",
         "text": "Sign up for our newsletter and be the first to know about exclusive offers.",
         "placeholder": "Enter your email address",
         "buttonLabel": "Subscribe",
@@ -88,26 +88,26 @@
       },
       "menus": {
         "_type": "footerMenus",
-        "heading": "menus",
-        "blurb": "Explore our menus featuring the best sourdough focaccia sandwiches, pizzas , shareable's and handcrafted cocktails.\n‍",
+        "heading": "Menus",
+        "blurb": "Explore our menus — focaccia sandwiches, pizza, shareables, and handcrafted cocktails at the Woodbridge restaurant.\n‍",
         "blurbUrl": "/menus",
         "links": [
           {
             "_type": "link",
             "_key": "lunch",
-            "label": "lunch",
+            "label": "Lunch",
             "url": "/menus/lunch"
           },
           {
             "_type": "link",
             "_key": "bar",
-            "label": "BAR",
+            "label": "Bar",
             "url": "/menus/bar"
           },
           {
             "_type": "link",
             "_key": "dinner",
-            "label": "DINNER",
+            "label": "Dinner",
             "url": "/menus/dinner"
           },
           {
@@ -120,15 +120,15 @@
       },
       "hours": {
         "_type": "footerHours",
-        "heading": "hours & location",
-        "locationLabel": "LOCATION",
+        "heading": "Hours & location",
+        "locationLabel": "Location",
         "address": "125 Hawkview Blvd, Woodbridge, ON L4H 2E2\n‍",
         "mapUrl": "https://www.google.com/maps/dir//125+Hawkview+Blvd,+Woodbridge,+ON+L4H+2E2/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x882b2f5c52cae66f:0xd9f3c33a869788c9?sa=X&ved=1t:707&ictx=111",
         "blocks": [
           {
             "_type": "hoursBlock",
             "_key": "cafe",
-            "label": "CAFE",
+            "label": "Cafe",
             "lines": [
               "Mon — Sat, 9am - 3pm",
               "Sun — 8am - 12pm",
@@ -138,7 +138,7 @@
           {
             "_type": "hoursBlock",
             "_key": "bar",
-            "label": "BAR",
+            "label": "Bar",
             "lines": [
               "Mon — Thur, 5pm - 10pm",
               "Fri — Sat, 5pm - 1am"
@@ -148,12 +148,12 @@
       },
       "contact": {
         "_type": "footerContact",
-        "heading": "contact",
-        "phone": "(905) 607 0606",
+        "heading": "Contact",
+        "phone": "(905) 607-0606",
         "phoneDigits": "9056070606",
         "email": "info@penelopesocial.com\n‍",
         "emailHref": "mailto:info@penelopesocial.com?subject=Hey%2C%20Penelope!",
-        "socialsLabel": "FOLLOW OUR SOCIALS",
+        "socialsLabel": "Follow our socials",
         "socials": [
           {
             "_type": "social",
@@ -180,8 +180,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Sourdough Bakery & Restaurant in Vaughan | Penelope Social",
-      "metaDescription": "Experience Penelope Social, a Sourdough Bakery & Restaurant in Vaughan. Indulge in freshly baked goods and delicious meals. Visit us today!",
+      "metaTitle": "Penelope Social | Cafe and bar in Woodbridge",
+      "metaDescription": "Cafe by day and a bar by night at 125 Hawkview Blvd, Woodbridge. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse in Scarborough.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",

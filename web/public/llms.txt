@@ -1,0 +1,65 @@
+# Penelope Social
+
+Penelope Social is a restaurant in Woodbridge, Ontario: cafe by day, bar by night.
+
+It is not a Vaughan bakery. Penelope Bakehouse is the sister micro-bakery in Scarborough.
+
+## Location (Google Business / NAP)
+
+- Name: Penelope Social
+- Street: 125 Hawkview Blvd
+- Locality: Woodbridge
+- Region: ON
+- Postal: L4H 2E2
+- Country: Canada
+- Phone: (905) 607-0606
+- Email: info@penelopesocial.com
+- Maps: https://www.google.com/maps/search/?api=1&query=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2
+
+Vaughan is the wider municipality / area served. Woodbridge is the city in titles and addressLocality.
+
+## Hours
+
+Cafe: Monday–Saturday 9am–3pm, Sunday 8am–12pm
+Bar: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am
+
+## Site
+
+- Canonical site: https://penelopesocial.com (apex; www 301s to apex)
+- Home: https://penelopesocial.com/
+- About: https://penelopesocial.com/about
+- Contact: https://penelopesocial.com/contact
+- Catering and events: https://penelopesocial.com/catering-events
+- Menus: https://penelopesocial.com/menus
+- Lunch: https://penelopesocial.com/menus/lunch
+- Dinner: https://penelopesocial.com/menus/dinner
+- Bar: https://penelopesocial.com/menus/bar
+- Catering menu: https://penelopesocial.com/menus/catering
+- Merchandise: https://penelopesocial.com/merchandise
+- Locations: https://penelopesocial.com/locations
+- Woodbridge restaurant: https://penelopesocial.com/locations/woodbridge
+- Scarborough bakehouse (sister): https://penelopesocial.com/locations/scarborough
+
+## Reservations
+
+Reservations: https://penelopesocial.com/reservations
+Toast: https://tables.toasttab.com/restaurants/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/reserve?partySize=2
+
+/events 301s to /catering-events. Do not rename catering-events to /catering (that would collide with /menus/catering).
+
+## Order online and gift cards
+
+Order online: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+Gift cards: https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard
+
+## Sister bakery
+
+Penelope Bakehouse — 71 Howden Rd, Scarborough, ON M1R 3C7
+https://penelopebakehouse.com
+Phone (647) 812-0104
+Social serves Bakehouse sourdough. Bakehouse is not a second Social dining room.
+
+## Sitemap
+
+https://penelopesocial.com/sitemap-index.xml
+https://penelopesocial.com/sitemap.xml

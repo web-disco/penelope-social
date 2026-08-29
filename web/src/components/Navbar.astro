@@ -71,6 +71,15 @@ const navScrolled = solidNav
             href={link.url}
             target={link.newTab ? '_blank' : undefined}
             rel={link.newTab ? 'noopener noreferrer' : undefined}
+            data-ga-event={
+              link.url.includes('egiftcards')
+                ? 'gift_card_click'
+                : link.url === '/catering-events'
+                  ? 'catering_click'
+                  : link.url === '/merchandise'
+                    ? 'merch_click'
+                    : undefined
+            }
             class={linkClass}
           >
             {link.label}
@@ -98,6 +107,8 @@ const navScrolled = solidNav
             href={header.orderOnline.url}
             target={header.orderOnline.newTab ? '_blank' : undefined}
             rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
+            data-ga-event="order_click"
+            data-ga-placement="nav"
             class:list={[btn.navSolid, 'navbar__cta']}
           >
             {header.orderOnline.label}
@@ -110,9 +121,10 @@ const navScrolled = solidNav
             href={header.reservations.url}
             target={header.reservations.newTab ? '_blank' : undefined}
             rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
+            data-ga-event="reservation_click"
             class:list={[btn.navOutline, 'navbar__cta']}
           >
-            {header.reservations.label}
+            {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
           </a>
         )
       }
@@ -168,6 +180,15 @@ const navScrolled = solidNav
           aria-current={isCurrent(link.url) ? 'page' : undefined}
           class:list={['menu-drawer__link', isCurrent(link.url) && 'is-current']}
           data-menu-link
+          data-ga-event={
+            link.url.includes('egiftcards')
+              ? 'gift_card_click'
+              : link.url === '/catering-events'
+                ? 'catering_click'
+                : link.url === '/merchandise'
+                  ? 'merch_click'
+                  : undefined
+          }
         >
           <span class={heading.menuItem}>{link.label}</span>
           <span class="menu-drawer__arrow" aria-hidden="true">→</span>
@@ -183,6 +204,8 @@ const navScrolled = solidNav
           href={header.orderOnline.url}
           target={header.orderOnline.newTab ? '_blank' : undefined}
           rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
+          data-ga-event="order_click"
+          data-ga-placement="drawer"
           class:list={[btn.secondary, 'menu-drawer__cta']}
         >
           {header.orderOnline.label}
@@ -195,9 +218,10 @@ const navScrolled = solidNav
           href={header.reservations.url}
           target={header.reservations.newTab ? '_blank' : undefined}
           rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
+          data-ga-event="reservation_click"
           class:list={[btn.secondaryOutline, 'menu-drawer__cta']}
         >
-          {header.reservations.label}
+          {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
         </a>
       )
     }

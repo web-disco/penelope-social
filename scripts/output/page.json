@@ -9,8 +9,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Penelope Social Menu Vaughan | Lunch, Dinner & Catering",
-      "metaDescription": "Explore Penelope Social's menu in Vaughan, featuring artisanal pizzas, sandwiches, pastas, and cocktails. Perfect for lunch, dinner, and catering events.",
+      "metaTitle": "Menus | Lunch, dinner, bar, and catering | Penelope Social",
+      "metaDescription": "Lunch, dinner, bar, and catering menus at Penelope Social in Woodbridge. Focaccia sandwiches, pizza, handhelds, and cocktails.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a8dfb734293806a5b_menu-og-image.png",
@@ -32,8 +32,8 @@
         "_key": "heading",
         "variant": "default",
         "align": "center",
-        "heading": "Penelope Social\nMenus Vaughan",
-        "intro": "From savory focaccia sandwiches at lunch to refreshing cocktails after work and gut-friendly pizzas for dinner, Penelope offers an unforgettable dining experience at every moment of the day.",
+        "heading": "Menus at Penelope Social",
+        "intro": "Focaccia sandwiches at lunch, cocktails after work, and pizza at dinner — all at 125 Hawkview Blvd, Woodbridge.",
         "quickLinks": []
       },
       {
@@ -106,8 +106,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "About Penelope Social Vaughan | Neighborhood Gem for Food & Drinks",
-      "metaDescription": "Learn about Penelope Social in Vaughan, a neighborhood gem for fresh sourdough, comfort food, and crafted cocktails. Great flavors, good times, and memories.",
+      "metaTitle": "About Penelope Social | Woodbridge restaurant",
+      "metaDescription": "Three brothers, a Woodbridge restaurant, and bread from Penelope Bakehouse in Scarborough. The family story behind cafe, kitchen, and bar.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
@@ -127,8 +127,8 @@
       {
         "_type": "introSection",
         "_key": "intro",
-        "heading": "About\nPenelope Social",
-        "intro": "Penelope is a neighborhood gem in the heart of Vaughan. Born from the passion of three brothers who believe in the power of great food, refreshing drinks, and bringing people together. With a focus on fresh sourdough, comfort food, and carefully crafted cocktails, we’ve created a space where every detail feels like home. It’s all about great flavors, good times, and making memories with the people you care about.",
+        "heading": "About Penelope Social",
+        "intro": "Penelope Social is the restaurant in Woodbridge — cafe by day, kitchen and bar at night — at 125 Hawkview Blvd. We serve lunch, dinner, and drinks. The sourdough on the table comes from Penelope Bakehouse, our Scarborough micro-bakery.",
         "ctas": []
       },
       {
@@ -343,8 +343,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Event Space Vaughan | Penelope Social",
-      "metaDescription": "Looking for an event space in Vaughan? Host your celebration, corporate gathering, or special occasion at Penelope Social with exceptional food and drinks.",
+      "metaTitle": "Catering and events in Woodbridge | Penelope Social",
+      "metaDescription": "Plan catering or a private event at Penelope Social, 125 Hawkview Blvd, Woodbridge. Trays to-go or a night in the restaurant. 24 hours' notice for catering.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
@@ -364,15 +364,15 @@
       {
         "_type": "introSection",
         "_key": "intro",
-        "heading": "Event space vaughan",
-        "intro": "Celebrate your special moments at Penelope Social in Vaughan. From intimate gatherings to corporate events, we offer a warm atmosphere, exceptional dishes, and handcrafted cocktails. Our team will collaborate with you to design a personalized experience, ensuring every detail is exactly what you envisioned.",
+        "heading": "Catering and events",
+        "intro": "Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you — food, drinks, and the room.",
         "ctas": []
       },
       {
         "_type": "contactFormSection",
         "_key": "form",
         "variant": "events",
-        "heading": "plan your event",
+        "heading": "Plan your event",
         "intro": "Submit the form below and someone from our team will reach back out to you within 24 to 48 hours.",
         "submitLabel": "Submit",
         "successMessage": "Thank you! Your submission has been received!",
@@ -483,8 +483,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Contact Penelope Social Vaughan | Get in Touch Today",
-      "metaDescription": "Reach out to Penelope Social in Vaughan for inquiries, reservations, or event bookings. We're here to help with all your needs. Contact us today!",
+      "metaTitle": "Contact Penelope Social in Woodbridge",
+      "metaDescription": "Call (905) 607-0606, email info@penelopesocial.com, or write us at 125 Hawkview Blvd, Woodbridge. Reservations, catering, and general questions.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
@@ -504,8 +504,8 @@
       {
         "_type": "introSection",
         "_key": "intro",
-        "heading": "Get in Touch with\nPenelope Social Vaughan",
-        "intro": "We’d love to hear from you! Whether you have questions, want to book a table, or are planning your next event, the Penelope team is here to help. Reach out via phone, email, or visit us in Vaughan to experience our warm hospitality, artisanal dishes, and creative cocktails firsthand.\n\nLet’s connect and make your Penelope experience unforgettable.",
+        "heading": "Get in touch",
+        "intro": "We'd love to hear from you. Questions, a table, or an event — call, email, or visit us at 125 Hawkview Blvd, Woodbridge.",
         "ctas": []
       },
       {
@@ -587,8 +587,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Penelope Social Merch Vaughan | Shop Exclusive Apparel",
-      "metaDescription": "Browse Penelope Social's exclusive merch in Vaughan. Shop unique apparel and accessories to take a piece of the experience home.",
+      "metaTitle": "Merch | Penelope Social",
+      "metaDescription": "Hoodies, tees, and totes from Penelope Social — the Woodbridge cafe and bar.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",

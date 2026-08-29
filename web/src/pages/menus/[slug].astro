@@ -7,6 +7,9 @@ import PageHero from '../../components/sections/PageHero.astro'
 import PageHeading from '../../components/sections/PageHeading.astro'
 import MenuCategories from '../../components/MenuCategories.astro'
 import { getAll } from '../../lib/data'
+import { resolveSeo } from '../../data/seo'
+import { restaurantCopy, displayHeading } from '../../data/copy'
+import { breadcrumbSchema, pageGraph, restaurantSchema } from '../../lib/schema'
 
 export async function getStaticPaths() {
   const menus = await getAll<any>('menu')
@@ -16,7 +19,18 @@ export async function getStaticPaths() {
 }
 
 const { menu } = Astro.props
-const seo = menu.seo ?? {}
+const path = `/menus/${menu.slug.current}`
+const seo = resolveSeo(path, menu.seo)
+const headingText = displayHeading(menu.heading, menu.title)
+const introText = restaurantCopy(menu.intro)
+const graph = pageGraph([
+  restaurantSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Menus', path: '/menus' },
+    { name: headingText, path },
+  ]),
+])
 
 /* The quick-link buttons are derived from the categories rather than authored
    beside them. They were a parallel array in Sanity that repeated each
@@ -28,16 +42,17 @@ const quickLinks = (menu.categories ?? [])
 ---
 
 <BaseLayout
-  title={seo.metaTitle ?? menu.title}
-  description={seo.metaDescription}
-  ogImage={seo.ogImage}
-  noIndex={seo.noIndex}
+  title={seo.title}
+  description={seo.description}
+  ogImage={menu.seo?.ogImage}
+  noIndex={menu.seo?.noIndex}
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
   <PageHero block={{ image: menu.banner }} />
   <PageHeading
     block={{
-      heading: menu.heading,
-      intro: menu.intro,
+      heading: headingText,
+      intro: introText,
       align: 'left',
       quickLinks,
     }}

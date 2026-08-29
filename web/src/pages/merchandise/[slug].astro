@@ -7,6 +7,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
 import { getAll } from '../../lib/data'
+import { resolveSeo } from '../../data/seo'
+import { breadcrumbSchema, pageGraph, restaurantSchema } from '../../lib/schema'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
 import { container, heading, btn } from '../../lib/ui'
 
@@ -18,16 +20,26 @@ export async function getStaticPaths() {
 }
 
 const { product } = Astro.props
-const seo = product.seo ?? {}
+const path = `/merchandise/${product.slug.current}`
+const seo = resolveSeo(path, product.seo)
+const graph = pageGraph([
+  restaurantSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Merch', path: '/merchandise' },
+    { name: product.title, path },
+  ]),
+])
 const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charcoal wf-md:text-[38px] wf-sm:text-[28px] wf-xs:flex-none wf-xs:text-[22px]'
 ---
 
 <BaseLayout
-  title={seo.metaTitle ?? product.title}
-  description={seo.metaDescription}
-  ogImage={seo.ogImage}
-  noIndex={seo.noIndex}
+  title={seo.title}
+  description={seo.description}
+  ogImage={product.seo?.ogImage}
+  noIndex={product.seo?.noIndex}
 >
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
   <PageHero block={{ image: product.banner }} />
 
   <div class="section-merch-details">
@@ -77,6 +89,7 @@ const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charc
                   <a
                     href={product.cta.url}
                     target={product.cta.newTab ? '_blank' : undefined}
+                    data-ga-event="merch_click"
                     class={product.cta.style === 'outline' ? btn.outline : btn.primary}
                   >
                     {product.cta.label}

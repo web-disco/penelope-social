@@ -13,6 +13,7 @@ import {
 import { initMerchSwiper } from './merch-swiper'
 import { initSiteForms, initEventForm, initTurnstileSpacing } from './forms'
 import { initLightbox } from './lightbox'
+import { initAnalyticsClicks } from './ga'
 
 /* Same order as the live site's DOMContentLoaded handler, with the additions
    that replace behaviour webflow.js used to provide (lightbox) and the form
@@ -53,6 +54,7 @@ function boot() {
   window.gsap = gsap
   lenis.start()
 
+  initAnalyticsClicks()
   initHomeMenuHover()
   initTitleAnimation()
   initTextAnimation()

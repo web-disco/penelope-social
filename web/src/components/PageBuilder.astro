@@ -17,6 +17,8 @@ import StorySection from './sections/StorySection.astro'
 import MerchListing from './sections/MerchListing.astro'
 import ContactFormSection from './sections/ContactFormSection.astro'
 import ImageGrid from './sections/ImageGrid.astro'
+import FaqSection from './sections/FaqSection.astro'
+import StepTimeline from './sections/StepTimeline.astro'
 
 const COMPONENTS: Record<string, any> = {
   hero: Hero,
@@ -30,6 +32,8 @@ const COMPONENTS: Record<string, any> = {
   merchListing: MerchListing,
   contactFormSection: ContactFormSection,
   imageGrid: ImageGrid,
+  faqSection: FaqSection,
+  stepTimeline: StepTimeline,
 }
 
 interface Props {
@@ -48,6 +52,12 @@ const { sections = [] } = Astro.props
     /* Homepage hero now carries the H1, so the intro under it drops to h2. */
     if (block._type === 'introSection' && sections.some((section) => section._type === 'hero')) {
       return <Component block={block} headingLevel="h2" />
+    }
+    if (block._type === 'faqSection') {
+      return <FaqSection headingText={block.heading} items={block.items ?? []} />
+    }
+    if (block._type === 'stepTimeline') {
+      return <StepTimeline headingText={block.heading} steps={block.steps ?? []} />
     }
     return <Component block={block} />
   })

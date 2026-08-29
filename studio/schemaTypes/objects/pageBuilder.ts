@@ -24,6 +24,8 @@ export const pageBuilderField = defineField({
     defineArrayMember({ type: 'merchListing' }),
     defineArrayMember({ type: 'contactFormSection' }),
     defineArrayMember({ type: 'imageGrid' }),
+    defineArrayMember({ type: 'faqSection' }),
+    defineArrayMember({ type: 'stepTimeline' }),
   ],
   options: {
     insertMenu: {

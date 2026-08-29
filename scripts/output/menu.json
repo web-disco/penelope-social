@@ -9,8 +9,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Lunch Menu | Sourdough Focaccia, Pizzas & Salads at Penelope Social",
-      "metaDescription": "Discover the best lunch in Vaughan at Penelope Social. Enjoy freshly baked sourdough focaccia sandwiches, artisanal pizzas, and crisp salads made with premium ingredients. Perfect for a quick bite or a relaxed midday meal.",
+      "metaTitle": "Lunch menu | Penelope Social Woodbridge",
+      "metaDescription": "Lunch at Penelope Social in Woodbridge: focaccia sandwiches, pizza, and salads. Monday–Saturday, 10am–3pm at 125 Hawkview Blvd.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3981daa85bcd03e403_lunch-og-image.png",
@@ -23,7 +23,7 @@
       "alt": "Image of Lunch menu platter"
     },
     "heading": "Lunch menu",
-    "intro": "Discover the best lunch in Vaughan at Penelope Social. Enjoy freshly baked sourdough focaccia sandwiches, artisanal New York-style pizzas, and crisp salads.\n\nExclusively Available | Monday - Saturday 10:00am -3:00pm",
+    "intro": "Lunch at Penelope Social in Woodbridge. Focaccia sandwiches, New York-style pizzas, and salads.\n\nMonday–Saturday 10:00am–3:00pm",
     "categories": [
       {
         "_type": "menuCategory",
@@ -277,15 +277,15 @@
   {
     "_id": "menu-dinner",
     "_type": "menu",
-    "title": "dinner menu",
+    "title": "Dinner menu",
     "slug": {
       "_type": "slug",
       "current": "dinner"
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Dinner Menu | Pizzas, Handhelds & Shareables at Penelope Social",
-      "metaDescription": "Savor a delicious dinner at Penelope Social with fresh pizzas, hearty handhelds, and shareable plates. From flavorful pizzas to light salads and savory olives, enjoy a memorable dining experience with premium ingredients in Vaughan.",
+      "metaTitle": "Dinner menu | Penelope Social Woodbridge",
+      "metaDescription": "Dinner in Woodbridge: pizza, handhelds, and shareable plates at Penelope Social. Monday–Saturday from 5pm at 125 Hawkview Blvd.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd396541130c2bde544c_dinner-og-image.png",
@@ -297,8 +297,8 @@
       "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bffb125533c6e03daf470_dinner-menu-banner.avif",
       "alt": "Image of dinner plate"
     },
-    "heading": "dinner menu",
-    "intro": "At Penelope, enjoy the best dinner in Vaughan with our fresh, gut-friendly pizzas and delicious dishes. Whether it's a date night or a gathering with friends, our menu has something for every craving.\n\nExclusively Available | Monday- Saturday 5:00pm-Close",
+    "heading": "Dinner menu",
+    "intro": "Dinner at Penelope Social in Woodbridge. Gut-friendly pizzas, handhelds, and shareable plates.\n\nMonday–Saturday 5:00pm–close",
     "categories": [
       {
         "_type": "menuCategory",
@@ -552,8 +552,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Bar Menu | Craft Cocktails & Drinks at Penelope Social",
-      "metaDescription": "Unwind at Penelope Social with our expertly crafted cocktails in Vaughan. Whether you're in the mood for something bold or light, our bar menu offers refreshing drinks to suit every taste. The perfect stop to relax after a busy day.",
+      "metaTitle": "Bar menu | Cocktails in Woodbridge | Penelope Social",
+      "metaDescription": "Cocktails, wine, and a late bar at Penelope Social in Woodbridge. Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd39418af7ad259a1808_bar-og-image.png",
@@ -566,12 +566,12 @@
       "alt": "Image of Bar Tender"
     },
     "heading": "Bar menu",
-    "intro": "Skip the traffic and relax at Penelope in Vaughan. Our expert bartenders will craft the perfect cocktail to match your mood, whether you’re in the mood for something bold or light and bubbly.",
+    "intro": "Skip the traffic and sit at the bar in Woodbridge. Cocktails to match the night — bold or light.",
     "categories": [
       {
         "_type": "menuCategory",
         "_key": "category-cocktails",
-        "title": "cocktails",
+        "title": "Cocktails",
         "items": [
           {
             "_type": "menuItem",
@@ -711,8 +711,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Catering Menu | Fresh Salads, Pizzas & Sandwiches at Penelope",
-      "metaDescription": "Explore Penelope Social's catering menu. Enjoy fresh salads, pizzas, focaccia sandwiches, and more for your next event. Perfect for any occasion!",
+      "metaTitle": "Catering menu | Penelope Social Woodbridge",
+      "metaDescription": "Trays of sandwiches, pizza, and more from Penelope Social in Woodbridge. See the catering menu, then enquire at /catering-events.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a810cc63ea87effc8_catering-og-image.png",
@@ -725,7 +725,7 @@
       "alt": "Image of Bar Tender"
     },
     "heading": "Catering menu",
-    "intro": "Bring the flavours of Penelope home with you with our Catering Menu. Whether its a party size pizza or a tray of our delicious focaccia sandwiches we have a little something for everyone.",
+    "intro": "Bring Penelope to your table. Party-size pizza or trays of focaccia sandwiches — from the Woodbridge kitchen.",
     "categories": [
       {
         "_type": "menuCategory",

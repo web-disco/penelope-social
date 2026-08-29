@@ -1,0 +1,74 @@
+---
+/**
+ * Inner-page banner with centred H1 + intro (Bakehouse PageHero).
+ * H1 is painted immediately — no GSAP / .reveal hide.
+ */
+import { heading, layout, typeScale } from '../../lib/ui'
+import { imageUrl, imageAlt } from '../../lib/image'
+
+interface Props {
+  src?: string
+  image?: any
+  alt?: string
+  headingText?: string
+  intro?: string
+  objectPosition?: string
+}
+
+const {
+  src,
+  image,
+  alt,
+  headingText,
+  intro,
+  objectPosition = 'center',
+} = Astro.props
+
+const imgSrc = src || imageUrl(image)
+const imgAlt = alt || imageAlt(image)
+const bannerHeight = 'h-[550px] wf-md:h-[420px] wf-sm:h-[440px] wf-xs:h-[400px]'
+---
+
+<div class:list={['page-banner relative mb-section-gap-y w-full overflow-hidden wf-sm:mb-section-gap-y-sm', bannerHeight]}>
+  {
+    imgSrc && (
+      <img
+        src={imgSrc}
+        alt={imgAlt}
+        width="1440"
+        height="810"
+        loading="eager"
+        fetchpriority="high"
+        class="page-banner-image absolute inset-0 h-full w-full object-cover"
+        style={`object-position: ${objectPosition};`}
+      />
+    )
+  }
+  <div class="page-banner-overlay pointer-events-none absolute inset-0 bg-black/35" aria-hidden="true"></div>
+  <div
+    class="page-banner-scrim pointer-events-none absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-black/92 via-black/55 to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+  {
+    (headingText || intro) && (
+      <div class="page-banner-copy absolute inset-x-0 bottom-0 z-[2] pb-space-48 pt-space-32 wf-md:pb-space-32 wf-sm:pb-space-24 wf-sm:pt-space-24">
+        <div class:list={[layout.shell, 'flex flex-col items-center text-center']}>
+          {headingText && (
+            <h1 class={`${heading.light} my-0 max-w-[1080px] text-balance`}>{headingText}</h1>
+          )}
+          {intro && (
+            <p
+              class:list={[
+                'mt-space-16 mb-0 max-w-[640px] text-beige text-pretty not-italic',
+                typeScale.intro,
+              ]}
+            >
+              {intro}
+            </p>
+          )}
+        </div>
+      </div>
+    )
+  }
+</div>

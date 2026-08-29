@@ -10,7 +10,8 @@ export const seo = defineType({
       name: 'metaTitle',
       title: 'Meta title',
       type: 'string',
-      description: 'Falls back to the page title. Shown in the browser tab and search results.',
+      description:
+        'Unique per URL. Use Woodbridge as the city — never Vaughan as the city. Vaughan can appear as the wider area only.',
     }),
     defineField({ name: 'metaDescription', title: 'Meta description', type: 'text', rows: 3 }),
     defineField({
