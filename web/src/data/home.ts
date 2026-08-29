@@ -32,7 +32,7 @@ export const homeMenusFallback = {
     },
     {
       title: 'Catering',
-      line: 'Trays for the table',
+      line: 'Trays for your event',
       url: '/menus/catering',
     },
   ],

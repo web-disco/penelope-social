@@ -10,7 +10,7 @@
 export const STUDIO_PUBLISH_CHECKLIST = [
   'Homepage hero: “Good food, better company at Penelope Social in Woodbridge” / “Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.” Place in the H1, food in the lede. No period in the H1. Repo wins over stale CMS.',
   'Homepage — delete the “Cafe and bar in Woodbridge” intro block (Reservations / Our story). The build already skips it.',
-  'Homepage mosaic — H2 “On the menu”, four cards: Lunch “Focaccia and pizza”, Bar “Cocktails till late”, Dinner “Pizza and shareables”, Catering “Trays for the table”. CTA “Explore our menus” → /menus',
+  'Homepage mosaic — H2 “On the menu”, four cards: Lunch “Focaccia and pizza”, Bar “Cocktails till late”, Dinner “Pizza and shareables”, Catering “Trays for your event”. CTA “Explore our menus” → /menus',
   'Homepage bread — “Good bread, served here every day” + Visit the Bakehouse → https://penelopebakehouse.com',
   'Homepage events — “Birthdays, work dinners, and nights in the room…” (no street address)',
   'Homepage green merch band — repo-only WaveMoment above FAQ. Bakehouse bike + checkers. Arc “Take a shirt home from Social”, support “Hoodies, tees, and totes. Pick them up in store.”, button See merch → /merchandise. No Studio block needed.',
