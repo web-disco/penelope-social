@@ -4,8 +4,8 @@
  * FAQs, JSON-LD, unique titles) already ship from this repo even if Studio
  * is stale. Hosted dataset writes were not available from this agent.
  *
- * /sourdough-bakery 301s to /about. Unpublish that CMS page so it cannot
- * rebuild as HTML in front of the redirect.
+ * GSC (sc-domain:penelopesocial.com): submit sitemap-index.xml only.
+ * Request indexing for /contact after that submit. Unpublish /sourdough-bakery.
  */
 export const STUDIO_PUBLISH_CHECKLIST = [
   'Homepage — title, hero H1/body, intro, menu cards, bread + events blocks, SEO (Woodbridge restaurant, not Vaughan bakery)',
@@ -13,11 +13,13 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Site Settings — default SEO, reservations label, footer headings (sentence case), hours labels Cafe/Bar, NAP 125 Hawkview Blvd, Woodbridge, ON L4H 2E2',
   'Site Settings nav — Bakery → https://penelopebakehouse.com (same tab; not /sourdough-bakery)',
   'Page: about — SEO only if still editing the CMS about doc (route now uses dedicated about.astro)',
-  'Page: contact — heading “Get in touch”, Woodbridge NAP intro, SEO',
+  'Page: contact — heading “Get in touch”, Woodbridge NAP intro, unique SEO (keep in sitemap; request-indexing is a GSC click after submit)',
   'Page: catering-events — heading “Catering and events”, Woodbridge copy, SEO (not “Event space vaughan”)',
+  'Menu: catering — tray-list heading + unique SEO (not a thin copy of /catering-events)',
   'Page: menus — heading “Menus at Penelope Social”, SEO',
   'Page: merchandise — SEO without Vaughan-as-city',
-  'Menus lunch/dinner/bar/catering — unique Woodbridge meta + intros',
+  'Menus lunch/dinner/bar — unique Woodbridge meta + intros',
   'Unpublish /sourdough-bakery — same-site 301 to /about already ships from _redirects',
+  'GSC — submit https://penelopesocial.com/sitemap-index.xml only (not sitemap.xml)',
   'Optional: add FAQ / Timeline page-builder blocks',
 ] as const

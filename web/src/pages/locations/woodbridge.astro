@@ -5,7 +5,7 @@ import LocationDetails from '../../components/sections/LocationDetails.astro'
 import FaqSection from '../../components/sections/FaqSection.astro'
 import { woodbridgeLocation, woodbridgeLocationMeta } from '../../data/locations'
 import { woodbridgeFaq } from '../../data/faq'
-import { breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../../lib/schema'
+import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../../lib/schema'
 import { INSTAGRAM_URL } from '../../data/site'
 
 const nap = woodbridgeLocation.nap
@@ -45,6 +45,7 @@ const detailRows = [
 
 const graph = pageGraph([
   restaurantSchema(),
+  bakehouseSchema(),
   faqPageSchema(woodbridgeFaq),
   breadcrumbSchema([
     { name: 'Home', path: '/' },

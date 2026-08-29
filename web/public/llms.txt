@@ -62,5 +62,6 @@ Social serves Bakehouse sourdough. Bakehouse is not a second Social dining room.
 
 ## Sitemap
 
-https://penelopesocial.com/sitemap-index.xml
-https://penelopesocial.com/sitemap.xml
+Submit only https://penelopesocial.com/sitemap-index.xml on sc-domain:penelopesocial.com.
+/sitemap.xml 301s to the index. It is not a second sitemap to submit.
+Keep /contact in the sitemap. Request indexing for /contact is a GSC click after submit.

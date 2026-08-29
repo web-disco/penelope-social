@@ -10,7 +10,7 @@ import FaqSection from '../components/sections/FaqSection.astro'
 import { getAll } from '../lib/data'
 import { resolveSeo } from '../data/seo'
 import { cateringFaq, contactFaq } from '../data/faq'
-import { breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
+import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
 
 export async function getStaticPaths() {
   const retired = new Set(['about', 'sourdough-bakery'])
@@ -31,6 +31,7 @@ const crumbName =
 
 const graph = pageGraph([
   restaurantSchema(),
+  bakehouseSchema(),
   breadcrumbSchema([
     { name: 'Home', path: '/' },
     { name: crumbName, path },

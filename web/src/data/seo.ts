@@ -47,9 +47,9 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
       'Cocktails, wine, and a late bar at Penelope Social in Woodbridge. Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.',
   },
   '/menus/catering': {
-    title: 'Catering menu | Penelope Social Woodbridge',
+    title: 'Catering tray menu | Pizza, focaccia, salads | Penelope Social',
     description:
-      'Trays of sandwiches, pizza, and more from Penelope Social in Woodbridge. See the catering menu, then enquire at /catering-events.',
+      'Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8–10. Prices on this page. Book trays on Catering and events — 24 hours’ notice.',
   },
   '/merchandise': {
     title: 'Merch | Penelope Social',
@@ -96,6 +96,8 @@ export function resolveSeo(
 ): SeoMeta {
   const path = normalizePath(pathname)
   const defaults = PAGE_SEO[path]
+  // GSC: /menus/catering is crawled, not indexed. Repo copy wins over a thin CMS duplicate of /catering-events.
+  if (path === '/menus/catering' && defaults) return defaults
   const cmsTitle = cms?.metaTitle?.trim()
   const cmsDescription = cms?.metaDescription?.trim()
 

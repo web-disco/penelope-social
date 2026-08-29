@@ -14,6 +14,10 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
     'Cafe by day and a bar by night at 125 Hawkview Blvd, Woodbridge. Lunch, dinner, and drinks — bread from Penelope Bakehouse in Scarborough.',
   'Event space vaughan': 'Catering and events in Woodbridge',
   'Event Space Vaughan | Penelope Social': 'Catering and events in Woodbridge | Penelope Social',
+  'Catering menu | Penelope Social Woodbridge':
+    'Catering tray menu | Pizza, focaccia, salads | Penelope Social',
+  'Trays of sandwiches, pizza, and more from Penelope Social in Woodbridge. See the catering menu, then enquire at /catering-events.':
+    'Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8–10. Prices on this page. Book trays on Catering and events — 24 hours’ notice.',
   'Penelope Social\nMenus Vaughan': 'Menus at Penelope Social',
   'Penelope Social Menu Vaughan | Lunch, Dinner & Catering':
     'Menus | Lunch, dinner, bar, and catering | Penelope Social',

@@ -11,7 +11,7 @@ import TeamGrid from '../components/sections/TeamGrid.astro'
 import { layout, space, typeScale, heading, btn } from '../lib/ui'
 import { aboutMeta, aboutPage } from '../data/about'
 import { aboutFaq } from '../data/faq'
-import { breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
+import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
 import { getOne } from '../lib/data'
 
 const cmsAbout = await getOne<any>('page', 'about')
@@ -20,6 +20,7 @@ const video = aboutPage.videoTeaser
 
 const graph = pageGraph([
   restaurantSchema(),
+  bakehouseSchema(),
   faqPageSchema(aboutFaq),
   breadcrumbSchema([
     { name: 'Home', path: '/' },

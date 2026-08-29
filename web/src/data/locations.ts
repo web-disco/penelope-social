@@ -16,7 +16,7 @@ export const locationsHubMeta = PAGE_SEO['/locations']!
 
 export const locationsHub = {
   heading: 'Our locations',
-  intro: 'Woodbridge restaurant and Scarborough bakehouse',
+  intro: 'Two places. Penelope Social is the Woodbridge restaurant. Penelope Bakehouse is the Scarborough micro-bakery.',
 }
 
 export const woodbridgeLocationMeta = PAGE_SEO['/locations/woodbridge']!

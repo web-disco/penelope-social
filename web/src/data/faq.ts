@@ -26,7 +26,11 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: 'Is this the same as Penelope Bakehouse?',
-    answer: `We're sister spots. Penelope Social is the Woodbridge cafe and bar. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough micro-bakery at 71 Howden Rd — that is where the sourdough is baked. We serve that bread here.`,
+    answer: `No. Penelope Social is the Woodbridge cafe and bar at 125 Hawkview Blvd. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough micro-bakery at 71 Howden Rd — that is where the sourdough is baked. We serve that bread here.`,
+  },
+  {
+    question: 'Where is the Penelope Bakehouse menu?',
+    answer: `The Scarborough bakehouse menu, hours, and online order live on <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. This site is Penelope Social — lunch, dinner, bar, and the catering tray list are here.`,
   },
   {
     question: 'Do you offer catering and events?',
@@ -75,6 +79,27 @@ export const cateringFaq: FaqItem[] = [
   {
     question: 'Can I just order trays?',
     answer: `Yes. See the <a href="${CATERING_MENU_URL}">catering menu</a>, then send the form on this page. Choose “Catering” as the reason.`,
+  },
+]
+
+/** Unique to /menus/catering — tray list, not the events booking page. */
+export const cateringMenuFaq: FaqItem[] = [
+  {
+    question: 'Is this the catering and events booking page?',
+    answer: `No. This page is the tray list and prices. To order trays or book a private night in the restaurant, go to <a href="${CATERING_EVENTS_URL}">Catering and events</a>.`,
+  },
+  {
+    question: 'What comes on a catering tray?',
+    answer:
+      '24-slice pizzas, focaccia sandwiches (minimum of 6, each cut into 4), country sourdough and focaccia loaves, and salads that serve 8–10. Appetizers and pasta are listed when they are available.',
+  },
+  {
+    question: 'How much notice do tray orders need?',
+    answer: `We prefer 24 hours’ notice. Send the order on <a href="${CATERING_EVENTS_URL}">Catering and events</a> and choose “Catering”.`,
+  },
+  {
+    question: 'Is this the Penelope Bakehouse catering menu?',
+    answer: `No. These trays come from Penelope Social’s Woodbridge kitchen. For the Scarborough bakehouse menu, go to <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>.`,
   },
 ]
 

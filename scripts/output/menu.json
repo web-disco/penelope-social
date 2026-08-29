@@ -711,8 +711,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Catering menu | Penelope Social Woodbridge",
-      "metaDescription": "Trays of sandwiches, pizza, and more from Penelope Social in Woodbridge. See the catering menu, then enquire at /catering-events.",
+      "metaTitle": "Catering tray menu | Pizza, focaccia, salads | Penelope Social",
+      "metaDescription": "Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8–10. Prices on this page. Book trays on Catering and events — 24 hours’ notice.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a810cc63ea87effc8_catering-og-image.png",
@@ -724,8 +724,8 @@
       "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cbe3a00fc531a1733e0c5_catering-banner.avif",
       "alt": "Image of Bar Tender"
     },
-    "heading": "Catering menu",
-    "intro": "Bring Penelope to your table. Party-size pizza or trays of focaccia sandwiches — from the Woodbridge kitchen.",
+    "heading": "Catering tray menu",
+    "intro": "Trays from the Woodbridge kitchen — not a private-event booking page, and not the Scarborough bakehouse menu. Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.",
     "categories": [
       {
         "_type": "menuCategory",

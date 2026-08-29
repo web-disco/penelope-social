@@ -88,4 +88,5 @@ export const MENU_URLS = [
   `${SITE_ORIGIN}/menus/catering`,
 ] as const
 
-export const SAME_AS = [INSTAGRAM_URL, TIKTOK_URL, BAKEHOUSE_SITE_URL] as const
+/** Social profiles only. Do not put penelopebakehouse.com here — that mixes the two entities. */
+export const SAME_AS = [INSTAGRAM_URL, TIKTOK_URL] as const

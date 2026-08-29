@@ -5,6 +5,7 @@
 
 import type { FaqItem, HourBlock } from '../data/types'
 import {
+  BAKEHOUSE_SITE_URL,
   INSTAGRAM_URL,
   MENU_URLS,
   SAME_AS,
@@ -13,6 +14,7 @@ import {
   TIKTOK_URL,
   barHours,
   cafeHours,
+  scarboroughBakehouse,
   woodbridgeNap,
 } from '../data/site'
 
@@ -78,9 +80,12 @@ export function restaurantSchema() {
     url: `${SITE}/`,
     telephone: nap.phone,
     email: nap.email,
+    description:
+      'Penelope Social is the Woodbridge restaurant at 125 Hawkview Blvd: cafe by day, bar by night. It is not Penelope Bakehouse. The Scarborough micro-bakery sister is at 71 Howden Rd — bread for this room starts there.',
     servesCuisine: ['Italian', 'Pizza', 'Cafe'],
     acceptsReservations: true,
     menu: [...MENU_URLS],
+    supplier: { '@id': `${BAKEHOUSE_SITE_URL}/#bakery` },
     address: {
       '@type': 'PostalAddress',
       streetAddress: nap.street,
@@ -112,6 +117,57 @@ export function restaurantSchema() {
         openingHoursSpecification: hoursFromBlocks(barHours),
       },
     ],
+  }
+}
+
+/** Separate Bakehouse entity. Do not fold this into Social's sameAs. */
+export function bakehouseSchema() {
+  const bakehouse = scarboroughBakehouse
+  return {
+    '@type': 'Bakery',
+    '@id': `${BAKEHOUSE_SITE_URL}/#bakery`,
+    name: bakehouse.name,
+    description:
+      'Scarborough micro-bakery sister to Penelope Social. Counter service, loaves, focaccia sandwiches, and pizza by the slice. Not a second Social dining room. Menu and orders live on penelopebakehouse.com.',
+    url: bakehouse.url,
+    telephone: bakehouse.phone,
+    email: bakehouse.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: bakehouse.street,
+      addressLocality: 'Scarborough',
+      addressRegion: 'ON',
+      postalCode: bakehouse.postal,
+      addressCountry: 'CA',
+    },
+  }
+}
+
+export function menuSchema(input: {
+  name: string
+  path: string
+  description: string
+  sections: { name: string; description?: string; items: { name: string; description?: string; price?: string }[] }[]
+}) {
+  return {
+    '@type': 'Menu',
+    '@id': `${SITE}${input.path}#menu`,
+    name: input.name,
+    url: `${SITE}${input.path}`,
+    description: input.description,
+    hasMenuSection: input.sections.map((section) => ({
+      '@type': 'MenuSection',
+      name: section.name,
+      description: section.description || undefined,
+      hasMenuItem: section.items.map((item) => ({
+        '@type': 'MenuItem',
+        name: item.name,
+        description: item.description || undefined,
+        offers: item.price
+          ? { '@type': 'Offer', price: item.price, priceCurrency: 'CAD' }
+          : undefined,
+      })),
+    })),
   }
 }
 

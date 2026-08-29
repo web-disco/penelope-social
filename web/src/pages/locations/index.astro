@@ -8,7 +8,7 @@ import {
   scarboroughLocation,
   woodbridgeLocation,
 } from '../../data/locations'
-import { breadcrumbSchema, pageGraph, restaurantSchema } from '../../lib/schema'
+import { bakehouseSchema, breadcrumbSchema, pageGraph, restaurantSchema } from '../../lib/schema'
 import { isMapsDirectionsHref, isSocialTelHref } from '../../lib/analytics'
 
 const hubs = [woodbridgeLocation, scarboroughLocation] as const
@@ -17,6 +17,7 @@ const contactLink =
 
 const graph = pageGraph([
   restaurantSchema(),
+  bakehouseSchema(),
   breadcrumbSchema([
     { name: 'Home', path: '/' },
     { name: 'Locations', path: '/locations' },
