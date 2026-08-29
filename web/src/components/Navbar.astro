@@ -123,7 +123,7 @@ const navScrolled = solidNav
             data-ga-placement="nav"
             class:list={[btn.navSolid, 'navbar__cta']}
           >
-            {header.orderOnline.label}
+            <span>{header.orderOnline.label}</span>
           </a>
         )
       }
@@ -136,7 +136,9 @@ const navScrolled = solidNav
             data-ga-event="reservation_click"
             class:list={[btn.navOutline, 'navbar__cta']}
           >
-            {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
+            <span>
+              {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
+            </span>
           </a>
         )
       }
@@ -220,7 +222,7 @@ const navScrolled = solidNav
           data-ga-placement="drawer"
           class:list={[btn.secondary, 'menu-drawer__cta']}
         >
-          {header.orderOnline.label}
+          <span>{header.orderOnline.label}</span>
         </a>
       )
     }
@@ -233,7 +235,9 @@ const navScrolled = solidNav
           data-ga-event="reservation_click"
           class:list={[btn.secondaryOutline, 'menu-drawer__cta']}
         >
-          {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
+          <span>
+            {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
+          </span>
         </a>
       )
     }

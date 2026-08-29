@@ -70,7 +70,7 @@ const canonical = `${SITE_ORIGIN}/sourdough-bakery`
                         rel={cta.newTab ? 'noopener noreferrer' : undefined}
                         class={cta.style === 'outline' ? btn.outline : btn.primary}
                       >
-                        {cta.label}
+                        <span>{cta.label}</span>
                       </a>
                     ))}
                   </div>

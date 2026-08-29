@@ -65,7 +65,7 @@ const secondaryCta = block.reservations
                   data-ga-placement="hero"
                   class={btn.onMediaPrimary}
                 >
-                  {primaryCta.label}
+                  <span>{primaryCta.label}</span>
                 </a>
               )}
               {secondaryCta?.url && (
@@ -76,7 +76,7 @@ const secondaryCta = block.reservations
                   data-ga-event="reservation_click"
                   class={btn.secondaryOutline}
                 >
-                  {secondaryCta.label}
+                  <span>{secondaryCta.label}</span>
                 </a>
               )}
             </div>

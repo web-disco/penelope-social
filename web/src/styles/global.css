@@ -187,6 +187,13 @@
    CSS. Everything else in this port is Tailwind utilities.
    --------------------------------------------------------------------------- */
 @layer components {
+  /* All-caps Sweet Sans sits optically high — nudge the label into the box. */
+  .btn > span,
+  .newsletter-btn > span {
+    position: relative;
+    top: 1px;
+  }
+
   /* Custom scrollbar — from the site's per-page <style> block */
   ::-webkit-scrollbar {
     width: 8px;

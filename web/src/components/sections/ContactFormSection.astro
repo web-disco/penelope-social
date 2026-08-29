@@ -92,12 +92,13 @@ const fields: any[] = block.fields ?? []
         */}
         <div class="form-btn-wrap col-span-2 flex flex-col items-center justify-end">
           <Turnstile class="w-full text-center [&.is-visible]:mb-[20px]" theme="light" />
-          <input
+          <button
             type="submit"
             data-wait="Please wait..."
             class={`${btn.primary} w-button cursor-pointer rounded-none`}
-            value={block.submitLabel ?? 'Submit'}
-          />
+          >
+            <span>{block.submitLabel ?? 'Submit'}</span>
+          </button>
         </div>
       </form>
 

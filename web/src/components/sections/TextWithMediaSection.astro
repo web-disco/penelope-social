@@ -62,7 +62,7 @@ const copyOrder = imageFirst ? '' : 'wf-md:order-2'
                 data-ga-event={ctaUrl === '/catering-events' ? 'catering_click' : undefined}
                 class={block.cta?.style === 'outline' ? btn.outline : btn.primary}
               >
-                {ctaLabel}
+                <span>{ctaLabel}</span>
               </a>
             </div>
           )
