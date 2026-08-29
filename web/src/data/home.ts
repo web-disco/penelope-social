@@ -17,7 +17,7 @@ export const homeMenusFallback = {
   cards: [
     {
       title: 'Lunch',
-      line: 'Focaccia and pizza',
+      line: 'Pizza and focaccia sandwiches',
       url: '/menus/lunch',
     },
     {
