@@ -23,7 +23,7 @@
           "alt": "People having dinner at Penelope Social"
         },
         "heading": "Good food, better company at Penelope Social in Woodbridge",
-        "body": "Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.",
+        "body": "Focaccia sandwiches at lunch, sourdough pizza at dinner, and cocktails whenever you sit down.",
         "orderOnline": {
           "_type": "link",
           "label": "Order Online",
@@ -108,6 +108,25 @@
       },
       {
         "_type": "textWithMediaSection",
+        "_key": "events",
+        "layout": "copy-first",
+        "heading": "Events at Penelope",
+        "body": "Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.",
+        "cta": {
+          "_type": "button",
+          "label": "Plan an event",
+          "url": "/catering-events",
+          "newTab": false,
+          "style": "primary"
+        },
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd6a82f4cc92b24d53393_DSC_9066%201.avif",
+          "alt": "Event at Penelope"
+        }
+      },
+      {
+        "_type": "textWithMediaSection",
         "_key": "bread",
         "layout": "image-first",
         "heading": "Good bread, served here every day",
@@ -125,25 +144,6 @@
           "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1.avif 700w",
           "_migrationSizes": "(max-width: 700px) 100vw, 700px",
           "alt": "Loaves of Sourdough Bread"
-        }
-      },
-      {
-        "_type": "textWithMediaSection",
-        "_key": "events",
-        "layout": "copy-first",
-        "heading": "Events at Penelope",
-        "body": "Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.",
-        "cta": {
-          "_type": "button",
-          "label": "Plan an event",
-          "url": "/catering-events",
-          "newTab": false,
-          "style": "primary"
-        },
-        "image": {
-          "_type": "image",
-          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd6a82f4cc92b24d53393_DSC_9066%201.avif",
-          "alt": "Event at Penelope"
         }
       }
     ]

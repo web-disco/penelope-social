@@ -8,7 +8,7 @@
  * /sourdough-bakery stays live as a Social vs Bakehouse page — do not 301 it.
  */
 export const STUDIO_PUBLISH_CHECKLIST = [
-  'Homepage hero: “Good food, better company at Penelope Social in Woodbridge” / “Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.” Place in the H1, food in the lede. No period in the H1. Repo wins over stale CMS.',
+  'Homepage hero: “Good food, better company at Penelope Social in Woodbridge” / “Focaccia sandwiches at lunch, sourdough pizza at dinner, and cocktails whenever you sit down.” Place in the H1, food in the lede. No period in the H1. Repo wins over stale CMS.',
   'Homepage — delete the “Cafe and bar in Woodbridge” intro block (Reservations / Our story). The build already skips it.',
   'Homepage mosaic — H2 “On the menu”, four cards: Lunch “Pizza and focaccia sandwiches”, Bar “Cocktails till late”, Dinner “Pizza and shareables”, Catering “Trays for your event”. CTA “Explore our menus” → /menus',
   'Homepage bread — “Good bread, served here every day” + Visit the Bakehouse → https://penelopebakehouse.com',

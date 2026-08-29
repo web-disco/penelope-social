@@ -4,7 +4,7 @@ import { BAKEHOUSE_SITE_URL } from './site'
 
 export const homeHeroFallback = {
   heading: 'Good food, better company at Penelope Social in Woodbridge',
-  body: 'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
+  body: 'Focaccia sandwiches at lunch, sourdough pizza at dinner, and cocktails whenever you sit down.',
 }
 
 export const homeMenusFallback = {
