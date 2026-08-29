@@ -31,9 +31,20 @@ const visibleCategories = (categories ?? []).filter((category: any) => {
 })
 
 function categoryBlurb(text?: string) {
-  const raw = restaurantCopy(text)
+  let raw = restaurantCopy(text)
   if (!raw) return ''
-  return raw.replace(/\s*\n+\s*/g, ', ').replace(/\s{2,}/g, ' ').trim()
+  raw = raw
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/\s*\n+\s*/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+
+  if (/minimum of 6 sandwiches/i.test(raw) && /cut into 4/i.test(raw)) {
+    return 'Minimum of 6 sandwiches, cut into 4.'
+  }
+  if (/each salad serves/i.test(raw)) return 'Each salad serves 8 to 10.'
+  if (/penne or spaghetti/i.test(raw)) return 'Choice of penne or spaghetti.'
+  return raw
 }
 
 function splitTitleSize(title: string) {

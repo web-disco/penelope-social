@@ -749,7 +749,7 @@
         "_type": "menuCategory",
         "_key": "category-pasta",
         "title": "Pasta",
-        "description": "Comes with your choice of Penne or Spaghetti.",
+        "description": "Choice of penne or spaghetti.",
         "items": [
           {
             "_type": "menuItem",

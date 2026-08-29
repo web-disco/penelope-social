@@ -97,8 +97,15 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
     'Minimum of 6 sandwiches, cut into 4.',
   'Minimum of 6 sandwiches All sandwiches are cut into 4 pcs':
     'Minimum of 6 sandwiches, cut into 4.',
+  'Minimum of 6 sandwiches. All sandwiches are cut into 4 pcs.':
+    'Minimum of 6 sandwiches, cut into 4.',
+  'Minimum of 6 sandwiches. All sandwiches are cut into 4 pcs':
+    'Minimum of 6 sandwiches, cut into 4.',
   'Each salad serves between 8 to 10 people.': 'Each salad serves 8 to 10.',
+  'Each salad serves 8–10 people.': 'Each salad serves 8 to 10.',
+  'Each salad serves 8-10 people.': 'Each salad serves 8 to 10.',
   'Comes with your choice of Penne or Spaghetti.': 'Choice of penne or spaghetti.',
+  'Choice of Penne or Spaghetti.': 'Choice of penne or spaghetti.',
   'Vince’s starter lives at the restaurant, and the loaves are baked at Penelope Bakehouse in Scarborough.':
     'Bakehouse bread on the table at Social.',
   'The cafe and bar, and the Scarborough bakehouse for loaves, focaccia, and pizza by the slice.':
