@@ -18,7 +18,7 @@ export const homeFaq: FaqItem[] = [
   {
     question: 'What are the cafe and bar hours?',
     answer:
-      '<strong>Cafe</strong>: Monday–Saturday 9am–3pm, Sunday 8am–12pm.<br><strong>Bar</strong>: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am. Closed Sunday night.',
+      '<strong>Cafe</strong>: Monday–Saturday 9am–3pm, Sunday 8am–12pm.<br><strong>Bar</strong>: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.<br>Closed Sunday night.',
   },
   {
     question: 'Do you take reservations?',
@@ -115,7 +115,7 @@ export const contactFaq: FaqItem[] = [
   {
     question: 'What are your hours?',
     answer:
-      'Cafe: Monday–Saturday 9am–3pm, Sunday 8am–12pm. Bar: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.',
+      'Cafe: Monday–Saturday 9am–3pm, Sunday 8am–12pm.<br>Bar: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.<br>Closed Sunday night.',
   },
 ]
 
@@ -127,7 +127,7 @@ export const woodbridgeFaq: FaqItem[] = [
   {
     question: 'What are the cafe and bar hours?',
     answer:
-      'Cafe: Monday–Saturday 9am–3pm, Sunday 8am–12pm.<br>Bar: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.',
+      'Cafe: Monday–Saturday 9am–3pm, Sunday 8am–12pm.<br>Bar: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.<br>Closed Sunday night.',
   },
   {
     question: 'Do you take reservations?',

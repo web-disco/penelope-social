@@ -62,7 +62,7 @@ export const cafeHours: HourBlock[] = [
 export const barHours: HourBlock[] = [
   {
     label: 'Bar',
-    lines: ['Mon–Thu: 5pm–10pm', 'Fri–Sat: 5pm–1am'],
+    lines: ['Mon–Thu: 5pm–10pm', 'Fri–Sat: 5pm–1am', 'Closed Sunday night.'],
   },
 ]
 
