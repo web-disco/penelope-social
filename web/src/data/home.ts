@@ -2,7 +2,7 @@
 
 export const homeHeroFallback = {
   heading: 'Good food, better company',
-  body: 'Penelope Social, a cafe and bar in Woodbridge.',
+  body: 'Focaccia sandwiches, sourdough pizza, and cocktails, made daily at our Woodbridge cafe and bar.',
 }
 
 export const homeMenusFallback = {
