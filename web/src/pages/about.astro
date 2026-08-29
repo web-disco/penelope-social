@@ -1,6 +1,6 @@
 ---
 /**
- * About — Bakehouse structure (hero, copy, timeline, video, team, FAQ).
+ * About — Bakehouse structure (hero, copy, timeline, video, FAQ).
  * Restaurant-first family story. /sourdough-bakery is a separate
  * Social vs Bakehouse page — do not 301 that URL here.
  */
@@ -8,16 +8,13 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import BannerHero from '../components/sections/BannerHero.astro'
 import StepTimeline from '../components/sections/StepTimeline.astro'
 import FaqSection from '../components/sections/FaqSection.astro'
-import TeamGrid from '../components/sections/TeamGrid.astro'
-import { layout, space, typeScale, heading, btn, container, story } from '../lib/ui'
+import { layout, space, typeScale, heading, btn, story } from '../lib/ui'
 import { aboutMeta, aboutPage } from '../data/about'
 import { aboutFaq } from '../data/faq'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
-import { getOne } from '../lib/data'
 
-const cmsAbout = await getOne<any>('page', 'about')
-const teamBlock = (cmsAbout?.sections ?? []).find((section: any) => section._type === 'teamGrid')
 const video = aboutPage.videoTeaser
+const cta = video.ctas[0]
 
 const graph = pageGraph([
   restaurantSchema(),
@@ -41,7 +38,7 @@ const graph = pageGraph([
       objectPosition="center 50%"
     />
 
-    <section class="about-content">
+    <section class="about-content reveal">
       <div class:list={[layout.shell, space.sectionYFirst, 'flex flex-col gap-space-24']}>
         {
           aboutPage.paragraphs.map((p) => (
@@ -53,8 +50,8 @@ const graph = pageGraph([
 
     <StepTimeline headingText={aboutPage.timeline.heading} steps={aboutPage.timeline.steps} />
 
-    <section class="section-story">
-      <div class={container}>
+    <section class="section-story reveal">
+      <div class:list={[layout.shell, space.sectionY]}>
         <div class={story.grid}>
           <div class={story.media}>
             <video
@@ -72,28 +69,28 @@ const graph = pageGraph([
           <div class={story.copy}>
             <div>
               <h2 class:list={[heading.medium, 'text-left my-0']}>{video.heading}</h2>
-              <p class:list={['mt-space-16 mb-0 text-charcoal max-w-[720px]', typeScale.bodyLg]}>
+              <p class:list={['mt-space-16 mb-0 text-charcoal', layout.measureNarrow, typeScale.bodyLg]}>
                 {video.body}
               </p>
             </div>
             {
-              video.ctas[0] && (
-                <a
-                  href={video.ctas[0].url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class={btn.primary}
-                >
-                  <span>{video.ctas[0].label}</span>
-                </a>
+              cta && (
+                <div class="story-cta">
+                  <a
+                    href={cta.url}
+                    target={cta.newTab ? '_blank' : undefined}
+                    rel={cta.newTab ? 'noopener noreferrer' : undefined}
+                    class:list={['inline-block', btn.primary]}
+                  >
+                    <span>{cta.label}</span>
+                  </a>
+                </div>
               )
             }
           </div>
         </div>
       </div>
     </section>
-
-    {teamBlock && <TeamGrid block={teamBlock} />}
 
     <FaqSection headingText="FAQs" items={aboutFaq} includeSchema={false} />
   </main>

@@ -66,6 +66,22 @@ export const barHours: HourBlock[] = [
   },
 ]
 
+/** Footer / location / hours-FAQ lines. One day-range per line, like Bakehouse. */
+export const stackedHoursBlocks: HourBlock[] = [...cafeHours, ...barHours]
+
+export const stackedHoursFaqHtml = [
+  '<strong>Cafe</strong>',
+  ...cafeHours[0]!.lines,
+  '<strong>Bar</strong>',
+  ...barHours[0]!.lines,
+].join('<br>')
+
+/** Strip ?subject= (and any other query) from mailto hrefs. */
+export function mailtoHref(href?: string, email = woodbridgeNap.email) {
+  const raw = (href || `mailto:${email}`).trim()
+  return raw.split('?')[0] || `mailto:${email}`
+}
+
 export const scarboroughBakehouse = {
   name: 'Penelope Bakehouse',
   street: '71 Howden Rd',

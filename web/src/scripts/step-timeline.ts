@@ -1,5 +1,6 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { lenis } from './lenis'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -89,7 +90,7 @@ export function initStepByStepTimeline() {
   ;(root as HTMLElement & { [mediaKey]?: gsap.MatchMedia })[mediaKey] = mediaQueries
 
   const onLenisScroll = () => ScrollTrigger.update()
-  window.lenis?.on('scroll', onLenisScroll)
+  lenis.on('scroll', onLenisScroll)
 
   mediaQueries.add('(prefers-reduced-motion: no-preference)', () => {
     measureLine()

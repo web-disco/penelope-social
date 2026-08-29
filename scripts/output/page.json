@@ -290,10 +290,10 @@
             "name": "Date",
             "id": "Date",
             "placeholder": "Date",
-            "type": "text",
+            "type": "date",
             "required": true,
             "fullWidth": true,
-            "note": "We need 24 hrs notice for catering orders. *"
+            "note": "We need at least 24 hours' notice for catering orders."
           },
           {
             "_type": "formField",

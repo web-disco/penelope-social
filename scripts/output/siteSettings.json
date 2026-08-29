@@ -130,9 +130,8 @@
             "_key": "cafe",
             "label": "Cafe",
             "lines": [
-              "Mon-Sat, 9am-3pm",
-              "Sun, 8am-12pm",
-              "‍"
+              "Mon-Sat: 9am-3pm",
+              "Sun: 8am-12pm"
             ]
           },
           {
@@ -140,8 +139,9 @@
             "_key": "bar",
             "label": "Bar",
             "lines": [
-              "Mon-Thu, 5pm-10pm",
-              "Fri-Sat, 5pm-1am"
+              "Mon-Thu: 5pm-10pm",
+              "Fri-Sat: 5pm-1am",
+              "Closed Sunday night."
             ]
           }
         ]
@@ -152,7 +152,7 @@
         "phone": "(905) 607-0606",
         "phoneDigits": "9056070606",
         "email": "info@penelopesocial.com\n‍",
-        "emailHref": "mailto:info@penelopesocial.com?subject=Hey%2C%20Penelope!",
+        "emailHref": "mailto:info@penelopesocial.com",
         "socialsLabel": "Follow our socials",
         "socials": [
           {

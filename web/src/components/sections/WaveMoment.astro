@@ -1,7 +1,7 @@
 ---
 /**
- * Full-bleed green moment — Bakehouse checker + curved marquee.
- * Social uses a shirt lockup and merch copy, not the bakery bike or hours.
+ * Full-bleed green moment — Bakehouse bike SVG + cream/green checkers.
+ * Merch is in-store only. No e-comm copy.
  */
 import { btn, space, typeScale } from '../../lib/ui'
 import { homeWaveMerch } from '../../data/home'
@@ -18,28 +18,28 @@ const waveText = phrase.repeat(6)
 >
   <img
     class="wave-checkers wave-checkers--in pointer-events-none"
-    src="/images/wave-checker-in.svg"
+    src="/images/wave-checker-in.webp"
     alt=""
-    width="1920"
-    height="24"
+    width="520"
+    height="48"
     loading="lazy"
     decoding="async"
     aria-hidden="true"
   />
-  <div class="wave-moment-body relative overflow-hidden bg-green py-section-pad wf-sm:py-section-pad-sm">
+  <div class="wave-moment-body relative overflow-hidden bg-green py-[120px] wf-sm:py-section-gap-y-sm">
     <p class="sr-only">
       {homeWaveMerch.wave}. {homeWaveMerch.status}.
     </p>
 
     <div class="wave-moment-stage relative flex flex-col items-center justify-center px-[25px]">
       <img
-        src="/images/merch-shirt.svg"
+        src="/images/penelope-bike.svg"
         alt=""
-        width="520"
-        height="420"
+        width="760"
+        height="512"
         loading="lazy"
         decoding="async"
-        class="wave-moment-mark relative z-[1] w-[min(420px,58vw)] wf-md:w-[min(360px,64vw)] wf-sm:w-[min(280px,70vw)]"
+        class="wave-moment-bike relative z-[1] w-[min(760px,72vw)] wf-md:w-[min(600px,76vw)] wf-sm:w-[min(440px,82vw)]"
         aria-hidden="true"
       />
 
@@ -84,10 +84,10 @@ const waveText = phrase.repeat(6)
 
   <img
     class="wave-checkers wave-checkers--out pointer-events-none"
-    src="/images/wave-checker-out.svg"
+    src="/images/wave-checker-out.webp"
     alt=""
-    width="1920"
-    height="24"
+    width="520"
+    height="48"
     loading="lazy"
     decoding="async"
     aria-hidden="true"
@@ -109,7 +109,7 @@ const waveText = phrase.repeat(6)
     margin-top: -1px;
   }
 
-  .wave-moment-mark {
+  .wave-moment-bike {
     height: auto;
   }
 

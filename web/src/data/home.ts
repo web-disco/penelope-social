@@ -1,3 +1,5 @@
+import { BAKEHOUSE_SITE_URL } from './site'
+
 /** Homepage copy. Repo wins over address-y Sanity so staging matches Bakehouse mood. */
 
 export const homeHeroFallback = {
@@ -15,22 +17,22 @@ export const homeMenusFallback = {
   cards: [
     {
       title: 'Lunch',
-      line: 'Focaccia sandwiches and pizza daily',
+      line: 'Focaccia and pizza',
       url: '/menus/lunch',
     },
     {
       title: 'Bar',
-      line: 'Cocktails, wine, and a late sit',
+      line: 'Cocktails till late',
       url: '/menus/bar',
     },
     {
       title: 'Dinner',
-      line: 'Pizza, handhelds, and shareable plates',
+      line: 'Pizza and shareables',
       url: '/menus/dinner',
     },
     {
       title: 'Catering',
-      line: 'Trays of pizza and sandwiches',
+      line: 'Trays for the table',
       url: '/menus/catering',
     },
   ],
@@ -39,8 +41,8 @@ export const homeMenusFallback = {
 export const homeBreadFallback = {
   heading: 'Good bread, served here every day',
   body: 'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.',
-  ctaLabel: 'Social and Bakehouse',
-  ctaUrl: '/sourdough-bakery',
+  ctaLabel: 'Visit the Bakehouse',
+  ctaUrl: BAKEHOUSE_SITE_URL,
 }
 
 export const homeEventsFallback = {
@@ -48,10 +50,10 @@ export const homeEventsFallback = {
   body: 'Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.',
 }
 
-/** Homepage green band. Merch CTA (Merch is off the desktop header). */
+/** Homepage green band. Merch is in-store only, not e-comm. */
 export const homeWaveMerch = {
   wave: 'Take a shirt home from Social',
-  status: 'Woodbridge cafe merch, on the site now',
-  ctaLabel: 'Shop merch',
+  status: 'Hoodies, tees, and totes. Pick them up in store.',
+  ctaLabel: 'See merch',
   ctaUrl: '/merchandise',
 }

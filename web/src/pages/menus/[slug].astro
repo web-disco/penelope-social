@@ -94,5 +94,5 @@ const canonical = `${SITE_ORIGIN}${path}`
       </section>
     )
   }
-  <MenuCategories categories={menu.categories ?? []} />
+  <MenuCategories categories={menu.categories ?? []} flushTop={!isCateringMenu} />
 </BaseLayout>

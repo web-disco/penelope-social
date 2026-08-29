@@ -20,7 +20,7 @@ interface Props {
 const { headingText, steps, activation = 0.5 } = Astro.props
 ---
 
-<section class="section-step-timeline" aria-label={headingText}>
+<section class="section-step-timeline reveal" aria-label={headingText}>
   <div class:list={[layout.shell, space.sectionY]}>
     <div
       data-step-timeline-init

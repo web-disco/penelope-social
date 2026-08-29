@@ -59,8 +59,8 @@
   --space-96: 96px;
 
   /* Semantic spacing — Bakehouse section pad: 120 desktop / 80 mobile */
-  --section-pad-y: 120px;
-  --section-pad-y-sm: 80px;
+  --section-pad-y: 60px;
+  --section-pad-y-sm: 40px;
   --section-gap: var(--space-48);
   --gutter: 25px;
   --gutter-lg: 25px;

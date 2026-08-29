@@ -52,7 +52,7 @@
             "_type": "menuCard",
             "_key": "card0",
             "title": "Lunch",
-            "line": "Focaccia sandwiches and pizza daily",
+            "line": "Focaccia and pizza",
             "url": "/menus/lunch",
             "image": {
               "_type": "image",
@@ -66,7 +66,7 @@
             "_type": "menuCard",
             "_key": "card1",
             "title": "Bar",
-            "line": "Cocktails, wine, and a late sit",
+            "line": "Cocktails till late",
             "url": "/menus/bar",
             "image": {
               "_type": "image",
@@ -80,7 +80,7 @@
             "_type": "menuCard",
             "_key": "card2",
             "title": "Dinner",
-            "line": "Pizza, handhelds, and shareable plates",
+            "line": "Pizza and shareables",
             "url": "/menus/dinner",
             "image": {
               "_type": "image",
@@ -94,7 +94,7 @@
             "_type": "menuCard",
             "_key": "card3",
             "title": "Catering",
-            "line": "Trays of pizza and sandwiches",
+            "line": "Trays for the table",
             "url": "/menus/catering",
             "image": {
               "_type": "image",
@@ -114,10 +114,10 @@
         "body": "Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.",
         "cta": {
           "_type": "button",
-          "label": "Social and Bakehouse",
-          "url": "/sourdough-bakery",
-          "newTab": false,
-          "style": "primary"
+          "label": "Visit the Bakehouse",
+          "url": "https://penelopebakehouse.com",
+          "newTab": true,
+          "style": "outline"
         },
         "image": {
           "_type": "image",

@@ -3,21 +3,33 @@
  * Menu category blocks. Bakehouse rhythm: title, short blurb, hairline, items.
  * “Currently unavailable” lines stay as small body copy, not category-sized headings.
  */
-import { container, typeScale } from '../lib/ui'
+import { layout, typeScale } from '../lib/ui'
 import LineText from './LineText.astro'
 
 interface Props {
   categories: any[]
+  /** After a banner that already has mb-section-gap-y. False when another cream block sits above. */
+  flushTop?: boolean
 }
-const { categories } = Astro.props
+const { categories, flushTop = true } = Astro.props
 
 const isUnavailable = (item: any) => /unavailable/i.test(item?.title ?? '')
 ---
 
 {
-  categories.map((category) => (
-    <div id={category.anchor?.current} class="menu-category">
-      <div class={container}>
+  categories.map((category, index) => (
+    <section
+      id={category.anchor?.current}
+      class:list={[
+        'menu-category',
+        index === 0
+          ? flushTop
+            ? 'mt-0'
+            : 'mt-section-pad wf-sm:mt-section-pad-sm'
+          : 'mt-section-gap-y mb-0 wf-sm:mt-section-gap-y-sm',
+      ]}
+    >
+      <div class={layout.shell}>
         <h2
           class:list={[
             'page-sub-heading mt-0 mb-0 overflow-hidden text-charcoal',
@@ -77,6 +89,6 @@ const isUnavailable = (item: any) => /unavailable/i.test(item?.title ?? '')
           )}
         </div>
       </div>
-    </div>
+    </section>
   ))
 }

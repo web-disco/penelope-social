@@ -5,6 +5,7 @@ import {
   CATERING_MENU_URL,
   ORDER_ONLINE_URL,
   RESERVATIONS_PATH,
+  stackedHoursFaqHtml,
   woodbridgeNap,
 } from './site'
 
@@ -17,8 +18,7 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: 'What are the cafe and bar hours?',
-    answer:
-      '<strong>Cafe</strong>: Monday to Saturday 9am to 3pm, Sunday 8am to 12pm.<br><strong>Bar</strong>: Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am.<br>Closed Sunday night.',
+    answer: stackedHoursFaqHtml,
   },
   {
     question: 'Do you take reservations?',
@@ -114,8 +114,7 @@ export const contactFaq: FaqItem[] = [
   },
   {
     question: 'What are your hours?',
-    answer:
-      'Cafe: Monday to Saturday 9am to 3pm, Sunday 8am to 12pm.<br>Bar: Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am.<br>Closed Sunday night.',
+    answer: stackedHoursFaqHtml,
   },
 ]
 
@@ -126,8 +125,7 @@ export const woodbridgeFaq: FaqItem[] = [
   },
   {
     question: 'What are the cafe and bar hours?',
-    answer:
-      'Cafe: Monday to Saturday 9am to 3pm, Sunday 8am to 12pm.<br>Bar: Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am.<br>Closed Sunday night.',
+    answer: stackedHoursFaqHtml,
   },
   {
     question: 'Do you take reservations?',

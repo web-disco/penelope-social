@@ -15,6 +15,7 @@ import { imageUrl } from '../lib/image'
 import NewsletterForm from './NewsletterForm.astro'
 import LineText from './LineText.astro'
 import { displayHeading, displayLinkLabel, restaurantCopy } from '../data/copy'
+import { mailtoHref, stackedHoursBlocks } from '../data/site'
 
 interface Props {
   settings: any
@@ -27,6 +28,8 @@ const newsletter = footer.newsletter ?? {}
 const menus = footer.menus ?? {}
 const hours = footer.hours ?? {}
 const contact = footer.contact ?? {}
+const hourBlocks = stackedHoursBlocks
+const emailHref = mailtoHref(contact.emailHref, contact.email)
 
 const logoSrc = imageUrl(footer.logo) || '/penelope-logo-lockup-white.svg'
 
@@ -151,8 +154,8 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         >
           {displayHeading(hours.heading, 'Hours & location')}
         </h4>
-        <div class="hours-wrap grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-0 wf-xs:grid-cols-1">
-          <p class={`${footerText} is-location col-span-2 mb-0 normal-case`}>
+        <div class="hours-wrap flex flex-col">
+          <p class={`${footerText} is-location mb-0 normal-case`}>
             <strong class={typeScale.label}>{hours.locationLabel}</strong>
             <br />
             <a href={hours.mapUrl} target="_blank" data-ga-event="get_directions" class={footerTextSpan}>
@@ -160,13 +163,13 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
             </a>
           </p>
           {
-            (hours.blocks ?? []).map((block: any) => (
-              <p class={`${footerTextHours} is-hours col-span-2`}>
+            hourBlocks.map((block) => (
+              <p class={`${footerTextHours} is-hours`}>
                 <strong class={typeScale.label}>
                   {displayHeading(block.label)}
                   <br />
                 </strong>
-                {(block.lines ?? []).map((line: string) => (
+                {block.lines.map((line) => (
                   <>
                     {line}
                     <br />
@@ -192,7 +195,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         <p class={footerText}>
           P: <a href={`tel:${contact.phoneDigits}`} data-ga-event="click_to_call" class={footerTextSpan}>{contact.phone}</a>
           <br />
-          E: <a href={contact.emailHref} class={footerTextSpan}><LineText text={contact.email} /></a>
+          E: <a href={emailHref} class={footerTextSpan}><LineText text={contact.email} /></a>
         </p>
         <div class="footer-socials gap-3">
           <div class={footerText}>{contact.socialsLabel}</div>

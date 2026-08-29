@@ -14,6 +14,7 @@ import { initMerchSwiper } from './merch-swiper'
 import { initSiteForms, initEventForm, initTurnstileSpacing } from './forms'
 import { initLightbox } from './lightbox'
 import { initAnalyticsClicks } from './ga'
+import { initStepByStepTimeline } from './step-timeline'
 
 /* Same order as the live site's DOMContentLoaded handler, with the additions
    that replace behaviour webflow.js used to provide (lightbox) and the form
@@ -53,6 +54,7 @@ function boot() {
      the console (and the parity scripts) able to inspect and settle tweens. */
   window.gsap = gsap
   lenis.start()
+  initStepByStepTimeline()
 
   initAnalyticsClicks()
   initHomeMenuHover()

@@ -10,7 +10,7 @@ import { sourdoughMeta, sourdoughPage } from '../data/sourdough'
 import { sourdoughFaq } from '../data/faq'
 import { SITE_ORIGIN } from '../data/site'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
-import { btn, container, heading, typeScale, story } from '../lib/ui'
+import { btn, container, containerNoTop, heading, typeScale, story } from '../lib/ui'
 
 const page = sourdoughPage
 const blocks = [page.social, page.bakehouse] as const
@@ -48,7 +48,7 @@ const canonical = `${SITE_ORIGIN}/sourdough-bakery`
         const imageFirst = block.layout === 'image-first'
         return (
           <section class={imageFirst ? 'section-home-bread' : 'home-events'}>
-            <div class={container}>
+            <div class={imageFirst ? containerNoTop : container}>
               <div class={story.grid}>
                 {imageFirst && (
                   <div class={story.media}>
@@ -58,17 +58,17 @@ const canonical = `${SITE_ORIGIN}/sourdough-bakery`
                 <div class:list={[story.copy, !imageFirst && 'wf-md:order-2']}>
                   <div>
                     <h2 class:list={[heading.medium, 'text-left my-0']}>{block.heading}</h2>
-                    <p class:list={['mt-space-16 mb-0 text-charcoal max-w-[720px]', typeScale.body]}>
+                    <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.bodyLg]}>
                       {block.body}
                     </p>
                   </div>
-                  <div class="flex flex-wrap items-start gap-space-16 wf-xs:w-full wf-xs:flex-col">
+                  <div class="story-cta flex flex-wrap items-start gap-space-16 wf-xs:w-full wf-xs:flex-col">
                     {block.ctas.map((cta) => (
                       <a
                         href={cta.url}
                         target={cta.newTab ? '_blank' : undefined}
                         rel={cta.newTab ? 'noopener noreferrer' : undefined}
-                        class={cta.style === 'outline' ? btn.outline : btn.primary}
+                        class:list={['inline-block', cta.style === 'outline' ? btn.outline : btn.primary]}
                       >
                         <span>{cta.label}</span>
                       </a>

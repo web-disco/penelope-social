@@ -100,7 +100,7 @@ export const paragraph = {
 } as const
 
 /* --- Containers -----------------------------------------------------------
-   .container { max-width:1440px; padding:120px 25px }
+   .container { max-width:1440px; padding:60px 25px }
    @767 { padding-block:80px }                                               */
 const CONTAINER_SHARED =
   'w-full mx-auto px-[25px] no-underline transition-[background-color,color] duration-500'
@@ -231,7 +231,7 @@ export const heading = {
   menuItem: `heading is-menu-item normal-case text-beige text-left overflow-hidden ${typeScale.menuItem}`,
 } as const
 
-/** Spacing recipes — Bakehouse section pad: 120px desktop, 80px mobile (≤767). */
+/** Spacing recipes — Bakehouse section pad is 60/40 so adjacent py stacks to 120/80. */
 export const space = {
   /** Full gap after full-bleed heroes before page content (120 desktop / 80 mobile). */
   afterHero: 'mb-section-gap-y wf-sm:mb-section-gap-y-sm',
@@ -261,15 +261,14 @@ export const space = {
 } as const
 
 /**
- * Bakehouse story / text+image: 7/5 on 12 columns, copy sits on the
- * bottom of the media, title–body 16px, then gap-24 to the CTA.
+ * Bakehouse story / text+image: media 7 / copy 5, 3:2 image,
+ * copy is flex-col gap-24 with the CTA in .story-cta after the text group.
  */
 export const story = {
-  grid: 'story-grid grid grid-cols-12 gap-x-space-48 gap-y-space-32 wf-md:grid-cols-1 wf-md:gap-x-0',
-  media: 'story-media col-span-7 w-full wf-md:col-span-1',
-  image:
-    'story-image block aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]',
-  copy: 'story-copy col-span-5 flex flex-col gap-space-24 justify-end pb-space-48 wf-md:col-span-1 wf-md:justify-start wf-md:pb-0',
+  grid: 'story-grid grid min-w-0 grid-cols-12 items-stretch gap-x-space-48 wf-md:gap-x-0 wf-md:gap-y-space-32',
+  media: 'story-media col-span-7 w-full overflow-hidden wf-md:col-span-12',
+  image: 'story-image block w-full object-cover aspect-[3/2]',
+  copy: 'story-copy col-span-5 flex flex-col items-start gap-space-24 justify-end pb-space-48 wf-md:col-span-12 wf-md:justify-start wf-md:pb-0',
 } as const
 
 /** Layout shell — Social's 1440 content container, 25px sides. */
