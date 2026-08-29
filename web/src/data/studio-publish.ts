@@ -19,7 +19,7 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Page: contact — heading “Get in touch”, Woodbridge NAP intro, unique SEO (keep in sitemap; request-indexing is a GSC click after submit)',
   'Page: catering-events — page hero heading “Catering and events” on the photo; intro below has no second H1',
   'Menu: catering — tray-list heading + unique SEO (positive copy; enquire on /catering-events)',
-  'Page: menus — heading “Menus at Penelope Social”, SEO',
+  'Page: menus — delete the cream “Menus at Penelope Social” pageHeading. One H2 “On the menu” + one lede + tiles. Banner stays untitled (or a small on-photo H1 “Menus”, not a second cream title).',
   'Page: merchandise — SEO without Vaughan-as-city',
   'Menus lunch/dinner/bar — unique Woodbridge meta + intros',
   'Do not 301 /sourdough-bakery — dedicated page ships from the repo (Bakehouse sourdough, served here). Unpublish the old “Best Sourdough Bakery in Vaughan” CMS doc so it cannot override.',

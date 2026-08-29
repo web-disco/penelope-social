@@ -28,17 +28,15 @@
         }
       },
       {
-        "_type": "pageHeading",
-        "_key": "heading",
-        "variant": "default",
-        "align": "center",
-        "heading": "Menus at Penelope Social",
-        "intro": "Lunch, dinner, and the bar — plus trays when you want to take the kitchen with you.",
-        "quickLinks": []
-      },
-      {
         "_type": "menuCards",
         "_key": "menus",
+        "heading": "On the menu",
+        "intro": "Focaccia sandwiches, pizza, shareable plates, and cocktails, plus trays when you want them.",
+        "cta": {
+          "_type": "link",
+          "label": "Explore our menus",
+          "url": "/menus"
+        },
         "cards": [
           {
             "_type": "menuCard",

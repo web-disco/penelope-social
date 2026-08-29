@@ -15,6 +15,7 @@ interface Props {
 const { block } = Astro.props
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 const isHome = path === '/'
+const isMenusHub = path === '/menus'
 const authored: any[] = block.cards ?? []
 const fallbackByUrl = new Map(homeMenusFallback.cards.map((card) => [card.url, card]))
 
@@ -24,19 +25,21 @@ const cards = (authored.length ? authored : homeMenusFallback.cards).map((card: 
   return {
     ...card,
     title: displayHeading(card.title, fallback.title),
-    line: isHome ? fallback.line : restaurantCopy(card.line, fallback.line),
+    line: isHome || isMenusHub ? fallback.line : restaurantCopy(card.line, fallback.line),
     url: card.url || fallback.url,
   }
 })
 
-const staleHeading = /woodbridge|explore our menus/i.test(block.heading ?? '')
-const staleIntro = /woodbridge|hawkview|125\s/i.test(block.intro ?? '')
-const sectionHeading = isHome || staleHeading
+const staleHeading = /woodbridge|explore our menus|menus at penelope/i.test(block.heading ?? '')
+const staleIntro = /woodbridge|hawkview|125\s|bakehouse/i.test(block.intro ?? '')
+const sectionHeading = isHome || isMenusHub || staleHeading
   ? homeMenusFallback.heading
   : displayHeading(block.heading)
-const sectionIntro = isHome || staleIntro
+const sectionIntro = isHome
   ? homeMenusFallback.intro
-  : restaurantCopy(block.intro)
+  : isMenusHub || staleIntro
+    ? homeMenusFallback.hubIntro
+    : restaurantCopy(block.intro)
 const ctaUrl = block.cta?.url || homeMenusFallback.ctaUrl
 const ctaLabel = /view all menus/i.test(block.cta?.label ?? '')
   ? homeMenusFallback.ctaLabel

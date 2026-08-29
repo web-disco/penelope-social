@@ -53,6 +53,13 @@ const { sections = [] } = Astro.props
     if (block._type === 'introSection' && sections.some((section) => section._type === 'hero')) {
       return null
     }
+    /* /menus is one H2 + lede + tiles. Drop the extra cream pageHeading. */
+    if (
+      block._type === 'pageHeading' &&
+      Astro.url.pathname.replace(/\/$/, '') === '/menus'
+    ) {
+      return null
+    }
     /* Catering (and any page hero with an on-image H1) should not repeat that title. */
     if (block._type === 'introSection') {
       const pageHero = sections.find((section) => section._type === 'pageHero')
