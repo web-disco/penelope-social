@@ -9,7 +9,7 @@
  * Submission now goes to the Cloudflare Worker (`data-endpoint`), which
  * verifies Turnstile and emails the submission on — see web/worker/index.ts.
  */
-import { container, containerHalfTop, pageSubHeadingSmall, formField, formFieldTextarea, btn } from '../../lib/ui'
+import { container, pageSubHeadingSmall, formField, formFieldTextarea, btn } from '../../lib/ui'
 import Turnstile from '../Turnstile.astro'
 
 interface Props {
@@ -22,7 +22,7 @@ const fields: any[] = block.fields ?? []
 ---
 
 <div class="section-events-form">
-  <div class={isEvents ? containerHalfTop : container}>
+  <div class={container}>
     <div class="form-block w-form mx-auto mb-0 max-w-[900px] text-center">
       <h2 class={pageSubHeadingSmall}>{block.heading}</h2>
       <p>{block.intro}</p>

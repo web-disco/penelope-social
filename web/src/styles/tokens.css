@@ -58,17 +58,17 @@
   --space-80: 80px;
   --space-96: 96px;
 
-  /* Semantic spacing */
-  --section-pad-y: var(--space-80);
-  --section-pad-y-sm: 60px;
+  /* Semantic spacing — Bakehouse section pad: 120 desktop / 80 mobile */
+  --section-pad-y: 120px;
+  --section-pad-y-sm: 80px;
   --section-gap: var(--space-48);
   --gutter: 25px;
   --gutter-lg: 25px;
   --gutter-sm: 25px;
   --stack-tight: var(--space-8);
   --stack-tight-lg: var(--space-16);
-  --menu-category-mt: var(--spacing-section-pad, 60px);
-  --menu-category-mb: var(--spacing-section-pad, 60px);
+  --menu-category-mt: var(--spacing-section-pad, 120px);
+  --menu-category-mb: var(--spacing-section-pad, 120px);
   --menu-grid-col-gap: var(--space-48);
   --menu-grid-row-gap: 40px;
 

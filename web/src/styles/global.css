@@ -37,9 +37,9 @@
   --spacing-space-96: 96px;
   --spacing-space-120: 120px;
 
-  /* Semantic spacing utilities: py-section-y, px-gutter, gap-section-gap, … */
-  --spacing-section-pad: 60px;
-  --spacing-section-pad-sm: 40px;
+  /* Semantic spacing utilities: py-section-pad, px-gutter, gap-section-gap, … */
+  --spacing-section-pad: 120px;
+  --spacing-section-pad-sm: 80px;
   --spacing-section-gap-y: 120px;
   --spacing-section-gap-y-sm: 80px;
   --spacing-section-y: 96px;
@@ -50,8 +50,8 @@
   --spacing-gutter-sm: 24px;
   --spacing-stack-tight: 8px;
   --spacing-stack: 16px;
-  --spacing-menu-category-mt: 60px;
-  --spacing-menu-category-mb: 60px;
+  --spacing-menu-category-mt: 120px;
+  --spacing-menu-category-mb: 120px;
   --spacing-menu-col: 48px;
   --spacing-menu-row: 40px;
 

@@ -100,8 +100,8 @@ export const paragraph = {
 } as const
 
 /* --- Containers -----------------------------------------------------------
-   .container { max-width:1440px; padding:80px 25px 60px }
-   @991/@767 { padding-block:60px }  @479 { padding-block:40px }             */
+   .container { max-width:1440px; padding:120px 25px }
+   @767 { padding-block:80px }                                               */
 const CONTAINER_SHARED =
   'w-full mx-auto px-[25px] no-underline transition-[background-color,color] duration-500'
 
@@ -231,12 +231,11 @@ export const heading = {
   menuItem: `heading is-menu-item normal-case text-beige text-left overflow-hidden ${typeScale.menuItem}`,
 } as const
 
-/** Spacing recipes — 60px section pad so adjacent sections sit 120px apart on desktop;
- *  mobile (≤767) uses 40px pad / 80px full gap. */
+/** Spacing recipes — Bakehouse section pad: 120px desktop, 80px mobile (≤767). */
 export const space = {
   /** Full gap after full-bleed heroes before page content (120 desktop / 80 mobile). */
   afterHero: 'mb-section-gap-y wf-sm:mb-section-gap-y-sm',
-  /** Cream sections — 60+60 → 120 desktop; 40+40 → 80 mobile. */
+  /** Cream sections — 120 desktop / 80 mobile. */
   sectionY: 'py-section-pad wf-sm:py-section-pad-sm',
   /** First cream block after a hero (hero already provides the gap). */
   sectionYFirst: 'pt-0 pb-section-pad wf-sm:pb-section-pad-sm',
