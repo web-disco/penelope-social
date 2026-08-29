@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="24" viewBox="0 0 1920 24" preserveAspectRatio="none">
+  <defs>
+    <pattern id="wave-check-out" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="#243824"/>
+      <rect x="12" width="12" height="12" fill="#f7f3df"/>
+      <rect y="12" width="12" height="12" fill="#f7f3df"/>
+      <rect x="12" y="12" width="12" height="12" fill="#243824"/>
+    </pattern>
+  </defs>
+  <rect width="1920" height="24" fill="url(#wave-check-out)"/>
+</svg>

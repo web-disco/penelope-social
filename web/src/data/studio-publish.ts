@@ -13,6 +13,7 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Homepage mosaic — H2 “On the menu”, four cards with line (Lunch / Bar / Dinner / Catering), CTA “Explore our menus” → /menus',
   'Homepage bread — “Good bread, served here every day” + Social and Bakehouse → /sourdough-bakery',
   'Homepage events — “Birthdays, work dinners, and nights in the room…” (no street address)',
+  'Homepage green merch band — repo-only WaveMoment above FAQ. Arc “Take a shirt home from Social”, support “Woodbridge cafe merch, on the site now”, button Shop merch → /merchandise. No Studio block needed.',
   'Site Settings — default SEO, reservations label, footer headings (sentence case), hours labels Cafe/Bar, NAP 125 Hawkview Blvd, Woodbridge, ON L4H 2E2',
   'Site Settings nav — delete the Bakery item. /sourdough-bakery stays live for GSC; do not add Bakery back to the header or drawer',
   'Page: about — SEO only if still editing the CMS about doc (route now uses dedicated about.astro)',

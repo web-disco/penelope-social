@@ -47,3 +47,11 @@ export const homeEventsFallback = {
   heading: 'Events at Penelope',
   body: 'Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.',
 }
+
+/** Homepage green band. Merch CTA (Merch is off the desktop header). */
+export const homeWaveMerch = {
+  wave: 'Take a shirt home from Social',
+  status: 'Woodbridge cafe merch, on the site now',
+  ctaLabel: 'Shop merch',
+  ctaUrl: '/merchandise',
+}
