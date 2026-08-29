@@ -21,13 +21,13 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.':
     'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.',
   'Lunch, dinner, the bar, and catering — from the Woodbridge kitchen, on Bakehouse sourdough.':
-    'Four menus from the kitchen: lunch, dinner, the bar, and catering, all on Bakehouse sourdough.',
+    'Lunch, dinner, the bar, and catering trays, all from this kitchen.',
   'Lunch, dinner, the bar, and catering — on Bakehouse sourdough.':
-    'Four menus from the kitchen: lunch, dinner, the bar, and catering, all on Bakehouse sourdough.',
+    'Lunch, dinner, the bar, and catering trays, all from this kitchen.',
   'Focaccia sandwiches at lunch, cocktails after work, and pizza at dinner — all at 125 Hawkview Blvd, Woodbridge.':
-    'Lunch, dinner, and the bar — plus trays when you want to take the kitchen with you.',
+    'Focaccia sandwiches, pizza, shareable plates, and cocktails, plus trays when you want them.',
   'Focaccia sandwiches at lunch, pizza at dinner, and cocktails at the bar.':
-    'Lunch, dinner, and the bar — plus trays when you want to take the kitchen with you.',
+    'Focaccia sandwiches, pizza, shareable plates, and cocktails, plus trays when you want them.',
   'Focaccia sandwiches and pizza': 'Focaccia sandwiches and pizza daily',
   'Cocktails and a late sit': 'Cocktails, wine, and a late sit',
   'Pizza, handhelds, shareables': 'Pizza, handhelds, and shareable plates',
@@ -37,11 +37,11 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Trays to-go, or a night in the room.':
     'Trays to-go or a night in the room, with pizza, focaccia, drinks, and a table we will set.',
   "We'd love to hear from you. Questions, a table, or an event — call, email, or visit us at 125 Hawkview Blvd, Woodbridge.":
-    'Questions, a table, or an event — call, email, or write us.',
+    'Questions, a table, or an event. Call, email, or write us.',
   'Lunch at Penelope Social in Woodbridge. Focaccia sandwiches, New York-style pizzas, and salads.\n\nMonday–Saturday 10:00am–3:00pm':
-    'Focaccia sandwiches, pizza, and salads.\n\nMonday–Saturday 10:00am–3:00pm',
+    'Focaccia sandwiches, pizza, and salads.\n\nMonday to Saturday, 10am to 3pm',
   'Dinner at Penelope Social in Woodbridge. Gut-friendly pizzas, handhelds, and shareable plates.\n\nMonday–Saturday 5:00pm–close':
-    'Pizza, handhelds, and shareable plates.\n\nMonday–Saturday 5:00pm–close',
+    'Pizza, handhelds, and shareable plates.\n\nMonday to Saturday, 5pm to close',
   'Skip the traffic and sit at the bar in Woodbridge. Cocktails to match the night — bold or light.':
     'Cocktails, wine, and a late sit.',
   'Explore our menus — focaccia sandwiches, pizza, shareables, and handcrafted cocktails at the Woodbridge restaurant.':
@@ -53,11 +53,11 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you — food, drinks, and the room.':
     'Food, drinks, and a table we will set. Prefer 24 hours’ notice for catering.',
   'Penelope Social is the restaurant in Woodbridge — cafe by day, kitchen and bar at night — at 125 Hawkview Blvd. We serve lunch, dinner, and drinks. The sourdough on the table comes from Penelope Bakehouse, our Scarborough micro-bakery.':
-    'This is a Woodbridge cafe and bar: lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
+    'This is a Woodbridge cafe and bar. Lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
   'A Woodbridge cafe and bar. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.':
-    'This is a Woodbridge cafe and bar: lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
+    'This is a Woodbridge cafe and bar. Lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
   'Trays from the Woodbridge kitchen — not a private-event booking page, and not the Scarborough bakehouse menu. Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.':
-    'Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.',
+    'Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8 to 10. Prices are below. Prefer 24 hours notice. Send the order on Catering and events.',
   'Sourdough Bakery & Restaurant in Vaughan | Penelope Social':
     'Penelope Social | Cafe and bar in Woodbridge',
   'Best Sourdough Bakery in Vaughan | Penelope Social':
@@ -68,13 +68,13 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
     'The Scarborough bakehouse and focacceria.',
   'Micro-bakery, not a dining room': 'Sourdough and focaccia, baked in Scarborough.',
   'Experience Penelope Social, a Sourdough Bakery & Restaurant in Vaughan. Indulge in freshly baked goods and delicious meals. Visit us today!':
-    'Cafe by day and a bar by night at 125 Hawkview Blvd, Woodbridge. Lunch, dinner, and drinks — bread from Penelope Bakehouse in Scarborough.',
+    'Cafe and bar at 125 Hawkview Blvd, Woodbridge. Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
   'Event space vaughan': 'Catering and events in Woodbridge',
   'Event Space Vaughan | Penelope Social': 'Catering and events in Woodbridge | Penelope Social',
   'Catering menu | Penelope Social Woodbridge':
     'Catering tray menu | Pizza, focaccia, salads | Penelope Social',
   'Trays of sandwiches, pizza, and more from Penelope Social in Woodbridge. See the catering menu, then enquire at /catering-events.':
-    'Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8–10. Prices on this page. Book trays on Catering and events — 24 hours’ notice.',
+    'Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8 to 10. Prices on this page. Book trays on Catering and events. We prefer 24 hours notice.',
   'Penelope Social\nMenus Vaughan': 'On the menu',
   'Menus at Penelope Social': 'On the menu',
   'Penelope Social Menu Vaughan | Lunch, Dinner & Catering':
@@ -122,20 +122,25 @@ export function rewriteVaughanCity(text: string): string {
     .replace(/\bMerch Vaughan\b/gi, 'Merch')
 }
 
+/** Bakehouse does not use em or en dashes in live copy. */
+function neutralizeDashes(text: string): string {
+  return text.replace(/\s*—\s*/g, ', ').replace(/–/g, '-')
+}
+
 /**
  * Prefer authored copy unless it still names Vaughan as the city.
  * Exact stale strings get restaurant-first replacements.
  */
 export function restaurantCopy(text?: string, fallback?: string): string {
   const raw = (text ?? '').trim()
-  if (!raw) return fallback ?? ''
+  if (!raw) return neutralizeDashes(fallback ?? '')
   const exact = EXACT_REPLACEMENTS[raw] ?? EXACT_REPLACEMENTS[raw.replace(/\s+$/, '')]
-  if (exact) return exact
+  if (exact) return neutralizeDashes(exact)
   if (usesVaughanAsCity(raw)) {
     const rewritten = rewriteVaughanCity(raw)
-    return rewritten || fallback || raw
+    return neutralizeDashes(rewritten || fallback || raw)
   }
-  return raw
+  return neutralizeDashes(raw)
 }
 
 /** Sentence/title case for chrome that arrived as ALL CAPS or random lowercase. */

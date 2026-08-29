@@ -18,7 +18,7 @@ export const homeFaq: FaqItem[] = [
   {
     question: 'What are the cafe and bar hours?',
     answer:
-      '<strong>Cafe</strong>: Monday–Saturday 9am–3pm, Sunday 8am–12pm.<br><strong>Bar</strong>: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.<br>Closed Sunday night.',
+      '<strong>Cafe</strong>: Monday to Saturday 9am to 3pm, Sunday 8am to 12pm.<br><strong>Bar</strong>: Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am.<br>Closed Sunday night.',
   },
   {
     question: 'Do you take reservations?',
@@ -30,7 +30,7 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: 'Where is the Penelope Bakehouse menu?',
-    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a> — hours and online order too.`,
+    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. Hours and online order too.`,
   },
   {
     question: 'Do you offer catering and events?',
@@ -46,7 +46,7 @@ export const aboutFaq: FaqItem[] = [
   {
     question: 'Who runs Penelope Social?',
     answer:
-      'Three brothers — Franco, Vince, and Giuliano Stalteri. Vince started the sourdough starter named Penelope; the restaurant and the Bakehouse grew from that.',
+      'Three brothers, Franco, Vince, and Giuliano Stalteri. Vince started the sourdough starter named Penelope. The restaurant and the Bakehouse grew from that.',
   },
   {
     question: 'Where is the restaurant?',
@@ -66,7 +66,7 @@ export const aboutFaq: FaqItem[] = [
 export const cateringFaq: FaqItem[] = [
   {
     question: 'What is the difference between catering and events?',
-    answer: `Catering is food to-go — trays from the <a href="${CATERING_MENU_URL}">catering menu</a>. Events are hosted here: birthdays, work dinners, and private nights. Book both on this page.`,
+    answer: `Catering is food to-go, trays from the <a href="${CATERING_MENU_URL}">catering menu</a>. Events are hosted here: birthdays, work dinners, and private nights. Book both on this page.`,
   },
   {
     question: 'How much notice do you need?',
@@ -91,7 +91,7 @@ export const cateringMenuFaq: FaqItem[] = [
   {
     question: 'What comes on a catering tray?',
     answer:
-      '24-slice pizzas, focaccia sandwiches (minimum of 6, each cut into 4), country sourdough and focaccia loaves, and salads that serve 8–10. Appetizers and pasta are listed when they are available.',
+      '24-slice pizzas, focaccia sandwiches (minimum of 6, each cut into 4), country sourdough and focaccia loaves, and salads that serve 8 to 10. Appetizers and pasta are listed when they are available.',
   },
   {
     question: 'How much notice do tray orders need?',
@@ -115,7 +115,7 @@ export const contactFaq: FaqItem[] = [
   {
     question: 'What are your hours?',
     answer:
-      'Cafe: Monday–Saturday 9am–3pm, Sunday 8am–12pm.<br>Bar: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.<br>Closed Sunday night.',
+      'Cafe: Monday to Saturday 9am to 3pm, Sunday 8am to 12pm.<br>Bar: Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am.<br>Closed Sunday night.',
   },
 ]
 
@@ -127,7 +127,7 @@ export const woodbridgeFaq: FaqItem[] = [
   {
     question: 'What are the cafe and bar hours?',
     answer:
-      'Cafe: Monday–Saturday 9am–3pm, Sunday 8am–12pm.<br>Bar: Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.<br>Closed Sunday night.',
+      'Cafe: Monday to Saturday 9am to 3pm, Sunday 8am to 12pm.<br>Bar: Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am.<br>Closed Sunday night.',
   },
   {
     question: 'Do you take reservations?',
@@ -142,7 +142,7 @@ export const woodbridgeFaq: FaqItem[] = [
 export const scarboroughFaq: FaqItem[] = [
   {
     question: 'What is Penelope Bakehouse?',
-    answer: `A bakehouse and focacceria at 71 Howden Rd — loaves, sandwiches, and pizza by the slice. Dinner and the bar are at <a href="/locations/woodbridge">Penelope Social</a>.`,
+    answer: `A bakehouse and focacceria at 71 Howden Rd. Loaves, sandwiches, and pizza by the slice. Dinner and the bar are at <a href="/locations/woodbridge">Penelope Social</a>.`,
   },
   {
     question: 'Where do I order Bakehouse bread?',
@@ -163,14 +163,14 @@ export const sourdoughFaq: FaqItem[] = [
   },
   {
     question: 'Where is the Penelope Bakehouse menu?',
-    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a> — hours, photos, and online order too. Social menus (lunch, dinner, bar) stay on this site.`,
+    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. Hours, photos, and online order too. Social menus (lunch, dinner, bar) stay on this site.`,
   },
   {
     question: 'Where is the bakery in Scarborough?',
-    answer: `71 Howden Rd, Scarborough — Penelope Bakehouse. Penelope Social is at <a href="/locations/woodbridge">${address}</a>.`,
+    answer: `71 Howden Rd, Scarborough. That is Penelope Bakehouse. Penelope Social is at <a href="/locations/woodbridge">${address}</a>.`,
   },
   {
     question: 'Where is the sourdough baked?',
-    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social — sandwiches, pizza, and bread on the table.`,
+    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social as sandwiches, pizza, and bread on the table.`,
   },
 ]

@@ -58,7 +58,7 @@ function hoursFromBlocks(blocks: HourBlock[]) {
       .filter((line) => !/closed/i.test(line) && line.trim() && line !== '‍')
       .map((line) => {
         const [daysPart, timePart] = line.split(':').map((s) => s.trim())
-        const times = (timePart ?? '').split('–').map((s) => s.trim())
+        const times = (timePart ?? '').split(/[–-]/).map((s) => s.trim())
         return {
           '@type': 'OpeningHoursSpecification',
           dayOfWeek: daysFromLabel(daysPart ?? ''),
@@ -81,7 +81,7 @@ export function restaurantSchema() {
     telephone: nap.phone,
     email: nap.email,
     description:
-      'Penelope Social is the Woodbridge restaurant at 125 Hawkview Blvd: cafe by day, bar by night. Sourdough comes from Penelope Bakehouse, the Scarborough bakehouse at 71 Howden Rd.',
+      'Penelope Social is a Woodbridge cafe and bar at 125 Hawkview Blvd. Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
     servesCuisine: ['Italian', 'Pizza', 'Cafe'],
     acceptsReservations: true,
     menu: [...MENU_URLS],

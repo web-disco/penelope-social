@@ -7,7 +7,7 @@ export const homeHeroFallback = {
 
 export const homeMenusFallback = {
   heading: 'On the menu',
-  intro: 'Four menus from the kitchen: lunch, dinner, the bar, and catering, all on Bakehouse sourdough.',
+  intro: 'Lunch, dinner, the bar, and catering trays, all from this kitchen.',
   /** /menus hub. Same H2; food-only lede, no sister-brand clause. */
   hubIntro: 'Focaccia sandwiches, pizza, shareable plates, and cocktails, plus trays when you want them.',
   ctaLabel: 'Explore our menus',

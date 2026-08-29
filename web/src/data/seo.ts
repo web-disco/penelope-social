@@ -9,7 +9,7 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
   '/': {
     title: 'Penelope Social | Cafe and bar in Woodbridge',
     description:
-      'Cafe by day and a bar by night at 125 Hawkview Blvd, Woodbridge. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse in Scarborough.',
+      'Cafe and bar at 125 Hawkview Blvd, Woodbridge. Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
   },
   '/about': {
     title: 'About Penelope Social | Woodbridge cafe and bar',
@@ -34,27 +34,27 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
   '/menus/lunch': {
     title: 'Lunch menu | Penelope Social Woodbridge',
     description:
-      'Lunch at Penelope Social in Woodbridge: focaccia sandwiches, pizza, and salads. Monday–Saturday, 10am–3pm at 125 Hawkview Blvd.',
+      'Lunch at Penelope Social in Woodbridge: focaccia sandwiches, pizza, and salads. Monday to Saturday, 10am to 3pm at 125 Hawkview Blvd.',
   },
   '/menus/dinner': {
     title: 'Dinner menu | Penelope Social Woodbridge',
     description:
-      'Dinner in Woodbridge: pizza, handhelds, and shareable plates at Penelope Social. Monday–Saturday from 5pm at 125 Hawkview Blvd.',
+      'Dinner in Woodbridge: pizza, handhelds, and shareable plates at Penelope Social. Monday to Saturday from 5pm at 125 Hawkview Blvd.',
   },
   '/menus/bar': {
     title: 'Bar menu | Cocktails in Woodbridge | Penelope Social',
     description:
-      'Cocktails, wine, and a late bar at Penelope Social in Woodbridge. Monday–Thursday 5pm–10pm, Friday–Saturday 5pm–1am.',
+      'Cocktails, wine, and a late bar at Penelope Social in Woodbridge. Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am.',
   },
   '/menus/catering': {
     title: 'Catering tray menu | Pizza, focaccia, salads | Penelope Social',
     description:
-      'Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8–10. Prices on this page. Book trays on Catering and events — 24 hours’ notice.',
+      'Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8 to 10. Prices on this page. Book trays on Catering and events. We prefer 24 hours notice.',
   },
   '/merchandise': {
     title: 'Merch | Penelope Social',
     description:
-      'Hoodies, tees, and totes from Penelope Social — the Woodbridge cafe and bar. Take a piece of the restaurant home.',
+      'Hoodies, tees, and totes from Penelope Social, the Woodbridge cafe and bar. Take a piece of the restaurant home.',
   },
   '/merchandise/tote-bag': {
     title: 'Tote bag | Penelope Social merch',

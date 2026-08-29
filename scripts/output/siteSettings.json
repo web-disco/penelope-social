@@ -130,8 +130,8 @@
             "_key": "cafe",
             "label": "Cafe",
             "lines": [
-              "Mon — Sat, 9am - 3pm",
-              "Sun — 8am - 12pm",
+              "Mon-Sat, 9am-3pm",
+              "Sun, 8am-12pm",
               "‍"
             ]
           },
@@ -140,8 +140,8 @@
             "_key": "bar",
             "label": "Bar",
             "lines": [
-              "Mon — Thur, 5pm - 10pm",
-              "Fri — Sat, 5pm - 1am"
+              "Mon-Thu, 5pm-10pm",
+              "Fri-Sat, 5pm-1am"
             ]
           }
         ]
@@ -181,7 +181,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "Penelope Social | Cafe and bar in Woodbridge",
-      "metaDescription": "Cafe by day and a bar by night at 125 Hawkview Blvd, Woodbridge. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse in Scarborough.",
+      "metaDescription": "Cafe and bar at 125 Hawkview Blvd, Woodbridge. Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",

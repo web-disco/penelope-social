@@ -87,7 +87,7 @@ export const scarboroughLocation = {
   intro: 'Sourdough loaves, focaccia sandwiches, and pizza by the slice, baked fresh at this Scarborough shop.',
   offeringsHeading: 'Sourdough and focaccia, baked here',
   offeringsBody:
-    'Loaves, focaccia sandwiches, and pizza by the slice — hours, menu, and orders live on penelopebakehouse.com.',
+    'Loaves, focaccia sandwiches, and pizza by the slice. Hours, menu, and orders live on penelopebakehouse.com.',
   hubBlurb: 'Sourdough, focaccia, and pizza by the slice.',
   ctas: [
     { label: 'Visit penelopebakehouse.com', url: BAKEHOUSE_SITE_URL, style: 'primary' as const, newTab: true },
@@ -95,7 +95,7 @@ export const scarboroughLocation = {
   ] satisfies Cta[],
   bakehouse: scarboroughBakehouse,
   hours: [
-    { label: 'Hours', lines: ['Monday–Friday: 9am–3pm', 'Saturday & Sunday: Closed'] },
+    { label: 'Hours', lines: ['Monday to Friday: 9am to 3pm', 'Saturday and Sunday: Closed'] },
   ],
 }
 

@@ -10,10 +10,10 @@ export const aboutMeta = PAGE_SEO['/about']!
 export const aboutPage = {
   heading: 'About Penelope Social',
   subheading:
-    'This is a Woodbridge cafe and bar: lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
+    'This is a Woodbridge cafe and bar. Lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
   paragraphs: [
-    'Lunch, dinner, and drinks, with sourdough from Penelope Bakehouse on the table.',
-    'Three brothers — Franco, Vince, and Giuliano — built the room around good bread and a proper bar.',
+    'We serve lunch, dinner, and drinks, with that sourdough as sandwiches, pizza, and bread.',
+    'Three brothers, Franco, Vince, and Giuliano, built the room around good bread and a proper bar.',
   ],
   timeline: {
     heading: 'How Penelope started',
@@ -28,7 +28,7 @@ export const aboutPage = {
       },
       {
         title: '2024',
-        body: 'Penelope became the base for the doughs at Social — breads and pizzas drawn from Italy and further.',
+        body: 'Penelope became the base for the doughs at Social. Breads and pizzas drawn from Italy and further.',
       },
       {
         title: '2026',

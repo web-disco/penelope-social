@@ -55,14 +55,14 @@ export const woodbridgeNap: Nap = {
 export const cafeHours: HourBlock[] = [
   {
     label: 'Cafe',
-    lines: ['Mon–Sat: 9am–3pm', 'Sun: 8am–12pm'],
+    lines: ['Mon-Sat: 9am-3pm', 'Sun: 8am-12pm'],
   },
 ]
 
 export const barHours: HourBlock[] = [
   {
     label: 'Bar',
-    lines: ['Mon–Thu: 5pm–10pm', 'Fri–Sat: 5pm–1am', 'Closed Sunday night.'],
+    lines: ['Mon-Thu: 5pm-10pm', 'Fri-Sat: 5pm-1am', 'Closed Sunday night.'],
   },
 ]
 
