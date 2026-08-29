@@ -123,12 +123,12 @@ export const menuBtn =
 
 /* Menu category H2 — Sweet Sans Medium display-s (28). */
 export const pageSubHeading =
-  'page-sub-heading normal-case text-charcoal mt-0 mb-space-24 overflow-hidden ' +
+  'page-sub-heading normal-case text-charcoal mt-0 mb-space-24 ' +
   'font-body font-medium text-[28px] leading-none text-balance ' +
   'wf-md:text-[26px] wf-sm:text-[24px] wf-xs:text-[22px]'
 
 export const pageSubHeadingSmall =
-  'page-sub-heading small-margin normal-case text-charcoal mt-0 mb-space-16 overflow-hidden ' +
+  'page-sub-heading small-margin normal-case text-charcoal mt-0 mb-space-16 ' +
   'font-body font-medium text-[28px] leading-none text-balance ' +
   'wf-md:text-[26px] wf-sm:text-[24px] wf-xs:text-[22px]'
 
@@ -213,22 +213,22 @@ export const typeScale = {
 /* --- Headings — Sweet Sans Medium, sentence case ------------------------ */
 export const heading = {
   /** Page H1 (centred). */
-  base: `heading normal-case text-charcoal text-center overflow-hidden ${typeScale.displayXl}`,
+  base: `heading normal-case text-charcoal text-center ${typeScale.displayXl}`,
 
   /** Page H1 (left). */
-  left: `heading is-left normal-case text-charcoal text-left overflow-hidden ${typeScale.displayXl}`,
+  left: `heading is-left normal-case text-charcoal text-left ${typeScale.displayXl}`,
 
   /** Section H2. */
-  medium: `heading is-medium normal-case text-charcoal text-center my-0 overflow-hidden ${typeScale.displayM}`,
+  medium: `heading is-medium normal-case text-charcoal text-center my-0 ${typeScale.displayM}`,
 
   /** Light page H1 (footer newsletter / dark bands). */
-  light: `heading is-light normal-case text-beige text-center overflow-hidden ${typeScale.displayXl}`,
+  light: `heading is-light normal-case text-beige text-center ${typeScale.displayXl}`,
 
   /** Hero H1 over imagery. */
-  lightLeft: `heading is-light is-left normal-case text-beige text-left overflow-hidden ${typeScale.displayHero}`,
+  lightLeft: `heading is-light is-left normal-case text-beige text-left ${typeScale.displayHero}`,
 
   /** Nav drawer links. */
-  menuItem: `heading is-menu-item normal-case text-beige text-left overflow-hidden ${typeScale.menuItem}`,
+  menuItem: `heading is-menu-item normal-case text-beige text-left ${typeScale.menuItem}`,
 } as const
 
 /** Spacing recipes — Bakehouse section pad is 60/40 so adjacent py stacks to 120/80. */
@@ -275,6 +275,9 @@ export const story = {
 export const layout = {
   /** Page shell width only */
   max: 'max-w-[1440px]',
+
+  /** Header / drawer top bar: Bakehouse 1920 + 25px. Page sections stay `shell` (1440). */
+  navShell: 'relative w-full min-w-0 mx-auto px-[25px] max-w-[1920px]',
 
   /** Shell: centered 1440 + 25px side padding */
   shell: 'mx-auto w-full max-w-[1440px] px-[25px]',

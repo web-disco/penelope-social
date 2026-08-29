@@ -16,6 +16,7 @@ import TeamGrid from './sections/TeamGrid.astro'
 import StorySection from './sections/StorySection.astro'
 import MerchListing from './sections/MerchListing.astro'
 import ContactFormSection from './sections/ContactFormSection.astro'
+import CateringEventsIntro from './sections/CateringEventsIntro.astro'
 import ImageGrid from './sections/ImageGrid.astro'
 import FaqSection from './sections/FaqSection.astro'
 import StepTimeline from './sections/StepTimeline.astro'
@@ -40,6 +41,7 @@ interface Props {
   sections: any[]
 }
 const { sections = [] } = Astro.props
+const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
 
 {
@@ -50,6 +52,14 @@ const { sections = [] } = Astro.props
       return null
     }
     const hasPageHero = sections.some((section) => section._type === 'pageHero')
+    if (block._type === 'pageHero' && path === '/catering-events') {
+      return (
+        <>
+          <Component block={block} />
+          <CateringEventsIntro />
+        </>
+      )
+    }
     /* Homepage hero is the H1. The old “Cafe and bar in Woodbridge” intro is gone. */
     if (block._type === 'introSection' && sections.some((section) => section._type === 'hero')) {
       return null

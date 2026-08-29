@@ -1,8 +1,7 @@
 ---
 /**
  * .section-merch-details — sticky copy column beside a gallery of product
- * shots. Each image carries `stagger-animation` on the live site and opens the
- * lightbox; both are reproduced.
+ * shots. Each image opens the lightbox.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
@@ -62,7 +61,7 @@ const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charc
           >
             {
               (product.images ?? []).map((image: any) => (
-                <div stagger-animation role="listitem" class="merch-details-images-item w-dyn-item">
+                <div role="listitem" class="merch-details-images-item w-dyn-item">
                   <a
                     href={imageUrl(image)}
                     data-gallery={`merch-${product.slug.current}`}

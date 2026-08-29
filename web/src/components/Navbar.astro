@@ -74,8 +74,8 @@ const navScrolled = solidNav
 >
   <div
     class:list={[
-      'navbar-wrap navbar__bar relative flex w-full items-stretch justify-between',
-      layout.shell,
+      'navbar-wrap navbar__bar flex items-stretch justify-between',
+      layout.navShell,
     ]}
   >
     <nav class="navbar__links" aria-label="Primary">
@@ -177,7 +177,7 @@ const navScrolled = solidNav
   aria-label="Menu"
   hidden
 >
-  <div class:list={['menu-drawer__bar', layout.shell]}>
+  <div class:list={['menu-drawer__bar', layout.navShell]}>
     <button class="menu-drawer__close" type="button" aria-label="Close menu">
       <span class="menu-drawer__close-bar"></span>
       <span class="menu-drawer__close-bar"></span>
