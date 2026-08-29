@@ -7,7 +7,15 @@
  */
 
 const EXACT_REPLACEMENTS: Record<string, string> = {
-  'Sourdough Bakery & Restaurant in Vaughan.': 'A Woodbridge restaurant with Bakehouse sourdough',
+  'Sourdough Bakery & Restaurant in Vaughan.': 'Cafe by day. Bar by night.',
+  'A Woodbridge restaurant with Bakehouse sourdough': 'Cafe by day. Bar by night.',
+  'Cafe by day and a bar by night at 125 Hawkview Blvd. Lunch, dinner, and drinks — bread from Penelope Bakehouse in Scarborough.':
+    'Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.',
+  'Bakehouse sourdough, served here': 'Good bread, served here every day',
+  'Naturally leavened loaves start at Penelope Bakehouse in Scarborough. We serve that bread at the Woodbridge restaurant — sandwiches, pizza, and loaves on the table.':
+    'Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.',
+  'Lunch, dinner, the bar, and catering — from the Woodbridge kitchen, on Bakehouse sourdough.':
+    'Lunch, dinner, the bar, and catering — on Bakehouse sourdough.',
   'Sourdough Bakery & Restaurant in Vaughan | Penelope Social':
     'Penelope Social | Cafe and bar in Woodbridge',
   'Best Sourdough Bakery in Vaughan | Penelope Social':

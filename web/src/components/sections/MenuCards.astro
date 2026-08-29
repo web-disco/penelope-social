@@ -1,7 +1,8 @@
 ---
 /**
- * Menu mosaic — image-led cards, Bakehouse pattern with 4 tiles.
- * Desktop: 4-up. Mobile: Swiper at 1.1 slides so a sliver of the next card peeks.
+ * Menu mosaic — Bakehouse pattern: H2 + 20px intro, 4 tiles
+ * (image, 20px title, 18px line), then an outline section CTA.
+ * Desktop: 4-up. Mobile: Swiper at 1.1 slides so the next card peeks.
  */
 import { btn, heading, layout, radius, space, typeScale } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
@@ -12,9 +13,32 @@ interface Props {
   block: any
 }
 const { block } = Astro.props
-const cards: any[] = block.cards ?? []
-const sectionHeading = displayHeading(block.heading, homeMenusFallback.heading)
-const sectionIntro = restaurantCopy(block.intro, homeMenusFallback.intro)
+const authored: any[] = block.cards ?? []
+const fallbackByUrl = new Map(homeMenusFallback.cards.map((card) => [card.url, card]))
+
+const cards = (authored.length ? authored : homeMenusFallback.cards).map((card: any, index: number) => {
+  const fallback =
+    fallbackByUrl.get(card.url) ?? homeMenusFallback.cards[index] ?? homeMenusFallback.cards[0]
+  return {
+    ...card,
+    title: displayHeading(card.title, fallback.title),
+    line: restaurantCopy(card.line, fallback.line),
+    url: card.url || fallback.url,
+  }
+})
+
+const staleHeading = /woodbridge|explore our menus/i.test(block.heading ?? '')
+const staleIntro = /woodbridge|hawkview|125\s/i.test(block.intro ?? '')
+const sectionHeading = staleHeading
+  ? homeMenusFallback.heading
+  : displayHeading(block.heading, homeMenusFallback.heading)
+const sectionIntro = staleIntro
+  ? homeMenusFallback.intro
+  : restaurantCopy(block.intro, homeMenusFallback.intro)
+const ctaUrl = block.cta?.url || homeMenusFallback.ctaUrl
+const ctaLabel = /view all menus/i.test(block.cta?.label ?? '')
+  ? homeMenusFallback.ctaLabel
+  : displayHeading(block.cta?.label, homeMenusFallback.ctaLabel)
 
 const tileClass = 'menu-mosaic-tile flex h-full flex-col no-underline'
 const frameClass = `overflow-hidden ${radius.none}`
@@ -23,7 +47,7 @@ const labelClass = `mt-space-16 mb-0 text-charcoal ${typeScale.title}`
 const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
 ---
 
-<section id="menu" class="section-menu-mosaic reveal overflow-x-hidden">
+<section id="menu" class="section-menu-mosaic overflow-x-hidden">
   <div class:list={[layout.shell, space.sectionYFirst]}>
     {
       sectionHeading && (
@@ -71,7 +95,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
                     class={imageClass}
                   />
                 </div>
-                <p class={labelClass}>{displayHeading(card.title)}</p>
+                <p class={labelClass}>{card.title}</p>
                 {card.line && <p class={lineClass}>{card.line}</p>}
               </a>
             </div>
@@ -80,14 +104,14 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
       </div>
     </div>
     {
-      block.cta?.url && (
+      ctaUrl && (
         <div class="mt-space-48 flex justify-center wf-sm:mt-space-32">
           <a
-            href={block.cta.url}
-            target={block.cta.newTab ? '_blank' : undefined}
+            href={ctaUrl}
+            target={block.cta?.newTab ? '_blank' : undefined}
             class={btn.outline}
           >
-            {block.cta.label}
+            {ctaLabel}
           </a>
         </div>
       )

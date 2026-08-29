@@ -13,8 +13,15 @@ interface Props {
 }
 const { block } = Astro.props
 
-const headingText = restaurantCopy(block.heading, homeHeroFallback.heading)
-const bodyText = restaurantCopy(block.body, homeHeroFallback.body)
+const headingLooksLikeNap = (text?: string) =>
+  /hawkview|woodbridge restaurant|125\s/i.test(text ?? '')
+
+const headingText = headingLooksLikeNap(block.heading)
+  ? homeHeroFallback.heading
+  : restaurantCopy(block.heading, homeHeroFallback.heading)
+const bodyText = headingLooksLikeNap(block.body) || headingLooksLikeNap(block.heading)
+  ? homeHeroFallback.body
+  : restaurantCopy(block.body, homeHeroFallback.body)
 const primaryCta = block.orderOnline
 const secondaryCta = block.reservations
 ---

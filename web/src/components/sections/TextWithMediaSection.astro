@@ -8,7 +8,7 @@
  * switches to `display:flex` with `wrap-reverse`, which is what pushes the
  * image above the copy on mobile.
  */
-import { container, heading, btn } from '../../lib/ui'
+import { container, heading, btn, typeScale } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
 import { displayHeading, restaurantCopy } from '../../data/copy'
 import { homeBreadFallback, homeEventsFallback } from '../../data/home'
@@ -19,8 +19,17 @@ interface Props {
 const { block } = Astro.props
 const imageFirst = block.layout !== 'copy-first'
 const fallback = imageFirst ? homeBreadFallback : homeEventsFallback
-const headingText = displayHeading(block.heading, fallback.heading)
-const bodyText = restaurantCopy(block.body, fallback.body)
+const looksLikeNap = /hawkview|woodbridge restaurant|125\s/i.test(
+  `${block.heading ?? ''} ${block.body ?? ''}`,
+)
+const headingText =
+  imageFirst && looksLikeNap
+    ? homeBreadFallback.heading
+    : displayHeading(block.heading, fallback.heading)
+const bodyText =
+  imageFirst && looksLikeNap
+    ? homeBreadFallback.body
+    : restaurantCopy(block.body, fallback.body)
 const ctaUrl = block.cta?.url ?? ('ctaUrl' in fallback ? fallback.ctaUrl : undefined)
 const ctaLabel = displayHeading(
   block.cta?.label,
@@ -36,10 +45,8 @@ const imageClass = imageFirst
   : 'home-events-image aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]'
 
 const contentClass = imageFirst
-  ? 'home-bread-content flex flex-col items-start justify-center'
-  : 'home-events-content flex flex-col items-start justify-center'
-
-const ctaClass = imageFirst ? 'home-bread-cta mt-10 wf-sm:mt-5' : 'events-cta mt-10 wf-sm:mt-5'
+  ? 'home-bread-content story-copy flex flex-col items-start justify-center gap-space-24'
+  : 'home-events-content story-copy flex flex-col items-start justify-center gap-space-24'
 ---
 
 <div class={imageFirst ? 'section-home-bread' : 'home-events'}>
@@ -59,16 +66,18 @@ const ctaClass = imageFirst ? 'home-bread-cta mt-10 wf-sm:mt-5' : 'events-cta mt
       }
 
       <div class={contentClass}>
-        <h2 class={heading.medium}>{headingText}</h2>
-        <p>{bodyText}</p>
+        <div>
+          <h2 class:list={[heading.medium, 'text-left my-0']}>{headingText}</h2>
+          <p class:list={['mt-space-16 mb-0 text-charcoal max-w-[720px]', typeScale.body]}>{bodyText}</p>
+        </div>
         {
           ctaUrl && (
-            <div class={ctaClass}>
+            <div class={imageFirst ? 'home-bread-cta' : 'events-cta'}>
               <a
                 href={ctaUrl}
-                target={block.cta.newTab ? '_blank' : undefined}
+                target={block.cta?.newTab ? '_blank' : undefined}
                 data-ga-event={ctaUrl === '/catering-events' ? 'catering_click' : undefined}
-                class={block.cta.style === 'outline' ? btn.outline : btn.primary}
+                class={block.cta?.style === 'outline' ? btn.outline : btn.primary}
               >
                 {ctaLabel}
               </a>

@@ -10,7 +10,7 @@
  * three paragraphs inside `.hours-wrap`, which span both columns — reproduced
  * below as `col-span-2`.
  */
-import { heading, containerFooter, container } from '../lib/ui'
+import { heading, containerFooter, container, typeScale } from '../lib/ui'
 import { imageUrl } from '../lib/image'
 import NewsletterForm from './NewsletterForm.astro'
 import LineText from './LineText.astro'
@@ -64,10 +64,15 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
   <!-- .footer-newsletter — the green band -->
   <div class="footer-newsletter bg-green">
     <div class={container}>
-      <h2 class={heading.light}>{displayHeading(newsletter.heading, 'Stay in the loop')}</h2>
+      <h2 class:list={[heading.light, typeScale.displayXl]}>
+        {displayHeading(newsletter.heading, 'Stay in the loop')}
+      </h2>
       <div class="footer-newsletter-wrap mx-auto max-w-[650px] text-center">
         <p
-          class="is-light newsletter-text mb-[10px] font-body text-[26px] leading-[150%] text-beige wf-sm:text-[24px] wf-xs:text-[18px]"
+          class:list={[
+            'is-light newsletter-text mb-[10px] text-beige',
+            typeScale.intro,
+          ]}
         >
           {newsletter.text}
         </p>

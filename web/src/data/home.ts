@@ -1,29 +1,47 @@
-/** Homepage fallbacks when Sanity still has Vaughan-as-city copy. */
+/** Homepage copy. Repo wins over address-y Sanity so staging matches Bakehouse mood. */
 
 export const homeHeroFallback = {
-  heading: 'A Woodbridge restaurant with Bakehouse sourdough',
-  body: 'Cafe by day and a bar by night at 125 Hawkview Blvd. Lunch, dinner, and drinks — bread from Penelope Bakehouse in Scarborough.',
-}
-
-export const homeIntroFallback = {
-  heading: 'Cafe and bar in Woodbridge',
-  intro:
-    'Penelope Social is the restaurant at 125 Hawkview Blvd, Woodbridge. New York-style sourdough pizza, focaccia sandwiches, and cocktails — bread from our Scarborough bakehouse, a room you can stay in.',
+  heading: 'Cafe by day. Bar by night.',
+  body: 'Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.',
 }
 
 export const homeMenusFallback = {
-  heading: 'Explore our menus',
-  intro: 'Lunch, dinner, the bar, and catering — from the Woodbridge kitchen, on Bakehouse sourdough.',
+  heading: 'On the menu',
+  intro: 'Lunch, dinner, the bar, and catering — on Bakehouse sourdough.',
+  ctaLabel: 'Explore our menus',
+  ctaUrl: '/menus',
+  cards: [
+    {
+      title: 'Lunch',
+      line: 'Focaccia sandwiches and pizza',
+      url: '/menus/lunch',
+    },
+    {
+      title: 'Bar',
+      line: 'Cocktails and a late sit',
+      url: '/menus/bar',
+    },
+    {
+      title: 'Dinner',
+      line: 'Pizza, handhelds, shareables',
+      url: '/menus/dinner',
+    },
+    {
+      title: 'Catering',
+      line: 'Trays for your table',
+      url: '/menus/catering',
+    },
+  ],
 }
 
 export const homeBreadFallback = {
-  heading: 'Bakehouse sourdough, served here',
-  body: 'Naturally leavened loaves start at Penelope Bakehouse in Scarborough. We serve that bread at the Woodbridge restaurant — sandwiches, pizza, and loaves on the table.',
+  heading: 'Good bread, served here every day',
+  body: 'Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.',
   ctaLabel: 'Social and Bakehouse',
   ctaUrl: '/sourdough-bakery',
 }
 
 export const homeEventsFallback = {
   heading: 'Events at Penelope',
-  body: 'Birthdays, work dinners, and nights in the Woodbridge restaurant. Artisanal dishes, handcrafted cocktails, and a room we will set for you. Catering trays if you want the food at yours.',
+  body: 'Birthdays, work dinners, and nights in the room. Artisanal dishes, handcrafted cocktails, and a table we will set for you. Catering trays if you want the food at yours.',
 }
