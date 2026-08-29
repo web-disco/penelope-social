@@ -75,7 +75,8 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
     'Catering tray menu | Pizza, focaccia, salads | Penelope Social',
   'Trays of sandwiches, pizza, and more from Penelope Social in Woodbridge. See the catering menu, then enquire at /catering-events.':
     'Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8–10. Prices on this page. Book trays on Catering and events — 24 hours’ notice.',
-  'Penelope Social\nMenus Vaughan': 'Menus at Penelope Social',
+  'Penelope Social\nMenus Vaughan': 'On the menu',
+  'Menus at Penelope Social': 'On the menu',
   'Penelope Social Menu Vaughan | Lunch, Dinner & Catering':
     'Menus | Lunch, dinner, bar, and catering | Penelope Social',
   'Get in Touch with\nPenelope Social Vaughan': 'Get in touch',
