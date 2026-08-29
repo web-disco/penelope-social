@@ -7,16 +7,35 @@
  */
 
 const EXACT_REPLACEMENTS: Record<string, string> = {
-  'Sourdough Bakery & Restaurant in Vaughan.': 'Cafe by day. Bar by night.',
-  'A Woodbridge restaurant with Bakehouse sourdough': 'Cafe by day. Bar by night.',
+  'Sourdough Bakery & Restaurant in Vaughan.': "Woodbridge's Cafe and Bar",
+  'A Woodbridge restaurant with Bakehouse sourdough': "Woodbridge's Cafe and Bar",
+  'Cafe by day. Bar by night.': "Woodbridge's Cafe and Bar",
   'Cafe by day and a bar by night at 125 Hawkview Blvd. Lunch, dinner, and drinks — bread from Penelope Bakehouse in Scarborough.':
-    'Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.',
+    'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
+  'Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.':
+    'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
+  'Lunch, dinner, and drinks — focaccia sandwiches, pizza, and sourdough from Penelope Bakehouse.':
+    'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
   'Naturally leavened loaves start at Penelope Bakehouse in Scarborough. We serve that bread at the Woodbridge restaurant — sandwiches, pizza, and loaves on the table.':
-    'Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.',
+    'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.',
+  'Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.':
+    'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.',
   'Lunch, dinner, the bar, and catering — from the Woodbridge kitchen, on Bakehouse sourdough.':
-    'Lunch, dinner, the bar, and catering — on Bakehouse sourdough.',
+    'Four menus from the kitchen: lunch, dinner, the bar, and catering, all on Bakehouse sourdough.',
+  'Lunch, dinner, the bar, and catering — on Bakehouse sourdough.':
+    'Four menus from the kitchen: lunch, dinner, the bar, and catering, all on Bakehouse sourdough.',
   'Focaccia sandwiches at lunch, cocktails after work, and pizza at dinner — all at 125 Hawkview Blvd, Woodbridge.':
-    'Focaccia sandwiches at lunch, pizza at dinner, and cocktails at the bar.',
+    'Lunch, dinner, and the bar — plus trays when you want to take the kitchen with you.',
+  'Focaccia sandwiches at lunch, pizza at dinner, and cocktails at the bar.':
+    'Lunch, dinner, and the bar — plus trays when you want to take the kitchen with you.',
+  'Focaccia sandwiches and pizza': 'Focaccia sandwiches and pizza daily',
+  'Cocktails and a late sit': 'Cocktails, wine, and a late sit',
+  'Pizza, handhelds, shareables': 'Pizza, handhelds, and shareable plates',
+  'Trays for your table': 'Trays of pizza and sandwiches',
+  'Birthdays, work dinners, and nights in the room. Food, drinks, and a table we will set.':
+    'Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.',
+  'Trays to-go, or a night in the room.':
+    'Trays to-go or a night in the room, with pizza, focaccia, drinks, and a table we will set.',
   "We'd love to hear from you. Questions, a table, or an event — call, email, or visit us at 125 Hawkview Blvd, Woodbridge.":
     'Questions, a table, or an event — call, email, or write us.',
   'Lunch at Penelope Social in Woodbridge. Focaccia sandwiches, New York-style pizzas, and salads.\n\nMonday–Saturday 10:00am–3:00pm':
@@ -30,11 +49,13 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Explore our menus — focaccia sandwiches, pizza, shareables, and handcrafted cocktails at the Woodbridge restaurant.\n‍':
     'Focaccia sandwiches, pizza, shareables, and cocktails.',
   'Birthdays, work dinners, and nights in the Woodbridge restaurant. Artisanal dishes, handcrafted cocktails, and a room we will set for you. Catering trays if you want the food at yours.':
-    'Birthdays, work dinners, and nights in the room. Food, drinks, and a table we will set.',
+    'Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.',
   'Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you — food, drinks, and the room.':
     'Food, drinks, and a table we will set. Prefer 24 hours’ notice for catering.',
   'Penelope Social is the restaurant in Woodbridge — cafe by day, kitchen and bar at night — at 125 Hawkview Blvd. We serve lunch, dinner, and drinks. The sourdough on the table comes from Penelope Bakehouse, our Scarborough micro-bakery.':
-    'A Woodbridge cafe and bar. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.',
+    'This is a Woodbridge cafe and bar: lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
+  'A Woodbridge cafe and bar. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.':
+    'This is a Woodbridge cafe and bar: lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
   'Trays from the Woodbridge kitchen — not a private-event booking page, and not the Scarborough bakehouse menu. Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.':
     'Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.',
   'Sourdough Bakery & Restaurant in Vaughan | Penelope Social':

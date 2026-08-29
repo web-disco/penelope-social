@@ -22,8 +22,8 @@
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/6738fc337434df480308980c_penelope-social-gathering.avif",
           "alt": "People having dinner at Penelope Social"
         },
-        "heading": "Cafe by day. Bar by night.",
-        "body": "Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.",
+        "heading": "Woodbridge's Cafe and Bar",
+        "body": "Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.",
         "orderOnline": {
           "_type": "link",
           "label": "Order Online",
@@ -41,7 +41,7 @@
         "_type": "menuCards",
         "_key": "menus",
         "heading": "On the menu",
-        "intro": "Lunch, dinner, the bar, and catering — on Bakehouse sourdough.",
+        "intro": "Four menus from the kitchen: lunch, dinner, the bar, and catering, all on Bakehouse sourdough.",
         "cta": {
           "_type": "link",
           "label": "Explore our menus",
@@ -52,7 +52,7 @@
             "_type": "menuCard",
             "_key": "card0",
             "title": "Lunch",
-            "line": "Focaccia sandwiches and pizza",
+            "line": "Focaccia sandwiches and pizza daily",
             "url": "/menus/lunch",
             "image": {
               "_type": "image",
@@ -66,7 +66,7 @@
             "_type": "menuCard",
             "_key": "card1",
             "title": "Bar",
-            "line": "Cocktails and a late sit",
+            "line": "Cocktails, wine, and a late sit",
             "url": "/menus/bar",
             "image": {
               "_type": "image",
@@ -80,7 +80,7 @@
             "_type": "menuCard",
             "_key": "card2",
             "title": "Dinner",
-            "line": "Pizza, handhelds, shareables",
+            "line": "Pizza, handhelds, and shareable plates",
             "url": "/menus/dinner",
             "image": {
               "_type": "image",
@@ -94,7 +94,7 @@
             "_type": "menuCard",
             "_key": "card3",
             "title": "Catering",
-            "line": "Trays for your table",
+            "line": "Trays of pizza and sandwiches",
             "url": "/menus/catering",
             "image": {
               "_type": "image",
@@ -111,7 +111,7 @@
         "_key": "bread",
         "layout": "image-first",
         "heading": "Good bread, served here every day",
-        "body": "Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.",
+        "body": "Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.",
         "cta": {
           "_type": "button",
           "label": "Social and Bakehouse",
@@ -132,7 +132,7 @@
         "_key": "events",
         "layout": "copy-first",
         "heading": "Events at Penelope",
-        "body": "Birthdays, work dinners, and nights in the room. Food, drinks, and a table we will set.",
+        "body": "Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.",
         "cta": {
           "_type": "button",
           "label": "Plan an event",

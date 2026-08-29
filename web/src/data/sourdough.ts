@@ -9,14 +9,15 @@ export const sourdoughMeta = PAGE_SEO['/sourdough-bakery']!
  */
 export const sourdoughPage = {
   heading: 'Bakehouse sourdough, served here',
-  subheading: 'Vince’s starter lives at the restaurant. The loaves are baked in Scarborough.',
+  subheading:
+    'Vince’s starter lives at the restaurant, and the loaves are baked at Penelope Bakehouse in Scarborough.',
   banner: {
     src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe4fbd904d89c7a43b7f4_bakery-banner.avif',
     alt: 'Sourdough loaves from Penelope',
   },
   social: {
     heading: 'Eat and drink here',
-    body: 'This is the cafe and bar — lunch, dinner, and drinks on Bakehouse sourdough.',
+    body: 'Sit down here for lunch, dinner, and drinks on the sourdough we serve from the Bakehouse.',
     image: {
       src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/6738fc337434df480308980c_penelope-social-gathering.avif',
       alt: 'Dinner service at Penelope Social',
@@ -29,7 +30,7 @@ export const sourdoughPage = {
   },
   bakehouse: {
     heading: 'Baked in Scarborough',
-    body: 'Penelope Bakehouse is the bakehouse and focacceria. Loaves, focaccia sandwiches, and pizza by the slice.',
+    body: 'Loaves, focaccia sandwiches, and pizza by the slice, baked at the Scarborough bakehouse and focacceria.',
     image: {
       src: 'https://penelopebakehouse.com/images/location-bakehouse.jpg',
       alt: 'Counter at Penelope Bakehouse',

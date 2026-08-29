@@ -261,6 +261,18 @@ export const space = {
   menuGrid: 'gap-x-menu-col gap-y-menu-row',
 } as const
 
+/**
+ * Bakehouse story / text+image: 7/5 on 12 columns, copy sits on the
+ * bottom of the media, title–body 16px, then gap-24 to the CTA.
+ */
+export const story = {
+  grid: 'story-grid grid grid-cols-12 gap-x-space-48 gap-y-space-32 wf-md:grid-cols-1 wf-md:gap-x-0',
+  media: 'story-media col-span-7 w-full wf-md:col-span-1',
+  image:
+    'story-image block aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]',
+  copy: 'story-copy col-span-5 flex flex-col gap-space-24 justify-end pb-space-48 wf-md:col-span-1 wf-md:justify-start wf-md:pb-0',
+} as const
+
 /** Layout shell — Social's 1440 content container, 25px sides. */
 export const layout = {
   /** Page shell width only */

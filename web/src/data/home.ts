@@ -1,34 +1,34 @@
 /** Homepage copy. Repo wins over address-y Sanity so staging matches Bakehouse mood. */
 
 export const homeHeroFallback = {
-  heading: 'Cafe by day. Bar by night.',
-  body: 'Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.',
+  heading: "Woodbridge's Cafe and Bar",
+  body: 'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
 }
 
 export const homeMenusFallback = {
   heading: 'On the menu',
-  intro: 'Lunch, dinner, the bar, and catering — on Bakehouse sourdough.',
+  intro: 'Four menus from the kitchen: lunch, dinner, the bar, and catering, all on Bakehouse sourdough.',
   ctaLabel: 'Explore our menus',
   ctaUrl: '/menus',
   cards: [
     {
       title: 'Lunch',
-      line: 'Focaccia sandwiches and pizza',
+      line: 'Focaccia sandwiches and pizza daily',
       url: '/menus/lunch',
     },
     {
       title: 'Bar',
-      line: 'Cocktails and a late sit',
+      line: 'Cocktails, wine, and a late sit',
       url: '/menus/bar',
     },
     {
       title: 'Dinner',
-      line: 'Pizza, handhelds, shareables',
+      line: 'Pizza, handhelds, and shareable plates',
       url: '/menus/dinner',
     },
     {
       title: 'Catering',
-      line: 'Trays for your table',
+      line: 'Trays of pizza and sandwiches',
       url: '/menus/catering',
     },
   ],
@@ -36,12 +36,12 @@ export const homeMenusFallback = {
 
 export const homeBreadFallback = {
   heading: 'Good bread, served here every day',
-  body: 'Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.',
+  body: 'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.',
   ctaLabel: 'Social and Bakehouse',
   ctaUrl: '/sourdough-bakery',
 }
 
 export const homeEventsFallback = {
   heading: 'Events at Penelope',
-  body: 'Birthdays, work dinners, and nights in the room. Food, drinks, and a table we will set.',
+  body: 'Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.',
 }

@@ -8,7 +8,21 @@
 import { btn, heading, layout } from '../lib/ui'
 import { imageUrl } from '../lib/image'
 
-const BAKERY_PATH = '/sourdough-bakery'
+const GIFT_CARDS_URL =
+  'https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard'
+
+/** /sourdough-bakery stays live for GSC — it is not a nav item. */
+const DEFAULT_NAV = [
+  { label: 'Menu', url: '/menus' },
+  { label: 'About', url: '/about' },
+  { label: 'Locations', url: '/locations' },
+  { label: 'Gift Cards', url: GIFT_CARDS_URL, newTab: true },
+  { label: 'Catering', url: '/catering-events' },
+  { label: 'Merch', url: '/merchandise' },
+]
+
+const isBakeryNav = (link: { label?: string; url?: string }) =>
+  /^bakery$/i.test(link.label ?? '') || /sourdough-bakery/i.test(link.url ?? '')
 
 interface Props {
   settings: any
@@ -20,18 +34,8 @@ const { settings, isHome = false, solidNav = false } = Astro.props
 const header = settings.header ?? {}
 const logoSrc = imageUrl(header.logo) || '/penelope-logo.svg'
 
-const GIFT_CARDS_URL =
-  'https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard'
-
-const navLinks = [
-  { label: 'Menu', url: '/menus' },
-  { label: 'About', url: '/about' },
-  { label: 'Locations', url: '/locations' },
-  { label: 'Bakery', url: BAKERY_PATH },
-  { label: 'Gift Cards', url: GIFT_CARDS_URL, newTab: true },
-  { label: 'Catering', url: '/catering-events' },
-  { label: 'Merch', url: '/merchandise' },
-]
+const authoredNav = Array.isArray(header.drawerLinks) ? header.drawerLinks : []
+const navLinks = (authoredNav.length ? authoredNav : DEFAULT_NAV).filter((link) => !isBakeryNav(link))
 
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/'
 const currentHash = Astro.url.hash

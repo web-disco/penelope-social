@@ -9,7 +9,7 @@ import BannerHero from '../components/sections/BannerHero.astro'
 import StepTimeline from '../components/sections/StepTimeline.astro'
 import FaqSection from '../components/sections/FaqSection.astro'
 import TeamGrid from '../components/sections/TeamGrid.astro'
-import { layout, space, typeScale, heading, btn } from '../lib/ui'
+import { layout, space, typeScale, heading, btn, container, story } from '../lib/ui'
 import { aboutMeta, aboutPage } from '../data/about'
 import { aboutFaq } from '../data/faq'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
@@ -54,11 +54,11 @@ const graph = pageGraph([
     <StepTimeline headingText={aboutPage.timeline.heading} steps={aboutPage.timeline.steps} />
 
     <section class="section-story">
-      <div class:list={[layout.shell, 'py-space-32 wf-sm:py-space-24']}>
-        <div class="story-grid mx-auto flex w-full max-w-[800px] flex-row items-center gap-x-space-32 wf-md:flex-col wf-md:gap-x-0 wf-md:gap-y-space-24">
-          <div class="story-media w-full max-w-[360px] shrink-0 overflow-hidden wf-md:mx-auto">
+      <div class={container}>
+        <div class={story.grid}>
+          <div class={story.media}>
             <video
-              class="story-image story-video block h-full w-full object-cover"
+              class:list={[story.image, 'story-video']}
               src={video.video.src}
               controls
               playsinline
@@ -67,10 +67,9 @@ const graph = pageGraph([
               autoplay
               preload="metadata"
               aria-label={video.image.alt}
-              style={`aspect-ratio: ${video.image.aspect};`}
             ></video>
           </div>
-          <div class="story-copy flex min-w-0 flex-1 flex-col items-start justify-center gap-space-24">
+          <div class={story.copy}>
             <div>
               <h2 class:list={[heading.medium, 'text-left my-0']}>{video.heading}</h2>
               <p class:list={['mt-space-16 mb-0 text-charcoal max-w-[720px]', typeScale.bodyLg]}>

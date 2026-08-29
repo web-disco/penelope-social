@@ -4,13 +4,12 @@
  *   .section-home-bread  — image first, copy second
  *   .home-events         — copy first, image second
  *
- * Both collapse to one column at ≤991px. The events variant additionally
- * switches to `display:flex` with `wrap-reverse`, which is what pushes the
- * image above the copy on mobile.
+ * Bakehouse story-grid: 12 columns, media 7, copy 5 bottom-aligned.
+ * Events puts the image first on mobile (wf-md:order).
  */
-import { container, heading, btn, typeScale } from '../../lib/ui'
+import { container, heading, btn, typeScale, story } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
-import { displayHeading, restaurantCopy } from '../../data/copy'
+import { displayHeading } from '../../data/copy'
 import { homeBreadFallback, homeEventsFallback } from '../../data/home'
 
 interface Props {
@@ -19,53 +18,37 @@ interface Props {
 const { block } = Astro.props
 const imageFirst = block.layout !== 'copy-first'
 const fallback = imageFirst ? homeBreadFallback : homeEventsFallback
-const looksLikeNap = /hawkview|woodbridge restaurant|125\s/i.test(
-  `${block.heading ?? ''} ${block.body ?? ''}`,
-)
-const headingText =
-  imageFirst && looksLikeNap
-    ? homeBreadFallback.heading
-    : displayHeading(block.heading, fallback.heading)
-const bodyText =
-  imageFirst && looksLikeNap
-    ? homeBreadFallback.body
-    : restaurantCopy(block.body, fallback.body)
+const headingText = fallback.heading
+const bodyText = fallback.body
 const ctaUrl = block.cta?.url ?? ('ctaUrl' in fallback ? fallback.ctaUrl : undefined)
 const ctaLabel = displayHeading(
   block.cta?.label,
   'ctaLabel' in fallback ? fallback.ctaLabel : undefined,
 )
 
-const wrapClass = imageFirst
-  ? 'home-bread-wrap grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-[60px] wf-md:grid-cols-1 wf-md:gap-[30px]'
-  : 'home-events-wrap grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-[60px] wf-md:flex wf-md:flex-wrap-reverse wf-md:grid-cols-1 wf-md:gap-[30px]'
-
-const imageClass = imageFirst
-  ? 'home-bread-image aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]'
-  : 'home-events-image aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]'
-
-const contentClass = imageFirst
-  ? 'home-bread-content story-copy flex flex-col items-start justify-center gap-space-24'
-  : 'home-events-content story-copy flex flex-col items-start justify-center gap-space-24'
+const mediaOrder = imageFirst ? '' : 'wf-md:order-1'
+const copyOrder = imageFirst ? '' : 'wf-md:order-2'
 ---
 
 <div class={imageFirst ? 'section-home-bread' : 'home-events'}>
   <div class={container}>
-    <div class={wrapClass}>
+    <div class={story.grid}>
       {
         imageFirst && (
-          <img
-            src={imageUrl(block.image)}
-            loading="eager"
-            sizes={imageSizes(block.image)}
-            srcset={imageSrcset(block.image)}
-            alt={imageAlt(block.image)}
-            class={imageClass}
-          />
+          <div class={story.media}>
+            <img
+              src={imageUrl(block.image)}
+              loading="eager"
+              sizes={imageSizes(block.image)}
+              srcset={imageSrcset(block.image)}
+              alt={imageAlt(block.image)}
+              class={story.image}
+            />
+          </div>
         )
       }
 
-      <div class={contentClass}>
+      <div class:list={[story.copy, copyOrder]}>
         <div>
           <h2 class:list={[heading.medium, 'text-left my-0']}>{headingText}</h2>
           <p class:list={['mt-space-16 mb-0 text-charcoal max-w-[720px]', typeScale.body]}>{bodyText}</p>
@@ -88,14 +71,16 @@ const contentClass = imageFirst
 
       {
         !imageFirst && (
-          <img
-            src={imageUrl(block.image)}
-            loading="eager"
-            sizes={imageSizes(block.image)}
-            srcset={imageSrcset(block.image)}
-            alt={imageAlt(block.image)}
-            class={imageClass}
-          />
+          <div class:list={[story.media, mediaOrder]}>
+            <img
+              src={imageUrl(block.image)}
+              loading="eager"
+              sizes={imageSizes(block.image)}
+              srcset={imageSrcset(block.image)}
+              alt={imageAlt(block.image)}
+              class={story.image}
+            />
+          </div>
         )
       }
     </div>

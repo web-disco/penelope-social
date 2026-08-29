@@ -47,13 +47,6 @@
         },
         {
           "_type": "link",
-          "_key": "bakery",
-          "label": "Bakery",
-          "url": "/sourdough-bakery",
-          "newTab": false
-        },
-        {
-          "_type": "link",
           "_key": "gift-cards",
           "label": "Gift Cards",
           "url": "https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard",

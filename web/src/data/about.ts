@@ -9,10 +9,11 @@ export const aboutMeta = PAGE_SEO['/about']!
  */
 export const aboutPage = {
   heading: 'About Penelope Social',
-  subheading: 'A Woodbridge cafe and bar, with Bakehouse sourdough.',
+  subheading:
+    'This is a Woodbridge cafe and bar: lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
   paragraphs: [
-    'Penelope Social is a Woodbridge cafe and bar. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.',
-    'Three brothers — Franco, Vince, and Giuliano — built the room around good bread and a proper bar. The starter is named Penelope.',
+    'Lunch, dinner, and drinks, with sourdough from Penelope Bakehouse on the table.',
+    'Three brothers — Franco, Vince, and Giuliano — built the room around good bread and a proper bar.',
   ],
   timeline: {
     heading: 'How Penelope started',
@@ -37,7 +38,7 @@ export const aboutPage = {
   },
   videoTeaser: {
     heading: 'Inside the bake',
-    body: 'From the starter to the table, everything starts with good bread.',
+    body: 'Vince’s starter still works the dough, and we serve that bread here as sandwiches, pizza, and loaves.',
     layout: 'image-first' as const,
     video: {
       src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc19b8d4f507a7318ec10_PENNY%20BREAD-transcode.mp4',

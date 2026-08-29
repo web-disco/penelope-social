@@ -33,7 +33,7 @@
         "variant": "default",
         "align": "center",
         "heading": "Menus at Penelope Social",
-        "intro": "Focaccia sandwiches at lunch, pizza at dinner, and cocktails at the bar.",
+        "intro": "Lunch, dinner, and the bar — plus trays when you want to take the kitchen with you.",
         "quickLinks": []
       },
       {
@@ -128,7 +128,7 @@
         "_type": "introSection",
         "_key": "intro",
         "heading": "About Penelope Social",
-        "intro": "A Woodbridge cafe and bar. Lunch, dinner, and drinks \u2014 sourdough from Penelope Bakehouse.",
+        "intro": "This is a Woodbridge cafe and bar: lunch, dinner, and drinks on sourdough from Penelope Bakehouse.",
         "ctas": []
       },
       {
@@ -200,7 +200,7 @@
           "alt": "A private event at Penelope Social"
         },
         "heading": "Catering and events",
-        "intro": "Trays to-go, or a night in the room."
+        "intro": "Trays to-go or a night in the room, with pizza, focaccia, drinks, and a table we will set."
       },
       {
         "_type": "introSection",

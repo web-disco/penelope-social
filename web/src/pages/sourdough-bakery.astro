@@ -10,7 +10,7 @@ import { sourdoughMeta, sourdoughPage } from '../data/sourdough'
 import { sourdoughFaq } from '../data/faq'
 import { SITE_ORIGIN } from '../data/site'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
-import { btn, container, heading, typeScale } from '../lib/ui'
+import { btn, container, heading, typeScale, story } from '../lib/ui'
 
 const page = sourdoughPage
 const blocks = [page.social, page.bakehouse] as const
@@ -46,22 +46,16 @@ const canonical = `${SITE_ORIGIN}/sourdough-bakery`
     {
       blocks.map((block) => {
         const imageFirst = block.layout === 'image-first'
-        const wrapClass = imageFirst
-          ? 'grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-[60px] wf-md:grid-cols-1 wf-md:gap-[30px]'
-          : 'grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-[60px] wf-md:flex wf-md:flex-wrap-reverse wf-md:grid-cols-1 wf-md:gap-[30px]'
         return (
           <section class={imageFirst ? 'section-home-bread' : 'home-events'}>
             <div class={container}>
-              <div class={wrapClass}>
+              <div class={story.grid}>
                 {imageFirst && (
-                  <img
-                    src={block.image.src}
-                    alt={block.image.alt}
-                    loading="eager"
-                    class="aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]"
-                  />
+                  <div class={story.media}>
+                    <img src={block.image.src} alt={block.image.alt} loading="eager" class={story.image} />
+                  </div>
                 )}
-                <div class="story-copy flex flex-col items-start justify-center gap-space-24">
+                <div class:list={[story.copy, !imageFirst && 'wf-md:order-2']}>
                   <div>
                     <h2 class:list={[heading.medium, 'text-left my-0']}>{block.heading}</h2>
                     <p class:list={['mt-space-16 mb-0 text-charcoal max-w-[720px]', typeScale.body]}>
@@ -82,12 +76,9 @@ const canonical = `${SITE_ORIGIN}/sourdough-bakery`
                   </div>
                 </div>
                 {!imageFirst && (
-                  <img
-                    src={block.image.src}
-                    alt={block.image.alt}
-                    loading="eager"
-                    class="aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]"
-                  />
+                  <div class:list={[story.media, 'wf-md:order-1']}>
+                    <img src={block.image.src} alt={block.image.alt} loading="eager" class={story.image} />
+                  </div>
                 )}
               </div>
             </div>

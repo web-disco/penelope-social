@@ -15,8 +15,8 @@ import {
 export const locationsHubMeta = PAGE_SEO['/locations']!
 
 export const locationsHub = {
-  heading: 'Our locations',
-  intro: 'A Woodbridge cafe and bar, and a Scarborough bakehouse.',
+  heading: 'Social and Bakehouse',
+  intro: 'The cafe and bar, and the Scarborough bakehouse for loaves, focaccia, and pizza by the slice.',
 }
 
 export const woodbridgeLocationMeta = PAGE_SEO['/locations/woodbridge']!
@@ -44,19 +44,19 @@ export const woodbridgeLocation = {
       href: `mailto:${woodbridgeNap.email}`,
     },
   },
-  intro: 'Cafe by day. Bar by night.',
+  intro: 'Focaccia sandwiches, pizza, and drinks on Bakehouse sourdough, from lunch through a late sit.',
   nap: woodbridgeNap,
   cafeHours,
   barHours,
   offeringsHeading: 'Cafe, kitchen, and bar',
   offeringsBody:
-    'Focaccia sandwiches and pizza at lunch. Dinner, drinks, and a late sit. Sourdough from Penelope Bakehouse.',
-  detailHeading: 'Cafe by day, bar by night',
+    'Focaccia sandwiches and pizza at lunch, then dinner plates, drinks, and sourdough from Penelope Bakehouse.',
+  detailHeading: 'Cafe, kitchen, and bar',
   detailCtas: [
     { label: 'Order online', url: ORDER_ONLINE_URL, style: 'primary' as const, newTab: true },
     { label: 'Reservations', url: RESERVATIONS_PATH, style: 'outline' as const },
   ] satisfies Cta[],
-  hubBlurb: 'Cafe by day, bar by night. Bakehouse sourdough on the table.',
+  hubBlurb: 'Cafe lunch, dinner, and late drinks.',
 }
 
 export const scarboroughLocationMeta = PAGE_SEO['/locations/scarborough']!
@@ -84,10 +84,10 @@ export const scarboroughLocation = {
       href: `mailto:${scarboroughBakehouse.email}`,
     },
   },
-  intro: 'The Scarborough bakehouse and focacceria.',
-  offeringsHeading: 'Sourdough and focaccia, baked in Scarborough.',
+  intro: 'Sourdough loaves, focaccia sandwiches, and pizza by the slice, baked fresh at this Scarborough shop.',
+  offeringsHeading: 'Sourdough and focaccia, baked here',
   offeringsBody:
-    'Loaves, focaccia sandwiches, and pizza by the slice. Bread for Penelope Social starts here. Hours, menu, and orders live on penelopebakehouse.com.',
+    'Loaves, focaccia sandwiches, and pizza by the slice — hours, menu, and orders live on penelopebakehouse.com.',
   hubBlurb: 'Sourdough, focaccia, and pizza by the slice.',
   ctas: [
     { label: 'Visit penelopebakehouse.com', url: BAKEHOUSE_SITE_URL, style: 'primary' as const, newTab: true },
