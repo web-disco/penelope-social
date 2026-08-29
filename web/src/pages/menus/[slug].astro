@@ -7,18 +7,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
 import PageHeading from '../../components/sections/PageHeading.astro'
 import MenuCategories from '../../components/MenuCategories.astro'
-import FaqSection from '../../components/sections/FaqSection.astro'
 import { getAll } from '../../lib/data'
 import { resolveSeo } from '../../data/seo'
 import { restaurantCopy, displayHeading } from '../../data/copy'
 import { cateringMenuCopy } from '../../data/menus'
-import { cateringMenuFaq } from '../../data/faq'
 import { SITE_ORIGIN } from '../../data/site'
 import { btn, layout, space, typeScale, heading } from '../../lib/ui'
 import {
   bakehouseSchema,
   breadcrumbSchema,
-  faqPageSchema,
   menuSchema,
   pageGraph,
   restaurantSchema,
@@ -69,12 +66,7 @@ const graph = pageGraph([
     description: seo.description,
     sections: menuSections,
   }),
-  ...(isCateringMenu ? [faqPageSchema(cateringMenuFaq)] : []),
 ])
-
-const quickLinks = (menu.categories ?? [])
-  .filter((category: any) => category.anchor?.current)
-  .map((category: any) => ({ label: category.title, anchor: category.anchor.current }))
 
 const canonical = `${SITE_ORIGIN}${path}`
 ---
@@ -93,7 +85,6 @@ const canonical = `${SITE_ORIGIN}${path}`
       heading: headingText,
       intro: introText,
       align: 'left',
-      quickLinks,
     }}
   />
   {
@@ -112,5 +103,4 @@ const canonical = `${SITE_ORIGIN}${path}`
     )
   }
   <MenuCategories categories={menu.categories ?? []} />
-  {isCateringMenu && <FaqSection headingText="FAQs" items={cateringMenuFaq} includeSchema={false} />}
 </BaseLayout>

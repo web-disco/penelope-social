@@ -69,6 +69,13 @@ const { sections = [] } = Astro.props
         return <Component block={{ ...block, heading: '' }} headingLevel="h2" />
       }
     }
+    /* Menu hub and menu pages have no FAQ block. */
+    if (
+      block._type === 'faqSection' &&
+      /^\/menus(\/|$)/.test(Astro.url.pathname.replace(/\/$/, '') || '/')
+    ) {
+      return null
+    }
     if (block._type === 'faqSection') {
       return <FaqSection headingText={block.heading} items={block.items ?? []} />
     }

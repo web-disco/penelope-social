@@ -1,28 +1,33 @@
 ---
 /**
- * .menu-category sections — one per course, each an anchor target for the
- * quick-links row above.
- *
- * On Webflow these were CMS collection lists; Webflow rendered the empty state
- * (`.w-dyn-empty` "No items found.") for categories with no published items,
- * which /menus/lunch still shows. That is reproduced so the page matches.
+ * Menu category blocks. Bakehouse rhythm: title, short blurb, hairline, items.
+ * “Currently unavailable” lines stay as small body copy, not category-sized headings.
  */
-import { container, pageSubHeading } from '../lib/ui'
+import { container, typeScale } from '../lib/ui'
 import LineText from './LineText.astro'
 
 interface Props {
   categories: any[]
 }
 const { categories } = Astro.props
+
+const isUnavailable = (item: any) => /unavailable/i.test(item?.title ?? '')
 ---
 
 {
   categories.map((category) => (
     <div id={category.anchor?.current} class="menu-category">
       <div class={container}>
-        <h2 class={pageSubHeading}>{category.title}</h2>
+        <h2
+          class:list={[
+            'page-sub-heading mt-0 mb-0 overflow-hidden text-charcoal',
+            typeScale.displayS,
+          ]}
+        >
+          {category.title}
+        </h2>
         {category.description && (
-          <p class="menu-description mt-[-30px] mb-10">
+          <p class:list={['menu-description mt-space-8 mb-space-16 text-charcoal', typeScale.body]}>
             <LineText text={category.description} />
           </p>
         )}
@@ -30,32 +35,40 @@ const { categories } = Astro.props
           {category.items?.length ? (
             <div
               role="list"
-              class="menu-category-list grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-[60px] wf-md:grid-cols-2 wf-md:gap-10 wf-sm:grid-cols-1 wf-xs:gap-5"
+              class="menu-category-list grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-x-[60px] gap-y-space-24 wf-md:grid-cols-2 wf-md:gap-x-10 wf-sm:grid-cols-1 wf-xs:gap-x-5"
             >
-              {category.items.map((item: any) => (
-                <div role="listitem" class="menu-category-item border-t-2 border-charcoal">
-                  <div class="menu-item-heading mt-5 flex items-start justify-between gap-10 pb-5 wf-sm:gap-5 wf-xs:gap-5">
-                    <div class="menu-item-title-wrap flex items-center justify-center gap-[10px]">
-                      <h3 class="menu-item-title mt-0 mb-0 font-body text-[24px] font-medium text-charcoal wf-xs:text-[18px]">
+              {category.items.map((item: any) =>
+                isUnavailable(item) ? (
+                  <div role="listitem" class="menu-category-item border-t-2 border-charcoal">
+                    <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.body]}>
+                      {item.title}
+                    </p>
+                  </div>
+                ) : (
+                  <div role="listitem" class="menu-category-item border-t-2 border-charcoal">
+                    <div class="menu-item-heading mt-space-16 flex items-start justify-between gap-10 pb-space-8 wf-sm:gap-5">
+                      <h3
+                        class:list={[
+                          'menu-item-title mt-0 mb-0 text-charcoal',
+                          typeScale.heading,
+                        ]}
+                      >
                         {item.title}
                       </h3>
+                      {item.price && (
+                        <p class:list={['heading-menu-price mt-0 mb-0 text-charcoal', typeScale.heading]}>
+                          {item.price}
+                        </p>
+                      )}
                     </div>
-                    {/* A few items have no price. Webflow still emitted the
-                        heading and hid it with `.w-dyn-bind-empty`; omitting it
-                        renders identically. */}
-                    {item.price && (
-                      <h3 class="heading-menu-price mt-0 mb-0 font-body font-medium text-charcoal wf-xs:text-[18px]">
-                        {item.price}
-                      </h3>
+                    {item.description && (
+                      <div class="menu-item-description">
+                        <p class:list={['mb-0 text-charcoal', typeScale.body]}>{item.description}</p>
+                      </div>
                     )}
                   </div>
-                  {item.description && (
-                    <div class="menu-item-description">
-                      <p>{item.description}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
+                )
+              )}
             </div>
           ) : (
             <div class="w-dyn-empty">
