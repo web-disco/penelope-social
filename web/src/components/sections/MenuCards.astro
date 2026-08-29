@@ -1,7 +1,7 @@
 ---
 /**
  * Menu mosaic — Bakehouse pattern: H2 + 20px intro, 4 tiles
- * (image, 20px title, 18px line), then an outline section CTA.
+ * (image, 20px title, 18px line). Homepage keeps the outline CTA to /menus.
  * Desktop: 4-up. Mobile: Swiper at 1.1 slides so the next card peeks.
  */
 import { btn, heading, layout, radius, space, typeScale } from '../../lib/ui'
@@ -113,7 +113,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
       </div>
     </div>
     {
-      ctaUrl && (
+      ctaUrl && !isMenusHub && (
         <div class="mt-space-48 flex justify-center wf-sm:mt-space-32">
           <a
             href={ctaUrl}
