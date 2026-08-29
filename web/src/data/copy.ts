@@ -33,6 +33,8 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
     'Birthdays, work dinners, and nights in the room. Food, drinks, and a table we will set.',
   'Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you — food, drinks, and the room.':
     'Food, drinks, and a table we will set. Prefer 24 hours’ notice for catering.',
+  'Penelope Social is the restaurant in Woodbridge — cafe by day, kitchen and bar at night — at 125 Hawkview Blvd. We serve lunch, dinner, and drinks. The sourdough on the table comes from Penelope Bakehouse, our Scarborough micro-bakery.':
+    'A Woodbridge cafe and bar. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.',
   'Trays from the Woodbridge kitchen — not a private-event booking page, and not the Scarborough bakehouse menu. Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.':
     'Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.',
   'Sourdough Bakery & Restaurant in Vaughan | Penelope Social':

@@ -23,6 +23,7 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Page: merchandise — SEO without Vaughan-as-city',
   'Menus lunch/dinner/bar — unique Woodbridge meta + intros',
   'Do not 301 /sourdough-bakery — dedicated page ships from the repo (Bakehouse sourdough, served here). Unpublish the old “Best Sourdough Bakery in Vaughan” CMS doc so it cannot override.',
+  'Copy rule — say what it is. No “not a dining room”. No street addresses in heroes. Woodbridge in meta + about intro.',
   'Newsletter subtext can stay as authored — type is now 20/18/16 to match Bakehouse',
   'GSC — submit https://penelopesocial.com/sitemap-index.xml only (not sitemap.xml)',
   'Optional: add FAQ / Timeline page-builder blocks',
