@@ -7,21 +7,25 @@
  */
 
 const EXACT_REPLACEMENTS: Record<string, string> = {
-  'Sourdough Bakery & Restaurant in Vaughan.': 'Good food, better company at Penelope Social',
-  'A Woodbridge restaurant with Bakehouse sourdough': 'Good food, better company at Penelope Social',
-  'Cafe by day. Bar by night.': 'Good food, better company at Penelope Social',
-  "Woodbridge's Cafe and Bar": 'Good food, better company at Penelope Social',
-  'Good food, better company': 'Good food, better company at Penelope Social',
+  'Sourdough Bakery & Restaurant in Vaughan.':
+    'Good food, better company at Penelope Social in Woodbridge',
+  'A Woodbridge restaurant with Bakehouse sourdough':
+    'Good food, better company at Penelope Social in Woodbridge',
+  'Cafe by day. Bar by night.': 'Good food, better company at Penelope Social in Woodbridge',
+  "Woodbridge's Cafe and Bar": 'Good food, better company at Penelope Social in Woodbridge',
+  'Good food, better company': 'Good food, better company at Penelope Social in Woodbridge',
+  'Good food, better company at Penelope Social':
+    'Good food, better company at Penelope Social in Woodbridge',
   'Cafe by day and a bar by night at 125 Hawkview Blvd. Lunch, dinner, and drinks — bread from Penelope Bakehouse in Scarborough.':
-    'Focaccia sandwiches, sourdough pizza, and cocktails, made daily at our Woodbridge cafe and bar.',
+    'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
   'Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.':
-    'Focaccia sandwiches, sourdough pizza, and cocktails, made daily at our Woodbridge cafe and bar.',
+    'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
   'Lunch, dinner, and drinks — focaccia sandwiches, pizza, and sourdough from Penelope Bakehouse.':
-    'Focaccia sandwiches, sourdough pizza, and cocktails, made daily at our Woodbridge cafe and bar.',
-  'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.':
-    'Focaccia sandwiches, sourdough pizza, and cocktails, made daily at our Woodbridge cafe and bar.',
+    'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
+  'Focaccia sandwiches, sourdough pizza, and cocktails, made daily at our Woodbridge cafe and bar.':
+    'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
   'Penelope Social, a cafe and bar in Woodbridge.':
-    'Focaccia sandwiches, sourdough pizza, and cocktails, made daily at our Woodbridge cafe and bar.',
+    'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
   'Naturally leavened loaves start at Penelope Bakehouse in Scarborough. We serve that bread at the Woodbridge restaurant — sandwiches, pizza, and loaves on the table.':
     'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.',
   'Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.':
