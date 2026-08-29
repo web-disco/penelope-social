@@ -1,40 +1,27 @@
 /**
- * Tailwind translations of the Webflow classes that appear on many elements.
+ * UI recipes — Bakehouse design system, carried over so sizing and spacing
+ * match the new Social styleguide.
  *
  * Two rules govern this file:
  *
  * 1. Each entry is the *effective* style of the original compound selector —
  *    the base rule plus every media-query override, already resolved for CSS
- *    specificity. (Webflow's media blocks don't raise specificity, so e.g.
- *    `.heading.is-medium { font-size: 62px }` still beats `.heading { font-size:
- *    64px }` inside the 991px block.)
+ *    specificity.
  *
  * 2. Every string is written out in full and must contain **no conflicting
  *    utilities**. Do not build a variant by concatenating a base string and an
  *    override — Tailwind resolves conflicts by stylesheet order, not by the
- *    order classes appear in the attribute, so `${BASE} py-4` can silently keep
- *    the base's `py-[18px]`.
+ *    order classes appear in the attribute.
  *
- * The original Webflow class name is kept as the first token of each string. It
- * matches no CSS rule, but it keeps the DOM recognisable against the old site
- * and lets the parity comparator select elements the same way on both.
- *
- * Values are read from penelope-social.webflow.shared.0467e5148.min.css.
+ * Headings are Sweet Sans Medium (sentence case), not Elmoder.
+ *   display-xl 64 · display-l 40 · display-m 36 · display-s 28 · heading 24 · title 20
+ * Body / footer: 20 intro · 18 body · 14 footer/btn · 12 caption
  */
-
-/* --- Buttons --------------------------------------------------------------
-   .btn { text-align:center; text-transform:uppercase; padding:18px 24px;
-          font-family:Sweet Sans Pro; font-weight:500; line-height:100%;
-          text-decoration:none; transition:background-color .35s,color .35s }
-   @991 { line-height:100%; display:block }   @479 { width:100% }
-   .btn.secondary { border:2px solid beige; background:beige; color:charcoal }
-   @991 { display:none }
-   .btn.secondary.is-nav { z-index:30; padding:16px 18px; font-size:12px;
-                           position:relative }                               */
 
 const BTN_TYPO = 'text-center uppercase font-body font-medium leading-none no-underline'
 const BTN_TRANSITION = 'transition-[background-color,color] duration-[350ms]'
 
+/* --- Buttons ------------------------------------------------------------- */
 export const btn = {
   /* .btn.primary */
   primary:
@@ -45,6 +32,26 @@ export const btn = {
   outline:
     `btn outline ${BTN_TYPO} ${BTN_TRANSITION} px-6 py-[18px] border-2 border-green ` +
     'text-green hover:bg-green hover:text-beige wf-md:block wf-xs:w-full',
+
+  /* Solid green fill — cream-canvas CTAs. */
+  green:
+    `btn green ${BTN_TYPO} ${BTN_TRANSITION} px-6 py-[18px] border-2 border-green ` +
+    'bg-green text-beige hover:bg-charcoal hover:border-charcoal wf-md:block wf-xs:w-full',
+
+  /* .btn.secondary — beige fill on dark surfaces (hero / charcoal / green) */
+  secondary:
+    `btn secondary ${BTN_TYPO} ${BTN_TRANSITION} px-6 py-[18px] border-2 border-beige ` +
+    'bg-beige text-charcoal hover:bg-brand-transparent hover:text-beige wf-md:block wf-xs:w-full',
+
+  /* Transparent beige outline on dark surfaces. */
+  secondaryOutline:
+    `btn secondary is-outline ${BTN_TYPO} ${BTN_TRANSITION} px-6 py-[18px] border-2 border-beige ` +
+    'bg-brand-transparent text-beige hover:bg-beige hover:text-charcoal wf-md:block wf-xs:w-full',
+
+  /** On-media hero primary — solid beige fill, charcoal text. */
+  onMediaPrimary:
+    `btn primary is-on-media ${BTN_TYPO} ${BTN_TRANSITION} px-6 py-[18px] border-2 border-beige rounded-none ` +
+    'bg-beige text-charcoal hover:bg-brand-transparent hover:text-beige wf-md:block wf-xs:w-full',
 
   /* .btn.secondary.is-nav — 16px/18px padding, 12px text, hidden below 992px */
   navSolid:
@@ -65,104 +72,67 @@ export const btn = {
     'wf-md:hidden wf-sm:block wf-xs:w-full',
 } as const
 
-/* --- Headings -------------------------------------------------------------
-   .heading { color:charcoal; text-align:center; font-family:Elmoder;
-              font-size:82px; line-height:100%; overflow:hidden }
-   @991 {64px}  @767 {mt:0; mb:10px; 54px; line-height:120%}  @479 {34px}
-   Margins otherwise come from Webflow's base h1/h2 rules (20px / 10px).      */
-export const heading = {
-  base:
-    'heading text-charcoal text-center font-heading text-[82px] leading-none overflow-hidden ' +
-    'wf-md:text-[64px] wf-sm:mt-0 wf-sm:mb-[10px] wf-sm:text-[54px] wf-sm:leading-[120%] wf-xs:text-[34px]',
-
-  /* .heading.is-left */
-  left:
-    'heading is-left text-charcoal text-left font-heading text-[82px] leading-none overflow-hidden ' +
-    'wf-md:text-[64px] wf-sm:mt-0 wf-sm:mb-[10px] wf-sm:text-[54px] wf-sm:leading-[120%] ' +
-    'wf-xs:text-[38px] wf-xs:tracking-[-3px]',
-
-  /* .heading.is-medium — stays 62px at 991 (specificity beats the media rule) */
-  medium:
-    'heading is-medium text-charcoal text-center font-heading text-[62px] leading-none overflow-hidden ' +
-    'my-0 wf-sm:text-[42px] wf-sm:leading-[120%] wf-xs:text-[34px]',
-
-  /* .heading.is-light — .heading in beige (footer newsletter) */
-  light:
-    'heading is-light text-beige text-center font-heading text-[82px] leading-none overflow-hidden ' +
-    'wf-md:text-[64px] wf-sm:mt-0 wf-sm:mb-[10px] wf-sm:text-[54px] wf-sm:leading-[120%] wf-xs:text-[34px]',
-
-  /* .heading.is-menu-item — the drawer links; body font, not Elmoder */
-  menuItem:
-    'heading is-menu-item text-beige text-left font-body text-[42px] font-normal tracking-[-2px] ' +
-    'leading-none overflow-hidden wf-sm:text-[32px]',
-} as const
-
-/* --- Paragraphs -----------------------------------------------------------
-   .paragraph { text-align:center; margin-bottom:10px; line-height:140% }
-   .paragraph.is-intro { font-size:26px; font-weight:400 }
-   @991 {24px}  @767 {22px}  @479 {16px}                                     */
+/* --- Paragraphs — intro is Bakehouse 20px --------------------------------
+   Base body text is 18px/150% (Webflow `p` rule).                          */
 export const paragraph = {
   intro:
-    'paragraph is-intro text-charcoal font-body text-center mb-[10px] leading-[140%] text-[26px] ' +
-    'font-normal wf-md:text-[24px] wf-sm:text-[22px] wf-xs:text-[16px]',
+    'paragraph is-intro text-charcoal font-body text-center mb-[10px] leading-[150%] text-[20px] ' +
+    'font-normal wf-md:text-[18px] wf-sm:text-[17px] wf-xs:text-[16px]',
 
   /* .paragraph.is-intro.is-left */
   introLeft:
     'paragraph is-intro is-left text-charcoal font-body text-left max-w-[850px] not-italic ' +
-    'mb-[10px] leading-[140%] text-[26px] font-normal wf-md:text-[24px] wf-sm:text-[22px] wf-xs:text-[16px]',
+    'mb-[10px] leading-[150%] text-[20px] font-normal wf-md:text-[18px] wf-sm:text-[17px] wf-xs:text-[16px]',
+
+  /** Intro, beige on dark, left. */
+  introLightLeft:
+    'paragraph is-intro is-left is-light text-beige font-body text-left max-w-[850px] not-italic ' +
+    'mb-[10px] leading-[150%] text-[20px] font-normal wf-md:text-[18px] wf-sm:text-[17px] wf-xs:text-[16px]',
+
+  /** Story / section body paras — base p size (18 → 16). */
+  bodyLg: 'paragraph is-body-lg text-charcoal font-body text-[18px] leading-[150%] wf-xs:text-[16px]',
+
+  bodyLgLeft:
+    'paragraph is-body-lg is-left text-charcoal font-body text-left max-w-[850px] ' +
+    'text-[18px] leading-[150%] wf-xs:text-[16px]',
+
+  body: 'paragraph is-body text-charcoal font-body text-[18px] leading-[150%] wf-xs:text-[16px]',
 } as const
 
 /* --- Containers -----------------------------------------------------------
-   .container { width:100%; max-width:1440px; margin-inline:auto;
-                padding:80px 25px 60px; text-decoration:none;
-                transition:background-color .5s, color .35s }
-   @991 { padding-block: 60px }  @767 { padding-block: 60px }
-   @479 { padding-block: 40px }                                              */
+   .container { max-width:1440px; padding:80px 25px 60px }
+   @991/@767 { padding-block:60px }  @479 { padding-block:40px }             */
 const CONTAINER_SHARED =
   'w-full mx-auto px-[25px] no-underline transition-[background-color,color] duration-500'
 
-export const container = `container ${CONTAINER_SHARED} max-w-[1440px] pt-20 pb-[60px] wf-md:pt-[60px] wf-md:pb-[60px] wf-xs:pt-10 wf-xs:pb-10`
+export const container = `container ${CONTAINER_SHARED} max-w-[1440px] pt-section-pad pb-section-pad wf-sm:pt-section-pad-sm wf-sm:pb-section-pad-sm`
 
-/** .container.no-top-padding */
-export const containerNoTop = `container no-top-padding ${CONTAINER_SHARED} max-w-[1440px] pt-0 pb-[60px] wf-md:pb-[60px] wf-xs:pb-10`
+/** .container.no-top-padding — use after a hero that already has space.afterHero */
+export const containerNoTop = `container no-top-padding ${CONTAINER_SHARED} max-w-[1440px] pt-0 pb-section-pad wf-sm:pb-section-pad-sm`
 
-/** .container.half-top-padding — 40px, and 0 at ≤479 */
-export const containerHalfTop = `container half-top-padding ${CONTAINER_SHARED} max-w-[1440px] pt-10 pb-[60px] wf-md:pb-[60px] wf-xs:pt-0 wf-xs:pb-10`
+/** .container.half-top-padding — 40px, and 0 at ≤767 */
+export const containerHalfTop = `container half-top-padding ${CONTAINER_SHARED} max-w-[1440px] pt-10 pb-section-pad wf-sm:pt-0 wf-sm:pb-section-pad-sm`
 
-/** .container.is-footer — wider; ≤767 flips to 80px top / 0 bottom.
-    No ≤479 override: Webflow's `.container { padding: 40px }` at that width is
-    a weaker selector than `.container.is-footer`, so 80px/0 carries through. */
+/** .container.is-footer — 1920; ≤767 flips to 80px top / 0 bottom. */
 export const containerFooter = `container is-footer ${CONTAINER_SHARED} max-w-[1920px] pt-20 pb-5 wf-md:pt-[60px] wf-sm:pt-20 wf-sm:pb-0`
 
-/* --- Menu cards -----------------------------------------------------------
-   .menu-btn { color:charcoal; text-transform:uppercase; flex-flow:row;
-               font-family:Sweet Sans Pro; font-size:14px; font-weight:500;
-               line-height:130%; text-decoration:none;
-               transition:opacity .35s; display:inline-flex; position:relative }
-   :hover { opacity:.75 }                                                     */
+/* --- Menu cards / sub-headings ------------------------------------------- */
 export const menuBtn =
   'menu-btn text-charcoal uppercase flex-row font-body text-[14px] font-medium leading-[130%] ' +
   'no-underline transition-opacity duration-[350ms] inline-flex relative hover:opacity-75'
 
-/* .page-sub-heading { color:charcoal; margin:0 0 40px; font-family:Elmoder;
-                       font-size:41px; line-height:100%; overflow:hidden }
-   @767 {38px}  @479 { margin-bottom:20px; font-size:24px }                  */
+/* Menu category H2 — Sweet Sans Medium display-s (28). */
 export const pageSubHeading =
-  'page-sub-heading text-charcoal mt-0 mb-10 font-heading text-[41px] leading-none overflow-hidden ' +
-  'wf-sm:text-[38px] wf-xs:mb-5 wf-xs:text-[24px]'
+  'page-sub-heading normal-case text-charcoal mt-0 mb-space-24 overflow-hidden ' +
+  'font-body font-medium text-[28px] leading-none text-balance ' +
+  'wf-md:text-[26px] wf-sm:text-[24px] wf-xs:text-[22px]'
 
-/** .page-sub-heading.small-margin */
 export const pageSubHeadingSmall =
-  'page-sub-heading small-margin text-charcoal mt-0 mb-5 font-heading text-[41px] leading-none ' +
-  'overflow-hidden wf-sm:text-[38px] wf-xs:text-[24px]'
+  'page-sub-heading small-margin normal-case text-charcoal mt-0 mb-space-16 overflow-hidden ' +
+  'font-body font-medium text-[28px] leading-none text-balance ' +
+  'wf-md:text-[26px] wf-sm:text-[24px] wf-xs:text-[22px]'
 
-/* --- Forms ----------------------------------------------------------------
-   .form-field { border:2px solid charcoal; background:transparent;
-                 min-height:50px; color:charcoal; padding-bottom:6px;
-                 font-family:Sweet Sans Pro }
-   over Webflow's .w-input { display:block; width:100%; height:38px;
-   margin-bottom:10px; padding:8px 12px; font-size:14px; line-height:1.42857;
-   vertical-align:middle }                                                    */
+/* --- Forms --------------------------------------------------------------- */
 const FORM_FIELD_SHARED =
   'block w-full min-h-[50px] mb-[10px] px-3 pt-2 pb-1.5 align-middle text-[14px] ' +
   'leading-[1.42857143] border-2 border-charcoal bg-brand-transparent text-charcoal font-body wf-field'
@@ -171,3 +141,155 @@ export const formField = `form-field ${FORM_FIELD_SHARED}`
 
 /** .form-field.textarea — height:150px */
 export const formFieldTextarea = `form-field textarea ${FORM_FIELD_SHARED} h-[150px]`
+
+/**
+ * Atomic type steps.
+ * Headings are Sweet Sans Medium + sentence case.
+ * Intro / body stay on Sweet Sans Regular.
+ */
+export const typeScale = {
+  /** Hero H1 over imagery. 64 → 56 / 46 / 40 / 36. */
+  displayHero:
+    'font-body font-medium normal-case text-[64px] leading-none text-balance ' +
+    'wf-md:text-[56px] wf-sm:text-[46px] max-[600px]:text-[40px] wf-xs:text-[36px]',
+
+  /** Page H1. 56 → 48 / 40 / 36 / 34. */
+  displayXl:
+    'font-body font-medium normal-case text-[56px] leading-none text-balance ' +
+    'wf-md:text-[48px] wf-sm:text-[40px] max-[600px]:text-[36px] wf-xs:text-[34px]',
+
+  /** 40 → 34 / 30 / 26. */
+  displayL:
+    'font-body font-medium normal-case text-[40px] leading-none text-balance ' +
+    'wf-md:text-[34px] wf-sm:text-[30px] wf-xs:text-[26px]',
+
+  /** Section H2. 36 → 32 / 28 / 26. */
+  displayM:
+    'font-body font-medium normal-case text-[36px] leading-none text-balance ' +
+    'wf-md:text-[32px] wf-sm:text-[28px] wf-xs:text-[26px]',
+
+  /** Menu category titles. 28 → 26 / 24 / 22. */
+  displayS:
+    'font-body font-medium normal-case text-[28px] leading-none text-balance ' +
+    'wf-md:text-[26px] wf-sm:text-[24px] wf-xs:text-[22px]',
+
+  heading: 'font-body font-medium normal-case text-[24px] leading-none text-balance',
+
+  title: 'font-body font-medium normal-case text-[20px] leading-none text-balance',
+
+  /** Drawer links — Sweet Sans Regular 42 → 32. */
+  menuItem: 'font-body font-normal text-[42px] tracking-[-2px] leading-none wf-sm:text-[32px]',
+
+  /** FAQ questions — Sweet Sans Medium 22. */
+  faq: 'font-body font-medium text-[22px] leading-none text-balance',
+
+  /** Lead copy — 20 → 18 / 17 / 16. */
+  intro:
+    'font-body font-normal text-[20px] leading-[150%] text-pretty ' +
+    'wf-md:text-[18px] wf-sm:text-[17px] wf-xs:text-[16px]',
+
+  /** Base body — 18 → 16. */
+  bodyLg: 'font-body font-normal text-[18px] leading-[150%] text-pretty wf-xs:text-[16px]',
+
+  /** Body, Sweet Sans Medium. */
+  bodyLgSemibold: 'font-body font-medium text-[18px] leading-[150%] text-pretty wf-xs:text-[16px]',
+
+  /** Base body — 18 → 16. */
+  body: 'font-body font-normal text-[18px] leading-[150%] text-pretty wf-xs:text-[16px]',
+
+  /** Eyebrows / small UI labels — Sweet Sans Medium 13 / tracking 0.08em. */
+  label: 'font-body font-medium text-[13px] uppercase tracking-[0.08em] leading-[1.4]',
+
+  /** Hero brand eyebrow — uppercase + tracking. */
+  labelHero: 'font-body font-medium uppercase text-[13px] tracking-[0.08em] leading-[1.4]',
+
+  /** Sentence-case eyebrow near logo / story. */
+  labelHeroSoft: 'font-body font-medium normal-case text-[14px] tracking-[0.04em] leading-[1.4]',
+
+  /** Captions / copyright — 12 uppercase. */
+  caption: 'font-body font-medium text-[12px] uppercase tracking-[0.06em] leading-none',
+} as const
+
+/* --- Headings — Sweet Sans Medium, sentence case ------------------------ */
+export const heading = {
+  /** Page H1 (centred). */
+  base: `heading normal-case text-charcoal text-center overflow-hidden ${typeScale.displayXl}`,
+
+  /** Page H1 (left). */
+  left: `heading is-left normal-case text-charcoal text-left overflow-hidden ${typeScale.displayXl}`,
+
+  /** Section H2. */
+  medium: `heading is-medium normal-case text-charcoal text-center my-0 overflow-hidden ${typeScale.displayM}`,
+
+  /** Light page H1 (footer newsletter / dark bands). */
+  light: `heading is-light normal-case text-beige text-center overflow-hidden ${typeScale.displayXl}`,
+
+  /** Hero H1 over imagery. */
+  lightLeft: `heading is-light is-left normal-case text-beige text-left overflow-hidden ${typeScale.displayHero}`,
+
+  /** Nav drawer links. */
+  menuItem: `heading is-menu-item normal-case text-beige text-left overflow-hidden ${typeScale.menuItem}`,
+} as const
+
+/** Spacing recipes — 60px section pad so adjacent sections sit 120px apart on desktop;
+ *  mobile (≤767) uses 40px pad / 80px full gap. */
+export const space = {
+  /** Full gap after full-bleed heroes before page content (120 desktop / 80 mobile). */
+  afterHero: 'mb-section-gap-y wf-sm:mb-section-gap-y-sm',
+  /** Cream sections — 60+60 → 120 desktop; 40+40 → 80 mobile. */
+  sectionY: 'py-section-pad wf-sm:py-section-pad-sm',
+  /** First cream block after a hero (hero already provides the gap). */
+  sectionYFirst: 'pt-0 pb-section-pad wf-sm:pb-section-pad-sm',
+  /** Banded sections (green wave) — cream pad outside the band. */
+  sectionYBand: 'py-section-pad wf-sm:py-section-pad-sm',
+  sectionYNoTop: 'pt-0 pb-section-pad wf-sm:pb-section-pad-sm',
+  sectionYHalfTop: 'pt-10 pb-section-pad wf-sm:pt-0 wf-sm:pb-section-pad-sm',
+
+  /** Page side margin — Social's flat 25px. */
+  gutter: 'px-[25px]',
+
+  /** Gap between major blocks inside a section */
+  sectionGap: 'gap-section-gap',
+  sectionGapTop: 'mt-section-gap',
+
+  /** Tight vertical stacks (8–16) */
+  stackTight: 'gap-stack-tight',
+  stack: 'gap-stack',
+
+  /** Menu category rhythm — 120 desktop / 80 mobile; first has no top (hero gap). */
+  menuCategory: 'mt-section-gap-y mb-0 first:mt-0 wf-sm:mt-section-gap-y-sm wf-sm:first:mt-0',
+  menuGrid: 'gap-x-menu-col gap-y-menu-row',
+} as const
+
+/** Layout shell — Social's 1440 content container, 25px sides. */
+export const layout = {
+  /** Page shell width only */
+  max: 'max-w-[1440px]',
+
+  /** Shell: centered 1440 + 25px side padding */
+  shell: 'mx-auto w-full max-w-[1440px] px-[25px]',
+
+  /** Shell without horizontal padding (when parent already has gutter) */
+  shellBare: 'mx-auto w-full max-w-[1440px]',
+
+  /** 12-column CSS grid · 24px column gap */
+  grid: 'grid grid-cols-12 gap-x-space-24',
+
+  /** Reading measures — copy only, never page shells */
+  measureNarrow: 'max-w-[720px]',
+  measure: 'max-w-[850px]',
+  measureWide: 'max-w-[1000px]',
+  measureVisit: 'max-w-[900px]',
+} as const
+
+export const radius = {
+  none: 'rounded-none',
+  softSm: 'rounded-soft-sm',
+  soft: 'rounded-soft',
+} as const
+
+/** Eyebrows — always Sweet Sans label. */
+export const eyebrow = {
+  base: `eyebrow text-charcoal ${typeScale.label}`,
+  light: `eyebrow is-light text-beige ${typeScale.labelHero}`,
+} as const

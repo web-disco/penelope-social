@@ -1,55 +1,105 @@
 ---
 /**
- * .section-home-hero — full-viewport image with a dark overlay and the
- * order/reservations bar pinned to the bottom.
- *
- * `.home-hero-reservation` is `display:none` until ≤767px, where the bar goes
- * `position:fixed` and the two links split the width 50/50.
+ * Home hero — full-bleed photo with overlay copy.
+ * H1 + supporting line + dual CTAs on a bottom-weighted scrim (Bakehouse pattern).
  */
+import { btn, heading, layout, typeScale } from '../../lib/ui'
 import { imageUrl, imageAlt } from '../../lib/image'
 
 interface Props {
   block: any
 }
 const { block } = Astro.props
+
+const headingText = block.heading || 'Sourdough Bakery & Restaurant in Vaughan.'
+const bodyText =
+  block.body ||
+  'New York-style sourdough pizza, artisanal handhelds, and creative cocktails, made in our micro bakery.'
+const primaryCta = block.orderOnline
+const secondaryCta = block.reservations
 ---
 
-<div
-  class="section-home-hero relative mb-20 block h-dvh w-full flex-col wf-md:mb-[60px] wf-sm:mb-0"
->
+<div class="section-home-hero relative mb-section-gap-y block h-dvh w-full flex-col wf-sm:mb-section-gap-y-sm">
   <div class="home-hero relative h-full overflow-hidden">
     <img
       src={imageUrl(block.image)}
-      loading="lazy"
-      width="960"
+      loading="eager"
+      fetchpriority="high"
+      width="1440"
+      height="810"
       alt={imageAlt(block.image)}
-      class="home-hero-image h-[102%] w-full object-cover wf-md:block"
+      class="home-hero-image absolute inset-0 h-full w-full object-cover animate-hero-ken"
     />
-    <div class="home-hero-overlay absolute inset-0 h-full w-full bg-black opacity-40"></div>
-  </div>
+    <div class="home-hero-overlay absolute inset-0 h-full w-full bg-black/35"></div>
+    <div
+      class="home-hero-scrim pointer-events-none absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-black/92 via-black/55 to-transparent"
+    >
+    </div>
 
-  <div
-    class="home-hero-cta absolute inset-x-0 top-auto -bottom-px h-[60px] w-full wf-sm:fixed wf-sm:z-10 wf-sm:flex"
-  >
-    <a
-      href={block.orderOnline?.url}
-      target="_blank"
-      class="home-hero-menu w-inline-block flex h-full w-full items-center justify-center border-2 border-charcoal bg-charcoal font-body leading-4 text-beige uppercase no-underline wf-sm:w-1/2"
-    >
-      <div class="home-hero-menu-text text-[16px] leading-none font-medium wf-sm:text-[14px]">
-        {block.orderOnline?.label}
+    <div class="home-hero-copy absolute inset-x-0 bottom-0 z-[1] pt-section-y pb-space-32">
+      <div class:list={[layout.shell, 'flex flex-col items-start justify-start text-left']}>
+        <h1 class={`${heading.lightLeft} mb-space-16 max-w-[1080px] text-balance text-left wf-sm:mb-space-12`}>
+          {headingText}
+        </h1>
+        {
+          bodyText && (
+            <p
+              class:list={[
+                'mb-space-32 max-w-[640px] text-left text-beige text-pretty not-italic',
+                typeScale.intro,
+                'wf-sm:mb-space-24',
+              ]}
+            >
+              {bodyText}
+            </p>
+          )
+        }
+        {
+          (primaryCta?.url || secondaryCta?.url) && (
+            <div class="intros-cta flex flex-wrap items-start justify-start gap-space-16 wf-xs:w-full wf-xs:flex-col wf-xs:items-stretch">
+              {primaryCta?.url && (
+                <a
+                  href={primaryCta.url}
+                  target={primaryCta.newTab ? '_blank' : undefined}
+                  rel={primaryCta.newTab ? 'noopener noreferrer' : undefined}
+                  class={btn.onMediaPrimary}
+                >
+                  {primaryCta.label}
+                </a>
+              )}
+              {secondaryCta?.url && (
+                <a
+                  href={secondaryCta.url}
+                  target={secondaryCta.newTab ? '_blank' : undefined}
+                  rel={secondaryCta.newTab ? 'noopener noreferrer' : undefined}
+                  class={btn.secondaryOutline}
+                >
+                  {secondaryCta.label}
+                </a>
+              )}
+            </div>
+          )
+        }
       </div>
-    </a>
-    <a
-      href={block.reservations?.url}
-      target="_blank"
-      class="home-hero-reservation w-inline-block hidden wf-sm:flex wf-sm:h-full wf-sm:w-1/2 wf-sm:items-center wf-sm:justify-center wf-sm:border-t-2 wf-sm:border-x-0 wf-sm:border-b-0 wf-sm:border-solid wf-sm:border-t-charcoal wf-sm:bg-beige wf-sm:no-underline"
-    >
-      <div
-        class="home-hero-reservation-text wf-sm:font-body wf-sm:font-medium wf-sm:leading-none wf-sm:text-charcoal wf-sm:uppercase"
-      >
-        {block.reservations?.label}
-      </div>
-    </a>
+    </div>
   </div>
 </div>
+
+<style>
+  @keyframes hero-ken {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.04);
+    }
+  }
+  .animate-hero-ken {
+    animation: hero-ken 18s ease-out forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-hero-ken {
+      animation: none;
+    }
+  }
+</style>

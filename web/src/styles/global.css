@@ -8,21 +8,57 @@
 @import './webflow-base.css' layer(base);
 
 @import 'glightbox/dist/css/glightbox.min.css';
+@import './tokens.css';
 
 /* ---------------------------------------------------------------------------
-   Theme — translated 1:1 from the compiled Webflow stylesheet
-   (penelope-social.webflow.shared.0467e5148.min.css)
+   Theme — Bakehouse token system (colours, type, spacing, radius)
    --------------------------------------------------------------------------- */
 @theme {
-  /* :root { --colors--* } in the Webflow build */
   --color-beige: #f7f3df;
+  --color-cream: #faf8ef;
   --color-charcoal: #282629;
   --color-green: #2e442e;
-  /* Webflow's `--colors--color` token is transparent (#fff0) */
+  --color-clear: #fff0;
   --color-brand-transparent: #fff0;
 
-  --font-heading: Elmoder, Arial, sans-serif;
-  --font-body: 'Sweet Sans Pro', Arial, sans-serif;
+  --font-heading: 'Sweet Sans Pro', 'Sweet Sans Fallback', Arial, sans-serif;
+  --font-body: 'Sweet Sans Pro', 'Sweet Sans Fallback', Arial, sans-serif;
+
+  /* Space scale — named so Tailwind defaults (gap-5, py-24, …) stay intact */
+  --spacing-space-4: 4px;
+  --spacing-space-8: 8px;
+  --spacing-space-12: 12px;
+  --spacing-space-16: 16px;
+  --spacing-space-24: 24px;
+  --spacing-space-32: 32px;
+  --spacing-space-48: 48px;
+  --spacing-space-64: 64px;
+  --spacing-space-80: 80px;
+  --spacing-space-96: 96px;
+  --spacing-space-120: 120px;
+
+  /* Semantic spacing utilities: py-section-y, px-gutter, gap-section-gap, … */
+  --spacing-section-pad: 60px;
+  --spacing-section-pad-sm: 40px;
+  --spacing-section-gap-y: 120px;
+  --spacing-section-gap-y-sm: 80px;
+  --spacing-section-y: 96px;
+  --spacing-section-y-sm: 64px;
+  --spacing-section-gap: 48px;
+  --spacing-gutter: 48px;
+  --spacing-gutter-lg: 80px;
+  --spacing-gutter-sm: 24px;
+  --spacing-stack-tight: 8px;
+  --spacing-stack: 16px;
+  --spacing-menu-category-mt: 60px;
+  --spacing-menu-category-mb: 60px;
+  --spacing-menu-col: 48px;
+  --spacing-menu-row: 40px;
+
+  /* Radius soft — rounded-none / rounded-soft-sm / rounded-soft */
+  --radius-none: 0px;
+  --radius-soft-sm: 4px;
+  --radius-soft: 8px;
 
   --breakpoint-md: 768px;
 }
@@ -37,6 +73,31 @@
 /* ---------------------------------------------------------------------------
    Fonts — self-hosted copies of the OTFs Webflow served from its CDN
    --------------------------------------------------------------------------- */
+
+/*
+  Metrics-matched stand-in so the swap to Sweet Sans does not reflow text.
+
+  Rendered at 72px, Sweet Sans Medium sets the homepage headline at 1701.0px
+  and Arial at 1538.6px, so Arial needs scaling up by 1701.0 / 1538.6 = 110.56%.
+
+    size-adjust       = 110.56%
+    ascent-override   = 0.770 / 1.1056 = 69.65%   (Sweet Sans hhea 770/1000)
+    descent-override  = 0.230 / 1.1056 = 20.81%   (Sweet Sans hhea 230/1000)
+
+  Overrides are divided by size-adjust because they resolve against the adjusted em.
+  Arial and Liberation Sans only — Liberation is metrically identical to Arial.
+*/
+@font-face {
+  font-family: 'Sweet Sans Fallback';
+  src:
+    local('Arial'),
+    local('Liberation Sans');
+  size-adjust: 110.56%;
+  ascent-override: 69.65%;
+  descent-override: 20.81%;
+  line-gap-override: 0%;
+}
+
 @font-face {
   font-family: 'Sweet Sans Pro';
   src: url('/fonts/SweetSansPro-Medium.otf') format('opentype');
@@ -67,11 +128,28 @@
 }
 
 /* ---------------------------------------------------------------------------
-   Site-level element defaults (Webflow's `body` and `p` rules)
+   Site-level element defaults
    --------------------------------------------------------------------------- */
+:root {
+  --nav-height: 88px;
+  --scroll-anchor-offset: calc(var(--nav-height) + 16px);
+}
+
+@media (max-width: 991px) {
+  :root {
+    --nav-height: 80px;
+  }
+}
+
+@media (max-width: 479px) {
+  :root {
+    --nav-height: 72px;
+  }
+}
+
 @layer base {
   body {
-    background-color: var(--color-beige);
+    background-color: var(--color-cream);
     color: #333;
     font-family: Arial, 'Helvetica Neue', Helvetica, sans-serif;
     font-size: 14px;
@@ -89,6 +167,18 @@
     p {
       font-size: 16px;
     }
+  }
+
+  html {
+    scroll-padding-top: var(--scroll-anchor-offset);
+  }
+
+  :where(section[id], .menu-category) {
+    scroll-margin-top: var(--scroll-anchor-offset);
+  }
+
+  :where(main section) p:last-child {
+    margin-bottom: 0;
   }
 }
 
@@ -193,9 +283,24 @@
     object-fit: cover;
   }
 
-  /* .page-loader-logo starts invisible; the loader timeline fades it in.
-     Webflow shipped this as a homepage embed. */
-  .page-loader-logo {
+  /* Subtle scroll reveals — presence without a page loader. */
+  .reveal {
     opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
   }
 }

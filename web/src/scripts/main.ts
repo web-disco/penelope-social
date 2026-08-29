@@ -3,8 +3,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { SplitText } from 'gsap/SplitText'
 
 import { lenis } from './lenis'
-import { initNavbar } from './navbar'
-import { initMenu } from './menu'
 import { initHomeMenuHover } from './home-menu-hover'
 import {
   initTitleAnimation,
@@ -12,20 +10,39 @@ import {
   initFadeIn,
   initStaggerAnimation,
 } from './animations'
-import { initPageLoader } from './page-loader'
 import { initMerchSwiper } from './merch-swiper'
 import { initSiteForms, initEventForm, initTurnstileSpacing } from './forms'
 import { initLightbox } from './lightbox'
 
 /* Same order as the live site's DOMContentLoaded handler, with the additions
    that replace behaviour webflow.js used to provide (lightbox) and the form
-   wiring.
-
-   initCustomCheckboxes() used to sit alongside initLightbox(). Its only consumer
-   was the newsletter pop-up's consent checkbox, which is gone. */
+   wiring. Navbar, drawer, and the page loader used to boot here — the first
+   two now live on Navbar.astro, and the loader is gone. */
 declare global {
   interface Window {
     gsap: typeof gsap
+  }
+}
+
+function initReveals() {
+  const reveals = document.querySelectorAll('.reveal')
+  if (!reveals.length) return
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            io.unobserve(entry.target)
+          }
+        })
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+    )
+    reveals.forEach((el) => io.observe(el))
+  } else {
+    reveals.forEach((el) => el.classList.add('is-visible'))
   }
 }
 
@@ -36,15 +53,13 @@ function boot() {
   window.gsap = gsap
   lenis.start()
 
-  initNavbar()
-  initMenu()
   initHomeMenuHover()
   initTitleAnimation()
   initTextAnimation()
   initFadeIn()
   initStaggerAnimation()
-  initPageLoader()
   initMerchSwiper()
+  initReveals()
 
   // Replaces webflow.js behaviour
   initLightbox()
