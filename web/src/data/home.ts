@@ -1,7 +1,7 @@
 /** Homepage copy. Repo wins over address-y Sanity so staging matches Bakehouse mood. */
 
 export const homeHeroFallback = {
-  heading: 'Good food, better company',
+  heading: 'Good food, better company at Penelope Social',
   body: 'Focaccia sandwiches, sourdough pizza, and cocktails, made daily at our Woodbridge cafe and bar.',
 }
 
