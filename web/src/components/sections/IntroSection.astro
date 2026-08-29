@@ -21,7 +21,13 @@ const introText = restaurantCopy(block.intro)
 
 <div class="section-intro">
   <div class={container}>
-    <Heading class={heading.base}><LineText text={headingText} /></Heading>
+    {
+      headingText && (
+        <Heading class={heading.base}>
+          <LineText text={headingText} />
+        </Heading>
+      )
+    }
     {
       introText && (
         <div class="intro-text mx-auto max-w-[1000px]">

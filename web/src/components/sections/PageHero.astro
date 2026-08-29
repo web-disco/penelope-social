@@ -1,25 +1,44 @@
 ---
 /**
- * .page-banner — the hero image strip at the top of every inner page, with a
- * flat 30%-black overlay above it.
- *
- * The real photo is `.page-banner-image`; `.page-banner-overlay` is decorative
- * and sits after it in the DOM.
+ * Inner-page banner. Image-only on menu pages; H1 on the photo for
+ * catering-events (Bakehouse /catering pattern).
  */
+import BannerHero from './BannerHero.astro'
 import { imageUrl, imageAlt } from '../../lib/image'
 
 interface Props {
   block: any
 }
 const { block } = Astro.props
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/'
+const isCatering = path === '/catering-events'
+const headingText =
+  block.heading || (isCatering ? 'Catering and events' : undefined)
+const intro =
+  block.intro ||
+  (isCatering ? 'Trays to-go, or a night in the room.' : undefined)
 ---
 
-<div class="page-banner relative h-[550px] w-full wf-md:h-[350px] wf-sm:h-[300px] wf-xs:h-[225px]">
-  <img
-    src={imageUrl(block.image)}
-    loading="lazy"
-    alt={imageAlt(block.image)}
-    class="page-banner-image relative mb-20 h-full w-full object-cover"
-  />
-  <div class="page-banner-overlay absolute inset-0 bg-[#0000004d]"></div>
-</div>
+{
+  headingText ? (
+    <BannerHero
+      image={block.image}
+      src={block.src}
+      alt={block.alt || imageAlt(block.image)}
+      headingText={headingText}
+      intro={intro}
+      objectPosition={block.objectPosition}
+    />
+  ) : (
+    <div class="page-banner relative h-[550px] w-full wf-md:h-[350px] wf-sm:h-[300px] wf-xs:h-[225px]">
+      <img
+        src={imageUrl(block.image)}
+        loading="lazy"
+        alt={imageAlt(block.image)}
+        class="page-banner-image relative mb-20 h-full w-full object-cover"
+      />
+      <div class="page-banner-overlay absolute inset-0 bg-[#0000004d]"></div>
+    </div>
+  )
+}

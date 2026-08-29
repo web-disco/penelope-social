@@ -114,13 +114,14 @@ const mapSrc = mapQuery
               <dd
                 class:list={[
                   'm-0 text-charcoal font-body',
+                  typeScale.body,
                   row.label.toLowerCase() === 'address' && 'location-nap-address',
                   (row.label.toLowerCase() === 'phone' || row.label.toLowerCase() === 'email') &&
                     'location-nap-contact',
                   row.label.toLowerCase() !== 'address' &&
                     row.label.toLowerCase() !== 'phone' &&
                     row.label.toLowerCase() !== 'email' &&
-                    `whitespace-nowrap wf-sm:whitespace-normal ${typeScale.body}`,
+                    'whitespace-nowrap wf-sm:whitespace-normal',
                 ]}
               >
                 <ul class="m-0 list-none space-y-1 p-0">

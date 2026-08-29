@@ -12,9 +12,9 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
       'Cafe by day and a bar by night at 125 Hawkview Blvd, Woodbridge. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse in Scarborough.',
   },
   '/about': {
-    title: 'About Penelope Social | Woodbridge restaurant',
+    title: 'About Penelope Social | Woodbridge cafe and bar',
     description:
-      'Three brothers, a Woodbridge restaurant, and bread from Penelope Bakehouse in Scarborough. The family story behind cafe, kitchen, and bar.',
+      'Three brothers, a Woodbridge cafe and bar, and bread from Penelope Bakehouse. The family story behind lunch, dinner, and drinks.',
   },
   '/contact': {
     title: 'Contact Penelope Social in Woodbridge',
@@ -71,7 +71,7 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
   '/locations': {
     title: 'Locations | Penelope Social and Penelope Bakehouse',
     description:
-      'Penelope Social is the Woodbridge restaurant at 125 Hawkview Blvd. Penelope Bakehouse is the Scarborough micro-bakery at 71 Howden Rd.',
+      'Penelope Social is the Woodbridge restaurant at 125 Hawkview Blvd. Penelope Bakehouse is the Scarborough bakehouse at 71 Howden Rd.',
   },
   '/locations/woodbridge': {
     title: 'Woodbridge | Penelope Social | 125 Hawkview Blvd',
@@ -79,14 +79,14 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
       'Visit Penelope Social at 125 Hawkview Blvd, Woodbridge. Cafe hours, bar hours, phone, and directions. Reservations on Toast.',
   },
   '/locations/scarborough': {
-    title: 'Scarborough Bakehouse | Sister to Penelope Social',
+    title: 'Scarborough Bakehouse | Penelope Bakehouse',
     description:
-      'Penelope Bakehouse at 71 Howden Rd, Scarborough is the micro-bakery sister to Penelope Social. Bread starts there. Visit penelopebakehouse.com.',
+      'Penelope Bakehouse at 71 Howden Rd, Scarborough is the bakehouse and focacceria. Bread for Penelope Social starts there. Visit penelopebakehouse.com.',
   },
   '/sourdough-bakery': {
-    title: 'Penelope Social and Penelope Bakehouse | Two places',
+    title: 'Bakehouse sourdough, served here | Penelope Social',
     description:
-      'Penelope Social is the Woodbridge restaurant. Penelope Bakehouse is the Scarborough micro-bakery — menu, photos, and hours at penelopebakehouse.com. Not a Vaughan bakery page.',
+      'Vince’s starter lives at Penelope Social in Woodbridge. The loaves are baked at Penelope Bakehouse in Scarborough. Menu, hours, and orders at penelopebakehouse.com.',
   },
 }
 

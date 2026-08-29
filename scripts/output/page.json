@@ -197,14 +197,16 @@
         "image": {
           "_type": "image",
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe31b6e85dcbc330d0069_penelope-event.avif",
-          "alt": "Image of Lunch menu platter"
-        }
+          "alt": "A private event at Penelope Social"
+        },
+        "heading": "Catering and events",
+        "intro": "Trays to-go, or a night in the room."
       },
       {
         "_type": "introSection",
         "_key": "intro",
-        "heading": "Catering and events",
-        "intro": "Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you \u2014 food, drinks, and the room.",
+        "heading": "",
+        "intro": "Food, drinks, and a table we will set. Prefer 24 hours\u2019 notice for catering.",
         "ctas": []
       },
       {

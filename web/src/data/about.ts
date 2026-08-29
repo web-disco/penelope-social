@@ -4,43 +4,40 @@ import { BAKEHOUSE_SITE_URL } from './site'
 export const aboutMeta = PAGE_SEO['/about']!
 
 /**
- * Family story for /about. /sourdough-bakery is the Social vs Bakehouse
- * page for bakery-confusion queries — keep both routes.
+ * Family story for /about. Years live only in the timeline.
+ * /sourdough-bakery is the Social vs Bakehouse page — keep both routes.
  */
 export const aboutPage = {
   heading: 'About Penelope Social',
-  subheading: 'A Woodbridge restaurant, and a family bakery story',
+  subheading: 'A Woodbridge cafe and bar, with Bakehouse sourdough.',
   paragraphs: [
-    'Penelope Social is the restaurant in Woodbridge — cafe by day, kitchen and bar at night — at 125 Hawkview Blvd. We serve lunch, dinner, and drinks. The sourdough on the table comes from Penelope Bakehouse, our Scarborough micro-bakery.',
-    'Three brothers — Franco, Vince, and Giuliano — built this place around good bread, a proper bar, and a room people stay in. The starter is named Penelope. The Bakehouse is where that starter still works. Social is where you sit down.',
-    'On May 17, 2017, Vince Stalteri left construction as a project manager and engineer to follow food. The old career paid, and it was stable, but it was not the work he wanted. He kept the leap to himself at first. Cooking was the thing that felt honest.',
-    'On January 1, 2018 he set out to learn sourdough. The mix of craft and science — chemistry, biology, physics in a bowl — became an obsession. In February he made his first starter, Anastasia. He neglected it for three weeks while opening the restaurant; it nearly died. He revived it instead of throwing it out, and when it came back he renamed it Penelope. The starter has been the through-line since: stay with the work.',
-    'By 2024 Penelope was the foundation for the doughs at Social — breads and pizzas drawn from Italy and further. The aim is bread as food that feeds you, not an empty carb. The loaves now start at Penelope Bakehouse in Scarborough. Social is the Woodbridge room where you eat them.',
+    'Penelope Social is a Woodbridge cafe and bar. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.',
+    'Three brothers — Franco, Vince, and Giuliano — built the room around good bread and a proper bar. The starter is named Penelope.',
   ],
   timeline: {
     heading: 'How Penelope started',
     steps: [
       {
         title: '2017',
-        body: 'On May 17, Vince left construction as a project manager and engineer. After years of a stable career that still felt empty, he followed food.',
+        body: 'On May 17, Vince Stalteri left construction as a project manager and engineer to follow food.',
       },
       {
         title: '2018',
-        body: 'January 1 he began learning sourdough. In February he made starter Anastasia, neglected it three weeks while opening the restaurant, revived it, and renamed it Penelope.',
+        body: 'He started learning sourdough and made his first starter, Anastasia. He nearly lost it, then revived it and renamed it Penelope.',
       },
       {
         title: '2024',
-        body: 'Penelope became the base for the doughs at Penelope Social in Woodbridge — breads and pizzas inspired by Italy and beyond. The work is to treat bread as nourishing food.',
+        body: 'Penelope became the base for the doughs at Social — breads and pizzas drawn from Italy and further.',
       },
       {
         title: '2026',
-        body: 'Penelope Bakehouse opens in Scarborough — home for the sourdough that feeds Social, plus focaccia sandwiches and pizza by the slice. Visit penelopebakehouse.com.',
+        body: 'Penelope Bakehouse opens in Scarborough. Home for the sourdough that feeds Social, plus focaccia sandwiches and pizza by the slice.',
       },
     ],
   },
   videoTeaser: {
     heading: 'Inside the bake',
-    body: `The family story starts with bread. Social is the Woodbridge restaurant. The loaves still come from the Bakehouse in Scarborough.`,
+    body: 'From the starter to the table, everything starts with good bread.',
     layout: 'image-first' as const,
     video: {
       src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc19b8d4f507a7318ec10_PENNY%20BREAD-transcode.mp4',
@@ -53,6 +50,6 @@ export const aboutPage = {
   },
   banner: {
     src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673feab787ea61dbd3013e50_about-banner.avif',
-    alt: 'The room at Penelope Social in Woodbridge',
+    alt: 'The room at Penelope Social',
   },
 }

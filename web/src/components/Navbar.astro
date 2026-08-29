@@ -66,7 +66,10 @@ const navScrolled = solidNav
   data-nav-scroll={solidNav ? 'false' : 'true'}
 >
   <div
-    class="navbar-wrap navbar__bar relative flex w-full items-stretch justify-between px-[25px]"
+    class:list={[
+      'navbar-wrap navbar__bar relative flex w-full items-stretch justify-between',
+      layout.shell,
+    ]}
   >
     <nav class="navbar__links" aria-label="Primary">
       {
@@ -133,29 +136,29 @@ const navScrolled = solidNav
         )
       }
     </div>
-  </div>
 
-  <a
-    href="/"
-    aria-current={isHome ? 'page' : undefined}
-    class:list={[
-      'navbar-logo-link navbar__logo pointer-events-auto absolute left-1/2 top-1/2 z-[70] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center no-underline',
-      isHome && 'w--current',
-    ]}
-  >
-    <img
-      src={logoSrc}
-      loading="eager"
-      alt={header.logoAlt ?? 'Penelope Logo'}
-      class="navbar-logo block w-[128px] wf-md:w-[110px] wf-xs:w-[84px]"
-    />
-    <span
-      aria-hidden="true"
-      class="navbar-logo-sub mt-space-8 font-body font-medium uppercase leading-none tracking-[0.32em] text-beige text-[10px] wf-md:text-[9px] wf-xs:mt-space-4 wf-xs:text-[7px] wf-xs:tracking-[0.26em]"
+    <a
+      href="/"
+      aria-current={isHome ? 'page' : undefined}
+      class:list={[
+        'navbar-logo-link navbar__logo pointer-events-auto absolute left-1/2 top-1/2 z-[70] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center no-underline',
+        isHome && 'w--current',
+      ]}
     >
-      Social
-    </span>
-  </a>
+      <img
+        src={logoSrc}
+        loading="eager"
+        alt={header.logoAlt ?? 'Penelope Logo'}
+        class="navbar-logo block w-[128px] wf-md:w-[110px] wf-xs:w-[84px]"
+      />
+      <span
+        aria-hidden="true"
+        class="navbar-logo-sub mt-space-8 font-body font-medium uppercase leading-none tracking-[0.32em] text-beige text-[10px] wf-md:text-[9px] wf-xs:mt-space-4 wf-xs:text-[7px] wf-xs:tracking-[0.26em]"
+      >
+        Social
+      </span>
+    </a>
+  </div>
 </div>
 
 <div
@@ -236,6 +239,8 @@ const navScrolled = solidNav
   /* Desktop inline nav from 1536px — Social has more/longer links than Bakehouse,
      so the 1200px cut-off let Merch sit under the centered logo. */
   .navbar {
+    display: flex;
+    justify-content: center;
     min-height: var(--nav-height);
   }
 

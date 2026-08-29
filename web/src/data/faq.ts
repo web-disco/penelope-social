@@ -26,7 +26,7 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: 'Is this the same as Penelope Bakehouse?',
-    answer: `No. Penelope Social is the Woodbridge cafe and bar at 125 Hawkview Blvd. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough micro-bakery at 71 Howden Rd — that is where the sourdough is baked. We serve that bread here.`,
+    answer: `Penelope Social is the Woodbridge cafe and bar at 125 Hawkview Blvd. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria at 71 Howden Rd — that is where the sourdough is baked. We serve that bread here.`,
   },
   {
     question: 'Where is the Penelope Bakehouse menu?',
@@ -54,7 +54,7 @@ export const aboutFaq: FaqItem[] = [
   },
   {
     question: 'How is Penelope Bakehouse related?',
-    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> in Scarborough is the micro-bakery sibling. Loaves, focaccia, and pizza dough for Social start there. It is not a second dining room.`,
+    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> in Scarborough is the bakehouse and focacceria. Loaves, focaccia, and pizza dough for Social start there.`,
   },
   {
     question: 'Why is the starter named Penelope?',
@@ -74,7 +74,7 @@ export const cateringFaq: FaqItem[] = [
   },
   {
     question: 'Where is the event space?',
-    answer: `At Penelope Social, <a href="/locations/woodbridge">${address}</a> — not at the Scarborough Bakehouse.`,
+    answer: `At Penelope Social, <a href="/locations/woodbridge">${address}</a>.`,
   },
   {
     question: 'Can I just order trays?',
@@ -86,7 +86,7 @@ export const cateringFaq: FaqItem[] = [
 export const cateringMenuFaq: FaqItem[] = [
   {
     question: 'Is this the catering and events booking page?',
-    answer: `No. This page is the tray list and prices. To order trays or book a private night in the restaurant, go to <a href="${CATERING_EVENTS_URL}">Catering and events</a>.`,
+    answer: `This page is the tray list and prices. To order trays or book a private night in the restaurant, go to <a href="${CATERING_EVENTS_URL}">Catering and events</a>.`,
   },
   {
     question: 'What comes on a catering tray?',
@@ -99,7 +99,7 @@ export const cateringMenuFaq: FaqItem[] = [
   },
   {
     question: 'Is this the Penelope Bakehouse catering menu?',
-    answer: `No. These trays come from Penelope Social’s Woodbridge kitchen. For the Scarborough bakehouse menu, go to <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>.`,
+    answer: `These trays come from Penelope Social’s Woodbridge kitchen. For the Scarborough bakehouse menu, go to <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>.`,
   },
 ]
 
@@ -135,14 +135,14 @@ export const woodbridgeFaq: FaqItem[] = [
   },
   {
     question: 'Is this the same as Penelope Bakehouse?',
-    answer: `Sister spots. This is the Woodbridge restaurant. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough micro-bakery where the bread is baked.`,
+    answer: `This is the Woodbridge restaurant. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse where the bread is baked.`,
   },
 ]
 
 export const scarboroughFaq: FaqItem[] = [
   {
     question: 'Is there a Penelope Social dining room in Scarborough?',
-    answer: `No. Penelope Bakehouse at 71 Howden Rd is a micro-bakery — counter service, loaves, sandwiches, and pizza by the slice. Dinner and the bar are at <a href="/locations/woodbridge">Penelope Social in Woodbridge</a>.`,
+    answer: `Penelope Bakehouse at 71 Howden Rd is a bakehouse and focacceria — counter service, loaves, sandwiches, and pizza by the slice. Dinner and the bar are at <a href="/locations/woodbridge">Penelope Social in Woodbridge</a>.`,
   },
   {
     question: 'Where do I order Bakehouse bread?',
@@ -159,7 +159,7 @@ export const scarboroughFaq: FaqItem[] = [
 export const sourdoughFaq: FaqItem[] = [
   {
     question: 'Is this Penelope Bakehouse?',
-    answer: `No. This page is on Penelope Social, the Woodbridge restaurant. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough micro-bakery at 71 Howden Rd.`,
+    answer: `This page is on Penelope Social, the Woodbridge cafe and bar. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria at 71 Howden Rd.`,
   },
   {
     question: 'Where is the Penelope Bakehouse menu?',

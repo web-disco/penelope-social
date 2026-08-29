@@ -153,7 +153,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         </h4>
         <div class="hours-wrap grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-0 wf-xs:grid-cols-1">
           <p class={`${footerText} is-location col-span-2 mb-0 normal-case`}>
-            <strong>{hours.locationLabel}</strong>
+            <strong class={typeScale.label}>{hours.locationLabel}</strong>
             <br />
             <a href={hours.mapUrl} target="_blank" data-ga-event="get_directions" class={footerTextSpan}>
               <LineText text={hours.address} />
@@ -162,7 +162,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
           {
             (hours.blocks ?? []).map((block: any) => (
               <p class={`${footerTextHours} is-hours col-span-2`}>
-                <strong>
+                <strong class={typeScale.label}>
                   {displayHeading(block.label)}
                   <br />
                 </strong>

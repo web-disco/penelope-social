@@ -43,5 +43,5 @@ export const homeBreadFallback = {
 
 export const homeEventsFallback = {
   heading: 'Events at Penelope',
-  body: 'Birthdays, work dinners, and nights in the room. Artisanal dishes, handcrafted cocktails, and a table we will set for you. Catering trays if you want the food at yours.',
+  body: 'Birthdays, work dinners, and nights in the room. Food, drinks, and a table we will set.',
 }

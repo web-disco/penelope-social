@@ -16,17 +16,17 @@ export const locationsHubMeta = PAGE_SEO['/locations']!
 
 export const locationsHub = {
   heading: 'Our locations',
-  intro: 'Two places. Penelope Social is the Woodbridge restaurant. Penelope Bakehouse is the Scarborough micro-bakery.',
+  intro: 'A Woodbridge cafe and bar, and a Scarborough bakehouse.',
 }
 
 export const woodbridgeLocationMeta = PAGE_SEO['/locations/woodbridge']!
 
 export const woodbridgeLocation = {
-  heading: 'Penelope Social in Woodbridge',
+  heading: 'Penelope Social',
   hubTitle: 'Penelope Social',
   hubImage: {
     src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/6738fc337434df480308980c_penelope-social-gathering.avif',
-    alt: 'Dinner service at Penelope Social in Woodbridge',
+    alt: 'Dinner service at Penelope Social',
     objectPosition: 'center 40%',
   },
   hubCta: { label: 'Visit Penelope Social', url: '/locations/woodbridge' },
@@ -44,25 +44,25 @@ export const woodbridgeLocation = {
       href: `mailto:${woodbridgeNap.email}`,
     },
   },
-  intro: 'Cafe by day, bar by night',
+  intro: 'Cafe by day. Bar by night.',
   nap: woodbridgeNap,
   cafeHours,
   barHours,
   offeringsHeading: 'Cafe, kitchen, and bar',
   offeringsBody:
-    'Penelope Social is the Woodbridge restaurant. Cafe by day with focaccia sandwiches and Bakehouse bread. Dinner and drinks at night. The sourdough starts at Penelope Bakehouse in Scarborough.',
+    'Focaccia sandwiches and pizza at lunch. Dinner, drinks, and a late sit. Sourdough from Penelope Bakehouse.',
   detailHeading: 'Cafe by day, bar by night',
   detailCtas: [
     { label: 'Order online', url: ORDER_ONLINE_URL, style: 'primary' as const, newTab: true },
     { label: 'Reservations', url: RESERVATIONS_PATH, style: 'outline' as const },
   ] satisfies Cta[],
-  hubBlurb: 'Woodbridge restaurant. Cafe by day, bar by night. Bakehouse sourdough on the table.',
+  hubBlurb: 'Cafe by day, bar by night. Bakehouse sourdough on the table.',
 }
 
 export const scarboroughLocationMeta = PAGE_SEO['/locations/scarborough']!
 
 export const scarboroughLocation = {
-  heading: 'Penelope Bakehouse in Scarborough',
+  heading: 'Penelope Bakehouse',
   hubTitle: 'Penelope Bakehouse',
   hubImage: {
     src: 'https://penelopebakehouse.com/images/location-bakehouse.jpg',
@@ -84,14 +84,14 @@ export const scarboroughLocation = {
       href: `mailto:${scarboroughBakehouse.email}`,
     },
   },
-  intro: 'The Scarborough micro-bakery — not a second Social dining room',
-  offeringsHeading: 'Micro-bakery, not a dining room',
+  intro: 'The Scarborough bakehouse and focacceria.',
+  offeringsHeading: 'Sourdough and focaccia, baked in Scarborough.',
   offeringsBody:
-    'Penelope Bakehouse at 71 Howden Rd, Scarborough is our sister micro-bakery. Loaves, focaccia sandwiches, and pizza by the slice. Bread for Penelope Social starts there. Hours, menu, and orders live on penelopebakehouse.com.',
-  hubBlurb: 'Scarborough micro-bakery. Sourdough for both places starts here.',
+    'Loaves, focaccia sandwiches, and pizza by the slice. Bread for Penelope Social starts here. Hours, menu, and orders live on penelopebakehouse.com.',
+  hubBlurb: 'Sourdough, focaccia, and pizza by the slice.',
   ctas: [
     { label: 'Visit penelopebakehouse.com', url: BAKEHOUSE_SITE_URL, style: 'primary' as const, newTab: true },
-    { label: 'Social in Woodbridge', url: '/locations/woodbridge', style: 'outline' as const },
+    { label: 'Penelope Social', url: '/locations/woodbridge', style: 'outline' as const },
   ] satisfies Cta[],
   bakehouse: scarboroughBakehouse,
   hours: [

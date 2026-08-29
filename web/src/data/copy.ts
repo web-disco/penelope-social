@@ -11,15 +11,25 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'A Woodbridge restaurant with Bakehouse sourdough': 'Cafe by day. Bar by night.',
   'Cafe by day and a bar by night at 125 Hawkview Blvd. Lunch, dinner, and drinks — bread from Penelope Bakehouse in Scarborough.':
     'Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.',
-  'Bakehouse sourdough, served here': 'Good bread, served here every day',
   'Naturally leavened loaves start at Penelope Bakehouse in Scarborough. We serve that bread at the Woodbridge restaurant — sandwiches, pizza, and loaves on the table.':
     'Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.',
   'Lunch, dinner, the bar, and catering — from the Woodbridge kitchen, on Bakehouse sourdough.':
     'Lunch, dinner, the bar, and catering — on Bakehouse sourdough.',
+  'Birthdays, work dinners, and nights in the Woodbridge restaurant. Artisanal dishes, handcrafted cocktails, and a room we will set for you. Catering trays if you want the food at yours.':
+    'Birthdays, work dinners, and nights in the room. Food, drinks, and a table we will set.',
+  'Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you — food, drinks, and the room.':
+    'Food, drinks, and a table we will set. Prefer 24 hours’ notice for catering.',
+  'Trays from the Woodbridge kitchen — not a private-event booking page, and not the Scarborough bakehouse menu. Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.':
+    'Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.',
   'Sourdough Bakery & Restaurant in Vaughan | Penelope Social':
     'Penelope Social | Cafe and bar in Woodbridge',
   'Best Sourdough Bakery in Vaughan | Penelope Social':
-    'Penelope Social and Penelope Bakehouse | Two places',
+    'Bakehouse sourdough, served here | Penelope Social',
+  'Penelope Social and Penelope Bakehouse | Two places':
+    'Bakehouse sourdough, served here | Penelope Social',
+  'The Scarborough micro-bakery — not a second Social dining room':
+    'The Scarborough bakehouse and focacceria.',
+  'Micro-bakery, not a dining room': 'Sourdough and focaccia, baked in Scarborough.',
   'Experience Penelope Social, a Sourdough Bakery & Restaurant in Vaughan. Indulge in freshly baked goods and delicious meals. Visit us today!':
     'Cafe by day and a bar by night at 125 Hawkview Blvd, Woodbridge. Lunch, dinner, and drinks — bread from Penelope Bakehouse in Scarborough.',
   'Event space vaughan': 'Catering and events in Woodbridge',

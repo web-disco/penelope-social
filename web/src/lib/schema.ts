@@ -81,7 +81,7 @@ export function restaurantSchema() {
     telephone: nap.phone,
     email: nap.email,
     description:
-      'Penelope Social is the Woodbridge restaurant at 125 Hawkview Blvd: cafe by day, bar by night. It is not Penelope Bakehouse. The Scarborough micro-bakery sister is at 71 Howden Rd — bread for this room starts there.',
+      'Penelope Social is the Woodbridge restaurant at 125 Hawkview Blvd: cafe by day, bar by night. Sourdough comes from Penelope Bakehouse, the Scarborough bakehouse at 71 Howden Rd.',
     servesCuisine: ['Italian', 'Pizza', 'Cafe'],
     acceptsReservations: true,
     menu: [...MENU_URLS],
@@ -128,7 +128,7 @@ export function bakehouseSchema() {
     '@id': `${BAKEHOUSE_SITE_URL}/#bakery`,
     name: bakehouse.name,
     description:
-      'Scarborough micro-bakery sister to Penelope Social. Counter service, loaves, focaccia sandwiches, and pizza by the slice. Not a second Social dining room. Menu and orders live on penelopebakehouse.com.',
+      'Scarborough bakehouse and focacceria. Counter service, loaves, focaccia sandwiches, and pizza by the slice. Menu and orders live on penelopebakehouse.com.',
     url: bakehouse.url,
     telephone: bakehouse.phone,
     email: bakehouse.email,

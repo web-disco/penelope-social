@@ -10,10 +10,10 @@ import { sourdoughMeta, sourdoughPage } from '../data/sourdough'
 import { sourdoughFaq } from '../data/faq'
 import { SITE_ORIGIN } from '../data/site'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
-import { btn, heading, layout, radius, space, typeScale } from '../lib/ui'
+import { btn, container, heading, typeScale } from '../lib/ui'
 
 const page = sourdoughPage
-const cards = [page.social, page.bakehouse] as const
+const blocks = [page.social, page.bakehouse] as const
 
 const graph = pageGraph([
   restaurantSchema(),
@@ -21,7 +21,7 @@ const graph = pageGraph([
   faqPageSchema(sourdoughFaq),
   breadcrumbSchema([
     { name: 'Home', path: '/' },
-    { name: 'Sourdough and Bakehouse', path: '/sourdough-bakery' },
+    { name: 'Bakehouse sourdough', path: '/sourdough-bakery' },
   ]),
 ])
 
@@ -43,44 +43,58 @@ const canonical = `${SITE_ORIGIN}/sourdough-bakery`
       objectPosition="center 50%"
     />
 
-    <section class="sourdough-split">
-      <div class:list={[layout.shell, space.sectionYFirst]}>
-        <div class:list={['grid grid-cols-2 wf-md:grid-cols-1', space.sectionGap]}>
-          {
-            cards.map((card) => (
-              <div class:list={['flex flex-col', radius.none]}>
-                <p class:list={['mb-0 text-charcoal/70 uppercase tracking-[0.06em]', typeScale.caption]}>
-                  {card.place}
-                </p>
-                <h2 class:list={[heading.medium, 'mt-space-8 text-left']}>{card.title}</h2>
-                <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.intro]}>{card.body}</p>
-                <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.body]}>{card.address}</p>
-                <a
-                  href={card.cta.url}
-                  class:list={[btn.primary, 'mt-space-32 self-start']}
-                >
-                  {card.cta.label}
-                </a>
+    {
+      blocks.map((block) => {
+        const imageFirst = block.layout === 'image-first'
+        const wrapClass = imageFirst
+          ? 'grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-[60px] wf-md:grid-cols-1 wf-md:gap-[30px]'
+          : 'grid auto-cols-[1fr] grid-cols-2 grid-rows-[auto] gap-[60px] wf-md:flex wf-md:flex-wrap-reverse wf-md:grid-cols-1 wf-md:gap-[30px]'
+        return (
+          <section class={imageFirst ? 'section-home-bread' : 'home-events'}>
+            <div class={container}>
+              <div class={wrapClass}>
+                {imageFirst && (
+                  <img
+                    src={block.image.src}
+                    alt={block.image.alt}
+                    loading="eager"
+                    class="aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]"
+                  />
+                )}
+                <div class="story-copy flex flex-col items-start justify-center gap-space-24">
+                  <div>
+                    <h2 class:list={[heading.medium, 'text-left my-0']}>{block.heading}</h2>
+                    <p class:list={['mt-space-16 mb-0 text-charcoal max-w-[720px]', typeScale.body]}>
+                      {block.body}
+                    </p>
+                  </div>
+                  <div class="flex flex-wrap items-start gap-space-16 wf-xs:w-full wf-xs:flex-col">
+                    {block.ctas.map((cta) => (
+                      <a
+                        href={cta.url}
+                        target={cta.newTab ? '_blank' : undefined}
+                        rel={cta.newTab ? 'noopener noreferrer' : undefined}
+                        class={cta.style === 'outline' ? btn.outline : btn.primary}
+                      >
+                        {cta.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+                {!imageFirst && (
+                  <img
+                    src={block.image.src}
+                    alt={block.image.alt}
+                    loading="eager"
+                    class="aspect-square w-full object-cover wf-md:max-h-[600px] wf-sm:max-h-[500px] wf-xs:max-h-[300px]"
+                  />
+                )}
               </div>
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <section class="sourdough-origin">
-      <div class:list={[layout.shell, space.sectionY, 'flex flex-col items-start gap-space-24']}>
-        <h2 class:list={[heading.medium, 'text-left my-0']}>{page.originHeading}</h2>
-        {
-          page.origin.map((paragraph) => (
-            <p class:list={['mb-0 max-w-[720px] text-charcoal', typeScale.bodyLg]}>{paragraph}</p>
-          ))
-        }
-        <a href={page.bakehouse.cta.url} class={btn.green}>
-          {page.bakehouse.cta.label}
-        </a>
-      </div>
-    </section>
+            </div>
+          </section>
+        )
+      })
+    }
 
     <FaqSection headingText="FAQs" items={sourdoughFaq} includeSchema={false} />
   </main>
