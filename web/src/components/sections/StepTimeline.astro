@@ -15,13 +15,22 @@ interface Props {
   steps: TimelineStep[]
   /** 0–1 viewport activation line; default 0.5 (centre). */
   activation?: number
+  /** Full 120/80 gap above (after a cream block that has no bottom pad). */
+  gapTop?: boolean
 }
 
-const { headingText, steps, activation = 0.5 } = Astro.props
+const { headingText, steps, activation = 0.5, gapTop = false } = Astro.props
 ---
 
 <section class="section-step-timeline reveal" aria-label={headingText}>
-  <div class:list={[layout.shell, space.sectionY]}>
+  <div
+    class:list={[
+      layout.shell,
+      gapTop
+        ? 'pt-section-gap-y pb-section-pad wf-sm:pt-section-gap-y-sm wf-sm:pb-section-pad-sm'
+        : space.sectionY,
+    ]}
+  >
     <div
       data-step-timeline-init
       data-step-timeline-activation={String(activation)}

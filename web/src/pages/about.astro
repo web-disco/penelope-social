@@ -36,10 +36,11 @@ const graph = pageGraph([
       headingText={aboutPage.heading}
       intro={aboutPage.subheading}
       objectPosition="center 50%"
+      introClass="max-w-none whitespace-nowrap wf-md:whitespace-normal wf-md:max-w-[720px]"
     />
 
     <section class="about-content reveal">
-      <div class:list={[layout.shell, space.sectionYFirst, 'flex flex-col gap-space-24']}>
+      <div class:list={[layout.shell, 'pt-0 pb-0', 'flex flex-col gap-space-24']}>
         {
           aboutPage.paragraphs.map((p) => (
             <p class={`mx-auto mb-0 max-w-[720px] text-center text-charcoal ${typeScale.bodyLg}`}>{p}</p>
@@ -48,7 +49,11 @@ const graph = pageGraph([
       </div>
     </section>
 
-    <StepTimeline headingText={aboutPage.timeline.heading} steps={aboutPage.timeline.steps} />
+    <StepTimeline
+      headingText={aboutPage.timeline.heading}
+      steps={aboutPage.timeline.steps}
+      gapTop
+    />
 
     <section class="section-story reveal">
       <div class:list={[layout.shell, space.sectionY]}>
