@@ -7,7 +7,8 @@
  */
 import { btn, heading, layout } from '../lib/ui'
 import { imageUrl } from '../lib/image'
-import { BAKEHOUSE_SITE_URL } from '../data/site'
+
+const BAKERY_PATH = '/sourdough-bakery'
 
 interface Props {
   settings: any
@@ -26,7 +27,7 @@ const navLinks = [
   { label: 'Menu', url: '/menus' },
   { label: 'About', url: '/about' },
   { label: 'Locations', url: '/locations' },
-  { label: 'Bakery', url: BAKEHOUSE_SITE_URL },
+  { label: 'Bakery', url: BAKERY_PATH },
   { label: 'Gift Cards', url: GIFT_CARDS_URL, newTab: true },
   { label: 'Catering', url: '/catering-events' },
   { label: 'Merch', url: '/merchandise' },

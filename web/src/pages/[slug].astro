@@ -2,7 +2,8 @@
 /**
  * Static pages driven by the page builder: /contact, /catering-events,
  * /merchandise, /menus.
- * /about is a dedicated page. /sourdough-bakery 301s there — do not emit HTML.
+ * /about and /sourdough-bakery are dedicated pages. Do not emit CMS HTML
+ * for sourdough-bakery — that would fight the disambiguation page.
  */
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
@@ -13,10 +14,10 @@ import { cateringFaq, contactFaq } from '../data/faq'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
 
 export async function getStaticPaths() {
-  const retired = new Set(['about', 'sourdough-bakery'])
+  const dedicated = new Set(['about', 'sourdough-bakery'])
   const pages = await getAll<any>('page')
   return pages
-    .filter((page) => page.slug?.current && !retired.has(page.slug.current))
+    .filter((page) => page.slug?.current && !dedicated.has(page.slug.current))
     .map((page) => ({ params: { slug: page.slug.current }, props: { page } }))
 }
 

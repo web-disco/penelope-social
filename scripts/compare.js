@@ -28,6 +28,7 @@ const ROUTES = [
   '/menus/bar',
   '/menus/catering',
   '/about',
+  '/sourdough-bakery',
   '/locations',
   '/locations/woodbridge',
   '/locations/scarborough',

@@ -83,6 +83,11 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
     description:
       'Penelope Bakehouse at 71 Howden Rd, Scarborough is the micro-bakery sister to Penelope Social. Bread starts there. Visit penelopebakehouse.com.',
   },
+  '/sourdough-bakery': {
+    title: 'Penelope Social and Penelope Bakehouse | Two places',
+    description:
+      'Penelope Social is the Woodbridge restaurant. Penelope Bakehouse is the Scarborough micro-bakery — menu, photos, and hours at penelopebakehouse.com. Not a Vaughan bakery page.',
+  },
 }
 
 export function normalizePath(pathname: string): string {
@@ -96,8 +101,8 @@ export function resolveSeo(
 ): SeoMeta {
   const path = normalizePath(pathname)
   const defaults = PAGE_SEO[path]
-  // GSC: /menus/catering is crawled, not indexed. Repo copy wins over a thin CMS duplicate of /catering-events.
-  if (path === '/menus/catering' && defaults) return defaults
+  // Repo wins: stale CMS still says “Best Sourdough Bakery in Vaughan”.
+  if ((path === '/menus/catering' || path === '/sourdough-bakery') && defaults) return defaults
   const cmsTitle = cms?.metaTitle?.trim()
   const cmsDescription = cms?.metaDescription?.trim()
 

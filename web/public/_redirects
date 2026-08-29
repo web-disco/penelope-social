@@ -1,8 +1,7 @@
 # Redirects the Webflow site served. Verified against the live responses.
-# Destinations keep trailingSlash: never. Same-site only — do not send bakery
-# traffic to penelopebakehouse.com.
+# Destinations keep trailingSlash: never.
+# /sourdough-bakery stays on this site as a disambiguation page — do not 301
+# it to /about or to penelopebakehouse.com.
 /reservations       https://tables.toasttab.com/restaurants/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/reserve?partySize=2  301
 /events             /catering-events                                                                                  301
-/sourdough-bakery   /about                                                                                            301
-/sourdough-bakery/  /about                                                                                            301
 /sitemap.xml        /sitemap-index.xml                                                                                301

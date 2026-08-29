@@ -1,0 +1,87 @@
+---
+/**
+ * Indexed URL that GSC shows as Bakehouse confusion, not About intent.
+ * Stay on this site. Do not 301 to /about or to penelopebakehouse.com.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro'
+import BannerHero from '../components/sections/BannerHero.astro'
+import FaqSection from '../components/sections/FaqSection.astro'
+import { sourdoughMeta, sourdoughPage } from '../data/sourdough'
+import { sourdoughFaq } from '../data/faq'
+import { SITE_ORIGIN } from '../data/site'
+import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
+import { btn, heading, layout, radius, space, typeScale } from '../lib/ui'
+
+const page = sourdoughPage
+const cards = [page.social, page.bakehouse] as const
+
+const graph = pageGraph([
+  restaurantSchema(),
+  bakehouseSchema(),
+  faqPageSchema(sourdoughFaq),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Sourdough and Bakehouse', path: '/sourdough-bakery' },
+  ]),
+])
+
+const canonical = `${SITE_ORIGIN}/sourdough-bakery`
+---
+
+<BaseLayout
+  title={sourdoughMeta.title}
+  description={sourdoughMeta.description}
+  canonical={canonical}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
+  <main>
+    <BannerHero
+      src={page.banner.src}
+      alt={page.banner.alt}
+      headingText={page.heading}
+      intro={page.subheading}
+      objectPosition="center 50%"
+    />
+
+    <section class="sourdough-split">
+      <div class:list={[layout.shell, space.sectionYFirst]}>
+        <div class:list={['grid grid-cols-2 wf-md:grid-cols-1', space.sectionGap]}>
+          {
+            cards.map((card) => (
+              <div class:list={['flex flex-col', radius.none]}>
+                <p class:list={['mb-0 text-charcoal/70 uppercase tracking-[0.06em]', typeScale.caption]}>
+                  {card.place}
+                </p>
+                <h2 class:list={[heading.medium, 'mt-space-8 text-left']}>{card.title}</h2>
+                <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.intro]}>{card.body}</p>
+                <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.body]}>{card.address}</p>
+                <a
+                  href={card.cta.url}
+                  class:list={[btn.primary, 'mt-space-32 self-start']}
+                >
+                  {card.cta.label}
+                </a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="sourdough-origin">
+      <div class:list={[layout.shell, space.sectionY, 'flex flex-col items-start gap-space-24']}>
+        <h2 class:list={[heading.medium, 'text-left my-0']}>{page.originHeading}</h2>
+        {
+          page.origin.map((paragraph) => (
+            <p class:list={['mb-0 max-w-[720px] text-charcoal', typeScale.bodyLg]}>{paragraph}</p>
+          ))
+        }
+        <a href={page.bakehouse.cta.url} class={btn.green}>
+          {page.bakehouse.cta.label}
+        </a>
+      </div>
+    </section>
+
+    <FaqSection headingText="FAQs" items={sourdoughFaq} includeSchema={false} />
+  </main>
+</BaseLayout>

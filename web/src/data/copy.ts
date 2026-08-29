@@ -2,14 +2,16 @@
  * Title-case / Woodbridge copy helpers.
  * Vaughan may appear as a region or areaServed — never as the city in titles.
  *
- * /sourdough-bakery 301s to /about (same site). Do not send that URL to
- * penelopebakehouse.com. Nav "Bakery" is a normal link to the Bakehouse site.
+ * /sourdough-bakery stays on this site as a Social vs Bakehouse page.
+ * Do not 301 it to /about or to penelopebakehouse.com.
  */
 
 const EXACT_REPLACEMENTS: Record<string, string> = {
   'Sourdough Bakery & Restaurant in Vaughan.': 'A Woodbridge restaurant with Bakehouse sourdough',
   'Sourdough Bakery & Restaurant in Vaughan | Penelope Social':
     'Penelope Social | Cafe and bar in Woodbridge',
+  'Best Sourdough Bakery in Vaughan | Penelope Social':
+    'Penelope Social and Penelope Bakehouse | Two places',
   'Experience Penelope Social, a Sourdough Bakery & Restaurant in Vaughan. Indulge in freshly baked goods and delicious meals. Visit us today!':
     'Cafe by day and a bar by night at 125 Hawkview Blvd, Woodbridge. Lunch, dinner, and drinks — bread from Penelope Bakehouse in Scarborough.',
   'Event space vaughan': 'Catering and events in Woodbridge',

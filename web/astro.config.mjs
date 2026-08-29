@@ -20,7 +20,7 @@ export default defineConfig({
       // Do not sitemap Toast hops or 301 sources.
       filter: (page) => {
         const path = new URL(page).pathname.replace(/\/$/, '') || '/'
-        return path !== '/sourdough-bakery' && path !== '/reservations' && path !== '/events'
+        return path !== '/reservations' && path !== '/events'
       },
     }),
   ],

@@ -12,7 +12,6 @@ import { container, heading, btn } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
 import { displayHeading, restaurantCopy } from '../../data/copy'
 import { homeBreadFallback, homeEventsFallback } from '../../data/home'
-import { BAKEHOUSE_SITE_URL } from '../../data/site'
 
 interface Props {
   block: any
@@ -22,12 +21,9 @@ const imageFirst = block.layout !== 'copy-first'
 const fallback = imageFirst ? homeBreadFallback : homeEventsFallback
 const headingText = displayHeading(block.heading, fallback.heading)
 const bodyText = restaurantCopy(block.body, fallback.body)
-const staleBakeryPath = (block.cta?.url ?? '').replace(/\/$/, '') === '/sourdough-bakery'
-const ctaUrl = staleBakeryPath
-  ? BAKEHOUSE_SITE_URL
-  : (block.cta?.url ?? ('ctaUrl' in fallback ? fallback.ctaUrl : undefined))
+const ctaUrl = block.cta?.url ?? ('ctaUrl' in fallback ? fallback.ctaUrl : undefined)
 const ctaLabel = displayHeading(
-  staleBakeryPath ? homeBreadFallback.ctaLabel : block.cta?.label,
+  block.cta?.label,
   'ctaLabel' in fallback ? fallback.ctaLabel : undefined,
 )
 

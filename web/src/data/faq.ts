@@ -30,7 +30,7 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: 'Where is the Penelope Bakehouse menu?',
-    answer: `The Scarborough bakehouse menu, hours, and online order live on <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. This site is Penelope Social — lunch, dinner, bar, and the catering tray list are here.`,
+    answer: `The Scarborough bakehouse menu, hours, and online order live on <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. This site is Penelope Social. <a href="/sourdough-bakery">Social and Bakehouse</a> explains the two places.`,
   },
   {
     question: 'Do you offer catering and events?',
@@ -152,5 +152,25 @@ export const scarboroughFaq: FaqItem[] = [
     question: 'Does Social serve Bakehouse bread?',
     answer:
       'Yes. Sourdough for the Woodbridge restaurant starts at the Scarborough bakehouse and is served here as sandwiches, pizza, and loaves on the menu.',
+  },
+]
+
+/** /sourdough-bakery — bakehouse-confusion queries, not About intent. */
+export const sourdoughFaq: FaqItem[] = [
+  {
+    question: 'Is this Penelope Bakehouse?',
+    answer: `No. This page is on Penelope Social, the Woodbridge restaurant. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough micro-bakery at 71 Howden Rd.`,
+  },
+  {
+    question: 'Where is the Penelope Bakehouse menu?',
+    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a> — hours, photos, and online order too. Social menus (lunch, dinner, bar) stay on this site.`,
+  },
+  {
+    question: 'Where is the bakery in Scarborough?',
+    answer: `71 Howden Rd, Scarborough. That is Penelope Bakehouse. Penelope Social is at 125 Hawkview Blvd, Woodbridge.`,
+  },
+  {
+    question: 'Do you bake the sourdough at the restaurant?',
+    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social — sandwiches, pizza, and bread on the table.`,
   },
 ]

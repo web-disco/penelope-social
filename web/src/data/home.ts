@@ -19,8 +19,8 @@ export const homeMenusFallback = {
 export const homeBreadFallback = {
   heading: 'Bakehouse sourdough, served here',
   body: 'Naturally leavened loaves start at Penelope Bakehouse in Scarborough. We serve that bread at the Woodbridge restaurant — sandwiches, pizza, and loaves on the table.',
-  ctaLabel: 'Visit the Bakehouse',
-  ctaUrl: 'https://penelopebakehouse.com',
+  ctaLabel: 'Social and Bakehouse',
+  ctaUrl: '/sourdough-bakery',
 }
 
 export const homeEventsFallback = {

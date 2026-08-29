@@ -4,8 +4,8 @@ import { BAKEHOUSE_SITE_URL } from './site'
 export const aboutMeta = PAGE_SEO['/about']!
 
 /**
- * About carries the Vince / origin story that used to live on
- * /sourdough-bakery. That URL now 301s here — do not leave a thin duplicate.
+ * Family story for /about. /sourdough-bakery is the Social vs Bakehouse
+ * page for bakery-confusion queries — keep both routes.
  */
 export const aboutPage = {
   heading: 'About Penelope Social',
