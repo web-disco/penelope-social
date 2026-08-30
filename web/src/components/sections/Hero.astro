@@ -38,7 +38,9 @@ const secondaryCta = block.reservations
 
     <div class="home-hero-copy absolute inset-x-0 bottom-0 z-[1] pt-section-y pb-space-32">
       <div class:list={[layout.shell, 'flex flex-col items-start justify-start text-left']}>
-        <h1 class={`${heading.lightLeft} mb-space-16 max-w-[1080px] text-balance text-left wf-sm:mb-space-12`}>
+        <h1
+          class={`${heading.lightLeft} mb-space-16 max-w-[1080px] text-balance text-left wf-sm:mb-space-12`}
+        >
           {headingText}
         </h1>
         {
@@ -103,6 +105,36 @@ const secondaryCta = block.reservations
   @media (prefers-reduced-motion: reduce) {
     .animate-hero-ken {
       animation: none;
+    }
+  }
+
+  /* Bakehouse homepage H1 scale. Cascade 991 → 767 → 600 → 479 so xs stays 36. */
+  .section-home-hero h1 {
+    font-size: 64px;
+    line-height: 1;
+  }
+
+  @media (max-width: 991px) {
+    .section-home-hero h1 {
+      font-size: 56px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .section-home-hero h1 {
+      font-size: 46px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .section-home-hero h1 {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 479px) {
+    .section-home-hero h1 {
+      font-size: 36px;
     }
   }
 </style>

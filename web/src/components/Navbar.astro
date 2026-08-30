@@ -1,6 +1,7 @@
 ---
 /**
- * Navbar — inline links + CTAs on wide screens; hamburger drawer below 1200px.
+ * Navbar — inline links + CTAs on wide screens; hamburger after the CTA slot
+ * on the right (Bakehouse). Logo stays absolute-centered. Drawer below 1536px.
  * Pattern copied from Bakehouse. Nav items are the new Social IA;
  * Order / Reservations still come from site settings.
  * Scroll hides nothing — the bar stays put and fills charcoal past 48px.
@@ -97,48 +98,50 @@ const navScrolled = solidNav
       }
     </nav>
 
-    <button
-      class="navbar__toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="menu-drawer"
-      aria-label="Open menu"
-    >
-      <span class="navbar__toggle-bar"></span>
-      <span class="navbar__toggle-bar"></span>
-      <span class="navbar__toggle-bar"></span>
-    </button>
+    <div class="navbar__end">
+      <div class="navbar__actions flex items-center gap-3">
+        {
+          header.orderOnline?.url && (
+            <a
+              href={header.orderOnline.url}
+              target={header.orderOnline.newTab ? '_blank' : undefined}
+              rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
+              data-ga-event="order_click"
+              data-ga-placement="nav"
+              class:list={[btn.navSolid, 'navbar__cta']}
+            >
+              <span>{header.orderOnline.label}</span>
+            </a>
+          )
+        }
+        {
+          header.reservations?.url && (
+            <a
+              href={header.reservations.url}
+              target={header.reservations.newTab ? '_blank' : undefined}
+              rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
+              data-ga-event="reservation_click"
+              class:list={[btn.navOutline, 'navbar__cta']}
+            >
+              <span>
+                {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
+              </span>
+            </a>
+          )
+        }
+      </div>
 
-    <div class="navbar__actions flex items-center gap-3">
-      {
-        header.orderOnline?.url && (
-          <a
-            href={header.orderOnline.url}
-            target={header.orderOnline.newTab ? '_blank' : undefined}
-            rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
-            data-ga-event="order_click"
-            data-ga-placement="nav"
-            class:list={[btn.navSolid, 'navbar__cta']}
-          >
-            <span>{header.orderOnline.label}</span>
-          </a>
-        )
-      }
-      {
-        header.reservations?.url && (
-          <a
-            href={header.reservations.url}
-            target={header.reservations.newTab ? '_blank' : undefined}
-            rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
-            data-ga-event="reservation_click"
-            class:list={[btn.navOutline, 'navbar__cta']}
-          >
-            <span>
-              {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
-            </span>
-          </a>
-        )
-      }
+      <button
+        class="navbar__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-drawer"
+        aria-label="Open menu"
+      >
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
     </div>
 
     <a
@@ -292,6 +295,14 @@ const navScrolled = solidNav
     height: 2px;
     background: currentColor;
     transition: transform 0.35s ease, opacity 0.35s ease;
+  }
+
+  .navbar__end {
+    display: flex;
+    align-items: stretch;
+    align-self: stretch;
+    margin-left: auto;
+    gap: 12px;
   }
 
   .navbar__actions {
