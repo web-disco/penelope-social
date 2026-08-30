@@ -6,7 +6,7 @@
  */
 import { btn, heading, layout, radius, space, typeScale } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
-import { displayHeading, restaurantCopy } from '../../data/copy'
+import { displayHeading, menuTitle, restaurantCopy } from '../../data/copy'
 import { homeMenusFallback } from '../../data/home'
 
 interface Props {
@@ -24,7 +24,7 @@ const cards = (authored.length ? authored : homeMenusFallback.cards).map((card: 
     fallbackByUrl.get(card.url) ?? homeMenusFallback.cards[index] ?? homeMenusFallback.cards[0]
   return {
     ...card,
-    title: displayHeading(card.title, fallback.title),
+    title: menuTitle(card.title, fallback.title),
     line: isHome || isMenusHub ? fallback.line : restaurantCopy(card.line, fallback.line),
     url: card.url || fallback.url,
   }

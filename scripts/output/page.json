@@ -43,7 +43,7 @@
           {
             "_type": "menuCard",
             "_key": "card0",
-            "title": "lunch",
+            "title": "Lunch",
             "url": "/menus/lunch",
             "image": {
               "_type": "image",
@@ -56,7 +56,7 @@
           {
             "_type": "menuCard",
             "_key": "card1",
-            "title": "bar",
+            "title": "Bar",
             "url": "/menus/bar",
             "image": {
               "_type": "image",
@@ -69,7 +69,7 @@
           {
             "_type": "menuCard",
             "_key": "card2",
-            "title": "dinner",
+            "title": "Dinner",
             "url": "/menus/dinner",
             "image": {
               "_type": "image",

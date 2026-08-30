@@ -18,10 +18,10 @@ const waveText = phrase.repeat(6)
 >
   <img
     class="wave-checkers wave-checkers--in pointer-events-none"
-    src="/images/wave-checker-in.webp"
+    src="/images/wave-checker-in.svg"
     alt=""
-    width="520"
-    height="48"
+    width="1920"
+    height="24"
     loading="lazy"
     decoding="async"
     aria-hidden="true"
@@ -39,7 +39,7 @@ const waveText = phrase.repeat(6)
         height="512"
         loading="lazy"
         decoding="async"
-        class="wave-moment-bike relative z-[1] w-[min(760px,72vw)] wf-md:w-[min(600px,76vw)] wf-sm:w-[min(440px,82vw)]"
+        class="wave-moment-bike relative z-[1] w-[min(760px,72vw)] wf-md:w-[min(600px,76vw)] wf-sm:w-[min(440px,82vw)] text-beige"
         aria-hidden="true"
       />
 
@@ -84,10 +84,10 @@ const waveText = phrase.repeat(6)
 
   <img
     class="wave-checkers wave-checkers--out pointer-events-none"
-    src="/images/wave-checker-out.webp"
+    src="/images/wave-checker-out.svg"
     alt=""
-    width="520"
-    height="48"
+    width="1920"
+    height="24"
     loading="lazy"
     decoding="async"
     aria-hidden="true"
@@ -98,15 +98,20 @@ const waveText = phrase.repeat(6)
   .wave-checkers {
     display: block;
     width: 100%;
-    height: auto;
+    height: 48px;
+    object-fit: cover;
+    background-repeat: repeat-x;
+    background-size: auto 24px;
   }
 
   .wave-checkers--in {
     margin-bottom: -1px;
+    background-image: url('/images/wave-checker-in.svg');
   }
 
   .wave-checkers--out {
     margin-top: -1px;
+    background-image: url('/images/wave-checker-out.svg');
   }
 
   .wave-moment-bike {

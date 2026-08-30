@@ -5,7 +5,7 @@
  * Empty lists stay titled with small body copy. Unavailable categories hide.
  */
 import { layout, typeScale } from '../lib/ui'
-import { restaurantCopy } from '../data/copy'
+import { menuTitle, restaurantCopy } from '../data/copy'
 
 interface Props {
   categories: any[]
@@ -76,7 +76,7 @@ function isMultiPrice(price?: string) {
       >
         <div class={layout.shell}>
           <h2 class:list={['page-sub-heading mt-0 mb-space-12 text-charcoal', typeScale.displayL]}>
-            {category.title}
+            {menuTitle(category.title)}
           </h2>
           {blurb && (
             <p
@@ -96,7 +96,7 @@ function isMultiPrice(price?: string) {
                 class="menu-category-list grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-[60px] wf-md:grid-cols-2 wf-md:gap-10 wf-sm:grid-cols-1 wf-xs:gap-5"
               >
                 {items.map((item: any) => {
-                  const { name, suffix } = splitTitleSize(item.title)
+                  const { name, suffix } = splitTitleSize(menuTitle(item.title))
                   const multi = isMultiPrice(item.price)
                   return (
                     <div role="listitem" class="menu-category-item border-t-2 border-charcoal">

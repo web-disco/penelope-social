@@ -10,6 +10,7 @@ export const menuItem = defineType({
       name: 'title',
       title: 'Name',
       type: 'string',
+      description: 'Title Case. Keep NY, DOP, 2oz, 1pc as written. Descriptions stay as written.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

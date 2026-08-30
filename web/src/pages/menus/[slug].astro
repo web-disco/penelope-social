@@ -8,7 +8,7 @@ import PageHero from '../../components/sections/PageHero.astro'
 import MenuCategories from '../../components/MenuCategories.astro'
 import { getAll } from '../../lib/data'
 import { resolveSeo } from '../../data/seo'
-import { restaurantCopy, displayHeading } from '../../data/copy'
+import { restaurantCopy, displayHeading, menuTitle } from '../../data/copy'
 import { cateringMenuCopy } from '../../data/menus'
 import { SITE_ORIGIN } from '../../data/site'
 import { btn, layout, space, typeScale, heading } from '../../lib/ui'
@@ -39,12 +39,12 @@ const introText = isCateringMenu ? cateringMenuCopy.intro : restaurantCopy(menu.
 
 const menuSections = (menu.categories ?? [])
   .map((category: any) => ({
-    name: category.title,
+    name: menuTitle(category.title),
     description: category.description,
     items: (category.items ?? [])
       .filter((item: any) => item.title && !/unavailable/i.test(item.title))
       .map((item: any) => ({
-        name: item.title,
+        name: menuTitle(item.title),
         description: item.description,
         price: item.price,
       })),

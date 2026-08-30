@@ -146,6 +146,16 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'reservations': 'Reservations',
   'stay in the loop.': 'Stay in the loop',
   'stay in the loop': 'Stay in the loop',
+  'the pizzas': 'The Pizzas',
+  'The pizzas': 'The Pizzas',
+  handhelds: 'Handhelds',
+  cocktails: 'Cocktails',
+  'Red wine': 'Red Wine',
+  'White wine': 'White Wine',
+  'Middle table': 'Middle Table',
+  lunch: 'Lunch',
+  dinner: 'Dinner',
+  bar: 'Bar',
 }
 
 /** True when copy treats Vaughan as the city, not just the wider area. */
@@ -197,6 +207,92 @@ export function restaurantCopy(text?: string, fallback?: string): string {
     return neutralizeDashes(rewritten || fallback || raw)
   }
   return neutralizeDashes(raw)
+}
+
+/**
+ * Word-level Title Case for menu category headings and item names.
+ * Keeps brand/acronym/unit bits (NY, DOP, ITA, 2oz, 1pc) and does not
+ * uppercase descriptions. Not a CSS text-transform.
+ */
+const TITLE_SMALL_WORDS = new Set([
+  'a',
+  'an',
+  'and',
+  'as',
+  'at',
+  'but',
+  'by',
+  'for',
+  'in',
+  'nor',
+  'of',
+  'on',
+  'or',
+  'the',
+  'to',
+  'vs',
+  'with',
+])
+
+const TITLE_PRESERVE = new Set([
+  'ABV',
+  'ARG',
+  'CAN',
+  'DOP',
+  'EVOO',
+  'ITA',
+  'NZ',
+  'NY',
+  'UK',
+  'USA',
+])
+
+const TITLE_UNIT = /^(oz|ml|pc|pcs)$/i
+
+function titleCaseToken(token: string, isFirstWord: boolean, isLastWord: boolean): string {
+  const match = token.match(/^([^\p{L}\p{N}']*)([\p{L}\p{N}']+)([^\p{L}\p{N}']*)$/u)
+  if (!match) return token
+  const [, lead, core, trail] = match
+  if (TITLE_PRESERVE.has(core)) return lead + core + trail
+  if (/^[A-Z]{2,5}$/.test(core)) return lead + core + trail
+  if (TITLE_UNIT.test(core)) return lead + core.toLowerCase() + trail
+  if (/\d/.test(core)) return lead + core + trail
+  const lower = core.toLowerCase()
+  if (!isFirstWord && !isLastWord && TITLE_SMALL_WORDS.has(lower)) {
+    return lead + lower + trail
+  }
+  return lead + core.charAt(0).toUpperCase() + core.slice(1).toLowerCase() + trail
+}
+
+export function toTitleCase(text?: string): string {
+  const raw = (text ?? '').trim()
+  if (!raw) return ''
+  const chunks = raw.split(/(\s+)/)
+  const wordChunks = chunks.filter((chunk) => chunk.trim().length > 0)
+  let wordIndex = 0
+  return chunks
+    .map((chunk) => {
+      if (!chunk.trim()) return chunk
+      const isFirst = wordIndex === 0
+      const isLast = wordIndex === wordChunks.length - 1
+      wordIndex += 1
+      return chunk
+        .split(/(-)/)
+        .map((part, partIndex, parts) => {
+          if (part === '-') return part
+          const firstInHyphen = partIndex === 0
+          const lastInHyphen = partIndex === parts.length - 1
+          return titleCaseToken(part, isFirst && firstInHyphen, isLast && lastInHyphen)
+        })
+        .join('')
+    })
+    .join('')
+}
+
+/** Menu category headings and item titles. Exact CMS fixes, then Title Case. */
+export function menuTitle(text?: string, fallback?: string): string {
+  const raw = restaurantCopy(text, fallback)
+  return toTitleCase(raw) || toTitleCase(fallback) || fallback || ''
 }
 
 /** Sentence/title case for chrome that arrived as ALL CAPS or random lowercase. */

@@ -23,6 +23,7 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Page: menus — on-photo H1 “On the menu” + lede. Delete cream pageHeading. Tiles only underneath.',
   'Page: merchandise — on-photo H1 “Merch” + lede. Delete cream “Penelope Merch”.',
   'Menus lunch/dinner/bar — on-photo H1 Lunch / Dinner / Bar + one short lede. No cream title. No category jump pills.',
+  'Menu category + item titles — Title Case in Studio (The Pizzas, Handhelds, Cocktails, Red Wine, White Wine, Middle Table). Keep NY, DOP, 2oz. The site also title-cases at render if Studio is stale. Descriptions stay as written.',
   'Do not 301 /sourdough-bakery — dedicated page ships from the repo (Bakehouse sourdough, served here). Unpublish the old “Best Sourdough Bakery in Vaughan” CMS doc so it cannot override.',
   'Copy rule: say what it is. No em or en dashes. No “not a dining room”. No street addresses in heroes. Woodbridge in meta + about intro.',
   'Newsletter subtext can stay as authored — type is now 20/18/16 to match Bakehouse',
