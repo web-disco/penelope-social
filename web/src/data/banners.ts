@@ -40,7 +40,9 @@ export const pageBannerCopy: Record<string, { heading: string; intro: string }> 
 }
 
 export function bannerCopyFor(path: string, fallback?: { heading?: string; intro?: string }) {
-  const known = pageBannerCopy[path]
+  const known =
+    pageBannerCopy[path] ||
+    (path.startsWith('/merchandise/') ? pageBannerCopy['/merchandise'] : undefined)
   const heading = restaurantCopy(known?.heading || fallback?.heading || '').replace(/\.$/, '')
   const intro = restaurantCopy(known?.intro || fallback?.intro || '')
   return { heading, intro }
