@@ -9,6 +9,13 @@ export const SITE_NAME = 'Penelope Social'
 export const SITE_ORIGIN = 'https://penelopesocial.com'
 export const BAKEHOUSE_SITE_URL = 'https://penelopebakehouse.com'
 
+/** Scarborough Bakehouse Toast — not Social's order link. */
+export const BAKEHOUSE_ORDER_ONLINE_URL =
+  'https://order.toasttab.com/online/penelope-bakehouse-scarborough-71-howden-road?diningOption=takeout&rwg_token=AE37R_ia7EAZEVcG9NpbtfhSwTVvmCeGwEAHkDzGsiouYTQl4FQHPdw2vVFRRzlSLmtTqQLuqAjNDwNCl8DpKxGNTJ4TST6CLQ%3D%3D'
+
+/** Bakehouse catering intake — not Social /catering-events. */
+export const BAKEHOUSE_CATERING_URL = `${BAKEHOUSE_SITE_URL}/catering`
+
 export const OG_IMAGE_PATH = '/images/og-share.jpg'
 
 export const ORDER_ONLINE_URL =

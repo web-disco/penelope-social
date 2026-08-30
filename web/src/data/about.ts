@@ -45,7 +45,7 @@ export const aboutPage = {
     },
     image: {
       alt: 'Hands shaping dough for Penelope',
-      aspect: '3/2',
+      aspect: '9/16',
     },
     ctas: [{ label: 'Visit the Bakehouse', url: BAKEHOUSE_SITE_URL, style: 'primary' as const, newTab: true }],
   },

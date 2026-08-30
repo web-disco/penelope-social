@@ -9,7 +9,7 @@ import FaqSection from '../../components/sections/FaqSection.astro'
 import { scarboroughLocation, scarboroughLocationMeta } from '../../data/locations'
 import { scarboroughFaq } from '../../data/faq'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../../lib/schema'
-import { BAKEHOUSE_SITE_URL } from '../../data/site'
+import { BAKEHOUSE_CATERING_URL, BAKEHOUSE_ORDER_ONLINE_URL, BAKEHOUSE_SITE_URL } from '../../data/site'
 
 const bakehouse = scarboroughLocation.bakehouse
 
@@ -38,6 +38,18 @@ const detailRows = [
     label: 'Website',
     lines: ['penelopebakehouse.com'],
     href: BAKEHOUSE_SITE_URL,
+    external: true,
+  },
+  {
+    label: 'Order',
+    lines: ['Order online'],
+    href: BAKEHOUSE_ORDER_ONLINE_URL,
+    external: true,
+  },
+  {
+    label: 'Catering',
+    lines: ['Catering'],
+    href: BAKEHOUSE_CATERING_URL,
     external: true,
   },
 ]

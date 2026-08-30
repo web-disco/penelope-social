@@ -1,6 +1,8 @@
 import type { Cta } from './types'
 import { PAGE_SEO } from './seo'
 import {
+  BAKEHOUSE_CATERING_URL,
+  BAKEHOUSE_ORDER_ONLINE_URL,
   BAKEHOUSE_SITE_URL,
   CATERING_EVENTS_URL,
   GET_DIRECTIONS_HREF,
@@ -90,7 +92,19 @@ export const scarboroughLocation = {
     'Loaves, focaccia sandwiches, and pizza by the slice. Hours, menu, and orders live on penelopebakehouse.com.',
   hubBlurb: 'Sourdough, focaccia, and pizza by the slice.',
   ctas: [
-    { label: 'Visit penelopebakehouse.com', url: BAKEHOUSE_SITE_URL, style: 'primary' as const, newTab: true },
+    {
+      label: 'Order online',
+      url: BAKEHOUSE_ORDER_ONLINE_URL,
+      style: 'primary' as const,
+      newTab: true,
+    },
+    {
+      label: 'Catering',
+      url: BAKEHOUSE_CATERING_URL,
+      style: 'outline' as const,
+      newTab: true,
+    },
+    { label: 'Visit penelopebakehouse.com', url: BAKEHOUSE_SITE_URL, style: 'outline' as const, newTab: true },
     { label: 'Penelope Social', url: '/locations/woodbridge', style: 'outline' as const },
   ] satisfies Cta[],
   bakehouse: scarboroughBakehouse,

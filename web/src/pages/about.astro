@@ -8,7 +8,7 @@ import BaseLayout from '../layouts/BaseLayout.astro'
 import BannerHero from '../components/sections/BannerHero.astro'
 import StepTimeline from '../components/sections/StepTimeline.astro'
 import FaqSection from '../components/sections/FaqSection.astro'
-import { layout, space, typeScale, heading, btn, story } from '../lib/ui'
+import { layout, space, typeScale, heading, btn } from '../lib/ui'
 import { aboutMeta, aboutPage } from '../data/about'
 import { aboutFaq } from '../data/faq'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
@@ -56,10 +56,12 @@ const graph = pageGraph([
 
     <section class="section-story">
       <div class:list={[layout.shell, space.sectionY]}>
-        <div class={story.grid}>
-          <div class={story.media}>
+        <div
+          class="story-grid mx-auto flex w-full max-w-[800px] flex-row items-center gap-x-space-32 wf-md:flex-col wf-md:gap-x-0 wf-md:gap-y-space-24"
+        >
+          <div class="story-media overflow-hidden rounded-none w-full max-w-[360px] shrink-0 wf-md:mx-auto">
             <video
-              class:list={[story.image, 'story-video']}
+              class="story-image story-video block h-full w-full object-cover"
               src={video.video.src}
               controls
               playsinline
@@ -68,9 +70,10 @@ const graph = pageGraph([
               autoplay
               preload="metadata"
               aria-label={video.image.alt}
+              style="aspect-ratio: 9/16; object-position: center center;"
             ></video>
           </div>
-          <div class={story.copy}>
+          <div class="story-copy flex min-w-0 flex-1 flex-col items-start justify-center gap-space-24 pb-0">
             <div>
               <h2 class:list={[heading.medium, 'text-left my-0']}>{video.heading}</h2>
               <p class:list={['mt-space-16 mb-0 text-charcoal', layout.measureNarrow, typeScale.bodyLg]}>

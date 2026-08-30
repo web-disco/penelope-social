@@ -42,9 +42,11 @@ function ctaClass(style?: Cta['style']) {
 }
 
 function gaEventForHref(href: string): string | undefined {
-  if (isSocialOrderHref(href)) return 'order_click'
+  if (isSocialOrderHref(href) || /order\.toasttab\.com\/online\/penelope-bakehouse/i.test(href)) {
+    return 'order_click'
+  }
   if (isReservationHref(href)) return 'reservation_click'
-  if (isCateringHref(href)) return 'catering_click'
+  if (isCateringHref(href) || /penelopebakehouse\.com\/catering/i.test(href)) return 'catering_click'
   if (isSocialTelHref(href)) return 'click_to_call'
   if (isMapsDirectionsHref(href)) return 'get_directions'
   return undefined
