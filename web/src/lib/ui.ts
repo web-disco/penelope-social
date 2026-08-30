@@ -148,15 +148,19 @@ export const formFieldTextarea = `form-field textarea ${FORM_FIELD_SHARED} h-[15
  * Intro / body stay on Sweet Sans Regular.
  */
 export const typeScale = {
-  /** Hero H1 over imagery. 64 → 56 / 46 / 40 / 36. */
+  /** Hero H1 over imagery. 64 → 56 / 46; phones (≤600 / xs) 32. */
   displayHero:
     'font-body font-medium normal-case text-[64px] leading-none text-balance ' +
-    'wf-md:text-[56px] wf-sm:text-[46px] max-[600px]:text-[40px] wf-xs:text-[36px]',
+    'wf-md:text-[56px] wf-sm:text-[46px] max-[600px]:text-[32px] wf-xs:text-[32px]',
 
-  /** Page H1. 56 → 48 / 40 / 36 / 34. */
+  /** Page H1. 56 → 48 / 40; banner heroes drop to 32 on phones. */
   displayXl:
     'font-body font-medium normal-case text-[56px] leading-none text-balance ' +
     'wf-md:text-[48px] wf-sm:text-[40px] max-[600px]:text-[36px] wf-xs:text-[34px]',
+
+  /** Phone-only override for on-photo heroes. Desktop/tablet steps stay on displayXl. */
+  heroMobile:
+    'max-[600px]:text-[32px] wf-xs:text-[32px]',
 
   /** 40 → 34 / 30 / 26. */
   displayL:

@@ -58,7 +58,9 @@ const bannerHeight = 'h-[550px] wf-md:h-[420px] wf-sm:h-[440px] wf-xs:h-[400px]'
       <div class="page-banner-copy absolute inset-x-0 bottom-0 z-[2] pb-space-48 pt-space-32 wf-md:pb-space-32 wf-sm:pb-space-24 wf-sm:pt-space-24">
         <div class:list={[layout.shell, 'flex flex-col items-center text-center']}>
           {headingText && (
-            <h1 class={`${heading.light} my-0 max-w-[1080px] text-balance`}>{headingText}</h1>
+            <h1 class={`${heading.light} ${typeScale.heroMobile} my-0 max-w-[1080px] text-balance`}>
+              {headingText}
+            </h1>
           )}
           {intro && (
             <p
@@ -77,3 +79,13 @@ const bannerHeight = 'h-[550px] wf-md:h-[420px] wf-sm:h-[440px] wf-xs:h-[400px]'
     )
   }
 </div>
+
+<style>
+  /* Inner-page heroes: phones ≤600px (and xs) are 32. Desktop/tablet steps unchanged. */
+  @media (max-width: 600px) {
+    .page-banner h1 {
+      font-size: 32px;
+      line-height: 1;
+    }
+  }
+</style>

@@ -108,7 +108,7 @@ const secondaryCta = block.reservations
     }
   }
 
-  /* Bakehouse homepage H1 scale. Cascade 991 → 767 → 600 → 479 so xs stays 36. */
+  /* Homepage H1: desktop/tablet stay 64/56/46. Phones (≤600, including xs) are 32. */
   .section-home-hero h1 {
     font-size: 64px;
     line-height: 1;
@@ -128,13 +128,7 @@ const secondaryCta = block.reservations
 
   @media (max-width: 600px) {
     .section-home-hero h1 {
-      font-size: 40px;
-    }
-  }
-
-  @media (max-width: 479px) {
-    .section-home-hero h1 {
-      font-size: 36px;
+      font-size: 32px;
     }
   }
 </style>
