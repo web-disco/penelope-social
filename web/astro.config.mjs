@@ -14,7 +14,16 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'never',
   build: { format: 'directory' },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // Joshua submits sitemap-index.xml on sc-domain:penelopesocial.com.
+      // Do not sitemap Toast hops or 301 sources.
+      filter: (page) => {
+        const path = new URL(page).pathname.replace(/\/$/, '') || '/'
+        return path !== '/reservations' && path !== '/events'
+      },
+    }),
+  ],
   vite: {
     plugins: [tailwindcss()],
   },

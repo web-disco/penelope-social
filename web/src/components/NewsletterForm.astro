@@ -48,12 +48,13 @@ const consentText =
         aria-label="Email address"
         required
       />
-      <input
+      <button
         type="submit"
         data-wait="Please wait..."
-        class="newsletter-btn inline-block cursor-pointer rounded-none border-2 border-beige bg-beige px-6 py-[18px] font-body leading-[inherit] text-charcoal uppercase no-underline transition-[background-color] duration-[350ms] hover:bg-brand-transparent hover:text-beige"
-        value={newsletter.buttonLabel ?? 'Subscribe'}
-      />
+        class="newsletter-btn btn inline-block cursor-pointer rounded-none border-2 border-beige bg-beige px-6 py-[18px] font-body font-medium leading-none text-charcoal uppercase no-underline transition-[background-color] duration-[350ms] hover:bg-brand-transparent hover:text-beige"
+      >
+        <span>{newsletter.buttonLabel ?? 'Subscribe'}</span>
+      </button>
     </div>
 
     <!--

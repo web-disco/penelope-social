@@ -1,0 +1,12 @@
+---
+import { layout, typeScale } from '../../lib/ui'
+import { cateringEventsIntro } from '../../data/catering'
+---
+
+<section class="catering-events-lede mb-section-gap-y wf-sm:mb-section-gap-y-sm">
+  <div class:list={[layout.shell, 'pt-0 pb-0']}>
+    <p class={`mx-auto mb-0 max-w-[720px] text-center text-charcoal ${typeScale.bodyLg}`}>
+      {cateringEventsIntro}
+    </p>
+  </div>
+</section>

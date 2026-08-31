@@ -1,7 +1,7 @@
 ---
 /**
  * .section-team-grid — three square portraits with name + role.
- * Every element carries `fade-in`, matching the live markup.
+ * No fade-in hide — first paint stays visible.
  */
 import { containerNoTop } from '../../lib/ui'
 import { imageUrl, imageAlt } from '../../lib/image'
@@ -24,14 +24,13 @@ const members: any[] = block.members ?? []
             <img
               src={imageUrl(member.image)}
               loading="lazy"
-              fade-in
               alt={imageAlt(member.image)}
               class="team-image static aspect-square w-full object-cover"
             />
-            <h2 fade-in class="team-title mb-[10px] font-heading text-charcoal">
+            <h2 class="team-title mb-[10px] font-heading text-charcoal">
               {member.name}
             </h2>
-            <div fade-in class="team-text font-body text-[24px]">
+            <div class="team-text font-body text-[24px]">
               {member.role}
             </div>
           </div>

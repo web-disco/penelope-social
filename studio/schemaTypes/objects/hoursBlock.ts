@@ -10,7 +10,7 @@ export const hoursBlock = defineType({
       name: 'label',
       title: 'Label',
       type: 'string',
-      description: 'e.g. CAFE, BAR',
+      description: 'e.g. Cafe, Bar — sentence case, matching Bakehouse headings.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

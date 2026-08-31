@@ -5,6 +5,7 @@
  */
 import { container, heading, paragraph, btn } from '../../lib/ui'
 import LineText from '../LineText.astro'
+import { displayHeading, restaurantCopy } from '../../data/copy'
 
 interface Props {
   block: any
@@ -14,16 +15,24 @@ interface Props {
 const { block, headingLevel = 'h1' } = Astro.props
 const Heading = headingLevel
 const ctas: any[] = block.ctas ?? []
+const headingText = displayHeading(block.heading)
+const introText = restaurantCopy(block.intro)
 ---
 
 <div class="section-intro">
   <div class={container}>
-    <Heading class={heading.base}><LineText text={block.heading} /></Heading>
     {
-      block.intro && (
+      headingText && (
+        <Heading class={heading.base}>
+          <LineText text={headingText} />
+        </Heading>
+      )
+    }
+    {
+      introText && (
         <div class="intro-text mx-auto max-w-[1000px]">
           <p class={paragraph.intro}>
-            <LineText text={block.intro} />
+            <LineText text={introText} />
           </p>
         </div>
       )
@@ -35,9 +44,14 @@ const ctas: any[] = block.ctas ?? []
             <a
               href={cta.url}
               target={cta.newTab ? '_blank' : undefined}
+              data-ga-event={
+                cta.url === '/reservations' || String(cta.url).includes('toasttab.com/restaurants')
+                  ? 'reservation_click'
+                  : undefined
+              }
               class={cta.style === 'outline' ? btn.outline : btn.primary}
             >
-              {cta.label}
+              <span>{displayHeading(cta.label)}</span>
             </a>
           ))}
         </div>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="420" viewBox="0 0 520 420" fill="none">
+  <!-- Darker-green line shirt so it reads on the forest band without the bakery bike. -->
+  <path
+    d="M168 86 L260 118 L352 86 L430 132 L392 176 L368 160 V334 C368 352 352 366 334 366 H186 C168 366 152 352 152 334 V160 L128 176 L90 132 Z"
+    stroke="#1e301e"
+    stroke-width="10"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+  />
+  <path
+    d="M198 128 C220 148 240 156 260 156 C280 156 300 148 322 128"
+    stroke="#1e301e"
+    stroke-width="8"
+    stroke-linecap="round"
+  />
+</svg>

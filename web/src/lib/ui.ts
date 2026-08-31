@@ -100,8 +100,8 @@ export const paragraph = {
 } as const
 
 /* --- Containers -----------------------------------------------------------
-   .container { max-width:1440px; padding:80px 25px 60px }
-   @991/@767 { padding-block:60px }  @479 { padding-block:40px }             */
+   .container { max-width:1440px; padding:60px 25px }
+   @767 { padding-block:80px }                                               */
 const CONTAINER_SHARED =
   'w-full mx-auto px-[25px] no-underline transition-[background-color,color] duration-500'
 
@@ -123,12 +123,12 @@ export const menuBtn =
 
 /* Menu category H2 — Sweet Sans Medium display-s (28). */
 export const pageSubHeading =
-  'page-sub-heading normal-case text-charcoal mt-0 mb-space-24 overflow-hidden ' +
+  'page-sub-heading normal-case text-charcoal mt-0 mb-space-24 ' +
   'font-body font-medium text-[28px] leading-none text-balance ' +
   'wf-md:text-[26px] wf-sm:text-[24px] wf-xs:text-[22px]'
 
 export const pageSubHeadingSmall =
-  'page-sub-heading small-margin normal-case text-charcoal mt-0 mb-space-16 overflow-hidden ' +
+  'page-sub-heading small-margin normal-case text-charcoal mt-0 mb-space-16 ' +
   'font-body font-medium text-[28px] leading-none text-balance ' +
   'wf-md:text-[26px] wf-sm:text-[24px] wf-xs:text-[22px]'
 
@@ -148,15 +148,19 @@ export const formFieldTextarea = `form-field textarea ${FORM_FIELD_SHARED} h-[15
  * Intro / body stay on Sweet Sans Regular.
  */
 export const typeScale = {
-  /** Hero H1 over imagery. 64 → 56 / 46 / 40 / 36. */
+  /** Hero H1 over imagery. 64 → 56 / 46; phones (≤600 / xs) 32. */
   displayHero:
     'font-body font-medium normal-case text-[64px] leading-none text-balance ' +
-    'wf-md:text-[56px] wf-sm:text-[46px] max-[600px]:text-[40px] wf-xs:text-[36px]',
+    'wf-md:text-[56px] wf-sm:text-[46px] max-[600px]:text-[32px] wf-xs:text-[32px]',
 
-  /** Page H1. 56 → 48 / 40 / 36 / 34. */
+  /** Page H1. 56 → 48 / 40; banner heroes drop to 32 on phones. */
   displayXl:
     'font-body font-medium normal-case text-[56px] leading-none text-balance ' +
     'wf-md:text-[48px] wf-sm:text-[40px] max-[600px]:text-[36px] wf-xs:text-[34px]',
+
+  /** Phone-only override for on-photo heroes. Desktop/tablet steps stay on displayXl. */
+  heroMobile:
+    'max-[600px]:text-[32px] wf-xs:text-[32px]',
 
   /** 40 → 34 / 30 / 26. */
   displayL:
@@ -213,30 +217,29 @@ export const typeScale = {
 /* --- Headings — Sweet Sans Medium, sentence case ------------------------ */
 export const heading = {
   /** Page H1 (centred). */
-  base: `heading normal-case text-charcoal text-center overflow-hidden ${typeScale.displayXl}`,
+  base: `heading normal-case text-charcoal text-center ${typeScale.displayXl}`,
 
   /** Page H1 (left). */
-  left: `heading is-left normal-case text-charcoal text-left overflow-hidden ${typeScale.displayXl}`,
+  left: `heading is-left normal-case text-charcoal text-left ${typeScale.displayXl}`,
 
   /** Section H2. */
-  medium: `heading is-medium normal-case text-charcoal text-center my-0 overflow-hidden ${typeScale.displayM}`,
+  medium: `heading is-medium normal-case text-charcoal text-center my-0 ${typeScale.displayM}`,
 
   /** Light page H1 (footer newsletter / dark bands). */
-  light: `heading is-light normal-case text-beige text-center overflow-hidden ${typeScale.displayXl}`,
+  light: `heading is-light normal-case text-beige text-center ${typeScale.displayXl}`,
 
   /** Hero H1 over imagery. */
-  lightLeft: `heading is-light is-left normal-case text-beige text-left overflow-hidden ${typeScale.displayHero}`,
+  lightLeft: `heading is-light is-left normal-case text-beige text-left ${typeScale.displayHero}`,
 
   /** Nav drawer links. */
-  menuItem: `heading is-menu-item normal-case text-beige text-left overflow-hidden ${typeScale.menuItem}`,
+  menuItem: `heading is-menu-item normal-case text-beige text-left ${typeScale.menuItem}`,
 } as const
 
-/** Spacing recipes — 60px section pad so adjacent sections sit 120px apart on desktop;
- *  mobile (≤767) uses 40px pad / 80px full gap. */
+/** Spacing recipes — Bakehouse section pad is 60/40 so adjacent py stacks to 120/80. */
 export const space = {
   /** Full gap after full-bleed heroes before page content (120 desktop / 80 mobile). */
   afterHero: 'mb-section-gap-y wf-sm:mb-section-gap-y-sm',
-  /** Cream sections — 60+60 → 120 desktop; 40+40 → 80 mobile. */
+  /** Cream sections — 120 desktop / 80 mobile. */
   sectionY: 'py-section-pad wf-sm:py-section-pad-sm',
   /** First cream block after a hero (hero already provides the gap). */
   sectionYFirst: 'pt-0 pb-section-pad wf-sm:pb-section-pad-sm',
@@ -261,10 +264,24 @@ export const space = {
   menuGrid: 'gap-x-menu-col gap-y-menu-row',
 } as const
 
+/**
+ * Bakehouse story / text+image: media 7 / copy 5, 3:2 image,
+ * copy is flex-col gap-24 with the CTA in .story-cta after the text group.
+ */
+export const story = {
+  grid: 'story-grid grid min-w-0 grid-cols-12 items-stretch gap-x-space-48 wf-md:gap-x-0 wf-md:gap-y-space-32',
+  media: 'story-media col-span-7 w-full overflow-hidden wf-md:col-span-12',
+  image: 'story-image block w-full object-cover aspect-[3/2]',
+  copy: 'story-copy col-span-5 flex flex-col items-start gap-space-24 justify-end pb-space-48 wf-md:col-span-12 wf-md:justify-start wf-md:pb-0',
+} as const
+
 /** Layout shell — Social's 1440 content container, 25px sides. */
 export const layout = {
   /** Page shell width only */
   max: 'max-w-[1440px]',
+
+  /** Header / drawer top bar: Bakehouse 1920 + 25px. Page sections stay `shell` (1440). */
+  navShell: 'relative w-full min-w-0 mx-auto px-[25px] max-w-[1920px]',
 
   /** Shell: centered 1440 + 25px side padding */
   shell: 'mx-auto w-full max-w-[1440px] px-[25px]',

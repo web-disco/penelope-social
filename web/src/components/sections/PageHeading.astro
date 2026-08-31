@@ -3,10 +3,11 @@
  * .page-heading — heading + intro paragraph, with two variants:
  *   default  — full width, left-aligned wrap
  *   is-center — capped at 900px and centred (bakery, merch)
- * Menu pages add `.page-heading-quick-links`, a row of anchor buttons.
+ * No category jump-link pills. Menu pages put title + lede on the photo.
  */
-import { container, heading, paragraph, btn } from '../../lib/ui'
+import { container, heading, paragraph } from '../../lib/ui'
 import LineText from '../LineText.astro'
+import { displayHeading, restaurantCopy } from '../../data/copy'
 
 interface Props {
   block: any
@@ -15,33 +16,23 @@ const { block } = Astro.props
 
 const isCenter = block.variant === 'center'
 const isLeft = block.align === 'left'
-const quickLinks: any[] = block.quickLinks ?? []
+const headingText = displayHeading(block.heading)
+const introText = restaurantCopy(block.intro)
 ---
 
 <div class:list={['page-heading mx-auto', isCenter && 'is-center max-w-[900px]']}>
   <div class={container}>
     <div class="page-heading-wrap mx-auto text-left">
       <h1 class={isLeft ? heading.left : heading.base}>
-        <LineText text={block.heading} />
+        <LineText text={headingText} />
       </h1>
       {
-        block.intro && (
+        introText && (
           <p class={isLeft ? paragraph.introLeft : paragraph.intro}>
-            <LineText text={block.intro} />
+            <LineText text={introText} />
           </p>
         )
       }
     </div>
-    {
-      quickLinks.length > 0 && (
-        <div class="page-heading-quick-links mt-10 flex flex-wrap gap-5 wf-xs:grid wf-xs:auto-cols-[1fr] wf-xs:grid-cols-2 wf-xs:grid-rows-[auto] wf-xs:gap-[10px]">
-          {quickLinks.map((link) => (
-            <a href={`#${link.anchor}`} class={btn.outline}>
-              {link.label}
-            </a>
-          ))}
-        </div>
-      )
-    }
   </div>
 </div>

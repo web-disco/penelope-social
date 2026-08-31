@@ -1,69 +1,138 @@
 ---
 /**
- * .menu-category sections — one per course, each an anchor target for the
- * quick-links row above.
- *
- * On Webflow these were CMS collection lists; Webflow rendered the empty state
- * (`.w-dyn-empty` "No items found.") for categories with no published items,
- * which /menus/lunch still shows. That is reproduced so the page matches.
+ * Menu category blocks. Bakehouse /menu type and spacing:
+ * 40px category title, one-line blurb, 60px grid, 24px item / price.
+ * Empty lists stay titled with small body copy. Unavailable categories hide.
  */
-import { container, pageSubHeading } from '../lib/ui'
-import LineText from './LineText.astro'
+import { layout, typeScale } from '../lib/ui'
+import { menuTitle, restaurantCopy } from '../data/copy'
 
 interface Props {
   categories: any[]
+  /** After a banner that already has mb-section-gap-y. False when another cream block sits above. */
+  flushTop?: boolean
 }
-const { categories } = Astro.props
+const { categories, flushTop = true } = Astro.props
+
+const isUnavailable = (item: any) => /unavailable/i.test(item?.title ?? '')
+
+const isPlaceholderCategory = (category: any) =>
+  /^(appetizers?|pasta)$/i.test(String(category.title ?? '').trim())
+
+const listableItems = (category: any) =>
+  (category.items ?? []).filter((item: any) => item?.title && !isUnavailable(item))
+
+/** Hide unavailable placeholders (catering Appetizers / Pasta). Empty lists stay. */
+const visibleCategories = (categories ?? []).filter((category: any) => {
+  const items = category.items ?? []
+  if (listableItems(category).length > 0) return true
+  if (items.some(isUnavailable) || isPlaceholderCategory(category)) return false
+  return true
+})
+
+function categoryBlurb(text?: string) {
+  let raw = restaurantCopy(text)
+  if (!raw) return ''
+  raw = raw
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/\s*\n+\s*/g, ' ')
+    .replace(/\s{2,}/g, ' ')
+    .trim()
+
+  if (/minimum of 6 sandwiches/i.test(raw) && /cut into 4/i.test(raw)) {
+    return 'Minimum of 6 sandwiches, cut into 4.'
+  }
+  if (/each salad serves/i.test(raw)) return 'Each salad serves 8 to 10.'
+  if (/penne or spaghetti/i.test(raw)) return 'Choice of penne or spaghetti.'
+  return raw
+}
+
+function splitTitleSize(title: string) {
+  const match = title.match(/^(.*?)(\s*\([^)]+\))$/)
+  if (!match) return { name: title, suffix: '' }
+  return { name: match[1], suffix: match[2] }
+}
+
+function isMultiPrice(price?: string) {
+  return Boolean(price && String(price).includes('/'))
+}
 ---
 
 {
-  categories.map((category) => (
-    <div id={category.anchor?.current} class="menu-category">
-      <div class={container}>
-        <h2 class={pageSubHeading}>{category.title}</h2>
-        {category.description && (
-          <p class="menu-description mt-[-30px] mb-10">
-            <LineText text={category.description} />
-          </p>
-        )}
-        <div class="menu-category-wrapper w-dyn-list">
-          {category.items?.length ? (
-            <div
-              role="list"
-              class="menu-category-list grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-[60px] wf-md:grid-cols-2 wf-md:gap-10 wf-sm:grid-cols-1 wf-xs:gap-5"
+  visibleCategories.map((category, index) => {
+    const blurb = categoryBlurb(category.description)
+    const items = (category.items ?? []).filter((item: any) => item?.title && !isUnavailable(item))
+    return (
+      <section
+        id={category.anchor?.current}
+        class:list={[
+          'menu-category',
+          index === 0
+            ? flushTop
+              ? 'mt-0'
+              : 'mt-section-pad wf-sm:mt-section-pad-sm'
+            : 'mt-section-gap-y mb-0 wf-sm:mt-section-gap-y-sm',
+        ]}
+      >
+        <div class={layout.shell}>
+          <h2 class:list={['page-sub-heading mt-0 mb-space-12 text-charcoal', typeScale.displayL]}>
+            {menuTitle(category.title)}
+          </h2>
+          {blurb && (
+            <p
+              class:list={[
+                'menu-description mb-space-24 text-charcoal whitespace-nowrap',
+                'wf-md:whitespace-normal',
+                typeScale.bodyLg,
+              ]}
             >
-              {category.items.map((item: any) => (
-                <div role="listitem" class="menu-category-item border-t-2 border-charcoal">
-                  <div class="menu-item-heading mt-5 flex items-start justify-between gap-10 pb-5 wf-sm:gap-5 wf-xs:gap-5">
-                    <div class="menu-item-title-wrap flex items-center justify-center gap-[10px]">
-                      <h3 class="menu-item-title mt-0 mb-0 font-body text-[24px] font-medium text-charcoal wf-xs:text-[18px]">
-                        {item.title}
-                      </h3>
+              {blurb}
+            </p>
+          )}
+          {items.length ? (
+            <div class="menu-category-wrapper w-dyn-list">
+              <div
+                role="list"
+                class="menu-category-list grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-[60px] wf-md:grid-cols-2 wf-md:gap-10 wf-sm:grid-cols-1 wf-xs:gap-5"
+              >
+                {items.map((item: any) => {
+                  const { name, suffix } = splitTitleSize(menuTitle(item.title))
+                  const multi = isMultiPrice(item.price)
+                  return (
+                    <div role="listitem" class="menu-category-item border-t-2 border-charcoal">
+                      <div class="menu-item-heading mt-5 mb-0 flex items-start justify-between pb-5 gap-space-16">
+                        <h3 class="menu-item-title mt-0 mb-0 text-[24px] font-medium leading-[120%] text-pretty text-charcoal">
+                          {name}
+                          {suffix && <span class="whitespace-nowrap">{suffix}</span>}
+                        </h3>
+                        {item.price && (
+                          <p
+                            class:list={[
+                              'heading-menu-price mt-0 mb-0 whitespace-nowrap text-charcoal',
+                              multi ? 'text-[16px] leading-[150%]' : 'text-[24px] leading-[120%]',
+                            ]}
+                          >
+                            {item.price}
+                          </p>
+                        )}
+                      </div>
+                      {item.description && (
+                        <div class="menu-item-description">
+                          <p class:list={['mb-0 text-charcoal', typeScale.body]}>{item.description}</p>
+                        </div>
+                      )}
                     </div>
-                    {/* A few items have no price. Webflow still emitted the
-                        heading and hid it with `.w-dyn-bind-empty`; omitting it
-                        renders identically. */}
-                    {item.price && (
-                      <h3 class="heading-menu-price mt-0 mb-0 font-body font-medium text-charcoal wf-xs:text-[18px]">
-                        {item.price}
-                      </h3>
-                    )}
-                  </div>
-                  {item.description && (
-                    <div class="menu-item-description">
-                      <p>{item.description}</p>
-                    </div>
-                  )}
-                </div>
-              ))}
+                  )
+                })}
+              </div>
             </div>
           ) : (
-            <div class="w-dyn-empty">
-              <div>No items found.</div>
-            </div>
+            <p class:list={['menu-empty mt-0 mb-0 text-charcoal', typeScale.body]}>
+              Nothing on this list right now.
+            </p>
           )}
         </div>
-      </div>
-    </div>
-  ))
+      </section>
+    )
+  })
 }

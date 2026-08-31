@@ -1,0 +1,79 @@
+---
+/**
+ * Sister Bakehouse page. Link out to penelopebakehouse.com.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import BannerHero from '../../components/sections/BannerHero.astro'
+import LocationDetails from '../../components/sections/LocationDetails.astro'
+import FaqSection from '../../components/sections/FaqSection.astro'
+import { scarboroughLocation, scarboroughLocationMeta } from '../../data/locations'
+import { scarboroughFaq } from '../../data/faq'
+import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../../lib/schema'
+import { BAKEHOUSE_SITE_URL } from '../../data/site'
+
+const bakehouse = scarboroughLocation.bakehouse
+
+const detailRows = [
+  {
+    label: 'Hours',
+    lines: scarboroughLocation.hours.flatMap((block) => block.lines),
+  },
+  {
+    label: 'Address',
+    lines: [`${bakehouse.street}, ${bakehouse.city}, ${bakehouse.region} ${bakehouse.postal}`],
+    href: bakehouse.mapUrl,
+    external: true,
+  },
+  {
+    label: 'Phone',
+    lines: [bakehouse.phone],
+    href: `tel:${bakehouse.phoneDigits}`,
+  },
+  {
+    label: 'Email',
+    lines: [bakehouse.email],
+    href: `mailto:${bakehouse.email}`,
+  },
+  {
+    label: 'Website',
+    lines: ['penelopebakehouse.com'],
+    href: BAKEHOUSE_SITE_URL,
+    external: true,
+  },
+]
+
+const graph = pageGraph([
+  restaurantSchema(),
+  bakehouseSchema(),
+  faqPageSchema(scarboroughFaq),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Locations', path: '/locations' },
+    { name: 'Scarborough', path: '/locations/scarborough' },
+  ]),
+])
+---
+
+<BaseLayout title={scarboroughLocationMeta.title} description={scarboroughLocationMeta.description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
+  <main>
+    <BannerHero
+      src={scarboroughLocation.hubImage.src}
+      alt={scarboroughLocation.hubImage.alt}
+      headingText={scarboroughLocation.hubTitle}
+      intro={scarboroughLocation.intro}
+      objectPosition={scarboroughLocation.hubImage.objectPosition}
+    />
+
+    <LocationDetails
+      headingText={scarboroughLocation.offeringsHeading}
+      intro={scarboroughLocation.offeringsBody}
+      ctas={scarboroughLocation.ctas}
+      rows={detailRows}
+      mapQuery={bakehouse.mapQuery}
+      mapTitle="Map to Penelope Bakehouse Scarborough"
+    />
+
+    <FaqSection items={scarboroughFaq} includeSchema={false} />
+  </main>
+</BaseLayout>

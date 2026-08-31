@@ -45,6 +45,43 @@ export const text = (el) =>
     .replace(/\s+/g, ' ')
     .trim()
 
+/**
+ * Title Case for scraped menu category / item / mosaic card names.
+ * Keep NY, DOP, 2oz, 1pc. Do not run this on descriptions.
+ */
+export function titleCaseName(value) {
+  const raw = (value ?? '').trim()
+  if (!raw) return ''
+  const small = new Set(['a', 'an', 'and', 'as', 'at', 'but', 'by', 'for', 'in', 'nor', 'of', 'on', 'or', 'the', 'to', 'vs', 'with'])
+  const preserve = new Set(['ABV', 'ARG', 'CAN', 'DOP', 'EVOO', 'ITA', 'NZ', 'NY', 'UK', 'USA'])
+  const words = raw.split(/(\s+)/)
+  const countable = words.filter((w) => w.trim())
+  let i = 0
+  return words
+    .map((chunk) => {
+      if (!chunk.trim()) return chunk
+      const first = i === 0
+      const last = i === countable.length - 1
+      i += 1
+      return chunk
+        .split(/(-)/)
+        .map((part) => {
+          if (part === '-') return part
+          const m = part.match(/^([^\p{L}\p{N}']*)([\p{L}\p{N}']+)([^\p{L}\p{N}']*)$/u)
+          if (!m) return part
+          const [, lead, core, trail] = m
+          if (preserve.has(core) || /^[A-Z]{2,5}$/.test(core)) return lead + core + trail
+          if (/^(oz|ml|pc|pcs)$/i.test(core)) return lead + core.toLowerCase() + trail
+          if (/\d/.test(core)) return lead + core + trail
+          const lower = core.toLowerCase()
+          if (!first && !last && small.has(lower)) return lead + lower + trail
+          return lead + core.charAt(0).toUpperCase() + core.slice(1).toLowerCase() + trail
+        })
+        .join('')
+    })
+    .join('')
+}
+
 /** Raw walk — keeps `<br>` as `\n` without normalising, so nesting composes. */
 function rawTextWithBreaks(el) {
   let out = ''

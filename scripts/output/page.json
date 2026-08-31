@@ -9,8 +9,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Penelope Social Menu Vaughan | Lunch, Dinner & Catering",
-      "metaDescription": "Explore Penelope Social's menu in Vaughan, featuring artisanal pizzas, sandwiches, pastas, and cocktails. Perfect for lunch, dinner, and catering events.",
+      "metaTitle": "Menus | Lunch, dinner, bar, and catering | Penelope Social",
+      "metaDescription": "Lunch, dinner, bar, and catering menus at Penelope Social in Woodbridge. Focaccia sandwiches, pizza, handhelds, plus cocktails.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a8dfb734293806a5b_menu-og-image.png",
@@ -25,25 +25,25 @@
           "_type": "image",
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe7a6af381401438e4b5d_menus.avif",
           "alt": "Image of Lunch menu platter"
-        }
-      },
-      {
-        "_type": "pageHeading",
-        "_key": "heading",
-        "variant": "default",
-        "align": "center",
-        "heading": "Penelope Social\nMenus Vaughan",
-        "intro": "From savory focaccia sandwiches at lunch to refreshing cocktails after work and gut-friendly pizzas for dinner, Penelope offers an unforgettable dining experience at every moment of the day.",
-        "quickLinks": []
+        },
+        "heading": "On the menu",
+        "intro": "Lunch, dinner, drinks, plus catering."
       },
       {
         "_type": "menuCards",
         "_key": "menus",
+        "heading": "On the menu",
+        "intro": "Focaccia sandwiches, pizza, shareable plates, and cocktails, plus trays when you want them.",
+        "cta": {
+          "_type": "link",
+          "label": "Explore our menus",
+          "url": "/menus"
+        },
         "cards": [
           {
             "_type": "menuCard",
             "_key": "card0",
-            "title": "lunch",
+            "title": "Lunch",
             "url": "/menus/lunch",
             "image": {
               "_type": "image",
@@ -56,20 +56,20 @@
           {
             "_type": "menuCard",
             "_key": "card1",
-            "title": "bar",
+            "title": "Bar",
             "url": "/menus/bar",
             "image": {
               "_type": "image",
               "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif",
               "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif 1080w",
               "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
-              "alt": "Crafted Cocktail"
+              "alt": "Cocktails at the bar"
             }
           },
           {
             "_type": "menuCard",
             "_key": "card2",
-            "title": "dinner",
+            "title": "Dinner",
             "url": "/menus/dinner",
             "image": {
               "_type": "image",
@@ -106,8 +106,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "About Penelope Social Vaughan | Neighborhood Gem for Food & Drinks",
-      "metaDescription": "Learn about Penelope Social in Vaughan, a neighborhood gem for fresh sourdough, comfort food, and crafted cocktails. Great flavors, good times, and memories.",
+      "metaTitle": "About Penelope Social | Woodbridge restaurant",
+      "metaDescription": "Three brothers, a Woodbridge restaurant, and bread from Penelope Bakehouse in Scarborough. The family story behind cafe, kitchen, and bar.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
@@ -127,8 +127,8 @@
       {
         "_type": "introSection",
         "_key": "intro",
-        "heading": "About\nPenelope Social",
-        "intro": "Penelope is a neighborhood gem in the heart of Vaughan. Born from the passion of three brothers who believe in the power of great food, refreshing drinks, and bringing people together. With a focus on fresh sourdough, comfort food, and carefully crafted cocktails, we’ve created a space where every detail feels like home. It’s all about great flavors, good times, and making memories with the people you care about.",
+        "heading": "About Penelope Social",
+        "intro": "This is a Woodbridge cafe and bar. Lunch and dinner, plus drinks on sourdough from Penelope Bakehouse.",
         "ctas": []
       },
       {
@@ -173,167 +173,6 @@
     ]
   },
   {
-    "_id": "page-sourdough-bakery",
-    "_type": "page",
-    "title": "Sourdough Bakery",
-    "slug": {
-      "_type": "slug",
-      "current": "sourdough-bakery"
-    },
-    "seo": {
-      "_type": "seo",
-      "metaTitle": "Best Sourdough Bakery in Vaughan | Penelope Social",
-      "metaDescription": "\"Discover Vaughan's finest sourdough bakery. Enjoy fresh-baked sourdough, focaccia, and artisanal treats made daily with premium ingredients.",
-      "ogImage": {
-        "_type": "image",
-        "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3989ef36fc1365b4e3_bread-og-image.png",
-        "alt": ""
-      }
-    },
-    "sections": [
-      {
-        "_type": "pageHero",
-        "_key": "banner",
-        "image": {
-          "_type": "image",
-          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe4fbd904d89c7a43b7f4_bakery-banner.avif",
-          "alt": "Image of Sourdough Bread"
-        }
-      },
-      {
-        "_type": "pageHeading",
-        "_key": "heading",
-        "variant": "center",
-        "align": "center",
-        "heading": "sourdough bakery\nin vaughan",
-        "intro": "\"On May 17, 2017 I decided to make a big change in my life. I left my career in the construction industry as a project manager and engineer to follow my passion; food.\" - Vince Stalteri.",
-        "quickLinks": []
-      },
-      {
-        "_type": "storySection",
-        "_key": "story0",
-        "galleryId": "bakery",
-        "body": [
-          {
-            "_type": "block",
-            "_key": "p0",
-            "style": "normal",
-            "markDefs": [],
-            "children": [
-              {
-                "_type": "span",
-                "_key": "s0",
-                "text": "After years of success in a field that provided a good salary, stability, and work-life balance, I realized something was missing. Despite solving problems and advancing in my role, I felt unfulfilled. I spent time reflecting on what truly inspired me, and after exploring several alternatives within construction, I discovered my love for cooking. The decision to leave behind a well-established career for something as uncertain as bread-making wasn’t easy, and I kept it to myself, knowing it would be hard for others to understand. But I knew it was the right path for me.",
-                "marks": []
-              }
-            ]
-          }
-        ],
-        "video": {
-          "_type": "storyVideo",
-          "mp4Url": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc19b8d4f507a7318ec10_PENNY%20BREAD-transcode.mp4",
-          "webmUrl": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc19b8d4f507a7318ec10_PENNY%20BREAD-transcode.webm"
-        }
-      },
-      {
-        "_type": "storySection",
-        "_key": "story1",
-        "galleryId": "bakery",
-        "body": [
-          {
-            "_type": "block",
-            "_key": "p0",
-            "style": "normal",
-            "markDefs": [],
-            "children": [
-              {
-                "_type": "span",
-                "_key": "s0",
-                "text": "On January 1, 2018, I set out to learn sourdough bread-making, a hobby that quickly became an obsession. The blend of art and science in bread-making fascinated me, revealing the complexities of chemistry, biology, and physics at play. In February, I created my first starter, Anastasia, but after neglecting it for three weeks while opening my restaurant, it nearly died. Rather than discard it, I revived it, and when it bounced back, I renamed it Penelope. For the past five years, Penelope has been my guide, teaching me resilience and the value of persistence.",
-                "marks": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "_type": "storySection",
-        "_key": "story2",
-        "galleryId": "bakery",
-        "gallery": [
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb2137a2a75edea0ec_bread-1.avif",
-            "alt": "Sourdough Bread"
-          },
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bcb06174393143f07c_bread-2.avif",
-            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bcb06174393143f07c_bread-2-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bcb06174393143f07c_bread-2.avif 1080w",
-            "_migrationSizes": "100vw",
-            "alt": "Sourdough Bread"
-          },
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba90442973261207a0_bread-3.avif",
-            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba90442973261207a0_bread-3-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba90442973261207a0_bread-3.avif 1080w",
-            "_migrationSizes": "100vw",
-            "alt": "Sourdough Bread"
-          }
-        ]
-      },
-      {
-        "_type": "storySection",
-        "_key": "story3",
-        "galleryId": "bakery",
-        "body": [
-          {
-            "_type": "block",
-            "_key": "p0",
-            "style": "normal",
-            "markDefs": [],
-            "children": [
-              {
-                "_type": "span",
-                "_key": "s0",
-                "text": "By 2024, Penelope has become the foundation for all our doughs at Penelope Social, where we offer a variety of sourdough-based breads and pizzas. We constantly experiment with new recipes, drawing inspiration from Italy and global bread traditions. Our goal is to change how people view bread—not as an unhealthy carb, but as a gut-friendly, nourishing food that provides energy without the bloat. This mission has become my life’s passion, and I’m dedicated to sharing the benefits of our breads with as many people as possible.",
-                "marks": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "_type": "storySection",
-        "_key": "story4",
-        "galleryId": "bakery",
-        "gallery": [
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69824e_bread-4.avif",
-            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69824e_bread-4-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69824e_bread-4.avif 1080w",
-            "_migrationSizes": "100vw",
-            "alt": "Sourdough Bread"
-          },
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb91ec686f6576eef0_bread-5.avif",
-            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb91ec686f6576eef0_bread-5-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5bb91ec686f6576eef0_bread-5.avif 1080w",
-            "_migrationSizes": "100vw",
-            "alt": "Sourdough Bread"
-          },
-          {
-            "_type": "image",
-            "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69820b_bread-6.avif",
-            "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69820b_bread-6-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc5ba0bc940d64a69820b_bread-6.avif 1080w",
-            "_migrationSizes": "100vw",
-            "alt": "Sourdough Bread"
-          }
-        ]
-      }
-    ]
-  },
-  {
     "_id": "page-catering-events",
     "_type": "page",
     "title": "Catering & Events",
@@ -343,8 +182,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Event Space Vaughan | Penelope Social",
-      "metaDescription": "Looking for an event space in Vaughan? Host your celebration, corporate gathering, or special occasion at Penelope Social with exceptional food and drinks.",
+      "metaTitle": "Catering and events in Woodbridge | Penelope Social",
+      "metaDescription": "Plan catering or a private event at Penelope Social, 125 Hawkview Blvd, Woodbridge. Trays to-go or a night in the restaurant. 24 hours' notice for catering.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
@@ -358,21 +197,23 @@
         "image": {
           "_type": "image",
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe31b6e85dcbc330d0069_penelope-event.avif",
-          "alt": "Image of Lunch menu platter"
-        }
+          "alt": "A private event at Penelope Social"
+        },
+        "heading": "Catering and events",
+        "intro": "Trays to-go, or a night in the room."
       },
       {
         "_type": "introSection",
         "_key": "intro",
-        "heading": "Event space vaughan",
-        "intro": "Celebrate your special moments at Penelope Social in Vaughan. From intimate gatherings to corporate events, we offer a warm atmosphere, exceptional dishes, and handcrafted cocktails. Our team will collaborate with you to design a personalized experience, ensuring every detail is exactly what you envisioned.",
+        "heading": "",
+        "intro": "Food, drinks, and a table we will set. Prefer 24 hours\u2019 notice for catering.",
         "ctas": []
       },
       {
         "_type": "contactFormSection",
         "_key": "form",
         "variant": "events",
-        "heading": "plan your event",
+        "heading": "Plan your event",
         "intro": "Submit the form below and someone from our team will reach back out to you within 24 to 48 hours.",
         "submitLabel": "Submit",
         "successMessage": "Thank you! Your submission has been received!",
@@ -449,10 +290,10 @@
             "name": "Date",
             "id": "Date",
             "placeholder": "Date",
-            "type": "text",
+            "type": "date",
             "required": true,
             "fullWidth": true,
-            "note": "We need 24 hrs notice for catering orders. *"
+            "note": "We need at least 24 hours' notice for catering orders."
           },
           {
             "_type": "formField",
@@ -483,8 +324,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Contact Penelope Social Vaughan | Get in Touch Today",
-      "metaDescription": "Reach out to Penelope Social in Vaughan for inquiries, reservations, or event bookings. We're here to help with all your needs. Contact us today!",
+      "metaTitle": "Contact Penelope Social in Woodbridge",
+      "metaDescription": "Call (905) 607-0606, email info@penelopesocial.com, or write us at 125 Hawkview Blvd, Woodbridge. Reservations and catering, plus general questions.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
@@ -499,13 +340,15 @@
           "_type": "image",
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bffc95f3addba8463d026_lunch-menu-banner.avif",
           "alt": "Image of Lunch menu platter"
-        }
+        },
+        "heading": "Get in touch",
+        "intro": "Questions, a table, or an event."
       },
       {
         "_type": "introSection",
         "_key": "intro",
-        "heading": "Get in Touch with\nPenelope Social Vaughan",
-        "intro": "We’d love to hear from you! Whether you have questions, want to book a table, or are planning your next event, the Penelope team is here to help. Reach out via phone, email, or visit us in Vaughan to experience our warm hospitality, artisanal dishes, and creative cocktails firsthand.\n\nLet’s connect and make your Penelope experience unforgettable.",
+        "heading": "",
+        "intro": "",
         "ctas": []
       },
       {
@@ -587,8 +430,8 @@
     },
     "seo": {
       "_type": "seo",
-      "metaTitle": "Penelope Social Merch Vaughan | Shop Exclusive Apparel",
-      "metaDescription": "Browse Penelope Social's exclusive merch in Vaughan. Shop unique apparel and accessories to take a piece of the experience home.",
+      "metaTitle": "Merch | Penelope Social",
+      "metaDescription": "Hoodies, tees, totes from Penelope Social, the Woodbridge cafe and bar.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
@@ -603,15 +446,17 @@
           "_type": "image",
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673fe645dd6506bf32e0602c_penelope-merch-2.avif",
           "alt": "Photo of Penlope Merch"
-        }
+        },
+        "heading": "Merch",
+        "intro": "Hoodies, tees, totes. Pick them up in store."
       },
       {
         "_type": "pageHeading",
         "_key": "heading",
         "variant": "center",
         "align": "center",
-        "heading": "Penelope Merch",
-        "intro": "Browse Penelope Social's exclusive collection of tees, hoodies, and totes. Featuring our bold logo, these items are designed for both comfort and style, available in multiple colours.",
+        "heading": "",
+        "intro": "",
         "quickLinks": []
       },
       {

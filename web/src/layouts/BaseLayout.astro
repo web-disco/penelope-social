@@ -4,6 +4,8 @@ import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
 import { getSiteSettings } from '../lib/data'
 import { imageUrl } from '../lib/image'
+import { GA_MEASUREMENT_ID_DEFAULT } from '../lib/analytics'
+import { restaurantCopy } from '../data/copy'
 
 interface Props {
   title: string
@@ -29,13 +31,14 @@ const {
 const settings = await getSiteSettings()
 const seo = settings.seo ?? {}
 
-const metaDescription = description ?? seo.metaDescription ?? ''
+const metaDescription =
+  description ?? restaurantCopy(seo.metaDescription) ?? ''
 const ogImageUrl = imageUrl(ogImage) || imageUrl(seo.ogImage)
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '')
 
-// Loaded once per page, not per form: two forms on a page would otherwise pull
-// the script twice. Only when the client's own sitekey exists — see Turnstile.astro.
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
+const gaMeasurementId =
+  (import.meta.env.PUBLIC_GA_MEASUREMENT_ID as string | undefined)?.trim() || GA_MEASUREMENT_ID_DEFAULT
 ---
 
 <!doctype html>
@@ -48,6 +51,7 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
     {metaDescription && <meta property="og:description" content={metaDescription} />}
     {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
     <meta name="twitter:title" content={title} />
     {metaDescription && <meta name="twitter:description" content={metaDescription} />}
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
@@ -56,14 +60,163 @@ const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
     {noIndex && <meta name="robots" content="noindex" />}
     <link rel="preload" href="/fonts/SweetSansPro-Medium.otf" as="font" type="font/otf" crossorigin />
     <link rel="preload" href="/fonts/SweetSansPro-Regular.otf" as="font" type="font/otf" crossorigin />
-    <link rel="shortcut icon" href="/favicon.png" type="image/x-icon" />
-    <link rel="apple-touch-icon" href="/webclip.png" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     {
       turnstileSiteKey && (
         <script is:inline async defer src="https://challenges.cloudflare.com/turnstile/v0/api.js" />
       )
     }
+    <slot name="head" />
+    {/*
+      Official gtag snippet, hostname-gated. gtag.js loads after `load` so it
+      does not compete with LCP. Click capture is inline so target=_blank
+      Toast / Maps links still beacon.
+    */}
+    <script is:inline define:vars={{ gaMeasurementId }}>
+      ;(function () {
+        var host = location.hostname.toLowerCase()
+        var isProd = host === 'penelopesocial.com' || host === 'www.penelopesocial.com'
+        var placements = { hero: 1, nav: 1, menu: 1, footer: 1, drawer: 1 }
+
+        if (isProd) {
+          window.dataLayer = window.dataLayer || []
+          function gtag() {
+            dataLayer.push(arguments)
+          }
+          window.gtag = gtag
+          gtag('js', new Date())
+          gtag('config', gaMeasurementId)
+
+          function loadGtag() {
+            if (window.__pbGtagRequested) return
+            window.__pbGtagRequested = true
+            var gtagScript = document.createElement('script')
+            gtagScript.async = true
+            gtagScript.src =
+              'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(gaMeasurementId)
+            document.head.appendChild(gtagScript)
+          }
+
+          if (document.readyState === 'complete') loadGtag()
+          else window.addEventListener('load', loadGtag)
+        }
+
+        function send(name, params) {
+          if (!isProd || typeof window.gtag !== 'function') return
+          params = params || {}
+          params.transport_type = 'beacon'
+          window.gtag('event', name, params)
+        }
+
+        function hrefOf(anchor) {
+          return anchor.getAttribute('href') || ''
+        }
+
+        function placementOf(anchor) {
+          var explicit = anchor.getAttribute('data-ga-placement')
+          if (explicit && placements[explicit]) return explicit
+          if (anchor.closest('.menu-drawer')) return 'drawer'
+          if (anchor.closest('.navbar, [data-navbar]')) return 'nav'
+          if (anchor.closest('.section-home-hero, .home-hero')) return 'hero'
+          if (anchor.closest('.footer')) return 'footer'
+          var path = location.pathname.replace(/\/$/, '') || '/'
+          if (path === '/menus' || path.indexOf('/menus/') === 0) return 'menu'
+          return ''
+        }
+
+        function isOrderHref(href) {
+          return !!href && /order\.toasttab\.com\/online\/penelope-social/i.test(href)
+        }
+
+        function isGiftHref(href) {
+          return !!href && /order\.toasttab\.com\/egiftcards\/penelope-social/i.test(href)
+        }
+
+        function isReservationHref(href) {
+          if (!href) return false
+          if (href === '/reservations' || href.slice(-13) === '/reservations') return true
+          return /tables\.toasttab\.com\/restaurants\/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/i.test(href)
+        }
+
+        function isCateringHref(href) {
+          if (!href) return false
+          var path = href.replace(/^https?:\/\/[^/]+/i, '').replace(/\/$/, '') || '/'
+          return path === '/catering-events'
+        }
+
+        function isMerchHref(href) {
+          if (!href) return false
+          var path = href.replace(/^https?:\/\/[^/]+/i, '').replace(/\/$/, '') || '/'
+          return path === '/merchandise' || path.indexOf('/merchandise/') === 0
+        }
+
+        function isTelHref(href) {
+          if (!href || href.toLowerCase().indexOf('tel:') !== 0) return false
+          var digits = href.replace(/\D/g, '')
+          return digits === '9056070606' || digits === '19056070606'
+        }
+
+        function isMapsHref(href) {
+          try {
+            var url = new URL(href, 'https://penelopesocial.com')
+            var h = url.hostname.toLowerCase()
+            if (h === 'maps.apple.com') return true
+            if (h === 'maps.google.com' || h === 'www.google.com' || h === 'google.com') {
+              return (
+                url.pathname.indexOf('/maps') !== -1 ||
+                url.search.indexOf('destination=') !== -1 ||
+                url.search.indexOf('api=1') !== -1
+              )
+            }
+            return false
+          } catch (err) {
+            return false
+          }
+        }
+
+        function eventFor(anchor) {
+          var named = anchor.getAttribute('data-ga-event')
+          var href = hrefOf(anchor)
+          var params = {}
+          if (named === 'order_click' || (!named && isOrderHref(href))) {
+            var placement = placementOf(anchor)
+            if (placement) params.placement = placement
+            return { name: 'order_click', params: params }
+          }
+          if (named) return { name: named, params: params }
+          if (isGiftHref(href)) return { name: 'gift_card_click', params: params }
+          if (isReservationHref(href)) return { name: 'reservation_click', params: params }
+          if (isCateringHref(href)) return { name: 'catering_click', params: params }
+          if (isMerchHref(href)) return { name: 'merch_click', params: params }
+          if (isTelHref(href)) return { name: 'click_to_call', params: params }
+          if (anchor.classList.contains('is-google-review')) return null
+          if (/google reviews/i.test(anchor.textContent || '')) return null
+          if (isMapsHref(href)) return { name: 'get_directions', params: params }
+          return null
+        }
+
+        document.addEventListener(
+          'click',
+          function (event) {
+            var target = event.target
+            if (target && target.nodeType === 3) target = target.parentElement
+            if (!target || !target.closest) return
+            var anchor = target.closest('a')
+            if (!anchor) return
+            var bound = eventFor(anchor)
+            if (bound) send(bound.name, bound.params)
+          },
+          true,
+        )
+        window.__pbGaBound = true
+      })()
+    </script>
   </head>
 
   <body>

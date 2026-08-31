@@ -21,6 +21,7 @@ import {
   image,
   toPortableText,
   seoFrom,
+  titleCaseName,
 } from './lib/scrape.js'
 
 const DRY = process.argv.includes('--dry')
@@ -297,7 +298,7 @@ function menuCardsFrom(doc, key) {
     cards: [...section.querySelectorAll('.menu')].map((card, index) => ({
       _type: 'menuCard',
       _key: `card${index}`,
-      title: text(card.querySelector('.menu-title')),
+      title: titleCaseName(text(card.querySelector('.menu-title'))),
       url: card.querySelector('.menu-link').getAttribute('href'),
       image: image(card.querySelector('.home-menu-image')),
     })),
@@ -541,7 +542,7 @@ async function buildMenu(slug) {
     const items = [...section.querySelectorAll('.menu-category-item')].map((item, itemIndex) => ({
       _type: 'menuItem',
       _key: `item${itemIndex}`,
-      title: text(item.querySelector('.menu-item-title')),
+      title: titleCaseName(text(item.querySelector('.menu-item-title'))),
       price: text(item.querySelector('.heading-menu-price')),
       description: text(item.querySelector('.menu-item-description')),
     }))
@@ -555,7 +556,7 @@ async function buildMenu(slug) {
     return {
       _type: 'menuCategory',
       _key: `category${index}`,
-      title: text(section.querySelector('.page-sub-heading')),
+      title: titleCaseName(text(section.querySelector('.page-sub-heading'))),
       anchor: { _type: 'slug', current: anchorId },
       description: textWithBreaks(section.querySelector('.menu-description')) || undefined,
       items,

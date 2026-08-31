@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import BannerHero from '../../components/sections/BannerHero.astro'
+import { btn, containerNoTop, heading, radius, space, typeScale } from '../../lib/ui'
+import {
+  locationsHub,
+  locationsHubMeta,
+  scarboroughLocation,
+  woodbridgeLocation,
+} from '../../data/locations'
+import { bakehouseSchema, breadcrumbSchema, pageGraph, restaurantSchema } from '../../lib/schema'
+import { isMapsDirectionsHref, isSocialTelHref } from '../../lib/analytics'
+
+const hubs = [woodbridgeLocation, scarboroughLocation] as const
+const contactLink =
+  'text-charcoal font-body no-underline transition-opacity duration-[350ms] hover:opacity-70'
+
+const graph = pageGraph([
+  restaurantSchema(),
+  bakehouseSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Locations', path: '/locations' },
+  ]),
+])
+---
+
+<BaseLayout title={locationsHubMeta.title} description={locationsHubMeta.description} solidNav={false}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
+  <main>
+    <BannerHero
+      src={woodbridgeLocation.hubImage.src}
+      alt="Penelope Social in Woodbridge and Penelope Bakehouse in Scarborough"
+      headingText={locationsHub.heading}
+      intro={locationsHub.intro}
+      objectPosition="center 40%"
+    />
+
+    <section class="locations-hub">
+      <div class={containerNoTop}>
+        <div class:list={['grid grid-cols-2 wf-md:grid-cols-1', space.sectionGap]}>
+          {
+            hubs.map((location) => (
+              <div class:list={['location-block flex flex-col', radius.none]}>
+                <div class={`overflow-hidden ${radius.none}`}>
+                  <img
+                    src={location.hubImage.src}
+                    alt={location.hubImage.alt}
+                    width="800"
+                    height="600"
+                    loading="lazy"
+                    class="aspect-[4/3] w-full object-cover"
+                    style={
+                      location.hubImage.objectPosition
+                        ? `object-position: ${location.hubImage.objectPosition};`
+                        : undefined
+                    }
+                  />
+                </div>
+                <h2 class:list={[heading.medium, 'mt-space-24 text-left']}>{location.hubTitle}</h2>
+                <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.intro]}>
+                  {location.hubBlurb}
+                </p>
+                <div class="location-nap mt-space-16 flex flex-col gap-space-4 text-charcoal font-body">
+                  <p class="location-nap-address mb-0">
+                    <a
+                      href={location.hubContact.address.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      data-ga-event={
+                        isMapsDirectionsHref(location.hubContact.address.href)
+                          ? 'get_directions'
+                          : undefined
+                      }
+                      class={contactLink}
+                    >
+                      {location.hubContact.address.label}
+                    </a>
+                  </p>
+                  <p class="location-nap-contact mb-0">
+                    <a
+                      href={location.hubContact.phone.href}
+                      data-ga-event={
+                        isSocialTelHref(location.hubContact.phone.href) ? 'click_to_call' : undefined
+                      }
+                      class={contactLink}
+                    >
+                      {location.hubContact.phone.label}
+                    </a>
+                    <span class="location-nap-sep" aria-hidden="true"> | </span>
+                    <a href={location.hubContact.email.href} class={contactLink}>
+                      {location.hubContact.email.label}
+                    </a>
+                  </p>
+                </div>
+                <a href={location.hubCta.url} class:list={[btn.primary, 'mt-space-32 self-start']}>
+                  <span>{location.hubCta.label}</span>
+                </a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,104 @@
+---
+/**
+ * About — Bakehouse structure (hero, copy, timeline, video, FAQ).
+ * Restaurant-first family story. /sourdough-bakery is a separate
+ * Social vs Bakehouse page — do not 301 that URL here.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro'
+import BannerHero from '../components/sections/BannerHero.astro'
+import StepTimeline from '../components/sections/StepTimeline.astro'
+import FaqSection from '../components/sections/FaqSection.astro'
+import { layout, space, typeScale, heading, btn } from '../lib/ui'
+import { aboutMeta, aboutPage } from '../data/about'
+import { aboutFaq } from '../data/faq'
+import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
+
+const video = aboutPage.videoTeaser
+const cta = video.ctas[0]
+
+const graph = pageGraph([
+  restaurantSchema(),
+  bakehouseSchema(),
+  faqPageSchema(aboutFaq),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+  ]),
+])
+---
+
+<BaseLayout title={aboutMeta.title} description={aboutMeta.description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
+  <main>
+    <BannerHero
+      src={aboutPage.banner.src}
+      alt={aboutPage.banner.alt}
+      headingText={aboutPage.heading}
+      intro={aboutPage.subheading}
+      objectPosition="center 50%"
+    />
+
+    <section class="about-content">
+      <div class:list={[layout.shell, 'pt-0 pb-0', 'flex flex-col gap-space-24']}>
+        {
+          aboutPage.paragraphs.map((p) => (
+            <p class={`mx-auto mb-0 max-w-[720px] text-center text-charcoal ${typeScale.bodyLg}`}>{p}</p>
+          ))
+        }
+      </div>
+    </section>
+
+    <StepTimeline
+      headingText={aboutPage.timeline.heading}
+      steps={aboutPage.timeline.steps}
+      gapTop
+    />
+
+    <section class="section-story">
+      <div class:list={[layout.shell, space.sectionY]}>
+        <div
+          class="story-grid mx-auto flex w-full max-w-[800px] flex-row items-center gap-x-space-32 wf-md:flex-col wf-md:gap-x-0 wf-md:gap-y-space-24"
+        >
+          <div class="story-media overflow-hidden rounded-none w-full max-w-[360px] shrink-0 wf-md:mx-auto">
+            <video
+              class="story-image story-video block h-full w-full object-cover"
+              src={video.video.src}
+              controls
+              playsinline
+              muted
+              loop
+              autoplay
+              preload="metadata"
+              aria-label={video.image.alt}
+              style="aspect-ratio: 9/16; object-position: center center;"
+            ></video>
+          </div>
+          <div class="story-copy flex min-w-0 flex-1 flex-col items-start justify-center gap-space-24 pb-0">
+            <div>
+              <h2 class:list={[heading.medium, 'text-left my-0']}>{video.heading}</h2>
+              <p class:list={['mt-space-16 mb-0 text-charcoal', layout.measureNarrow, typeScale.bodyLg]}>
+                {video.body}
+              </p>
+            </div>
+            {
+              cta && (
+                <div class="story-cta">
+                  <a
+                    href={cta.url}
+                    target={cta.newTab ? '_blank' : undefined}
+                    rel={cta.newTab ? 'noopener noreferrer' : undefined}
+                    class:list={['inline-block', btn.primary]}
+                  >
+                    <span>{cta.label}</span>
+                  </a>
+                </div>
+              )
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <FaqSection headingText="FAQs" items={aboutFaq} includeSchema={false} />
+  </main>
+</BaseLayout>

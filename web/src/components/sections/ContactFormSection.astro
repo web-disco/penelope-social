@@ -9,7 +9,7 @@
  * Submission now goes to the Cloudflare Worker (`data-endpoint`), which
  * verifies Turnstile and emails the submission on — see web/worker/index.ts.
  */
-import { container, containerHalfTop, pageSubHeadingSmall, formField, formFieldTextarea, btn } from '../../lib/ui'
+import { containerNoTop, pageSubHeadingSmall, formField, formFieldTextarea, btn } from '../../lib/ui'
 import Turnstile from '../Turnstile.astro'
 
 interface Props {
@@ -22,10 +22,10 @@ const fields: any[] = block.fields ?? []
 ---
 
 <div class="section-events-form">
-  <div class={isEvents ? containerHalfTop : container}>
+  <div class={containerNoTop}>
     <div class="form-block w-form mx-auto mb-0 max-w-[900px] text-center">
-      <h2 class={pageSubHeadingSmall}>{block.heading}</h2>
-      <p>{block.intro}</p>
+      {block.heading && <h2 class={pageSubHeadingSmall}>{block.heading}</h2>}
+      {block.intro && <p class="mb-0 mt-space-16 text-charcoal font-body text-[18px] leading-[150%] wf-xs:text-[16px]">{block.intro}</p>}
 
       <form
         id={isEvents ? 'events-form' : 'contact-form'}
@@ -65,10 +65,11 @@ const fields: any[] = block.fields ?? []
               ) : (
                 <input
                   class={`${formField} w-input`}
-                  maxlength="256"
+                  maxlength={field.type === 'date' || field.name === 'Date' ? undefined : '256'}
                   name={field.name}
-                  placeholder={field.placeholder}
-                  type={field.type ?? 'text'}
+                  placeholder={field.type === 'date' || field.name === 'Date' ? undefined : field.placeholder}
+                  aria-label={field.placeholder}
+                  type={field.type === 'date' || field.name === 'Date' ? 'date' : (field.type ?? 'text')}
                   id={field.id}
                   required={field.required}
                 />
@@ -90,14 +91,32 @@ const fields: any[] = block.fields ?? []
           child (the usual case, widget hidden) this renders identically to the
           row it replaces: horizontally centred, bottom-aligned.
         */}
-        <div class="form-btn-wrap col-span-2 flex flex-col items-center justify-end">
+        {
+          isEvents && (
+            <label class="form-consent col-span-2 mt-2 flex cursor-pointer items-start gap-2 text-left">
+              <input
+                type="checkbox"
+                name="catering-notice"
+                value="yes"
+                required
+                class="consent-checkbox consent-checkbox--on-light"
+              />
+              <span class="font-body text-[14px] font-normal leading-[18px] text-charcoal">
+                I understand catering orders need at least 24 hours' notice.
+              </span>
+            </label>
+          )
+        }
+
+        <div class="form-btn-wrap col-span-2 mt-space-24 flex flex-col items-center justify-end">
           <Turnstile class="w-full text-center [&.is-visible]:mb-[20px]" theme="light" />
-          <input
+          <button
             type="submit"
             data-wait="Please wait..."
             class={`${btn.primary} w-button cursor-pointer rounded-none`}
-            value={block.submitLabel ?? 'Submit'}
-          />
+          >
+            <span>{block.submitLabel ?? 'Submit'}</span>
+          </button>
         </div>
       </form>
 

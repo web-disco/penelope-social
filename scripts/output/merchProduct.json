@@ -9,7 +9,7 @@
     },
     "order": 0,
     "price": "10",
-    "description": "This grey tote bag combines style and function, featuring Penelope’s iconic bicycle and bread graphic on one side and the Penelope Social logo on the other. Perfectly sized for daily essentials or market runs, it’s durable, lightweight, and versatile—making it an eco-friendly companion for any occasion.",
+    "description": "This grey tote bag combines style and function, featuring Penelope’s iconic bicycle and bread graphic on one side and the Penelope Social logo on the other. Perfectly sized for daily essentials or market runs, it’s durable, lightweight, and versatile, making it an eco-friendly companion for any occasion.",
     "banner": {
       "_type": "image",
       "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
@@ -36,7 +36,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "Tote Bag | Penelope Social",
-      "metaDescription": "This grey tote bag combines style and function, featuring Penelope’s iconic bicycle and bread graphic on one side and the Penelope Social logo on the other. Perfectly sized for daily essentials or market runs, it’s durable, lightweight, and versatile—making it an eco-friendly companion for any occasion."
+      "metaDescription": "This grey tote bag combines style and function, featuring Penelope’s iconic bicycle and bread graphic on one side and the Penelope Social logo on the other. Perfectly sized for daily essentials or market runs, it’s durable, lightweight, and versatile, making it an eco-friendly companion for any occasion."
     }
   },
   {
@@ -49,7 +49,7 @@
     },
     "order": 1,
     "price": "40",
-    "description": "Stay cozy while representing Penelope Social with this stylish hoodie, available in grey. Featuring the Penelope logo on the front left chest and a playful back design of a bicycle carrying sourdough and coffee, this hoodie combines comfort with charm. Perfect for cooler days, it’s crafted for a relaxed fit and everyday wear.",
+    "description": "Grey hoodie. Penelope logo on the left chest. Bike on the back, carrying sourdough and coffee. Relaxed fit.",
     "banner": {
       "_type": "image",
       "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
@@ -83,7 +83,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "Hoodie | Penelope Social",
-      "metaDescription": "Stay cozy while representing Penelope Social with this stylish hoodie, available in grey. Featuring the Penelope logo on the front left chest and a playful back design of a bicycle carrying sourdough and coffee, this hoodie combines comfort with charm. Perfect for cooler days, it’s crafted for a relaxed fit and everyday wear."
+      "metaDescription": "Grey hoodie. Penelope logo on the left chest. Bike on the back, carrying sourdough and coffee. Relaxed fit."
     }
   },
   {
@@ -96,7 +96,7 @@
     },
     "order": 2,
     "price": "20",
-    "description": "Show off your love for Penelope Social with this versatile t-shirt, available in green or white. Featuring the Penelope Social logo on the front left chest, the white version adds charm with a playful back design of a bicycle carrying sourdough and coffee. Both styles are crafted for a relaxed, comfortable fit, perfect for casual wear.",
+    "description": "Green or white. Logo on the left chest. The white one has the bike on the back, sourdough and coffee. Relaxed fit.",
     "banner": {
       "_type": "image",
       "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
@@ -144,7 +144,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "T-Shirt | Penelope Social",
-      "metaDescription": "Show off your love for Penelope Social with this versatile t-shirt, available in green or white. Featuring the Penelope Social logo on the front left chest, the white version adds charm with a playful back design of a bicycle carrying sourdough and coffee. Both styles are crafted for a relaxed, comfortable fit, perfect for casual wear."
+      "metaDescription": "Green or white. Logo on the left chest. The white one has the bike on the back, sourdough and coffee. Relaxed fit."
     }
   }
 ]

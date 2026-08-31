@@ -13,14 +13,27 @@ export function initSiteForms() {
     const block = form.parentElement
     const done = block?.querySelector<HTMLElement>('.w-form-done')
     const fail = block?.querySelector<HTMLElement>('.w-form-fail')
-    const submit = form.querySelector<HTMLInputElement>('input[type=submit]')
-    const originalValue = submit?.value ?? ''
+    const submit = form.querySelector<HTMLButtonElement | HTMLInputElement>(
+      'button[type=submit], input[type=submit]',
+    )
+    const submitLabel = submit?.querySelector('span') ?? submit
+    const originalValue =
+      submitLabel instanceof HTMLSpanElement
+        ? (submitLabel.textContent ?? '')
+        : submit instanceof HTMLInputElement
+          ? submit.value
+          : ''
     const waitValue = submit?.getAttribute('data-wait') ?? 'Please wait...'
+
+    const setSubmitLabel = (text: string) => {
+      if (submitLabel instanceof HTMLSpanElement) submitLabel.textContent = text
+      else if (submit instanceof HTMLInputElement) submit.value = text
+    }
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault()
       if (submit) {
-        submit.value = waitValue
+        setSubmitLabel(waitValue)
         submit.disabled = true
       }
       if (fail) fail.style.display = 'none'
@@ -34,11 +47,20 @@ export function initSiteForms() {
 
         form.style.display = 'none'
         if (done) done.style.display = 'block'
+
+        const gtag = (window as any).gtag
+        if (typeof gtag === 'function') {
+          if (endpoint === '/api/newsletter') {
+            gtag('event', 'newsletter_signup', { transport_type: 'beacon' })
+          } else if (endpoint === '/api/contact' || endpoint === '/api/events') {
+            gtag('event', 'generate_lead', { transport_type: 'beacon', form: endpoint })
+          }
+        }
       } catch {
         if (fail) fail.style.display = 'block'
       } finally {
         if (submit) {
-          submit.value = originalValue
+          setSubmitLabel(originalValue)
           submit.disabled = false
         }
         resetTurnstile(form)

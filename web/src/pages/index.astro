@@ -6,19 +6,46 @@
  */
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
+import WaveMoment from '../components/sections/WaveMoment.astro'
+import TextWithMediaSection from '../components/sections/TextWithMediaSection.astro'
+import FaqSection from '../components/sections/FaqSection.astro'
 import { getSingleton, missingContentMessage } from '../lib/data'
+import { resolveSeo } from '../data/seo'
+import { homeFaq } from '../data/faq'
+import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
 
 const home = await getSingleton<any>('homepage')
 if (!home) throw new Error(missingContentMessage('homepage'))
-const seo = home.seo ?? {}
+const seo = resolveSeo('/', home.seo)
+
+const allSections: any[] = home.sections ?? []
+/** Bakehouse bread story sits below the merch band, not under the mosaic. */
+const isBreadStory = (block: any) =>
+  block?._type === 'textWithMediaSection' &&
+  (block._key === 'bread' ||
+    block.layout === 'image-first' ||
+    /good bread/i.test(block.heading ?? ''))
+const breadSection = allSections.find(isBreadStory)
+const pageSections = allSections.filter((block) => block !== breadSection)
+
+const graph = pageGraph([
+  restaurantSchema(),
+  bakehouseSchema(),
+  faqPageSchema(homeFaq),
+  breadcrumbSchema([{ name: 'Home', path: '/' }]),
+])
 ---
 
 <BaseLayout
-  title={seo.metaTitle ?? home.title}
-  description={seo.metaDescription}
-  ogImage={seo.ogImage}
-  noIndex={seo.noIndex}
+  title={seo.title}
+  description={seo.description}
+  ogImage={home.seo?.ogImage}
+  noIndex={home.seo?.noIndex}
   isHome
 >
-  <PageBuilder sections={home.sections ?? []} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
+  <PageBuilder sections={pageSections} />
+  <WaveMoment />
+  {breadSection && <TextWithMediaSection block={breadSection} />}
+  <FaqSection headingText="FAQs" items={homeFaq} includeSchema={false} />
 </BaseLayout>

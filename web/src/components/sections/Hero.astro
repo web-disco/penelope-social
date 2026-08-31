@@ -5,16 +5,16 @@
  */
 import { btn, heading, layout, typeScale } from '../../lib/ui'
 import { imageUrl, imageAlt } from '../../lib/image'
+import { homeHeroFallback } from '../../data/home'
 
 interface Props {
   block: any
 }
 const { block } = Astro.props
 
-const headingText = block.heading || 'Sourdough Bakery & Restaurant in Vaughan.'
-const bodyText =
-  block.body ||
-  'New York-style sourdough pizza, artisanal handhelds, and creative cocktails, made in our micro bakery.'
+/* Repo wins. Sanity `hero.body` is ignored so a stale Studio lede cannot paint. */
+const headingText = homeHeroFallback.heading
+const bodyText = homeHeroFallback.body
 const primaryCta = block.orderOnline
 const secondaryCta = block.reservations
 ---
@@ -38,7 +38,9 @@ const secondaryCta = block.reservations
 
     <div class="home-hero-copy absolute inset-x-0 bottom-0 z-[1] pt-section-y pb-space-32">
       <div class:list={[layout.shell, 'flex flex-col items-start justify-start text-left']}>
-        <h1 class={`${heading.lightLeft} mb-space-16 max-w-[1080px] text-balance text-left wf-sm:mb-space-12`}>
+        <h1
+          class={`${heading.lightLeft} mb-space-16 max-w-[1080px] text-balance text-left wf-sm:mb-space-12`}
+        >
           {headingText}
         </h1>
         {
@@ -62,9 +64,11 @@ const secondaryCta = block.reservations
                   href={primaryCta.url}
                   target={primaryCta.newTab ? '_blank' : undefined}
                   rel={primaryCta.newTab ? 'noopener noreferrer' : undefined}
+                  data-ga-event="order_click"
+                  data-ga-placement="hero"
                   class={btn.onMediaPrimary}
                 >
-                  {primaryCta.label}
+                  <span>{primaryCta.label}</span>
                 </a>
               )}
               {secondaryCta?.url && (
@@ -72,9 +76,10 @@ const secondaryCta = block.reservations
                   href={secondaryCta.url}
                   target={secondaryCta.newTab ? '_blank' : undefined}
                   rel={secondaryCta.newTab ? 'noopener noreferrer' : undefined}
+                  data-ga-event="reservation_click"
                   class={btn.secondaryOutline}
                 >
-                  {secondaryCta.label}
+                  <span>{secondaryCta.label}</span>
                 </a>
               )}
             </div>
@@ -100,6 +105,30 @@ const secondaryCta = block.reservations
   @media (prefers-reduced-motion: reduce) {
     .animate-hero-ken {
       animation: none;
+    }
+  }
+
+  /* Homepage H1: desktop/tablet stay 64/56/46. Phones (≤600, including xs) are 32. */
+  .section-home-hero h1 {
+    font-size: 64px;
+    line-height: 1;
+  }
+
+  @media (max-width: 991px) {
+    .section-home-hero h1 {
+      font-size: 56px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .section-home-hero h1 {
+      font-size: 46px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .section-home-hero h1 {
+      font-size: 32px;
     }
   }
 </style>
