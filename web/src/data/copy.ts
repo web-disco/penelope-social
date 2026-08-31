@@ -175,8 +175,6 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
     'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.',
   'Focaccia sandwiches, pizza, shareables, and cocktails.\n‍':
     'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.',
-  'A note when the menu or hours change.':
-    'Sign up for our newsletter and be the first to know about exclusive offers.',
   'Stay cozy while representing Penelope Social with this stylish hoodie, available in grey. Featuring the Penelope logo on the front left chest and a playful back design of a bicycle carrying sourdough and coffee, this hoodie combines comfort with charm. Perfect for cooler days, it’s crafted for a relaxed fit and everyday wear.':
     'Grey hoodie. Penelope logo on the left chest. Bike on the back, carrying sourdough and coffee. Relaxed fit.',
   'Show off your love for Penelope Social with this versatile t-shirt, available in green or white. Featuring the Penelope Social logo on the front left chest, the white version adds charm with a playful back design of a bicycle carrying sourdough and coffee. Both styles are crafted for a relaxed, comfortable fit, perfect for casual wear.':
