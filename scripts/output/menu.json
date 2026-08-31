@@ -10,7 +10,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "Lunch menu | Penelope Social Woodbridge",
-      "metaDescription": "Lunch at Penelope Social in Woodbridge: focaccia sandwiches, pizza, and salads. Monday to Saturday, 10am to 3pm at 125 Hawkview Blvd.",
+      "metaDescription": "Lunch at Penelope Social in Woodbridge: focaccia sandwiches and pizza, plus salads. Monday to Saturday, 10am to 3pm at 125 Hawkview Blvd.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3981daa85bcd03e403_lunch-og-image.png",
@@ -23,7 +23,7 @@
       "alt": "Image of Lunch menu platter"
     },
     "heading": "Lunch",
-    "intro": "Focaccia sandwiches, pizza, and salads.",
+    "intro": "Focaccia sandwiches and pizza, plus salads.",
     "categories": [
       {
         "_type": "menuCategory",
@@ -285,7 +285,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "Dinner menu | Penelope Social Woodbridge",
-      "metaDescription": "Dinner in Woodbridge: pizza, handhelds, and shareable plates at Penelope Social. Monday to Saturday from 5pm at 125 Hawkview Blvd.",
+      "metaDescription": "Dinner in Woodbridge: pizza, handhelds, shareable plates at Penelope Social. Monday to Saturday from 5pm at 125 Hawkview Blvd.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd396541130c2bde544c_dinner-og-image.png",
@@ -298,7 +298,7 @@
       "alt": "Image of dinner plate"
     },
     "heading": "Dinner",
-    "intro": "Pizza, handhelds, and shareable plates.",
+    "intro": "Pizza, handhelds, shareable plates.",
     "categories": [
       {
         "_type": "menuCategory",
@@ -566,7 +566,7 @@
       "alt": "Image of Bar Tender"
     },
     "heading": "Bar",
-    "intro": "Cocktails, wine, and beer till late.",
+    "intro": "Cocktails, wine, beer. Till late.",
     "categories": [
       {
         "_type": "menuCategory",
@@ -725,7 +725,7 @@
       "alt": "Image of Bar Tender"
     },
     "heading": "Catering tray menu",
-    "intro": "Party pizzas, sandwiches, breads, and salads.",
+    "intro": "Party pizzas, sandwiches, breads, salads.",
     "categories": [
       {
         "_type": "menuCategory",

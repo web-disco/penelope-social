@@ -47,6 +47,18 @@ const YEAR = new Intl.DateTimeFormat('en-CA', {
 
 const copyrightText = `© ${YEAR} Penelope Social`
 
+const FOOTER_MENUS_BLURB =
+  'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.'
+const NEWSLETTER_SUPPORT = 'A note when the menu or hours change.'
+const menusBlurbRaw = restaurantCopy(menus.blurb, FOOTER_MENUS_BLURB)
+const menusBlurb = /featuring the best|shareable['’]s|handcrafted/i.test(menusBlurbRaw)
+  ? FOOTER_MENUS_BLURB
+  : menusBlurbRaw || FOOTER_MENUS_BLURB
+const newsletterTextRaw = restaurantCopy(newsletter.text, NEWSLETTER_SUPPORT)
+const newsletterText = /exclusive offers|first to know/i.test(newsletterTextRaw)
+  ? NEWSLETTER_SUPPORT
+  : newsletterTextRaw || NEWSLETTER_SUPPORT
+
 /* Subtle hover for every footer link, matching the .35s of the buttons around
    it. Not applied to the Google Reviews button, which has its own colour
    hover, nor to the logo, which is a graphic rather than a text link. */
@@ -77,7 +89,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
             typeScale.intro,
           ]}
         >
-          {newsletter.text}
+          {newsletterText}
         </p>
         <NewsletterForm newsletter={newsletter} />
       </div>
@@ -127,7 +139,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
              column's natural width from its longest line. -->
         <div class={`${footerText} max-w-[300px]`}>
           <a href={menus.blurbUrl ?? '/menus'} class={footerTextSpan}>
-            <LineText text={restaurantCopy(menus.blurb)} />
+            <LineText text={menusBlurb} />
           </a>
         </div>
         <div class="footer-menu-wrap flex flex-col gap-[10px]">

@@ -40,7 +40,7 @@ export const homeMenusFallback = {
 
 export const homeBreadFallback = {
   heading: 'Good bread, served here every day',
-  body: 'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.',
+  body: 'Loaves start at Penelope Bakehouse and land here as sandwiches and pizza, or as bread with dinner.',
   ctaLabel: 'Visit the Bakehouse',
   ctaUrl: BAKEHOUSE_SITE_URL,
 }
@@ -53,7 +53,7 @@ export const homeEventsFallback = {
 /** Homepage green band. Merch is in-store only, not e-comm. */
 export const homeWaveMerch = {
   wave: 'Take a shirt home from Social',
-  status: 'Hoodies, tees, and totes. Pick them up in store.',
+  status: 'Hoodies, tees, totes. Pick them up in store.',
   ctaLabel: 'See merch',
   ctaUrl: '/merchandise',
 }

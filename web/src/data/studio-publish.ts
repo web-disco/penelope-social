@@ -13,7 +13,7 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Homepage mosaic — H2 “On the menu”, four cards: Lunch “Pizza and focaccia sandwiches”, Bar “Cocktails till late”, Dinner “Pizza and shareables”, Catering “Trays for your event”. CTA “Explore our menus” → /menus',
   'Homepage bread — “Good bread, served here every day” + Visit the Bakehouse → https://penelopebakehouse.com',
   'Homepage events — “Birthdays, work dinners, and nights in the room…” (no street address)',
-  'Homepage green merch band — repo-only WaveMoment above FAQ. Bakehouse bike + checkers. Arc “Take a shirt home from Social”, support “Hoodies, tees, and totes. Pick them up in store.”, button See merch → /merchandise. No Studio block needed.',
+  'Homepage green merch band — repo-only WaveMoment above FAQ. Bakehouse bike + checkers. Arc “Take a shirt home from Social”, support “Hoodies, tees, totes. Pick them up in store.”, button See merch → /merchandise. No Studio block needed.',
   'Site Settings — default SEO, reservations label, footer headings (sentence case), hours labels Cafe/Bar, NAP 125 Hawkview Blvd, Woodbridge, ON L4H 2E2',
   'Site Settings nav — delete the Bakery item. /sourdough-bakery stays live for GSC; do not add Bakery back to the header or drawer',
   'Page: about — SEO only if still editing the CMS about doc (route now uses dedicated about.astro)',
@@ -26,7 +26,7 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Menu category + item titles — Title Case in Studio (The Pizzas, Handhelds, Cocktails, Red Wine, White Wine, Middle Table). Keep NY, DOP, 2oz. The site also title-cases at render if Studio is stale. Descriptions stay as written.',
   'Do not 301 /sourdough-bakery — dedicated page ships from the repo (Bakehouse sourdough, served here). Unpublish the old “Best Sourdough Bakery in Vaughan” CMS doc so it cannot override.',
   'Copy rule: say what it is. No em or en dashes. No “not a dining room”. No street addresses in heroes. Woodbridge in meta + about intro.',
-  'Newsletter subtext can stay as authored — type is now 20/18/16 to match Bakehouse',
+  'Footer newsletter copy — “A note when the menu or hours change.” Footer menus blurb — “Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.” Repo rewrites slop if Studio is stale.',
   'GSC — submit https://penelopesocial.com/sitemap-index.xml only (not sitemap.xml)',
   'Optional: add FAQ / Timeline page-builder blocks',
 ] as const

@@ -52,13 +52,13 @@ export const woodbridgeLocation = {
   barHours,
   offeringsHeading: 'Cafe, kitchen, and bar',
   offeringsBody:
-    'Focaccia sandwiches and pizza at lunch, then dinner plates, drinks, and sourdough from Penelope Bakehouse.',
+    'Focaccia sandwiches and pizza at lunch, then dinner plates and drinks, with sourdough from Penelope Bakehouse.',
   detailHeading: 'Cafe, kitchen, and bar',
   detailCtas: [
     { label: 'Order online', url: ORDER_ONLINE_URL, style: 'primary' as const, newTab: true },
     { label: 'Reservations', url: RESERVATIONS_PATH, style: 'outline' as const },
   ] satisfies Cta[],
-  hubBlurb: 'Cafe lunch, dinner, and late drinks.',
+  hubBlurb: 'Cafe lunch and dinner, then late drinks.',
 }
 
 export const scarboroughLocationMeta = PAGE_SEO['/locations/scarborough']!
@@ -86,11 +86,11 @@ export const scarboroughLocation = {
       href: `mailto:${scarboroughBakehouse.email}`,
     },
   },
-  intro: 'Sourdough, focaccia, and pizza by the slice.',
+  intro: 'Sourdough and focaccia, pizza by the slice.',
   offeringsHeading: 'Sourdough and focaccia, baked here',
   offeringsBody:
-    'Loaves, focaccia sandwiches, and pizza by the slice. Hours, menu, and orders live on penelopebakehouse.com.',
-  hubBlurb: 'Sourdough, focaccia, and pizza by the slice.',
+    'Loaves, focaccia sandwiches, pizza by the slice. Hours and menu live on penelopebakehouse.com, plus online orders.',
+  hubBlurb: 'Sourdough and focaccia, pizza by the slice.',
   ctas: [
     {
       label: 'Order online',

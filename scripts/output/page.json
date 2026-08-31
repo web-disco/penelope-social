@@ -10,7 +10,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "Menus | Lunch, dinner, bar, and catering | Penelope Social",
-      "metaDescription": "Lunch, dinner, bar, and catering menus at Penelope Social in Woodbridge. Focaccia sandwiches, pizza, handhelds, and cocktails.",
+      "metaDescription": "Lunch, dinner, bar, and catering menus at Penelope Social in Woodbridge. Focaccia sandwiches, pizza, handhelds, plus cocktails.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a8dfb734293806a5b_menu-og-image.png",
@@ -27,7 +27,7 @@
           "alt": "Image of Lunch menu platter"
         },
         "heading": "On the menu",
-        "intro": "Lunch, dinner, drinks, and catering."
+        "intro": "Lunch, dinner, drinks, plus catering."
       },
       {
         "_type": "menuCards",
@@ -63,7 +63,7 @@
               "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif",
               "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif 1080w",
               "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
-              "alt": "Crafted Cocktail"
+              "alt": "Cocktails at the bar"
             }
           },
           {
@@ -128,7 +128,7 @@
         "_type": "introSection",
         "_key": "intro",
         "heading": "About Penelope Social",
-        "intro": "This is a Woodbridge cafe and bar. Lunch, dinner, and drinks on sourdough from Penelope Bakehouse.",
+        "intro": "This is a Woodbridge cafe and bar. Lunch and dinner, plus drinks on sourdough from Penelope Bakehouse.",
         "ctas": []
       },
       {
@@ -325,7 +325,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "Contact Penelope Social in Woodbridge",
-      "metaDescription": "Call (905) 607-0606, email info@penelopesocial.com, or write us at 125 Hawkview Blvd, Woodbridge. Reservations, catering, and general questions.",
+      "metaDescription": "Call (905) 607-0606, email info@penelopesocial.com, or write us at 125 Hawkview Blvd, Woodbridge. Reservations and catering, plus general questions.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
@@ -431,7 +431,7 @@
     "seo": {
       "_type": "seo",
       "metaTitle": "Merch | Penelope Social",
-      "metaDescription": "Hoodies, tees, and totes from Penelope Social, the Woodbridge cafe and bar.",
+      "metaDescription": "Hoodies, tees, totes from Penelope Social, the Woodbridge cafe and bar.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b754906e_merch-og-image.png",
@@ -448,7 +448,7 @@
           "alt": "Photo of Penlope Merch"
         },
         "heading": "Merch",
-        "intro": "Hoodies, tees, and totes. Pick them up in store."
+        "intro": "Hoodies, tees, totes. Pick them up in store."
       },
       {
         "_type": "pageHeading",

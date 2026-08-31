@@ -73,7 +73,7 @@
               "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif",
               "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif 1080w",
               "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
-              "alt": "Crafted Cocktail"
+              "alt": "Cocktails at the bar"
             }
           },
           {
@@ -130,7 +130,7 @@
         "_key": "bread",
         "layout": "image-first",
         "heading": "Good bread, served here every day",
-        "body": "Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.",
+        "body": "Loaves start at Penelope Bakehouse and land here as sandwiches and pizza, or as bread with dinner.",
         "cta": {
           "_type": "button",
           "label": "Visit the Bakehouse",

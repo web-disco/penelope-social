@@ -7,23 +7,23 @@ import { restaurantCopy } from './copy'
 export const pageBannerCopy: Record<string, { heading: string; intro: string }> = {
   '/menus': {
     heading: 'On the menu',
-    intro: 'Lunch, dinner, drinks, and catering.',
+    intro: 'Lunch, dinner, drinks, plus catering.',
   },
   '/menus/lunch': {
     heading: 'Lunch',
-    intro: 'Focaccia sandwiches, pizza, and salads.',
+    intro: 'Focaccia sandwiches and pizza, plus salads.',
   },
   '/menus/dinner': {
     heading: 'Dinner',
-    intro: 'Pizza, handhelds, and shareable plates.',
+    intro: 'Pizza, handhelds, shareable plates.',
   },
   '/menus/bar': {
     heading: 'Bar',
-    intro: 'Cocktails, wine, and beer till late.',
+    intro: 'Cocktails, wine, beer. Till late.',
   },
   '/menus/catering': {
     heading: 'Catering tray menu',
-    intro: 'Party pizzas, sandwiches, breads, and salads.',
+    intro: 'Party pizzas, sandwiches, breads, salads.',
   },
   '/catering-events': {
     heading: 'Catering and events',
@@ -35,7 +35,7 @@ export const pageBannerCopy: Record<string, { heading: string; intro: string }> 
   },
   '/merchandise': {
     heading: 'Merch',
-    intro: 'Hoodies, tees, and totes. Pick them up in store.',
+    intro: 'Hoodies, tees, totes. Pick them up in store.',
   },
 }
 

@@ -8,6 +8,7 @@ import PageHero from '../../components/sections/PageHero.astro'
 import { getAll } from '../../lib/data'
 import { resolveSeo } from '../../data/seo'
 import { displayHeading, restaurantCopy } from '../../data/copy'
+import { merchProductCopy } from '../../data/merch'
 import { pageBannerCopy } from '../../data/banners'
 import { breadcrumbSchema, pageGraph, restaurantSchema } from '../../lib/schema'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
@@ -103,7 +104,7 @@ const productName = PRODUCT_TITLES[product.slug.current] || displayHeading(produ
               <p class={price}>{product.price}</p>
             </div>
             <p class:list={['mb-0 text-charcoal', typeScale.body]}>
-              {restaurantCopy(product.description)}
+              {merchProductCopy[product.slug.current] || restaurantCopy(product.description)}
             </p>
             {
               product.cta?.url && (

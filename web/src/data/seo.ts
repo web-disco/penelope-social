@@ -14,12 +14,12 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
   '/about': {
     title: 'About Penelope Social | Woodbridge cafe and bar',
     description:
-      'Three brothers, a Woodbridge cafe and bar, and bread from Penelope Bakehouse. The family story behind lunch, dinner, and drinks.',
+      'The Stalteri brothers, a Woodbridge cafe and bar, and bread from Penelope Bakehouse. The family story behind lunch and dinner, plus drinks.',
   },
   '/contact': {
     title: 'Contact Penelope Social in Woodbridge',
     description:
-      'Call (905) 607-0606, email info@penelopesocial.com, or write us at 125 Hawkview Blvd, Woodbridge. Reservations, catering, and general questions.',
+      'Call (905) 607-0606, email info@penelopesocial.com, or write us at 125 Hawkview Blvd, Woodbridge. Reservations and catering, plus general questions.',
   },
   '/catering-events': {
     title: 'Catering and events in Woodbridge | Penelope Social',
@@ -29,17 +29,17 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
   '/menus': {
     title: 'Menus | Lunch, dinner, bar, and catering | Penelope Social',
     description:
-      'Lunch, dinner, bar, and catering menus at Penelope Social in Woodbridge. Focaccia sandwiches, pizza, handhelds, and cocktails.',
+      'Lunch, dinner, bar, and catering menus at Penelope Social in Woodbridge. Focaccia sandwiches, pizza, handhelds, plus cocktails.',
   },
   '/menus/lunch': {
     title: 'Lunch menu | Penelope Social Woodbridge',
     description:
-      'Lunch at Penelope Social in Woodbridge: focaccia sandwiches, pizza, and salads. Monday to Saturday, 10am to 3pm at 125 Hawkview Blvd.',
+      'Lunch at Penelope Social in Woodbridge: focaccia sandwiches and pizza, plus salads. Monday to Saturday, 10am to 3pm at 125 Hawkview Blvd.',
   },
   '/menus/dinner': {
     title: 'Dinner menu | Penelope Social Woodbridge',
     description:
-      'Dinner in Woodbridge: pizza, handhelds, and shareable plates at Penelope Social. Monday to Saturday from 5pm at 125 Hawkview Blvd.',
+      'Dinner in Woodbridge: pizza, handhelds, shareable plates at Penelope Social. Monday to Saturday from 5pm at 125 Hawkview Blvd.',
   },
   '/menus/bar': {
     title: 'Bar menu | Cocktails in Woodbridge | Penelope Social',
@@ -54,7 +54,7 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
   '/merchandise': {
     title: 'Merch | Penelope Social',
     description:
-      'Hoodies, tees, and totes from Penelope Social, the Woodbridge cafe and bar. Take a piece of the restaurant home.',
+      'Hoodies, tees, totes from Penelope Social, the Woodbridge cafe and bar. Take a piece of the restaurant home.',
   },
   '/merchandise/tote-bag': {
     title: 'Tote bag | Penelope Social merch',
@@ -76,7 +76,7 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
   '/locations/woodbridge': {
     title: 'Woodbridge | Penelope Social | 125 Hawkview Blvd',
     description:
-      'Visit Penelope Social at 125 Hawkview Blvd, Woodbridge. Cafe hours, bar hours, phone, and directions. Reservations on Toast.',
+      'Visit Penelope Social at 125 Hawkview Blvd, Woodbridge. Cafe hours, bar hours, phone, plus directions. Reservations on Toast.',
   },
   '/locations/scarborough': {
     title: 'Scarborough Bakehouse | Penelope Bakehouse',
@@ -86,7 +86,7 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
   '/sourdough-bakery': {
     title: 'Bakehouse sourdough, served here | Penelope Social',
     description:
-      'Vince’s starter lives at Penelope Social in Woodbridge. The loaves are baked at Penelope Bakehouse in Scarborough. Menu, hours, and orders at penelopebakehouse.com.',
+      'Vince’s starter lives at Penelope Social in Woodbridge. The loaves are baked at Penelope Bakehouse in Scarborough. Menu, hours, online order at penelopebakehouse.com.',
   },
 }
 

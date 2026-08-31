@@ -29,22 +29,22 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.':
     'Focaccia sandwiches at lunch, sourdough pizza at dinner, and cocktails whenever you sit down.',
   'Naturally leavened loaves start at Penelope Bakehouse in Scarborough. We serve that bread at the Woodbridge restaurant — sandwiches, pizza, and loaves on the table.':
-    'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.',
+    'Loaves start at Penelope Bakehouse and land here as sandwiches and pizza, or as bread with dinner.',
   'Loaves start at Penelope Bakehouse. We put that sourdough on the table here — sandwiches, pizza, and bread with dinner.':
-    'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.',
+    'Loaves start at Penelope Bakehouse and land here as sandwiches and pizza, or as bread with dinner.',
   'Lunch, dinner, the bar, and catering — from the Woodbridge kitchen, on Bakehouse sourdough.':
     'Lunch, dinner, the bar, and catering trays, all from this kitchen.',
   'Lunch, dinner, the bar, and catering — on Bakehouse sourdough.':
     'Lunch, dinner, the bar, and catering trays, all from this kitchen.',
   'Focaccia sandwiches at lunch, cocktails after work, and pizza at dinner — all at 125 Hawkview Blvd, Woodbridge.':
-    'Lunch, dinner, drinks, and catering.',
+    'Lunch, dinner, drinks, plus catering.',
   'Focaccia sandwiches at lunch, pizza at dinner, and cocktails at the bar.':
-    'Lunch, dinner, drinks, and catering.',
+    'Lunch, dinner, drinks, plus catering.',
   'Focaccia sandwiches, pizza, shareable plates, and cocktails, plus trays when you want them.':
-    'Lunch, dinner, drinks, and catering.',
+    'Lunch, dinner, drinks, plus catering.',
   'Focaccia sandwiches and pizza': 'Focaccia sandwiches and pizza daily',
   'Cocktails and a late sit': 'Cocktails, wine, and a late sit',
-  'Pizza, handhelds, shareables': 'Pizza, handhelds, and shareable plates',
+  'Pizza, handhelds, shareables': 'Pizza, handhelds, shareable plates.',
   'Trays for your table': 'Trays of pizza and sandwiches',
   'Birthdays, work dinners, and nights in the room. Food, drinks, and a table we will set.':
     'Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.',
@@ -58,41 +58,41 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Dinner menu': 'Dinner',
   'Bar menu': 'Bar',
   'Lunch at Penelope Social in Woodbridge. Focaccia sandwiches, New York-style pizzas, and salads.\n\nMonday–Saturday 10:00am–3:00pm':
-    'Focaccia sandwiches, pizza, and salads.',
+    'Focaccia sandwiches and pizza, plus salads.',
   'Dinner at Penelope Social in Woodbridge. Gut-friendly pizzas, handhelds, and shareable plates.\n\nMonday–Saturday 5:00pm–close':
-    'Pizza, handhelds, and shareable plates.',
+    'Pizza, handhelds, shareable plates.',
   'Focaccia sandwiches, pizza, and salads.\n\nMonday to Saturday, 10am to 3pm':
-    'Focaccia sandwiches, pizza, and salads.',
+    'Focaccia sandwiches and pizza, plus salads.',
   'Focaccia sandwiches, pizza, and salads, Monday to Saturday, 10am to 3pm.':
-    'Focaccia sandwiches, pizza, and salads.',
+    'Focaccia sandwiches and pizza, plus salads.',
   'Pizza, handhelds, and shareable plates.\n\nMonday to Saturday, 5pm to close':
-    'Pizza, handhelds, and shareable plates.',
+    'Pizza, handhelds, shareable plates.',
   'Pizza, handhelds, and shareable plates, Monday to Saturday from 5pm.':
-    'Pizza, handhelds, and shareable plates.',
+    'Pizza, handhelds, shareable plates.',
   'Skip the traffic and sit at the bar in Woodbridge. Cocktails to match the night — bold or light.':
-    'Cocktails, wine, and beer till late.',
+    'Cocktails, wine, beer. Till late.',
   'Cocktails, wine, and a late sit, from 5pm Monday to Saturday.':
-    'Cocktails, wine, and beer till late.',
+    'Cocktails, wine, beer. Till late.',
   'Explore our menus — focaccia sandwiches, pizza, shareables, and handcrafted cocktails at the Woodbridge restaurant.':
-    'Lunch, dinner, drinks, and catering.',
+    'Lunch, dinner, drinks, plus catering.',
   'Explore our menus — focaccia sandwiches, pizza, shareables, and handcrafted cocktails at the Woodbridge restaurant.\n‍':
-    'Lunch, dinner, drinks, and catering.',
+    'Lunch, dinner, drinks, plus catering.',
   'Hoodies, tees, and totes from the Woodbridge cafe and bar.':
-    'Hoodies, tees, and totes. Pick them up in store.',
+    'Hoodies, tees, totes. Pick them up in store.',
   'Birthdays, work dinners, and nights in the Woodbridge restaurant. Artisanal dishes, handcrafted cocktails, and a room we will set for you. Catering trays if you want the food at yours.':
     'Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.',
   'Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you — food, drinks, and the room.':
     'Food, drinks, and a table we will set. Prefer 24 hours’ notice for catering.',
   'Penelope Social is the restaurant in Woodbridge — cafe by day, kitchen and bar at night — at 125 Hawkview Blvd. We serve lunch, dinner, and drinks. The sourdough on the table comes from Penelope Bakehouse, our Scarborough micro-bakery.':
-    'This is a Woodbridge cafe and bar. Lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
+    'This is a Woodbridge cafe and bar. Lunch and dinner, plus drinks on sourdough from Penelope Bakehouse.',
   'A Woodbridge cafe and bar. Lunch, dinner, and drinks — sourdough from Penelope Bakehouse.':
-    'This is a Woodbridge cafe and bar. Lunch, dinner, and drinks on sourdough from Penelope Bakehouse.',
+    'This is a Woodbridge cafe and bar. Lunch and dinner, plus drinks on sourdough from Penelope Bakehouse.',
   'Trays from the Woodbridge kitchen — not a private-event booking page, and not the Scarborough bakehouse menu. Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8–10. Prices are below. Prefer 24 hours’ notice; send the order on Catering and events.':
-    'Party pizzas, sandwiches, breads, and salads.',
+    'Party pizzas, sandwiches, breads, salads.',
   'Party pizzas (24 slices), focaccia sandwiches (minimum of 6, cut in four), breads, and salads for 8 to 10. Prices are below. Prefer 24 hours notice. Send the order on Catering and events.':
-    'Party pizzas, sandwiches, breads, and salads.',
+    'Party pizzas, sandwiches, breads, salads.',
   'Party pizzas, focaccia sandwiches, breads, and salads for 8 to 10.':
-    'Party pizzas, sandwiches, breads, and salads.',
+    'Party pizzas, sandwiches, breads, salads.',
   'Minimum of 6 sandwiches\nAll sandwiches are cut into 4 pcs':
     'Minimum of 6 sandwiches, cut into 4.',
   'Minimum of 6 sandwiches All sandwiches are cut into 4 pcs':
@@ -113,7 +113,7 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Focaccia sandwiches, pizza, and drinks on Bakehouse sourdough, from lunch through a late sit.':
     'Cafe, kitchen, and bar in Woodbridge.',
   'Sourdough loaves, focaccia sandwiches, and pizza by the slice, baked fresh at this Scarborough shop.':
-    'Sourdough, focaccia, and pizza by the slice.',
+    'Sourdough and focaccia, pizza by the slice.',
   'Sourdough Bakery & Restaurant in Vaughan | Penelope Social':
     'Penelope Social | Cafe and bar in Woodbridge',
   'Best Sourdough Bakery in Vaughan | Penelope Social':
@@ -156,6 +156,31 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   lunch: 'Lunch',
   dinner: 'Dinner',
   bar: 'Bar',
+  'Lunch, dinner, drinks, and catering.': 'Lunch, dinner, drinks, plus catering.',
+  'Focaccia sandwiches, pizza, and salads.': 'Focaccia sandwiches and pizza, plus salads.',
+  'Pizza, handhelds, and shareable plates.': 'Pizza, handhelds, shareable plates.',
+  'Cocktails, wine, and beer till late.': 'Cocktails, wine, beer. Till late.',
+  'Party pizzas, sandwiches, breads, and salads.': 'Party pizzas, sandwiches, breads, salads.',
+  'Hoodies, tees, and totes. Pick them up in store.':
+    'Hoodies, tees, totes. Pick them up in store.',
+  'Hoodies, tees, and totes.': 'Hoodies, tees, totes.',
+  'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.':
+    'Loaves start at Penelope Bakehouse and land here as sandwiches and pizza, or as bread with dinner.',
+  'Sourdough, focaccia, and pizza by the slice.': 'Sourdough and focaccia, pizza by the slice.',
+  'Explore our menus featuring the best sourdough focaccia sandwiches, pizzas , shareable\'s and handcrafted cocktails.':
+    'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.',
+  "Explore our menus featuring the best sourdough focaccia sandwiches, pizzas , shareable's and handcrafted cocktails.":
+    'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.',
+  'Focaccia sandwiches, pizza, shareables, and cocktails.':
+    'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.',
+  'Focaccia sandwiches, pizza, shareables, and cocktails.\n‍':
+    'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.',
+  'Sign up for our newsletter and be the first to know about exclusive offers.':
+    'A note when the menu or hours change.',
+  'Stay cozy while representing Penelope Social with this stylish hoodie, available in grey. Featuring the Penelope logo on the front left chest and a playful back design of a bicycle carrying sourdough and coffee, this hoodie combines comfort with charm. Perfect for cooler days, it’s crafted for a relaxed fit and everyday wear.':
+    'Grey hoodie. Penelope logo on the left chest. Bike on the back, carrying sourdough and coffee. Relaxed fit.',
+  'Show off your love for Penelope Social with this versatile t-shirt, available in green or white. Featuring the Penelope Social logo on the front left chest, the white version adds charm with a playful back design of a bicycle carrying sourdough and coffee. Both styles are crafted for a relaxed, comfortable fit, perfect for casual wear.':
+    'Green or white. Logo on the left chest. The white one has the bike on the back, sourdough and coffee. Relaxed fit.',
 }
 
 /** True when copy treats Vaughan as the city, not just the wider area. */

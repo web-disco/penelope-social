@@ -67,7 +67,13 @@ export const siteSettings = defineType({
           type: 'object',
           fields: [
             defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-            defineField({ name: 'text', title: 'Copy', type: 'text', rows: 2 }),
+            defineField({
+              name: 'text',
+              title: 'Copy',
+              type: 'text',
+              rows: 2,
+              initialValue: 'A note when the menu or hours change.',
+            }),
             defineField({ name: 'placeholder', title: 'Input placeholder', type: 'string' }),
             defineField({ name: 'buttonLabel', title: 'Button label', type: 'string' }),
             defineField({
@@ -90,7 +96,14 @@ export const siteSettings = defineType({
           type: 'object',
           fields: [
             defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-            defineField({ name: 'blurb', title: 'Blurb', type: 'text', rows: 3 }),
+            defineField({
+              name: 'blurb',
+              title: 'Blurb',
+              type: 'text',
+              rows: 3,
+              initialValue:
+                'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.',
+            }),
             defineField({ name: 'blurbUrl', title: 'Blurb links to', type: 'string' }),
             defineField({
               name: 'links',

@@ -16,7 +16,7 @@ export const sourdoughPage = {
   },
   social: {
     heading: 'Eat and drink here',
-    body: 'Sit down here for lunch, dinner, and drinks on the sourdough we serve from the Bakehouse.',
+    body: 'Sit down here for lunch and dinner, plus drinks on the sourdough we serve from the Bakehouse.',
     image: {
       src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/6738fc337434df480308980c_penelope-social-gathering.avif',
       alt: 'Dinner service at Penelope Social',

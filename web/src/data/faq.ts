@@ -26,7 +26,7 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: 'How is Penelope Bakehouse related?',
-    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria. We serve that sourdough here. <a href="/sourdough-bakery">Social and Bakehouse</a> has both places.`,
+    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria. We serve that sourdough here. Bakehouse bakes it. Social is the cafe and bar.`,
   },
   {
     question: 'Where is the Penelope Bakehouse menu?',
@@ -46,7 +46,7 @@ export const aboutFaq: FaqItem[] = [
   {
     question: 'Who runs Penelope Social?',
     answer:
-      'Three brothers, Franco, Vince, and Giuliano Stalteri. Vince started the sourdough starter named Penelope. The restaurant and the Bakehouse grew from that.',
+      'The Stalteri brothers: Franco, Vince, Giuliano. Vince started the sourdough starter named Penelope. The restaurant and the Bakehouse grew from that.',
   },
   {
     question: 'Where is the restaurant?',
@@ -54,7 +54,7 @@ export const aboutFaq: FaqItem[] = [
   },
   {
     question: 'How is Penelope Bakehouse related?',
-    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> in Scarborough is the bakehouse and focacceria. Loaves, focaccia, and pizza dough for Social start there.`,
+    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> in Scarborough is the bakehouse and focacceria. Loaves and focaccia, plus pizza dough for Social, start there.`,
   },
   {
     question: 'Why is the starter named Penelope?',
@@ -66,7 +66,7 @@ export const aboutFaq: FaqItem[] = [
 export const cateringFaq: FaqItem[] = [
   {
     question: 'What is the difference between catering and events?',
-    answer: `Catering is food to-go, trays from the <a href="${CATERING_MENU_URL}">catering menu</a>. Events are hosted here: birthdays, work dinners, and private nights. Book both on this page.`,
+    answer: `Catering is food to-go, trays from the <a href="${CATERING_MENU_URL}">catering menu</a>. Events are hosted here: birthdays and work dinners, or a private night. Book both on this page.`,
   },
   {
     question: 'How much notice do you need?',
@@ -140,16 +140,16 @@ export const woodbridgeFaq: FaqItem[] = [
 export const scarboroughFaq: FaqItem[] = [
   {
     question: 'What is Penelope Bakehouse?',
-    answer: `A bakehouse and focacceria at 71 Howden Rd. Loaves, sandwiches, and pizza by the slice. Dinner and the bar are at <a href="/locations/woodbridge">Penelope Social</a>.`,
+    answer: `A bakehouse and focacceria at 71 Howden Rd. Loaves, sandwiches, pizza by the slice. Dinner and the bar are at <a href="/locations/woodbridge">Penelope Social</a>.`,
   },
   {
     question: 'Where do I order Bakehouse bread?',
-    answer: `Visit <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a> for the menu, hours, and online order.`,
+    answer: `Visit <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a> for the menu, hours, online order.`,
   },
   {
     question: 'Does Social serve Bakehouse bread?',
     answer:
-      'Yes. Sourdough starts at the Scarborough bakehouse and is served at Social as sandwiches, pizza, and loaves on the menu.',
+      'Yes. Sourdough starts at the Scarborough bakehouse and is served at Social as sandwiches and pizza, and as loaves on the menu.',
   },
 ]
 
@@ -161,7 +161,7 @@ export const sourdoughFaq: FaqItem[] = [
   },
   {
     question: 'Where is the Penelope Bakehouse menu?',
-    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. Hours, photos, and online order too. Social menus (lunch, dinner, bar) stay on this site.`,
+    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. Hours, photos, online order too. Social menus (lunch, dinner, bar) stay on this site.`,
   },
   {
     question: 'Where is the bakery in Scarborough?',
@@ -169,6 +169,6 @@ export const sourdoughFaq: FaqItem[] = [
   },
   {
     question: 'Where is the sourdough baked?',
-    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social as sandwiches, pizza, and bread on the table.`,
+    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social as sandwiches and pizza, or as bread on the table.`,
   },
 ]

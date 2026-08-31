@@ -79,7 +79,7 @@
       "newsletter": {
         "_type": "newsletter",
         "heading": "Stay in the loop",
-        "text": "Sign up for our newsletter and be the first to know about exclusive offers.",
+        "text": "A note when the menu or hours change.",
         "placeholder": "Enter your email address",
         "buttonLabel": "Subscribe",
         "successMessage": "Thank you! Your submission has been received!",
@@ -89,7 +89,7 @@
       "menus": {
         "_type": "footerMenus",
         "heading": "Menus",
-        "blurb": "Focaccia sandwiches, pizza, shareables, and cocktails.\n‍",
+        "blurb": "Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.",
         "blurbUrl": "/menus",
         "links": [
           {
