@@ -14,7 +14,7 @@ const address = `${woodbridgeNap.street}, ${woodbridgeNap.city}, ${woodbridgeNap
 export const homeFaq: FaqItem[] = [
   {
     question: 'Where is Penelope Social?',
-    answer: `Penelope Social is at <a href="/locations/woodbridge">${address}</a>. Phone <a href="tel:${woodbridgeNap.phoneDigits}">${woodbridgeNap.phone}</a>.`,
+    answer: `Penelope Social is at <a href="/locations/woodbridge">${address}</a>, in Vaughan. Phone <a href="tel:${woodbridgeNap.phoneDigits}">${woodbridgeNap.phone}</a>.`,
   },
   {
     question: 'What are the cafe and bar hours?',
@@ -50,7 +50,7 @@ export const aboutFaq: FaqItem[] = [
   },
   {
     question: 'Where is the restaurant?',
-    answer: `<a href="/locations/woodbridge">${address}</a>. Cafe by day, kitchen and bar at night.`,
+    answer: `<a href="/locations/woodbridge">${address}</a>. Woodbridge is in Vaughan. Cafe by day, kitchen and bar at night.`,
   },
   {
     question: 'How is Penelope Bakehouse related?',
@@ -74,7 +74,7 @@ export const cateringFaq: FaqItem[] = [
   },
   {
     question: 'Where is the event space?',
-    answer: `At Penelope Social, <a href="/locations/woodbridge">${address}</a>.`,
+    answer: `At Penelope Social, <a href="/locations/woodbridge">${address}</a>, in Vaughan.`,
   },
   {
     question: 'Can I just order trays?',
@@ -106,7 +106,7 @@ export const cateringMenuFaq: FaqItem[] = [
 export const contactFaq: FaqItem[] = [
   {
     question: 'How do I reach Penelope Social?',
-    answer: `Phone <a href="tel:${woodbridgeNap.phoneDigits}">${woodbridgeNap.phone}</a> or email <a href="mailto:${woodbridgeNap.email}">${woodbridgeNap.email}</a>. We're at <a href="/locations/woodbridge">${address}</a>.`,
+    answer: `Phone <a href="tel:${woodbridgeNap.phoneDigits}">${woodbridgeNap.phone}</a> or email <a href="mailto:${woodbridgeNap.email}">${woodbridgeNap.email}</a>. We're at <a href="/locations/woodbridge">${address}</a>, in Vaughan.`,
   },
   {
     question: 'How do I book a table?',
@@ -121,7 +121,7 @@ export const contactFaq: FaqItem[] = [
 export const woodbridgeFaq: FaqItem[] = [
   {
     question: 'Where is Penelope Social?',
-    answer: `${address}. Phone ${woodbridgeNap.phone}.`,
+    answer: `${address}. Woodbridge is in Vaughan. Phone ${woodbridgeNap.phone}.`,
   },
   {
     question: 'What are the cafe and bar hours?',
@@ -134,6 +134,10 @@ export const woodbridgeFaq: FaqItem[] = [
   {
     question: 'How is Penelope Bakehouse related?',
     answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse where the bread is baked. We serve it here.`,
+  },
+  {
+    question: 'Is Penelope Social in Vaughan?',
+    answer: `Yes. Woodbridge is in the City of Vaughan. We're at ${address}.`,
   },
 ]
 

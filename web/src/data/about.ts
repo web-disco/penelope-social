@@ -12,7 +12,7 @@ export const aboutPage = {
   subheading:
     'A Woodbridge cafe and bar, with lunch and dinner, plus drinks.',
   paragraphs: [
-    'A cafe and bar in Woodbridge. Cafe by day, kitchen and bar at night. Bakehouse sourdough on the table as sandwiches and pizza, or as bread.',
+    'A cafe and bar in Woodbridge, Vaughan. Cafe by day, kitchen and bar at night. Bakehouse sourdough on the table as sandwiches and pizza, or as bread.',
     'The Stalteri brothers built Social around good sourdough bread and a proper bar. Franco, Vince, Giuliano.',
   ],
   timeline: {

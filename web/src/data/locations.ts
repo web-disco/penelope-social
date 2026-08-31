@@ -18,7 +18,7 @@ export const locationsHubMeta = PAGE_SEO['/locations']!
 
 export const locationsHub = {
   heading: 'Social and Bakehouse',
-  intro: 'Woodbridge cafe and bar. Scarborough bakery.',
+  intro: 'Woodbridge cafe and bar, in Vaughan. Scarborough bakery.',
 }
 
 export const woodbridgeLocationMeta = PAGE_SEO['/locations/woodbridge']!
@@ -46,7 +46,7 @@ export const woodbridgeLocation = {
       href: `mailto:${woodbridgeNap.email}`,
     },
   },
-  intro: 'Cafe, kitchen, and bar in Woodbridge.',
+  intro: 'Cafe, kitchen, and bar in Woodbridge, Vaughan.',
   nap: woodbridgeNap,
   cafeHours,
   barHours,
