@@ -79,7 +79,7 @@
       "newsletter": {
         "_type": "newsletter",
         "heading": "Stay in the loop",
-        "text": "A note when the menu or hours change.",
+        "text": "Sign up for our newsletter and be the first to know about exclusive offers.",
         "placeholder": "Enter your email address",
         "buttonLabel": "Subscribe",
         "successMessage": "Thank you! Your submission has been received!",

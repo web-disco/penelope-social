@@ -26,7 +26,7 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Menu category + item titles — Title Case in Studio (The Pizzas, Handhelds, Cocktails, Red Wine, White Wine, Middle Table). Keep NY, DOP, 2oz. The site also title-cases at render if Studio is stale. Descriptions stay as written.',
   'Do not 301 /sourdough-bakery — dedicated page ships from the repo (Bakehouse sourdough, served here). Unpublish the old “Best Sourdough Bakery in Vaughan” CMS doc so it cannot override.',
   'Copy rule: say what it is. No em or en dashes. No “not a dining room”. No street addresses in heroes. Woodbridge in meta + about intro.',
-  'Footer newsletter copy — “A note when the menu or hours change.” Footer menus blurb — “Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.” Repo rewrites slop if Studio is stale.',
+  'Footer newsletter copy stays “Sign up for our newsletter and be the first to know about exclusive offers.” Footer menus blurb — “Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.” Repo rewrites slop if Studio is stale.',
   'GSC — submit https://penelopesocial.com/sitemap-index.xml only (not sitemap.xml)',
   'Optional: add FAQ / Timeline page-builder blocks',
 ] as const

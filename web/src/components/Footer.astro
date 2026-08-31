@@ -49,15 +49,13 @@ const copyrightText = `© ${YEAR} Penelope Social`
 
 const FOOTER_MENUS_BLURB =
   'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.'
-const NEWSLETTER_SUPPORT = 'A note when the menu or hours change.'
+const NEWSLETTER_SUPPORT =
+  'Sign up for our newsletter and be the first to know about exclusive offers.'
 const menusBlurbRaw = restaurantCopy(menus.blurb, FOOTER_MENUS_BLURB)
 const menusBlurb = /featuring the best|shareable['’]s|handcrafted/i.test(menusBlurbRaw)
   ? FOOTER_MENUS_BLURB
   : menusBlurbRaw || FOOTER_MENUS_BLURB
-const newsletterTextRaw = restaurantCopy(newsletter.text, NEWSLETTER_SUPPORT)
-const newsletterText = /exclusive offers|first to know/i.test(newsletterTextRaw)
-  ? NEWSLETTER_SUPPORT
-  : newsletterTextRaw || NEWSLETTER_SUPPORT
+const newsletterText = restaurantCopy(newsletter.text, NEWSLETTER_SUPPORT) || NEWSLETTER_SUPPORT
 
 /* Subtle hover for every footer link, matching the .35s of the buttons around
    it. Not applied to the Google Reviews button, which has its own colour

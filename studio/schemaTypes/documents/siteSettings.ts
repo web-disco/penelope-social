@@ -72,7 +72,8 @@ export const siteSettings = defineType({
               title: 'Copy',
               type: 'text',
               rows: 2,
-              initialValue: 'A note when the menu or hours change.',
+              initialValue:
+                'Sign up for our newsletter and be the first to know about exclusive offers.',
             }),
             defineField({ name: 'placeholder', title: 'Input placeholder', type: 'string' }),
             defineField({ name: 'buttonLabel', title: 'Button label', type: 'string' }),
