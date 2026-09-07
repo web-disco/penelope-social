@@ -5,8 +5,8 @@
     "title": "Home",
     "seo": {
       "_type": "seo",
-      "metaTitle": "Sourdough Bakery & Restaurant in Vaughan | Penelope Social",
-      "metaDescription": "Experience Penelope Social, a Sourdough Bakery & Restaurant in Vaughan. Indulge in freshly baked goods and delicious meals. Visit us today!",
+      "metaTitle": "Penelope Social | Cafe and bar in Woodbridge",
+      "metaDescription": "Cafe and bar at 125 Hawkview Blvd, Woodbridge. Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.",
       "ogImage": {
         "_type": "image",
         "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674ccd3a69b8aa62b7549081_og-image.png",
@@ -22,8 +22,8 @@
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/6738fc337434df480308980c_penelope-social-gathering.avif",
           "alt": "People having dinner at Penelope Social"
         },
-        "heading": "Sourdough Bakery & Restaurant in Vaughan.",
-        "body": "New York-style sourdough pizza, artisanal handhelds, and creative cocktails, made in our micro bakery.",
+        "heading": "Good food, better company at Penelope Social in Woodbridge",
+        "body": "Focaccia sandwiches at lunch, sourdough pizza at dinner, and cocktails whenever you sit down.",
         "orderOnline": {
           "_type": "link",
           "label": "Order Online",
@@ -38,42 +38,21 @@
         }
       },
       {
-        "_type": "introSection",
-        "_key": "intro",
-        "heading": "Sourdough Bakery\n& Restaurant",
-        "intro": "Penelope Social is a hidden gem in Vaughan, offering the best New York-style sourdough pizza, artisanal handhelds, and creative cocktails, all made with love in our micro sourdough bakery. Whether you're stopping by for a quick bite or a relaxing evening, our welcoming atmosphere feels like home.",
-        "ctas": [
-          {
-            "_type": "button",
-            "_key": "cta0",
-            "label": "reservations",
-            "url": "/reservations",
-            "style": "primary"
-          },
-          {
-            "_type": "button",
-            "_key": "cta1",
-            "label": "our story",
-            "url": "/about",
-            "style": "outline"
-          }
-        ]
-      },
-      {
         "_type": "menuCards",
         "_key": "menus",
-        "heading": "Explore our menus",
-        "intro": "Lunch, dinner, the bar, and catering — all made in our sourdough bakery.",
+        "heading": "On the menu",
+        "intro": "Lunch, dinner, the bar, and catering trays, all from this kitchen.",
         "cta": {
           "_type": "link",
-          "label": "View all menus",
+          "label": "Explore our menus",
           "url": "/menus"
         },
         "cards": [
           {
             "_type": "menuCard",
             "_key": "card0",
-            "title": "lunch",
+            "title": "Lunch",
+            "line": "Pizza and focaccia sandwiches",
             "url": "/menus/lunch",
             "image": {
               "_type": "image",
@@ -86,20 +65,22 @@
           {
             "_type": "menuCard",
             "_key": "card1",
-            "title": "bar",
+            "title": "Bar",
+            "line": "Cocktails till late",
             "url": "/menus/bar",
             "image": {
               "_type": "image",
               "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif",
               "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673abcd7e9962bf4ba5c6fc7_coctail.avif 1080w",
               "_migrationSizes": "(max-width: 1080px) 100vw, 1080px",
-              "alt": "Crafted Cocktail"
+              "alt": "Cocktails at the bar"
             }
           },
           {
             "_type": "menuCard",
             "_key": "card2",
-            "title": "dinner",
+            "title": "Dinner",
+            "line": "Pizza and shareables",
             "url": "/menus/dinner",
             "image": {
               "_type": "image",
@@ -113,6 +94,7 @@
             "_type": "menuCard",
             "_key": "card3",
             "title": "Catering",
+            "line": "Trays for your event",
             "url": "/menus/catering",
             "image": {
               "_type": "image",
@@ -126,34 +108,13 @@
       },
       {
         "_type": "textWithMediaSection",
-        "_key": "bread",
-        "layout": "image-first",
-        "heading": "crafted Sourdough",
-        "body": "At Penelope, we craft naturally leavened sourdough with the finest local and imported flours. Our 40-hour fermentation creates a flavorful, gut-friendly loaf that's easy to digest. Experience the best sourdough in Vaughan, baked with care and time.",
-        "cta": {
-          "_type": "button",
-          "label": "Sourdough Bakery",
-          "url": "/sourdough-bakery",
-          "newTab": false,
-          "style": "primary"
-        },
-        "image": {
-          "_type": "image",
-          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1.avif",
-          "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1.avif 700w",
-          "_migrationSizes": "(max-width: 700px) 100vw, 700px",
-          "alt": "Loaves of Sourdough Bread"
-        }
-      },
-      {
-        "_type": "textWithMediaSection",
         "_key": "events",
         "layout": "copy-first",
-        "heading": "Events At Penelope",
-        "body": "Celebrate at Penelope Social, Vaughan's perfect spot for any event. Whether it’s a birthday, corporate gathering, or special occasion, we offer artisanal dishes, handcrafted cocktails, and a warm, inviting atmosphere. Let our dedicated team handle the details while you relax, enjoy exceptional flavors, and create unforgettable memories with your guests.",
+        "heading": "Events at Penelope",
+        "body": "Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.",
         "cta": {
           "_type": "button",
-          "label": "plan event",
+          "label": "Plan an event",
           "url": "/catering-events",
           "newTab": false,
           "style": "primary"
@@ -162,6 +123,27 @@
           "_type": "image",
           "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd6a82f4cc92b24d53393_DSC_9066%201.avif",
           "alt": "Event at Penelope"
+        }
+      },
+      {
+        "_type": "textWithMediaSection",
+        "_key": "bread",
+        "layout": "image-first",
+        "heading": "Good bread, served here every day",
+        "body": "Loaves start at Penelope Bakehouse and land here as sandwiches and pizza, or as bread with dinner.",
+        "cta": {
+          "_type": "button",
+          "label": "Visit the Bakehouse",
+          "url": "https://penelopebakehouse.com",
+          "newTab": true,
+          "style": "outline"
+        },
+        "image": {
+          "_type": "image",
+          "_migrationSrc": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1.avif",
+          "_migrationSrcset": "https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1-p-500.avif 500w, https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673bd40cbabda2cdfd221245_Penelope-Restaruant-Slides-Bread-1.avif 700w",
+          "_migrationSizes": "(max-width: 700px) 100vw, 700px",
+          "alt": "Loaves of Sourdough Bread"
         }
       }
     ]

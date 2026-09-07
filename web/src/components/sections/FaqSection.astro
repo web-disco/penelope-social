@@ -1,0 +1,64 @@
+---
+/**
+ * FAQ accordion with optional FAQPage JSON-LD.
+ */
+import { heading, layout, radius, space, typeScale } from '../../lib/ui'
+import type { FaqItem } from '../../data/types'
+import { faqPageSchema } from '../../lib/schema'
+
+interface Props {
+  headingText?: string
+  items: FaqItem[]
+  includeSchema?: boolean
+}
+const {
+  headingText = 'FAQs',
+  items,
+  includeSchema = true,
+} = Astro.props
+---
+
+<section class="section-faq" id="faq">
+  <div class:list={[layout.shell, space.sectionY]}>
+    <h2 class={heading.medium}>{headingText}</h2>
+    <div class:list={['faq-list mx-auto w-full max-w-[1100px]', space.sectionGapTop]}>
+      {
+        items.map((item) => (
+          <details
+            class:list={[
+              'faq-item group border-t border-charcoal/30 last:border-b',
+              radius.none,
+            ]}
+          >
+            <summary
+              class:list={[
+                'faq-question cursor-pointer list-none marker:content-none py-[20px] text-charcoal',
+                typeScale.faq,
+              ]}
+            >
+              <span class="flex items-center justify-between gap-space-16 wf-sm:items-start">
+                <span class="min-w-0 wf-sm:max-w-[20ch]">{item.question}</span>
+                <span
+                  class={`faq-chevron inline-block text-charcoal/60 transition-transform duration-300 group-open:rotate-45 ${typeScale.body}`}
+                  aria-hidden="true"
+                >
+                  +
+                </span>
+              </span>
+            </summary>
+            <p
+              class={`faq-answer mt-0 mb-0 pb-[20px] text-charcoal/85 ${typeScale.body} [&_a]:text-charcoal [&_a]:underline [&_a]:underline-offset-[0.18em] [&_a]:decoration-charcoal/40 [&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70`}
+              set:html={item.answer}
+            />
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+{
+  includeSchema && (
+    <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', ...faqPageSchema(items) })} />
+  )
+}

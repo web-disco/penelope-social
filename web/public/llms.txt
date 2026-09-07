@@ -1,0 +1,68 @@
+# Penelope Social
+
+Penelope Social is a Woodbridge cafe and bar: lunch and dinner, plus drinks, serving Bakehouse sourdough.
+
+Penelope Bakehouse is the Scarborough bakehouse and focacceria.
+
+## Location (Google Business / NAP)
+
+- Name: Penelope Social
+- Street: 125 Hawkview Blvd
+- Locality: Woodbridge
+- Region: ON
+- Postal: L4H 2E2
+- Country: Canada
+- Phone: (905) 607-0606
+- Email: info@penelopesocial.com
+- Maps: https://www.google.com/maps/search/?api=1&query=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2
+
+Vaughan is the wider municipality / area served. Woodbridge is the city in titles and addressLocality.
+
+## Hours
+
+Cafe: Monday to Saturday 9am to 3pm, Sunday 8am to 12pm
+Bar: Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am
+
+## Site
+
+- Canonical site: https://penelopesocial.com (apex; www 301s to apex)
+- Home: https://penelopesocial.com/
+- About: https://penelopesocial.com/about
+- Contact: https://penelopesocial.com/contact
+- Catering and events: https://penelopesocial.com/catering-events
+- Menus: https://penelopesocial.com/menus
+- Lunch: https://penelopesocial.com/menus/lunch
+- Dinner: https://penelopesocial.com/menus/dinner
+- Bar: https://penelopesocial.com/menus/bar
+- Catering menu: https://penelopesocial.com/menus/catering
+- Merchandise: https://penelopesocial.com/merchandise
+- Locations: https://penelopesocial.com/locations
+- Woodbridge restaurant: https://penelopesocial.com/locations/woodbridge
+- Scarborough bakehouse (sister): https://penelopesocial.com/locations/scarborough
+- Bakehouse sourdough, served here: https://penelopesocial.com/sourdough-bakery
+
+## Reservations
+
+Reservations: https://penelopesocial.com/reservations
+Toast: https://tables.toasttab.com/restaurants/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/reserve?partySize=2
+
+/events 301s to /catering-events. Do not rename catering-events to /catering (that would collide with /menus/catering).
+/sourdough-bakery stays on this site as a Social vs Bakehouse page. Do not 301 it to /about or to penelopebakehouse.com. It is not in the header nav. The homepage bread CTA and that page link to https://penelopebakehouse.com.
+
+## Order online and gift cards
+
+Order online: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+Gift cards: https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard
+
+## Sister bakery
+
+Penelope Bakehouse, 71 Howden Rd, Scarborough, ON M1R 3C7
+https://penelopebakehouse.com
+Phone (647) 812-0104
+Social serves Bakehouse sourdough. Bakehouse is the Scarborough bakehouse and focacceria.
+
+## Sitemap
+
+Submit only https://penelopesocial.com/sitemap-index.xml on sc-domain:penelopesocial.com.
+/sitemap.xml 301s to the index. Submit the index only.
+Keep /contact in the sitemap. Request indexing for /contact is a GSC click after submit.

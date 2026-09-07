@@ -10,6 +10,7 @@ import { formField } from './objects/formField'
 import { hoursBlock } from './objects/hoursBlock'
 import { social } from './objects/social'
 import { storyVideo } from './objects/storyVideo'
+import { faqItem } from './objects/faqItem'
 
 // sections (page-builder blocks)
 import { hero } from './sections/hero'
@@ -23,6 +24,8 @@ import { storySection } from './sections/storySection'
 import { merchListing } from './sections/merchListing'
 import { contactFormSection } from './sections/contactFormSection'
 import { imageGrid } from './sections/imageGrid'
+import { faqSection } from './sections/faqSection'
+import { stepTimeline } from './sections/stepTimeline'
 
 // documents
 import { siteSettings } from './documents/siteSettings'
@@ -47,6 +50,8 @@ export const sectionTypes = [
   merchListing,
   contactFormSection,
   imageGrid,
+  faqSection,
+  stepTimeline,
 ]
 
 export const objectTypes = [
@@ -61,6 +66,7 @@ export const objectTypes = [
   hoursBlock,
   social,
   storyVideo,
+  faqItem,
 ]
 
 export const documentTypes = [siteSettings, homepage, page, menu, merchProduct]

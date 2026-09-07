@@ -1,12 +1,29 @@
 ---
 /**
- * Navbar — inline links + CTAs on wide screens; hamburger drawer below 1200px.
+ * Navbar — inline links + CTAs on wide screens; hamburger after the CTA slot
+ * on the right (Bakehouse). Logo stays absolute-centered. Drawer below 1536px.
  * Pattern copied from Bakehouse. Nav items are the new Social IA;
  * Order / Reservations still come from site settings.
  * Scroll hides nothing — the bar stays put and fills charcoal past 48px.
  */
 import { btn, heading, layout } from '../lib/ui'
 import { imageUrl } from '../lib/image'
+
+const GIFT_CARDS_URL =
+  'https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard'
+
+/** /sourdough-bakery stays live for GSC — it is not a nav item. */
+const DEFAULT_NAV = [
+  { label: 'Menu', url: '/menus' },
+  { label: 'About', url: '/about' },
+  { label: 'Locations', url: '/locations' },
+  { label: 'Gift Cards', url: GIFT_CARDS_URL, newTab: true },
+  { label: 'Catering', url: '/catering-events' },
+  { label: 'Merch', url: '/merchandise' },
+]
+
+const isBakeryNav = (link: { label?: string; url?: string }) =>
+  /^bakery$/i.test(link.label ?? '') || /sourdough-bakery/i.test(link.url ?? '')
 
 interface Props {
   settings: any
@@ -18,22 +35,17 @@ const { settings, isHome = false, solidNav = false } = Astro.props
 const header = settings.header ?? {}
 const logoSrc = imageUrl(header.logo) || '/penelope-logo.svg'
 
-const GIFT_CARDS_URL =
-  'https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard'
-
-const navLinks = [
-  { label: 'Menu', url: '/menus' },
-  { label: 'About', url: '/about' },
-  { label: 'Locations', url: '/locations' },
-  { label: 'Gift Cards', url: GIFT_CARDS_URL, newTab: true },
-  { label: 'Catering', url: '/catering-events' },
-  { label: 'Merch', url: '/merchandise' },
-]
+const authoredNav = Array.isArray(header.drawerLinks) ? header.drawerLinks : []
+const navLinks = (authoredNav.length ? authoredNav : DEFAULT_NAV).filter((link) => !isBakeryNav(link))
+const isMerchNav = (link: { label?: string; url?: string }) =>
+  /^merch$/i.test(link.label ?? '') || /\/merchandise/i.test(link.url ?? '')
+const desktopNavLinks = navLinks.filter((link) => !isMerchNav(link))
 
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/'
 const currentHash = Astro.url.hash
 
 const isCurrent = (url: string) => {
+  if (/^https?:\/\//i.test(url)) return false
   const [path, hash = ''] = url.split('#')
   const normalizedPath = path.replace(/\/$/, '') || '/'
 
@@ -62,15 +74,22 @@ const navScrolled = solidNav
   data-nav-scroll={solidNav ? 'false' : 'true'}
 >
   <div
-    class="navbar-wrap navbar__bar relative flex w-full items-stretch justify-between px-[25px]"
+    class="navbar-wrap navbar__bar relative flex w-full min-w-0 items-stretch justify-between mx-auto px-[25px] max-w-[1920px]"
   >
     <nav class="navbar__links" aria-label="Primary">
       {
-        navLinks.map((link) => (
+        desktopNavLinks.map((link) => (
           <a
             href={link.url}
             target={link.newTab ? '_blank' : undefined}
             rel={link.newTab ? 'noopener noreferrer' : undefined}
+            data-ga-event={
+              link.url.includes('egiftcards')
+                ? 'gift_card_click'
+                : link.url === '/catering-events'
+                  ? 'catering_click'
+                  : undefined
+            }
             class={linkClass}
           >
             {link.label}
@@ -79,67 +98,74 @@ const navScrolled = solidNav
       }
     </nav>
 
-    <button
-      class="navbar__toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="menu-drawer"
-      aria-label="Open menu"
-    >
-      <span class="navbar__toggle-bar"></span>
-      <span class="navbar__toggle-bar"></span>
-      <span class="navbar__toggle-bar"></span>
-    </button>
+    <div class="navbar__end">
+      <div class="navbar__actions flex items-center gap-3">
+        {
+          header.orderOnline?.url && (
+            <a
+              href={header.orderOnline.url}
+              target={header.orderOnline.newTab ? '_blank' : undefined}
+              rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
+              data-ga-event="order_click"
+              data-ga-placement="nav"
+              class:list={[btn.navSolid, 'navbar__cta']}
+            >
+              <span>{header.orderOnline.label}</span>
+            </a>
+          )
+        }
+        {
+          header.reservations?.url && (
+            <a
+              href={header.reservations.url}
+              target={header.reservations.newTab ? '_blank' : undefined}
+              rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
+              data-ga-event="reservation_click"
+              class:list={[btn.navOutline, 'navbar__cta']}
+            >
+              <span>
+                {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
+              </span>
+            </a>
+          )
+        }
+      </div>
 
-    <div class="navbar__actions flex items-center gap-3">
-      {
-        header.orderOnline?.url && (
-          <a
-            href={header.orderOnline.url}
-            target={header.orderOnline.newTab ? '_blank' : undefined}
-            rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
-            class:list={[btn.navSolid, 'navbar__cta']}
-          >
-            {header.orderOnline.label}
-          </a>
-        )
-      }
-      {
-        header.reservations?.url && (
-          <a
-            href={header.reservations.url}
-            target={header.reservations.newTab ? '_blank' : undefined}
-            rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
-            class:list={[btn.navOutline, 'navbar__cta']}
-          >
-            {header.reservations.label}
-          </a>
-        )
-      }
+      <button
+        class="navbar__toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="menu-drawer"
+        aria-label="Open menu"
+      >
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
     </div>
-  </div>
 
-  <a
-    href="/"
-    aria-current={isHome ? 'page' : undefined}
-    class:list={[
-      'navbar-logo-link navbar__logo pointer-events-auto absolute left-1/2 top-1/2 z-[70] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center no-underline',
-      isHome && 'w--current',
-    ]}
-  >
-    <img
-      src={logoSrc}
-      loading="eager"
-      alt={header.logoAlt ?? 'Penelope Logo'}
-      class="navbar-logo block w-[128px] wf-md:w-[110px] wf-xs:w-[84px]"
-    />
-    <span
-      aria-hidden="true"
-      class="navbar-logo-sub mt-space-8 font-body font-medium uppercase leading-none tracking-[0.32em] text-beige text-[10px] wf-md:text-[9px] wf-xs:mt-space-4 wf-xs:text-[7px] wf-xs:tracking-[0.26em]"
+    <a
+      href="/"
+      aria-current={isHome ? 'page' : undefined}
+      class:list={[
+        'navbar-logo-link navbar__logo pointer-events-auto absolute left-1/2 top-1/2 z-[70] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center no-underline',
+        isHome && 'w--current',
+      ]}
     >
-      Social
-    </span>
-  </a>
+      <img
+        src={logoSrc}
+        loading="eager"
+        alt={header.logoAlt ?? 'Penelope Logo'}
+        class="navbar-logo block w-[128px] wf-md:w-[110px] wf-xs:w-[84px]"
+      />
+      <span
+        aria-hidden="true"
+        class="navbar-logo-sub mt-space-8 font-body font-medium uppercase leading-none tracking-[0.32em] text-beige text-[10px] wf-md:text-[9px] wf-xs:mt-space-4 wf-xs:text-[7px] wf-xs:tracking-[0.26em]"
+      >
+        Social
+      </span>
+    </a>
+  </div>
 </div>
 
 <div
@@ -151,7 +177,7 @@ const navScrolled = solidNav
   aria-label="Menu"
   hidden
 >
-  <div class:list={['menu-drawer__bar', layout.shell]}>
+  <div class="menu-drawer__bar relative w-full min-w-0 mx-auto px-[25px] max-w-[1920px]">
     <button class="menu-drawer__close" type="button" aria-label="Close menu">
       <span class="menu-drawer__close-bar"></span>
       <span class="menu-drawer__close-bar"></span>
@@ -168,6 +194,15 @@ const navScrolled = solidNav
           aria-current={isCurrent(link.url) ? 'page' : undefined}
           class:list={['menu-drawer__link', isCurrent(link.url) && 'is-current']}
           data-menu-link
+          data-ga-event={
+            link.url.includes('egiftcards')
+              ? 'gift_card_click'
+              : link.url === '/catering-events'
+                ? 'catering_click'
+                : link.url === '/merchandise'
+                  ? 'merch_click'
+                  : undefined
+          }
         >
           <span class={heading.menuItem}>{link.label}</span>
           <span class="menu-drawer__arrow" aria-hidden="true">→</span>
@@ -183,9 +218,11 @@ const navScrolled = solidNav
           href={header.orderOnline.url}
           target={header.orderOnline.newTab ? '_blank' : undefined}
           rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
+          data-ga-event="order_click"
+          data-ga-placement="drawer"
           class:list={[btn.secondary, 'menu-drawer__cta']}
         >
-          {header.orderOnline.label}
+          <span>{header.orderOnline.label}</span>
         </a>
       )
     }
@@ -195,9 +232,12 @@ const navScrolled = solidNav
           href={header.reservations.url}
           target={header.reservations.newTab ? '_blank' : undefined}
           rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
+          data-ga-event="reservation_click"
           class:list={[btn.secondaryOutline, 'menu-drawer__cta']}
         >
-          {header.reservations.label}
+          <span>
+            {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
+          </span>
         </a>
       )
     }
@@ -208,6 +248,8 @@ const navScrolled = solidNav
   /* Desktop inline nav from 1536px — Social has more/longer links than Bakehouse,
      so the 1200px cut-off let Merch sit under the centered logo. */
   .navbar {
+    display: flex;
+    justify-content: center;
     min-height: var(--nav-height);
   }
 
@@ -253,6 +295,14 @@ const navScrolled = solidNav
     height: 2px;
     background: currentColor;
     transition: transform 0.35s ease, opacity 0.35s ease;
+  }
+
+  .navbar__end {
+    display: flex;
+    align-items: stretch;
+    align-self: stretch;
+    margin-left: auto;
+    gap: 12px;
   }
 
   .navbar__actions {

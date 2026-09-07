@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import BannerHero from '../../components/sections/BannerHero.astro'
+import LocationDetails from '../../components/sections/LocationDetails.astro'
+import FaqSection from '../../components/sections/FaqSection.astro'
+import { woodbridgeLocation, woodbridgeLocationMeta } from '../../data/locations'
+import { woodbridgeFaq } from '../../data/faq'
+import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../../lib/schema'
+import { INSTAGRAM_URL } from '../../data/site'
+
+const nap = woodbridgeLocation.nap
+
+const detailRows = [
+  ...woodbridgeLocation.cafeHours.map((block) => ({
+    label: block.label,
+    lines: block.lines,
+  })),
+  ...woodbridgeLocation.barHours.map((block) => ({
+    label: block.label,
+    lines: block.lines,
+  })),
+  {
+    label: 'Address',
+    lines: [`${nap.street}, ${nap.city}, ${nap.region} ${nap.postal}`],
+    href: nap.mapUrl,
+    external: true,
+  },
+  {
+    label: 'Phone',
+    lines: [nap.phone],
+    href: `tel:${nap.phoneDigits}`,
+  },
+  {
+    label: 'Email',
+    lines: [nap.email],
+    href: `mailto:${nap.email}`,
+  },
+  {
+    label: 'Social',
+    lines: ['Instagram'],
+    href: INSTAGRAM_URL,
+    external: true,
+  },
+]
+
+const graph = pageGraph([
+  restaurantSchema(),
+  bakehouseSchema(),
+  faqPageSchema(woodbridgeFaq),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Locations', path: '/locations' },
+    { name: 'Woodbridge', path: '/locations/woodbridge' },
+  ]),
+])
+---
+
+<BaseLayout title={woodbridgeLocationMeta.title} description={woodbridgeLocationMeta.description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
+  <main>
+    <BannerHero
+      src={woodbridgeLocation.hubImage.src}
+      alt={woodbridgeLocation.hubImage.alt}
+      headingText={woodbridgeLocation.hubTitle}
+      intro={woodbridgeLocation.intro}
+      objectPosition={woodbridgeLocation.hubImage.objectPosition}
+    />
+
+    <LocationDetails
+      headingText={woodbridgeLocation.detailHeading}
+      intro={woodbridgeLocation.offeringsBody}
+      ctas={woodbridgeLocation.detailCtas}
+      rows={detailRows}
+      mapQuery={nap.mapQuery}
+      mapTitle="Map to Penelope Social Woodbridge"
+    />
+
+    <FaqSection items={woodbridgeFaq} includeSchema={false} />
+  </main>
+</BaseLayout>

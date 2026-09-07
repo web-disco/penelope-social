@@ -16,7 +16,10 @@ import TeamGrid from './sections/TeamGrid.astro'
 import StorySection from './sections/StorySection.astro'
 import MerchListing from './sections/MerchListing.astro'
 import ContactFormSection from './sections/ContactFormSection.astro'
+import CateringEventsIntro from './sections/CateringEventsIntro.astro'
 import ImageGrid from './sections/ImageGrid.astro'
+import FaqSection from './sections/FaqSection.astro'
+import StepTimeline from './sections/StepTimeline.astro'
 
 const COMPONENTS: Record<string, any> = {
   hero: Hero,
@@ -30,12 +33,15 @@ const COMPONENTS: Record<string, any> = {
   merchListing: MerchListing,
   contactFormSection: ContactFormSection,
   imageGrid: ImageGrid,
+  faqSection: FaqSection,
+  stepTimeline: StepTimeline,
 }
 
 interface Props {
   sections: any[]
 }
 const { sections = [] } = Astro.props
+const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
 
 {
@@ -45,9 +51,41 @@ const { sections = [] } = Astro.props
       console.warn(`[PageBuilder] no component registered for section type "${block._type}"`)
       return null
     }
-    /* Homepage hero now carries the H1, so the intro under it drops to h2. */
+    const hasPageHero = sections.some((section) => section._type === 'pageHero')
+    if (block._type === 'pageHero' && path === '/catering-events') {
+      return (
+        <>
+          <Component block={block} />
+          <CateringEventsIntro />
+        </>
+      )
+    }
+    /* Homepage hero is the H1. The old “Cafe and bar in Woodbridge” intro is gone. */
     if (block._type === 'introSection' && sections.some((section) => section._type === 'hero')) {
-      return <Component block={block} headingLevel="h2" />
+      return null
+    }
+    /* Title + lede live on the photo. Never a second cream H1. */
+    if (block._type === 'pageHeading' && hasPageHero) {
+      return null
+    }
+    if (block._type === 'introSection' && hasPageHero) {
+      if (block.ctas?.length) {
+        return <Component block={{ ...block, heading: '' }} headingLevel="h2" />
+      }
+      return null
+    }
+    /* Menu hub and menu pages have no FAQ block. */
+    if (
+      block._type === 'faqSection' &&
+      /^\/menus(\/|$)/.test(Astro.url.pathname.replace(/\/$/, '') || '/')
+    ) {
+      return null
+    }
+    if (block._type === 'faqSection') {
+      return <FaqSection headingText={block.heading} items={block.items ?? []} />
+    }
+    if (block._type === 'stepTimeline') {
+      return <StepTimeline headingText={block.heading} steps={block.steps ?? []} />
     }
     return <Component block={block} />
   })
