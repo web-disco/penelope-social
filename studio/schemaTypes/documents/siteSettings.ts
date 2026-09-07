@@ -42,7 +42,8 @@ export const siteSettings = defineType({
           name: 'drawerLinks',
           title: 'Nav links',
           type: 'array',
-          description: 'Shown in the desktop bar and the mobile menu.',
+          description:
+            'Desktop bar + mobile drawer. Order: Menus, About, Locations, Gift Cards, Catering (/catering-events), Merch. Label is “Menus” (not “Our Menus”). Do not add Bakery. The site rewrites stale labels and injects Locations if missing.',
           of: [defineArrayMember({ type: 'link' })],
         }),
       ],

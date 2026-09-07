@@ -131,6 +131,10 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
     'Catering tray menu | Pizza, focaccia, salads | Penelope Social',
   'Trays of sandwiches, pizza, and more from Penelope Social in Woodbridge. See the catering menu, then enquire at /catering-events.':
     'Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8 to 10. Prices on this page. Book trays on Catering and events. We prefer 24 hours notice.',
+  'Our Menus': 'Menus',
+  'Our menus': 'Menus',
+  'our menus': 'Menus',
+  'Our Menu': 'Menus',
   'Penelope Social\nMenus Vaughan': 'On the menu',
   'Menus at Penelope Social': 'On the menu',
   'Penelope Social Menu Vaughan | Lunch, Dinner & Catering':
@@ -335,4 +339,11 @@ export function displayHeading(text?: string, fallback?: string): string {
 
 export function displayLinkLabel(text?: string): string {
   return displayHeading(text)
+}
+
+/** Footer / mosaic chrome: never leave “Our Menus” on the page. */
+export function displayMenusHeading(text?: string, fallback = 'Menus'): string {
+  const raw = displayHeading(text, fallback)
+  if (/^(our\s+)?menus?$/i.test(raw)) return 'Menus'
+  return raw || fallback
 }

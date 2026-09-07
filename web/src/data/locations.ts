@@ -17,8 +17,8 @@ import {
 export const locationsHubMeta = PAGE_SEO['/locations']!
 
 export const locationsHub = {
-  heading: 'Social and Bakehouse',
-  intro: 'Woodbridge cafe and bar, in Vaughan. Scarborough bakery.',
+  heading: 'Our locations',
+  intro: 'Two sister spots. Woodbridge cafe and bar, Scarborough bakery.',
 }
 
 export const woodbridgeLocationMeta = PAGE_SEO['/locations/woodbridge']!
@@ -46,14 +46,14 @@ export const woodbridgeLocation = {
       href: `mailto:${woodbridgeNap.email}`,
     },
   },
-  intro: 'Cafe, kitchen, and bar in Woodbridge, Vaughan.',
+  intro: 'Cafe, kitchen, and bar in Woodbridge',
   nap: woodbridgeNap,
   cafeHours,
   barHours,
   offeringsHeading: 'Cafe, kitchen, and bar',
   offeringsBody:
-    'Focaccia sandwiches and pizza at lunch, then dinner plates and drinks, with sourdough from Penelope Bakehouse.',
-  detailHeading: 'Cafe, kitchen, and bar',
+    'Penelope Social is the Woodbridge cafe and bar. Focaccia sandwiches and pizza at lunch, dinner plates and drinks after. Bread starts at Penelope Bakehouse in Scarborough.',
+  detailHeading: 'Cafe by day, bar by night',
   detailCtas: [
     { label: 'Order online', url: ORDER_ONLINE_URL, style: 'primary' as const, newTab: true },
     { label: 'Reservations', url: RESERVATIONS_PATH, style: 'outline' as const },
@@ -86,10 +86,10 @@ export const scarboroughLocation = {
       href: `mailto:${scarboroughBakehouse.email}`,
     },
   },
-  intro: 'Sourdough and focaccia, pizza by the slice.',
-  offeringsHeading: 'Sourdough and focaccia, baked here',
+  intro: 'Sister bakehouse in Scarborough',
+  offeringsHeading: 'Sourdough and focaccia, baked there',
   offeringsBody:
-    'Loaves, focaccia sandwiches, pizza by the slice. Hours and menu live on penelopebakehouse.com, plus online orders.',
+    'Penelope Bakehouse is the Scarborough bakery. Loaves, focaccia sandwiches, pizza by the slice. Hours and the bakery menu live on penelopebakehouse.com.',
   hubBlurb: 'Sourdough and focaccia, pizza by the slice.',
   ctas: [
     {

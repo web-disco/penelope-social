@@ -14,7 +14,7 @@ import { heading, containerFooter, container, typeScale } from '../lib/ui'
 import { imageUrl } from '../lib/image'
 import NewsletterForm from './NewsletterForm.astro'
 import LineText from './LineText.astro'
-import { displayHeading, displayLinkLabel, restaurantCopy } from '../data/copy'
+import { displayHeading, displayLinkLabel, displayMenusHeading, restaurantCopy } from '../data/copy'
 import { mailtoHref, stackedHoursBlocks } from '../data/site'
 
 interface Props {
@@ -131,7 +131,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         <h4
           class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
         >
-          {displayHeading(menus.heading, 'Menus')}
+          {displayMenusHeading(menus.heading, 'Menus')}
         </h4>
         <!-- Capped so the blurb wraps inside its column instead of setting the
              column's natural width from its longest line. -->

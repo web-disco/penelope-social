@@ -27,7 +27,7 @@
         {
           "_type": "link",
           "_key": "menu",
-          "label": "Menu",
+          "label": "Menus",
           "url": "/menus",
           "newTab": false
         },

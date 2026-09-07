@@ -1,29 +1,12 @@
 ---
 /**
- * Navbar — inline links + CTAs on wide screens; hamburger after the CTA slot
- * on the right (Bakehouse). Logo stays absolute-centered. Drawer below 1536px.
- * Pattern copied from Bakehouse. Nav items are the new Social IA;
- * Order / Reservations still come from site settings.
- * Scroll hides nothing — the bar stays put and fills charcoal past 48px.
+ * Navbar — inline links + CTAs on wide screens; hamburger drawer below 1536px.
+ * Drawer open/close, spacing, type, and close-on-the-right match Bakehouse.
+ * Social keeps two CTAs (Order / Reservations) and Merch in the drawer.
  */
 import { btn, heading, layout } from '../lib/ui'
 import { imageUrl } from '../lib/image'
-
-const GIFT_CARDS_URL =
-  'https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard'
-
-/** /sourdough-bakery stays live for GSC — it is not a nav item. */
-const DEFAULT_NAV = [
-  { label: 'Menu', url: '/menus' },
-  { label: 'About', url: '/about' },
-  { label: 'Locations', url: '/locations' },
-  { label: 'Gift Cards', url: GIFT_CARDS_URL, newTab: true },
-  { label: 'Catering', url: '/catering-events' },
-  { label: 'Merch', url: '/merchandise' },
-]
-
-const isBakeryNav = (link: { label?: string; url?: string }) =>
-  /^bakery$/i.test(link.label ?? '') || /sourdough-bakery/i.test(link.url ?? '')
+import { isMerchNav, resolveNavLinks } from '../data/nav'
 
 interface Props {
   settings: any
@@ -33,12 +16,10 @@ interface Props {
 const { settings, isHome = false, solidNav = false } = Astro.props
 
 const header = settings.header ?? {}
+const socials = settings.footer?.contact?.socials ?? []
 const logoSrc = imageUrl(header.logo) || '/penelope-logo.svg'
 
-const authoredNav = Array.isArray(header.drawerLinks) ? header.drawerLinks : []
-const navLinks = (authoredNav.length ? authoredNav : DEFAULT_NAV).filter((link) => !isBakeryNav(link))
-const isMerchNav = (link: { label?: string; url?: string }) =>
-  /^merch$/i.test(link.label ?? '') || /\/merchandise/i.test(link.url ?? '')
+const navLinks = resolveNavLinks(header.drawerLinks)
 const desktopNavLinks = navLinks.filter((link) => !isMerchNav(link))
 
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/'
@@ -59,9 +40,16 @@ const isCurrent = (url: string) => {
 
 const linkClass =
   'nav-link whitespace-nowrap text-beige no-underline font-body font-medium uppercase ' +
-  'text-[13px] tracking-[0.06em] leading-[1.4] transition-opacity duration-[350ms] hover:opacity-70'
+  'text-[13px] tracking-[0.08em] leading-[1.4] transition-opacity duration-[350ms] hover:opacity-70'
 
 const navScrolled = solidNav
+
+function gaEventForNav(url: string) {
+  if (url.includes('egiftcards')) return 'gift_card_click'
+  if (url === '/catering-events') return 'catering_click'
+  if (url === '/merchandise') return 'merch_click'
+  return undefined
+}
 ---
 
 <div
@@ -74,7 +62,10 @@ const navScrolled = solidNav
   data-nav-scroll={solidNav ? 'false' : 'true'}
 >
   <div
-    class="navbar-wrap navbar__bar relative flex w-full min-w-0 items-stretch justify-between mx-auto px-[25px] max-w-[1920px]"
+    class:list={[
+      'navbar-wrap navbar__bar relative flex items-stretch justify-between',
+      layout.navShell,
+    ]}
   >
     <nav class="navbar__links" aria-label="Primary">
       {
@@ -83,13 +74,7 @@ const navScrolled = solidNav
             href={link.url}
             target={link.newTab ? '_blank' : undefined}
             rel={link.newTab ? 'noopener noreferrer' : undefined}
-            data-ga-event={
-              link.url.includes('egiftcards')
-                ? 'gift_card_click'
-                : link.url === '/catering-events'
-                  ? 'catering_click'
-                  : undefined
-            }
+            data-ga-event={gaEventForNav(link.url)}
             class={linkClass}
           >
             {link.label}
@@ -98,74 +83,72 @@ const navScrolled = solidNav
       }
     </nav>
 
-    <div class="navbar__end">
-      <div class="navbar__actions flex items-center gap-3">
-        {
-          header.orderOnline?.url && (
-            <a
-              href={header.orderOnline.url}
-              target={header.orderOnline.newTab ? '_blank' : undefined}
-              rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
-              data-ga-event="order_click"
-              data-ga-placement="nav"
-              class:list={[btn.navSolid, 'navbar__cta']}
-            >
-              <span>{header.orderOnline.label}</span>
-            </a>
-          )
-        }
-        {
-          header.reservations?.url && (
-            <a
-              href={header.reservations.url}
-              target={header.reservations.newTab ? '_blank' : undefined}
-              rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
-              data-ga-event="reservation_click"
-              class:list={[btn.navOutline, 'navbar__cta']}
-            >
-              <span>
-                {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
-              </span>
-            </a>
-          )
-        }
-      </div>
-
-      <button
-        class="navbar__toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="menu-drawer"
-        aria-label="Open menu"
-      >
-        <span class="navbar__toggle-bar"></span>
-        <span class="navbar__toggle-bar"></span>
-        <span class="navbar__toggle-bar"></span>
-      </button>
+    <div class="navbar__actions flex items-center gap-3">
+      {
+        header.orderOnline?.url && (
+          <a
+            href={header.orderOnline.url}
+            target={header.orderOnline.newTab ? '_blank' : undefined}
+            rel={header.orderOnline.newTab ? 'noopener noreferrer' : undefined}
+            data-ga-event="order_click"
+            data-ga-placement="nav"
+            class:list={[btn.navSolid, 'navbar__cta']}
+          >
+            <span>{header.orderOnline.label}</span>
+          </a>
+        )
+      }
+      {
+        header.reservations?.url && (
+          <a
+            href={header.reservations.url}
+            target={header.reservations.newTab ? '_blank' : undefined}
+            rel={header.reservations.newTab ? 'noopener noreferrer' : undefined}
+            data-ga-event="reservation_click"
+            class:list={[btn.navOutline, 'navbar__cta']}
+          >
+            <span>
+              {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
+            </span>
+          </a>
+        )
+      }
     </div>
 
-    <a
-      href="/"
-      aria-current={isHome ? 'page' : undefined}
-      class:list={[
-        'navbar-logo-link navbar__logo pointer-events-auto absolute left-1/2 top-1/2 z-[70] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center no-underline',
-        isHome && 'w--current',
-      ]}
+    <button
+      class="navbar__toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="menu-drawer"
+      aria-label="Open menu"
     >
-      <img
-        src={logoSrc}
-        loading="eager"
-        alt={header.logoAlt ?? 'Penelope Logo'}
-        class="navbar-logo block w-[128px] wf-md:w-[110px] wf-xs:w-[84px]"
-      />
-      <span
-        aria-hidden="true"
-        class="navbar-logo-sub mt-space-8 font-body font-medium uppercase leading-none tracking-[0.32em] text-beige text-[10px] wf-md:text-[9px] wf-xs:mt-space-4 wf-xs:text-[7px] wf-xs:tracking-[0.26em]"
-      >
-        Social
-      </span>
-    </a>
+      <span class="navbar__toggle-bar"></span>
+      <span class="navbar__toggle-bar"></span>
+      <span class="navbar__toggle-bar"></span>
+    </button>
   </div>
+
+  <a
+    href="/"
+    aria-current={isHome ? 'page' : undefined}
+    class:list={[
+      'navbar-logo-link navbar__logo pointer-events-auto absolute left-1/2 top-1/2 z-[70] flex -translate-x-1/2 -translate-y-1/2 flex-col items-center no-underline',
+      isHome && 'w--current',
+    ]}
+  >
+    <img
+      src={logoSrc}
+      loading="eager"
+      alt={header.logoAlt ?? 'Penelope Logo'}
+      class="navbar-logo block w-[128px] wf-md:w-[110px] wf-xs:w-[84px]"
+    />
+    <span
+      aria-hidden="true"
+      class="navbar-logo-sub mt-space-8 font-body font-medium uppercase leading-none tracking-[0.32em] text-beige text-[10px] wf-md:text-[9px] wf-xs:mt-space-4 wf-xs:text-[7px] wf-xs:tracking-[0.26em]"
+    >
+      Social
+    </span>
+  </a>
 </div>
 
 <div
@@ -177,7 +160,7 @@ const navScrolled = solidNav
   aria-label="Menu"
   hidden
 >
-  <div class="menu-drawer__bar relative w-full min-w-0 mx-auto px-[25px] max-w-[1920px]">
+  <div class:list={['menu-drawer__bar', layout.shell]}>
     <button class="menu-drawer__close" type="button" aria-label="Close menu">
       <span class="menu-drawer__close-bar"></span>
       <span class="menu-drawer__close-bar"></span>
@@ -194,15 +177,7 @@ const navScrolled = solidNav
           aria-current={isCurrent(link.url) ? 'page' : undefined}
           class:list={['menu-drawer__link', isCurrent(link.url) && 'is-current']}
           data-menu-link
-          data-ga-event={
-            link.url.includes('egiftcards')
-              ? 'gift_card_click'
-              : link.url === '/catering-events'
-                ? 'catering_click'
-                : link.url === '/merchandise'
-                  ? 'merch_click'
-                  : undefined
-          }
+          data-ga-event={gaEventForNav(link.url)}
         >
           <span class={heading.menuItem}>{link.label}</span>
           <span class="menu-drawer__arrow" aria-hidden="true">→</span>
@@ -212,6 +187,28 @@ const navScrolled = solidNav
   </nav>
 
   <div class:list={['menu-drawer__foot', layout.shell]}>
+    {
+      socials.length > 0 && (
+        <div class="menu-drawer__socials">
+          {socials.map((social: { platform?: string; url?: string; icon?: string }) => (
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.platform}
+              class="menu-drawer__social"
+            >
+              <img
+                src={social.icon ?? `/icons/${social.platform}.svg`}
+                alt=""
+                width="28"
+                height="28"
+              />
+            </a>
+          ))}
+        </div>
+      )
+    }
     {
       header.orderOnline?.url && (
         <a
@@ -258,6 +255,10 @@ const navScrolled = solidNav
   }
 
   .navbar__bar {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 1920px;
+    margin-inline: auto;
     min-height: var(--nav-height);
   }
 
@@ -297,14 +298,6 @@ const navScrolled = solidNav
     transition: transform 0.35s ease, opacity 0.35s ease;
   }
 
-  .navbar__end {
-    display: flex;
-    align-items: stretch;
-    align-self: stretch;
-    margin-left: auto;
-    gap: 12px;
-  }
-
   .navbar__actions {
     align-self: stretch;
   }
@@ -328,10 +321,11 @@ const navScrolled = solidNav
   @media (max-width: 1535px) {
     .navbar__bar {
       min-height: var(--nav-height);
+      justify-content: flex-end;
     }
   }
 
-  /* Full-screen drawer — Bakehouse layout */
+  /* Full-screen drawer — Bakehouse layout, Social CTAs */
   .menu-drawer {
     position: fixed;
     inset: 0;
@@ -340,7 +334,7 @@ const navScrolled = solidNav
     flex-direction: column;
     background-color: var(--color-charcoal);
     color: var(--color-beige);
-    overflow-y: auto;
+    overflow: hidden;
     overscroll-behavior: contain;
     block-size: 100vh;
     block-size: 100svh;
@@ -350,6 +344,14 @@ const navScrolled = solidNav
     flex-shrink: 0;
   }
 
+  .menu-drawer > .menu-drawer__links {
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+    flex-shrink: 1;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .menu-drawer[hidden] {
     display: none;
   }
@@ -357,7 +359,7 @@ const navScrolled = solidNav
   .menu-drawer__bar {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
     min-height: 72px;
     padding-block: var(--space-16, 16px);
   }
@@ -365,10 +367,10 @@ const navScrolled = solidNav
   .menu-drawer__close {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
     width: 44px;
     height: 44px;
-    margin-inline-start: -10px;
+    margin-inline-end: -10px;
     padding: 0;
     border: 0;
     background: transparent;
@@ -379,7 +381,7 @@ const navScrolled = solidNav
 
   .menu-drawer__close-bar {
     position: absolute;
-    left: 10px;
+    right: 10px;
     width: 24px;
     height: 2px;
     background: currentColor;
@@ -393,10 +395,11 @@ const navScrolled = solidNav
     transform: rotate(-45deg);
   }
 
+  /* 72px rows keep Order + Reservations on-screen at 375×667 / 100svh. */
   .menu-drawer__links {
     display: flex;
     flex-direction: column;
-    padding-block-start: var(--space-24, 24px);
+    padding-block-start: var(--space-8, 8px);
   }
 
   .menu-drawer__link {
@@ -427,14 +430,41 @@ const navScrolled = solidNav
     margin-block-start: auto;
     display: flex;
     flex-direction: column;
-    gap: var(--space-16, 16px);
-    padding-block: var(--space-32, 32px) calc(var(--space-48, 48px) + env(safe-area-inset-bottom, 0px));
+    gap: var(--space-12, 12px);
+    padding-block: var(--space-16, 16px) calc(var(--space-16, 16px) + env(safe-area-inset-bottom, 0px));
   }
 
   .menu-drawer__foot :global(.menu-drawer__cta) {
     display: block;
     width: 100%;
     text-align: center;
+  }
+
+  .menu-drawer__socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-24, 24px);
+  }
+
+  .menu-drawer__social {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    opacity: 0.9;
+    transition: opacity 0.35s ease;
+  }
+
+  .menu-drawer__social:hover {
+    opacity: 0.7;
+  }
+
+  .menu-drawer__social img {
+    display: block;
+    width: 28px;
+    height: 28px;
   }
 
   .navbar__toggle[data-quiet-focus]:focus-visible,
