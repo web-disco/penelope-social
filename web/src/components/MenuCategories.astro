@@ -7,22 +7,37 @@
  * (`.w-dyn-empty` "No items found.") for categories with no published items,
  * which /menus/lunch still shows. That is reproduced so the page matches.
  */
-import { container, pageSubHeading } from '../lib/ui'
+import { container } from '../lib/ui'
 import LineText from './LineText.astro'
 
 interface Props {
   categories: any[]
 }
 const { categories } = Astro.props
+
+/** Bakehouse sizes multi-price strings (glass/bottle, SM/LG, tier packs) down to 16px. */
+function isMultiPrice(price: string) {
+  return /[|/]/.test(price)
+}
 ---
 
 {
   categories.map((category) => (
     <div id={category.anchor?.current} class="menu-category">
       <div class={container}>
-        <h2 class={pageSubHeading}>{category.title}</h2>
+        <h2
+          class:list={[
+            'page-sub-heading mt-0 overflow-hidden font-body text-[28px] font-medium leading-none text-balance normal-case text-charcoal',
+            'wf-md:text-[26px] wf-sm:text-[24px] wf-xs:text-[22px]',
+            category.description
+              ? 'mb-space-12 wf-xs:mb-space-8'
+              : 'mb-space-24',
+          ]}
+        >
+          {category.title}
+        </h2>
         {category.description && (
-          <p class="menu-description mt-[-30px] mb-10">
+          <p class="menu-description mb-space-24 font-body text-[18px] font-normal leading-[150%] text-pretty text-charcoal wf-xs:text-[16px]">
             <LineText text={category.description} />
           </p>
         )}
@@ -44,7 +59,14 @@ const { categories } = Astro.props
                         heading and hid it with `.w-dyn-bind-empty`; omitting it
                         renders identically. */}
                     {item.price && (
-                      <h3 class="heading-menu-price mt-0 mb-0 font-body font-medium text-charcoal wf-xs:text-[18px]">
+                      <h3
+                        class:list={[
+                          'heading-menu-price mt-0 mb-0 shrink-0 whitespace-nowrap font-body font-medium leading-none text-charcoal',
+                          isMultiPrice(item.price)
+                            ? 'text-[16px] wf-xs:text-[14px]'
+                            : 'text-[24px] wf-xs:text-[18px]',
+                        ]}
+                      >
                         {item.price}
                       </h3>
                     )}
