@@ -151,10 +151,17 @@ environment:
 | `PUBLIC_TURNSTILE_SITE_KEY` | the widget's sitekey | build fails, deliberately |
 | `PUBLIC_SANITY_DATASET` | `production` | defaults to `production` |
 | `PUBLIC_SANITY_PROJECT_ID` | leave unset | falls back to `DEFAULT_PROJECT_ID` |
+| `SANITY_PREVIEW_DRAFTS` | leave unset on production | published-only (the default) |
+| `SANITY_API_READ_TOKEN` | leave unset on production | drafts stay invisible |
 
 Leave `PUBLIC_SANITY_PROJECT_ID` genuinely unset rather than blank — `data.ts`
 treats an empty value as "use the committed fixtures on purpose" and would
 deploy stale content without complaint.
+
+**Do not set `SANITY_PREVIEW_DRAFTS` or `SANITY_API_READ_TOKEN` on the
+production Workers Builds trigger.** Those two are build-time only (never
+`PUBLIC_*`) and exist so a laptop or a *preview* trigger can overlay Sanity
+drafts. See `.env.example`.
 
 Publishing in Sanity triggers a rebuild through a Workers Builds **Deploy Hook**
 registered as a Sanity webhook. Builds read the dataset live (`useCdn: false`),

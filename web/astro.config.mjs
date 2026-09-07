@@ -14,6 +14,8 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'never',
   build: { format: 'directory' },
+  // Matches README / Claude launch.json so `pnpm dev` is :4380, not Astro's 4321.
+  server: { port: 4380 },
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
