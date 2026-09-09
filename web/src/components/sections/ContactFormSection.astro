@@ -10,6 +10,7 @@
  * verifies Turnstile and emails the submission on — see web/worker/index.ts.
  */
 import { containerNoTop, pageSubHeadingSmall, formField, formFieldTextarea, btn } from '../../lib/ui'
+import { displayHeading } from '../../data/copy'
 import Turnstile from '../Turnstile.astro'
 
 interface Props {
@@ -24,7 +25,11 @@ const fields: any[] = block.fields ?? []
 <div class="section-events-form">
   <div class={containerNoTop}>
     <div class="form-block w-form mx-auto mb-0 max-w-[900px] text-center">
-      {block.heading && <h2 class={pageSubHeadingSmall}>{block.heading}</h2>}
+      {/* Sanity holds this as "plan your event". Every other heading on the
+          site goes through displayHeading, which repairs a value that arrived
+          all lowercase or ALL CAPS and leaves a deliberately cased one alone —
+          this one rendered raw, so the form sat under a lowercase h2. */}
+      {block.heading && <h2 class={pageSubHeadingSmall}>{displayHeading(block.heading)}</h2>}
       {block.intro && <p class="mb-0 mt-space-16 text-charcoal font-body text-[18px] leading-[150%] wf-xs:text-[16px]">{block.intro}</p>}
 
       <form

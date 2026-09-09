@@ -8,6 +8,6 @@ export const cateringMenuCopy = {
   intro: 'Party pizzas, sandwiches, breads, salads.',
   noteHeading: 'How to order these trays',
   noteBody:
-    'This page is the list and prices. Enquire on Catering and events for trays to-go, or a night in the restaurant.',
-  cta: { label: 'Enquire about catering', url: CATERING_EVENTS_URL },
+    'This page is the list and prices. Inquire on Catering and events for trays to-go, or a night in the restaurant.',
+  cta: { label: 'Inquire about catering', url: CATERING_EVENTS_URL },
 }
