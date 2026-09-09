@@ -1,5 +1,4 @@
 import { PAGE_SEO } from './seo'
-import { BAKEHOUSE_SITE_URL } from './site'
 
 export const aboutMeta = PAGE_SEO['/about']!
 
@@ -47,7 +46,7 @@ export const aboutPage = {
       alt: 'Hands shaping dough for Penelope',
       aspect: '9/16',
     },
-    ctas: [{ label: 'Visit the Bakehouse', url: BAKEHOUSE_SITE_URL, style: 'primary' as const, newTab: true }],
+    ctas: [{ label: 'Visit the Bakehouse', url: '/locations/scarborough', style: 'primary' as const }],
   },
   banner: {
     src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673feab787ea61dbd3013e50_about-banner.avif',

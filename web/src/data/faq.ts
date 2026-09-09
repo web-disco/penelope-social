@@ -1,15 +1,19 @@
 import type { FaqItem } from './types'
 import {
+  BAKEHOUSE_CATERING_URL,
+  BAKEHOUSE_MENU_URL,
   BAKEHOUSE_SITE_URL,
   CATERING_EVENTS_URL,
   CATERING_MENU_URL,
   ORDER_ONLINE_URL,
   RESERVATIONS_PATH,
+  scarboroughBakehouse,
   stackedHoursFaqHtml,
   woodbridgeNap,
 } from './site'
 
 const address = `${woodbridgeNap.street}, ${woodbridgeNap.city}, ${woodbridgeNap.region} ${woodbridgeNap.postal}`
+const bakehouseAddress = `${scarboroughBakehouse.street}, ${scarboroughBakehouse.city}, ${scarboroughBakehouse.region} ${scarboroughBakehouse.postal}`
 
 export const homeFaq: FaqItem[] = [
   {
@@ -118,42 +122,77 @@ export const contactFaq: FaqItem[] = [
   },
 ]
 
+/**
+ * Both location sets are copied from the pages penelopebakehouse.com serves for
+ * the same two addresses — same questions, same order, same wording — so a
+ * reader who lands on either site gets the same answers.
+ *
+ * The links are the one thing that cannot be copied verbatim. The Bakehouse
+ * site is describing these locations from the outside, so its answers link to
+ * penelopesocial.com and to its own /menu and /catering. Reproduced here those
+ * would either point the reader at the domain they are already on, or 404 —
+ * this site has no /menu or /catering. Each link therefore resolves to the
+ * equivalent on this side: on-site paths for Social, penelopebakehouse.com for
+ * anything that lives on the Bakehouse site.
+ */
 export const woodbridgeFaq: FaqItem[] = [
   {
     question: 'Where is Penelope Social?',
-    answer: `${address}. Woodbridge is in Vaughan. Phone ${woodbridgeNap.phone}.`,
+    answer: `${address}. Phone ${woodbridgeNap.phone}.`,
   },
   {
+    // Same hours the Bakehouse page prints, but kept as the shared constant so
+    // this cannot drift from the footer and hours table on this same page.
     question: 'What are the cafe and bar hours?',
     answer: stackedHoursFaqHtml,
   },
   {
     question: 'Do you take reservations?',
-    answer: `Yes. <a href="${RESERVATIONS_PATH}">Book a table</a> on Toast.`,
+    answer: `Yes. <a href="${RESERVATIONS_PATH}">Book a table</a> on Toast, or see <a href="/menus">menus</a> and more.`,
   },
   {
-    question: 'How is Penelope Bakehouse related?',
-    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse where the bread is baked. We serve it here.`,
+    question: 'Can I order online?',
+    answer: `Yes. <a href="${ORDER_ONLINE_URL}">Order online through Toast</a>, or use Order online on this page.`,
   },
   {
-    question: 'Is Penelope Social in Vaughan?',
-    answer: `Yes. Woodbridge is in the City of Vaughan. We're at ${address}.`,
+    question: 'Is this the same as Penelope Bakehouse?',
+    answer: `We're sister spots. Penelope Social is the Woodbridge cafe and bar. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria at ${scarboroughBakehouse.street} — where the bread is baked.`,
+  },
+  {
+    question: 'Do you offer catering and events?',
+    answer: `Yes. Plan catering and events through our <a href="${CATERING_EVENTS_URL}">catering and events page</a>.`,
   },
 ]
 
 export const scarboroughFaq: FaqItem[] = [
   {
-    question: 'What is Penelope Bakehouse?',
-    answer: `A bakehouse and focacceria at 71 Howden Rd. Loaves, sandwiches, pizza by the slice. Dinner and the bar are at <a href="/locations/woodbridge">Penelope Social</a>.`,
+    question: 'Where is Penelope Bakehouse?',
+    answer: `<a href="/locations">${bakehouseAddress}</a>. Phone <a href="tel:${scarboroughBakehouse.phoneDigits}">${scarboroughBakehouse.phone}</a>.`,
   },
   {
-    question: 'Where do I order Bakehouse bread?',
-    answer: `Visit <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a> for the menu, hours, online order.`,
+    question: 'What do you sell?',
+    answer: `Sourdough bread, <a href="${BAKEHOUSE_MENU_URL}">focaccia sandwiches, pizza by the slice</a>, focaccia loaves, sweets, coffee, and drinks.`,
   },
   {
-    question: 'Does Social serve Bakehouse bread?',
+    question: 'Do you make focaccia sandwiches?',
+    answer: `Yes. Our focacceria is inside the bakehouse. You'll find <a href="${BAKEHOUSE_MENU_URL}#sandwiches">Bianca, Classico, Calabrese</a>, Italian, Canadian, Caprese, and more.`,
+  },
+  {
+    question: 'Do you have pizza by the slice?',
+    answer: `Yes. Slices include <a href="${BAKEHOUSE_MENU_URL}#pizza">Margherita, NY Pepperoni, Vodka</a>, Spicy Vodka Pepp, and Bee Sting.`,
+  },
+  {
+    question: 'Is the sourdough baked in-house?',
     answer:
-      'Yes. Sourdough starts at the Scarborough bakehouse and is served at Social as sandwiches and pizza, and as loaves on the menu.',
+      'Yes. Every loaf is naturally fermented, shaped, and baked fresh daily at our Scarborough bakehouse, including the bread for our other locations.',
+  },
+  {
+    question: 'Do you offer catering?',
+    answer: `Yes. Request catering through our <a href="${BAKEHOUSE_CATERING_URL}">catering page form</a> (24 hours' notice preferred). Trays of sandwiches, pizza, and more.`,
+  },
+  {
+    question: 'Is this the same as Penelope Social?',
+    answer: `We're <a href="/locations">sister spots</a>. Penelope Bakehouse is the Scarborough bakehouse and focacceria at ${scarboroughBakehouse.street}. <a href="/locations/woodbridge">Penelope Social</a> is the Woodbridge cafe and bar at ${woodbridgeNap.street}.`,
   },
 ]
 

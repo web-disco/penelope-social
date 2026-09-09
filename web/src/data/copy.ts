@@ -243,6 +243,10 @@ export function restaurantCopy(text?: string, fallback?: string): string {
  */
 const TITLE_SMALL_WORDS = new Set([
   'a',
+  // Italian, for names the bar list carries verbatim: Amaro La Miscela al 30.
+  // The mixed-case rule below cannot save this one — "al" is all lowercase, so
+  // without an entry here it is a word to capitalise like any other.
+  'al',
   'an',
   'and',
   'as',
@@ -284,11 +288,22 @@ function titleCaseToken(token: string, isFirstWord: boolean, isLastWord: boolean
   if (/^[A-Z]{2,5}$/.test(core)) return lead + core + trail
   if (TITLE_UNIT.test(core)) return lead + core.toLowerCase() + trail
   if (/\d/.test(core)) return lead + core + trail
+  // Mixed case already, so somebody chose it: 'Nduja, Po'Boy, All'Arancia,
+  // Death By Penelope. This function repairs titles that arrive ALL CAPS or all
+  // lowercase, and it used to flatten these on the way past — the old
+  // `core.slice(1).toLowerCase()` could not tell an intentional interior capital
+  // from a stray one. The apostrophe made it worse: in "'Nduja" the first
+  // *character* is the quote, so uppercasing it did nothing and the N was
+  // lowercased with the rest, shipping "'nduja Aioli". Requiring both cases
+  // keeps the repair working on "MARGHERITA" and "cocktails" (neither has both)
+  // while leaving authored capitals alone.
+  if (/\p{Lu}/u.test(core) && /\p{Ll}/u.test(core)) return lead + core + trail
   const lower = core.toLowerCase()
   if (!isFirstWord && !isLastWord && TITLE_SMALL_WORDS.has(lower)) {
     return lead + lower + trail
   }
-  return lead + core.charAt(0).toUpperCase() + core.slice(1).toLowerCase() + trail
+  // Capitalise the first letter, which is not always the first character.
+  return lead + lower.replace(/\p{L}/u, (ch) => ch.toUpperCase()) + trail
 }
 
 export function toTitleCase(text?: string): string {

@@ -24,7 +24,10 @@ const ctaUrl = imageFirst ? homeBreadFallback.ctaUrl : (block.cta?.url ?? ('ctaU
 const ctaLabel = imageFirst
   ? homeBreadFallback.ctaLabel
   : displayHeading(block.cta?.label, 'ctaLabel' in fallback ? fallback.ctaLabel : undefined)
-const ctaNewTab = imageFirst || Boolean(block.cta?.newTab)
+// The bread CTA used to be hardcoded to a new tab because it always left for
+// penelopebakehouse.com. It now points at /locations/scarborough, so derive the
+// flag from the destination instead: off-site opens a tab, on-site navigates.
+const ctaNewTab = imageFirst ? /^https?:\/\//i.test(ctaUrl ?? '') : Boolean(block.cta?.newTab)
 const ctaStyle = imageFirst ? 'outline' : block.cta?.style
 
 const mediaOrder = imageFirst ? '' : 'wf-md:order-1'

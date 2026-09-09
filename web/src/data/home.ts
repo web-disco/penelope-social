@@ -1,5 +1,3 @@
-import { BAKEHOUSE_SITE_URL } from './site'
-
 /** Homepage copy. Repo wins over address-y Sanity so staging matches Bakehouse mood. */
 
 export const homeHeroFallback = {
@@ -42,7 +40,13 @@ export const homeBreadFallback = {
   heading: 'Good bread, served here every day',
   body: 'Loaves start at Penelope Bakehouse and land here as sandwiches and pizza, or as bread with dinner.',
   ctaLabel: 'Visit the Bakehouse',
-  ctaUrl: BAKEHOUSE_SITE_URL,
+  /**
+   * The Bakehouse's page on this site, not penelopebakehouse.com. The sister
+   * site is still one click further on (that page's Website row and its order
+   * and catering buttons all go there), so nothing is unreachable — the
+   * homepage just no longer hands visitors off to another domain mid-story.
+   */
+  ctaUrl: '/locations/scarborough',
 }
 
 export const homeEventsFallback = {
