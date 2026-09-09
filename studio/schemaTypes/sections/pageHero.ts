@@ -21,6 +21,19 @@ export const pageHero = defineType({
       fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: 'heading',
+      title: 'Heading',
+      type: 'string',
+      description: 'H1 on the photo (Bakehouse inner-page pattern). No period at the end.',
+    }),
+    defineField({
+      name: 'intro',
+      title: 'Intro',
+      type: 'text',
+      rows: 3,
+      description: 'One short sentence under the on-image H1. No em dash. No street address.',
+    }),
   ],
   preview: {
     select: { alt: 'image.alt' },

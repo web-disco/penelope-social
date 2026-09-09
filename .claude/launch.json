@@ -4,15 +4,40 @@
     {
       "name": "penelope-web",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--filter", "@penelope/web", "dev", "--port", "4380"],
+      "runtimeArgs": [
+        "--filter",
+        "@penelope/web",
+        "dev",
+        "--port",
+        "4380"
+      ],
       "port": 4380,
       "autoPort": false
     },
     {
       "name": "penelope-studio",
       "runtimeExecutable": "pnpm",
-      "runtimeArgs": ["--filter", "@penelope/studio", "dev", "--port", "3334"],
+      "runtimeArgs": [
+        "--filter",
+        "@penelope/studio",
+        "dev",
+        "--port",
+        "3334"
+      ],
       "port": 3334,
+      "autoPort": false
+    },
+    {
+      "name": "penelope-web-4381",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": [
+        "--filter",
+        "@penelope/web",
+        "dev",
+        "--port",
+        "4381"
+      ],
+      "port": 4381,
       "autoPort": false
     }
   ]

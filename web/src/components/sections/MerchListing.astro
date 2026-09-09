@@ -31,7 +31,7 @@ const title = 'merch-item-title font-heading text-[28px] text-charcoal'
         {
           products.map((product) => (
             <div role="listitem" class="merch-listing-item w-dyn-item">
-              <a href={`/merchandise/${product.slug.current}`} class="merch-item-link-wrap w-inline-block w-full">
+              <a href={`/merchandise/${product.slug.current}`} data-ga-event="merch_click" class="merch-item-link-wrap w-inline-block w-full">
                 <img
                   src={imageUrl(product.images?.[0])}
                   loading="lazy"

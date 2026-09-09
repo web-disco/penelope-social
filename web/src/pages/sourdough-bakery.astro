@@ -1,0 +1,92 @@
+---
+/**
+ * Indexed URL that GSC shows as Bakehouse confusion, not About intent.
+ * Stay on this site. Do not 301 to /about or to penelopebakehouse.com.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro'
+import BannerHero from '../components/sections/BannerHero.astro'
+import FaqSection from '../components/sections/FaqSection.astro'
+import { sourdoughMeta, sourdoughPage } from '../data/sourdough'
+import { sourdoughFaq } from '../data/faq'
+import { SITE_ORIGIN } from '../data/site'
+import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
+import { btn, container, containerNoTop, heading, typeScale, story } from '../lib/ui'
+
+const page = sourdoughPage
+const blocks = [page.social, page.bakehouse] as const
+
+const graph = pageGraph([
+  restaurantSchema(),
+  bakehouseSchema(),
+  faqPageSchema(sourdoughFaq),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Bakehouse sourdough', path: '/sourdough-bakery' },
+  ]),
+])
+
+const canonical = `${SITE_ORIGIN}/sourdough-bakery`
+---
+
+<BaseLayout
+  title={sourdoughMeta.title}
+  description={sourdoughMeta.description}
+  canonical={canonical}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
+  <main>
+    <BannerHero
+      src={page.banner.src}
+      alt={page.banner.alt}
+      headingText={page.heading}
+      intro={page.subheading}
+      objectPosition="center 50%"
+    />
+
+    {
+      blocks.map((block) => {
+        const imageFirst = block.layout === 'image-first'
+        return (
+          <section class={imageFirst ? 'section-home-bread' : 'home-events'}>
+            <div class={imageFirst ? containerNoTop : container}>
+              <div class={story.grid}>
+                {imageFirst && (
+                  <div class={story.media}>
+                    <img src={block.image.src} alt={block.image.alt} loading="eager" class={story.image} />
+                  </div>
+                )}
+                <div class:list={[story.copy, !imageFirst && 'wf-md:order-2']}>
+                  <div>
+                    <h2 class:list={[heading.medium, 'text-left my-0']}>{block.heading}</h2>
+                    <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.bodyLg]}>
+                      {block.body}
+                    </p>
+                  </div>
+                  <div class="story-cta flex flex-wrap items-start gap-space-16 wf-xs:w-full wf-xs:flex-col">
+                    {block.ctas.map((cta) => (
+                      <a
+                        href={cta.url}
+                        target={cta.newTab ? '_blank' : undefined}
+                        rel={cta.newTab ? 'noopener noreferrer' : undefined}
+                        class:list={['inline-block', cta.style === 'outline' ? btn.outline : btn.primary]}
+                      >
+                        <span>{cta.label}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+                {!imageFirst && (
+                  <div class:list={[story.media, 'wf-md:order-1']}>
+                    <img src={block.image.src} alt={block.image.alt} loading="eager" class={story.image} />
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )
+      })
+    }
+
+    <FaqSection headingText="FAQs" items={sourdoughFaq} includeSchema={false} />
+  </main>
+</BaseLayout>

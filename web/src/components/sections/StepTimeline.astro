@@ -1,0 +1,127 @@
+---
+/**
+ * Step-by-step timeline — Bakehouse markup + ScrollTrigger fill.
+ * data-* attributes are required by the script; do not rename.
+ */
+import { layout, space, heading, typeScale } from '../../lib/ui'
+
+export interface TimelineStep {
+  title: string
+  body: string
+}
+
+interface Props {
+  headingText: string
+  steps: TimelineStep[]
+  /** 0–1 viewport activation line; default 0.5 (centre). */
+  activation?: number
+  /** Full 120/80 gap above (after a cream block that has no bottom pad). */
+  gapTop?: boolean
+}
+
+const { headingText, steps, activation = 0.5, gapTop = false } = Astro.props
+---
+
+<section class="section-step-timeline" aria-label={headingText}>
+  <div
+    class:list={[
+      layout.shell,
+      gapTop
+        ? 'pt-section-gap-y pb-section-pad wf-sm:pt-section-gap-y-sm wf-sm:pb-section-pad-sm'
+        : space.sectionY,
+    ]}
+  >
+    <div
+      data-step-timeline-init
+      data-step-timeline-activation={String(activation)}
+      class="step-timeline mx-auto w-full max-w-[50em]"
+    >
+      <div class="step-timeline__header mb-[3em] flex flex-col items-center text-center">
+        <h2 class:list={[heading.medium, 'my-0']}>{headingText}</h2>
+      </div>
+
+      <div class="step-timeline__wrapper relative mx-auto w-fit max-w-full">
+        <div
+          data-step-timeline-line
+          class="step-timeline__line pointer-events-none absolute bottom-0 left-[1.5em] top-0 w-0.5 bg-charcoal/15"
+        >
+          <div
+            data-step-timeline-fill
+            class="step-timeline__fill absolute inset-0 h-full w-full origin-top bg-green"
+          >
+          </div>
+        </div>
+
+        <div class="step-timeline__collection">
+          <div class="step-timeline__list flex flex-col items-stretch gap-[8em] wf-sm:gap-[6em]">
+            {
+              steps.map((step, i) => (
+                <div
+                  data-step-timeline-item
+                  class="step-timeline__item relative flex items-start gap-[3em] wf-sm:gap-space-24"
+                >
+                  <div
+                    data-step-timeline-marker
+                    class="step-timeline__marker relative flex size-[3em] shrink-0 items-center justify-center rounded-full border border-charcoal/20 bg-beige text-charcoal font-body font-medium"
+                  >
+                    <span class={typeScale.label}>{i + 1}</span>
+                  </div>
+                  <div class="step-timeline__content flex max-w-[36em] flex-col items-start gap-space-16 pt-[0.4em]">
+                    <h3 class:list={['step-timeline__content-h my-0 text-charcoal', typeScale.displayS]}>
+                      {step.title}
+                    </h3>
+                    <p class:list={['step-timeline__p mb-0 text-charcoal', typeScale.bodyLg]}>{step.body}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  [data-step-timeline-item][data-status='active'] [data-step-timeline-marker] {
+    background: var(--color-green);
+    color: var(--color-beige);
+    border-color: var(--color-green);
+  }
+
+  [data-step-timeline-item][data-current] [data-step-timeline-marker] {
+    box-shadow: 0 0 0 0.5em color-mix(in oklab, var(--color-green) 16%, transparent);
+  }
+
+  .step-timeline__marker {
+    transition:
+      background-color 0.4s cubic-bezier(0.645, 0.045, 0.355, 1),
+      color 0.4s cubic-bezier(0.645, 0.045, 0.355, 1),
+      border-color 0.4s cubic-bezier(0.645, 0.045, 0.355, 1),
+      box-shadow 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  [data-step-timeline-item] .step-timeline__content {
+    opacity: 0.25;
+    transition: opacity 0.25s;
+  }
+
+  [data-step-timeline-item][data-status='active'] .step-timeline__content {
+    opacity: 0.5;
+  }
+
+  [data-step-timeline-item][data-current] .step-timeline__content {
+    opacity: 1;
+  }
+
+  @media (max-width: 767px) {
+    .step-timeline {
+      max-width: none;
+    }
+  }
+</style>
+
+<script>
+  import { initStepByStepTimeline } from '../../scripts/step-timeline'
+  initStepByStepTimeline()
+</script>

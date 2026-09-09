@@ -1,0 +1,253 @@
+---
+/**
+ * Full-bleed green moment — Bakehouse bike SVG + cream/green checkers.
+ * Merch is in-store only. No e-comm copy.
+ */
+import { btn, space, typeScale } from '../../lib/ui'
+import { homeWaveMerch } from '../../data/home'
+
+const chip = `text-beige ${typeScale.label}`
+const phrase = `${homeWaveMerch.wave}  ·  `
+const waveText = phrase.repeat(6)
+---
+
+<section
+  id="wave-moment"
+  class:list={['section-wave-moment relative z-10 text-beige', space.sectionYBand]}
+  aria-label="Merch"
+>
+  <svg
+    class="wave-checkers wave-checkers--in"
+    width="100%"
+    height="72"
+    aria-hidden="true"
+    shape-rendering="crispEdges"
+  >
+    <defs>
+      <pattern id="wave-check-in" width="48" height="72" patternUnits="userSpaceOnUse">
+        <rect width="24" height="24" fill="#2e442e" />
+        <rect x="24" width="24" height="24" fill="#f7f3df" />
+        <rect y="24" width="24" height="24" fill="#f7f3df" />
+        <rect x="24" y="24" width="24" height="24" fill="#2e442e" />
+        <rect y="48" width="24" height="24" fill="#2e442e" />
+        <rect x="24" y="48" width="24" height="24" fill="#f7f3df" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wave-check-in)" />
+  </svg>
+  <div class="wave-moment-body relative overflow-hidden bg-green py-[120px] wf-sm:py-section-gap-y-sm">
+    <p class="sr-only">{homeWaveMerch.wave}.</p>
+
+    <div class="wave-moment-stage relative flex flex-col items-center justify-center px-[25px]">
+      <img
+        src="/images/penelope-bike.svg"
+        alt=""
+        width="760"
+        height="512"
+        loading="lazy"
+        decoding="async"
+        class="wave-moment-bike relative z-[1] w-[min(760px,72vw)] wf-md:w-[min(600px,76vw)] wf-sm:w-[min(440px,82vw)]"
+        aria-hidden="true"
+      />
+
+      <div
+        class="wave-moment-chips relative z-[3] mt-space-48 flex w-full max-w-[720px] flex-col items-center justify-center gap-space-24 text-center wf-sm:mt-space-32"
+      >
+        <p class:list={['wave-moment-hours mb-0 whitespace-nowrap wf-sm:whitespace-normal', chip]}>
+          {homeWaveMerch.status}
+        </p>
+        <a href={homeWaveMerch.ctaUrl} data-ga-event="merch_click" class:list={['inline-block', btn.secondary]}>
+          <span>{homeWaveMerch.ctaLabel}</span>
+        </a>
+      </div>
+    </div>
+
+    <svg
+      class="wave-moment-svg pointer-events-none absolute top-1/2 left-1/2 z-[2] h-[min(40vw,440px)] w-[min(1440px,96vw)] -translate-x-1/2 -translate-y-[58%] wf-sm:h-[280px]"
+      viewBox="0 0 1400 260"
+      fill="none"
+      aria-hidden="true"
+    >
+      <defs>
+        <path
+          id="social-wave"
+          d="M-1400 140 C-1230 40 -1070 240 -900 140 S-560 40 -390 140 S-120 240 0 140 C170 40 330 240 500 140 S840 40 1010 140 S1280 240 1400 140 C1570 40 1730 240 1900 140 S2240 40 2410 140 S2680 240 2800 140"
+        ></path>
+      </defs>
+      <text
+        class="wave-moment-text uppercase"
+        fill="#f7f3df"
+        font-family="Sweet Sans Pro, Arial, sans-serif"
+        font-size="44"
+        font-weight="500"
+        letter-spacing="6"
+      >
+        <textPath id="social-wave-text" href="#social-wave" startOffset="0" data-phrase={phrase}>
+          {waveText}
+        </textPath>
+      </text>
+    </svg>
+  </div>
+
+  <svg
+    class="wave-checkers wave-checkers--out"
+    width="100%"
+    height="72"
+    aria-hidden="true"
+    shape-rendering="crispEdges"
+  >
+    <defs>
+      <pattern id="wave-check-out" width="48" height="72" patternUnits="userSpaceOnUse">
+        <rect width="24" height="24" fill="#2e442e" />
+        <rect x="24" width="24" height="24" fill="#f7f3df" />
+        <rect y="24" width="24" height="24" fill="#f7f3df" />
+        <rect x="24" y="24" width="24" height="24" fill="#2e442e" />
+        <rect y="48" width="24" height="24" fill="#2e442e" />
+        <rect x="24" y="48" width="24" height="24" fill="#f7f3df" />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#wave-check-out)" />
+  </svg>
+</section>
+
+<style>
+  .wave-checkers {
+    display: block;
+    width: 100%;
+    height: auto;
+    line-height: 0;
+    overflow: hidden;
+    vertical-align: top;
+  }
+
+  .wave-checkers--in {
+    margin-bottom: -1px;
+  }
+
+  .wave-checkers--out {
+    margin-top: -1px;
+  }
+
+  .wave-moment-bike {
+    height: auto;
+  }
+
+  .wave-moment-svg {
+    overflow: visible;
+    mask-image: linear-gradient(to right, transparent, black 18%, black 82%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 18%, black 82%, transparent);
+  }
+
+  @media (max-width: 767px) {
+    .wave-moment-svg {
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+
+    .wave-moment-text {
+      font-size: 72px;
+      letter-spacing: 2px;
+    }
+  }
+</style>
+
+<script>
+  const section = document.getElementById('wave-moment')
+  const pathText = document.getElementById('social-wave-text')
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (section && pathText instanceof SVGTextPathElement && !reduce) {
+    const startWave = async () => {
+      const { default: gsap } = await import('gsap')
+
+      const measureCycle = () => {
+        const phrase = pathText.dataset.phrase ?? ''
+        const textEl = pathText.parentElement
+        if (!(textEl instanceof SVGTextElement) || !phrase) return 0
+        const probe = textEl.cloneNode(true)
+        const probePath = probe.querySelector('textPath')
+        if (!probePath) return 0
+        probePath.textContent = phrase
+        textEl.ownerSVGElement?.appendChild(probe)
+        const cycle = Math.max(probePath.getComputedTextLength(), 1)
+        probe.remove()
+        return cycle
+      }
+
+      const isVisible = () => {
+        const rect = section.getBoundingClientRect()
+        return rect.bottom > 0 && rect.top < window.innerHeight
+      }
+
+      const cycle = measureCycle()
+      if (cycle <= 0) return
+
+      const wrap = gsap.utils.wrap(-cycle, 0)
+      const cruise = cycle / 24
+      const clampBoost = gsap.utils.clamp(-cruise * 7, cruise * 7)
+      let heading = cruise
+      let boost = 0
+      let speed = cruise
+      let offset = 0
+      let inView = isVisible()
+
+      gsap.ticker.add(() => {
+        if (!inView) return
+        const dt = Math.min(Math.max(gsap.ticker.deltaRatio(), 0), 2) / 60
+        boost += (0 - boost) * (1 - Math.exp(-7 * dt))
+        speed += (heading + boost - speed) * (1 - Math.exp(-8 * dt))
+        offset = wrap(offset - speed * dt)
+        pathText.setAttribute('startOffset', String(offset))
+      })
+
+      const applyVelocity = (velocity: number) => {
+        if (!inView || Math.abs(velocity) < 0.08) return
+        heading = Math.sign(velocity) * cruise
+        boost = clampBoost(velocity * 14)
+      }
+
+      const viewIo = new IntersectionObserver(
+        ([entry]) => {
+          inView = entry.isIntersecting || isVisible()
+        },
+        { rootMargin: '30% 0px' },
+      )
+      viewIo.observe(section)
+
+      const bindNativeScroll = () => {
+        let lastY = window.scrollY
+        window.addEventListener(
+          'scroll',
+          () => {
+            const y = window.scrollY
+            applyVelocity(y - lastY)
+            lastY = y
+          },
+          { passive: true },
+        )
+      }
+
+      let tries = 0
+      const bindLenis = () => {
+        const lenis = window.lenis
+        if (lenis && typeof lenis.on === 'function') {
+          lenis.on('scroll', (instance) => applyVelocity(instance.velocity))
+          return
+        }
+        if (++tries < 45) requestAnimationFrame(bindLenis)
+        else bindNativeScroll()
+      }
+      bindLenis()
+    }
+
+    const warm = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        warm.disconnect()
+        void startWave()
+      },
+      { rootMargin: '200px 0px' },
+    )
+    warm.observe(section)
+  }
+</script>

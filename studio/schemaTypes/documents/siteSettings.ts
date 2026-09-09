@@ -40,8 +40,10 @@ export const siteSettings = defineType({
         defineField({ name: 'reservations', title: 'Reservations button', type: 'link' }),
         defineField({
           name: 'drawerLinks',
-          title: 'Menu drawer links',
+          title: 'Nav links',
           type: 'array',
+          description:
+            'Desktop bar + mobile drawer. Order: Menus, About, Locations, Gift Cards, Catering (/catering-events), Merch. Label is “Menus” (not “Our Menus”). Do not add Bakery. The site rewrites stale labels and injects Locations if missing.',
           of: [defineArrayMember({ type: 'link' })],
         }),
       ],
@@ -66,7 +68,14 @@ export const siteSettings = defineType({
           type: 'object',
           fields: [
             defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-            defineField({ name: 'text', title: 'Copy', type: 'text', rows: 2 }),
+            defineField({
+              name: 'text',
+              title: 'Copy',
+              type: 'text',
+              rows: 2,
+              initialValue:
+                'Sign up for our newsletter and be the first to know about exclusive offers.',
+            }),
             defineField({ name: 'placeholder', title: 'Input placeholder', type: 'string' }),
             defineField({ name: 'buttonLabel', title: 'Button label', type: 'string' }),
             defineField({
@@ -89,7 +98,14 @@ export const siteSettings = defineType({
           type: 'object',
           fields: [
             defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-            defineField({ name: 'blurb', title: 'Blurb', type: 'text', rows: 3 }),
+            defineField({
+              name: 'blurb',
+              title: 'Blurb',
+              type: 'text',
+              rows: 3,
+              initialValue:
+                'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.',
+            }),
             defineField({ name: 'blurbUrl', title: 'Blurb links to', type: 'string' }),
             defineField({
               name: 'links',
@@ -105,8 +121,18 @@ export const siteSettings = defineType({
           type: 'object',
           fields: [
             defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-            defineField({ name: 'locationLabel', title: 'Location label', type: 'string' }),
-            defineField({ name: 'address', title: 'Address', type: 'string' }),
+            defineField({
+              name: 'locationLabel',
+              title: 'Location label',
+              type: 'string',
+              description: 'Woodbridge is the locality. Do not put Vaughan as the city.',
+            }),
+            defineField({
+              name: 'address',
+              title: 'Address',
+              type: 'string',
+              description: 'Must match GBP: 125 Hawkview Blvd, Woodbridge, ON L4H 2E2',
+            }),
             defineField({ name: 'mapUrl', title: 'Map link', type: 'url' }),
             defineField({
               name: 'blocks',
@@ -146,7 +172,14 @@ export const siteSettings = defineType({
       ],
     }),
 
-    defineField({ name: 'seo', title: 'Default SEO', type: 'seo', group: 'seo' }),
+    defineField({
+      name: 'seo',
+      title: 'Default SEO',
+      type: 'seo',
+      group: 'seo',
+      description:
+        'Fallback title/description. Use Woodbridge as the city. Unique per-page SEO lives on each document.',
+    }),
   ],
   preview: { prepare: () => ({ title: 'Site Settings' }) },
 })

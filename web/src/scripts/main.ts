@@ -1,28 +1,19 @@
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { SplitText } from 'gsap/SplitText'
 
 import { lenis } from './lenis'
-import { initNavbar } from './navbar'
-import { initMenu } from './menu'
 import { initHomeMenuHover } from './home-menu-hover'
-import {
-  initTitleAnimation,
-  initTextAnimation,
-  initFadeIn,
-  initStaggerAnimation,
-} from './animations'
-import { initPageLoader } from './page-loader'
 import { initMerchSwiper } from './merch-swiper'
 import { initSiteForms, initEventForm, initTurnstileSpacing } from './forms'
 import { initLightbox } from './lightbox'
+import { initAnalyticsClicks } from './ga'
+import { initStepByStepTimeline } from './step-timeline'
 
 /* Same order as the live site's DOMContentLoaded handler, with the additions
    that replace behaviour webflow.js used to provide (lightbox) and the form
-   wiring.
-
-   initCustomCheckboxes() used to sit alongside initLightbox(). Its only consumer
-   was the newsletter pop-up's consent checkbox, which is gone. */
+   wiring. Navbar, drawer, and the page loader used to boot here — the first
+   two now live on Navbar.astro, and the loader is gone.
+   Fade / SplitText / .reveal hides are gone so first paint is visible. */
 declare global {
   interface Window {
     gsap: typeof gsap
@@ -30,27 +21,17 @@ declare global {
 }
 
 function boot() {
-  gsap.registerPlugin(ScrollTrigger, SplitText)
-  /* GSAP's own CDN build sets this; the ESM build doesn't. Exposing it keeps
-     the console (and the parity scripts) able to inspect and settle tweens. */
+  gsap.registerPlugin(ScrollTrigger)
   window.gsap = gsap
   lenis.start()
+  initStepByStepTimeline()
 
-  initNavbar()
-  initMenu()
+  initAnalyticsClicks()
   initHomeMenuHover()
-  initTitleAnimation()
-  initTextAnimation()
-  initFadeIn()
-  initStaggerAnimation()
-  initPageLoader()
   initMerchSwiper()
 
-  // Replaces webflow.js behaviour
   initLightbox()
 
-  // Forms — the newsletter is one of them now that it posts to the Worker
-  // rather than to Mailchimp over JSONP.
   initSiteForms()
   initEventForm()
   initTurnstileSpacing()

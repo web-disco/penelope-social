@@ -14,6 +14,8 @@ const { block } = Astro.props
 const images: any[] = block.images ?? []
 ---
 
+{
+  images.length > 0 && (
 <div
   class="section-image-grid auto-cols-[1fr] grid-cols-[1fr_1fr_1fr_1fr] grid-rows-[auto_auto] gap-4"
 >
@@ -25,3 +27,5 @@ const images: any[] = block.images ?? []
     }
   </div>
 </div>
+  )
+}

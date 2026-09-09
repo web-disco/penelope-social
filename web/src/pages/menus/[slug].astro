@@ -1,12 +1,24 @@
 ---
 /**
  * /menus/lunch, /menus/dinner, /menus/bar, /menus/catering
+ * /menus/catering is the tray list — not a thin copy of /catering-events.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
-import PageHeading from '../../components/sections/PageHeading.astro'
 import MenuCategories from '../../components/MenuCategories.astro'
 import { getAll } from '../../lib/data'
+import { resolveSeo } from '../../data/seo'
+import { restaurantCopy, displayHeading, menuTitle } from '../../data/copy'
+import { cateringMenuCopy } from '../../data/menus'
+import { SITE_ORIGIN } from '../../data/site'
+import { btn, layout, space, typeScale, heading } from '../../lib/ui'
+import {
+  bakehouseSchema,
+  breadcrumbSchema,
+  menuSchema,
+  pageGraph,
+  restaurantSchema,
+} from '../../lib/schema'
 
 export async function getStaticPaths() {
   const menus = await getAll<any>('menu')
@@ -16,31 +28,71 @@ export async function getStaticPaths() {
 }
 
 const { menu } = Astro.props
-const seo = menu.seo ?? {}
+const slug = menu.slug.current as string
+const path = `/menus/${slug}`
+const isCateringMenu = slug === 'catering'
+const seo = resolveSeo(path, menu.seo)
+const headingText = isCateringMenu
+  ? cateringMenuCopy.heading
+  : displayHeading(menu.heading, menu.title)
+const introText = isCateringMenu ? cateringMenuCopy.intro : restaurantCopy(menu.intro)
 
-/* The quick-link buttons are derived from the categories rather than authored
-   beside them. They were a parallel array in Sanity that repeated each
-   category's label and anchor — identical in all four menus, and one rename
-   away from pointing at a section that no longer existed. */
-const quickLinks = (menu.categories ?? [])
-  .filter((category: any) => category.anchor?.current)
-  .map((category: any) => ({ label: category.title, anchor: category.anchor.current }))
+const menuSections = (menu.categories ?? [])
+  .map((category: any) => ({
+    name: menuTitle(category.title),
+    description: category.description,
+    items: (category.items ?? [])
+      .filter((item: any) => item.title && !/unavailable/i.test(item.title))
+      .map((item: any) => ({
+        name: menuTitle(item.title),
+        description: item.description,
+        price: item.price,
+      })),
+  }))
+  .filter((section: { items: unknown[] }) => section.items.length > 0)
+
+const graph = pageGraph([
+  restaurantSchema(),
+  bakehouseSchema(),
+  breadcrumbSchema([
+    { name: 'Home', path: '/' },
+    { name: 'Menus', path: '/menus' },
+    { name: headingText, path },
+  ]),
+  menuSchema({
+    name: headingText,
+    path,
+    description: seo.description,
+    sections: menuSections,
+  }),
+])
+
+const canonical = `${SITE_ORIGIN}${path}`
 ---
 
 <BaseLayout
-  title={seo.metaTitle ?? menu.title}
-  description={seo.metaDescription}
-  ogImage={seo.ogImage}
-  noIndex={seo.noIndex}
+  title={seo.title}
+  description={seo.description}
+  ogImage={menu.seo?.ogImage}
+  noIndex={menu.seo?.noIndex}
+  canonical={canonical}
 >
-  <PageHero block={{ image: menu.banner }} />
-  <PageHeading
-    block={{
-      heading: menu.heading,
-      intro: menu.intro,
-      align: 'left',
-      quickLinks,
-    }}
-  />
-  <MenuCategories categories={menu.categories ?? []} />
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
+  <PageHero block={{ image: menu.banner, heading: headingText, intro: introText }} />
+  {
+    isCateringMenu && (
+      <section class="catering-menu-note">
+        <div class:list={[layout.shell, space.sectionYFirst, 'flex flex-col items-start gap-space-24']}>
+          <h2 class:list={[heading.medium, 'text-left my-0']}>{cateringMenuCopy.noteHeading}</h2>
+          <p class:list={['mb-0 max-w-[720px] text-charcoal', typeScale.bodyLg]}>
+            {cateringMenuCopy.noteBody}
+          </p>
+          <a href={cateringMenuCopy.cta.url} data-ga-event="catering_click" class={btn.primary}>
+            <span>{cateringMenuCopy.cta.label}</span>
+          </a>
+        </div>
+      </section>
+    )
+  }
+  <MenuCategories categories={menu.categories ?? []} flushTop={!isCateringMenu} />
 </BaseLayout>

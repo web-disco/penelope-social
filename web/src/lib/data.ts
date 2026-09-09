@@ -31,6 +31,52 @@ const projectId = configured === undefined ? DEFAULT_PROJECT_ID : configured
 const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production'
 
 /**
+ * Optional draft overlay for local / Workers *preview* builds.
+ *
+ * Production must stay published-only. Drafts are visible only when BOTH
+ * server/build-only variables are set:
+ *   SANITY_PREVIEW_DRAFTS=true
+ *   SANITY_API_READ_TOKEN=<Viewer token that can read drafts>
+ *
+ * Neither is `PUBLIC_*`. They are read from `process.env` first so Vite
+ * does not inline the token into a client chunk, then from `import.meta.env`
+ * so a symlinked `web/.env` still works under `astro dev`. A missing token
+ * keeps today's published client — the API silently drops drafts without
+ * one, which would look like the flag did nothing.
+ *
+ * `previewDrafts` overlays each draft on its published document and returns
+ * published `_id`s, so the `!(_id in path("drafts.**"))` filters below keep
+ * working and still surface never-published drafts (amari, bakery, …).
+ */
+function readServerEnv(name: 'SANITY_PREVIEW_DRAFTS' | 'SANITY_API_READ_TOKEN'): string | undefined {
+  // Static property reads so Astro/Vite can inject a symlinked web/.env.
+  // process.env is what Cloudflare Builds and a real shell provide.
+  const fromProcess = typeof process !== 'undefined' ? process.env[name] : undefined
+  const fromMeta =
+    name === 'SANITY_PREVIEW_DRAFTS'
+      ? import.meta.env.SANITY_PREVIEW_DRAFTS
+      : import.meta.env.SANITY_API_READ_TOKEN
+  const value = fromProcess || fromMeta
+  return typeof value === 'string' && value !== '' ? value : undefined
+}
+
+const previewDraftsRequested = readServerEnv('SANITY_PREVIEW_DRAFTS') === 'true'
+const readToken = readServerEnv('SANITY_API_READ_TOKEN')
+const previewDrafts = previewDraftsRequested && Boolean(readToken)
+
+if (previewDraftsRequested && !readToken) {
+  console.warn(
+    '[data] SANITY_PREVIEW_DRAFTS=true but SANITY_API_READ_TOKEN is unset. ' +
+      'Keeping perspective "published" — drafts are invisible without a Viewer token.',
+  )
+} else if (previewDrafts) {
+  console.info(
+    `[data] Sanity perspective "previewDrafts" on project ${projectId} / ${dataset}. ` +
+      'Unpublished drafts will be baked into this build.',
+  )
+}
+
+/**
  * `useCdn: false` is deliberate.
  *
  * This site is fully static, so every query runs at build time and is then
@@ -40,6 +86,10 @@ const dataset = import.meta.env.PUBLIC_SANITY_DATASET || 'production'
  * does) can be served the pre-publish answer and bake in stale or missing
  * content. Fetching live costs one round trip per query at build time and
  * removes that whole class of bug.
+ *
+ * Preview-draft builds also cannot use the CDN: it only caches published
+ * documents, and a token on a CDN request would be the wrong default even
+ * if it worked.
  */
 export const sanity: SanityClient | null = projectId
   ? createClient({
@@ -47,7 +97,8 @@ export const sanity: SanityClient | null = projectId
       dataset,
       apiVersion: '2024-10-01',
       useCdn: false,
-      perspective: 'published',
+      perspective: previewDrafts ? 'previewDrafts' : 'published',
+      ...(previewDrafts ? { token: readToken } : {}),
     })
   : null
 

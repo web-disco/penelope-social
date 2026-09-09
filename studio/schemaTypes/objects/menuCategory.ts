@@ -24,7 +24,8 @@ export const menuCategory = defineType({
       name: 'title',
       title: 'Title',
       type: 'string',
-      description: 'Names the section, its quick link and its anchor.',
+      description:
+        'Title Case (The Pizzas, Handhelds, Red Wine). Keep NY, DOP, 2oz as written.',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
