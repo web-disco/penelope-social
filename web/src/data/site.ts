@@ -16,6 +16,14 @@ export const BAKEHOUSE_ORDER_ONLINE_URL =
 /** Bakehouse catering intake — not Social /catering-events. */
 export const BAKEHOUSE_CATERING_URL = `${BAKEHOUSE_SITE_URL}/catering`
 
+/**
+ * The Bakehouse menu lives on the sister site — Social's own /menus are lunch,
+ * dinner, bar and catering, and none of them list slices or focaccia
+ * sandwiches. FAQs on /locations/scarborough answer for the bakehouse, so they
+ * point here rather than at a Social menu that cannot answer the question.
+ */
+export const BAKEHOUSE_MENU_URL = `${BAKEHOUSE_SITE_URL}/menu`
+
 export const OG_IMAGE_PATH = '/images/og-share.jpg'
 
 export const ORDER_ONLINE_URL =

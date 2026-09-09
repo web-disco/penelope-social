@@ -3,7 +3,6 @@ import { PAGE_SEO } from './seo'
 import {
   BAKEHOUSE_CATERING_URL,
   BAKEHOUSE_ORDER_ONLINE_URL,
-  BAKEHOUSE_SITE_URL,
   CATERING_EVENTS_URL,
   GET_DIRECTIONS_HREF,
   ORDER_ONLINE_URL,
@@ -91,6 +90,13 @@ export const scarboroughLocation = {
   offeringsBody:
     'Penelope Bakehouse is the Scarborough bakery. Loaves, focaccia sandwiches, pizza by the slice. Hours and the bakery menu live on penelopebakehouse.com.',
   hubBlurb: 'Sourdough and focaccia, pizza by the slice.',
+  /**
+   * Order online + Catering only, matching the pair penelopebakehouse.com puts
+   * in its own hero — this page is the Bakehouse's presence on the Social site,
+   * so the two should not offer a different set of actions. The dropped
+   * "Visit penelopebakehouse.com" button is not a lost route: the Website row
+   * in the detail table (scarborough.astro) still links out.
+   */
   ctas: [
     {
       label: 'Order online',
@@ -104,8 +110,6 @@ export const scarboroughLocation = {
       style: 'outline' as const,
       newTab: true,
     },
-    { label: 'Visit penelopebakehouse.com', url: BAKEHOUSE_SITE_URL, style: 'outline' as const, newTab: true },
-    { label: 'Penelope Social', url: '/locations/woodbridge', style: 'outline' as const },
   ] satisfies Cta[],
   bakehouse: scarboroughBakehouse,
   hours: [
