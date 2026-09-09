@@ -2,7 +2,8 @@
 /**
  * Menu mosaic — Bakehouse pattern: H2 + 20px intro, 4 tiles
  * (image, 20px title, 18px line). Homepage keeps the outline CTA to /menus.
- * Desktop: 4-up. Mobile: Swiper at 1.1 slides so the next card peeks.
+ * Desktop: 4-up grid. Tablet: Swiper at 2.5 slides. Mobile: Swiper at 1.1,
+ * so the next card peeks at every width the slider runs.
  */
 import { btn, heading, layout, radius, space, typeScale } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
@@ -95,7 +96,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
                   <img
                     src={imageUrl(card.image)}
                     srcset={imageSrcset(card.image)}
-                    sizes={imageSizes(card.image) ?? '(min-width: 992px) 25vw, 90vw'}
+                    sizes={imageSizes(card.image) ?? '(min-width: 992px) 25vw, (min-width: 768px) 40vw, 90vw'}
                     loading="lazy"
                     alt={imageAlt(card.image)}
                     width="800"
