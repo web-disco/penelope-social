@@ -1,259 +1,420 @@
 # SEO audit & content plan — Penelope Social + Penelope Bakehouse
 
-Date: 2026-09-19
-Tooling: OpenSEO (site crawl, DataForSEO keyword + SERP data, Google Business Profile)
-Market: Canada (loc 2124), English
+Date: 2026-09-19 (v2 — rewritten against first-party Search Console + GA4 data)
+Tooling: OpenSEO — site crawl, Search Console, GA4, DataForSEO keyword/SERP/competitor data, Google Business Profile
 
-OpenSEO projects created for this work:
+OpenSEO projects:
 - Penelope Social — `f47f5443-8964-4be5-949d-b03157c3d7ac`
 - Penelope Bakehouse — `c9c689c3-cd37-41bc-8ac9-fec1411a8e55`
 
----
-
-## 0. Blocker: no GSC or GA4 data
-
-**Neither site has Google Search Console or Google Analytics connected to OpenSEO**, so
-every number below comes from third-party SERP/keyword data and live crawls — not from
-first-party click, impression, or session data.
-
-The only Google property connected to this OpenSEO account is `sc-domain:henleystrategies.com`,
-on the unrelated "Default" project. Connecting is an OAuth step that has to happen in the
-browser; it cannot be done from here.
-
-Connect at:
-- Social — https://app.openseo.so/p/f47f5443-8964-4be5-949d-b03157c3d7ac/settings/integrations
-- Bakehouse — https://app.openseo.so/p/c9c689c3-cd37-41bc-8ac9-fec1411a8e55/settings/integrations
-
-Once connected, re-run this audit to get striking-distance queries (positions 4–20), real CTR
-by page, and which landing pages actually convert. **Treat the article priorities below as
-provisional until that data lands.**
+**Data windows.** Search Console: 2026-08-19 → 09-16 (28 days). GA4: both properties were
+created 2026-08-28, so GA4 covers roughly three weeks and has **no previous period to compare
+against**. Bakehouse organic sessions by week ran 2 → 94 → 415 → 325, i.e. still ramping. Read
+every GA4 number as an early baseline, not a trend.
 
 ---
 
-## 1. Technical crawl
+## 1. The single biggest finding: the two sites are fighting over the Bakehouse's brand
 
-Both sites are technically clean. No broken links, no server errors, no missing or duplicate
-titles/descriptions, no canonical conflicts, no redirect chains. The Astro builds are doing
-their job. Everything below is a warning or an info-level nit.
+Search Console shows **penelopesocial.com outranking penelopebakehouse.com for the Bakehouse's
+own name**, and converting those searches at roughly one-eighth the rate.
 
-### Penelope Social — 18 pages crawled
+Same queries, both properties, same 28 days:
 
-| Issue | Count | Detail |
+| Query | On penelopesocial.com | On penelopebakehouse.com |
 | --- | --- | --- |
-| Orphan page | 1 | `/sourdough-bakery` is in the sitemap but linked from nowhere |
-| Thin content | 6 | `/menus` (99 words), `/merchandise` (94), `/merchandise/hoodie` (109), `/merchandise/t-shirt` (113), `/merchandise/tote-bag` (139), `/locations` (128) |
-| Heading order skips | 17 | H1 → H3 on nearly every page |
-| Title > 60 chars | 3 | `/menus/lunch` (67), `/menus/dinner` (63), `/menus/catering` (62) |
-| Meta description > 160 chars | 3 | `/merchandise/tote-bag` (305), `/menus/catering` (201), `/sourdough-bakery` (166) |
+| penelope bakehouse | 2,896 impr · 46 clicks · **1.6%** · pos 5.4 | 926 impr · 112 clicks · **12.1%** · pos 4.2 |
+| penelope bakehouse menu | 1,657 · 41 · **2.5%** · pos 4.9 | 130 · 13 · **10.0%** · pos 5.4 |
+| penelope bakery scarborough | 377 · 3 · **0.8%** · pos 6.3 | 550 · 93 · **16.9%** · pos 2.9 |
+| penelope bakehouse scarborough | 337 · 4 · **1.2%** · pos 7.7 | 101 · 27 · **26.7%** · pos 3.6 |
+| penelope bakehouse reviews | 320 · 4 · 1.3% · pos 6.7 | 8 · 0 · — · pos 7.3 |
+| penelope bake house | 50 · 2 · 4.0% | 30 · 8 · 26.7% |
+| penelopes bakehouse | 32 · 2 · 6.3% | 16 · 2 · 12.5% |
+| **Totals** | **5,669 impr · 102 clicks · 1.8%** | **1,761 impr · 255 clicks · 14.5%** |
 
-**No blog exists.** No route, no Sanity schema, no collection. Zero informational content on
-the whole domain.
+The wrong domain is taking **76% of the impressions** on the Bakehouse's brand and converting
+them at about **one-eighth** the click-through rate.
 
-`/sourdough-bakery` being orphaned is the most costly item here: it is the one page aimed at
-the sourdough theme and nothing links to it.
+**The page doing it is `/sourdough-bakery`** — the orphaned page flagged in v1. It is now the
+highest-scoring opportunity in the whole account:
 
-### Penelope Bakehouse — 11 pages crawled
+> `/sourdough-bakery` — **7,620 impressions, 60 clicks, 0.79% CTR, average position 5.2**, and
+> only 31 GA4 sessions. Opportunity score 83/100.
 
-| Issue | Count | Detail |
-| --- | --- | --- |
-| Thin content | 3 | `/locations` (145 words), `/menus/pizza` (143), `/menus` (120) |
-| Title > 60 chars | 7 | `/menus` (77), homepage (74), `/about` (74), `/menus/bakery` (73), and three more at 70 |
+A page nothing links to is pulling 7,600 impressions a month and wasting essentially all of
+them. Its title ("Bakehouse sourdough, served here") and Social's `/locations/scarborough` page
+are both bidding for Bakehouse-brand queries from the wrong domain.
 
-**`/blog` exists as a route but the crawler never reached it** — it is not in the nav, not in
-the sitemap, and has no posts. It is currently invisible to Google.
+**Rough upside.** If those 5,669 impressions landed on penelopebakehouse.com and behaved like
+its existing brand traffic (14.5% CTR), that is on the order of **800 clicks per 28 days rather
+than 102**. Hedge that properly — consolidating changes positions, and not every impression
+transfers — but the Bakehouse currently gets 838 organic sessions in total, so fixing this is
+plausibly the difference between its current traffic and roughly double it. Nothing else in
+this document is worth as much.
 
-**The retail/pantry business is entirely missing from the website.** The Google Business
-Profile lists a full imported-goods range — extra virgin olive oil ($24), EVOO chili oil ($19),
-balsamic of Modena ($11.99), four pasta shapes, five sauces, basil pesto, hot peppers in oil.
-A grep of the repo finds no mention of any of it. That is revenue and keyword surface with no
-page behind it.
+**Options, in the order I'd consider them:**
+1. Retitle `/sourdough-bakery` so it stops competing on the Bakehouse's name — make it about
+   Social's use of the bread ("The sourdough we serve") rather than about the Bakehouse — and
+   put a prominent above-the-fold link to penelopebakehouse.com. Fixes the orphan at the same
+   time by linking it from `/about` and `/menus`.
+2. Same for `/locations/scarborough`: keep it as a pointer, not a destination.
+3. If the split persists after that, `noindex` the Social-side Scarborough pages and let the
+   Bakehouse domain take the queries outright.
+4. Strengthen penelopebakehouse.com's own brand signals (title, H1, sitemap — see §2).
+
+I'd start with 1 and 2 and re-measure in three weeks before reaching for 3.
 
 ---
 
-## 2. Where each site actually stands
+## 2. Technical crawl
 
-### Penelope Social — 114 ranking keywords, almost all brand
+Both crawls re-ran clean: no broken links, no server errors, no missing/duplicate titles or
+descriptions, no canonical conflicts, no redirect chains.
 
-Real non-brand positions:
+### Penelope Bakehouse — a real sitemap bug
 
-| Keyword | Position |
+Search Console URL inspection returned:
+
+| URL | Coverage state |
 | --- | --- |
-| sandwiches vaughan | 5 |
-| sandwich vaughan | 6 |
-| italian sandwich vaughan | 11 |
-| patios vaughan | 25 |
-| happy hour vaughan | 29 |
+| `/menu` (singular) | **"Discovered – currently not indexed"**, and listed in `sitemap.xml` |
+| `/menus` (the real route, in the nav) | **"URL is unknown to Google"** |
+| `/blog` | **"URL is unknown to Google"** |
 
-Everything else is `penelope social`, `penelope restaurant`, `penelope social menu` etc., plus
-a long tail of accidental matches against other restaurants' names.
+So Google has been told about a `/menu` URL that the repo does not generate, and has **never
+seen the actual menu hub**. GA4 confirms the damage: **63 organic sessions landed on `/menu`
+with 22% engagement and zero key events**, against 80% engagement and a 13.4% conversion rate
+on the homepage.
 
-**The central finding: the site calls itself a "cafe and bar". The market searches "Italian
-restaurant".**
+The repo config is correct — `astro.config.mjs` lists `/menus` in its `INDEXABLE` set. So the
+**live sitemap is stale**, and the likely cause is in `sitemapXmlAlias()`:
 
-| Keyword | Volume/mo | KD | Social's position |
-| --- | --- | --- | --- |
-| italian restaurant vaughan | 8,100 | 1 | not ranking |
-| italian restaurants in woodbridge | 2,900 | 8 | not ranking |
-| italian restaurant woodbridge | 2,900 | 6 | not ranking |
-| best italian restaurants in vaughan | 1,600 | 0 | not ranking |
-| restaurants in woodbridge | 5,400 | 6 | not ranking |
-| kleinburg restaurants | 5,400 | 5 | not ranking |
-| best restaurants in woodbridge ontario | 1,000 | 0 | **local pack #1**, no organic |
-| bars in vaughan | 1,000 | 0 | not ranking |
-| catering vaughan | 480 | 0 | not ranking |
-| italian catering vaughan | 210 | 0 | not ranking |
+```js
+try {
+  await access(dest)
+  return        // <- bails out if dist/sitemap.xml already exists
+} catch { /* write below */ }
+```
 
-These are low-difficulty terms in a suburban market. Nothing here needs authority — it needs
-a page.
+On any build where `dist/` is not cleaned first, an older `sitemap.xml` survives untouched and
+keeps being served. That matches the symptom exactly.
 
-The `best restaurants in woodbridge ontario` SERP is worth reading closely: **Penelope Social
-already holds local pack #1**, while organic 4–10 is TripAdvisor, visitvaughan.ca, OpenTable,
-Toronto Life and competitors' homepages. The brand has the trust signal and none of the content.
+**Fix:** always overwrite `dest` instead of returning early, rebuild clean, resubmit
+`sitemap.xml` in Search Console, and request indexing for `/menus`. This is a small change with
+a large blast radius — the entire menu section is currently invisible to Google.
 
-### Penelope Bakehouse — zero ranking keywords
-
-DataForSEO Labs returns an empty set for `penelopebakehouse.com`. The domain has no organic
-footprint at all. Everything is greenfield.
-
-The Google Business Profile, by contrast, is in good shape: claimed, 4.6★ from 74 reviews,
-104 photos, full menu with prices synced.
-
-**Two Business Profile problems:**
-
-1. **Category is "Bakery" and nothing else.** No secondary categories. Given that the two
-   best-selling products are focaccia sandwiches and pizza by the slice, missing
-   `Sandwich shop`, `Pizza restaurant`, `Cafe` and `Italian restaurant` is capping local pack
-   reach on exactly the queries with the most volume. This is a five-minute fix with more
-   near-term upside than any article below.
-2. Profile topics — what reviewers actually write — are: **sandwiches ×30, sourdough bread ×11,
-   focaccia ×9, italian ×4**, then pepperoni pizza, crullers, mortadella, pistachio pesto.
-   Customers describe this place in exactly the language the keyword data rewards. The website
-   should use the same words.
-
----
-
-## 3. Article plan
-
-Four per site, ordered by expected return. Each is tied to a keyword the SERP shows is
-winnable, and each has a conversion path back to an order/booking page.
+Remaining Bakehouse issues: 3 thin pages (`/menus` 120 words, `/menus/pizza` 143, `/locations`
+145) and 7 titles over 60 characters (`/menus` 77, homepage 74, `/about` 74).
 
 ### Penelope Social
 
-**1. Italian food in Woodbridge: focaccia, sourdough pizza, and what to order**
-Primary: `italian restaurant woodbridge` (2,900/mo, KD 6) · `italian restaurants in woodbridge` (2,900, KD 8)
-Secondary: `italian restaurant vaughan` (8,100, KD 1) · `best italian restaurants in vaughan` (1,600, KD 0)
+Unchanged from v1: `/sourdough-bakery` orphaned (see §1), 6 thin pages (`/menus` 99 words,
+`/merchandise` 94, the three product pages, `/locations` 128), 17 heading-order skips, 3 long
+titles, 3 long meta descriptions. Still **no blog route or schema**.
 
-The highest-value gap on either site. ~11,000 monthly searches in this cluster and the site
-does not use the word "Italian" as a positioning term anywhere. The article should do the
-positioning work a homepage rewrite can't: the Stalteri family kitchen, why the bread comes
-from the Bakehouse, what "Italian" means here versus the red-sauce trattorias the SERP is full
-of. Links to `/menus/lunch` and `/menus/dinner`.
-*Pairs with:* adding "Italian" to the homepage title/H1 and the Google Business Profile category.
+One new item: Search Console reports some pages indexed under the **`www.` hostname**
+(`www.penelopesocial.com/merchandise`, `/catering-events`, `/merchandise/tote-bag`,
+`/merchandise/t-shirt`) separately from the canonical non-www versions. Low volume, but worth
+confirming the www → apex redirect covers every route.
 
-**2. Catering in Woodbridge and Vaughan: tray sizes, prices, and how far ahead to order**
-Primary: `catering vaughan` (480/mo, KD 0) · `italian catering vaughan` (210, KD 0) · `italian catering woodbridge` (90, KD 4)
+---
 
-The `italian catering woodbridge` SERP is local pack plus seven competitor homepages. **There
-is no guide content ranking at all** — no one has written the "what does it cost, how much do
-I order per person, how much notice do you need" page. Social already has the raw material on
-`/menus/catering`: 24-slice pizzas, focaccia sandwiches with a six-minimum, salads for 8–10,
-24 hours' notice. Highest commercial intent of anything on this list, and the easiest SERP.
+## 3. Measurement: Social is recording nothing
 
-**3. Happy hour and late night in Vaughan: where the bar is still open after 10**
-Primary: `happy hour vaughan` (210/mo, KD 1 — currently position 29) · `bars in vaughan` (1,000, KD 0)
-Secondary: `best bars in vaughan` (90) · `patios vaughan` (480 — currently position 25)
+| | Penelope Social | Penelope Bakehouse |
+| --- | --- | --- |
+| Organic sessions (28d) | 1,946 | 838 |
+| Engagement rate | 59.8% | 68.4% |
+| **Key events** | **0** | **109** |
+| Key events defined | `purchase`, `qualify_lead`, `close_convert_lead` | plus `order_click`, `get_directions`, `gift_card_click`, `newsletter_signup` |
 
-Social already ranks 29th and 25th for two of these with no dedicated content, so the topical
-signal exists. The bar runs to 1am Friday and Saturday, which is a genuine differentiator
-against the Earls / State & Main / Kelseys chains that own this SERP. Written as an honest
-neighbourhood guide (including other bars) rather than a brochure, it can displace the
-OpenTable listicle at #5.
+The Bakehouse tracks what actually matters — 92 `order_click`, 10 `get_directions`, 4
+newsletter signups, 3 gift-card clicks — giving it a **13.4% session-to-order-click rate** on
+organic homepage traffic. That is a real conversion baseline to improve against.
 
-**4. Best restaurants in Woodbridge: the spots locals actually go to**
-Primary: `best restaurants in woodbridge ontario` (1,000/mo, KD 0) · `best restaurants in woodbridge` (1,000, KD 0)
-Secondary: `restaurants in woodbridge` (5,400, KD 6) · `kleinburg restaurants` (5,400, KD 5)
+Social has **2.3× the organic traffic and zero recorded outcomes**. Its three key events are
+GA4 defaults that nothing on the site fires. There is no way to tell whether any page — or any
+future article — produces a reservation, an order, or a catering enquiry.
 
-Social holds local pack #1 here while organic is entirely aggregators. A generous, genuinely
-useful neighbourhood guide is the standard way to take that slot.
+**Port the Bakehouse's event setup to Social before publishing anything.** At minimum:
+`order_click` (Toast), `reservation_click` (Toast tables), `get_directions`, `phone_click`,
+and a catering form submit. Without this, every recommendation below is unmeasurable.
 
-*Tradeoff, stated plainly:* this means publishing a list that sends readers to competitors.
-It works because generosity is what outranks TripAdvisor, and because the local pack #1 slot
-means Penelope is the first thing the searcher sees anyway. If that is not acceptable, run
-articles 1–3 and skip this one — it is the only one of the four with a real strategic cost.
+---
+
+## 4. Penelope Social — what the real data says
+
+### The Italian gap is confirmed
+
+v1 predicted this from keyword data alone. Search Console now proves the demand is real and
+that Social is buried just below the fold:
+
+| Query | Impressions | Avg position |
+| --- | --- | --- |
+| italian restaurant vaughan | 208 | **24.1** |
+| italian restaurants vaughan | 93 | 19.2 |
+| best italian restaurant vaughan | 60 | 17.8 |
+| italian restaurant near me | 56 | 14.4 |
+| italian sandwich vaughan | 57 | 6.7 |
+| italian restaurants near me | 25 | 15.6 |
+| best italian restaurant in vaughan | 22 | 14.0 |
+
+Positions 14–24 means Google already associates the site with these terms but ranks nothing
+well. The Google Business Profile reinforces the gap: categories are **Restaurant, Bakery,
+Cocktail bar, Sandwich shop — no "Italian restaurant"**. The GBP description is currently
+*"Penelope Social is an enigma, don't try and classify it."* — a 750-character field doing no
+work at all.
+
+### New discovery: brunch demand nobody is serving
+
+Not visible in keyword tools, obvious in Search Console. Roughly **600 impressions across
+brunch queries, all at positions 5–13**:
+
+`brunch vaughan` 134 impr @ 10.5 · `brunch near me` 122 @ 9.0 · `brunch in vaughan` 95 @ 9.3 ·
+`brunch spots vaughan` 53 @ 6.8 · `vaughan brunch` 37 @ 9.6 · `brunch` 25 @ 11.1 ·
+`brunch places near me` 26 @ 6.6 · `brunch woodbridge` 24 @ 5.7 · plus a dozen smaller variants.
+
+**Penelope Social has no brunch menu and no brunch page.** The Business Profile shows Sunday
+hours of 9 a.m.–12 p.m. — a brunch-shaped window already exists. This is demand arriving at the
+door with nothing to land on.
+
+### The homepage has a click-through problem, not a ranking problem
+
+| Query | Impressions | Position | CTR |
+| --- | --- | --- | --- |
+| restaurants in vaughan | 1,137 | 4.4 | 2.3% |
+| vaughan restaurants | 899 | 4.2 | 2.0% |
+| restaurants vaughan | 886 | 4.7 | 2.6% |
+| best restaurants vaughan | 301 | 4.9 | 2.3% |
+| restaurants near me | 2,934 | 9.3 | 1.0% |
+
+~3,400 impressions sitting at positions 4–5 and converting at ~2%. Position 4–5 should earn
+roughly 6–9%. The homepage overall does 48,241 impressions → 4,111 clicks (8.5%) at position
+5.6, so the brand queries are carrying it while the category queries leak. Title and meta
+description rewrites on the homepage are a cheap test here, independent of any article.
+
+`/catering-events` is worse: **1,258 impressions, 5 clicks, 0.4% CTR at position 8.0**, and 6
+GA4 sessions at 33% engagement. Demand exists; the page is not earning the click.
+
+### Attribute queries where Social already ranks well
+
+Small volumes, strong positions — evidence for an FAQ/"good to know" layer rather than articles:
+`healthy restaurants vaughan` @ 1.4 · `casual restaurants vaughan` @ 1.1 · `gluten free
+restaurants in vaughan` @ 1.5 · `dog friendly patios vaughan` @ 1.6 · `best family restaurants
+vaughan` @ 1.3 · `kid friendly restaurants vaughan` @ 2.7 · `date night restaurants vaughan` @
+2.7 · `hidden gem restaurants in vaughan` 122 impr @ 5.0.
+
+### Noise worth knowing about
+
+A Greek cluster (`greek restaurant vaughan` 66 impr @ 8.5, `greek food vaughan` 22 @ 13.8,
+`greek restaurants vaughan`, `best greek restaurant vaughan` @ 3.7) is almost certainly the
+name "Penelope" reading as Greek. It is mismatched traffic, not an opportunity — and a mild
+argument for making the Italian positioning explicit.
+
+---
+
+## 5. Penelope Bakehouse — ranks fine, has no demand
+
+The Bakehouse's problem is the inverse of Social's. It ranks **well** for non-brand terms and
+gets almost no impressions for them:
+
+| Query | Impressions | Position | Clicks |
+| --- | --- | --- | --- |
+| focaccia bread near me | 7 | **1.4** | 0 |
+| best sourdough bread near me | 3 | **1.0** | 0 |
+| fresh sourdough bread near me | 3 | 2.3 | 0 |
+| italian bakery scarborough | 5 | 5.6 | 0 |
+| bakery scarborough | 42 | 8.9 | 0 |
+| bakery near me | 88 | 8.4 | 1 |
+| italian bakery near me | 9 | 7.7 | 0 |
+
+Position 1 on three impressions is not a win — it is a keyword nobody searches locally. The
+homepage carries the whole site: **3,910 impressions, 495 clicks, 12.7% CTR, position 4.3**,
+and **681 of 838 organic sessions (81%)** land there.
+
+So the Bakehouse does not need better rankings. It needs **reasons for more people to search**,
+which is exactly what content does — and it needs the `/menus` sitemap bug fixed so its product
+pages can be indexed at all.
+
+Also: a large tail of cake, cupcake, donut and dessert queries draws impressions at positions
+20–66 with zero clicks. The Bakehouse does not sell cakes. Likewise several gluten-free bakery
+queries. Mismatched impressions, safe to ignore.
+
+**Business Profile:** claimed, 4.6★ / 74 reviews, 104 photos, menu synced with prices. Still
+categorized **"Bakery" and nothing else** — no *Sandwich shop*, *Pizza restaurant*, *Cafe* or
+*Italian restaurant*, despite sandwiches being the single most-mentioned review topic (30).
+This remains the highest-value five-minute fix on either site.
+
+---
+
+## 6. Competitors
+
+### bartholomewbakery.com — and what it proves
+
+Bartholomew Bakery (467 Edgeley Blvd, Concord) has **~37,600 estimated organic traffic across
+321 keywords**. Penelope Social has 114 keywords, nearly all brand. It out-ranks both Penelope
+sites, and how it does it is the most useful thing in this audit.
+
+**Half its playbook is local category terms:**
+`bakery in vaughan` (1,900/mo, KD 1) @ 4 · `bakeries in vaughan` (1,900) @ 4 · `vaughan bakery`
+(1,600, KD 0) @ 4 · `coffee shops in vaughan` (2,900, KD 0) @ 6 · `cafe in vaughan` (2,900,
+KD 0) @ 14 · `desserts vaughan` (1,000) @ 9 · `best bakery vaughan` @ 2 · `best coffee in
+vaughan` @ 6.
+
+Penelope Social *is* a cafe and bar and ranks for **none** of the Vaughan cafe/coffee cluster.
+
+**The other half is educational content about their own craft** — and this is the proof point:
+
+| Their keyword | Volume | Their position |
+| --- | --- | --- |
+| **benefits of sourdough bread** | 1,900 | 26 |
+| **sourdough bread benefits** | 1,300 | 22 |
+| how to bake croissants | 1,300 | 9 |
+| artisanal sourdough bread | 720 | 10 |
+| does croissant have egg | 390 | 4 |
+| are croissants healthy | 320 | 15 |
+| what is an artisan bread | 260 | 9 |
+| carbs in a croissant | 210 | 12 |
+| where can i buy sourdough bread | 170 | 7 |
+| sourdough bread vs regular bread | 70 | 6 |
+
+A neighbourhood bakery built a whole informational layer around croissants and sourdough and it
+is carrying a meaningful share of 37,600 visits. **This is the Bakehouse plan from v1, already
+working, two suburbs away.**
+
+The strategic opening: Bartholomew is **croissant-led and only ranks 22nd and 26th on the
+sourdough-benefit terms**. Penelope Bakehouse is an actual sourdough specialist with a named
+starter and a 24-hour ferment. Out-specialising them on sourdough is a winnable fight against a
+page that is barely trying.
+
+### Penelope Bakehouse's Scarborough competitors — you asked, here they are
+
+From a SERP-competitor analysis across eight Scarborough bakery/sandwich/sourdough queries:
+
+**The direct one: `francescabakery.com` — Francesca Italian Bakery, 2 Invergordon Ave,
+Scarborough.** Ranks **#1 for both `italian bakery scarborough` and `bakery scarborough`**
+(average position 1.0). It is the head-to-head competitor, and the Bakehouse currently sits at
+positions 5.6 and 8.9 on those same terms.
+
+Also real:
+- **calabriabakery.ca** — #3 `italian bakery scarborough`
+- **montmartrebakery.com** — #3 `bakery scarborough`
+- **paninaro.ca** — #4 `focaccia sandwich near me`, #5 `italian sandwiches near me` — the closest thing to a direct focaccia-sandwich rival
+- **micosandwiches.ca** (Mico Italian Sandwiches) — #5 `focaccia sandwich near me`
+- Secondary: rusticbakery.ca, italianmarket.ca, buongiornocaffe.ca, subitosandwich.com
+
+**Important caveat:** the top of these SERPs is not local businesses at all. **Yelp holds
+positions 1–4 across six of the eight queries** (#1 for both `sourdough bread near me` and
+`focaccia sandwich near me`), with Instagram, Facebook, TripAdvisor and Reddit close behind. For
+"near me" queries, **the Yelp and Instagram profiles are the battleground, not the website.**
+Claiming and filling out those profiles will move more than a blog post will.
+
+---
+
+## 7. Revised article plan
+
+Changes from v1 are flagged. Every item now ties to measured impressions, not inference.
+
+### Penelope Social
+
+**1. Italian food in Vaughan: focaccia, sourdough pizza and what to order** *(confirmed)*
+Evidence: 464 impressions across the Italian cluster at positions 14–24 (table in §4).
+The demand is measured, not assumed. Pair the article with adding **"Italian restaurant" to the
+Google Business Profile categories** and rewriting the GBP description, which currently says
+nothing. Targets `italian restaurant vaughan` (8,100/mo, KD 1) and `italian restaurants in
+woodbridge` (2,900, KD 8).
+
+**2. Brunch in Vaughan: where to go, and what we serve Sunday morning** *(new — from GSC)*
+Evidence: ~600 impressions across brunch queries at positions 5–13, with no brunch page and no
+brunch menu. The clearest unserved demand on the site.
+*Caveat worth raising with the client: this only works if there is something brunch-like to
+sell. If a Sunday brunch offer is not on the cards, this becomes a "Sunday mornings at
+Penelope" page instead — smaller, but still better than the nothing that exists now.*
+
+**3. Happy hour and late night in Vaughan** *(confirmed, and stronger than expected)*
+Evidence: `happy hour vaughan` 39 impr @ 7.2, `happy hour near me` 32 @ 7.6, `bars in vaughan
+ontario` @ 3.3, `late night food vaughan` @ 2.6 — plus, tellingly, **`penelope social happy
+hour` 40 impr at 35% CTR** and `penelope social happy hour menu` 20 impr. People are searching
+the brand *plus* happy hour and there is no page for it. The bar runs to 1 a.m. Friday and
+Saturday; the GBP flags cocktails as a notable highlight.
+This one should probably be a permanent `/happy-hour` page, not just a post.
+
+**4. Where to eat in Vaughan: a local's guide** *(retargeted from "Woodbridge" to "Vaughan")*
+The v1 draft aimed at Woodbridge. Search Console shows the **Vaughan** variants carry far more
+volume — ~3,400 impressions at positions 4–5 versus a few hundred for Woodbridge equivalents.
+Same article, better target.
+*Same tradeoff as v1:* it means linking to competitors. It works because generosity is what
+outranks TripAdvisor and OpenTable, and Social holds local pack #1 on the Woodbridge variant
+anyway. Drop this one if that is unwelcome — items 1–3 stand alone.
+
+**Demoted from v1:** the catering article. `/catering-events` already gets 1,258 impressions at
+position 8 and converts at 0.4%. That is a page-quality and CTR problem, not a missing-content
+problem. Fix the existing page first; revisit the article after.
 
 ### Penelope Bakehouse
 
-**1. What a focaccia sandwich actually is — and the six we build in Scarborough**
-Primary: `focaccia sandwich` (2,900/mo, KD 0)
-Secondary: `focaccia sandwich near me` (720) · `focaccia sandwich recipes` (480, KD 2) · `best focaccia sandwich toronto`
+**1. What a focaccia sandwich actually is — and the six we build in Scarborough** *(confirmed)*
+`focaccia sandwich` is 2,900/mo at KD 0 and the SERP is five recipe blogs, an AI overview and a
+recipes carousel — no businesses. The Bakehouse already ranks 1.4 for `focaccia bread near me`
+and 2.0 for `focaccia sandwich`, on single-digit impressions. It has the authority and needs
+the demand. Sandwiches are also the #1 review topic on its Business Profile (30 mentions).
+Direct rivals to beat: paninaro.ca and micosandwiches.ca.
 
-KD 0 on 2,900 searches. The SERP is an AI overview, a recipes carousel, and five recipe blogs
-(Smitten Kitchen, Pinch of Yum, Female Foodie) — **not one bakery, not one business**. A shop
-that makes these every morning has material nobody else on that page has: the semolina vs
-barese difference, why the crumb holds up to stracciatella, how to cut one. "Sandwiches" is
-also the #1 topic in their Google reviews (30 mentions), so the customer language already
-matches. Links to `/menus/sandwiches` and online ordering.
+**2. Sourdough: what a 24-hour ferment actually does** *(strongly confirmed — see §6)*
+No longer a hypothesis. Bartholomew Bakery ranks **22nd and 26th** for `sourdough bread
+benefits` (1,300) and `benefits of sourdough bread` (1,900) — as a croissant shop. A dedicated
+sourdough bakery with a named starter should beat that. Also picks up `sourdough bread vs
+regular bread`, `where can i buy sourdough bread`, `artisanal sourdough bread`, and feeds the
+transactional `sourdough bread near me` (3,600/mo, KD 0) where the Bakehouse already ranks 1.0.
+**Cite real sources on anything health-related and make no medical claims** — this is
+YMYL-adjacent and thin health content will not hold.
 
-**2. Sourdough bread benefits: what a 24-hour ferment actually does**
-Primary: `sourdough bread benefits` (1,300/mo, KD 24)
-Secondary: `is sourdough bread healthy` (1,600, KD 28) · `why is sourdough bread bad for you` (140) · `sourdough bread near me` (3,600, KD 0)
+**3. An Italian bakery in Scarborough: bread, focaccia and the imported pantry shelf** *(confirmed, now with a named target)*
+Francesca Bakery holds #1 for both `italian bakery scarborough` and `bakery scarborough`; the
+Bakehouse sits at 5.6 and 8.9. This article also finally puts the **retail range on the website
+for the first time** — the olive oil, chili oil, balsamic, four pasta shapes, five sauces and
+pesto are all listed with prices on the Google Business Profile and appear **nowhere in the
+repo**.
 
-The SERP looks intimidating — WebMD, University Hospitals, a PubMed systematic review — but
-**position #2 is abreadaffair.com, a Vancouver bakery, with "11 Reasons to Eat Sourdough
-Bread."** A bakery has already proven this is winnable against the health publishers.
-
-Write it from the bench, not the internet: their actual fermentation schedule, what the acids
-do, why Vince's starter matters. **Cite real sources for anything health-related and make no
-medical claims** — this is a YMYL-adjacent query and thin health content will not hold.
-Internal-link hard to the loaves page to capture the transactional `sourdough bread near me`
-traffic (3,600/mo, KD 0) that this article's authority will feed.
-
-**3. Pizza by the slice in Scarborough: Roman-style vs New York, and what $6 gets you**
-Primary: `best pizza in scarborough` (880/mo, KD 0) · `best pizza scarborough` (880, KD 0)
-Secondary: `pizza by the slice toronto` · `italian pizza by the slice near me`
-
-The SERP is Reddit, blogTO's "Best Pizza in Scarborough", and TripAdvisor — and **both blogTO
-and TripAdvisor list bakeries (Lamanna's, Calabria) among the best pizza**, so the category
-crossover is already established in this market. Bakehouse has the goods: Bee Sting, NY
-Pepperoni, Margherita, Vodka, Spicy Vodka Pepp, $6–$7. Also fixes the thin `/menus/pizza` page
-(143 words) by giving it something to link to.
-
-**4. An Italian bakery in Scarborough: bread, focaccia, and the imported pantry shelf**
-Primary: `italian bakery scarborough` (390/mo, KD 0) · `best italian bakery scarborough` (30)
-Secondary: `italian bakery near me` (9,900, KD 3) · `best italian bakery toronto` (140, KD 1)
-
-This one does double duty: it targets a KD-0 local term **and** puts the retail range on the
-website for the first time. The olive oil, chili oil, balsamic, four pasta shapes, five sauces
-and pesto are on the Google Business Profile with prices and appear nowhere in the repo. Right
-now someone searching for imported Italian pantry goods in Scarborough cannot find out this
-shop sells them.
+**4. Pizza by the slice in Scarborough: Roman vs New York, and what $6 gets you** *(confirmed)*
+`best pizza in scarborough` is 880/mo at KD 0, and the SERP is Reddit, blogTO and TripAdvisor —
+whose lists already include bakeries (Lamanna's, Calabria). Gives the thin `/menus/pizza` page
+(143 words) something to support.
 
 ---
 
-## 4. Fixes worth doing before or alongside the articles
+## 8. Priority order
 
-Ordered by effort-to-impact. Several of these will outperform any single article.
+Ranked by expected return. **The first four are worth more than the entire article plan.**
 
-**Bakehouse**
-1. Add secondary Google Business Profile categories: `Sandwich shop`, `Pizza restaurant`, `Cafe`, `Italian restaurant`. Minutes of work, affects the surface that drives most of this business.
-2. Put `/blog` in the nav and the sitemap before publishing anything into it — it is currently unreachable.
-3. Shorten seven titles to ≤60 chars, starting with `/menus` (77) and the homepage (74).
-4. Expand `/menus/pizza` (143 words) and `/menus` (120).
-5. Build a retail/pantry page.
-
-**Social**
-1. Link `/sourdough-bakery` from the homepage, `/about`, and `/menus` — it is orphaned and it is the sourdough anchor.
-2. Work "Italian" into the homepage title, H1 and meta description. The whole cluster in §2 hinges on a word the site does not use.
-3. Build a blog route + Sanity schema. Nothing on this plan can ship without it.
-4. Expand the three merchandise product pages and `/menus` (99 words).
-5. Trim three titles and three meta descriptions.
-6. Fix the H1 → H3 skips site-wide (17 pages) — accessibility as much as SEO.
+1. **Fix the brand cannibalization** (§1) — retitle `/sourdough-bakery`, link it, point the
+   Scarborough pages at the Bakehouse domain. ~5,700 impressions currently converting at 1.8%
+   that should convert at ~14%.
+2. **Fix the Bakehouse sitemap bug** (§2) — overwrite `dest` in `sitemapXmlAlias()`, clean
+   rebuild, resubmit, request indexing for `/menus`. The entire menu section is unindexed.
+3. **Add GA4 conversion tracking to Social** (§3) — 1,946 organic sessions currently measured
+   as zero outcomes. Nothing below can be evaluated without it.
+4. **Business Profiles** — add *Italian restaurant* to Social; add *Sandwich shop*, *Pizza
+   restaurant*, *Cafe*, *Italian restaurant* to the Bakehouse. Rewrite Social's GBP description.
+   Claim and fill the Yelp and Instagram profiles (§6 — Yelp holds positions 1–4 on the
+   Bakehouse's "near me" terms).
+5. **Homepage and `/catering-events` title + meta rewrites on Social** — ~3,400 impressions at
+   positions 4–5 converting at ~2%, and 1,258 impressions at 0.4%.
+6. **Build the blog route + Sanity schema on Social**; put `/blog` in the Bakehouse nav and
+   sitemap. Prerequisites for everything in §7.
+7. **Articles**, in the order given in §7.
+8. **Housekeeping** — thin pages, long titles, heading-order skips, www/apex consistency.
 
 ---
 
-## 5. What to do when GSC and GA4 are connected
+## 9. Re-measure
 
-1. Run `get_search_opportunities` on both projects — joins Search Console positions 4–20 against GA4 landing-page outcomes and scores them. This is the single highest-value call once the data exists.
-2. Check whether the Bakehouse is getting impressions Labs data cannot see. A domain with no Labs footprint can still be picking up branded and "near me" impressions.
-3. Validate the assumption behind Social article #1 — if Search Console already shows impressions on Italian terms, that article moves from speculative to certain.
-4. Set up rank tracking on the ~20 keywords named above to measure whether the articles work.
+Re-run this audit in **three to four weeks**, by which point GA4 will have a comparable previous
+period. Watch specifically:
+
+- Bakehouse-brand CTR on penelopebakehouse.com vs penelopesocial.com (§1) — the clearest
+  before/after in the whole plan.
+- Whether `/menus` moves from "unknown to Google" to indexed.
+- Whether Social starts recording key events at all.
+- Whether the Italian cluster moves off positions 14–24.
+- Set up rank tracking on the ~25 keywords named here so the articles can be judged on evidence.
