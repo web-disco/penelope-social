@@ -64,6 +64,28 @@ this document is worth as much.
 
 I'd start with 1 and 2 and re-measure in three weeks before reaching for 3.
 
+**Update 2026-09-19: options 1 and 2 are shipped.**
+
+| Page | Was | Now |
+| --- | --- | --- |
+| `/locations/scarborough` | `Scarborough Bakehouse \| Penelope Bakehouse` | `Scarborough \| Penelope Social` |
+| `/locations/scarborough` H1 | `Penelope Bakehouse` | `Our Scarborough bakehouse` |
+| `/sourdough-bakery` | `Bakehouse sourdough, served here \| Penelope Social` | `Sourdough and focaccia in Woodbridge \| Penelope Social` |
+| `/sourdough-bakery` H1 | `Bakehouse sourdough, served here` | `The sourdough we serve` |
+
+Both meta descriptions were rewritten so "Penelope Bakehouse" no longer appears in the first 60
+characters. The handoff is untouched — body copy, CTAs and the Website row still point at
+penelopebakehouse.com, and the `/locations` hub card still reads "Penelope Bakehouse", which is
+the right label beside "Penelope Social".
+
+`/sourdough-bakery` is also **no longer orphaned**: `/about` now links to it from the "Inside the
+bake" section. It had no inbound link because `isBakeryNav` strips the legacy "Bakery" nav row
+deliberately, so a contextual link was the right fix rather than re-adding a nav item.
+
+**Not yet done:** option 3 (noindex) is deliberately held back — it is the escalation if the
+retitle alone does not move the numbers. Option 4 (Bakehouse brand signals) is still open and
+overlaps with the title-length fixes in §2.
+
 ---
 
 ## 2. Technical crawl
@@ -420,7 +442,7 @@ whose lists already include bakeries (Lamanna's, Calabria). Gives the thin `/men
 
 Ranked by expected return. **The first four are worth more than the entire article plan.**
 
-1. **Fix the brand cannibalization** (§1) — retitle `/sourdough-bakery`, link it, point the
+1. ~~**Fix the brand cannibalization**~~ (§1) — **retitle + de-orphan shipped 2026-09-19.** Watch the §1 table for three weeks; escalate to `noindex` only if it does not move. Originally: retitle `/sourdough-bakery`, link it, point the
    Scarborough pages at the Bakehouse domain. ~5,700 impressions currently converting at 1.8%
    that should convert at ~14%.
 2. **Fix the Bakehouse sitemap bug** (§2) — overwrite `dest` in `sitemapXmlAlias()`, clean
