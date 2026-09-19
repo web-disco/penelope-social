@@ -158,6 +158,21 @@ absent despite the code being present, that is a genuine bug to chase.
 
 Until this is done, no page and no future article can be evaluated on outcomes.
 
+**Update 2026-09-19:** done. Social now has 11 key events, including `order_click`,
+`reservation_click`, `catering_click`, `get_directions`, `click_to_call`, `gift_card_click`,
+`merch_click` and `newsletter_signup`. Note that marking a key event is **not retroactive** —
+GA4 will not recount the historical window, so conversion data accrues from 2026-09-19 onward
+and a usable baseline arrives in roughly two to three weeks.
+
+**Open item on the Bakehouse, found while verifying the above:** the Bakehouse fires
+`click_to_call` in code (`Footer.astro`, `VisitSection.astro`, `LocationDetails.astro`, both
+location pages, and the inline capture in `BaseLayout.astro`) but has **not** marked it as a key
+event — its list is `purchase`, `close_convert_lead`, `qualify_lead`, `order_click`,
+`get_directions`, `gift_card_click`, `newsletter_signup`. Phone calls to a bakery are a real
+conversion and none are being counted. Same toggle, other property. (`catering_click`,
+`reservation_click` and `merch_click` do not apply there — no merch, no reservations, and
+catering is a form page.)
+
 ---
 
 ## 4. Penelope Social — what the real data says
@@ -410,10 +425,9 @@ Ranked by expected return. **The first four are worth more than the entire artic
    that should convert at ~14%.
 2. **Fix the Bakehouse sitemap bug** (§2) — overwrite `dest` in `sitemapXmlAlias()`, clean
    rebuild, resubmit, request indexing for `/menus`. The entire menu section is unindexed.
-3. **Mark Social's existing GA4 events as key events** (§3) — the tracking code is already
-   there and sending; the events were never flagged in the property, so 1,946 organic sessions
-   report zero outcomes. A settings toggle, not a code change. Nothing below can be evaluated
-   without it.
+3. ~~**Mark Social's existing GA4 events as key events**~~ — **done 2026-09-19** (11 key
+   events). Remaining: mark **`click_to_call` as a key event on the Bakehouse property** — it is
+   fired in code and counted nowhere (§3). Neither is retroactive, so baselines build from now.
 4. **Business Profiles** — add *Italian restaurant* to Social; add *Sandwich shop*, *Pizza
    restaurant*, *Cafe*, *Italian restaurant* to the Bakehouse. Rewrite Social's GBP description.
    Claim and fill the Yelp and Instagram profiles (§6 — Yelp holds positions 1–4 on the
