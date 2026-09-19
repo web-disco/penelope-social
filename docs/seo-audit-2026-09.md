@@ -132,13 +132,31 @@ The Bakehouse tracks what actually matters — 92 `order_click`, 10 `get_directi
 newsletter signups, 3 gift-card clicks — giving it a **13.4% session-to-order-click rate** on
 organic homepage traffic. That is a real conversion baseline to improve against.
 
-Social has **2.3× the organic traffic and zero recorded outcomes**. Its three key events are
-GA4 defaults that nothing on the site fires. There is no way to tell whether any page — or any
-future article — produces a reservation, an order, or a catering enquiry.
+Social reports **zero key events across 1,946 organic sessions**. **This is not missing tracking
+code.** Social's instrumentation is near-identical to the Bakehouse's and in places richer:
 
-**Port the Bakehouse's event setup to Social before publishing anything.** At minimum:
-`order_click` (Toast), `reservation_click` (Toast tables), `get_directions`, `phone_click`,
-and a catering form submit. Without this, every recommendation below is unmeasurable.
+- the same hostname-gated gtag bootstrap and beacon-on-click capture in `BaseLayout.astro`
+- `data-ga-event="order_click"` on the nav, hero and drawer CTAs; `get_directions` in the footer
+  and location blocks; `gift_card_click` on the Toast e-gift links
+- plus `web/src/scripts/ga.ts`, a fallback binder (guarded by `__pbGaBound`, so it does not
+  double-fire) that additionally recognises **reservation, catering, merch and `tel:` hrefs** —
+  instrumentation the Bakehouse does not have
+
+The gap is **GA4 property configuration only**. Social's three key events (`purchase`,
+`qualify_lead`, `close_convert_lead`) are GA4/Ads defaults that nothing on the site fires, while
+the events the site *does* send have never been marked as key events. They are being collected
+as ordinary events and therefore never appear in any conversion report.
+
+**Fix: GA4 Admin → Events → "Mark as key event"** on `order_click`, `get_directions` and
+`gift_card_click` at minimum, plus reservation/catering/phone events if they are present. This
+is a settings toggle measured in minutes, not a development task.
+
+*Caveat:* the GA4 API only reports key events, so this analysis confirms the sending code exists
+and the property config differs — it cannot confirm the events are arriving. Check Admin →
+Events (or Realtime) first. If `order_click` is listed there, it is just the toggle; if it is
+absent despite the code being present, that is a genuine bug to chase.
+
+Until this is done, no page and no future article can be evaluated on outcomes.
 
 ---
 
@@ -392,8 +410,10 @@ Ranked by expected return. **The first four are worth more than the entire artic
    that should convert at ~14%.
 2. **Fix the Bakehouse sitemap bug** (§2) — overwrite `dest` in `sitemapXmlAlias()`, clean
    rebuild, resubmit, request indexing for `/menus`. The entire menu section is unindexed.
-3. **Add GA4 conversion tracking to Social** (§3) — 1,946 organic sessions currently measured
-   as zero outcomes. Nothing below can be evaluated without it.
+3. **Mark Social's existing GA4 events as key events** (§3) — the tracking code is already
+   there and sending; the events were never flagged in the property, so 1,946 organic sessions
+   report zero outcomes. A settings toggle, not a code change. Nothing below can be evaluated
+   without it.
 4. **Business Profiles** — add *Italian restaurant* to Social; add *Sandwich shop*, *Pizza
    restaurant*, *Cafe*, *Italian restaurant* to the Bakehouse. Rewrite Social's GBP description.
    Claim and fill the Yelp and Instagram profiles (§6 — Yelp holds positions 1–4 on the
@@ -415,6 +435,6 @@ period. Watch specifically:
 - Bakehouse-brand CTR on penelopebakehouse.com vs penelopesocial.com (§1) — the clearest
   before/after in the whole plan.
 - Whether `/menus` moves from "unknown to Google" to indexed.
-- Whether Social starts recording key events at all.
+- Whether Social's key events start reporting once they are marked in GA4.
 - Whether the Italian cluster moves off positions 14–24.
 - Set up rank tracking on the ~25 keywords named here so the articles can be judged on evidence.
