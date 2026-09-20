@@ -556,3 +556,124 @@ period. Watch specifically:
 - Whether Social's key events start reporting once they are marked in GA4.
 - Whether the Italian cluster moves off positions 14–24.
 - Set up rank tracking on the ~25 keywords named here so the articles can be judged on evidence.
+
+---
+
+## 10. Verified content plan (2026-09-20) — supersedes §7 and the 09-20 refresh
+
+### Why this section exists: a correction
+
+Earlier drafts of this plan described Penelope Social as ranking "position 12.1" for
+`best pizza in vaughan` and the Bakehouse as ranking "5.1" for `sourdough bread near me`. Both
+came from Search Console's **average position**, and both were wrong in a way that matters.
+
+Average position is computed *only across searches where the site actually appeared*. Social
+drew **33 impressions in three months** against a keyword that gets ~2,640 searches in that
+window — it surfaced in roughly **1% of searches**, almost certainly proximity-driven, and
+earned **0 clicks**. Averaging position 12 across that sliver is not a rank.
+
+**Live SERP checks, which are the evidence this section relies on:**
+
+| Query | Depth checked | Does the site appear? |
+| --- | --- | --- |
+| `best pizza in vaughan` | top **100** | **No** — penelopesocial.com absent entirely |
+| `best pizza scarborough` | top 20 | **No** — penelopebakehouse.com absent |
+| `sourdough bread near me` | top 20 | **No** (see caveat below) |
+| `cafe in vaughan` | top 10 | No |
+| `happy hour vaughan` | top 10 | No |
+| `focaccia sandwich` | top 10 | No |
+| `best italian restaurants in vaughan` | top 10 | No |
+| `italian catering woodbridge` | top 10 | No |
+
+DataForSEO Labs corroborates: **penelopebakehouse.com ranks for zero keywords**, and
+penelopesocial.com's 114 are almost entirely brand or accidental.
+
+**Caveat on "near me" checks.** Queries containing a city (`best pizza scarborough`) are
+location-stable, so absence is conclusive. Queries with "near me" resolve against the searcher's
+location, and these checks did not run from Scarborough or Vaughan — so `sourdough bread near me`
+is *not* conclusively lost, only unverified. Treat city-in-query evidence as hard and "near me"
+evidence as soft.
+
+**The corrected framing:** these pages are not "push from page 2 to page 1". Neither site has a
+ranking asset for any of these terms. The pages create one where none exists.
+
+### An unexpected finding worth acting on
+
+On both pizza SERPs, **third-party social content about Penelope ranks where the owned sites do
+not**:
+
+- `best pizza in vaughan` — a food vlogger's Instagram reel at **#8** ("This Might just be the
+  best pizza in Vaughan! 📍125 Hawkview Blvd"), and the same creator's Facebook video at **#19**
+- `best pizza scarborough` — an Instagram reel at **#17** ("Scarborough's newest spot for
+  authentic Italian sandwiches & they also have amazing pizza & bread! @penelope.focacceria")
+
+People are already making rankable content about both businesses. Neither business owns any of
+it. That is an argument for the pages below, and separately for working with those creators.
+
+Also on `best pizza scarborough`: blogTO's "The Best Pizza in Scarborough" holds **#10** and
+TripAdvisor's list at #7 already includes two *bakeries* (Lamanna's, Calabria). Getting the
+Bakehouse into those lists is digital PR, not content, and is likely cheaper than outranking them.
+
+### Static pages — Penelope Social
+
+| Slug | Primary target | Vol/mo | KD | Evidence grade |
+| --- | --- | --- | --- | --- |
+| `/pizza-vaughan` | pizza vaughan · best pizza vaughan · best pizza in vaughan 880 · pizza in vaughan 590 · pizza woodbridge 590 | ~2,400 | 0 | **Hard** — absent from top 100 |
+| `/cafe-in-vaughan` | cafe in vaughan · cafe vaughan · cafes vaughan · coffee shop(s) vaughan *(one grouped keyword)* | ~2,900 | 0 | **Hard** — absent from top 10 |
+| `/happy-hour-vaughan` | bars in vaughan 1,000 · bars in woodbridge 320 · happy hour vaughan 210 | ~1,700 | 0–4 | **Hard** — absent from top 10 |
+| `/italian-sandwiches-vaughan` | italian sandwich vaughan 170 · italian sandwiches vaughan 140 · sandwich(es) vaughan 210 | ~740 | 0 | Medium — volume verified, SERP unchecked |
+
+Plus a **homepage retitle** to carry *Vaughan* and *Italian*: it currently says neither, while
+taking ~3,700 impressions on Vaughan restaurant terms at ~2% CTR, and `italian restaurant vaughan`
+is 8,100/mo at KD 1.
+
+`/pizza-vaughan` is the priority: pizza is the **#1 topic in their Google reviews (124 mentions,
+vs 37 for sourdough bread)** and the site is invisible for it.
+
+### Static pages — Penelope Bakehouse
+
+| Slug | Primary target | Vol/mo | KD | Evidence grade |
+| --- | --- | --- | --- | --- |
+| `/pizza-scarborough` | pizza scarborough · pizza in scarborough 1,000 · best pizza scarborough 880 + non-geo sourdough pizza near me 880 | ~2,300 | 0 | **Hard** — absent from top 20 |
+| `/focaccia-sandwiches-scarborough` | focaccia sandwich 2,900 · italian sandwiches near me 9,900 | large | 0 | **Hard** — absent from top 10 |
+| `/sourdough-bread-scarborough` | sourdough bakery 1,300 · artisanal sourdough bread 720 · sourdough bread near me 3,600 | ~2,000 | 0–4 | Medium — "near me" check inconclusive |
+| `/italian-pantry-scarborough` | **unsized** | ? | ? | **Weak** — justified by unlisted product, not measured demand |
+
+Plus a **homepage retitle** to own `bakery scarborough` 1,900 + `bakeries scarborough` 1,900 +
+`italian bakery scarborough` 390 — the largest cluster on the site, currently drawing 46 and 8
+impressions. The current title crams sourdough + focaccia + Scarborough and so competes with all
+three child pages.
+
+### Articles — Penelope Social
+
+1. **Where to eat in Vaughan: hidden gems** — `hidden gem restaurants in vaughan` 590/KD 0 (already position 5.0), `top restaurants in vaughan` 5,400/KD 0. *Tradeoff: links to competitors.*
+2. **The best patios in Vaughan** — `patios vaughan` 480, currently position 25 while holding 1.4–2.9 on `patio restaurants vaughan`, `best patios in vaughan`, `dog friendly patios vaughan`.
+3. **What people order most at Penelope Social** — captures `penelope social reviews`, currently leaking **628 impressions at 0.8% CTR**. Modelled on Bartholomew's bestsellers post, which ranks **#4 for `bartholomew bakery reviews`** (1,300/mo).
+4. **How much food per person: planning a party in Vaughan** — supports `/catering-events`, which draws 1,258 impressions at **0.4% CTR**.
+
+### Articles — Penelope Bakehouse
+
+1. **How to store sourdough bread** — 1,000/mo, KD 0. A Canadian food business (spentgoods.ca) already ranks #9, so it is winnable.
+2. **What a 24-hour ferment actually does** — `sourdough bread benefits` 1,300 + `benefits of sourdough bread` 1,900, KD 24–28. Hardest item here; abreadaffair.com (a Vancouver bakery) holds #2 and Bartholomew sits at #22/#26 *as a croissant shop*. **Cite sources, make no medical claims.**
+3. **Focaccia sandwich ideas** — `focaccia sandwich recipes` 480/KD 2. Deliberately recipe-intent so it does not compete with `/focaccia-sandwiches-scarborough`.
+4. **Our bestsellers: what Scarborough orders** — captures `penelope bakehouse reviews`, leaking 379 impressions at 1.1% CTR.
+
+### Ownership rules (anti-cannibalization)
+
+| Contested term | Owner |
+| --- | --- |
+| `sourdough pizza near me` / `sourdough pizza toronto` | Bakehouse `/pizza-scarborough` |
+| `focaccia sandwich` (non-geo, 2,900) | Bakehouse `/focaccia-sandwiches-scarborough` |
+| `italian sandwiches` + geo | Social `/italian-sandwiches-vaughan` |
+| `bakery scarborough` (broad) | Bakehouse homepage |
+| `restaurants in vaughan` (broad) | Social homepage |
+
+### Order of work
+
+1. Bakehouse sitemap fix — `/menus` is still "unknown to Google"; new pages risk the same fate
+2. Business Profile categories on both
+3. `/pizza-vaughan` and `/pizza-scarborough` — biggest verified gaps
+4. Homepage retitles on both
+5. Remaining static pages
+6. Blog infrastructure (Social has none; Bakehouse's `/blog` is an unindexed stub)
+7. Articles
