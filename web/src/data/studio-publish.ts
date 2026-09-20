@@ -24,7 +24,7 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Page: merchandise — on-photo H1 “Merch” + lede. Delete cream “Penelope Merch”.',
   'Menus lunch/dinner/bar — on-photo H1 Lunch / Dinner / Bar + one short lede. No cream title. No category jump pills.',
   'Menu category + item titles — Title Case in Studio (The Pizzas, Handhelds, Cocktails, Red Wine, White Wine, Middle Table). Keep NY, DOP, 2oz. The site also title-cases at render if Studio is stale. Descriptions stay as written.',
-  'Do not 301 /sourdough-bakery — dedicated page ships from the repo (Bakehouse sourdough, served here). Unpublish the old “Best Sourdough Bakery in Vaughan” CMS doc so it cannot override.',
+  'Do not 301 /sourdough-bakery — dedicated page ships from the repo (The sourdough we serve). Unpublish the old “Best Sourdough Bakery in Vaughan” CMS doc so it cannot override.',
   'Copy rule: say what it is. No em or en dashes. No “not a dining room”. No street addresses in heroes. Woodbridge in meta + about intro.',
   'Footer menus column heading is “Menus” (not “Our Menus”). Newsletter copy stays “Sign up for our newsletter and be the first to know about exclusive offers.” Footer menus blurb — “Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.” Repo rewrites slop if Studio is stale.',
   'Locations pages are repo-owned (hub + Woodbridge + Scarborough). No Studio publish needed. If you later add a locations document: hub H1 “Our locations”, lede “Two sister spots. Woodbridge cafe and bar, Scarborough bakery.” Woodbridge detail H2 “Cafe by day, bar by night”, NAP 125 Hawkview Blvd + cafe/bar hours. Scarborough is sister-only (71 Howden Rd, link out to penelopebakehouse.com). Do not paste Bakehouse bakery copy onto Social Woodbridge.',

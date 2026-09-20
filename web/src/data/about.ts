@@ -46,7 +46,15 @@ export const aboutPage = {
       alt: 'Hands shaping dough for Penelope',
       aspect: '9/16',
     },
-    ctas: [{ label: 'Visit the Bakehouse', url: '/locations/scarborough', style: 'primary' as const }],
+    /**
+     * The second CTA de-orphans /sourdough-bakery. It was in the sitemap with
+     * no inbound link (isBakeryNav strips the legacy "Bakery" row from the nav
+     * on purpose), so this contextual link is how the page gets crawled.
+     */
+    ctas: [
+      { label: 'Visit the Bakehouse', url: '/locations/scarborough', style: 'primary' as const },
+      { label: 'The sourdough we serve', url: '/sourdough-bakery', style: 'outline' as const },
+    ],
   },
   banner: {
     src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673feab787ea61dbd3013e50_about-banner.avif',

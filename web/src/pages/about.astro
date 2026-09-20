@@ -14,7 +14,7 @@ import { aboutFaq } from '../data/faq'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
 
 const video = aboutPage.videoTeaser
-const cta = video.ctas[0]
+const videoCtas = video.ctas
 
 const graph = pageGraph([
   restaurantSchema(),
@@ -81,16 +81,18 @@ const graph = pageGraph([
               </p>
             </div>
             {
-              cta && (
-                <div class="story-cta">
-                  <a
-                    href={cta.url}
-                    target={cta.newTab ? '_blank' : undefined}
-                    rel={cta.newTab ? 'noopener noreferrer' : undefined}
-                    class:list={['inline-block', btn.primary]}
-                  >
-                    <span>{cta.label}</span>
-                  </a>
+              videoCtas.length > 0 && (
+                <div class="story-cta flex flex-wrap items-center gap-space-16">
+                  {videoCtas.map((cta) => (
+                    <a
+                      href={cta.url}
+                      target={cta.newTab ? '_blank' : undefined}
+                      rel={cta.newTab ? 'noopener noreferrer' : undefined}
+                      class:list={['inline-block', cta.style === 'outline' ? btn.outline : btn.primary]}
+                    >
+                      <span>{cta.label}</span>
+                    </a>
+                  ))}
                 </div>
               )
             }

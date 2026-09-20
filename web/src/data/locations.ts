@@ -63,7 +63,15 @@ export const woodbridgeLocation = {
 export const scarboroughLocationMeta = PAGE_SEO['/locations/scarborough']!
 
 export const scarboroughLocation = {
-  heading: 'Penelope Bakehouse',
+  /**
+   * `heading` is this page's H1; `hubTitle` labels its card on /locations.
+   * They differ on purpose. Naming the sister brand twice (title tag + H1) made
+   * this page outrank penelopebakehouse.com for "penelope bakehouse" from the
+   * stronger domain, at 1.8% CTR against its 14.5%. The hub card still says
+   * "Penelope Bakehouse" — that is the right label next to "Penelope Social" —
+   * and the body copy, CTAs and Website row still hand off to the Bakehouse.
+   */
+  heading: 'Our Scarborough bakehouse',
   hubTitle: 'Penelope Bakehouse',
   hubImage: {
     src: 'https://penelopebakehouse.com/images/location-bakehouse.jpg',

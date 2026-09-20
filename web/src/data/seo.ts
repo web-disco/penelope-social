@@ -78,15 +78,23 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
     description:
       'Visit Penelope Social at 125 Hawkview Blvd, Woodbridge. Cafe hours, bar hours, phone, plus directions. Reservations on Toast.',
   },
+  /*
+   * These two pages point at the sister bakehouse, so they used to lead with
+   * "Penelope Bakehouse" in the title. That made them outrank
+   * penelopebakehouse.com for its own brand from the stronger domain: 5,669
+   * impressions on "penelope bakehouse*" landed here at 1.8% CTR against 14.5%
+   * on the Bakehouse's own pages (Search Console, 2026-08-19 to 09-16).
+   * Title and description now lead with Social; the handoff stays in the body.
+   */
   '/locations/scarborough': {
-    title: 'Scarborough Bakehouse | Penelope Bakehouse',
+    title: 'Scarborough | Penelope Social',
     description:
-      'Penelope Bakehouse at 71 Howden Rd, Scarborough is the bakehouse and focacceria. Bread for Penelope Social starts there. Visit penelopebakehouse.com.',
+      'Our sister bakehouse and focacceria at 71 Howden Rd, Scarborough, where the bread for Penelope Social is baked. Hours, directions, and phone.',
   },
   '/sourdough-bakery': {
-    title: 'Bakehouse sourdough, served here | Penelope Social',
+    title: 'Sourdough and focaccia in Woodbridge | Penelope Social',
     description:
-      'Vince’s starter lives at Penelope Social in Woodbridge. The loaves are baked at Penelope Bakehouse in Scarborough. Menu, hours, online order at penelopebakehouse.com.',
+      'The sourdough we serve in Woodbridge: Vince’s starter, loaves and focaccia on the table at Penelope Social, baked at our Scarborough bakehouse.',
   },
 }
 
