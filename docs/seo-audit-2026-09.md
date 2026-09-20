@@ -376,28 +376,46 @@ A second pass over the Search Console long tail (3-month window, striking-distan
 plus keyword sizing and SERP checks produced two new topics and one format change. The briefs
 further down still stand except where noted here.
 
-**Format change: brunch should be a page, not a post.** The `brunch vaughan` SERP is a local
-pack plus *single-business pages* — Clementina at #4 with `clementinabrunch.com`, Eggstatic at
-#7 with a dedicated `/vaughan-brunch-restaurant` page, Pür & Simple's location page at #9 on
-`best breakfast in vaughan`. Google is not rewarding editorial here; it is rewarding businesses
-with a brunch page. A `/brunch` route beats a blog post.
+**Brunch is out — they don't serve it.** Confirmed with the client on 2026-09-20, and the menu
+data agrees: the morning offer is espresso, cappuccino, latte and tea alongside the Nutella
+Bombe, crullers and cookies. No eggs, pancakes or benedicts anywhere. The `brunch vaughan` SERP
+is wall-to-wall actual brunch restaurants — Evviva, Pür & Simple, Ravine Cafe, Clementina,
+Tubbies — so a page chasing that term would mismatch intent, bounce, and misrepresent the
+business. **Do not pursue the brunch cluster.**
 
-The cluster is also much bigger than the v2 estimate. Vaughan/Woodbridge brunch **and** breakfast,
-all at **KD 0**:
+**Replace it with the cafe and coffee cluster**, which is the same morning daypart and is what
+they actually sell. Penelope Social *is* a cafe and ranks for none of it:
 
-| Keyword | Volume/mo |
-| --- | --- |
-| brunch vaughan | 2,900 |
-| best brunch vaughan / best brunch in vaughan | 480 each |
-| breakfast woodbridge | 480 |
-| best breakfast in vaughan | 390 |
-| breakfast places vaughan | 390 |
-| brunch woodbridge | 390 |
-| brunch kleinburg · sunday brunch vaughan · all day breakfast vaughan · best breakfast woodbridge · brunch vaughan mills | 70–90 each |
+| Keyword | Volume/mo | KD |
+| --- | --- | --- |
+| coffee shops in vaughan | 2,900 | 0 |
+| cafe in vaughan | 2,900 | 0 |
+| cafes vaughan | 2,900 | 0 |
+| vaughan cafes | 480 | 0 |
+| coffee in vaughan · coffee vaughan | 260 each | 0 |
+| best cafe in vaughan · best cafes in vaughan | 170 each | 0 |
+| best coffee in vaughan · best coffee vaughan | 90 each | 0 |
+| best cafe vaughan · best coffee shop in vaughan | 70 each | 0 |
 
-That is roughly **5,800/mo at KD 0**, against 544 impressions already landing at positions
-6.9–10.2 over three months with nothing to land on. Direct competitor to study: Clementina, a
-brunch-only spot that just opened in RioCan Colossus Centre, minutes from Social.
+*Read those three 2,900s with care* — they are near-certainly close variants grouped by Google
+Ads, so treat the cluster as roughly **3,000–4,000/mo of real demand at KD 0**, not 9,000.
+
+Two pieces of evidence make this a strong bet:
+
+1. **The format is proven by a bakery.** Bartholomew ranks **#6 for `coffee shops in vaughan`**
+   with a purpose-built page at `bartholomewbakery.com/specialty-coffee-vaughan`, titled
+   "Specialty Coffee | Vaughan Coffee Shops". Not a blog post, not a chain — a local bakery with
+   a dedicated local-service page. That is the model to copy.
+2. **Locals already call Penelope a cafe, in a result ranking #4.** The Reddit thread "What is
+   your favourite cafe in Vaughan?" sits at position 4 for `cafe in vaughan` and its recommended
+   answer reads: *"Penelope Cafe, offering focaccia and Roman style pizza slices. Good stuff and
+   good use of a cocktail bar space during the day."* Search Console agrees — `penelope cafe`
+   draws impressions at position 2.7. The word-of-mouth exists; the site has no page to catch it.
+
+**Also add "Cafe" (and/or "Coffee shop" / "Espresso bar") to Social's Business Profile
+categories.** Its current set is Restaurant, Bakery, Cocktail bar, Sandwich shop — cafe is
+missing, on a business whose own site calls it "a cafe and bar". Pair this with the
+*Italian restaurant* category already recommended in §8.
 
 **New for Bakehouse — sourdough pizza.** The strongest find of this pass, and more distinctive
 than the generic "pizza by the slice" brief below:
@@ -428,7 +446,7 @@ exists and is not transferring.
 
 **Revised shortlist, highest expected return first:**
 
-*Social* — 1) `/brunch` page (not a post) · 2) Italian in Vaughan · 3) Hidden gems / where to eat
+*Social* — 1) `/cafe` page (not a post) · 2) Italian in Vaughan · 3) Hidden gems / where to eat
 in Vaughan · 4) Happy hour and late night. `hidden gem restaurants in vaughan` is worth calling
 out: 590/mo at KD 0, and Social already sits at position 5.0 on 122 impressions.
 
@@ -446,12 +464,9 @@ Google Business Profile categories** and rewriting the GBP description, which cu
 nothing. Targets `italian restaurant vaughan` (8,100/mo, KD 1) and `italian restaurants in
 woodbridge` (2,900, KD 8).
 
-**2. Brunch in Vaughan: where to go, and what we serve Sunday morning** *(new — from GSC)*
-Evidence: ~600 impressions across brunch queries at positions 5–13, with no brunch page and no
-brunch menu. The clearest unserved demand on the site.
-*Caveat worth raising with the client: this only works if there is something brunch-like to
-sell. If a Sunday brunch offer is not on the cards, this becomes a "Sunday mornings at
-Penelope" page instead — smaller, but still better than the nothing that exists now.*
+**2. ~~Brunch in Vaughan~~ — dropped 2026-09-20; they do not serve brunch.**
+The caveat raised here turned out to be the deciding factor. Superseded by the cafe and coffee
+page in the 2026-09-20 refresh above.
 
 **3. Happy hour and late night in Vaughan** *(confirmed, and stronger than expected)*
 Evidence: `happy hour vaughan` 39 impr @ 7.2, `happy hour near me` 32 @ 7.6, `bars in vaughan
