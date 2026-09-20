@@ -370,6 +370,73 @@ Claiming and filling out those profiles will move more than a blog post will.
 
 Changes from v1 are flagged. Every item now ties to measured impressions, not inference.
 
+### 2026-09-20 refresh — read this before the briefs below
+
+A second pass over the Search Console long tail (3-month window, striking-distance filters)
+plus keyword sizing and SERP checks produced two new topics and one format change. The briefs
+further down still stand except where noted here.
+
+**Format change: brunch should be a page, not a post.** The `brunch vaughan` SERP is a local
+pack plus *single-business pages* — Clementina at #4 with `clementinabrunch.com`, Eggstatic at
+#7 with a dedicated `/vaughan-brunch-restaurant` page, Pür & Simple's location page at #9 on
+`best breakfast in vaughan`. Google is not rewarding editorial here; it is rewarding businesses
+with a brunch page. A `/brunch` route beats a blog post.
+
+The cluster is also much bigger than the v2 estimate. Vaughan/Woodbridge brunch **and** breakfast,
+all at **KD 0**:
+
+| Keyword | Volume/mo |
+| --- | --- |
+| brunch vaughan | 2,900 |
+| best brunch vaughan / best brunch in vaughan | 480 each |
+| breakfast woodbridge | 480 |
+| best breakfast in vaughan | 390 |
+| breakfast places vaughan | 390 |
+| brunch woodbridge | 390 |
+| brunch kleinburg · sunday brunch vaughan · all day breakfast vaughan · best breakfast woodbridge · brunch vaughan mills | 70–90 each |
+
+That is roughly **5,800/mo at KD 0**, against 544 impressions already landing at positions
+6.9–10.2 over three months with nothing to land on. Direct competitor to study: Clementina, a
+brunch-only spot that just opened in RioCan Colossus Centre, minutes from Social.
+
+**New for Bakehouse — sourdough pizza.** The strongest find of this pass, and more distinctive
+than the generic "pizza by the slice" brief below:
+
+| Keyword | Volume/mo | KD | Bakehouse position |
+| --- | --- | --- | --- |
+| sourdough pizza | 2,900 | 11 | 4.5 (8 impressions) |
+| sourdough pizza near me | 880 | **0** | 8.5 (10 impressions) |
+| sourdough pizza toronto | 390 | **0** | — |
+| sourdough pizza dough near me | 70 | 0 | — |
+
+The `sourdough pizza near me` local pack returns Hamilton, Burnaby and Gloucester — Google has
+almost no GTA options to show. Organic #4 is **Slowhand Sourdough Pizza** (Leslieville),
+essentially the only Toronto player. Both Penelope sites make sourdough pizza and neither says
+so in a way Google can index. This is an open niche with transactional intent and zero difficulty.
+
+**New for Bakehouse — how to store sourdough bread.** 1,000/mo at **KD 0**. The SERP is an AI
+overview, Reddit, The Clever Carrot, The Perfect Loaf — and at #9 **spentgoods.ca, a Canadian
+food business**, so a bakery can rank. Ideal post-purchase content: it targets people who have
+just bought a loaf, and it earns links from the sourdough community far more easily than a
+health post.
+
+**One sharp diagnostic for the Italian brief.** Over three months Social ranks **6.3 for
+`italian sandwiches vaughan`** but **18.8 for `italian restaurants vaughan`** and 17.7 for
+`best italian restaurant vaughan`. Google has classified it as a sandwich shop, not an Italian
+restaurant. The article's job is to bridge that gap explicitly — the sandwich authority already
+exists and is not transferring.
+
+**Revised shortlist, highest expected return first:**
+
+*Social* — 1) `/brunch` page (not a post) · 2) Italian in Vaughan · 3) Hidden gems / where to eat
+in Vaughan · 4) Happy hour and late night. `hidden gem restaurants in vaughan` is worth calling
+out: 590/mo at KD 0, and Social already sits at position 5.0 on 122 impressions.
+
+*Bakehouse* — 1) Focaccia sandwich · 2) **Sourdough pizza** · 3) **How to store sourdough
+bread** · 4) Sourdough benefits / 24-hour ferment. The "Italian bakery in Scarborough" brief
+drops to fifth, but the retail/pantry gap inside it is still worth fixing on its own.
+
+
 ### Penelope Social
 
 **1. Italian food in Vaughan: focaccia, sourdough pizza and what to order** *(confirmed)*
