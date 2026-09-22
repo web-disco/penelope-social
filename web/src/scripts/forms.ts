@@ -126,7 +126,8 @@ export function initTurnstileSpacing() {
 
 /**
  * Preselect the enquiry reason from the query string, e.g. the "Catering &
- * Events" nav link points at `/catering-events?general-inquiry`.
+ * Events" nav link points at `/catering-events?general-inquiry`, the Christmas
+ * popup at `/catering-events?event`.
  *
  * The live site ships this as an inline script but targets `#Event-Type`, an id
  * that does not exist on the page (the select is `#Reason-For-Inquiry`), so it
@@ -140,15 +141,21 @@ export function initEventForm() {
   const select = document.querySelector<HTMLSelectElement>('#Reason-For-Inquiry')
   if (!select) return
 
-  const params = new URLSearchParams(window.location.search)
-  const firstKey = Array.from(params.keys())[0] // e.g. "general-inquiry"
-  if (!firstKey) return
+  /* Every key, not just the first, so `?event&utm_source=popup` works — and
+     split on stray `?`s, so the easy typo `?event?utm_source=popup` (one key,
+     "event?utm_source") still finds "event". */
+  const keys = Array.from(new URLSearchParams(window.location.search).keys()).flatMap((key) =>
+    key.split('?'),
+  )
 
-  const normalized = firstKey.replace(/-/g, ' ').toLowerCase()
-  for (const option of Array.from(select.options)) {
-    if (option.value.toLowerCase() === normalized) {
-      select.value = option.value
-      break
+  for (const key of keys) {
+    const normalized = key.replace(/-/g, ' ').trim().toLowerCase()
+    const match = Array.from(select.options).find(
+      (option) => option.value && option.value.toLowerCase() === normalized,
+    )
+    if (match) {
+      select.value = match.value
+      return
     }
   }
 }

@@ -19,7 +19,9 @@ const primaryCta = block.orderOnline
 const secondaryCta = block.reservations
 ---
 
-<div class="section-home-hero relative mb-section-gap-y block h-dvh w-full flex-col wf-sm:mb-section-gap-y-sm">
+<!-- Minus the announcement bar (AnnouncementBar.astro), so the headline and
+     buttons stay above the fold when it is showing. -->
+<div class="section-home-hero relative mb-section-gap-y block h-[calc(100dvh-var(--announcement-height,0px))] w-full flex-col wf-sm:mb-section-gap-y-sm">
   <div class="home-hero relative h-full overflow-hidden">
     <img
       src={imageUrl(block.image)}

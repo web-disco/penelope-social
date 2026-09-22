@@ -1,6 +1,6 @@
 ---
-import { layout, typeScale } from '../../lib/ui'
-import { cateringEventsIntro } from '../../data/catering'
+import { btn, layout, typeScale } from '../../lib/ui'
+import { cateringEventsIntro, cateringMenuLink } from '../../data/catering'
 ---
 
 <section class="catering-events-lede mb-section-gap-y wf-sm:mb-section-gap-y-sm">
@@ -14,5 +14,10 @@ import { cateringEventsIntro } from '../../data/catering'
       ]}
       set:html={cateringEventsIntro}
     />
+    <div class="mt-space-24 flex justify-center">
+      <a href={cateringMenuLink.url} class={btn.outline}>
+        <span>{cateringMenuLink.label}</span>
+      </a>
+    </div>
   </div>
 </section>

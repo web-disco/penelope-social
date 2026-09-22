@@ -38,6 +38,8 @@ import { homepage } from './documents/homepage'
 import { page } from './documents/page'
 import { menu } from './documents/menu'
 import { merchProduct } from './documents/merchProduct'
+import { marketingPopup } from './documents/marketingPopup'
+import { announcementBar } from './documents/announcementBar'
 
 /**
  * The page-builder blocks, in the order they appear in the insert menu.
@@ -79,6 +81,6 @@ export const objectTypes = [
   faqItem,
 ]
 
-export const documentTypes = [siteSettings, homepage, page, menu, merchProduct]
+export const documentTypes = [siteSettings, homepage, page, menu, merchProduct, marketingPopup, announcementBar]
 
 export const schemaTypes = [...objectTypes, ...sectionTypes, ...documentTypes]

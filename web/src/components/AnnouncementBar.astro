@@ -1,0 +1,188 @@
+---
+/**
+ * The bar above the header, fed by the `announcementBar` singleton.
+ * Independent of MarketingPopup — its own schedule, its own dismissal.
+ *
+ * It sits in normal flow at the very top of the page, so it pushes the hero
+ * down and scrolls away with it. Two custom properties on <html>:
+ * - `--announcement-top`: where the bar ends right now, shrinking to 0 as it
+ *   scrolls off. The fixed navbar sits there (Navbar.astro).
+ * - `--announcement-height`: the bar's height, steady while scrolling. The
+ *   full-screen home hero subtracts it so its headline and buttons stay above
+ *   the fold (Hero.astro).
+ *
+ * Rendered `hidden`. The inline script straight after it decides — schedule,
+ * "closed" state, test mode — before anything below it paints, so a visitor
+ * who closed it never sees it flash in, and one who didn't gets no layout
+ * shift. Closing it hides it for the rest of the campaign, keyed on the text.
+ *
+ * `test` renders the bar even while `enabled` is off, but only shows it off
+ * the production hostnames — leaving it on can't ship to the live site.
+ */
+interface Props {
+  bar: any
+}
+const { bar } = Astro.props
+
+/* `link` is the field this replaced — a label + URL — kept as a fallback so a
+   bar published before the change still links somewhere. */
+const url: string | undefined = bar?.url || bar?.link?.url
+const newTab = Boolean(bar?.url ? bar?.newTab : bar?.link?.newTab)
+const mobileText: string | undefined = bar?.mobileText?.trim() || undefined
+const Tag = url ? 'a' : 'div'
+
+const INNER =
+  'block px-14 py-[11px] text-center font-body text-[14px] font-medium leading-[1.4] text-beige ' +
+  'no-underline text-pretty wf-xs:px-12 wf-xs:text-[13px]'
+const show = Boolean((bar?.enabled || bar?.test) && bar?.text)
+---
+
+{
+  show && (
+    <>
+      <div
+        class="announcement-bar relative bg-green text-beige"
+        role="region"
+        aria-label="Announcement"
+        data-announcement-bar
+        data-campaign={bar.text}
+        data-enabled={bar.enabled ? 'true' : 'false'}
+        data-test={bar.test ? 'true' : 'false'}
+        data-start={bar.startDate ?? ''}
+        data-end={bar.endDate ?? ''}
+        hidden
+      >
+        <Tag
+          href={url}
+          target={url && newTab ? '_blank' : undefined}
+          rel={url && newTab ? 'noopener noreferrer' : undefined}
+          class:list={[INNER, url && 'announcement-bar__link']}
+          data-announcement-link={url ? '' : undefined}
+        >
+          {mobileText ? (
+            <>
+              <span class="wf-sm:hidden">{bar.text}</span>
+              <span class="hidden wf-sm:inline">{mobileText}</span>
+            </>
+          ) : (
+            bar.text
+          )}
+        </Tag>
+        <button
+          type="button"
+          class="announcement-bar__x absolute top-1/2 right-2 grid h-9 w-9 -translate-y-1/2 cursor-pointer place-items-center border-0 bg-transparent text-beige"
+          aria-label="Dismiss announcement"
+          data-announcement-close
+        >
+          <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="2" fill="none" />
+          </svg>
+        </button>
+      </div>
+      <script is:inline>
+        ;(function () {
+          var bar = document.currentScript.previousElementSibling
+          if (!bar) return
+          var host = location.hostname.toLowerCase()
+          var isProd = host === 'penelopesocial.com' || host === 'www.penelopesocial.com'
+          var d = bar.dataset
+          var testMode = d.test === 'true' && !isProd
+
+          if (!testMode) {
+            if (d.enabled !== 'true') return
+            var today = new Date().toLocaleDateString('en-CA')
+            if (d.start && today < d.start) return
+            if (d.end && today > d.end) return
+            try {
+              if (localStorage.getItem('pb:announcement-bar') === d.campaign) return
+            } catch (err) {
+              /* Storage blocked: show it. Unlike the popup, a bar that comes back
+                 is a nuisance, not a nag. */
+            }
+          }
+
+          bar.hidden = false
+          var root = document.documentElement.style
+          root.setProperty('--announcement-top', bar.offsetHeight + 'px')
+          root.setProperty('--announcement-height', bar.offsetHeight + 'px')
+        })()
+      </script>
+    </>
+  )
+}
+
+<style>
+  .announcement-bar__link {
+    transition: background-color 350ms;
+  }
+
+  .announcement-bar__link:hover {
+    background-color: rgb(0 0 0 / 0.12);
+  }
+
+  /* The ✕ sits on top of the link rather than inside it (a button in a link is
+     invalid), so it needs its own stacking level to stay clickable. */
+  .announcement-bar__x {
+    z-index: 1;
+  }
+
+  .announcement-bar__x:focus-visible,
+  .announcement-bar__link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: -4px;
+  }
+</style>
+
+<script>
+  import { track } from '../scripts/ga'
+
+  const STORAGE_KEY = 'pb:announcement-bar'
+
+  function init() {
+    const bar = document.querySelector<HTMLElement>('[data-announcement-bar]')
+    if (!bar || bar.hidden) return
+
+    const root = document.documentElement
+    let frame = 0
+
+    /* Where the bar's bottom edge is now: its full height at the top of the
+       page, shrinking to 0 as it scrolls off. */
+    const sync = () => {
+      frame = 0
+      const shown = bar.isConnected && !bar.hidden
+      const bottom = shown ? bar.getBoundingClientRect().bottom : 0
+      root.style.setProperty('--announcement-top', `${Math.max(0, Math.round(bottom))}px`)
+      root.style.setProperty('--announcement-height', `${shown ? bar.offsetHeight : 0}px`)
+    }
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(sync)
+    }
+
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', schedule)
+    /* Fonts landing or the text rewrapping changes the height. */
+    new ResizeObserver(schedule).observe(bar)
+    sync()
+
+    bar.querySelector('[data-announcement-close]')?.addEventListener('click', () => {
+      try {
+        localStorage.setItem(STORAGE_KEY, bar.dataset.campaign ?? '')
+      } catch {
+        /* nothing to do */
+      }
+      track('announcement_dismiss', { announcement: bar.dataset.campaign ?? '' })
+      bar.remove()
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', schedule)
+      root.style.setProperty('--announcement-top', '0px')
+      root.style.setProperty('--announcement-height', '0px')
+    })
+
+    bar.querySelector('[data-announcement-link]')?.addEventListener('click', () => {
+      track('announcement_click', { announcement: bar.dataset.campaign ?? '' })
+    })
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init)
+  else init()
+</script>
