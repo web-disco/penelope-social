@@ -4,3 +4,6 @@
  */
 export const cateringEventsIntro =
   'Trays of focaccia sandwiches and <a href="/pizza-vaughan">pizza</a>, plus shareables from the Woodbridge kitchen. Tell us the headcount and what you need. We\'ll help size it.'
+
+/** Button under the lede, as on Bakehouse /catering. */
+export const cateringMenuLink = { label: 'See the catering menu', url: '/menus/catering' }
