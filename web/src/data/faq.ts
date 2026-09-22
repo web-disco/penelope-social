@@ -216,6 +216,6 @@ export const sourdoughFaq: FaqItem[] = [
   },
   {
     question: 'Where is the sourdough baked?',
-    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social as sandwiches and pizza, or as bread on the table.`,
+    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social as sandwiches and <a href="/pizza-vaughan">pizza</a>, or as bread on the table.`,
   },
 ]

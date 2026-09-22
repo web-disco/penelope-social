@@ -199,6 +199,30 @@ export function breadcrumbSchema(crumbs: { name: string; path: string }[]) {
   }
 }
 
+/**
+ * The page itself, tied to the restaurant it is about and, for landing pages
+ * that list dishes, the Menu node that carries them.
+ */
+export function webPageSchema(input: {
+  path: string
+  name: string
+  description?: string
+  image?: string
+  mainEntityId?: string
+}) {
+  return {
+    '@type': 'WebPage',
+    '@id': `${SITE}${input.path}#webpage`,
+    url: `${SITE}${input.path}`,
+    name: input.name,
+    description: input.description || undefined,
+    inLanguage: 'en-CA',
+    about: { '@id': `${SITE}/#restaurant` },
+    mainEntity: input.mainEntityId ? { '@id': input.mainEntityId } : undefined,
+    primaryImageOfPage: input.image ? { '@type': 'ImageObject', url: input.image } : undefined,
+  }
+}
+
 export function pageGraph(nodes: Record<string, unknown>[]) {
   return {
     '@context': 'https://schema.org',
