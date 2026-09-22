@@ -21,7 +21,9 @@ import {
 const SITE = SITE_ORIGIN.replace(/\/$/, '')
 
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+  // Tags become spaces so block tags don't glue words; then drop the space a
+  // closing </a> leaves before punctuation ("pizza .").
+  return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').replace(/\s+([.,;:!?])/g, '$1').trim()
 }
 
 function daysFromLabel(line: string): string[] {

@@ -91,9 +91,19 @@ const STAR =
                       style={imageObjectPosition(card.image) ? `object-position: ${imageObjectPosition(card.image)};` : undefined}
                     />
                   </div>
-                  <div class="mt-space-16 flex items-start justify-between gap-space-16">
-                    <h3 class:list={['my-0 text-charcoal', typeScale.title]}>{card.title}</h3>
-                    {card.price && <p class:list={['my-0 whitespace-nowrap text-charcoal', typeScale.title]}>{card.price}</p>}
+                  {/* Name | price on one line. When the price wraps, the inner row's negative
+                      margin pushes its leading pipe under the clip instead of starting line two. */}
+                  <div class="mt-space-12 overflow-hidden">
+                    <div class="-ml-space-24 flex flex-wrap items-baseline gap-y-space-4 py-space-4">
+                      <h3 class:list={['my-0 pl-space-24 text-charcoal', typeScale.title]}>{card.title}</h3>
+                      {card.price && (
+                        <p class:list={['my-0 flex items-baseline whitespace-nowrap text-charcoal', typeScale.title]}>
+                          <span class="w-space-24 shrink-0 text-center text-charcoal/40" aria-hidden="true">|</span>
+                          <span>{card.price}</span>
+                          {card.priceUnit && <span class:list={['ml-space-8 text-charcoal/70', typeScale.label]}>per {card.priceUnit}</span>}
+                        </p>
+                      )}
+                    </div>
                   </div>
                   {card.description && (
                     <p class:list={['mt-space-8 mb-0 line-clamp-2 text-charcoal/80', typeScale.body]} title={card.description}>

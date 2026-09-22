@@ -10,6 +10,7 @@ import { getAll } from '../../lib/data'
 import { resolveSeo } from '../../data/seo'
 import { restaurantCopy, displayHeading, menuTitle } from '../../data/copy'
 import { cateringMenuCopy } from '../../data/menus'
+import { plainText } from '../../lib/portableText'
 import { SITE_ORIGIN } from '../../data/site'
 import { btn, layout, space, typeScale, heading } from '../../lib/ui'
 import {
@@ -40,7 +41,7 @@ const introText = isCateringMenu ? cateringMenuCopy.intro : restaurantCopy(menu.
 const menuSections = (menu.categories ?? [])
   .map((category: any) => ({
     name: menuTitle(category.title),
-    description: category.description,
+    description: plainText(category.description),
     items: (category.items ?? [])
       .filter((item: any) => item.title && !/unavailable/i.test(item.title))
       .map((item: any) => ({

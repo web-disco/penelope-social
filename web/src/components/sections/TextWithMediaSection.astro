@@ -20,6 +20,7 @@ const imageFirst = block.layout !== 'copy-first'
 const fallback = imageFirst ? homeBreadFallback : homeEventsFallback
 const headingText = fallback.heading
 const bodyText = fallback.body
+const bodyHtml = 'bodyHtml' in fallback ? fallback.bodyHtml : undefined
 const ctaUrl = imageFirst ? homeBreadFallback.ctaUrl : (block.cta?.url ?? ('ctaUrl' in fallback ? fallback.ctaUrl : undefined))
 const ctaLabel = imageFirst
   ? homeBreadFallback.ctaLabel
@@ -55,7 +56,19 @@ const copyOrder = imageFirst ? '' : 'wf-md:order-2'
       <div class:list={[story.copy, copyOrder]}>
         <div>
           <h2 class:list={[heading.medium, 'text-left my-0']}>{headingText}</h2>
-          <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.bodyLg]}>{bodyText}</p>
+          {bodyHtml ? (
+            <p
+              class:list={[
+                'mt-space-16 mb-0 text-charcoal',
+                '[&_a]:text-charcoal [&_a]:underline [&_a]:underline-offset-[0.18em] [&_a]:decoration-charcoal/40',
+                '[&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70',
+                typeScale.bodyLg,
+              ]}
+              set:html={bodyHtml}
+            />
+          ) : (
+            <p class:list={['mt-space-16 mb-0 text-charcoal', typeScale.bodyLg]}>{bodyText}</p>
+          )}
         </div>
         {
           ctaUrl && (

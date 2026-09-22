@@ -21,6 +21,10 @@ export const homeFaq: FaqItem[] = [
     answer: `Penelope Social is at <a href="/locations/woodbridge">${address}</a>, in Vaughan. Phone <a href="tel:${woodbridgeNap.phoneDigits}">${woodbridgeNap.phone}</a>.`,
   },
   {
+    question: 'Where can I get sourdough pizza in Vaughan?',
+    answer: `Here, at ${address}. Roman-style slices at lunch and 14-inch New York-style pies at dinner, both on our own sourdough. More on <a href="/pizza-vaughan">our sourdough pizza</a>.`,
+  },
+  {
     question: 'What are the cafe and bar hours?',
     answer: stackedHoursFaqHtml,
   },
