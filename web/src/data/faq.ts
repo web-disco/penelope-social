@@ -21,6 +21,10 @@ export const homeFaq: FaqItem[] = [
     answer: `Penelope Social is at <a href="/locations/woodbridge">${address}</a>, in Vaughan. Phone <a href="tel:${woodbridgeNap.phoneDigits}">${woodbridgeNap.phone}</a>.`,
   },
   {
+    question: 'Where can I get sourdough pizza in Vaughan?',
+    answer: `Here, at ${address}. Roman-style slices at lunch and 14-inch New York-style pies at dinner, both on our own sourdough. More on <a href="/pizza-vaughan">our sourdough pizza</a>.`,
+  },
+  {
     question: 'What are the cafe and bar hours?',
     answer: stackedHoursFaqHtml,
   },
@@ -212,6 +216,6 @@ export const sourdoughFaq: FaqItem[] = [
   },
   {
     question: 'Where is the sourdough baked?',
-    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social as sandwiches and pizza, or as bread on the table.`,
+    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social as sandwiches and <a href="/pizza-vaughan">pizza</a>, or as bread on the table.`,
   },
 ]

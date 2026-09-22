@@ -87,7 +87,8 @@ export const stackedHoursBlocks: HourBlock[] = [...cafeHours, ...barHours]
 export const stackedHoursFaqHtml = [
   '<strong>Cafe</strong>',
   ...cafeHours[0]!.lines,
-  '<strong>Bar</strong>',
+  // inline-block so the top margin applies; it separates the two groups.
+  '<strong class="mt-space-12 inline-block">Bar</strong>',
   ...barHours[0]!.lines,
 ].join('<br>')
 

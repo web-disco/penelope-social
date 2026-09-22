@@ -4,7 +4,9 @@
  * 40px category title, one-line blurb, 60px grid, 24px item / price.
  * Empty lists stay titled with small body copy. Unavailable categories hide.
  */
+import { PortableText } from 'astro-portabletext'
 import { layout, typeScale } from '../lib/ui'
+import { withoutEmptyBlocks } from '../lib/portableText'
 import { menuTitle, restaurantCopy } from '../data/copy'
 
 interface Props {
@@ -31,6 +33,7 @@ const visibleCategories = (categories ?? []).filter((category: any) => {
 })
 
 function categoryBlurb(text?: string) {
+  if (typeof text !== 'string') return ''
   let raw = restaurantCopy(text)
   if (!raw) return ''
   raw = raw
@@ -60,7 +63,13 @@ function isMultiPrice(price?: string) {
 
 {
   visibleCategories.map((category, index) => {
-    const blurb = categoryBlurb(category.description)
+    // Rich text (links allowed) renders as-is; older plain strings keep the copy cleanup.
+    // Cloned: astro-portabletext rewrites linked spans in place, and the menu
+    // docs are shared across renders (and with the JSON-LD built from them).
+    const richBlurb = Array.isArray(category.description)
+      ? structuredClone(withoutEmptyBlocks(category.description))
+      : []
+    const blurb = richBlurb.length ? '' : categoryBlurb(category.description)
     const items = (category.items ?? []).filter((item: any) => item?.title && !isUnavailable(item))
     return (
       <section
@@ -78,6 +87,18 @@ function isMultiPrice(price?: string) {
           <h2 class:list={['page-sub-heading mt-0 mb-space-12 text-charcoal', typeScale.displayL]}>
             {menuTitle(category.title)}
           </h2>
+          {richBlurb.length > 0 && (
+            <div
+              class:list={[
+                'menu-description mb-space-24 text-charcoal [&_p]:my-0',
+                '[&_a]:text-charcoal [&_a]:underline [&_a]:underline-offset-[0.18em] [&_a]:decoration-charcoal/40',
+                '[&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70 [&_strong]:font-medium',
+                typeScale.bodyLg,
+              ]}
+            >
+              <PortableText value={richBlurb} />
+            </div>
+          )}
           {blurb && (
             <p
               class:list={[

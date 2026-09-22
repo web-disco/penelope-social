@@ -1,0 +1,35 @@
+---
+/**
+ * Centred intro: H2 and a Portable Text body in an 850px reading column.
+ * block: { heading, body: PortableText[] }
+ */
+import { PortableText } from 'astro-portabletext'
+import { withoutEmptyBlocks } from '../../lib/portableText'
+import { layout, space, typeScale } from '../../lib/ui'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+const body = withoutEmptyBlocks(block.body)
+
+const bodyClass =
+  'rich-text-intro-body flex flex-col gap-space-16 text-center text-charcoal [&_p]:my-0 ' +
+  '[&_a]:text-charcoal [&_a]:underline [&_a]:underline-offset-[0.18em] [&_a]:decoration-charcoal/40 ' +
+  '[&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70 [&_strong]:font-medium'
+---
+
+<section class="section-rich-text-intro">
+  <div class:list={[layout.shell, space.sectionYFirst]}>
+    <div class:list={['mx-auto', layout.measure]}>
+      {block.heading && <h2 class:list={['mt-0 mb-space-24 text-center text-charcoal', typeScale.displayM]}>{block.heading}</h2>}
+      {
+        body.length > 0 && (
+          <div class:list={[bodyClass, typeScale.bodyLg]}>
+            <PortableText value={body} />
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

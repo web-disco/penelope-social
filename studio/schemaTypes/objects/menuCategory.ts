@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { richTextField } from './richText'
 
 /**
  * A named group of items within a menu — "Focaccia", "Pizzas", "Cocktails".
@@ -44,7 +45,15 @@ export const menuCategory = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
-    defineField({ name: 'description', title: 'Description', type: 'text', rows: 2 }),
+    /*
+     * Rich text so a blurb can carry an inline link: the pizza categories point
+     * at /pizza-vaughan. One short paragraph; the site reads older plain-string
+     * values too.
+     */
+    {
+      ...richTextField('description', 'Description'),
+      description: 'One short line under the title. Select text and use the link button to link it.',
+    },
     defineField({
       name: 'items',
       title: 'Items',

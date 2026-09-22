@@ -26,6 +26,11 @@ export const pageBuilderField = defineField({
     defineArrayMember({ type: 'imageGrid' }),
     defineArrayMember({ type: 'faqSection' }),
     defineArrayMember({ type: 'stepTimeline' }),
+    defineArrayMember({ type: 'richTextIntro' }),
+    defineArrayMember({ type: 'menuItemCards' }),
+    defineArrayMember({ type: 'mediaTextCta' }),
+    defineArrayMember({ type: 'comparisonTable' }),
+    defineArrayMember({ type: 'finalCta' }),
   ],
   options: {
     insertMenu: {

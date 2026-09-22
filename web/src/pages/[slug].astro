@@ -8,10 +8,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
 import FaqSection from '../components/sections/FaqSection.astro'
-import { getAll } from '../lib/data'
+import { getAll, getOne } from '../lib/data'
 import { resolveSeo } from '../data/seo'
 import { cateringFaq, contactFaq } from '../data/faq'
-import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
+import {
+  bakehouseSchema,
+  breadcrumbSchema,
+  faqPageSchema,
+  menuSchema,
+  pageGraph,
+  restaurantSchema,
+  webPageSchema,
+} from '../lib/schema'
+import { imageUrl } from '../lib/image'
+import { plainText } from '../lib/portableText'
+import { menuTitle } from '../data/copy'
+import { SITE_ORIGIN } from '../data/site'
 
 export async function getStaticPaths() {
   const dedicated = new Set(['about', 'sourdough-bakery'])
@@ -21,18 +33,76 @@ export async function getStaticPaths() {
     .map((page) => ({ params: { slug: page.slug.current }, props: { page } }))
 }
 
-const { page } = Astro.props
+/*
+ * `astro dev` caches getStaticPaths, so the props above are whatever Sanity
+ * held when the server started. Re-read the page per request in dev so a
+ * Studio publish (or draft edit, with SANITY_PREVIEW_DRAFTS) shows on reload.
+ * Static builds fetch once and keep the props.
+ */
+const page = import.meta.env.DEV
+  ? ((await getOne<any>('page', Astro.props.page.slug.current)) ?? Astro.props.page)
+  : Astro.props.page
 const slug = page.slug.current as string
 const path = `/${slug}`
 const seo = resolveSeo(path, page.seo)
+
+/* A page that closes on the green final-CTA band already ends on its own call
+   to action; a second green newsletter band straight after it reads as a repeat. */
+const endsWithFinalCta = (page.sections ?? []).at(-1)?._type === 'finalCta'
 
 const faqItems = slug === 'contact' ? contactFaq : slug === 'catering-events' ? cateringFaq : null
 const crumbName =
   slug === 'contact' ? 'Contact' : slug === 'catering-events' ? 'Catering and events' : page.title
 
+/*
+ * Landing pages that sell dishes get a Menu node built from the live menu
+ * categories, so the prices in the JSON-LD are the ones on /menus/*.
+ * Each entry: [menu slug, category anchor, section label].
+ */
+const LANDING_MENUS: Record<string, [string, string, string][]> = {
+  'pizza-vaughan': [
+    ['lunch', 'pizza-slices', 'Sourdough pizza by the slice (lunch)'],
+    ['dinner', 'pizza', 'Sourdough pizza, 14-inch pies (dinner)'],
+  ],
+}
+const landingSources = LANDING_MENUS[slug]
+let landingMenu: ReturnType<typeof menuSchema> | null = null
+if (landingSources) {
+  const menus = await getAll<any>('menu')
+  const sections = landingSources
+    .map(([menuSlug, anchor, label]) => {
+      const category = menus
+        .find((m) => m.slug?.current === menuSlug)
+        ?.categories?.find((c: any) => c.anchor?.current === anchor)
+      return {
+        name: label,
+        description: plainText(category?.description) || undefined,
+        items: (category?.items ?? [])
+          .filter((item: any) => item?.title && !/unavailable/i.test(item.title))
+          .map((item: any) => ({ name: menuTitle(item.title), description: item.description, price: item.price })),
+      }
+    })
+    .filter((section) => section.items.length > 0)
+  if (sections.length) landingMenu = menuSchema({ name: page.title, path, description: seo.description, sections })
+}
+
+const heroImage = (page.sections ?? []).find((block: any) => block?._type === 'pageHero')?.image
+
 const graph = pageGraph([
   restaurantSchema(),
   bakehouseSchema(),
+  ...(landingSources
+    ? [
+        webPageSchema({
+          path,
+          name: seo.title,
+          description: seo.description,
+          image: heroImage?.asset ? imageUrl(heroImage) : undefined,
+          mainEntityId: landingMenu ? `${SITE_ORIGIN.replace(/\/$/, '')}${path}#menu` : undefined,
+        }),
+      ]
+    : []),
+  ...(landingMenu ? [landingMenu] : []),
   breadcrumbSchema([
     { name: 'Home', path: '/' },
     { name: crumbName, path },
@@ -46,6 +116,7 @@ const graph = pageGraph([
   description={seo.description}
   ogImage={page.seo?.ogImage}
   noIndex={page.seo?.noIndex}
+  hideNewsletter={endsWithFinalCta}
 >
   {graph && <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />}
   <PageBuilder sections={page.sections ?? []} />

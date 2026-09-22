@@ -26,6 +26,11 @@ import { contactFormSection } from './sections/contactFormSection'
 import { imageGrid } from './sections/imageGrid'
 import { faqSection } from './sections/faqSection'
 import { stepTimeline } from './sections/stepTimeline'
+import { richTextIntro } from './sections/richTextIntro'
+import { menuItemCards } from './sections/menuItemCards'
+import { mediaTextCta } from './sections/mediaTextCta'
+import { comparisonTable } from './sections/comparisonTable'
+import { finalCta } from './sections/finalCta'
 
 // documents
 import { siteSettings } from './documents/siteSettings'
@@ -52,6 +57,11 @@ export const sectionTypes = [
   imageGrid,
   faqSection,
   stepTimeline,
+  richTextIntro,
+  menuItemCards,
+  mediaTextCta,
+  comparisonTable,
+  finalCta,
 ]
 
 export const objectTypes = [

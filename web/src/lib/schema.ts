@@ -21,7 +21,9 @@ import {
 const SITE = SITE_ORIGIN.replace(/\/$/, '')
 
 function stripHtml(html: string): string {
-  return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+  // Tags become spaces so block tags don't glue words; then drop the space a
+  // closing </a> leaves before punctuation ("pizza .").
+  return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').replace(/\s+([.,;:!?])/g, '$1').trim()
 }
 
 function daysFromLabel(line: string): string[] {
@@ -194,6 +196,30 @@ export function breadcrumbSchema(crumbs: { name: string; path: string }[]) {
       name: crumb.name,
       item: crumb.path.startsWith('http') ? crumb.path : `${SITE}${crumb.path === '/' ? '/' : crumb.path}`,
     })),
+  }
+}
+
+/**
+ * The page itself, tied to the restaurant it is about and, for landing pages
+ * that list dishes, the Menu node that carries them.
+ */
+export function webPageSchema(input: {
+  path: string
+  name: string
+  description?: string
+  image?: string
+  mainEntityId?: string
+}) {
+  return {
+    '@type': 'WebPage',
+    '@id': `${SITE}${input.path}#webpage`,
+    url: `${SITE}${input.path}`,
+    name: input.name,
+    description: input.description || undefined,
+    inLanguage: 'en-CA',
+    about: { '@id': `${SITE}/#restaurant` },
+    mainEntity: input.mainEntityId ? { '@id': input.mainEntityId } : undefined,
+    primaryImageOfPage: input.image ? { '@type': 'ImageObject', url: input.image } : undefined,
   }
 }
 

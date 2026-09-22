@@ -39,6 +39,9 @@ export const homeMenusFallback = {
 export const homeBreadFallback = {
   heading: 'Good bread, served here every day',
   body: 'Loaves start at Penelope Bakehouse and land here as sandwiches and pizza, or as bread with dinner.',
+  /** Same line, with "pizza" linked to the /pizza-vaughan landing page. */
+  bodyHtml:
+    'Loaves start at Penelope Bakehouse and land here as sandwiches and <a href="/pizza-vaughan">pizza</a>, or as bread with dinner.',
   ctaLabel: 'Visit the Bakehouse',
   /**
    * The Bakehouse's page on this site, not penelopebakehouse.com. The sister

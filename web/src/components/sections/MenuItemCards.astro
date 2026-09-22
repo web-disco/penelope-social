@@ -1,0 +1,164 @@
+---
+/**
+ * Menu-item cards in the MenuCards mosaic style: 4-up grid at desktop, Swiper
+ * below 992px (same script and breakpoints). Each card picks a dish from a
+ * menu document, so name, description and price come from the live menu;
+ * the photo is authored on the card because menu items carry no image.
+ *
+ * block: { heading, intro, rating: { score, label, url }, items: [{ menu, item, image, link }], cta: { label, url } }
+ */
+import { btn, heading, layout, radius, space, typeScale } from '../../lib/ui'
+import { imageAlt, imageObjectPosition, imageSrcset, imageUrl } from '../../lib/image'
+import { resolveMenuItem } from '../../lib/menuItems'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+
+const resolved = await Promise.all(
+  (block.items ?? []).map(async (card: any) => {
+    const item = await resolveMenuItem(card)
+    return item ? { ...item, image: card.image, href: card.link || item.menuUrl } : null
+  }),
+)
+const cards = resolved.filter(Boolean) as any[]
+
+/* Stars fill to the score: 4.7 of 5 paints 94% of the row. */
+const rating = block.rating
+const ratingFill = rating ? `${Math.max(0, Math.min(5, Number(rating.score))) * 20}%` : '0%'
+const STAR =
+  'M12 2.5l2.94 6.28 6.86.74-5.13 4.63 1.43 6.77L12 17.47 5.9 20.92l1.43-6.77L2.2 9.52l6.86-.74L12 2.5z'
+---
+
+{
+  cards.length > 0 && (
+    <section class="section-menu-item-cards overflow-x-hidden">
+      <div class:list={[layout.shell, space.sectionY]}>
+        {block.heading && <h2 class={heading.medium}>{block.heading}</h2>}
+        {block.intro && (
+          <p class:list={['mx-auto mt-space-16 mb-0 text-center text-charcoal', layout.measureNarrow, typeScale.intro]}>
+            {block.intro}
+          </p>
+        )}
+        {rating?.url && (
+          <a
+            href={rating.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="google-rating mx-auto mt-space-24 flex w-fit flex-col items-center gap-space-8 text-charcoal no-underline transition-opacity duration-[350ms] hover:opacity-70"
+          >
+            <span class="flex items-center gap-space-12">
+              <svg viewBox="0 0 48 48" width="22" height="22" aria-hidden="true" class="shrink-0">
+                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+              </svg>
+              <span class:list={['font-medium', typeScale.body]}>{rating.score}</span>
+              <span class="relative inline-block h-[18px] w-[98px] shrink-0" role="img" aria-label={`Rated ${rating.score} out of 5`}>
+                <span class="absolute inset-0 flex gap-[2px] text-charcoal/20">
+                  {[0, 1, 2, 3, 4].map(() => (
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d={STAR} /></svg>
+                  ))}
+                </span>
+                <span class="absolute inset-y-0 left-0 flex gap-[2px] overflow-hidden text-[#FBBC05]" style={`width: ${ratingFill};`}>
+                  {[0, 1, 2, 3, 4].map(() => (
+                    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" class="shrink-0"><path fill="currentColor" d={STAR} /></svg>
+                  ))}
+                </span>
+              </span>
+            </span>
+            <span class:list={['underline decoration-charcoal/40 underline-offset-[0.18em]', typeScale.body]}>{rating.label}</span>
+          </a>
+        )}
+        <div class:list={['swiper menu-mosaic-swiper w-full', space.sectionGapTop]} data-menu-mosaic-swiper>
+          <ul role="list" class="swiper-wrapper m-0 list-none p-0">
+            {cards.map((card) => (
+              <li class="swiper-slide">
+                <a href={card.href} class="menu-item-card flex h-full flex-col text-charcoal no-underline">
+                  <div class={`overflow-hidden ${radius.none}`}>
+                    <img
+                      src={imageUrl(card.image)}
+                      srcset={imageSrcset(card.image)}
+                      sizes="(min-width: 992px) 25vw, (min-width: 768px) 40vw, 90vw"
+                      alt={imageAlt(card.image) || card.title}
+                      width="800"
+                      height="1000"
+                      loading="lazy"
+                      draggable="false"
+                      class="block aspect-[4/5] w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
+                      style={imageObjectPosition(card.image) ? `object-position: ${imageObjectPosition(card.image)};` : undefined}
+                    />
+                  </div>
+                  {/* Name | price on one line. When the price wraps, the inner row's negative
+                      margin pushes its leading pipe under the clip instead of starting line two. */}
+                  <div class="mt-space-12 overflow-hidden">
+                    <div class="-ml-space-24 flex flex-wrap items-baseline gap-y-space-4 py-space-4">
+                      <h3 class:list={['my-0 pl-space-24 text-charcoal', typeScale.title]}>{card.title}</h3>
+                      {card.price && (
+                        <p class:list={['my-0 flex items-baseline whitespace-nowrap text-charcoal', typeScale.title]}>
+                          <span class="w-space-24 shrink-0 text-center text-charcoal/40" aria-hidden="true">|</span>
+                          <span>{card.price}</span>
+                          {card.priceUnit && <span class:list={['ml-space-8 text-charcoal/70', typeScale.label]}>per {card.priceUnit}</span>}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  {card.description && (
+                    <p class:list={['mt-space-8 mb-0 line-clamp-2 text-charcoal/80', typeScale.body]} title={card.description}>
+                      {card.description}
+                    </p>
+                  )}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {block.cta?.url && block.cta?.label && (
+          <div class="mt-space-48 flex justify-center wf-sm:mt-space-32">
+            <a
+              href={block.cta.url}
+              class={btn.outline}
+              {...(block.cta.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+            >
+              <span>{block.cta.label}</span>
+            </a>
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  /* Same slider/grid switch as MenuCards.astro. */
+  .menu-mosaic-swiper.swiper {
+    overflow: visible;
+    width: 100%;
+  }
+
+  .menu-mosaic-swiper .swiper-slide {
+    height: auto;
+  }
+
+  @media (min-width: 992px) {
+    .menu-mosaic-swiper .swiper-wrapper {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+      width: 100%;
+      transform: none;
+    }
+
+    .menu-mosaic-swiper .swiper-slide {
+      width: 100%;
+      margin: 0;
+    }
+  }
+</style>
+
+<script>
+  import { initMenuMosaicSwiper } from '../../scripts/menu-mosaic-swiper'
+  initMenuMosaicSwiper()
+</script>

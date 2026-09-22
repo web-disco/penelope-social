@@ -1,5 +1,5 @@
 import type { SeoMeta } from './types'
-import { restaurantCopy, usesVaughanAsCity } from './copy'
+import { VAUGHAN_TARGET_PATHS, restaurantCopy, usesVaughanAsCity } from './copy'
 
 /**
  * Unique meta titles + descriptions per URL.
@@ -113,6 +113,13 @@ export function resolveSeo(
   if ((path === '/menus/catering' || path === '/sourdough-bakery') && defaults) return defaults
   const cmsTitle = cms?.metaTitle?.trim()
   const cmsDescription = cms?.metaDescription?.trim()
+
+  if (VAUGHAN_TARGET_PATHS.has(path)) {
+    return {
+      title: cmsTitle || defaults?.title || 'Penelope Social',
+      description: cmsDescription || defaults?.description || '',
+    }
+  }
 
   const title =
     cmsTitle && !usesVaughanAsCity(cmsTitle)
