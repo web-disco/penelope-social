@@ -54,7 +54,8 @@ function gaEventForNav(url: string) {
 
 <div
   class:list={[
-    'navbar fixed inset-x-0 top-0 bottom-auto z-20 w-full',
+    /* --announcement-top: where the announcement bar ends (AnnouncementBar.astro). */
+    'navbar fixed inset-x-0 top-[var(--announcement-top,0px)] bottom-auto z-20 w-full',
     'transition-[background-color] duration-300 ease-out',
     navScrolled && 'is-scrolled',
   ]}

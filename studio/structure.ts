@@ -1,7 +1,7 @@
 import type { StructureResolver } from 'sanity/structure'
 
 /** Document types edited as singletons — one instance, no create/duplicate/delete. */
-export const singletonTypes = new Set<string>(['homepage', 'siteSettings'])
+export const singletonTypes = new Set<string>(['homepage', 'siteSettings', 'marketingPopup', 'announcementBar'])
 
 /** The only actions allowed on a singleton. */
 export const singletonActions = new Set<string>([
@@ -37,8 +37,39 @@ export const structure: StructureResolver = (S) =>
 
       S.listItem()
         .title('Site Settings')
-        .id('siteSettings')
+        .id('siteSettingsFolder')
         .child(
-          S.document().schemaType('siteSettings').documentId('siteSettings').title('Site Settings'),
+          S.list()
+            .title('Site Settings')
+            .items([
+              S.listItem()
+                .title('General')
+                .id('siteSettings')
+                .child(
+                  S.document()
+                    .schemaType('siteSettings')
+                    .documentId('siteSettings')
+                    .title('Site Settings'),
+                ),
+              S.divider(),
+              S.listItem()
+                .title('Announcement bar')
+                .id('announcementBar')
+                .child(
+                  S.document()
+                    .schemaType('announcementBar')
+                    .documentId('announcementBar')
+                    .title('Announcement bar'),
+                ),
+              S.listItem()
+                .title('Marketing popup')
+                .id('marketingPopup')
+                .child(
+                  S.document()
+                    .schemaType('marketingPopup')
+                    .documentId('marketingPopup')
+                    .title('Marketing popup'),
+                ),
+            ]),
         ),
     ])

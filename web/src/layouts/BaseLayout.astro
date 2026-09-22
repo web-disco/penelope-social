@@ -2,7 +2,9 @@
 import '../styles/global.css'
 import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
-import { getSiteSettings } from '../lib/data'
+import MarketingPopup from '../components/MarketingPopup.astro'
+import AnnouncementBar from '../components/AnnouncementBar.astro'
+import { getSiteSettings, getSingleton } from '../lib/data'
 import { imageUrl } from '../lib/image'
 import { GA_MEASUREMENT_ID_DEFAULT } from '../lib/analytics'
 import { restaurantCopy } from '../data/copy'
@@ -32,6 +34,8 @@ const {
 } = Astro.props
 
 const settings = await getSiteSettings()
+const marketingPopup = await getSingleton('marketingPopup')
+const announcementBar = await getSingleton('announcementBar')
 const seo = settings.seo ?? {}
 
 const metaDescription =
@@ -223,6 +227,8 @@ const gaMeasurementId =
   </head>
 
   <body>
+    <AnnouncementBar bar={announcementBar} />
+
     <div class="page-wrapper relative">
       <Navbar settings={settings} isHome={isHome} solidNav={solidNav} />
 
@@ -232,6 +238,8 @@ const gaMeasurementId =
 
       <Footer settings={settings} isHome={isHome} hideNewsletter={hideNewsletter} />
     </div>
+
+    <MarketingPopup popup={marketingPopup} />
 
     <script>
       import '../scripts/main'

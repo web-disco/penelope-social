@@ -1,0 +1,354 @@
+---
+/**
+ * The seasonal promo modal, fed by the `marketingPopup` singleton.
+ *
+ * Built so it can't become the popup people hate:
+ * - never on page load — it waits for SHOW_AFTER_MS on the page or half a page
+ *   scrolled, whichever comes first, and shows at most once per visit;
+ * - never on the page its main button links to;
+ * - closing it (button, ✕, Esc, backdrop) hides it for `dismissDays`;
+ *   clicking through hides it for the rest of the campaign.
+ *
+ * A campaign is keyed on the title, so retitling it in Sanity shows the new
+ * popup to people who closed the old one.
+ *
+ * Two ways to force it open straight away, ignoring all of the above, for
+ * checking copy: `?popup` in the URL, or the document's `test` flag. `test`
+ * renders the popup even while `enabled` is off, but only opens it off the
+ * production hostnames — leaving it on can't ship a nagging popup.
+ *
+ * The schedule is read in the browser rather than at build time: a static
+ * build baked on 1 December would otherwise keep the popup up long after the
+ * end date.
+ */
+import { PortableText } from 'astro-portabletext'
+import { withoutEmptyBlocks } from '../lib/portableText'
+import { imageAlt, imageObjectPosition, imageSrcset, imageUrl } from '../lib/image'
+import { btn, typeScale } from '../lib/ui'
+
+interface Props {
+  popup: any
+}
+const { popup } = Astro.props
+
+const cta = popup?.primaryCta
+/* A plain string is what the field held before it became rich text. */
+const text = typeof popup?.text === 'string' ? popup.text : null
+const blocks = text ? [] : withoutEmptyBlocks(popup?.text)
+const hasText = Boolean(text || blocks.length)
+
+const image = popup?.image
+const bannerSrc = imageUrl(image, 1120)
+
+const show = Boolean((popup?.enabled || popup?.test) && popup?.title && cta?.url && cta?.label)
+
+const SECONDARY_BTN =
+  'btn outline text-center uppercase font-body font-medium leading-none no-underline ' +
+  'transition-[background-color,color] duration-[350ms] px-6 py-[18px] border-2 border-charcoal ' +
+  'bg-brand-transparent text-charcoal hover:bg-charcoal hover:text-beige cursor-pointer wf-xs:w-full'
+---
+
+{
+  show && (
+    <dialog
+      class="marketing-popup"
+      aria-labelledby="marketing-popup-title"
+      aria-describedby={hasText ? 'marketing-popup-text' : undefined}
+      data-marketing-popup
+      data-campaign={popup.title}
+      data-enabled={popup.enabled ? 'true' : 'false'}
+      data-test={popup.test ? 'true' : 'false'}
+      data-start={popup.startDate ?? ''}
+      data-end={popup.endDate ?? ''}
+      data-dismiss-days={popup.dismissDays ?? 14}
+      data-cta-url={cta.url}
+      data-lenis-prevent
+    >
+      <div class="relative bg-cream text-charcoal">
+        {bannerSrc && (
+          <img
+            src={bannerSrc}
+            srcset={imageSrcset(image, [560, 840, 1120])}
+            sizes="(max-width: 591px) calc(100vw - 32px), 560px"
+            alt={imageAlt(image)}
+            width="1120"
+            height="630"
+            loading="lazy"
+            decoding="async"
+            class="block aspect-video w-full object-cover"
+            style={imageObjectPosition(image) ? `object-position: ${imageObjectPosition(image)}` : undefined}
+            data-popup-image
+          />
+        )}
+
+        <button
+          type="button"
+          class:list={[
+            'marketing-popup__x absolute top-space-16 right-space-16 grid h-10 w-10 cursor-pointer place-items-center border-0 text-charcoal',
+            bannerSrc ? 'rounded-full bg-cream' : 'bg-transparent',
+          ]}
+          aria-label="Close"
+          data-popup-close
+        >
+          <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true">
+            <path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.75" fill="none" />
+          </svg>
+        </button>
+
+        <div
+          class:list={[
+            'px-space-48 pb-space-48 wf-sm:px-space-24 wf-sm:pb-space-32',
+            bannerSrc ? 'pt-space-48 wf-sm:pt-space-32' : 'pt-space-64 wf-sm:pt-space-48',
+          ]}
+        >
+          <h2 id="marketing-popup-title" class:list={['my-0 text-left', typeScale.displayM]}>
+            {popup.title}
+          </h2>
+          {hasText && (
+            <div
+              id="marketing-popup-text"
+              class:list={[
+                'marketing-popup__text mt-space-16 flex flex-col gap-space-12 text-charcoal/85',
+                typeScale.body,
+              ]}
+            >
+              {text ? <p>{text}</p> : <PortableText value={blocks} />}
+            </div>
+          )}
+
+          <div class="mt-space-32 flex flex-wrap items-center gap-space-16 wf-xs:flex-col wf-xs:items-stretch">
+            <a
+              href={cta.url}
+              target={cta.newTab ? '_blank' : undefined}
+              rel={cta.newTab ? 'noopener noreferrer' : undefined}
+              class={btn.primary}
+              data-popup-cta
+            >
+              <span>{cta.label}</span>
+            </a>
+            <button type="button" class={SECONDARY_BTN} data-popup-close>
+              <span>{popup.secondaryLabel || 'Not right now'}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </dialog>
+  )
+}
+
+<style>
+  .marketing-popup {
+    width: min(560px, calc(100vw - 32px));
+    max-width: none;
+    max-height: calc(100dvh - 32px);
+    margin: auto;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+
+  .marketing-popup::backdrop {
+    background: rgb(40 38 41 / 0.4);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+
+  .marketing-popup[open] {
+    animation: marketing-popup-in 400ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .marketing-popup[open]::backdrop {
+    animation: marketing-popup-fade 400ms ease-out;
+  }
+
+  /* Shift+Enter in the Studio is a newline inside the paragraph. */
+  .marketing-popup__text :global(p) {
+    margin: 0;
+    white-space: pre-line;
+  }
+
+  .marketing-popup__text :global(a) {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.18em;
+  }
+
+  .marketing-popup__text :global(strong) {
+    font-weight: 500;
+  }
+
+  .marketing-popup__x:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+  }
+
+  @keyframes marketing-popup-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+
+  @keyframes marketing-popup-fade {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marketing-popup[open],
+    .marketing-popup[open]::backdrop {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import { track } from '../scripts/ga'
+
+  const SHOW_AFTER_MS = 15_000
+  const SCROLL_FRACTION = 0.5
+  const STORAGE_KEY = 'pb:marketing-popup'
+  const SESSION_KEY = 'pb:marketing-popup:seen'
+  const CLICKED_DAYS = 365
+  const DAY_MS = 86_400_000
+
+  type Stored = { campaign: string; hideUntil: number }
+
+  /* Storage can throw (private mode, blocked site data). A popup that can't
+     remember being closed would nag on every visit, so treat that as "don't
+     show" rather than "always show". */
+  function read<T>(store: () => Storage, key: string): T | null | undefined {
+    try {
+      const raw = store().getItem(key)
+      return raw ? (JSON.parse(raw) as T) : null
+    } catch {
+      return undefined
+    }
+  }
+
+  function write(store: () => Storage, key: string, value: unknown) {
+    try {
+      store().setItem(key, JSON.stringify(value))
+    } catch {
+      /* nothing to do */
+    }
+  }
+
+  const normalizePath = (path: string) => path.replace(/\/$/, '') || '/'
+
+  function isCtaPage(url: string): boolean {
+    try {
+      const target = new URL(url, location.href)
+      return target.origin === location.origin && normalizePath(target.pathname) === normalizePath(location.pathname)
+    } catch {
+      return false
+    }
+  }
+
+  /** YYYY-MM-DD in the visitor's own timezone, to compare with Sanity dates. */
+  const today = () => new Date().toLocaleDateString('en-CA')
+
+  function init() {
+    const dialog = document.querySelector<HTMLDialogElement>('[data-marketing-popup]')
+    if (!dialog || typeof dialog.showModal !== 'function') return
+
+    const campaign = dialog.dataset.campaign ?? ''
+    const dismissDays = Number(dialog.dataset.dismissDays) || 14
+    const host = location.hostname.toLowerCase()
+    const isProd = host === 'penelopesocial.com' || host === 'www.penelopesocial.com'
+    const testMode = dialog.dataset.test === 'true' && !isProd
+    const forced = testMode || new URLSearchParams(location.search).has('popup')
+
+    /* Rendered only because of test mode, on a host where test mode is off. */
+    if (!forced && dialog.dataset.enabled !== 'true') return
+
+    const hide = (days: number) =>
+      write(() => localStorage, STORAGE_KEY, { campaign, hideUntil: Date.now() + days * DAY_MS })
+
+    let closedBy: 'cta' | 'dismiss' = 'dismiss'
+
+    const open = () => {
+      if (dialog.open) return
+      /* Don't stack on top of the open menu drawer — try again shortly. */
+      if (document.documentElement.style.overflow === 'hidden') {
+        window.setTimeout(open, 2000)
+        return
+      }
+      write(() => sessionStorage, SESSION_KEY, true)
+      dialog.showModal()
+      document.documentElement.style.overflow = 'hidden'
+      window.lenis?.stop()
+      track('popup_view', { popup: campaign })
+    }
+
+    dialog.addEventListener('close', () => {
+      document.documentElement.style.overflow = ''
+      window.lenis?.start()
+      if (forced) return
+      if (closedBy === 'cta') hide(CLICKED_DAYS)
+      else {
+        hide(dismissDays)
+        track('popup_dismiss', { popup: campaign })
+      }
+    })
+
+    dialog.querySelectorAll('[data-popup-close]').forEach((el) =>
+      el.addEventListener('click', () => dialog.close()),
+    )
+
+    /* A click on the dialog element itself is a click on the backdrop — the
+       content wrapper fills the box, so nothing inside lands here. */
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close()
+    })
+
+    dialog.querySelector('[data-popup-cta]')?.addEventListener('click', () => {
+      closedBy = 'cta'
+      track('popup_click', { popup: campaign })
+      if (forced) return
+      hide(CLICKED_DAYS)
+    })
+
+    if (forced) {
+      open()
+      return
+    }
+
+    const date = today()
+    const { start, end } = dialog.dataset
+    if (start && date < start) return
+    if (end && date > end) return
+    if (isCtaPage(dialog.dataset.ctaUrl ?? '')) return
+
+    const stored = read<Stored>(() => localStorage, STORAGE_KEY)
+    if (stored === undefined) return
+    if (stored && stored.campaign === campaign && stored.hideUntil > Date.now()) return
+    const seen = read<boolean>(() => sessionStorage, SESSION_KEY)
+    if (seen !== null) return
+
+    /* It's going to show this visit: fetch the banner during the wait so it
+       doesn't pop in after the modal opens. Lazy until now, so visitors who
+       have closed the popup never download it. */
+    const banner = dialog.querySelector<HTMLImageElement>('[data-popup-image]')
+    if (banner) banner.loading = 'eager'
+
+    let timer = 0
+    const trigger = () => {
+      window.clearTimeout(timer)
+      window.removeEventListener('scroll', onScroll)
+      open()
+    }
+    const onScroll = () => {
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight
+      if (scrollable > 0 && window.scrollY / scrollable >= SCROLL_FRACTION) trigger()
+    }
+    timer = window.setTimeout(trigger, SHOW_AFTER_MS)
+    window.addEventListener('scroll', onScroll, { passive: true })
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init)
+  else init()
+</script>
