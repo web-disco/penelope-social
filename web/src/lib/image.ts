@@ -47,3 +47,17 @@ export function imageSizes(image: MigratedImage): string | undefined {
 export function imageAlt(image: MigratedImage): string {
   return image?.alt ?? ''
 }
+
+/**
+ * CSS object-position for an image cropped with object-cover: the Sanity
+ * hotspot when an editor set one, else an explicit `objectPosition`.
+ */
+export function imageObjectPosition(
+  image: (MigratedImage & { hotspot?: { x?: number; y?: number }; objectPosition?: string }) | null | undefined,
+): string | undefined {
+  const hotspot = image?.hotspot
+  if (hotspot && typeof hotspot.x === 'number' && typeof hotspot.y === 'number') {
+    return `${Math.round(hotspot.x * 100)}% ${Math.round(hotspot.y * 100)}%`
+  }
+  return image?.objectPosition
+}

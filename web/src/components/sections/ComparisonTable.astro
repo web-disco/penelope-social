@@ -1,0 +1,92 @@
+---
+/**
+ * Comparison table: one row per point of difference, one column per option.
+ * `highlight` (1-based, default 1) is Penelope's column — green header, tinted cells.
+ *
+ * A real <table> at every width, filling the page container. Below its minimum
+ * width it scrolls sideways inside its own wrapper rather than stacking, so the
+ * options stay side by side and comparable.
+ *
+ * block: { heading, intro, columns: string[], highlight, rows: [{ label, values: string[] }] }
+ */
+import { heading, layout, space, typeScale } from '../../lib/ui'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+const columns: string[] = block.columns ?? []
+const rows: { label: string; values: string[] }[] = block.rows ?? []
+const highlight: number = (block.highlight ?? 1) - 1
+---
+
+<section class="section-comparison">
+  <div class:list={[layout.shell, space.sectionY]}>
+    {block.heading && <h2 class={heading.medium}>{block.heading}</h2>}
+    {
+      block.intro && (
+        <p class:list={['mx-auto mt-space-16 mb-0 text-center text-charcoal', layout.measureNarrow, typeScale.intro]}>
+          {block.intro}
+        </p>
+      )
+    }
+
+    <div class:list={['comparison-scroll w-full overflow-x-auto', space.sectionGapTop]} tabindex="0" role="region" aria-label={block.heading ? `${block.heading} (scrolls sideways)` : 'Comparison table (scrolls sideways)'}>
+    <table class="comparison-table w-full min-w-[720px] table-fixed border-collapse text-left">
+      <caption class="sr-only">{block.heading}</caption>
+      <thead>
+        <tr>
+          <th scope="col" class="w-[22%]"><span class="sr-only">Compared</span></th>
+          {
+            columns.map((column, i) => (
+              <th
+                scope="col"
+                class:list={[
+                  'px-space-24 py-space-16 align-bottom',
+                  typeScale.title,
+                  i === highlight ? 'bg-green text-beige' : 'text-charcoal',
+                ]}
+              >
+                {column}
+              </th>
+            ))
+          }
+        </tr>
+      </thead>
+      <tbody>
+        {
+          rows.map((row) => (
+            <tr class="border-t-2 border-charcoal">
+              <th scope="row" class:list={['py-space-24 pr-space-24 align-top text-charcoal', typeScale.label]}>
+                {row.label}
+              </th>
+              {columns.map((column, i) => (
+                <td
+                  class:list={[
+                    'px-space-24 py-space-24 align-top text-charcoal',
+                    typeScale.body,
+                    i === highlight ? 'is-highlight bg-green/10 font-medium' : 'text-charcoal/80',
+                  ]}
+                >
+                  {row.values?.[i] ?? ''}
+                </td>
+              ))}
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparison-table tbody tr:last-child {
+    border-bottom: 2px solid var(--color-charcoal);
+  }
+
+  .comparison-scroll:focus-visible {
+    outline: 2px solid var(--color-charcoal);
+    outline-offset: 4px;
+  }
+</style>

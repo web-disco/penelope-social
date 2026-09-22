@@ -20,8 +20,10 @@ import { mailtoHref, stackedHoursBlocks } from '../data/site'
 interface Props {
   settings: any
   isHome?: boolean
+  /** Drop the green newsletter band, e.g. on pages that close on their own CTA band. */
+  hideNewsletter?: boolean
 }
-const { settings, isHome = false } = Astro.props
+const { settings, isHome = false, hideNewsletter = false } = Astro.props
 
 const footer = settings.footer ?? {}
 const newsletter = footer.newsletter ?? {}
@@ -75,6 +77,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
   ]}
 >
   <!-- .footer-newsletter — the green band -->
+  {!hideNewsletter && (
   <div class="footer-newsletter bg-green">
     <div class={container}>
       <h2 class:list={[heading.light, typeScale.displayXl]}>
@@ -93,6 +96,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
       </div>
     </div>
   </div>
+  )}
 
   <div class={containerFooter}>
     <!-- Columns size to their content and spread with space-between, so the gaps

@@ -16,6 +16,8 @@ interface Props {
   isHome?: boolean
   /** Charcoal nav from first paint (pages without a dark hero). */
   solidNav?: boolean
+  /** Hide the footer's newsletter band. */
+  hideNewsletter?: boolean
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   noIndex = false,
   isHome = false,
   solidNav = false,
+  hideNewsletter = false,
 } = Astro.props
 
 const settings = await getSiteSettings()
@@ -227,7 +230,7 @@ const gaMeasurementId =
         <slot />
       </div>
 
-      <Footer settings={settings} isHome={isHome} />
+      <Footer settings={settings} isHome={isHome} hideNewsletter={hideNewsletter} />
     </div>
 
     <script>

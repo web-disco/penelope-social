@@ -1,0 +1,86 @@
+---
+/**
+ * Image and copy side by side with CTAs. Built on the story grid from the
+ * homepage bread block and /sourdough-bakery, but split 50/50 with a portrait
+ * 4:5 image. Only used by the SEO landing pages.
+ *
+ * block: { eyebrow, heading, body: PortableText[], image, layout: 'image-first' | 'copy-first', ctas: Cta[] }
+ */
+import { PortableText } from 'astro-portabletext'
+import { withoutEmptyBlocks } from '../../lib/portableText'
+import { btn, eyebrow, layout, space, story, typeScale } from '../../lib/ui'
+import { imageAlt, imageObjectPosition, imageSrcset, imageUrl } from '../../lib/image'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+const body = withoutEmptyBlocks(block.body)
+const imageFirst = block.layout !== 'copy-first'
+
+/* The shared story tokens stay 7/5 and 3:2 for TextWithMediaSection and
+   /sourdough-bakery; this block swaps its own copies. Swapped rather than
+   stacked: two conflicting utilities on one element resolve by stylesheet
+   order, not class order. */
+const media = story.media.replace('col-span-7', 'col-span-6')
+const copy = story.copy
+  .replace('col-span-5', 'col-span-6')
+  .replace('justify-end', 'justify-center')
+  .replace('pb-space-48', 'pb-0')
+const image = story.image.replace('aspect-[3/2]', 'aspect-[4/5]')
+const ctas: any[] = block.ctas ?? []
+
+const bodyClass =
+  'flex flex-col gap-space-16 text-charcoal [&_p]:my-0 ' +
+  '[&_a]:text-charcoal [&_a]:underline [&_a]:underline-offset-[0.18em] [&_a]:decoration-charcoal/40 ' +
+  '[&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70'
+---
+
+<section class="section-media-text-cta">
+  <div class:list={[layout.shell, space.sectionY]}>
+    <div class={story.grid}>
+      <div class:list={[media, !imageFirst && 'order-2 wf-md:order-1']}>
+        <img
+          src={imageUrl(block.image)}
+          srcset={imageSrcset(block.image)}
+          sizes="(min-width: 992px) 50vw, 100vw"
+          alt={imageAlt(block.image)}
+          width="800"
+          height="1000"
+          loading="lazy"
+          class={image}
+          style={imageObjectPosition(block.image) ? `object-position: ${imageObjectPosition(block.image)};` : undefined}
+        />
+      </div>
+      <div class:list={[copy, !imageFirst && 'order-1 wf-md:order-2']}>
+        <div class="max-w-[40rem]">
+          {block.eyebrow && <p class:list={[eyebrow.base, 'mt-0 mb-space-16']}>{block.eyebrow}</p>}
+          <h2 class:list={['my-0 text-left text-charcoal', typeScale.displayM]}>{block.heading}</h2>
+          {
+            body.length > 0 && (
+              <div class:list={['mt-space-16', bodyClass, typeScale.bodyLg]}>
+                <PortableText value={body} />
+              </div>
+            )
+          }
+        </div>
+        {
+          ctas.length > 0 && (
+            <div class="story-cta flex flex-wrap items-start gap-space-16 wf-xs:w-full wf-xs:flex-col">
+              {ctas.map((cta) => (
+                <a
+                  href={cta.url}
+                  target={cta.newTab ? '_blank' : undefined}
+                  rel={cta.newTab ? 'noopener noreferrer' : undefined}
+                  class:list={['inline-block', cta.style === 'outline' ? btn.outline : btn.primary]}
+                >
+                  <span>{cta.label}</span>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>

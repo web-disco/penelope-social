@@ -2,7 +2,7 @@
  * On-photo H1 + lede for every inner banner (Bakehouse catering style).
  * No periods in H1s. No em dashes. One short sentence that stays one line at 1440.
  */
-import { restaurantCopy } from './copy'
+import { VAUGHAN_TARGET_PATHS, restaurantCopy } from './copy'
 
 export const pageBannerCopy: Record<string, { heading: string; intro: string }> = {
   '/menus': {
@@ -40,6 +40,12 @@ export const pageBannerCopy: Record<string, { heading: string; intro: string }> 
 }
 
 export function bannerCopyFor(path: string, fallback?: { heading?: string; intro?: string }) {
+  if (VAUGHAN_TARGET_PATHS.has(path)) {
+    return {
+      heading: (fallback?.heading ?? '').trim().replace(/\.$/, ''),
+      intro: (fallback?.intro ?? '').trim(),
+    }
+  }
   const known =
     pageBannerCopy[path] ||
     (path.startsWith('/merchandise/') ? pageBannerCopy['/merchandise'] : undefined)

@@ -1,0 +1,73 @@
+---
+/**
+ * Closing band, full-bleed green with the content held to the page shell:
+ * heading, line and buttons on the left; a Google map of 125 Hawkview Blvd on
+ * the right. Same keyless embed as LocationDetails.astro, fed from data/site so
+ * the pin matches the footer and /locations/woodbridge.
+ *
+ * block: { heading, body, ctas: Cta[], showVisitDetails }
+ * showVisitDetails now toggles the map.
+ */
+import { btn, layout, typeScale } from '../../lib/ui'
+import { woodbridgeNap } from '../../data/site'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+const ctas: any[] = block.ctas ?? []
+const nap = woodbridgeNap
+const showMap = block.showVisitDetails !== false
+const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(nap.mapQuery)}&output=embed`
+const mapTitle = `Map to ${nap.name}, ${nap.street}, ${nap.city}`
+---
+
+<!-- mt-section-pad: cream sections end on 60 / 40 of padding, so this margin
+     makes the cream gap above the band a full 120 / 80 whatever sits before it.
+     last:-mb-20 cancels the footer's mt-20 (Footer.astro) when this band closes
+     the page, so it meets the footer with no cream gap. -->
+<section class="section-final-cta mt-section-pad bg-green last:-mb-20 wf-sm:mt-section-pad-sm">
+  <div class:list={[layout.shell, 'py-section-gap-y wf-sm:py-section-gap-y-sm']}>
+    <div
+      class:list={[
+        'grid items-stretch gap-space-64 wf-md:gap-space-48',
+        showMap ? 'grid-cols-2 wf-md:grid-cols-1' : 'grid-cols-1',
+      ]}
+    >
+      <div>
+        <h2 class:list={['my-0 text-left text-beige [text-wrap:balance]', typeScale.displayL]}>{block.heading}</h2>
+        {block.body && <p class:list={['mt-space-16 mb-0 max-w-[560px] text-beige/85', typeScale.intro]}>{block.body}</p>}
+        {
+          ctas.length > 0 && (
+            <div class="mt-space-32 flex flex-wrap items-center gap-space-16 wf-xs:flex-col wf-xs:items-stretch">
+              {ctas.map((cta) => (
+                <a
+                  href={cta.url}
+                  target={cta.newTab ? '_blank' : undefined}
+                  rel={cta.newTab ? 'noopener noreferrer' : undefined}
+                  class={cta.style === 'outline' ? btn.secondaryOutline : btn.secondary}
+                >
+                  <span>{cta.label}</span>
+                </a>
+              ))}
+            </div>
+          )
+        }
+      </div>
+
+      {
+        showMap && (
+          <div class="final-cta-map min-h-[360px] w-full overflow-hidden wf-md:min-h-0">
+            <iframe
+              title={mapTitle}
+              class="block h-full min-h-[360px] w-full border-0 wf-md:h-[320px] wf-md:min-h-0 wf-sm:h-[280px]"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src={mapSrc}
+            ></iframe>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>

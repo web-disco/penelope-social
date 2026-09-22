@@ -185,6 +185,15 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
     'Green or white. Logo on the left chest. The white one has the bike on the back, sourdough and coffee. Relaxed fit.',
 }
 
+/**
+ * SEO landing pages that deliberately target "… Vaughan" searches (see
+ * docs/seo-audit-2026-09.md). The Vaughan-as-city rewrite below exists to scrub
+ * stale Webflow copy; on these pages Vaughan is the point, so their hero and
+ * meta copy from Sanity render as written. Restaurant NAP and JSON-LD still
+ * say Woodbridge.
+ */
+export const VAUGHAN_TARGET_PATHS: ReadonlySet<string> = new Set(['/pizza-vaughan'])
+
 /** True when copy treats Vaughan as the city, not just the wider area. */
 export function usesVaughanAsCity(text?: string): boolean {
   if (!text) return false

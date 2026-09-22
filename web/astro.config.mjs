@@ -22,7 +22,8 @@ export default defineConfig({
       // Do not sitemap Toast hops or 301 sources.
       filter: (page) => {
         const path = new URL(page).pathname.replace(/\/$/, '') || '/'
-        return path !== '/reservations' && path !== '/events'
+        // /pizza-vaughan is noindex while its copy is placeholder; drop it here too.
+        return path !== '/reservations' && path !== '/events' && path !== '/pizza-vaughan'
       },
     }),
   ],

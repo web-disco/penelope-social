@@ -8,7 +8,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
 import FaqSection from '../components/sections/FaqSection.astro'
-import { getAll } from '../lib/data'
+import { getAll, getOne } from '../lib/data'
 import { resolveSeo } from '../data/seo'
 import { cateringFaq, contactFaq } from '../data/faq'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
@@ -21,10 +21,22 @@ export async function getStaticPaths() {
     .map((page) => ({ params: { slug: page.slug.current }, props: { page } }))
 }
 
-const { page } = Astro.props
+/*
+ * `astro dev` caches getStaticPaths, so the props above are whatever Sanity
+ * held when the server started. Re-read the page per request in dev so a
+ * Studio publish (or draft edit, with SANITY_PREVIEW_DRAFTS) shows on reload.
+ * Static builds fetch once and keep the props.
+ */
+const page = import.meta.env.DEV
+  ? ((await getOne<any>('page', Astro.props.page.slug.current)) ?? Astro.props.page)
+  : Astro.props.page
 const slug = page.slug.current as string
 const path = `/${slug}`
 const seo = resolveSeo(path, page.seo)
+
+/* A page that closes on the green final-CTA band already ends on its own call
+   to action; a second green newsletter band straight after it reads as a repeat. */
+const endsWithFinalCta = (page.sections ?? []).at(-1)?._type === 'finalCta'
 
 const faqItems = slug === 'contact' ? contactFaq : slug === 'catering-events' ? cateringFaq : null
 const crumbName =
@@ -46,6 +58,7 @@ const graph = pageGraph([
   description={seo.description}
   ogImage={page.seo?.ogImage}
   noIndex={page.seo?.noIndex}
+  hideNewsletter={endsWithFinalCta}
 >
   {graph && <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />}
   <PageBuilder sections={page.sections ?? []} />
