@@ -30,6 +30,7 @@ export const pageBuilderField = defineField({
     defineArrayMember({ type: 'menuItemCards' }),
     defineArrayMember({ type: 'mediaTextCta' }),
     defineArrayMember({ type: 'comparisonTable' }),
+    defineArrayMember({ type: 'visitDetails' }),
     defineArrayMember({ type: 'finalCta' }),
   ],
   options: {

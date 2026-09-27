@@ -192,7 +192,7 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
  * meta copy from Sanity render as written. Restaurant NAP and JSON-LD still
  * say Woodbridge.
  */
-export const VAUGHAN_TARGET_PATHS: ReadonlySet<string> = new Set(['/pizza-vaughan'])
+export const VAUGHAN_TARGET_PATHS: ReadonlySet<string> = new Set(['/pizza-vaughan', '/cafe-in-vaughan'])
 
 /** True when copy treats Vaughan as the city, not just the wider area. */
 export function usesVaughanAsCity(text?: string): boolean {

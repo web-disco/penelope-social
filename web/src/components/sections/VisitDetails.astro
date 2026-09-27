@@ -1,0 +1,47 @@
+---
+/**
+ * Page-builder wrapper around LocationDetails: the /locations/woodbridge
+ * layout, for landing pages that need an address, parking and directions block.
+ * Address and hours come from data/site so they match the footer; authored
+ * rows (parking, getting here) follow them.
+ *
+ * block: { heading, intro, ctas, showAddress, hours: 'both'|'cafe'|'bar'|'none', rows: [{ label, body }], showMap }
+ */
+import LocationDetails, { type LocationDetailRow } from './LocationDetails.astro'
+import { barHours, cafeHours, woodbridgeNap } from '../../data/site'
+
+interface Props {
+  block: any
+}
+const { block } = Astro.props
+const nap = woodbridgeNap
+const hours: string = block.hours ?? 'both'
+
+const rows: LocationDetailRow[] = [
+  ...(block.showAddress !== false
+    ? [
+        {
+          label: 'Address',
+          lines: [`${nap.street}, ${nap.city}, ${nap.region} ${nap.postal}`],
+          href: nap.mapUrl,
+          external: true,
+        },
+      ]
+    : []),
+  ...(hours === 'both' || hours === 'cafe' ? cafeHours : []).map((b) => ({ label: b.label, lines: b.lines })),
+  ...(hours === 'both' || hours === 'bar' ? barHours : []).map((b) => ({ label: b.label, lines: b.lines })),
+  ...(block.rows ?? [])
+    .filter((row: any) => row?.label && row?.body)
+    .map((row: any) => ({ label: row.label, lines: String(row.body).split('\n').filter(Boolean), wrap: true })),
+]
+---
+
+<LocationDetails
+  headingText={block.heading}
+  intro={block.intro}
+  ctas={block.ctas ?? []}
+  rows={rows}
+  mapQuery={block.showMap !== false ? nap.mapQuery : undefined}
+  mapTitle={`Map to ${nap.name}, ${nap.street}, ${nap.city}`}
+  padTop
+/>

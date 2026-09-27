@@ -12,8 +12,8 @@ import {
   isSocialTelHref,
 } from '../../lib/analytics'
 
-const shell =
-  'container w-full mx-auto max-w-[1440px] px-[25px] pt-0 pb-section-pad ' +
+const shellBase =
+  'container w-full mx-auto max-w-[1440px] px-[25px] pb-section-pad ' +
   'wf-sm:pb-section-pad-sm ' +
   'no-underline transition-[background-color,color] duration-500'
 
@@ -23,6 +23,8 @@ export interface LocationDetailRow {
   href?: string
   labelHref?: string
   external?: boolean
+  /** Let long text wrap. Hours rows stay on one line per range; prose rows need this. */
+  wrap?: boolean
 }
 
 interface Props {
@@ -32,9 +34,12 @@ interface Props {
   rows: LocationDetailRow[]
   mapQuery?: string
   mapTitle?: string
+  /** Top padding for use mid-page; /locations/woodbridge sits it under the hero with none. */
+  padTop?: boolean
 }
 
-const { headingText, intro, ctas = [], rows, mapQuery, mapTitle } = Astro.props
+const { headingText, intro, ctas = [], rows, mapQuery, mapTitle, padTop = false } = Astro.props
+const shell = `${shellBase} ${padTop ? 'pt-section-pad wf-sm:pt-section-pad-sm' : 'pt-0'}`
 
 function ctaClass(style?: Cta['style']) {
   if (style === 'outline') return btn.outline
@@ -120,7 +125,8 @@ const mapSrc = mapQuery
                   row.label.toLowerCase() === 'address' && 'location-nap-address',
                   (row.label.toLowerCase() === 'phone' || row.label.toLowerCase() === 'email') &&
                     'location-nap-contact',
-                  row.label.toLowerCase() !== 'address' &&
+                  !row.wrap &&
+                    row.label.toLowerCase() !== 'address' &&
                     row.label.toLowerCase() !== 'phone' &&
                     row.label.toLowerCase() !== 'email' &&
                     'whitespace-nowrap wf-sm:whitespace-normal',
