@@ -3,11 +3,14 @@
  * Step-by-step timeline — Bakehouse markup + ScrollTrigger fill.
  * data-* attributes are required by the script; do not rename.
  */
+import { PortableText } from 'astro-portabletext'
+import { withoutEmptyBlocks } from '../../lib/portableText'
 import { layout, space, heading, typeScale } from '../../lib/ui'
 
 export interface TimelineStep {
   title: string
-  body: string
+  /** Portable Text from Sanity, or a plain string from code (About). */
+  body: string | any[]
 }
 
 interface Props {
@@ -20,6 +23,12 @@ interface Props {
 }
 
 const { headingText, steps, activation = 0.5, gapTop = false } = Astro.props
+
+// Link styling matches RichTextIntro.
+const bodyClass =
+  'flex flex-col gap-space-16 [&_p]:my-0 ' +
+  '[&_a]:text-charcoal [&_a]:underline [&_a]:underline-offset-[0.18em] [&_a]:decoration-charcoal/40 ' +
+  '[&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70 [&_strong]:font-medium'
 ---
 
 <section class="section-step-timeline" aria-label={headingText}>
@@ -70,7 +79,13 @@ const { headingText, steps, activation = 0.5, gapTop = false } = Astro.props
                     <h3 class:list={['step-timeline__content-h my-0 text-charcoal', typeScale.displayS]}>
                       {step.title}
                     </h3>
-                    <p class:list={['step-timeline__p mb-0 text-charcoal', typeScale.bodyLg]}>{step.body}</p>
+                    {typeof step.body === 'string' ? (
+                      <p class:list={['step-timeline__p mb-0 text-charcoal', typeScale.bodyLg]}>{step.body}</p>
+                    ) : (
+                      <div class:list={['step-timeline__p text-charcoal', bodyClass, typeScale.bodyLg]}>
+                        <PortableText value={withoutEmptyBlocks(step.body)} />
+                      </div>
+                    )}
                   </div>
                 </div>
               ))

@@ -17,6 +17,17 @@ const { block } = Astro.props
 const nap = woodbridgeNap
 const hours: string = block.hours ?? 'both'
 
+/** A row that is only a phone number or an email address links to call or mail it. */
+function contactHref(body: string): string | undefined {
+  const text = body.trim()
+  if (/^\S+@\S+\.\S+$/.test(text)) return `mailto:${text}`
+  const digits = text.replace(/\D/g, '')
+  if (/^[\d\s()+.-]+$/.test(text) && (digits.length === 10 || (digits.length === 11 && digits[0] === '1'))) {
+    return `tel:+${digits.length === 10 ? '1' : ''}${digits}`
+  }
+  return undefined
+}
+
 const rows: LocationDetailRow[] = [
   ...(block.showAddress !== false
     ? [
@@ -32,7 +43,12 @@ const rows: LocationDetailRow[] = [
   ...(hours === 'both' || hours === 'bar' ? barHours : []).map((b) => ({ label: b.label, lines: b.lines })),
   ...(block.rows ?? [])
     .filter((row: any) => row?.label && row?.body)
-    .map((row: any) => ({ label: row.label, lines: String(row.body).split('\n').filter(Boolean), wrap: true })),
+    .map((row: any) => ({
+      label: row.label,
+      lines: String(row.body).split('\n').filter(Boolean),
+      href: contactHref(String(row.body)),
+      wrap: true,
+    })),
 ]
 ---
 
