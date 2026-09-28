@@ -25,6 +25,10 @@ export const homeFaq: FaqItem[] = [
     answer: `Here, at ${address}. Roman-style slices at lunch and 14-inch New York-style pies at dinner, both on our own sourdough. More on <a href="/pizza-vaughan">our sourdough pizza</a>.`,
   },
   {
+    question: 'Is there a cafe for coffee in Vaughan?',
+    answer: `Yes, here at ${address}. Espresso, cappuccino and lattes from 9am, with pastries from Penelope Bakehouse. More on <a href="/cafe-in-vaughan">our cafe</a>.`,
+  },
+  {
     question: 'What are the cafe and bar hours?',
     answer: stackedHoursFaqHtml,
   },
@@ -42,7 +46,7 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: 'Do you offer catering and events?',
-    answer: `Yes. Book trays or a night in the room on <a href="${CATERING_EVENTS_URL}">catering and events</a>. The tray list is at <a href="${CATERING_MENU_URL}">/menus/catering</a>. We prefer 24 hours' notice for catering.`,
+    answer: `Yes. Book trays or a night in the room on <a href="${CATERING_EVENTS_URL}">catering and events</a>. View the tray list on our <a href="${CATERING_MENU_URL}">catering menu</a>. We prefer 24 hours' notice for catering.`,
   },
   {
     question: 'Can I order online?',

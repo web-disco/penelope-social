@@ -31,6 +31,7 @@ import { menuItemCards } from './sections/menuItemCards'
 import { mediaTextCta } from './sections/mediaTextCta'
 import { comparisonTable } from './sections/comparisonTable'
 import { finalCta } from './sections/finalCta'
+import { visitDetails } from './sections/visitDetails'
 
 // documents
 import { siteSettings } from './documents/siteSettings'
@@ -63,6 +64,7 @@ export const sectionTypes = [
   menuItemCards,
   mediaTextCta,
   comparisonTable,
+  visitDetails,
   finalCta,
 ]
 

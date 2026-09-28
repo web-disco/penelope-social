@@ -1,5 +1,14 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { BlockIcon } from '../blockIcon'
+import { richTextField } from '../objects/richText'
+
+/** Step body flattened for the list preview; tolerates legacy plain strings. */
+const plainText = (body: unknown): string =>
+  typeof body === 'string'
+    ? body
+    : Array.isArray(body)
+      ? body.map((block: any) => (block?.children ?? []).map((child: any) => child.text ?? '').join('')).join(' ')
+      : ''
 
 export const stepTimeline = defineType({
   name: 'stepTimeline',
@@ -23,9 +32,12 @@ export const stepTimeline = defineType({
           name: 'timelineStep',
           fields: [
             defineField({ name: 'title', title: 'Year / title', type: 'string' }),
-            defineField({ name: 'body', title: 'Body', type: 'text', rows: 3 }),
+            richTextField(),
           ],
-          preview: { select: { title: 'title', subtitle: 'body' } },
+          preview: {
+            select: { title: 'title', body: 'body' },
+            prepare: ({ title, body }) => ({ title, subtitle: plainText(body) }),
+          },
         }),
       ],
     }),

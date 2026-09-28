@@ -76,11 +76,23 @@ export async function resolveMenuItem(pick: MenuItemPick): Promise<ResolvedMenuI
     console.warn(`[menuItems] "${pick.item}" is not on the ${menu?.slug?.current ?? 'referenced'} menu; skipped`)
     return null
   }
+  const tier = firstTier(item.price)
   return {
     title: menuTitle(item.title),
     description: item.description,
-    price: item.price,
-    priceUnit: item.price ? priceUnit(category.title) : undefined,
+    price: tier?.price ?? item.price,
+    priceUnit: tier?.unit ?? (item.price ? priceUnit(category.title) : undefined),
     menuUrl: `/menus/${menu.slug.current}`,
   }
+}
+
+/**
+ * Treats are priced in tiers ("1pc 4.50 | 6pc 24 | 12pc 45"), too long for a
+ * card's one-line price. The card quotes the first tier; the menu has the rest.
+ */
+function firstTier(price?: string): { price: string; unit: string } | undefined {
+  if (!price?.includes('|')) return undefined
+  const match = /^(\d+)\s*pc\s+\$?([\d.]+)$/i.exec(price.split('|')[0]!.trim())
+  if (!match) return undefined
+  return { price: match[2]!, unit: match[1] === '1' ? 'piece' : `${match[1]} pieces` }
 }
