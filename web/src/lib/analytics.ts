@@ -43,6 +43,15 @@ export function isCateringHref(href: string): boolean {
   return path === '/catering-events'
 }
 
+export function isBakehouseSiteHref(href: string): boolean {
+  try {
+    const host = new URL(href, 'https://penelopesocial.com').hostname.toLowerCase()
+    return host === 'penelopebakehouse.com' || host === 'www.penelopebakehouse.com'
+  } catch {
+    return false
+  }
+}
+
 export function isMerchHref(href: string): boolean {
   if (!href) return false
   const path = href.replace(/^https?:\/\/[^/]+/i, '').replace(/\/$/, '') || '/'

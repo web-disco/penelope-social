@@ -108,6 +108,9 @@ function gaEventForNav(url: string) {
                               href={item.url}
                               aria-current={isCurrent(item.url) ? 'page' : undefined}
                               class:list={['nav-dropdown__item', isCurrent(item.url) && 'is-current']}
+                              data-ga-event="nav_menu_click"
+                              data-ga-placement="dropdown"
+                              data-ga-item={item.label}
                             >
                               <span class="nav-dropdown__thumb">
                                 {thumbUrl(item.image) && (
@@ -294,6 +297,9 @@ function gaEventForNav(url: string) {
                   href={item.url}
                   aria-current={isCurrent(item.url) ? 'page' : undefined}
                   class:list={['menu-drawer__screen-item', isCurrent(item.url) && 'is-current']}
+                  data-ga-event="nav_menu_click"
+                  data-ga-placement="drawer"
+                  data-ga-item={item.label}
                   data-menu-link
                 >
                   <span class="menu-drawer__screen-thumb">
