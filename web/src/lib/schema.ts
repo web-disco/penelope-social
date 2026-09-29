@@ -122,6 +122,35 @@ export function restaurantSchema() {
   }
 }
 
+/**
+ * Menu prices can be tiered ("1pc 4.50 | 6pc 24", "SM 12 | LG 20", "17/68")
+ * or not a number at all ("MP"). schema.org wants a numeric price per Offer, so
+ * each tier becomes its own Offer, named by its label; non-numeric prices get none.
+ */
+function menuOffers(price?: string) {
+  if (!price) return undefined
+  const offers = price
+    .split(/\s*[|/]\s*/)
+    .map((tier) => {
+      const match = /^(?:([A-Za-z0-9]+)\s+)?\$?(\d+(?:\.\d+)?)$/.exec(tier.trim())
+      if (!match) return null
+      const label = match[1]
+      const name = !label
+        ? undefined
+        : /^sm$/i.test(label)
+          ? 'Small'
+          : /^lg$/i.test(label)
+            ? 'Large'
+            : /^(\d+)pc$/i.test(label)
+              ? `${label.replace(/pc$/i, '')} ${label === '1pc' ? 'piece' : 'pieces'}`
+              : label
+      return { '@type': 'Offer', price: match[2], priceCurrency: 'CAD', ...(name ? { name } : {}) }
+    })
+    .filter(Boolean)
+  if (!offers.length) return undefined
+  return offers.length === 1 ? offers[0] : offers
+}
+
 /** Separate Bakehouse entity. Do not fold this into Social's sameAs. */
 export function bakehouseSchema() {
   const bakehouse = scarboroughBakehouse
@@ -165,9 +194,7 @@ export function menuSchema(input: {
         '@type': 'MenuItem',
         name: item.name,
         description: item.description || undefined,
-        offers: item.price
-          ? { '@type': 'Offer', price: item.price, priceCurrency: 'CAD' }
-          : undefined,
+        offers: menuOffers(item.price),
       })),
     })),
   }

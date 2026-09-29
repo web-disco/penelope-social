@@ -73,7 +73,7 @@ const cards = resolved.filter(Boolean) as any[]
                         <p class:list={['my-0 flex items-baseline whitespace-nowrap text-charcoal', typeScale.title]}>
                           <span class="w-space-24 shrink-0 text-center text-charcoal/40" aria-hidden="true">|</span>
                           <span>{card.price}</span>
-                          {card.priceUnit && <span class:list={['ml-space-8 text-charcoal/70', typeScale.label]}>per {card.priceUnit}</span>}
+                          {card.priceUnit && <span class:list={['ml-space-8 text-charcoal/70', typeScale.label]}>{card.priceUnit}</span>}
                         </p>
                       )}
                     </div>
