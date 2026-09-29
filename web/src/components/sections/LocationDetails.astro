@@ -73,7 +73,9 @@ const mapSrc = mapQuery
     <div
       class:list={[
         'location-details-body grid items-start gap-space-48 wf-md:gap-space-32 wf-sm:grid-cols-1',
-        detailsFirst ? 'grid-cols-[0.85fr_1.15fr]' : 'grid-cols-[1.15fr_0.85fr]',
+        /* Details first: an even split with the same 48px gap as MediaTextCta's
+           6/6 grid, so the heading lines up with the photo's left edge above. */
+        detailsFirst ? 'grid-cols-2' : 'grid-cols-[1.15fr_0.85fr]',
       ]}
     >
       <div class:list={['location-details-copy', detailsFirst && 'order-2 wf-sm:order-1']}>
