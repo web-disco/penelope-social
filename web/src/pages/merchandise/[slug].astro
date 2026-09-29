@@ -71,7 +71,7 @@ const graph = pageGraph([restaurantSchema(), breadcrumbSchema(breadcrumbs)])
                   <a
                     href={imageUrl(image)}
                     data-gallery={`merch-${product.slug.current}`}
-                    class="merch-lightbox w-inline-block glightbox w-full"
+                    class="merch-lightbox glightbox group block w-full overflow-hidden isolate"
                   >
                     <img
                       src={imageUrl(image)}
@@ -79,7 +79,7 @@ const graph = pageGraph([restaurantSchema(), breadcrumbSchema(breadcrumbs)])
                       alt={imageAlt(image)}
                       sizes={imageSizes(image)}
                       srcset={imageSrcset(image)}
-                      class="merch-image w-full"
+                      class="merch-image block w-full transition-transform duration-500 will-change-transform [backface-visibility:hidden] motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]"
                     />
                   </a>
                 </div>
