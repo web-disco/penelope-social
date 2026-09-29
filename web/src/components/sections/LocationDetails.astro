@@ -36,9 +36,12 @@ interface Props {
   mapTitle?: string
   /** Top padding for use mid-page; /locations/woodbridge sits it under the hero with none. */
   padTop?: boolean
+  /** Rows on the left, copy on the right, so it alternates with a copy-first block above.
+      Phones still stack copy first. */
+  detailsFirst?: boolean
 }
 
-const { headingText, intro, ctas = [], rows, mapQuery, mapTitle, padTop = false } = Astro.props
+const { headingText, intro, ctas = [], rows, mapQuery, mapTitle, padTop = false, detailsFirst = false } = Astro.props
 const shell = `${shellBase} ${padTop ? 'pt-section-pad wf-sm:pt-section-pad-sm' : 'pt-0'}`
 
 function ctaClass(style?: Cta['style']) {
@@ -68,9 +71,12 @@ const mapSrc = mapQuery
 <section class="section-location-details">
   <div class={shell}>
     <div
-      class="location-details-body grid grid-cols-[1.15fr_0.85fr] items-start gap-space-48 wf-md:gap-space-32 wf-sm:grid-cols-1"
+      class:list={[
+        'location-details-body grid items-start gap-space-48 wf-md:gap-space-32 wf-sm:grid-cols-1',
+        detailsFirst ? 'grid-cols-[0.85fr_1.15fr]' : 'grid-cols-[1.15fr_0.85fr]',
+      ]}
     >
-      <div class="location-details-copy">
+      <div class:list={['location-details-copy', detailsFirst && 'order-2 wf-sm:order-1']}>
         {
           headingText && (
             <h2 class={`mb-space-24 mt-0 max-w-[640px] text-left text-charcoal ${typeScale.displayL}`}>
@@ -100,7 +106,7 @@ const mapSrc = mapQuery
         }
       </div>
 
-      <dl class="location-details-rows m-0 flex min-w-0 flex-col">
+      <dl class:list={['location-details-rows m-0 flex min-w-0 flex-col', detailsFirst && 'order-1 wf-sm:order-2']}>
         {
           rows.map((row) => (
             <div class={`grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-space-16 py-space-16 ${rowBorder}`}>

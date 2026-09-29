@@ -5,7 +5,7 @@
  * Address and hours come from data/site so they match the footer; authored
  * rows (parking, getting here) follow them.
  *
- * block: { heading, intro, ctas, showAddress, hours: 'both'|'cafe'|'bar'|'none', rows: [{ label, body }], showMap }
+ * block: { heading, intro, ctas, showAddress, hours: 'both'|'cafe'|'bar'|'none', rows: [{ label, body }], showMap, layout: 'copy-first'|'details-first' }
  */
 import LocationDetails, { type LocationDetailRow } from './LocationDetails.astro'
 import { barHours, cafeHours, woodbridgeNap } from '../../data/site'
@@ -60,4 +60,5 @@ const rows: LocationDetailRow[] = [
   mapQuery={block.showMap !== false ? nap.mapQuery : undefined}
   mapTitle={`Map to ${nap.name}, ${nap.street}, ${nap.city}`}
   padTop
+  detailsFirst={block.layout === 'details-first'}
 />

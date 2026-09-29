@@ -23,6 +23,21 @@ export const visitDetails = defineType({
     }),
     defineField({ name: 'intro', title: 'Line', type: 'text', rows: 3 }),
     defineField({
+      name: 'layout',
+      title: 'Layout',
+      type: 'string',
+      description: 'Details first puts the address and hours on the left, to alternate with a copy-left block above.',
+      options: {
+        list: [
+          { title: 'Heading first', value: 'copy-first' },
+          { title: 'Details first', value: 'details-first' },
+        ],
+        layout: 'radio',
+        direction: 'horizontal',
+      },
+      initialValue: 'copy-first',
+    }),
+    defineField({
       name: 'ctas',
       title: 'Buttons',
       type: 'array',
