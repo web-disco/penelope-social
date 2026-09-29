@@ -11,8 +11,8 @@ export const aboutPage = {
   subheading:
     'A Woodbridge cafe and bar, with lunch and dinner, plus drinks.',
   paragraphs: [
-    // HTML: "Cafe by day" links to /cafe-in-vaughan, "pizza" to /pizza-vaughan.
-    'A cafe and bar in Woodbridge, Vaughan. <a href="/cafe-in-vaughan">Cafe by day</a>, kitchen and bar at night. Bakehouse sourdough on the table as sandwiches and <a href="/pizza-vaughan">pizza</a>, or as bread.',
+    // HTML: "Cafe by day", "sandwiches" and "pizza" link to their landing pages.
+    'A cafe and bar in Woodbridge, Vaughan. <a href="/cafe-in-vaughan">Cafe by day</a>, kitchen and bar at night. Bakehouse sourdough on the table as <a href="/sandwiches-vaughan">sandwiches</a> and <a href="/pizza-vaughan">pizza</a>, or as bread.',
     'The Stalteri brothers built Social around good sourdough bread and a proper bar. Franco, Vince, Giuliano.',
   ],
   timeline: {
