@@ -108,7 +108,14 @@ const mapSrc = mapQuery
         }
       </div>
 
-      <dl class:list={['location-details-rows m-0 flex min-w-0 flex-col', detailsFirst && 'order-1 wf-sm:order-2']}>
+      <dl
+        class:list={[
+          'location-details-rows m-0 flex min-w-0 flex-col',
+          /* 85% of a half column = the 0.85fr column of the heading-first layout,
+             so the table is the same width either way. Full width on phones. */
+          detailsFirst && 'order-1 w-[85%] wf-sm:order-2 wf-sm:w-full',
+        ]}
+      >
         {
           rows.map((row) => (
             <div class={`grid grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-x-space-16 py-space-16 ${rowBorder}`}>
