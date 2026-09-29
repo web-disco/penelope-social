@@ -50,9 +50,12 @@ const ctaLabel = /view all menus/i.test(block.cta?.label ?? '')
   ? homeMenusFallback.ctaLabel
   : displayHeading(block.cta?.label, homeMenusFallback.ctaLabel)
 
-const tileClass = 'menu-mosaic-tile flex h-full flex-col no-underline'
+const tileClass = 'menu-mosaic-tile group flex h-full flex-col no-underline'
 const frameClass = `overflow-hidden ${radius.none}`
-const imageClass = 'block w-full aspect-[4/5] object-cover'
+// Same slow zoom as MenuItemCards, on hover or keyboard focus anywhere on the tile.
+const imageClass =
+  'block w-full aspect-[4/5] object-cover transition-transform duration-500 ' +
+  'motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]'
 const labelClass = `mt-space-16 mb-0 text-charcoal ${typeScale.title}`
 const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
 ---
