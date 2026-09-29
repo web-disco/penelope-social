@@ -1,12 +1,12 @@
 ---
 /**
- * Navbar — inline links + CTAs on wide screens; hamburger drawer below 1536px.
+ * Navbar — inline links + CTAs on wide screens; hamburger drawer below 1280px.
  * Drawer open/close, spacing, type, and close-on-the-right match Bakehouse.
  * Social keeps two CTAs (Order / Reservations) and Merch in the drawer.
  */
 import { btn, heading, layout } from '../lib/ui'
 import { imageUrl } from '../lib/image'
-import { isMerchNav, resolveNavLinks } from '../data/nav'
+import { MENUS_DROPDOWN, isMerchNav, resolveNavLinks } from '../data/nav'
 
 interface Props {
   settings: any
@@ -44,6 +44,17 @@ const linkClass =
 
 const navScrolled = solidNav
 
+/**
+ * Square thumbnails for the dropdown (68px), 2x for retina. Not lazy: a lazy image
+ * inside the hidden panel only starts loading on first open and shows blank.
+ */
+const thumbUrl = (ref: string) => imageUrl({ asset: { _ref: ref } }, 136)
+
+/** The Menus item carries the Menus / Specialties dropdown. */
+const isMenusLink = (url: string) => (url.replace(/\/$/, '') || '/') === '/menus'
+const chevron =
+  '<svg width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+
 function gaEventForNav(url: string) {
   if (url.includes('egiftcards')) return 'gift_card_click'
   if (url === '/catering-events') return 'catering_click'
@@ -70,17 +81,64 @@ function gaEventForNav(url: string) {
   >
     <nav class="navbar__links" aria-label="Primary">
       {
-        desktopNavLinks.map((link) => (
-          <a
-            href={link.url}
-            target={link.newTab ? '_blank' : undefined}
-            rel={link.newTab ? 'noopener noreferrer' : undefined}
-            data-ga-event={gaEventForNav(link.url)}
-            class={linkClass}
-          >
-            {link.label}
-          </a>
-        ))
+        desktopNavLinks.map((link) =>
+          isMenusLink(link.url) ? (
+            <div class="nav-dropdown" data-nav-dropdown>
+              <a href={link.url} class={linkClass}>
+                {link.label}
+              </a>
+              <button
+                type="button"
+                class="nav-dropdown__toggle"
+                aria-expanded="false"
+                aria-controls="nav-menus-panel"
+                aria-label="Show menus and specialties"
+                data-nav-dropdown-toggle
+                set:html={chevron}
+              />
+              <div id="nav-menus-panel" class="nav-dropdown__panel" data-nav-dropdown-panel>
+                <div class="nav-dropdown__grid">
+                  {MENUS_DROPDOWN.map((group) => (
+                    <div class="nav-dropdown__group">
+                      <p class="nav-dropdown__heading">{group.heading}</p>
+                      <ul class="nav-dropdown__list">
+                        {group.links.map((item) => (
+                          <li>
+                            <a
+                              href={item.url}
+                              aria-current={isCurrent(item.url) ? 'page' : undefined}
+                              class:list={['nav-dropdown__item', isCurrent(item.url) && 'is-current']}
+                            >
+                              <span class="nav-dropdown__thumb">
+                                {thumbUrl(item.image) && (
+                                  <img src={thumbUrl(item.image)} alt="" width="68" height="68" decoding="async" fetchpriority="low" />
+                                )}
+                              </span>
+                              <span class="nav-dropdown__text">
+                                <span class="nav-dropdown__name">{item.label}</span>
+                                <span class="nav-dropdown__desc">{item.description}</span>
+                              </span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ) : (
+            <a
+              href={link.url}
+              target={link.newTab ? '_blank' : undefined}
+              rel={link.newTab ? 'noopener noreferrer' : undefined}
+              data-ga-event={gaEventForNav(link.url)}
+              class={linkClass}
+            >
+              {link.label}
+            </a>
+          ),
+        )
       }
     </nav>
 
@@ -152,6 +210,10 @@ function gaEventForNav(url: string) {
   </a>
 </div>
 
+<!-- Soft blur over the page while the Menus dropdown is open. Sits just under the
+     navbar (z-20), so the header stays sharp; never takes clicks. -->
+<div class="nav-backdrop" aria-hidden="true"></div>
+
 <div
   id="menu-drawer"
   class="menu-drawer"
@@ -162,6 +224,15 @@ function gaEventForNav(url: string) {
   hidden
 >
   <div class:list={['menu-drawer__bar', layout.shell]}>
+    <a href="/" class="menu-drawer__logo" data-menu-link aria-label="Penelope Social home">
+      <img src={logoSrc} alt="" class="block w-[110px] wf-xs:w-[84px]" />
+      <span
+        aria-hidden="true"
+        class="mt-space-8 font-body font-medium uppercase leading-none tracking-[0.32em] text-beige text-[9px] wf-xs:mt-space-4 wf-xs:text-[7px] wf-xs:tracking-[0.26em]"
+      >
+        Social
+      </span>
+    </a>
     <button class="menu-drawer__close" type="button" aria-label="Close menu">
       <span class="menu-drawer__close-bar"></span>
       <span class="menu-drawer__close-bar"></span>
@@ -170,22 +241,78 @@ function gaEventForNav(url: string) {
 
   <nav class:list={['menu-drawer__links', layout.shell]} aria-label="Primary">
     {
-      navLinks.map((link) => (
-        <a
-          href={link.url}
-          target={link.newTab ? '_blank' : undefined}
-          rel={link.newTab ? 'noopener noreferrer' : undefined}
-          aria-current={isCurrent(link.url) ? 'page' : undefined}
-          class:list={['menu-drawer__link', isCurrent(link.url) && 'is-current']}
-          data-menu-link
-          data-ga-event={gaEventForNav(link.url)}
-        >
-          <span class={heading.menuItem}>{link.label}</span>
-          <span class="menu-drawer__arrow" aria-hidden="true">→</span>
-        </a>
-      ))
+      navLinks.map((link) =>
+        isMenusLink(link.url) ? (
+          <button
+            type="button"
+            class="menu-drawer__link"
+            aria-expanded="false"
+            aria-controls="drawer-menus-screen"
+            data-drawer-screen-open
+          >
+            <span class={heading.menuItem}>{link.label}</span>
+            <span class="menu-drawer__arrow" aria-hidden="true">→</span>
+          </button>
+        ) : (
+          <a
+            href={link.url}
+            target={link.newTab ? '_blank' : undefined}
+            rel={link.newTab ? 'noopener noreferrer' : undefined}
+            aria-current={isCurrent(link.url) ? 'page' : undefined}
+            class:list={['menu-drawer__link', isCurrent(link.url) && 'is-current']}
+            data-menu-link
+            data-ga-event={gaEventForNav(link.url)}
+          >
+            <span class={heading.menuItem}>{link.label}</span>
+            <span class="menu-drawer__arrow" aria-hidden="true">→</span>
+          </a>
+        ),
+      )
     }
   </nav>
+
+  <!-- Second screen: slides in over the drawer when Menus is tapped. -->
+  <div
+    id="drawer-menus-screen"
+    class="menu-drawer__screen"
+    role="region"
+    aria-label="Menus and specialties"
+    inert
+    data-drawer-screen
+  >
+    <div class:list={['menu-drawer__screen-inner', layout.shell]}>
+      <button type="button" class="menu-drawer__back" data-drawer-screen-back>
+        <span aria-hidden="true">←</span> Back
+      </button>
+      {MENUS_DROPDOWN.map((group) => (
+        <div class="menu-drawer__screen-group">
+          <p class="menu-drawer__screen-heading">{group.heading}</p>
+          <ul class="menu-drawer__screen-list">
+            {group.links.map((item) => (
+              <li>
+                <a
+                  href={item.url}
+                  aria-current={isCurrent(item.url) ? 'page' : undefined}
+                  class:list={['menu-drawer__screen-item', isCurrent(item.url) && 'is-current']}
+                  data-menu-link
+                >
+                  <span class="menu-drawer__screen-thumb">
+                    {thumbUrl(item.image) && (
+                      <img src={thumbUrl(item.image)} alt="" width="64" height="64" decoding="async" fetchpriority="low" />
+                    )}
+                  </span>
+                  <span class="menu-drawer__screen-text">
+                    <span class="menu-drawer__screen-name">{item.label}</span>
+                    <span class="menu-drawer__screen-desc">{item.description}</span>
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
 
   <div class:list={['menu-drawer__foot', layout.shell]}>
     {
@@ -243,8 +370,10 @@ function gaEventForNav(url: string) {
 </div>
 
 <style>
-  /* Desktop inline nav from 1536px — Social has more/longer links than Bakehouse,
-     so the 1200px cut-off let Merch sit under the centered logo. */
+  /* Desktop inline nav from 1280px. The five links (Merch is drawer-only) run
+     from 25px to ~529px; the centred 128px logo starts at 50vw - 64px, so they
+     clear it from ~1266px. 1280 keeps ~47px between them. Re-measure if a link
+     is added or renamed. */
   .navbar {
     display: flex;
     justify-content: center;
@@ -273,6 +402,236 @@ function gaEventForNav(url: string) {
   .navbar__links > a {
     display: flex;
     align-items: center;
+  }
+
+  /* Menus dropdown: opens on hover, keyboard focus, or the chevron button. */
+  .nav-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .nav-dropdown__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-beige);
+    cursor: pointer;
+    transition: transform 0.25s ease;
+  }
+
+  .nav-dropdown__panel {
+    position: absolute;
+    /* Just under the link text (the link sits mid-bar), not at the bottom of the 88px bar. */
+    top: calc(50% + 14px);
+    left: calc(-1 * var(--space-24, 24px));
+    z-index: 40;
+    /* Top padding bridges the gap from the link so hover is not lost on the way down. */
+    padding-top: var(--space-12, 12px);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    /* top / padding-top ease with the bar's own 0.3s background change on scroll,
+       so the panel glides to its scrolled position instead of snapping. */
+    transition:
+      opacity 0.25s ease-out,
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      top 0.3s ease-out,
+      padding-top 0.3s ease-out,
+      visibility 0s linear 0.25s;
+  }
+
+  /* Once the bar turns solid charcoal, drop the panel below it with a clear gap so
+     the two don't read as one block. The gap is the panel's own transparent padding,
+     so hover still carries across it. */
+  .navbar.is-scrolled .nav-dropdown__panel {
+    top: 100%;
+    /* The Menus item ends ~4px above the bar's edge, so this leaves a 16px gap. */
+    padding-top: 20px;
+  }
+
+  .nav-dropdown:hover .nav-dropdown__panel,
+  .nav-dropdown:focus-within .nav-dropdown__panel,
+  .nav-dropdown[data-open] .nav-dropdown__panel {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition:
+      opacity 0.25s ease-out,
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      top 0.3s ease-out,
+      padding-top 0.3s ease-out,
+      visibility 0s;
+  }
+
+  .nav-dropdown[data-closed] .nav-dropdown__panel {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .nav-dropdown:hover .nav-dropdown__toggle,
+  .nav-dropdown[data-open] .nav-dropdown__toggle {
+    transform: rotate(180deg);
+  }
+
+  .nav-dropdown__grid {
+    display: grid;
+    /* Fixed width: sized by the design, not by the narrow "Menus" item it hangs from.
+       Wide enough that every description sits on one line. */
+    width: 960px;
+    max-width: calc(100vw - 48px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 20px var(--space-24, 24px);
+    column-gap: var(--space-24, 24px);
+    background-color: var(--color-charcoal);
+    box-shadow: 0 24px 48px color-mix(in oklab, black 35%, transparent);
+  }
+
+  /* Hairline between the two columns. */
+  .nav-dropdown__group + .nav-dropdown__group {
+    padding-left: var(--space-24, 24px);
+    border-left: 1px solid color-mix(in oklab, var(--color-cream) 12%, transparent);
+  }
+
+  .nav-dropdown__group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-dropdown__heading {
+    margin: 0 0 var(--space-8, 8px);
+    color: color-mix(in oklab, var(--color-cream) 55%, transparent);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .nav-dropdown__list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0 -10px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .nav-dropdown__item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-16, 16px);
+    padding: 8px 10px;
+    color: var(--color-cream);
+    text-decoration: none;
+    transition: background-color 0.25s ease;
+  }
+
+  /* The current page's item wears the hover highlight. */
+  .nav-dropdown__item:hover,
+  .nav-dropdown__item:focus-visible,
+  .nav-dropdown__item.is-current {
+    background-color: color-mix(in oklab, var(--color-cream) 7%, transparent);
+  }
+
+  .nav-dropdown__thumb {
+    flex: none;
+    width: 68px;
+    height: 68px;
+    overflow: hidden;
+    /* Own stacking context, so the clip holds while the image scales (Safari). */
+    isolation: isolate;
+    background-color: color-mix(in oklab, var(--color-cream) 8%, transparent);
+  }
+
+  .nav-dropdown__thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    /* Pre-promoted to its own layer so the zoom doesn't snap or re-blur at the
+       start and end of the transition. Seven 68px layers: negligible memory. */
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+
+  .nav-dropdown__item:hover .nav-dropdown__thumb img,
+  .nav-dropdown__item:focus-visible .nav-dropdown__thumb img {
+    transform: scale(1.06);
+  }
+
+  .nav-dropdown__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 4px);
+    min-width: 0;
+  }
+
+  .nav-dropdown__name {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1.2;
+  }
+
+  .nav-dropdown__desc {
+    color: color-mix(in oklab, var(--color-cream) 65%, transparent);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  /* Page backdrop while the Menus dropdown is open (hover, focus or chevron). */
+  .nav-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 19;
+    pointer-events: none;
+    background-color: color-mix(in oklab, var(--color-charcoal) 18%, transparent);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.25s ease-out,
+      visibility 0s linear 0.25s;
+  }
+
+  .navbar:has(.nav-dropdown:is(:hover, :focus-within, [data-open]):not([data-closed])) + .nav-backdrop {
+    opacity: 1;
+    visibility: visible;
+    transition:
+      opacity 0.25s ease-out,
+      visibility 0s;
+  }
+
+  /* A dropdown link was clicked: gone in one frame (see the click handler). */
+  .navbar:has(.nav-dropdown[data-leaving]) + .nav-backdrop,
+  .nav-dropdown[data-leaving] .nav-dropdown__panel {
+    transition: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .nav-backdrop,
+    .nav-dropdown__panel,
+    .nav-dropdown:hover .nav-dropdown__panel,
+    .nav-dropdown:focus-within .nav-dropdown__panel,
+    .nav-dropdown[data-open] .nav-dropdown__panel,
+    .nav-dropdown__toggle,
+    .nav-dropdown__thumb img {
+      transition: none;
+    }
+    .nav-dropdown__item:hover .nav-dropdown__thumb img {
+      transform: none;
+    }
   }
 
   .navbar__toggle {
@@ -309,7 +668,7 @@ function gaEventForNav(url: string) {
     z-index: 30;
   }
 
-  @media (min-width: 1536px) {
+  @media (min-width: 1280px) {
     .navbar__links {
       display: flex;
     }
@@ -319,7 +678,7 @@ function gaEventForNav(url: string) {
     }
   }
 
-  @media (max-width: 1535px) {
+  @media (max-width: 1279px) {
     .navbar__bar {
       min-height: var(--nav-height);
       justify-content: flex-end;
@@ -420,6 +779,174 @@ function gaEventForNav(url: string) {
     opacity: 0.75;
   }
 
+  /* Drawer bar: logo centred where the page header shows it, close on the right. */
+  .menu-drawer__bar {
+    position: relative;
+  }
+
+  .menu-drawer__logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  /* Menus button: same row as the links, reset from a button. */
+  button.menu-drawer__link {
+    width: 100%;
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid color-mix(in oklab, var(--color-beige) 20%, transparent);
+    background: transparent;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  /* Menus / Specialties screen, slid in from the right over the drawer. */
+  .menu-drawer__screen {
+    position: absolute;
+    inset: 72px 0 0;
+    z-index: 2;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    background-color: var(--color-charcoal);
+    transform: translateX(100%);
+    visibility: hidden;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s linear 0.35s;
+  }
+
+  .menu-drawer__screen[data-open] {
+    transform: none;
+    visibility: visible;
+    transition:
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+      visibility 0s;
+  }
+
+  /* Push transition: the main list and foot slide out left as the screen slides
+     in from the right, at the same speed and curve. */
+  .menu-drawer > .menu-drawer__links,
+  .menu-drawer > .menu-drawer__foot {
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .menu-drawer[data-screen-open] > .menu-drawer__links,
+  .menu-drawer[data-screen-open] > .menu-drawer__foot {
+    transform: translateX(-100%);
+  }
+
+  .menu-drawer__screen-inner {
+    padding-block: var(--space-8, 8px) calc(var(--space-32, 32px) + env(safe-area-inset-bottom, 0px));
+  }
+
+  .menu-drawer__back {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8, 8px);
+    min-height: 48px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--color-beige);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .menu-drawer__screen-group {
+    margin-top: var(--space-24, 24px);
+  }
+
+  .menu-drawer__screen-heading {
+    margin: 0 0 var(--space-8, 8px);
+    color: color-mix(in oklab, var(--color-beige) 55%, transparent);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .menu-drawer__screen-list {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .menu-drawer__screen-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-16, 16px);
+    padding-block: var(--space-12, 12px);
+    border-bottom: 1px solid color-mix(in oklab, var(--color-beige) 12%, transparent);
+    color: var(--color-beige);
+    text-decoration: none;
+    transition: opacity 0.35s ease;
+  }
+
+  .menu-drawer__screen-item:hover,
+  .menu-drawer__screen-item.is-current {
+    opacity: 0.75;
+  }
+
+  .menu-drawer__screen-thumb {
+    flex: none;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    background-color: color-mix(in oklab, var(--color-beige) 8%, transparent);
+  }
+
+  .menu-drawer__screen-thumb img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .menu-drawer__screen-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4, 4px);
+    min-width: 0;
+  }
+
+  .menu-drawer__screen-name {
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .menu-drawer__screen-desc {
+    color: color-mix(in oklab, var(--color-beige) 65%, transparent);
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-drawer__screen,
+    .menu-drawer__screen[data-open],
+    .menu-drawer > .menu-drawer__links,
+    .menu-drawer > .menu-drawer__foot {
+      transition: none;
+    }
+  }
+
   .menu-drawer__arrow {
     font-family: var(--font-body);
     font-size: 22px;
@@ -473,7 +1000,7 @@ function gaEventForNav(url: string) {
     outline: none;
   }
 
-  @media (min-width: 1536px) {
+  @media (min-width: 1280px) {
     .menu-drawer {
       display: none !important;
     }
@@ -491,6 +1018,87 @@ function gaEventForNav(url: string) {
     syncNav()
     window.addEventListener('scroll', syncNav, { passive: true })
   }
+
+  // Menus dropdown (desktop): the chevron toggles it; Escape and outside clicks close it.
+  document.querySelectorAll<HTMLElement>('[data-nav-dropdown]').forEach((dropdown) => {
+    const button = dropdown.querySelector<HTMLButtonElement>('[data-nav-dropdown-toggle]')
+    if (!button) return
+    const set = (open: boolean) => {
+      button.setAttribute('aria-expanded', String(open))
+      if (open) {
+        dropdown.dataset.open = ''
+        delete dropdown.dataset.closed
+      } else {
+        delete dropdown.dataset.open
+      }
+    }
+    button.addEventListener('click', () => set(button.getAttribute('aria-expanded') !== 'true'))
+    dropdown.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return
+      set(false)
+      // Hide it even while focus is still inside, until the pointer or focus leaves.
+      dropdown.dataset.closed = ''
+      button.focus()
+    })
+    dropdown.addEventListener('mouseleave', () => delete dropdown.dataset.closed)
+    // Following a link: hide the panel and page blur in this frame, no fade. The
+    // browser holds the last frame on screen until the next page paints, so a
+    // fading blur would otherwise flash over the new page.
+    dropdown.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return
+        set(false)
+        dropdown.dataset.closed = ''
+        dropdown.dataset.leaving = ''
+      })
+    })
+    // Back/forward cache restores the page as it was left; start closed.
+    window.addEventListener('pageshow', (event) => {
+      if (!event.persisted) return
+      set(false)
+      delete dropdown.dataset.closed
+      delete dropdown.dataset.leaving
+    })
+    dropdown.addEventListener('focusout', (event) => {
+      if (!dropdown.contains(event.relatedTarget as Node | null)) {
+        set(false)
+        delete dropdown.dataset.closed
+      }
+    })
+    document.addEventListener('click', (event) => {
+      if (!dropdown.contains(event.target as Node)) set(false)
+    })
+  })
+
+  // Drawer: Menus opens a second screen (Menus / Specialties) that slides in.
+  const drawerScreen = document.querySelector<HTMLElement>('[data-drawer-screen]')
+  const drawerScreenOpen = document.querySelector<HTMLButtonElement>('[data-drawer-screen-open]')
+  const drawerScreenBack = document.querySelector<HTMLButtonElement>('[data-drawer-screen-back]')
+  const setDrawerScreen = (open: boolean, moveFocus = true) => {
+    if (!drawerScreen || !drawerScreenOpen) return
+    drawerScreenOpen.setAttribute('aria-expanded', String(open))
+    drawerScreen.inert = !open
+    const drawer = document.getElementById('menu-drawer')
+    // The pushed-out list and foot are off-screen: keep them out of focus order.
+    drawer?.querySelectorAll<HTMLElement>(':scope > .menu-drawer__links, :scope > .menu-drawer__foot').forEach((el) => {
+      el.inert = open
+    })
+    if (open) {
+      drawerScreen.dataset.open = ''
+      drawer?.setAttribute('data-screen-open', '')
+    } else {
+      delete drawerScreen.dataset.open
+      drawer?.removeAttribute('data-screen-open')
+    }
+    if (!moveFocus) return
+    if (open) drawerScreenBack?.focus({ preventScroll: true })
+    else drawerScreenOpen.focus({ preventScroll: true })
+  }
+  drawerScreenOpen?.addEventListener('click', () => {
+    drawerScreen?.scrollTo(0, 0)
+    setDrawerScreen(true)
+  })
+  drawerScreenBack?.addEventListener('click', () => setDrawerScreen(false))
 
   const menu = document.getElementById('menu-drawer')
   const toggle = document.querySelector<HTMLButtonElement>('.navbar__toggle')
@@ -510,6 +1118,7 @@ function gaEventForNav(url: string) {
       delete close.dataset.quietFocus
 
       menu.hidden = !open
+      if (!open) setDrawerScreen(false, false)
       toggle.setAttribute('aria-expanded', String(open))
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu')
       document.documentElement.style.overflow = open ? 'hidden' : ''
