@@ -196,7 +196,12 @@ const gaMeasurementId =
             if (placement) params.placement = placement
             return { name: 'order_click', params: params }
           }
-          if (named) return { name: named, params: params }
+          if (named) {
+            // Other named events may carry a placement too (review_click: rating_badge / footer).
+            var namedPlacement = anchor.getAttribute('data-ga-placement')
+            if (namedPlacement) params.placement = namedPlacement
+            return { name: named, params: params }
+          }
           if (isGiftHref(href)) return { name: 'gift_card_click', params: params }
           if (isReservationHref(href)) return { name: 'reservation_click', params: params }
           if (isCateringHref(href)) return { name: 'catering_click', params: params }

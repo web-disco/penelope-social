@@ -56,6 +56,10 @@ function eventFromMarkup(anchor: HTMLAnchorElement): { name: string; params: Rec
   if (named === 'order_click') {
     const placement = orderPlacement(anchor)
     if (placement) params.placement = placement
+  } else {
+    // Other named events may carry a placement too (review_click: rating_badge / footer).
+    const placement = anchor.getAttribute('data-ga-placement')
+    if (placement) params.placement = placement
   }
   return { name: named, params }
 }
