@@ -78,7 +78,7 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Explore our menus — focaccia sandwiches, pizza, shareables, and handcrafted cocktails at the Woodbridge restaurant.\n‍':
     'Lunch, dinner, drinks, plus catering.',
   'Hoodies, tees, and totes from the Woodbridge cafe and bar.':
-    'Hoodies, tees, totes. Pick them up in store.',
+    'Hoodies, tees, totes. Purchase and pick them up in store.',
   'Birthdays, work dinners, and nights in the Woodbridge restaurant. Artisanal dishes, handcrafted cocktails, and a room we will set for you. Catering trays if you want the food at yours.':
     'Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.',
   'Celebrate at Penelope Social in Woodbridge. Intimate dinners, work nights, or trays to-go. We will design the night with you — food, drinks, and the room.':
@@ -166,7 +166,7 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Cocktails, wine, and beer till late.': 'Cocktails, wine, beer. Till late.',
   'Party pizzas, sandwiches, breads, and salads.': 'Party pizzas, sandwiches, breads, salads.',
   'Hoodies, tees, and totes. Pick them up in store.':
-    'Hoodies, tees, totes. Pick them up in store.',
+    'Hoodies, tees, totes. Purchase and pick them up in store.',
   'Hoodies, tees, and totes.': 'Hoodies, tees, totes.',
   'Loaves start at Penelope Bakehouse and land here as sandwiches, pizza, and bread with dinner.':
     'Loaves start at Penelope Bakehouse and land here as sandwiches and pizza, or as bread with dinner.',

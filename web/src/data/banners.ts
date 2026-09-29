@@ -35,7 +35,7 @@ export const pageBannerCopy: Record<string, { heading: string; intro: string }> 
   },
   '/merchandise': {
     heading: 'Merch',
-    intro: 'Hoodies, tees, totes. Pick them up in store.',
+    intro: 'Hoodies, tees, totes. Purchase and pick them up in store.',
   },
 }
 

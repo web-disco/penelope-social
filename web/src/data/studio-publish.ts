@@ -13,7 +13,7 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Homepage mosaic — H2 “On the menu”, four cards: Lunch “Pizza and focaccia sandwiches”, Bar “Cocktails till late”, Dinner “Pizza and shareables”, Catering “Trays for your event”. CTA “Explore our menus” → /menus',
   'Homepage bread — “Good bread, served here every day” + Visit the Bakehouse → https://penelopebakehouse.com',
   'Homepage events — “Birthdays, work dinners, and nights in the room…” (no street address)',
-  'Homepage green merch band — repo-only WaveMoment above FAQ. Bakehouse bike + checkers. Arc “Take a shirt home from Social”, support “Hoodies, tees, totes. Pick them up in store.”, button See merch → /merchandise. No Studio block needed.',
+  'Homepage green merch band — repo-only WaveMoment above FAQ. Bakehouse bike + checkers. Arc “Take a shirt home from Social”, support “Hoodies, tees, totes. Purchase and pick them up in store.”, button See merch → /merchandise. No Studio block needed.',
   'Site Settings — default SEO, reservations label, footer headings (sentence case), hours labels Cafe/Bar, NAP 125 Hawkview Blvd, Woodbridge, ON L4H 2E2',
   'Site Settings nav (draft only — do not publish from this pass): Menus → /menus, About → /about, Locations → /locations, Gift Cards → Toast e-gift (new tab), Catering → /catering-events, Merch → /merchandise. Label is “Menus” not “Our Menus” or “Menu”. Delete Bakery. The site already rewrites stale labels and injects Locations if the draft is missing it.',
   'Page: about — SEO only if still editing the CMS about doc (route now uses dedicated about.astro)',
