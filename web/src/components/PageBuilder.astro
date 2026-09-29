@@ -51,8 +51,10 @@ const COMPONENTS: Record<string, any> = {
 
 interface Props {
   sections: any[]
+  /** Breadcrumb trail for the page hero's bar. */
+  breadcrumbs?: { name: string; path: string }[]
 }
-const { sections = [] } = Astro.props
+const { sections = [], breadcrumbs } = Astro.props
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
 
@@ -67,7 +69,7 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
     if (block._type === 'pageHero' && path === '/catering-events') {
       return (
         <>
-          <Component block={block} />
+          <Component block={block} breadcrumbs={breadcrumbs} />
           <CateringEventsIntro />
         </>
       )
@@ -86,12 +88,12 @@ const path = Astro.url.pathname.replace(/\/$/, '') || '/'
       }
       return null
     }
-    /* Menu hub and menu pages have no FAQ block. */
-    if (
-      block._type === 'faqSection' &&
-      /^\/menus(\/|$)/.test(Astro.url.pathname.replace(/\/$/, '') || '/')
-    ) {
+    /* Individual menu pages have no FAQ block; the /menus hub does. */
+    if (block._type === 'faqSection' && /^\/menus\//.test(Astro.url.pathname.replace(/\/$/, '') || '/')) {
       return null
+    }
+    if (block._type === 'pageHero') {
+      return <Component block={block} breadcrumbs={breadcrumbs} />
     }
     if (block._type === 'faqSection') {
       return <FaqSection headingText={block.heading} items={block.items ?? []} />

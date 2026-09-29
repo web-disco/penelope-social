@@ -9,6 +9,7 @@ import { btn, heading, layout, radius, space, typeScale } from '../../lib/ui'
 import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
 import { displayHeading, menuTitle, restaurantCopy } from '../../data/copy'
 import { homeMenusFallback } from '../../data/home'
+import GoogleRating from '../GoogleRating.astro'
 
 interface Props {
   block: any
@@ -17,56 +18,70 @@ const { block } = Astro.props
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 const isHome = path === '/'
 const isMenusHub = path === '/menus'
+/* The hub's own menus block (key "menus") is chrome-owned like the homepage's.
+   Any other card block on the hub, e.g. "What we're known for", is authored. */
+const isChromeBlock = isHome || (isMenusHub && block._key === 'menus')
 const authored: any[] = block.cards ?? []
 const fallbackByUrl = new Map(homeMenusFallback.cards.map((card) => [card.url, card]))
 
 const cards = (authored.length ? authored : homeMenusFallback.cards).map((card: any, index: number) => {
+  if (!isChromeBlock && !fallbackByUrl.has(card.url)) {
+    return { ...card, title: menuTitle(card.title), line: restaurantCopy(card.line) }
+  }
   const fallback =
     fallbackByUrl.get(card.url) ?? homeMenusFallback.cards[index] ?? homeMenusFallback.cards[0]
   return {
     ...card,
     title: menuTitle(card.title, fallback.title),
-    line: isHome || isMenusHub ? fallback.line : restaurantCopy(card.line, fallback.line),
+    line: isChromeBlock ? fallback.line : restaurantCopy(card.line, fallback.line),
     url: card.url || fallback.url,
   }
 })
 
 const staleHeading = /woodbridge|explore our menus|menus at penelope/i.test(block.heading ?? '')
 const staleIntro = /woodbridge|hawkview|125\s|bakehouse/i.test(block.intro ?? '')
-const sectionHeading = isMenusHub
+const sectionHeading = isMenusHub && isChromeBlock
   ? ''
   : isHome || staleHeading
     ? homeMenusFallback.heading
     : displayHeading(block.heading)
-const sectionIntro = isMenusHub
+const sectionIntro = isMenusHub && isChromeBlock
   ? ''
   : isHome
     ? homeMenusFallback.intro
     : staleIntro
       ? homeMenusFallback.hubIntro
       : restaurantCopy(block.intro)
-const ctaUrl = block.cta?.url || homeMenusFallback.ctaUrl
+// Authored hub blocks only show a button when they set one (no self-link to /menus).
+const ctaUrl = block.cta?.url || (isChromeBlock ? homeMenusFallback.ctaUrl : undefined)
+// Optional Google rating under the intro (homepage "On the menu", /menus "What we're known for").
+const hasRating = !!block.rating?.url && !!sectionIntro
 const ctaLabel = /view all menus/i.test(block.cta?.label ?? '')
   ? homeMenusFallback.ctaLabel
   : displayHeading(block.cta?.label, homeMenusFallback.ctaLabel)
 
 const tileClass = 'menu-mosaic-tile group flex h-full flex-col no-underline'
-const frameClass = `overflow-hidden ${radius.none}`
+// isolate: the clip holds while the image scales (Safari).
+const frameClass = `overflow-hidden isolate ${radius.none}`
 // Same slow zoom as MenuItemCards, on hover or keyboard focus anywhere on the tile.
+// Pre-promoted layer so the zoom doesn't snap or re-blur at either end.
 const imageClass =
   'block w-full aspect-[4/5] object-cover transition-transform duration-500 ' +
+  'will-change-transform [backface-visibility:hidden] ' +
   'motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]'
 const labelClass = `mt-space-16 mb-0 text-charcoal ${typeScale.title}`
 const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
 ---
 
-<section id="menu" class="section-menu-mosaic overflow-x-hidden">
-  <div class:list={[layout.shell, space.sectionYFirst]}>
+<section id={isChromeBlock ? 'menu' : undefined} class="section-menu-mosaic overflow-x-hidden">
+  <div class:list={[layout.shell, isChromeBlock ? space.sectionYFirst : space.sectionY]}>
     {
       sectionHeading && (
         <h2
           class:list={[
-            heading.base,
+            /* The homepage mosaic keeps the large display heading; an authored
+               mid-page block (e.g. "What we're known for") uses the section size. */
+            isChromeBlock ? heading.base : heading.medium,
             'text-center',
             sectionIntro ? 'mb-0' : 'mb-space-48 wf-sm:mb-space-32',
           ]}
@@ -79,14 +94,22 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
       sectionIntro && (
         <p
           class:list={[
-            'mx-auto mt-space-16 mb-space-48 text-center text-charcoal',
-            'wf-sm:mb-space-32',
+            'mx-auto mt-space-16 text-center text-charcoal',
+            hasRating ? 'mb-0' : 'mb-space-48',
+            !hasRating && 'wf-sm:mb-space-32',
             layout.measureNarrow,
             typeScale.intro,
           ]}
         >
           {sectionIntro}
         </p>
+      )
+    }
+    {
+      hasRating && (
+        <div class="mb-space-48 wf-sm:mb-space-32">
+          <GoogleRating rating={block.rating} />
+        </div>
       )
     }
     <div class="swiper menu-mosaic-swiper w-full" data-menu-mosaic-swiper>

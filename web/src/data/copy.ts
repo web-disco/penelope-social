@@ -2,8 +2,8 @@
  * Title-case / Woodbridge copy helpers.
  * Vaughan may appear as a region or areaServed — never as the city in titles.
  *
- * /sourdough-bakery stays on this site as a Social vs Bakehouse page.
- * Do not 301 it to /about or to penelopebakehouse.com.
+ * /sourdough-bakery 301s to /bakery-vaughan (public/_redirects), the Vaughan
+ * bakery landing page. Scarborough bakery searches belong to penelopebakehouse.com.
  */
 
 const EXACT_REPLACEMENTS: Record<string, string> = {
@@ -196,7 +196,20 @@ export const VAUGHAN_TARGET_PATHS: ReadonlySet<string> = new Set([
   '/pizza-vaughan',
   '/cafe-in-vaughan',
   '/sandwiches-vaughan',
+  '/bakery-vaughan',
 ])
+
+/**
+ * Short breadcrumb names for the landing pages. The visible trail on the banner
+ * and the BreadcrumbList JSON-LD both read from here, so they always match; the
+ * full title already sits in the H1 right below the trail.
+ */
+export const LANDING_BREADCRUMBS: Readonly<Record<string, string>> = {
+  '/pizza-vaughan': 'Sourdough Pizza',
+  '/cafe-in-vaughan': 'Cafe',
+  '/sandwiches-vaughan': 'Focaccia Sandwiches',
+  '/bakery-vaughan': 'Sourdough Bakery',
+}
 
 /** True when copy treats Vaughan as the city, not just the wider area. */
 export function usesVaughanAsCity(text?: string): boolean {

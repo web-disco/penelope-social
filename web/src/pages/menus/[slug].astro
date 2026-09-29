@@ -30,6 +30,7 @@ export async function getStaticPaths() {
 
 const { menu } = Astro.props
 const slug = menu.slug.current as string
+const MENU_CRUMBS: Record<string, string> = { lunch: 'Lunch', dinner: 'Dinner', bar: 'Bar', catering: 'Catering' }
 const path = `/menus/${slug}`
 const isCateringMenu = slug === 'catering'
 const seo = resolveSeo(path, menu.seo)
@@ -52,14 +53,17 @@ const menuSections = (menu.categories ?? [])
   }))
   .filter((section: { items: unknown[] }) => section.items.length > 0)
 
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Menus', path: '/menus' },
+  // Short names, so the trail reads Lunch / Dinner / Bar / Catering whatever the H1 says.
+  { name: MENU_CRUMBS[slug] ?? headingText, path },
+]
+
 const graph = pageGraph([
   restaurantSchema(),
   bakehouseSchema(),
-  breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: 'Menus', path: '/menus' },
-    { name: headingText, path },
-  ]),
+  breadcrumbSchema(breadcrumbs),
   menuSchema({
     name: headingText,
     path,
@@ -79,7 +83,7 @@ const canonical = `${SITE_ORIGIN}${path}`
   canonical={canonical}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
-  <PageHero block={{ image: menu.banner, heading: headingText, intro: introText }} />
+  <PageHero block={{ image: menu.banner, heading: headingText, intro: introText }} breadcrumbs={breadcrumbs} />
   {
     isCateringMenu && (
       <section class="catering-menu-note">

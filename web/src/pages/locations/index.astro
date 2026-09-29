@@ -15,13 +15,15 @@ const hubs = [woodbridgeLocation, scarboroughLocation] as const
 const contactLink =
   'text-charcoal font-body no-underline transition-opacity duration-[350ms] hover:opacity-70'
 
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Locations', path: '/locations' },
+]
+
 const graph = pageGraph([
   restaurantSchema(),
   bakehouseSchema(),
-  breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: 'Locations', path: '/locations' },
-  ]),
+  breadcrumbSchema(breadcrumbs),
 ])
 ---
 
@@ -34,6 +36,7 @@ const graph = pageGraph([
       headingText={locationsHub.heading}
       intro={locationsHub.intro}
       objectPosition="center 40%"
+      breadcrumbs={breadcrumbs}
     />
 
     <section class="locations-hub">

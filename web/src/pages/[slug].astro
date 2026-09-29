@@ -2,8 +2,8 @@
 /**
  * Static pages driven by the page builder: /contact, /catering-events,
  * /merchandise, /menus.
- * /about and /sourdough-bakery are dedicated pages. Do not emit CMS HTML
- * for sourdough-bakery — that would fight the disambiguation page.
+ * /about is a dedicated page. /sourdough-bakery 301s to /bakery-vaughan; its
+ * stale CMS doc ("Best Sourdough Bakery in Vaughan") must not build a page.
  */
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
@@ -22,7 +22,7 @@ import {
 } from '../lib/schema'
 import { imageUrl } from '../lib/image'
 import { plainText } from '../lib/portableText'
-import { menuTitle } from '../data/copy'
+import { LANDING_BREADCRUMBS, menuTitle } from '../data/copy'
 import { SITE_ORIGIN } from '../data/site'
 
 export async function getStaticPaths() {
@@ -52,7 +52,14 @@ const endsWithFinalCta = (page.sections ?? []).at(-1)?._type === 'finalCta'
 
 const faqItems = slug === 'contact' ? contactFaq : slug === 'catering-events' ? cateringFaq : null
 const crumbName =
-  slug === 'contact' ? 'Contact' : slug === 'catering-events' ? 'Catering and events' : page.title
+  LANDING_BREADCRUMBS[path] ??
+  (slug === 'contact'
+    ? 'Contact'
+    : slug === 'catering-events'
+      ? 'Catering and events'
+      : slug === 'merchandise'
+        ? 'Merch'
+        : page.title)
 
 /*
  * Landing pages that sell dishes get a Menu node built from the live menu
@@ -69,6 +76,7 @@ const LANDING_MENUS: Record<string, [string, string, string][]> = {
     ['lunch', 'treats', 'Pastries and treats'],
   ],
   'sandwiches-vaughan': [['lunch', 'focaccia', 'Sourdough focaccia sandwiches']],
+  'bakery-vaughan': [['lunch', 'bakery', 'Sourdough loaves, focaccia and dough to take home']],
 }
 const landingSources = LANDING_MENUS[slug]
 let landingMenu: ReturnType<typeof menuSchema> | null = null
@@ -91,6 +99,11 @@ if (landingSources) {
   if (sections.length) landingMenu = menuSchema({ name: page.title, path, description: seo.description, sections })
 }
 
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: crumbName, path },
+]
+
 const heroImage = (page.sections ?? []).find((block: any) => block?._type === 'pageHero')?.image
 
 const graph = pageGraph([
@@ -108,10 +121,7 @@ const graph = pageGraph([
       ]
     : []),
   ...(landingMenu ? [landingMenu] : []),
-  breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: crumbName, path },
-  ]),
+  breadcrumbSchema(breadcrumbs),
   ...(faqItems ? [faqPageSchema(faqItems)] : []),
 ])
 ---
@@ -124,6 +134,6 @@ const graph = pageGraph([
   hideNewsletter={endsWithFinalCta}
 >
   {graph && <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />}
-  <PageBuilder sections={page.sections ?? []} />
+  <PageBuilder sections={page.sections ?? []} breadcrumbs={breadcrumbs} />
   {faqItems && <FaqSection items={faqItems} includeSchema={false} />}
 </BaseLayout>

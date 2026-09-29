@@ -86,7 +86,7 @@ export function restaurantSchema() {
       'Penelope Social is a Woodbridge cafe and bar at 125 Hawkview Blvd. Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
     servesCuisine: ['Italian', 'Pizza', 'Cafe'],
     acceptsReservations: true,
-    menu: [...MENU_URLS],
+    hasMenu: [...MENU_URLS],
     supplier: { '@id': `${BAKEHOUSE_SITE_URL}/#bakery` },
     address: {
       '@type': 'PostalAddress',

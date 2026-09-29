@@ -43,15 +43,17 @@ const detailRows = [
   },
 ]
 
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Locations', path: '/locations' },
+  { name: 'Woodbridge', path: '/locations/woodbridge' },
+]
+
 const graph = pageGraph([
   restaurantSchema(),
   bakehouseSchema(),
   faqPageSchema(woodbridgeFaq),
-  breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: 'Locations', path: '/locations' },
-    { name: 'Woodbridge', path: '/locations/woodbridge' },
-  ]),
+  breadcrumbSchema(breadcrumbs),
 ])
 ---
 
@@ -64,6 +66,7 @@ const graph = pageGraph([
       headingText={woodbridgeLocation.heading}
       intro={woodbridgeLocation.intro}
       objectPosition={woodbridgeLocation.hubImage.objectPosition}
+      breadcrumbs={breadcrumbs}
     />
 
     <LocationDetails
