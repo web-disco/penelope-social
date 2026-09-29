@@ -25,6 +25,10 @@ export const homeFaq: FaqItem[] = [
     answer: `Here, at ${address}. Roman-style slices at lunch and 14-inch New York-style pies at dinner, both on our own sourdough. More on <a href="/pizza-vaughan">our sourdough pizza</a>.`,
   },
   {
+    question: 'Where can I get Italian sandwiches in Vaughan?',
+    answer: `Here, at ${address}. Nine Italian sandwiches on sourdough focaccia at lunch, Monday to Saturday. More on <a href="/sandwiches-vaughan">our focaccia sandwiches</a>.`,
+  },
+  {
     question: 'Is there a cafe for coffee in Vaughan?',
     answer: `Yes, here at ${address}. Espresso, cappuccino and lattes from 9am, with pastries from Penelope Bakehouse. More on <a href="/cafe-in-vaughan">our cafe</a>.`,
   },
@@ -220,6 +224,6 @@ export const sourdoughFaq: FaqItem[] = [
   },
   {
     question: 'Where is the sourdough baked?',
-    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social as sandwiches and <a href="/pizza-vaughan">pizza</a>, or as bread on the table.`,
+    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social as <a href="/sandwiches-vaughan">sandwiches</a> and <a href="/pizza-vaughan">pizza</a>, or as bread on the table.`,
   },
 ]
