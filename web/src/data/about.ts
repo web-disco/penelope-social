@@ -4,7 +4,6 @@ export const aboutMeta = PAGE_SEO['/about']!
 
 /**
  * Family story for /about. Years live only in the timeline.
- * /sourdough-bakery is the Social vs Bakehouse page — keep both routes.
  */
 export const aboutPage = {
   heading: 'About Penelope Social',
@@ -47,14 +46,10 @@ export const aboutPage = {
       alt: 'Hands shaping dough for Penelope',
       aspect: '9/16',
     },
-    /**
-     * The second CTA de-orphans /sourdough-bakery. It was in the sitemap with
-     * no inbound link (isBakeryNav strips the legacy "Bakery" row from the nav
-     * on purpose), so this contextual link is how the page gets crawled.
-     */
+    /** The second CTA links the Vaughan bakery landing page (take-home bread). */
     ctas: [
       { label: 'Visit the Bakehouse', url: '/locations/scarborough', style: 'primary' as const },
-      { label: 'The sourdough we serve', url: '/sourdough-bakery', style: 'outline' as const },
+      { label: 'Our sourdough bakery', url: '/bakery-vaughan', style: 'outline' as const },
     ],
   },
   banner: {

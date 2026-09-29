@@ -91,11 +91,6 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
     description:
       'Our sister bakehouse and focacceria at 71 Howden Rd, Scarborough, where the bread for Penelope Social is baked. Hours, directions, and phone.',
   },
-  '/sourdough-bakery': {
-    title: 'Sourdough and focaccia in Woodbridge | Penelope Social',
-    description:
-      'The sourdough we serve in Woodbridge: Vince’s starter, loaves and focaccia on the table at Penelope Social, baked at our Scarborough bakehouse.',
-  },
 }
 
 export function normalizePath(pathname: string): string {
@@ -109,8 +104,8 @@ export function resolveSeo(
 ): SeoMeta {
   const path = normalizePath(pathname)
   const defaults = PAGE_SEO[path]
-  // Repo wins: stale CMS still says “Best Sourdough Bakery in Vaughan”.
-  if ((path === '/menus/catering' || path === '/sourdough-bakery') && defaults) return defaults
+  // Repo wins over the stale catering menu SEO in the CMS.
+  if (path === '/menus/catering' && defaults) return defaults
   const cmsTitle = cms?.metaTitle?.trim()
   const cmsDescription = cms?.metaDescription?.trim()
 

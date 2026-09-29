@@ -1,7 +1,7 @@
 ---
 /**
  * Image and copy side by side with CTAs. Built on the story grid from the
- * homepage bread block and /sourdough-bakery, but split 50/50 with a portrait
+ * homepage bread block, but split 50/50 with a portrait
  * 4:5 image. Only used by the SEO landing pages.
  *
  * block: { eyebrow, heading, body: PortableText[], image, layout: 'image-first' | 'copy-first', ctas: Cta[] }
@@ -18,8 +18,8 @@ const { block } = Astro.props
 const body = withoutEmptyBlocks(block.body)
 const imageFirst = block.layout !== 'copy-first'
 
-/* The shared story tokens stay 7/5 and 3:2 for TextWithMediaSection and
-   /sourdough-bakery; this block swaps its own copies. Swapped rather than
+/* The shared story tokens stay 7/5 and 3:2 for TextWithMediaSection;
+   this block swaps its own copies. Swapped rather than
    stacked: two conflicting utilities on one element resolve by stylesheet
    order, not class order. */
 const media = story.media.replace('col-span-7', 'col-span-6')

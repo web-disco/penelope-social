@@ -26,7 +26,7 @@ export const homeFaq: FaqItem[] = [
   },
   {
     question: 'Where can I get Italian sandwiches in Vaughan?',
-    answer: `Here, at ${address}. Nine Italian sandwiches on sourdough focaccia at lunch, Monday to Saturday. More on <a href="/sandwiches-vaughan">our focaccia sandwiches</a>.`,
+    answer: `Here, at ${address}. Italian sandwiches on sourdough focaccia at lunch, Monday to Saturday. More on <a href="/sandwiches-vaughan">our focaccia sandwiches</a>.`,
   },
   {
     question: 'Is there a cafe for coffee in Vaughan?',
@@ -205,25 +205,5 @@ export const scarboroughFaq: FaqItem[] = [
   {
     question: 'Is this the same as Penelope Social?',
     answer: `We're <a href="/locations">sister spots</a>. Penelope Bakehouse is the Scarborough bakehouse and focacceria at ${scarboroughBakehouse.street}. <a href="/locations/woodbridge">Penelope Social</a> is the Woodbridge cafe and bar at ${woodbridgeNap.street}.`,
-  },
-]
-
-/** /sourdough-bakery — bakehouse-confusion queries. */
-export const sourdoughFaq: FaqItem[] = [
-  {
-    question: 'How are Social and Bakehouse related?',
-    answer: `This page is on Penelope Social, the cafe and bar. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria.`,
-  },
-  {
-    question: 'Where is the Penelope Bakehouse menu?',
-    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. Hours, photos, online order too. Social menus (lunch, dinner, bar) stay on this site.`,
-  },
-  {
-    question: 'Where is the bakery in Scarborough?',
-    answer: `71 Howden Rd, Scarborough. That is Penelope Bakehouse. Penelope Social is at <a href="/locations/woodbridge">${address}</a>.`,
-  },
-  {
-    question: 'Where is the sourdough baked?',
-    answer: `Vince’s starter, Penelope, is the origin story. The loaves are baked at the Scarborough bakehouse and served at Social as <a href="/sandwiches-vaughan">sandwiches</a> and <a href="/pizza-vaughan">pizza</a>, or as bread on the table.`,
   },
 ]
