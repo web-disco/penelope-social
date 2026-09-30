@@ -27,7 +27,80 @@ export const DEFAULT_NAV: NavLink[] = [
   { label: 'Merch', url: '/merchandise' },
 ]
 
-const CANONICAL_KEYS = ['menus', 'about', 'locations', 'gift', 'catering', 'merch'] as const
+/**
+ * The Menus dropdown: the four menus, then the dish landing pages. Specialty
+ * labels match the landing pages' breadcrumbs (LANDING_BREADCRUMBS in copy.ts).
+ * The bakery entry is the Vaughan page, never penelopebakehouse.com's Scarborough
+ * searches.
+ */
+export type DropdownLink = NavLink & {
+  description: string
+  /** Sanity image asset id for the thumbnail. */
+  image: string
+}
+
+export const MENUS_DROPDOWN: { heading: string; links: DropdownLink[] }[] = [
+  {
+    heading: 'Menus',
+    links: [
+      {
+        label: 'Lunch',
+        url: '/menus/lunch',
+        description: 'Focaccia sandwiches, pizza slices and salads',
+        image: 'image-d884aa3e5e73b2b39bc258631c35eb72483d27a9-1080x1620-avif',
+      },
+      {
+        label: 'Dinner',
+        url: '/menus/dinner',
+        description: 'Shareables, handhelds and 14-inch pies',
+        image: 'image-6015d51314b0d2c5075e2a35cf8c81d6a5add239-1080x1620-avif',
+      },
+      {
+        label: 'Bar',
+        url: '/menus/bar',
+        description: 'Cocktails till late',
+        image: 'image-e537a13269d0c3e55ba5b2c8eb3809315bedf852-1080x1620-avif',
+      },
+      {
+        label: 'Catering',
+        url: '/menus/catering',
+        description: 'Trays for your office or event',
+        image: 'image-bf9585ea52b15eab43836e7d11e5d3742a1c3476-1339x2000-jpg',
+      },
+    ],
+  },
+  {
+    heading: 'Specialties',
+    links: [
+      {
+        label: 'Italian Cafe',
+        url: '/cafe-in-vaughan',
+        description: 'Espresso and Bakehouse pastries from 9am',
+        image: 'image-d2ae1187bd7910cd4adad652edac24b50744137e-1334x2000-jpg',
+      },
+      {
+        label: 'Sourdough Pizza',
+        url: '/pizza-vaughan',
+        description: 'Roman slices at lunch, 14-inch pies at dinner',
+        image: 'image-34fecfc4c4d4f6b224f8614a2d0974c6d491e034-683x1024-jpg',
+      },
+      {
+        label: 'Focaccia Sandwiches',
+        url: '/sandwiches-vaughan',
+        description: 'Italian sandwiches on sourdough focaccia',
+        image: 'image-dc577006850c5879f4336a5c5ef15435551b84f2-1334x2000-jpg',
+      },
+      {
+        label: 'Sourdough Bakery',
+        url: '/bakery-vaughan',
+        description: 'Loaves, focaccia and pizza dough to take home',
+        image: 'image-832fff1d530a0fd8b5e347dd28b396e8a1f56f84-1080x1920-avif',
+      },
+    ],
+  },
+]
+
+const CANONICAL_KEYS =['menus', 'about', 'locations', 'gift', 'catering', 'merch'] as const
 type NavKey = (typeof CANONICAL_KEYS)[number]
 
 export function isBakeryNav(link: { label?: string; url?: string }) {

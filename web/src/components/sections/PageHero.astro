@@ -9,8 +9,10 @@ import { bannerCopyFor } from '../../data/banners'
 
 interface Props {
   block: any
+  /** The page's trail, shown as a bar under the banner. Same list as its BreadcrumbList. */
+  breadcrumbs?: { name: string; path: string }[]
 }
-const { block } = Astro.props
+const { block, breadcrumbs } = Astro.props
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 const copy = bannerCopyFor(path, { heading: block.heading, intro: block.intro })
@@ -23,4 +25,5 @@ const copy = bannerCopyFor(path, { heading: block.heading, intro: block.intro })
   headingText={copy.heading}
   intro={copy.intro}
   objectPosition={block.objectPosition}
+  breadcrumbs={breadcrumbs}
 />

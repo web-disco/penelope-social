@@ -60,7 +60,7 @@ export const homeEventsFallback = {
 /** Homepage green band. Merch is in-store only, not e-comm. */
 export const homeWaveMerch = {
   wave: 'Take a shirt home from Social',
-  status: 'Hoodies, tees, totes. Pick them up in store.',
+  status: 'Hoodies, tees, totes. Purchase and pick them up in store.',
   ctaLabel: 'See merch',
   ctaUrl: '/merchandise',
 }

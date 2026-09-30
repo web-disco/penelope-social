@@ -26,7 +26,7 @@ export interface ResolvedMenuItem {
   title: string
   description?: string
   price?: string
-  /** What the price buys when a card mixes units: "slice", "14\" pie". */
+  /** What the price buys, worded for the card: "per slice", "per 14\" pie", "per piece". */
   priceUnit?: string
   menuUrl: string
 }
@@ -38,9 +38,9 @@ export interface ResolvedMenuItem {
  */
 function priceUnit(categoryTitle?: string): string | undefined {
   if (!categoryTitle) return undefined
-  if (/slice/i.test(categoryTitle)) return 'slice'
+  if (/slice/i.test(categoryTitle)) return 'per slice'
   const size = /\((\d+)["”]\s*round\)/i.exec(categoryTitle)?.[1]
-  return size ? `${size}" pie` : undefined
+  return size ? `per ${size}" pie` : undefined
 }
 
 /** "Buona Notte (3oz)" and "buona notte" are the same item. */
@@ -87,12 +87,18 @@ export async function resolveMenuItem(pick: MenuItemPick): Promise<ResolvedMenuI
 }
 
 /**
- * Treats are priced in tiers ("1pc 4.50 | 6pc 24 | 12pc 45"), too long for a
- * card's one-line price. The card quotes the first tier; the menu has the rest.
+ * Some items are priced in tiers, too long for a card's one-line price. By
+ * count ("1pc 4.50 | 6pc 24 | 12pc 45") the card quotes the first tier with its
+ * unit ("4.50 per piece"). By size ("SM 12 | LG 20") it quotes the lowest as
+ * "From 12", with no unit. The menu page lists every tier.
  */
 function firstTier(price?: string): { price: string; unit: string } | undefined {
   if (!price?.includes('|')) return undefined
-  const match = /^(\d+)\s*pc\s+\$?([\d.]+)$/i.exec(price.split('|')[0]!.trim())
-  if (!match) return undefined
-  return { price: match[2]!, unit: match[1] === '1' ? 'piece' : `${match[1]} pieces` }
+  const first = price.split('|')[0]!.trim()
+  const count = /^(\d+)\s*pc\s+\$?([\d.]+)$/i.exec(first)
+  if (count) return { price: count[2]!, unit: count[1] === '1' ? 'per piece' : `per ${count[1]} pieces` }
+  const size = /^(SM|LG|small|large)\s+\$?([\d.]+)$/i.exec(first)
+  // Empty unit, not undefined, so the category-title unit doesn't fill in behind it.
+  if (size) return { price: `From ${size[2]!}`, unit: '' }
+  return undefined
 }

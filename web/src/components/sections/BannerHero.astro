@@ -15,6 +15,8 @@ interface Props {
   objectPosition?: string
   /** Extra classes on the on-photo lede. Desktop stays one line (Bakehouse). */
   introClass?: string
+  /** Visible trail above the H1; the last crumb is the current page. */
+  breadcrumbs?: { name: string; path: string }[]
 }
 
 const {
@@ -25,14 +27,18 @@ const {
   intro,
   objectPosition = 'center',
   introClass,
+  breadcrumbs,
 } = Astro.props
 
 const imgSrc = src || imageUrl(image)
 const imgAlt = alt || imageAlt(image)
 const bannerHeight = 'h-[550px] wf-md:h-[420px] wf-sm:h-[440px] wf-xs:h-[400px]'
+const hasBreadcrumbs = !!breadcrumbs && breadcrumbs.length > 1
+// The section gap sits under whatever closes the banner: the photo, or the breadcrumb bar.
+const gapBelow = 'mb-section-gap-y wf-sm:mb-section-gap-y-sm'
 ---
 
-<div class:list={['page-banner relative mb-section-gap-y w-full overflow-hidden wf-sm:mb-section-gap-y-sm', bannerHeight]}>
+<div class:list={['page-banner relative w-full overflow-hidden', !hasBreadcrumbs && gapBelow, bannerHeight]}>
   {
     imgSrc && (
       <img
@@ -79,6 +85,34 @@ const bannerHeight = 'h-[550px] wf-md:h-[420px] wf-sm:h-[440px] wf-xs:h-[400px]'
     )
   }
 </div>
+
+{
+  hasBreadcrumbs && (
+    <nav aria-label="Breadcrumb" class:list={['page-breadcrumbs bg-charcoal', gapBelow]}>
+      <div class={layout.shell}>
+        <ol class:list={['m-0 flex list-none flex-wrap items-center gap-x-space-8 p-0 py-space-16 text-cream/70', typeScale.label]}>
+          {breadcrumbs!.map((crumb, i) => (
+            <li class="flex items-center gap-x-space-8">
+              {i > 0 && <span aria-hidden="true">/</span>}
+              {i < breadcrumbs!.length - 1 ? (
+                <a
+                  href={crumb.path}
+                  class="text-cream/70 no-underline transition-opacity duration-[350ms] hover:opacity-70"
+                >
+                  {crumb.name}
+                </a>
+              ) : (
+                <span aria-current="page" class="text-cream">
+                  {crumb.name}
+                </span>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </nav>
+  )
+}
 
 <style>
   /* Inner-page heroes: phones ≤600px (and xs) are 32. Desktop/tablet steps unchanged. */

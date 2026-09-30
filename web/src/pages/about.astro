@@ -1,8 +1,7 @@
 ---
 /**
  * About — Bakehouse structure (hero, copy, timeline, video, FAQ).
- * Restaurant-first family story. /sourdough-bakery is a separate
- * Social vs Bakehouse page — do not 301 that URL here.
+ * Restaurant-first family story. Take-home bread lives on /bakery-vaughan.
  */
 import BaseLayout from '../layouts/BaseLayout.astro'
 import BannerHero from '../components/sections/BannerHero.astro'
@@ -16,14 +15,16 @@ import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurant
 const video = aboutPage.videoTeaser
 const videoCtas = video.ctas
 
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+]
+
 const graph = pageGraph([
   restaurantSchema(),
   bakehouseSchema(),
   faqPageSchema(aboutFaq),
-  breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-  ]),
+  breadcrumbSchema(breadcrumbs),
 ])
 ---
 
@@ -36,6 +37,7 @@ const graph = pageGraph([
       headingText={aboutPage.heading}
       intro={aboutPage.subheading}
       objectPosition="center 50%"
+      breadcrumbs={breadcrumbs}
     />
 
     <section class="about-content">

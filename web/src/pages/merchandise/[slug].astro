@@ -24,14 +24,6 @@ export async function getStaticPaths() {
 const { product } = Astro.props
 const path = `/merchandise/${product.slug.current}`
 const seo = resolveSeo(path, product.seo)
-const graph = pageGraph([
-  restaurantSchema(),
-  breadcrumbSchema([
-    { name: 'Home', path: '/' },
-    { name: 'Merch', path: '/merchandise' },
-    { name: product.title, path },
-  ]),
-])
 const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charcoal wf-md:text-[38px] wf-sm:text-[28px] wf-xs:flex-none wf-xs:text-[22px]'
 const PRODUCT_TITLES: Record<string, string> = {
   hoodie: 'Hoodie',
@@ -39,6 +31,12 @@ const PRODUCT_TITLES: Record<string, string> = {
   'tote-bag': 'Tote bag',
 }
 const productName = PRODUCT_TITLES[product.slug.current] || displayHeading(product.title)
+const breadcrumbs = [
+  { name: 'Home', path: '/' },
+  { name: 'Merch', path: '/merchandise' },
+  { name: productName, path },
+]
+const graph = pageGraph([restaurantSchema(), breadcrumbSchema(breadcrumbs)])
 ---
 
 <BaseLayout
@@ -54,6 +52,7 @@ const productName = PRODUCT_TITLES[product.slug.current] || displayHeading(produ
       heading: pageBannerCopy['/merchandise']?.heading || 'Merch',
       intro: pageBannerCopy['/merchandise']?.intro,
     }}
+    breadcrumbs={breadcrumbs}
   />
 
   <div class="section-merch-details">
@@ -72,7 +71,7 @@ const productName = PRODUCT_TITLES[product.slug.current] || displayHeading(produ
                   <a
                     href={imageUrl(image)}
                     data-gallery={`merch-${product.slug.current}`}
-                    class="merch-lightbox w-inline-block glightbox w-full"
+                    class="merch-lightbox glightbox group block w-full overflow-hidden isolate"
                   >
                     <img
                       src={imageUrl(image)}
@@ -80,7 +79,7 @@ const productName = PRODUCT_TITLES[product.slug.current] || displayHeading(produ
                       alt={imageAlt(image)}
                       sizes={imageSizes(image)}
                       srcset={imageSrcset(image)}
-                      class="merch-image w-full"
+                      class="merch-image block w-full transition-transform duration-500 will-change-transform [backface-visibility:hidden] motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]"
                     />
                   </a>
                 </div>

@@ -39,7 +39,7 @@ Bar: Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am
 - Locations: https://penelopesocial.com/locations
 - Woodbridge restaurant: https://penelopesocial.com/locations/woodbridge
 - Scarborough bakehouse (sister): https://penelopesocial.com/locations/scarborough
-- Bakehouse sourdough, served here: https://penelopesocial.com/sourdough-bakery
+- Sourdough bakery in Vaughan (bread to take home): https://penelopesocial.com/bakery-vaughan
 
 ## Reservations
 
@@ -47,7 +47,7 @@ Reservations: https://penelopesocial.com/reservations
 Toast: https://tables.toasttab.com/restaurants/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/reserve?partySize=2
 
 /events 301s to /catering-events. Do not rename catering-events to /catering (that would collide with /menus/catering).
-/sourdough-bakery stays on this site as a Social vs Bakehouse page. Do not 301 it to /about or to penelopebakehouse.com. It is not in the header nav. The homepage bread CTA and that page link to https://penelopebakehouse.com.
+/sourdough-bakery 301s to /bakery-vaughan. The bread is baked at Penelope Bakehouse (71 Howden Rd, Scarborough, https://penelopebakehouse.com) and sold to take home at Penelope Social in Woodbridge.
 
 ## Order online and gift cards
 

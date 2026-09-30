@@ -187,6 +187,23 @@ const gaMeasurementId =
           }
         }
 
+        function isBakehouseSiteHref(href) {
+          try {
+            var h = new URL(href, 'https://penelopesocial.com').hostname.toLowerCase()
+            return h === 'penelopebakehouse.com' || h === 'www.penelopebakehouse.com'
+          } catch (err) {
+            return false
+          }
+        }
+
+        /** Where on the page an untagged link sits: footer, faq, nav or content. */
+        function contextOf(el) {
+          if (el.closest('.footer')) return 'footer'
+          if (el.closest('.section-faq')) return 'faq'
+          if (el.closest('.menu-drawer, .navbar, [data-navbar]')) return 'nav'
+          return 'content'
+        }
+
         function eventFor(anchor) {
           var named = anchor.getAttribute('data-ga-event')
           var href = hrefOf(anchor)
@@ -196,12 +213,23 @@ const gaMeasurementId =
             if (placement) params.placement = placement
             return { name: 'order_click', params: params }
           }
-          if (named) return { name: named, params: params }
+          if (named) {
+            // Other named events may carry a placement too (review_click: rating_badge / footer).
+            var namedPlacement = anchor.getAttribute('data-ga-placement')
+            if (namedPlacement) params.placement = namedPlacement
+            // nav_menu_click names the item picked (Lunch, Sourdough Pizza...).
+            var namedItem = anchor.getAttribute('data-ga-item')
+            if (namedItem) params.item = namedItem
+            return { name: named, params: params }
+          }
           if (isGiftHref(href)) return { name: 'gift_card_click', params: params }
           if (isReservationHref(href)) return { name: 'reservation_click', params: params }
           if (isCateringHref(href)) return { name: 'catering_click', params: params }
           if (isMerchHref(href)) return { name: 'merch_click', params: params }
           if (isTelHref(href)) return { name: 'click_to_call', params: params }
+          // Social -> Bakehouse handoff (Scarborough page, FAQs, footer, bakery page).
+          if (isBakehouseSiteHref(href)) return { name: 'bakehouse_click', params: { placement: contextOf(anchor) } }
+          if (href.toLowerCase().indexOf('mailto:') === 0) return { name: 'email_click', params: { placement: contextOf(anchor) } }
           if (anchor.classList.contains('is-google-review')) return null
           if (/google reviews/i.test(anchor.textContent || '')) return null
           if (isMapsHref(href)) return { name: 'get_directions', params: params }
@@ -218,6 +246,21 @@ const gaMeasurementId =
             if (!anchor) return
             var bound = eventFor(anchor)
             if (bound) send(bound.name, bound.params)
+          },
+          true,
+        )
+
+        // FAQ opens: which questions people actually expand. <details> toggle
+        // doesn't bubble, so listen in the capture phase.
+        document.addEventListener(
+          'toggle',
+          function (event) {
+            var details = event.target
+            if (!details || !details.open || !details.closest || !details.closest('.section-faq')) return
+            // The question span only, not the +/- icon beside it.
+            var q = details.querySelector('[data-faq-question]') || details.querySelector('summary')
+            var question = ((q && q.textContent) || '').replace(/\s+/g, ' ').trim().slice(0, 100)
+            if (question) send('faq_open', { question: question })
           },
           true,
         )

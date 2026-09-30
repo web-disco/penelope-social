@@ -4,6 +4,7 @@
 
 import {
   ORDER_PLACEMENTS,
+  isBakehouseSiteHref,
   isCateringHref,
   isMapsDirectionsHref,
   isMerchHref,
@@ -56,8 +57,22 @@ function eventFromMarkup(anchor: HTMLAnchorElement): { name: string; params: Rec
   if (named === 'order_click') {
     const placement = orderPlacement(anchor)
     if (placement) params.placement = placement
+  } else {
+    // Other named events may carry a placement too (review_click: rating_badge / footer).
+    const placement = anchor.getAttribute('data-ga-placement')
+    if (placement) params.placement = placement
+    const item = anchor.getAttribute('data-ga-item')
+    if (item) params.item = item
   }
   return { name: named, params }
+}
+
+/** Where on the page an untagged link sits: footer, faq, nav or content. */
+function contextOf(el: Element): string {
+  if (el.closest('.footer')) return 'footer'
+  if (el.closest('.section-faq')) return 'faq'
+  if (el.closest('.menu-drawer, .navbar, [data-navbar]')) return 'nav'
+  return 'content'
 }
 
 function eventFromHref(
@@ -73,6 +88,8 @@ function eventFromHref(
   if (isCateringHref(href)) return { name: 'catering_click', params: {} }
   if (isMerchHref(href)) return { name: 'merch_click', params: {} }
   if (isSocialTelHref(href)) return { name: 'click_to_call', params: {} }
+  if (isBakehouseSiteHref(href)) return { name: 'bakehouse_click', params: { placement: contextOf(anchor) } }
+  if (/^mailto:/i.test(href)) return { name: 'email_click', params: { placement: contextOf(anchor) } }
   if (anchor.classList.contains('is-google-review')) return null
   if (/google reviews/i.test(anchor.textContent ?? '')) return null
   if (isMapsDirectionsHref(href)) return { name: 'get_directions', params: {} }
@@ -92,6 +109,17 @@ export function initAnalyticsClicks() {
       const bound = eventFromMarkup(anchor) ?? eventFromHref(hrefOf(anchor), anchor)
       if (!bound) return
       track(bound.name, bound.params)
+    },
+    true,
+  )
+  document.addEventListener(
+    'toggle',
+    (event) => {
+      const details = event.target
+      if (!(details instanceof HTMLDetailsElement) || !details.open || !details.closest('.section-faq')) return
+      const q = details.querySelector('[data-faq-question]') ?? details.querySelector('summary')
+      const question = (q?.textContent ?? '').replace(/\s+/g, ' ').trim().slice(0, 100)
+      if (question) track('faq_open', { question })
     },
     true,
   )

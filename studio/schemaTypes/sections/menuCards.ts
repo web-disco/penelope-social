@@ -28,6 +28,28 @@ export const menuCards = defineType({
       description: 'Optional supporting line under the heading.',
     }),
     defineField({
+      name: 'rating',
+      title: 'Google rating',
+      type: 'object',
+      description: 'Optional. Shown under the intro, linking to the reviews. Update the numbers by hand.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({
+          name: 'score',
+          title: 'Score',
+          type: 'number',
+          validation: (Rule) => Rule.min(0).max(5).precision(1),
+        }),
+        defineField({
+          name: 'label',
+          title: 'Label',
+          type: 'string',
+          description: 'e.g. “600+ reviews on Google”.',
+        }),
+        defineField({ name: 'url', title: 'Reviews link', type: 'url' }),
+      ],
+    }),
+    defineField({
       name: 'cards',
       title: 'Cards',
       type: 'array',
