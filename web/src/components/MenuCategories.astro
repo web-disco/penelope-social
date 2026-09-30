@@ -2,6 +2,8 @@
 /**
  * Menu category blocks. Bakehouse /menu type and spacing:
  * 40px category title, one-line blurb, 60px grid, 24px item / price.
+ * Phones (<=479) take the Bakehouse step down — 24px title, 18px item and
+ * single price, 14px multi price — so item names stop reading as headings.
  * Empty lists stay titled with small body copy. Unavailable categories hide.
  */
 import { PortableText } from 'astro-portabletext'
@@ -84,7 +86,12 @@ function isMultiPrice(price?: string) {
         ]}
       >
         <div class={layout.shell}>
-          <h2 class:list={['page-sub-heading mt-0 mb-space-12 text-charcoal', typeScale.displayL]}>
+          <h2
+            class:list={[
+              'page-sub-heading mt-0 mb-space-12 wf-xs:mb-space-8 text-charcoal',
+              typeScale.displayMenuCategory,
+            ]}
+          >
             {menuTitle(category.title)}
           </h2>
           {richBlurb.length > 0 && (
@@ -125,18 +132,21 @@ function isMultiPrice(price?: string) {
                         {/* font-body is load-bearing: webflow-base sets body to
                             Arial, so every element that does not name a family
                             inherits it. Each token in lib/ui.ts carries font-body
-                            for that reason; this heading was hand-rolled and did
-                            not, which put every menu item name in Arial while the
-                            category heading beside it rendered in Sweet Sans. */}
-                        <h3 class="menu-item-title mt-0 mb-0 font-body text-[24px] font-medium leading-[120%] text-pretty text-charcoal">
-                          {name}
-                          {suffix && <span class="whitespace-nowrap">{suffix}</span>}
-                        </h3>
+                            for that reason; this heading and the price beside it
+                            are hand-rolled and did not, which put every menu item
+                            name in Arial while the category heading above it
+                            rendered in Sweet Sans. */}
+                        <div class="menu-item-title-wrap min-w-0 flex-1 pr-space-8">
+                          <h3 class="menu-item-title mt-0 mb-0 font-body text-[24px] font-medium leading-[120%] text-pretty text-charcoal wf-xs:text-[18px]">
+                            {name}
+                            {suffix && <span class="whitespace-nowrap">{suffix}</span>}
+                          </h3>
+                        </div>
                         {item.price && (
                           <p
                             class:list={[
-                              'heading-menu-price mt-0 mb-0 whitespace-nowrap text-charcoal',
-                              multi ? 'text-[16px] leading-[150%]' : 'text-[24px] leading-[120%]',
+                              'heading-menu-price mt-0 mb-0 shrink-0 whitespace-nowrap font-body font-medium leading-none text-charcoal',
+                              multi ? 'text-[16px] wf-xs:text-[14px]' : 'text-[24px] wf-xs:text-[18px]',
                             ]}
                           >
                             {item.price}
