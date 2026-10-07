@@ -1,0 +1,481 @@
+{
+  "summary": {
+    "health_score": 72,
+    "business_type": "Local brick-and-mortar restaurant (Italian-leaning cafe & bar, Woodbridge/Vaughan ON) with sister bakery on a separate domain",
+    "audit_date": "2026-10-06",
+    "top_findings": [
+      "Homepage title/H1 never say 'restaurant', 'Vaughan' or 'Italian'; ~4,600 impressions at pos 4.9 convert at 2.8% (rewrite recommended 2026-09-19, not shipped)",
+      "Fragmented entity: two Google place IDs, two Instagram handles, wrong Apple Maps/Yelp data, 'Penelope Focacceria' alias",
+      "No page or positioning owns 'Italian restaurant Vaughan' (982 impr, pos 19.6)",
+      "/catering-events thin (~190 words); Christmas packages only in a popup during booking season",
+      "No security headers and no long-lived caching for hashed assets"
+    ],
+    "quick_wins": [
+      "Rewrite homepage title/meta/H1 (web/src/data/seo.ts:10)",
+      "Unmark popup_view, popup_dismiss, nav_menu_click, faq_open, announcement_dismiss as GA4 key events (~80% of organic 'conversions')",
+      "Fix sameAs Instagram handle and strip tracking params (web/src/data/site.ts:44-45)",
+      "aria-labels on the catering form select/textarea",
+      "Add web/public/_headers for security headers + immutable /_astro caching"
+    ]
+  },
+  "remeasure": {
+    "window": "GSC 2026-09-06..10-03 vs prior audit 2026-08-19..09-16",
+    "clicks": [
+      5283,
+      4517
+    ],
+    "impressions": [
+      53748,
+      44793
+    ],
+    "ctr": [
+      9.83,
+      10.08
+    ],
+    "position": [
+      5.6,
+      5.4
+    ],
+    "bakehouse_brand_impressions": [
+      6661,
+      3257
+    ],
+    "italian_cluster": {
+      "impressions": [
+        905,
+        982
+      ],
+      "position": [
+        20.8,
+        19.6
+      ]
+    },
+    "brunch": {
+      "impressions": [
+        840,
+        704
+      ],
+      "position": [
+        9.0,
+        9.6
+      ]
+    },
+    "catering_events_ctr": [
+      0.53,
+      1.15
+    ],
+    "confounder": "September 2026 Spam Update (from 2026-09-24)"
+  },
+  "field_data": {
+    "crux_origin": {
+      "lcp_ms": 485,
+      "inp_ms": 62,
+      "cls": 0.0,
+      "ttfb_ms": 134
+    }
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 78,
+      "what_works": [
+        "All 20 sitemap URLs 200, self-canonical, indexable",
+        "Single-hop 301s for http/www/legacy URLs",
+        "Real 404 with noindex",
+        "SSR HTML, brotli",
+        "Sitemap resubmitted 09-30, 0 errors"
+      ],
+      "findings": [
+        {
+          "title": "No security headers",
+          "severity": "High",
+          "description": "No HSTS, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, X-Frame-Options/CSP; web/public has no _headers file.",
+          "recommendation": "Add web/public/_headers; CSP report-only first."
+        },
+        {
+          "title": "Hashed assets not cached",
+          "severity": "High",
+          "description": "/_astro/* and /fonts/* served max-age=0, must-revalidate.",
+          "recommendation": "_headers: /_astro/* max-age=31536000, immutable; /fonts/* 30 days."
+        },
+        {
+          "title": "No sitemap lastmod",
+          "severity": "Medium",
+          "description": "sitemap-0.xml has no <lastmod>.",
+          "recommendation": "@astrojs/sitemap serialize in astro.config.mjs:19-27 from Sanity _updatedAt."
+        },
+        {
+          "title": "/locations/scarborough not indexed",
+          "severity": "Medium",
+          "description": "GSC: Discovered - currently not indexed, never crawled, yet in sitemap.",
+          "recommendation": "noindex + remove from sitemap; keep as sister card linking to penelopebakehouse.com."
+        },
+        {
+          "title": "Trailing-slash 307",
+          "severity": "Medium",
+          "description": "/about/ -> 307 -> /about (temporary).",
+          "recommendation": "Cloudflare redirect rule 301/308."
+        },
+        {
+          "title": "http://www two hops",
+          "severity": "Low",
+          "description": "http://www -> https://www -> apex.",
+          "recommendation": "Single rule to https apex."
+        },
+        {
+          "title": "Turnstile on every page",
+          "severity": "Low",
+          "description": "BaseLayout.astro:77-81 loads it sitewide.",
+          "recommendation": "Load only where forms render."
+        },
+        {
+          "title": "GA4 key events inflated by engagement events",
+          "severity": "High",
+          "description": "popup_view, popup_dismiss, nav_menu_click, faq_open, announcement_dismiss marked as key events: 3,856 of 4,786 organic key events.",
+          "recommendation": "Unmark them in GA4 Admin > Events; keep reservation/order/catering/call/directions/lead/gift/merch."
+        }
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 70,
+      "what_works": [
+        "Four Vaughan landing pages are substantive (535-660 unique words, prices, FAQs) and do not cannibalize",
+        "Low templated ratio",
+        "Consistent founder story",
+        "Good readability (Flesch 52-80)"
+      ],
+      "findings": [
+        {
+          "title": "No brunch or happy-hour content",
+          "severity": "High",
+          "description": "Both words appear 0 times; brunch 704 impr @ 9.6; 'penelope social happy hour' ~25% CTR.",
+          "recommendation": "Client decision; build pages if offers exist, else honest FAQ/sections."
+        },
+        {
+          "title": "/catering-events thin",
+          "severity": "High",
+          "description": "~190 words main copy; no capacity, packages, pricing, photos; Christmas packages only in popup; 24h vs 72h notice conflict.",
+          "recommendation": "Expand with capacity, per-person table, December packages, photos, consistent notice."
+        },
+        {
+          "title": "Bakehouse anchors point internally",
+          "severity": "Medium",
+          "description": "Home/cafe/pizza/about link 'Bakehouse' to /locations/scarborough; its FAQs speak as the Bakehouse.",
+          "recommendation": "Point to penelopebakehouse.com; rewrite FAQs."
+        },
+        {
+          "title": "Repeated starter story",
+          "severity": "Medium",
+          "description": "Near-verbatim on three landing pages and twice on /about.",
+          "recommendation": "Replace with page-specific first-hand detail and review quotes."
+        },
+        {
+          "title": "Weak authority signals",
+          "severity": "Medium",
+          "description": "No press, no quoted reviews, no opening year.",
+          "recommendation": "Review strip, press links, 'open since'."
+        }
+      ]
+    },
+    {
+      "name": "On-Page SEO",
+      "score": 63,
+      "what_works": [
+        "Unique titles and metas on every page",
+        "One H1 per page",
+        "Descriptive URLs"
+      ],
+      "findings": [
+        {
+          "title": "Homepage title/H1 mis-targeted",
+          "severity": "High",
+          "description": "'Penelope Social | Cafe and bar in Woodbridge'; 'restaurant' 0 times on page; restaurants-in-Vaughan CTR 2.8% at pos 4.9.",
+          "recommendation": "Title 'Penelope Social | Italian Restaurant & Bar in Vaughan'; H1 'Italian restaurant, cafe and bar in Woodbridge, Vaughan'."
+        },
+        {
+          "title": "/catering-events title",
+          "severity": "High",
+          "description": "Low CTR on catering intent.",
+          "recommendation": "'Catering & Private Events in Vaughan | Penelope Social'."
+        },
+        {
+          "title": "Duplicate merch H1s",
+          "severity": "Medium",
+          "description": "Hoodie, t-shirt, tote all H1 'Merch'; titles 23-26 chars.",
+          "recommendation": "H1 = product name."
+        },
+        {
+          "title": "Long titles/metas",
+          "severity": "Medium",
+          "description": "Lunch 71, dinner 67, catering menu 62 chars; tote meta 305, catering menu meta 201.",
+          "recommendation": "Trim to 60/155."
+        },
+        {
+          "title": "No <main> landmark",
+          "severity": "Medium",
+          "description": "16 of 20 pages lack <main>; no header/footer elements.",
+          "recommendation": "Wrap page-builder output in <main>."
+        },
+        {
+          "title": "Thin location pages",
+          "severity": "Medium",
+          "description": "/locations ~50-63 words; /locations/woodbridge ~155-211.",
+          "recommendation": "Add parking, transit, map, photo."
+        }
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 72,
+      "what_works": [
+        "Valid single @graph per page",
+        "Bakehouse modelled as separate entity",
+        "Hours match visible",
+        "Numeric CAD Menu offers",
+        "No self-serving aggregateRating"
+      ],
+      "findings": [
+        {
+          "title": "No Product schema on merch",
+          "severity": "Medium",
+          "description": "merchandise/[slug].astro:39 emits only Restaurant + BreadcrumbList.",
+          "recommendation": "Product/Offer, CAD, InStoreOnly."
+        },
+        {
+          "title": "Dangling supplier @id",
+          "severity": "Medium",
+          "description": "supplier -> penelopebakehouse.com/#bakery not defined on merch pages (schema.ts:90).",
+          "recommendation": "Always include bakehouseSchema() or drop supplier."
+        },
+        {
+          "title": "Favicon as image; no WebSite node",
+          "severity": "Medium",
+          "description": "image = favicon-192.png (schema.ts:81).",
+          "recommendation": "Real photos + logo; WebSite node on /."
+        },
+        {
+          "title": "sameAs thin and inconsistent",
+          "severity": "Low",
+          "description": "Instagram handle differs from site links; tracking params; no GBP/Yelp.",
+          "recommendation": "Fix handle, add profiles."
+        }
+      ]
+    },
+    {
+      "name": "Performance (CWV)",
+      "score": 82,
+      "what_works": [
+        "Field CWV all good: LCP 485ms, INP 62ms, CLS 0, TTFB 134ms",
+        "CLS 0 in lab too",
+        "AVIF/WebP via Sanity",
+        "GA4 deferred"
+      ],
+      "findings": [
+        {
+          "title": "Turnstile sitewide",
+          "severity": "High",
+          "description": "~600-700KB challenge payload on homepage; likely driver of 10s mobile lab LCP (hypothesis).",
+          "recommendation": "Lazy explicit render only on form pages."
+        },
+        {
+          "title": "Uncapped hero/banner images",
+          "severity": "Medium",
+          "description": "/pizza-vaughan banner 575KB from 3840px source.",
+          "recommendation": "imageSrcset with width cap."
+        },
+        {
+          "title": "OTF fonts",
+          "severity": "Medium",
+          "description": "~145KB for 2 faces.",
+          "recommendation": "Subset woff2."
+        },
+        {
+          "title": "Render-blocking CSS",
+          "severity": "Medium",
+          "description": "4 stylesheets; Swiper CSS everywhere.",
+          "recommendation": "Inline critical; per-page Swiper."
+        },
+        {
+          "title": "/menus/lunch TBT 490ms",
+          "severity": "Medium",
+          "description": "GSAP/timeline/GTM long tasks.",
+          "recommendation": "Load on demand."
+        }
+      ]
+    },
+    {
+      "name": "AI Search Readiness",
+      "score": 72,
+      "what_works": [
+        "SSR pages",
+        "Search/retrieval bots allowed (OAI-SearchBot, PerplexityBot, Claude-SearchBot, Googlebot)",
+        "Quotable FAQ answers with prices",
+        "Clean homepage accessibility tree"
+      ],
+      "findings": [
+        {
+          "title": "Not cited for Italian/brunch prompts",
+          "severity": "High",
+          "description": "Absent from top 20 (Brave) for 'best Italian restaurant Vaughan', 'brunch Vaughan'.",
+          "recommendation": "Definition passage + Italian FAQ."
+        },
+        {
+          "title": "AI training bots blocked vs robots.txt Allow",
+          "severity": "Medium",
+          "description": "GPTBot, ClaudeBot, CCBot 403; also explains absence from Common Crawl.",
+          "recommendation": "Decide policy in Cloudflare AI Crawl Control and make robots.txt match."
+        },
+        {
+          "title": "llms.txt fails Lighthouse; internal notes",
+          "severity": "Medium",
+          "description": "Plain 'Label: URL' lines, no summary, ops notes, missing landing pages.",
+          "recommendation": "Rewrite as Markdown links."
+        },
+        {
+          "title": "Catering form unlabeled",
+          "severity": "Medium",
+          "description": "Agentic Browsing 1/3 on /catering-events (home 2/3).",
+          "recommendation": "aria-label/label on select and textarea."
+        }
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 80,
+      "what_works": [
+        "All images have alt; empty alts are legitimately decorative",
+        "AVIF/WebP negotiation",
+        "Meaningful images have descriptive alt"
+      ],
+      "findings": [
+        {
+          "title": "Hero without srcset",
+          "severity": "Medium",
+          "description": "1920px image to 390px phones (67KB vs 28KB at 800px).",
+          "recommendation": "srcset/sizes."
+        },
+        {
+          "title": "Below-fold images eager",
+          "severity": "Low",
+          "description": "'Event at Penelope', 'Loaves of Sourdough Bread' loading=eager.",
+          "recommendation": "loading=lazy."
+        },
+        {
+          "title": "Missing dimensions",
+          "severity": "Low",
+          "description": "5-7 images per page (footer logo, icons).",
+          "recommendation": "Set width/height."
+        }
+      ]
+    },
+    {
+      "name": "Local SEO (supporting)",
+      "score": 65,
+      "what_works": [
+        "Identical NAP across pages, schema and Bakehouse site",
+        "Hours match schema",
+        "Deliberate Woodbridge/Vaughan split"
+      ],
+      "findings": [
+        {
+          "title": "Two Google place IDs",
+          "severity": "High",
+          "description": "Directions link 0x...:0xd9f3c33a869788c9 vs reviews 0x...:0x3e54ffff5191a9bd.",
+          "recommendation": "Confirm canonical GBP; merge/report duplicate."
+        },
+        {
+          "title": "Apple Maps wrong",
+          "severity": "High",
+          "description": "Unit 12-125, Sun-Tue closed, 10am open, 'Pizza Restaurant'.",
+          "recommendation": "Apple Business Connect."
+        },
+        {
+          "title": "Yelp stale",
+          "severity": "High",
+          "description": "Daytime-only hours; 14 reviews.",
+          "recommendation": "Claim and fix."
+        },
+        {
+          "title": "No Italian GBP category",
+          "severity": "Medium",
+          "description": "Categories lack Italian restaurant; 'enigma' description.",
+          "recommendation": "Add category; rewrite description."
+        }
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Homepage title/meta/H1 rewrite",
+          "Resolve duplicate Google place ID",
+          "Unify Instagram handle in sameAs",
+          "Add _headers (security + caching)",
+          "Unmark noise GA4 key events",
+          "GBP Italian category + description",
+          "Fix Apple Maps and Yelp"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Expand /catering-events with Christmas packages",
+          "Lazy Turnstile",
+          "Hero srcset + lazy images",
+          "woff2 fonts",
+          "Rewrite llms.txt",
+          "Catering form labels",
+          "noindex /locations/scarborough; external Bakehouse anchors"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Brunch / happy hour decision and pages",
+          "Review strip and press",
+          "Location page depth",
+          "Schema: Product, WebSite, image, priceRange",
+          "AI crawler policy",
+          "Local citations and PR"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Re-measure ~2026-10-27",
+          "Track /bakery-vaughan Bakehouse-brand leakage",
+          "Landing-page non-brand rankings",
+          "GA4 key events",
+          "Add Bing WMT / Moz for backlinks"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  },
+  "ga4": {
+    "organic_sessions_28d": 5881,
+    "organic_engagement_rate": 69.6,
+    "organic_conversions_since_0919": {
+      "reservation_click": 390,
+      "order_click": 311,
+      "catering_click": 132,
+      "merch_click": 18,
+      "get_directions": 14,
+      "click_to_call": 13,
+      "generate_lead": 8,
+      "gift_card_click": 5
+    },
+    "noise_key_events_since_0919": 3856,
+    "popup_click_rate": 1.0
+  }
+}
