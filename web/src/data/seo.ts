@@ -3,13 +3,16 @@ import { VAUGHAN_TARGET_PATHS, restaurantCopy, usesVaughanAsCity } from './copy'
 
 /**
  * Unique meta titles + descriptions per URL.
- * Woodbridge is the city. Vaughan is not used in titles.
+ * Woodbridge is the city. Vaughan is not used as the city in titles; the
+ * homepage names it after Woodbridge ("Woodbridge, Vaughan") because it ranks
+ * for "restaurants in Vaughan" and the old "Cafe and bar" title never earned
+ * the click (2026-10 audit).
  */
 export const PAGE_SEO: Record<string, SeoMeta> = {
   '/': {
-    title: 'Penelope Social | Cafe and bar in Woodbridge',
+    title: 'Penelope Social | Italian Restaurant in Woodbridge, Vaughan',
     description:
-      'Cafe and bar at 125 Hawkview Blvd, Woodbridge. Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
+      'Italian restaurant, cafe, and bar at 125 Hawkview Blvd, Woodbridge, Vaughan. Focaccia sandwiches, sourdough pizza, and cocktails, morning to late night.',
   },
   '/about': {
     title: 'About Penelope Social | Woodbridge cafe and bar',

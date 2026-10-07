@@ -1,68 +1,45 @@
 # Penelope Social
 
-Penelope Social is a Woodbridge cafe and bar: lunch and dinner, plus drinks, serving Bakehouse sourdough.
+> Penelope Social is an Italian restaurant, cafe and bar at 125 Hawkview Blvd in Woodbridge, Vaughan, Ontario. Focaccia sandwiches and Roman-style sourdough pizza at lunch, New York pies and shareables at dinner, and cocktails until late. The bread comes from its sister bakery, Penelope Bakehouse in Scarborough.
 
-Penelope Bakehouse is the Scarborough bakehouse and focacceria.
+## Visit
 
-## Location (Google Business / NAP)
-
-- Name: Penelope Social
-- Street: 125 Hawkview Blvd
-- Locality: Woodbridge
-- Region: ON
-- Postal: L4H 2E2
-- Country: Canada
+- Address: 125 Hawkview Blvd, Woodbridge, ON L4H 2E2, Canada (Woodbridge is a community in the City of Vaughan)
 - Phone: (905) 607-0606
 - Email: info@penelopesocial.com
-- Maps: https://www.google.com/maps/search/?api=1&query=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2
+- Cafe hours: Monday to Saturday 9am to 3pm, Sunday 8am to 12pm
+- Bar hours: Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am
+- [Directions on Google Maps](https://www.google.com/maps/dir/?api=1&destination=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2)
 
-Vaughan is the wider municipality / area served. Woodbridge is the city in titles and addressLocality.
+## Book and order
 
-## Hours
+- [Reserve a table](https://penelopesocial.com/reservations): Toast Tables
+- [Order online](https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard)
+- [Gift cards](https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard)
+- [Catering and private events](https://penelopesocial.com/catering-events): request form for trays and events in the restaurant
 
-Cafe: Monday to Saturday 9am to 3pm, Sunday 8am to 12pm
-Bar: Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am
+## Menus
 
-## Site
+- [All menus](https://penelopesocial.com/menus)
+- [Lunch](https://penelopesocial.com/menus/lunch): focaccia sandwiches, pizza, salads
+- [Dinner](https://penelopesocial.com/menus/dinner): pizzas, handhelds, shareables
+- [Bar](https://penelopesocial.com/menus/bar): cocktails, wine, amari
+- [Catering trays](https://penelopesocial.com/menus/catering): pizzas, focaccia sandwiches, breads, salads, with prices
 
-- Canonical site: https://penelopesocial.com (apex; www 301s to apex)
-- Home: https://penelopesocial.com/
-- About: https://penelopesocial.com/about
-- Contact: https://penelopesocial.com/contact
-- Catering and events: https://penelopesocial.com/catering-events
-- Menus: https://penelopesocial.com/menus
-- Lunch: https://penelopesocial.com/menus/lunch
-- Dinner: https://penelopesocial.com/menus/dinner
-- Bar: https://penelopesocial.com/menus/bar
-- Catering menu: https://penelopesocial.com/menus/catering
-- Merchandise: https://penelopesocial.com/merchandise
-- Locations: https://penelopesocial.com/locations
-- Woodbridge restaurant: https://penelopesocial.com/locations/woodbridge
-- Scarborough bakehouse (sister): https://penelopesocial.com/locations/scarborough
-- Sourdough bakery in Vaughan (bread to take home): https://penelopesocial.com/bakery-vaughan
+## Specialties
 
-## Reservations
+- [Italian focaccia sandwiches in Vaughan](https://penelopesocial.com/sandwiches-vaughan): sourdough focaccia, $19 to $23
+- [Sourdough pizza in Vaughan](https://penelopesocial.com/pizza-vaughan): Roman-style slices at lunch, 14-inch pies at dinner
+- [Italian cafe in Vaughan](https://penelopesocial.com/cafe-in-vaughan): espresso, cappuccino, Bakehouse pastries from 9am
+- [Sourdough bakery in Vaughan](https://penelopesocial.com/bakery-vaughan): loaves, focaccia and pizza dough to take home
 
-Reservations: https://penelopesocial.com/reservations
-Toast: https://tables.toasttab.com/restaurants/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/reserve?partySize=2
+## About
 
-/events 301s to /catering-events. Do not rename catering-events to /catering (that would collide with /menus/catering).
-/sourdough-bakery 301s to /bakery-vaughan. The bread is baked at Penelope Bakehouse (71 Howden Rd, Scarborough, https://penelopebakehouse.com) and sold to take home at Penelope Social in Woodbridge.
-
-## Order online and gift cards
-
-Order online: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
-Gift cards: https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard
+- [About Penelope Social](https://penelopesocial.com/about): the Stalteri family and the bread
+- [Woodbridge location](https://penelopesocial.com/locations/woodbridge)
+- [Contact](https://penelopesocial.com/contact)
+- [Merchandise](https://penelopesocial.com/merchandise): hoodies, tees and totes, bought and picked up in store
 
 ## Sister bakery
 
-Penelope Bakehouse, 71 Howden Rd, Scarborough, ON M1R 3C7
-https://penelopebakehouse.com
-Phone (647) 812-0104
-Social serves Bakehouse sourdough. Bakehouse is the Scarborough bakehouse and focacceria.
-
-## Sitemap
-
-Submit only https://penelopesocial.com/sitemap-index.xml on sc-domain:penelopesocial.com.
-/sitemap.xml 301s to the index. Submit the index only.
-Keep /contact in the sitemap. Request indexing for /contact is a GSC click after submit.
+- [Penelope Bakehouse](https://penelopebakehouse.com): 71 Howden Rd, Scarborough, ON M1R 3C7, (647) 812-0104. Sourdough loaves, focaccia sandwiches and pizza by the slice. A separate shop, not a second Penelope Social dining room.
