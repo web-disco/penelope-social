@@ -18,9 +18,14 @@ const { block } = Astro.props
 const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 const isHome = path === '/'
 const isMenusHub = path === '/menus'
-/* The hub's own menus block (key "menus") is chrome-owned like the homepage's.
-   Any other card block on the hub, e.g. "What we're known for", is authored. */
-const isChromeBlock = isHome || (isMenusHub && block._key === 'menus')
+/* The "menus" block on the homepage and the hub is chrome-owned. Any other card
+   block, e.g. "What we're known for" on either page, is authored. */
+const isChromeBlock = (isHome || isMenusHub) && block._key === 'menus'
+/* "sentence": the cards as one large line of type, each a photo pill plus a
+   link, with plain words between (block.sentence). Used by the homepage's
+   "What we're known for" so it doesn't read as a second copy of the menu row
+   above it, or echo the text-and-photo split of "Events" below it. */
+const isSentence = block.layout === 'sentence'
 const authored: any[] = block.cards ?? []
 const fallbackByUrl = new Map(homeMenusFallback.cards.map((card) => [card.url, card]))
 
@@ -38,16 +43,19 @@ const cards = (authored.length ? authored : homeMenusFallback.cards).map((card: 
   }
 })
 
+const cardByUrl = new Map(cards.map((card: any) => [card.url, card]))
+const sentence: any[] = isSentence ? block.sentence ?? [] : []
+
 const staleHeading = /woodbridge|explore our menus|menus at penelope/i.test(block.heading ?? '')
 const staleIntro = /woodbridge|hawkview|125\s|bakehouse/i.test(block.intro ?? '')
 const sectionHeading = isMenusHub && isChromeBlock
   ? ''
-  : isHome || staleHeading
+  : (isHome && isChromeBlock) || staleHeading
     ? homeMenusFallback.heading
     : displayHeading(block.heading)
 const sectionIntro = isMenusHub && isChromeBlock
   ? ''
-  : isHome
+  : isHome && isChromeBlock
     ? homeMenusFallback.intro
     : staleIntro
       ? homeMenusFallback.hubIntro
@@ -76,7 +84,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
 <section id={isChromeBlock ? 'menu' : undefined} class="section-menu-mosaic overflow-x-hidden">
   <div class:list={[layout.shell, isChromeBlock ? space.sectionYFirst : space.sectionY]}>
     {
-      sectionHeading && (
+      sectionHeading && !isSentence && (
         <h2
           class:list={[
             /* The homepage mosaic keeps the large display heading; an authored
@@ -91,7 +99,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
       )
     }
     {
-      sectionIntro && (
+      sectionIntro && !isSentence && (
         <p
           class:list={[
             'mx-auto mt-space-16 text-center text-charcoal',
@@ -112,6 +120,41 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
         </div>
       )
     }
+    {isSentence ? (
+      <div class="flex flex-col items-center gap-space-24 text-center wf-sm:gap-space-16">
+        <h2 class:list={['m-0 text-charcoal', typeScale.label]}>{sectionHeading}</h2>
+        {/* Inline flow, not flex, so commas sit on their word; each photo stays
+            with its link via nowrap. Pills are sized in em to scale with the type. */}
+        <p class="specialty-sentence mx-auto my-0 max-w-[1200px] font-body text-[48px] font-medium leading-[1.4] tracking-[-0.01em] text-balance text-charcoal wf-md:text-[36px] wf-sm:text-[28px] wf-xs:text-[24px]">
+          {
+            sentence.map((part, index) => {
+              const gap = index ? ' ' : ''
+              const card: any = part.url ? cardByUrl.get(part.url) : undefined
+              if (!card) return <>{gap}{part.text ?? part.label}</>
+              return (
+                <>
+                  {gap}
+                  <span class="whitespace-nowrap">
+                    <a href={card.url} class="group no-underline">
+                      <img
+                        src={imageUrl(card.image, 240)}
+                        loading="lazy"
+                        alt=""
+                        width="84"
+                        height="52"
+                        draggable="false"
+                        class="mr-[0.28em] inline-block h-[1.08em] w-[1.75em] rounded-full object-cover align-[-0.22em] transition-transform duration-300 motion-safe:group-hover:scale-105 motion-safe:group-focus-visible:scale-105"
+                      />
+                      <span class="underline decoration-2 underline-offset-[0.16em] transition-colors duration-300 group-hover:text-green group-focus-visible:text-green">{part.label}</span>
+                    </a>{part.after}
+                  </span>
+                </>
+              )
+            })
+          }
+        </p>
+      </div>
+    ) : (
     <div class="swiper menu-mosaic-swiper w-full" data-menu-mosaic-swiper>
       <div class="swiper-wrapper">
         {
@@ -139,6 +182,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
         }
       </div>
     </div>
+    )}
     {
       ctaUrl && !isMenusHub && (
         <div class="mt-space-48 flex justify-center wf-sm:mt-space-32">
