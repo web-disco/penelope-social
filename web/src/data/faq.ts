@@ -20,17 +20,17 @@ export const homeFaq: FaqItem[] = [
     question: 'Where is Penelope Social?',
     answer: `Penelope Social is at <a href="/locations/woodbridge">${address}</a>, in Vaughan. Phone <a href="tel:${woodbridgeNap.phoneDigits}">${woodbridgeNap.phone}</a>.`,
   },
+  /*
+   * One "what do you serve" answer that links out, not one "Where can I get X
+   * in Vaughan?" question per dish. Those questions, and their FAQPage JSON-LD,
+   * are the landing pages' target queries word for word, and on the homepage
+   * they won them instead: "focaccia sandwich vaughan" drew 39 impressions on /
+   * against 9 on /sandwiches-vaughan (Search Console, 2026-09-13 to 10-11).
+   * Each landing page keeps its own FAQ for that question.
+   */
   {
-    question: 'Where can I get sourdough pizza in Vaughan?',
-    answer: `Here, at ${address}. Roman-style slices at lunch and 14-inch New York-style pies at dinner, both on our own sourdough. More on <a href="/pizza-vaughan">our sourdough pizza</a>.`,
-  },
-  {
-    question: 'Where can I get Italian sandwiches in Vaughan?',
-    answer: `Here, at ${address}. Italian sandwiches on sourdough focaccia at lunch, Monday to Saturday. More on <a href="/sandwiches-vaughan">our focaccia sandwiches</a>.`,
-  },
-  {
-    question: 'Is there a cafe for coffee in Vaughan?',
-    answer: `Yes, here at ${address}. Espresso, cappuccino and lattes from 9am, with pastries from Penelope Bakehouse. More on <a href="/cafe-in-vaughan">our cafe</a>.`,
+    question: 'What does Penelope Social serve?',
+    answer: `Coffee and pastries from 9am, focaccia sandwiches and pizza slices at lunch, then 14-inch pies, shareables and cocktails at night. All of it is on our own sourdough. See <a href="/pizza-vaughan">our sourdough pizza</a>, <a href="/sandwiches-vaughan">Italian sandwiches</a>, <a href="/cafe-in-vaughan">the cafe</a> and <a href="/bakery-vaughan">bread to take home</a>.`,
   },
   {
     question: 'What are the cafe and bar hours?',
