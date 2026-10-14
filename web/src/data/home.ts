@@ -1,4 +1,5 @@
 /** Homepage copy. Repo wins over address-y Sanity so staging matches Bakehouse mood. */
+import { MENUS_DROPDOWN } from './nav'
 
 export const homeHeroFallback = {
   heading: 'Good food, better company at Penelope Social in Woodbridge',
@@ -63,4 +64,43 @@ export const homeWaveMerch = {
   status: 'Hoodies, tees, totes. Purchase and pick them up in store.',
   ctaLabel: 'See merch',
   ctaUrl: '/merchandise',
+}
+
+/**
+ * "What we're known for" on the homepage: the four dish landing pages, right
+ * under "On the menu". Before this they were linked only from the hover-only
+ * Menus dropdown, collapsed FAQ answers and one sentence near the foot of the
+ * page, while "On the menu" sent pizza and sandwich intent to /menus/lunch.
+ * Labels, lines and photos come from the dropdown so the three stay in step.
+ */
+const SPECIALTY_ALT: Record<string, string> = {
+  '/cafe-in-vaughan': 'A latte with latte art at Penelope Social',
+  '/pizza-vaughan': 'Sourdough pizza at Penelope Social',
+  '/sandwiches-vaughan': 'An Italian focaccia sandwich',
+  '/bakery-vaughan': 'Sourdough loaves from Penelope Bakehouse',
+}
+
+export const homeSpecialtiesBlock = {
+  _type: 'menuCards',
+  _key: 'specialties',
+  layout: 'sentence',
+  heading: "What we're known for",
+  /* Read in order: plain words, then each landing page as a photo + link. The
+     link text is the page's subject, so it doubles as descriptive anchor text. */
+  sentence: [
+    { text: 'Come in for' },
+    { url: '/pizza-vaughan', label: 'sourdough pizza', after: ',' },
+    { url: '/sandwiches-vaughan', label: 'Italian sandwiches', after: ',' },
+    { text: 'coffee at our' },
+    { url: '/cafe-in-vaughan', label: 'Italian cafe' },
+    { text: 'and' },
+    { url: '/bakery-vaughan', label: 'bread to take home', after: '.' },
+  ],
+  cards: (MENUS_DROPDOWN.find((group) => group.heading === 'Specialties')?.links ?? []).map((link) => ({
+    _key: link.url,
+    title: link.label,
+    line: link.description,
+    url: link.url,
+    image: { _type: 'image', alt: SPECIALTY_ALT[link.url] ?? link.label, asset: { _ref: link.image, _type: 'reference' } },
+  })),
 }

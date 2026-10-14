@@ -16,6 +16,7 @@ import NewsletterForm from './NewsletterForm.astro'
 import LineText from './LineText.astro'
 import { displayHeading, displayLinkLabel, displayMenusHeading, restaurantCopy } from '../data/copy'
 import { mailtoHref, stackedHoursBlocks } from '../data/site'
+import { MENUS_DROPDOWN } from '../data/nav'
 
 interface Props {
   settings: any
@@ -31,6 +32,10 @@ const menus = footer.menus ?? {}
 const hours = footer.hours ?? {}
 const contact = footer.contact ?? {}
 const hourBlocks = stackedHoursBlocks
+/* The dish landing pages, under the menu links, so every page links all four
+   from crawlable footer text rather than only from the hover dropdown. */
+const specialties = MENUS_DROPDOWN.find((group) => group.heading === 'Specialties')?.links ?? []
+const SPECIALTIES_BLURB = 'Sourdough pizza, Italian sandwiches on focaccia, our cafe, and bread to take home.'
 const emailHref = mailtoHref(contact.emailHref, contact.email)
 
 const logoSrc = imageUrl(footer.logo) || '/penelope-logo-lockup-white.svg'
@@ -100,19 +105,23 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
 
   <div class={containerFooter}>
     <!-- Columns size to their content and spread with space-between, so the gaps
-         between the four blocks are even. Four equal-width tracks made the gaps
+         between the five blocks are even. Equal-width tracks made the gaps
          uneven instead: each column's content starts at its own track's left
          edge, so a narrow column (hours) sat close to its neighbour while the
          right-aligned contact column left a wide empty stretch beside it.
 
-         The logo track is capped rather than fixed — a hard 318px starves the
-         menus column at ~992px. The contact column still right-aligns, so it
-         lands flush with the credit in the copyright row below. -->
+         The logo track is capped rather than fixed — a hard width starves the
+         text columns at ~992px. The contact column still right-aligns, so it
+         lands flush with the credit in the copyright row below.
+
+         Five columns only fit from 1280px. Between 992px and 1279px the logo
+         takes a row of its own and the four text columns sit below it. -->
     <div
-      class="footer-grid grid grid-cols-[minmax(200px,318px)_auto_auto_auto] grid-rows-[auto] justify-between gap-10 wf-md:grid-cols-1 wf-md:justify-normal"
+      class="footer-grid grid grid-cols-[minmax(160px,260px)_auto_auto_auto_auto] grid-rows-[auto] justify-between gap-10 min-[992px]:max-[1279px]:grid-cols-[repeat(4,auto)] wf-md:grid-cols-1 wf-md:justify-normal"
     >
-      <!-- logo -->
-      <div class="footer-content">
+      <!-- logo — its own row from 992px to 1279px, so the four text columns
+           get the full width instead of wrapping every other word -->
+      <div class="footer-content min-[992px]:max-[1279px]:col-span-4">
         <a
           href="/"
           aria-current={isHome ? 'page' : undefined}
@@ -125,7 +134,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
             src={logoSrc}
             loading="lazy"
             alt={footer.logoAlt ?? 'Penelope Social Logo'}
-            class="footer-logo w-full max-w-[75%] wf-md:mx-auto wf-md:mb-10 wf-md:block wf-md:max-w-[50%] wf-md:text-left wf-xs:mb-0 wf-xs:max-w-full"
+            class="footer-logo w-full max-w-[75%] min-[992px]:max-[1279px]:max-w-[200px] wf-md:mx-auto wf-md:mb-10 wf-md:block wf-md:max-w-[50%] wf-md:text-left wf-xs:mb-0 wf-xs:max-w-full"
           />
         </a>
       </div>
@@ -139,7 +148,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         </h4>
         <!-- Capped so the blurb wraps inside its column instead of setting the
              column's natural width from its longest line. -->
-        <div class={`${footerText} max-w-[300px]`}>
+        <div class={`${footerText} max-w-[230px]`}>
           <a href={menus.blurbUrl ?? '/menus'} class={footerTextSpan}>
             <LineText text={menusBlurb} />
           </a>
@@ -155,6 +164,35 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
                 ]}
               >
                 {displayLinkLabel(link.label)}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- specialties — same anatomy as menus: heading, blurb, four links -->
+      <div class="footer-content">
+        <h4
+          class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
+        >
+          Specialties
+        </h4>
+        <div class={`${footerText} max-w-[230px]`}>
+          <span class="font-normal text-beige">
+            <LineText text={SPECIALTIES_BLURB} />
+          </span>
+        </div>
+        <div class="footer-menu-wrap mt-[30px] flex flex-col gap-[10px] wf-md:mt-5">
+          {
+            specialties.map((link) => (
+              <a
+                href={link.url}
+                class:list={[
+                  'footer-menu-link mb-[3px] inline-block font-body font-medium leading-none text-beige uppercase no-underline',
+                  hover,
+                ]}
+              >
+                {link.label}
               </a>
             ))
           }
