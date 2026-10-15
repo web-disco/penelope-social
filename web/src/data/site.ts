@@ -41,8 +41,9 @@ export const RESERVATIONS_TOAST_URL =
 export const CATERING_EVENTS_URL = '/catering-events'
 export const CATERING_MENU_URL = '/menus/catering'
 
-export const INSTAGRAM_URL = 'https://www.instagram.com/penelopesocial/?hl=en'
-export const TIKTOK_URL = 'https://www.tiktok.com/@penelope.social?_t=8rVjknXtEaF&_r=1'
+/** Same handle as the footer and TikTok. No tracking params: these feed schema sameAs. */
+export const INSTAGRAM_URL = 'https://www.instagram.com/penelope.social/'
+export const TIKTOK_URL = 'https://www.tiktok.com/@penelope.social'
 
 /** Get directions — Maps place URL, not the reviews panel. */
 export const GET_DIRECTIONS_HREF =

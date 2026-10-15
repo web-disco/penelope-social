@@ -115,7 +115,7 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
   'Sourdough loaves, focaccia sandwiches, and pizza by the slice, baked fresh at this Scarborough shop.':
     'Sourdough and focaccia, pizza by the slice.',
   'Sourdough Bakery & Restaurant in Vaughan | Penelope Social':
-    'Penelope Social | Cafe and bar in Woodbridge',
+    'Penelope Social | Italian Restaurant in Woodbridge, Vaughan',
   'Best Sourdough Bakery in Vaughan | Penelope Social':
     'Bakehouse sourdough, served here | Penelope Social',
   'Penelope Social and Penelope Bakehouse | Two places':
@@ -124,7 +124,12 @@ const EXACT_REPLACEMENTS: Record<string, string> = {
     'The Scarborough bakehouse and focacceria.',
   'Micro-bakery, not a dining room': 'Sourdough and focaccia, baked in Scarborough.',
   'Experience Penelope Social, a Sourdough Bakery & Restaurant in Vaughan. Indulge in freshly baked goods and delicious meals. Visit us today!':
-    'Cafe and bar at 125 Hawkview Blvd, Woodbridge. Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.',
+    'Italian restaurant, cafe, and bar at 125 Hawkview Blvd, Woodbridge, Vaughan. Focaccia sandwiches, sourdough pizza, and cocktails, morning to late night.',
+  // The CMS still holds the old homepage meta; map it to the 2026-10 copy.
+  'Penelope Social | Cafe and bar in Woodbridge':
+    'Penelope Social | Italian Restaurant in Woodbridge, Vaughan',
+  'Cafe and bar at 125 Hawkview Blvd, Woodbridge. Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.':
+    'Italian restaurant, cafe, and bar at 125 Hawkview Blvd, Woodbridge, Vaughan. Focaccia sandwiches, sourdough pizza, and cocktails, morning to late night.',
   'Event space vaughan': 'Catering and events in Woodbridge',
   'Event Space Vaughan | Penelope Social': 'Catering and events in Woodbridge | Penelope Social',
   'Catering menu | Penelope Social Woodbridge':

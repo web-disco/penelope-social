@@ -51,6 +51,7 @@ const fields: any[] = block.fields ?? []
                   id={field.id}
                   name={field.name}
                   required={field.required}
+                  aria-label={field.placeholder}
                   class={`${formField} w-select`}
                 >
                   <option value="">{field.placeholder}</option>
@@ -64,6 +65,7 @@ const fields: any[] = block.fields ?? []
                   name={field.name}
                   maxlength="5000"
                   placeholder={field.placeholder}
+                  aria-label={field.placeholder}
                   required={field.required}
                   class={`${formFieldTextarea} textarea w-input`}
                 />
