@@ -40,13 +40,15 @@ export const homeFaq: FaqItem[] = [
     question: 'Do you take reservations?',
     answer: `Yes. <a href="${RESERVATIONS_PATH}">Book a table</a> on Toast for dinner and the bar. Cafe lunch is mostly walk-in.`,
   },
+  /*
+   * Asked about the bread, not the Bakehouse by name. "How is Penelope
+   * Bakehouse related?" and "Where is the Penelope Bakehouse menu?" (plus their
+   * FAQPage JSON-LD) matched the Bakehouse's own brand searches word for word,
+   * and this page ranked for them instead of penelopebakehouse.com.
+   */
   {
-    question: 'How is Penelope Bakehouse related?',
-    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria. We serve that sourdough here. Bakehouse bakes it. Social is the cafe and bar.`,
-  },
-  {
-    question: 'Where is the Penelope Bakehouse menu?',
-    answer: `On <a href="${BAKEHOUSE_SITE_URL}">penelopebakehouse.com</a>. Hours and online order too.`,
+    question: 'Where does your bread come from?',
+    answer: `Our sister bakehouse in Scarborough, <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a>, bakes it from the same starter. Its menu, hours and online ordering are on penelopebakehouse.com.`,
   },
   {
     question: 'Do you offer catering and events?',
@@ -69,8 +71,8 @@ export const aboutFaq: FaqItem[] = [
     answer: `<a href="/locations/woodbridge">${address}</a>. Woodbridge is in Vaughan. Cafe by day, kitchen and bar at night.`,
   },
   {
-    question: 'How is Penelope Bakehouse related?',
-    answer: `<a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> in Scarborough is the bakehouse and focacceria. Loaves and focaccia, plus pizza dough for Social, start there.`,
+    question: 'Where is the bread baked?',
+    answer: `At our sister bakehouse in Scarborough, <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a>. Loaves and focaccia, plus pizza dough for Social, start there.`,
   },
   {
     question: 'Why is the starter named Penelope?',
@@ -167,8 +169,8 @@ export const woodbridgeFaq: FaqItem[] = [
     answer: `Yes. <a href="${ORDER_ONLINE_URL}">Order online through Toast</a>, or use Order online on this page.`,
   },
   {
-    question: 'Is this the same as Penelope Bakehouse?',
-    answer: `We're sister spots. Penelope Social is the Woodbridge cafe and bar. <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a> is the Scarborough bakehouse and focacceria at ${scarboroughBakehouse.street} — where the bread is baked.`,
+    question: 'Where is the bread baked?',
+    answer: `At our sister bakehouse in Scarborough, <a href="${BAKEHOUSE_SITE_URL}">Penelope Bakehouse</a>. Penelope Social is the Woodbridge cafe and bar that serves it.`,
   },
   {
     question: 'Do you offer catering and events?',

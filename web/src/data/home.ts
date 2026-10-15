@@ -1,5 +1,6 @@
 /** Homepage copy. Repo wins over address-y Sanity so staging matches Bakehouse mood. */
 import { MENUS_DROPDOWN } from './nav'
+import { BAKEHOUSE_SITE_URL } from './site'
 
 export const homeHeroFallback = {
   heading: 'Good food, better company at Penelope Social in Woodbridge',
@@ -45,12 +46,13 @@ export const homeBreadFallback = {
     'Loaves start at Penelope Bakehouse and land here as <a href="/sandwiches-vaughan">sandwiches</a> and <a href="/pizza-vaughan">pizza</a>, or as bread with dinner.',
   ctaLabel: 'Visit the Bakehouse',
   /**
-   * The Bakehouse's page on this site, not penelopebakehouse.com. The sister
-   * site is still one click further on (that page's Website row and its order
-   * and catering buttons all go there), so nothing is unreachable — the
-   * homepage just no longer hands visitors off to another domain mid-story.
+   * penelopebakehouse.com, not /locations/scarborough. Links labelled
+   * "Bakehouse" pointing at a page on this domain helped Social rank for the
+   * Bakehouse's own name (~500 "penelope bakehouse" impressions a week on
+   * Social pages, Search Console, 2026-10-05 to 10-12), which belongs to the
+   * sister site. Off-site, so TextWithMediaSection opens it in a new tab.
    */
-  ctaUrl: '/locations/scarborough',
+  ctaUrl: BAKEHOUSE_SITE_URL,
 }
 
 export const homeEventsFallback = {

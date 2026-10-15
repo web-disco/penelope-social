@@ -6,7 +6,7 @@ import FaqSection from '../../components/sections/FaqSection.astro'
 import { woodbridgeLocation, woodbridgeLocationMeta } from '../../data/locations'
 import { woodbridgeFaq } from '../../data/faq'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../../lib/schema'
-import { INSTAGRAM_URL } from '../../data/site'
+import { BAKEHOUSE_SITE_URL, INSTAGRAM_URL } from '../../data/site'
 
 const nap = woodbridgeLocation.nap
 
@@ -100,7 +100,9 @@ const graph = pageGraph([
         </a>{' '}
         at lunch, dinner plates and drinks after. Bread starts at{' '}
         <a
-          href="/locations/scarborough"
+          href={BAKEHOUSE_SITE_URL}
+          target="_blank"
+          rel="noopener"
           class="underline underline-offset-[0.18em] decoration-charcoal/40 text-charcoal transition-opacity duration-[350ms] hover:opacity-70"
         >
           Penelope Bakehouse

@@ -1,10 +1,13 @@
 # Redirects the Webflow site served. Verified against the live responses.
 # Destinations keep trailingSlash: never.
-# /sourdough-bakery was the Social vs Bakehouse page; it became the Vaughan bakery
-# landing page. Never 301 it to /about or to penelopebakehouse.com.
+# /sourdough-bakery was the Social vs Bakehouse page. Its search history is the
+# Bakehouse's brand ("penelope bakehouse", "... menu"), so it 301s to
+# penelopebakehouse.com. Pointed at /bakery-vaughan (2026-09-28 to 10-15) it
+# handed that brand to the Vaughan page instead: "bakehouse" impressions on
+# /bakery-vaughan went from 12 to 269 a week once Google followed it.
 /reservations       https://tables.toasttab.com/restaurants/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/reserve?partySize=2  301
 /events             /catering-events                                                                                  301
 /events/            /catering-events                                                                                  301
 /sitemap.xml        /sitemap-index.xml                                                                                301
-/sourdough-bakery   /bakery-vaughan                                                                                   301
-/sourdough-bakery/  /bakery-vaughan                                                                                   301
+/sourdough-bakery   https://penelopebakehouse.com                                                                     301
+/sourdough-bakery/  https://penelopebakehouse.com                                                                     301

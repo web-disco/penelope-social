@@ -47,7 +47,7 @@ Reservations: https://penelopesocial.com/reservations
 Toast: https://tables.toasttab.com/restaurants/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/reserve?partySize=2
 
 /events 301s to /catering-events. Do not rename catering-events to /catering (that would collide with /menus/catering).
-/sourdough-bakery 301s to /bakery-vaughan. The bread is baked at Penelope Bakehouse (71 Howden Rd, Scarborough, https://penelopebakehouse.com) and sold to take home at Penelope Social in Woodbridge.
+/sourdough-bakery 301s to https://penelopebakehouse.com. The bread is baked at Penelope Bakehouse (71 Howden Rd, Scarborough, https://penelopebakehouse.com) and sold to take home at Penelope Social in Woodbridge.
 
 ## Order online and gift cards
 

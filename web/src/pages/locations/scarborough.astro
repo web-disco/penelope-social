@@ -50,7 +50,7 @@ const breadcrumbs = [
 
 const graph = pageGraph([
   restaurantSchema(),
-  bakehouseSchema(),
+  bakehouseSchema({ full: true }),
   faqPageSchema(scarboroughFaq),
   breadcrumbSchema(breadcrumbs),
 ])
