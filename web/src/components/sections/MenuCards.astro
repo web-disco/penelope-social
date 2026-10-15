@@ -125,7 +125,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
         <h2 class:list={['m-0 text-charcoal', typeScale.label]}>{sectionHeading}</h2>
         {/* Inline flow, not flex, so commas sit on their word; each photo stays
             with its link via nowrap. Pills are sized in em to scale with the type. */}
-        <p class="specialty-sentence mx-auto my-0 max-w-[1200px] font-body text-[48px] font-medium leading-[1.4] tracking-[-0.01em] text-balance text-charcoal wf-md:text-[36px] wf-sm:text-[28px] wf-xs:text-[24px]">
+        <p class="specialty-sentence mx-auto my-0 max-w-none font-body text-[clamp(26px,4.45vw,64px)] font-medium leading-[1.35] tracking-[-0.015em] text-pretty wf-sm:text-balance text-charcoal">
           {
             sentence.map((part, index) => {
               const gap = index ? ' ' : ''
