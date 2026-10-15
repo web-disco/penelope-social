@@ -5,7 +5,7 @@
  * even if Studio is stale. Hosted dataset writes were not available from this agent.
  *
  * GSC (sc-domain:penelopesocial.com): submit sitemap-index.xml only.
- * /sourdough-bakery 301s to /bakery-vaughan (a Sanity page).
+ * /sourdough-bakery 301s to https://penelopebakehouse.com (it held the Bakehouse's brand searches).
  */
 export const STUDIO_PUBLISH_CHECKLIST = [
   'Homepage hero: “Good food, better company at Penelope Social in Woodbridge” / “Focaccia sandwiches at lunch, sourdough pizza at dinner, and cocktails whenever you sit down.” Place in the H1, food in the lede. No period in the H1. Repo wins over stale CMS.',
@@ -24,7 +24,8 @@ export const STUDIO_PUBLISH_CHECKLIST = [
   'Page: merchandise — on-photo H1 “Merch” + lede. Delete cream “Penelope Merch”.',
   'Menus lunch/dinner/bar — on-photo H1 Lunch / Dinner / Bar + one short lede. No cream title. No category jump pills.',
   'Menu category + item titles — Title Case in Studio (The Pizzas, Handhelds, Cocktails, Red Wine, White Wine, Middle Table). Keep NY, DOP, 2oz. The site also title-cases at render if Studio is stale. Descriptions stay as written.',
-  '/sourdough-bakery 301s to /bakery-vaughan. The old “Best Sourdough Bakery in Vaughan” CMS doc (page-sourdough-bakery) is skipped at build; it can be deleted.',
+  '/sourdough-bakery 301s to https://penelopebakehouse.com. The old “Best Sourdough Bakery in Vaughan” CMS doc (page-sourdough-bakery) is skipped at build; it can be deleted.',
+  'Bakehouse hand-off (Social should not rank for “Penelope Bakehouse”): /bakery-vaughan FAQ “Is this Penelope Bakehouse?” → reword to “Where is the bread baked?”. /sandwiches-vaughan: link each plain-text “Penelope Bakehouse” to https://penelopebakehouse.com. /cafe-in-vaughan and /pizza-vaughan: their “Penelope Bakehouse” / “Bakehouse in Scarborough” links → https://penelopebakehouse.com, not /locations/scarborough.',
   'Copy rule: say what it is. No em or en dashes. No “not a dining room”. No street addresses in heroes. Woodbridge in meta + about intro.',
   'Footer menus column heading is “Menus” (not “Our Menus”). Newsletter copy stays “Sign up for our newsletter and be the first to know about exclusive offers.” Footer menus blurb — “Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.” Repo rewrites slop if Studio is stale.',
   'Locations pages are repo-owned (hub + Woodbridge + Scarborough). No Studio publish needed. If you later add a locations document: hub H1 “Our locations”, lede “Two sister spots. Woodbridge cafe and bar, Scarborough bakery.” Woodbridge detail H2 “Cafe by day, bar by night”, NAP 125 Hawkview Blvd + cafe/bar hours. Scarborough is sister-only (71 Howden Rd, link out to penelopebakehouse.com). Do not paste Bakehouse bakery copy onto Social Woodbridge.',
