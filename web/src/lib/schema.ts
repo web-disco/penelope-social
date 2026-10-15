@@ -151,16 +151,26 @@ function menuOffers(price?: string) {
   return offers.length === 1 ? offers[0] : offers
 }
 
-/** Separate Bakehouse entity. Do not fold this into Social's sameAs. */
-export function bakehouseSchema() {
+/**
+ * The sister bakehouse, a separate entity: never fold it into Social's sameAs. By default a reference only (@id, name, url): the full
+ * record (address, phone, description) on every Social page told Google these
+ * pages describe Penelope Bakehouse, and they ranked for its name. The full
+ * entity lives on penelopebakehouse.com under the same @id; only Social's
+ * /locations/scarborough page, which is about that location, passes `full`.
+ */
+export function bakehouseSchema({ full = false }: { full?: boolean } = {}) {
   const bakehouse = scarboroughBakehouse
-  return {
+  const reference = {
     '@type': 'Bakery',
     '@id': `${BAKEHOUSE_SITE_URL}/#bakery`,
     name: bakehouse.name,
+    url: bakehouse.url,
+  }
+  if (!full) return reference
+  return {
+    ...reference,
     description:
       'Scarborough bakehouse and focacceria. Counter service, loaves, focaccia sandwiches, and pizza by the slice. Menu and orders live on penelopebakehouse.com.',
-    url: bakehouse.url,
     telephone: bakehouse.phone,
     email: bakehouse.email,
     address: {

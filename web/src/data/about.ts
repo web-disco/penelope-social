@@ -1,4 +1,5 @@
 import { PAGE_SEO } from './seo'
+import { BAKEHOUSE_SITE_URL } from './site'
 
 export const aboutMeta = PAGE_SEO['/about']!
 
@@ -48,7 +49,8 @@ export const aboutPage = {
     },
     /** The second CTA links the Vaughan bakery landing page (take-home bread). */
     ctas: [
-      { label: 'Visit the Bakehouse', url: '/locations/scarborough', style: 'primary' as const },
+      /* The sister site, not /locations/scarborough: "Bakehouse" links belong on its domain. */
+      { label: 'Visit the Bakehouse', url: BAKEHOUSE_SITE_URL, newTab: true, style: 'primary' as const },
       { label: 'Our sourdough bakery', url: '/bakery-vaughan', style: 'outline' as const },
     ],
   },
