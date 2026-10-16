@@ -44,10 +44,9 @@ function splitTitleSize(text: string) {
 <div class="menu-callout mt-space-48 bg-beige wf-sm:mt-space-32">
   <div class="flex items-center gap-[96px] p-[72px] wf-md:flex-col wf-md:items-stretch wf-md:gap-space-48 wf-md:p-space-48 wf-sm:px-space-24">
     <div class="flex w-[440px] shrink-0 flex-col items-start gap-space-24 wf-md:w-auto">
-      {callout.eyebrow && <p class:list={['my-0 text-green', typeScale.label]}>{callout.eyebrow}</p>}
-      {/* Larger than the section H2 tokens on purpose: as in the Paper comp (D), the
-          title carries the band, so it wraps to two big lines at 440px. */}
-      <h2 class="my-0 text-left font-body text-[88px] font-medium leading-[0.95] tracking-[-0.035em] text-green text-balance wf-md:text-[64px] wf-sm:text-[52px] wf-xs:text-[44px]">
+      {/* Larger than the section H2 tokens on purpose: the title carries the band.
+          76px keeps "Happy Hour" on one line in the 440px column. */}
+      <h2 class="my-0 text-left font-body text-[76px] font-medium leading-[0.95] tracking-[-0.035em] text-green text-balance wf-md:text-[64px] wf-sm:text-[52px] wf-xs:text-[44px]">
         {title}
       </h2>
       {line && <p class:list={['my-0 text-charcoal', typeScale.intro]}>{line}</p>}

@@ -80,12 +80,6 @@ export const menu = defineType({
       description: 'A banner under the menu cards on the homepage and /menus, linking to this menu.',
       fields: [
         defineField({ name: 'enabled', title: 'Show the callout', type: 'boolean', initialValue: false }),
-        defineField({
-          name: 'eyebrow',
-          title: 'Eyebrow',
-          type: 'string',
-          description: 'A few words above the title — “Every day, 5 to 7pm”.',
-        }),
         defineField({ name: 'line', title: 'Line', type: 'text', rows: 2, description: 'One sentence under the title.' }),
         defineField({
           name: 'ctaLabel',
