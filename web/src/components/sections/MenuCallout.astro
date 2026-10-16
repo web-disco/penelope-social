@@ -1,0 +1,63 @@
+---
+/**
+ * Featured menu callout — a green band under the four menu cards on the
+ * homepage and /menus, for a menu that isn't one of the four (Happy Hour).
+ * Driven by the menu document's `callout` fields: switch it on in the Studio
+ * and it appears; no page-builder block to place on two pages.
+ *
+ * Image left (falls back to the menu banner), copy right; stacks below 992px.
+ */
+import { btn, eyebrow, typeScale } from '../../lib/ui'
+import { imageAlt, imageObjectPosition, imageSrcset, imageUrl } from '../../lib/image'
+import { displayHeading, menuTitle, restaurantCopy } from '../../data/copy'
+
+interface Props {
+  menu: any
+}
+const { menu } = Astro.props
+const callout = menu.callout ?? {}
+const image = callout.image?.asset ? callout.image : menu.banner
+const url = `/menus/${menu.slug.current}`
+const title = menuTitle(menu.title)
+const line = restaurantCopy(callout.line)
+const position = imageObjectPosition(image)
+---
+
+<a
+  href={url}
+  class="menu-callout group mt-space-48 grid grid-cols-12 overflow-hidden bg-green text-beige no-underline wf-sm:mt-space-32 wf-md:grid-cols-1"
+>
+  {
+    image?.asset && (
+      <div class="col-span-5 overflow-hidden isolate wf-md:col-span-1">
+        <img
+          src={imageUrl(image)}
+          srcset={imageSrcset(image)}
+          sizes="(min-width: 992px) 40vw, 100vw"
+          alt={imageAlt(image) || ''}
+          width="1200"
+          height="800"
+          loading="lazy"
+          class="block h-full w-full aspect-[3/2] object-cover transition-transform duration-500 will-change-transform [backface-visibility:hidden] motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]"
+          style={position ? `object-position: ${position};` : undefined}
+        />
+      </div>
+    )
+  }
+  <div
+    class:list={[
+      'flex flex-col items-start justify-center gap-space-24 p-space-48 wf-sm:p-space-24',
+      image?.asset ? 'col-span-7 wf-md:col-span-1' : 'col-span-12 wf-md:col-span-1',
+    ]}
+  >
+    <div class="flex flex-col gap-space-16">
+      {callout.eyebrow && <p class:list={[eyebrow.light, 'my-0']}>{callout.eyebrow}</p>}
+      <h2 class:list={['my-0 text-left text-beige', typeScale.displayL]}>{title}</h2>
+      {line && <p class:list={['my-0 max-w-[40rem] text-beige', typeScale.bodyLg]}>{line}</p>}
+    </div>
+    {/* The whole band is the link; this is its visible affordance, not a second link. */}
+    <span class:list={['inline-block', btn.secondary]}>
+      <span>{displayHeading(callout.ctaLabel, 'View the menu')}</span>
+    </span>
+  </div>
+</a>

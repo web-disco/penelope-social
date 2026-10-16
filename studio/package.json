@@ -10,6 +10,7 @@
     "start": "sanity start"
   },
   "dependencies": {
+    "@sanity/ui": "^3.4.0",
     "@sanity/vision": "^6.6.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",

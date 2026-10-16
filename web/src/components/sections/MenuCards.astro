@@ -10,6 +10,8 @@ import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
 import { displayHeading, menuTitle, restaurantCopy } from '../../data/copy'
 import { homeMenusFallback } from '../../data/home'
 import GoogleRating from '../GoogleRating.astro'
+import MenuCallout from './MenuCallout.astro'
+import { getAll } from '../../lib/data'
 
 interface Props {
   block: any
@@ -42,6 +44,12 @@ const cards = (authored.length ? authored : homeMenusFallback.cards).map((card: 
     url: card.url || fallback.url,
   }
 })
+
+/* A menu outside the four cards (Happy Hour) can ask to be featured under them.
+   Only on the chrome row, so an authored card block elsewhere stays as authored. */
+const featuredMenus: any[] = isChromeBlock
+  ? (await getAll<any>('menu')).filter((menu) => menu.callout?.enabled && menu.slug?.current)
+  : []
 
 const cardByUrl = new Map(cards.map((card: any) => [card.url, card]))
 const sentence: any[] = isSentence ? block.sentence ?? [] : []
@@ -196,6 +204,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
         </div>
       )
     }
+    {featuredMenus.map((menu) => <MenuCallout menu={menu} />)}
   </div>
 </section>
 

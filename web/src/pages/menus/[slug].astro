@@ -1,12 +1,14 @@
 ---
 /**
- * /menus/lunch, /menus/dinner, /menus/bar, /menus/catering
+ * /menus/lunch, /menus/dinner, /menus/bar, /menus/catering, plus any extra
+ * menu (Happy Hour) that is reached from a callout rather than the four cards.
  * /menus/catering is the tray list — not a thin copy of /catering-events.
  */
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
 import MenuCategories from '../../components/MenuCategories.astro'
 import { getAll } from '../../lib/data'
+import { resolveMenuLinks } from '../../lib/menuItems'
 import { resolveSeo } from '../../data/seo'
 import { restaurantCopy, displayHeading, menuTitle } from '../../data/copy'
 import { cateringMenuCopy } from '../../data/menus'
@@ -25,12 +27,21 @@ export async function getStaticPaths() {
   const menus = await getAll<any>('menu')
   return menus
     .filter((menu) => menu.slug?.current)
-    .map((menu) => ({ params: { slug: menu.slug.current }, props: { menu } }))
+    .map((menu) => ({
+      params: { slug: menu.slug.current },
+      props: { menu: resolveMenuLinks(menu, menus) },
+    }))
 }
 
 const { menu } = Astro.props
 const slug = menu.slug.current as string
-const MENU_CRUMBS: Record<string, string> = { lunch: 'Lunch', dinner: 'Dinner', bar: 'Bar', catering: 'Catering' }
+const MENU_CRUMBS: Record<string, string> = {
+  lunch: 'Lunch',
+  dinner: 'Dinner',
+  bar: 'Bar',
+  catering: 'Catering',
+  'happy-hour': 'Happy Hour',
+}
 const path = `/menus/${slug}`
 const isCateringMenu = slug === 'catering'
 const seo = resolveSeo(path, menu.seo)

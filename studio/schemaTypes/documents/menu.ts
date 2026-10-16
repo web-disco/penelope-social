@@ -20,6 +20,7 @@ export const menu = defineType({
     { name: 'page', title: 'Page', default: true },
     { name: 'content', title: 'Content' },
     { name: 'categories', title: 'Categories' },
+    { name: 'callout', title: 'Callout' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -65,6 +66,42 @@ export const menu = defineType({
       description:
         'Drag to reorder — the order here is the order on the page, and the order of the quick-link buttons above it.',
       validation: (Rule) => Rule.min(1),
+    }),
+    /*
+     * Lunch, Dinner, Bar and Catering are the four menu cards. A menu that
+     * isn't one of them (Happy Hour) can still be surfaced: switched on, it
+     * shows as a wide callout under the cards on the homepage and /menus.
+     */
+    defineField({
+      name: 'callout',
+      title: 'Featured callout',
+      type: 'object',
+      group: 'callout',
+      description: 'A banner under the menu cards on the homepage and /menus, linking to this menu.',
+      fields: [
+        defineField({ name: 'enabled', title: 'Show the callout', type: 'boolean', initialValue: false }),
+        defineField({
+          name: 'eyebrow',
+          title: 'Eyebrow',
+          type: 'string',
+          description: 'A few words above the title — “Every day, 5 to 7pm”.',
+        }),
+        defineField({ name: 'line', title: 'Line', type: 'text', rows: 2, description: 'One sentence under the title.' }),
+        defineField({
+          name: 'ctaLabel',
+          title: 'Button label',
+          type: 'string',
+          description: 'Defaults to “View the menu”.',
+        }),
+        defineField({
+          name: 'image',
+          title: 'Image',
+          type: 'image',
+          options: { hotspot: true },
+          description: 'Defaults to the banner image.',
+          fields: [defineField({ name: 'alt', title: 'Alt text', type: 'string' })],
+        }),
+      ],
     }),
     defineField({ name: 'seo', title: 'SEO', type: 'seo', group: 'seo' }),
   ],

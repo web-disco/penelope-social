@@ -102,3 +102,30 @@ function firstTier(price?: string): { price: string; unit: string } | undefined 
   if (size) return { price: `From ${size[2]!}`, unit: '' }
   return undefined
 }
+
+/**
+ * A menu's categories with every "item from another menu" (menuItemLink)
+ * swapped for the item it points at: the source's name and description, at
+ * this menu's price. The Happy Hour list is built this way, so its dishes
+ * cannot drift from Dinner's. A link whose item is gone is dropped, not
+ * rendered blank — same reasoning as resolveMenuItem.
+ */
+export function resolveMenuLinks(menu: any, menus: any[]): any {
+  const byId = new Map(menus.map((m) => [String(m._id).replace(/^drafts\./, ''), m]))
+  const categories = (menu.categories ?? []).map((category: any) => ({
+    ...category,
+    items: (category.items ?? []).flatMap((item: any) => {
+      if (item?._type !== 'menuItemLink') return [item]
+      const source = byId.get(String(item.menu?._ref ?? '').replace(/^drafts\./, ''))
+      const original = source?.categories
+        ?.flatMap((c: any) => c.items ?? [])
+        .find((candidate: any) => candidate?._key === item.itemKey && candidate._type !== 'menuItemLink')
+      if (!original?.title) {
+        console.warn(`[menuItems] ${menu.slug?.current}: linked item ${item.itemKey} not found; skipped`)
+        return []
+      }
+      return [{ _key: item._key, _type: 'menuItem', title: original.title, description: original.description, price: item.price }]
+    }),
+  }))
+  return { ...menu, categories }
+}
