@@ -1,84 +1,55 @@
 ---
 /**
- * Featured menu callout — a beige band under the four menu cards on the
- * homepage and /menus, for a menu that isn't one of the four (Happy Hour).
- * Driven by the menu document's `callout` fields: switch it on in the Studio
- * and it appears; no page-builder block to place on two pages.
+ * Featured menu callout — under the four menu cards on the homepage and
+ * /menus, for a menu that isn't one of the four (Happy Hour). Driven by the
+ * menu document's `callout` fields: switch it on in the Studio and it
+ * appears; no page-builder block to place on two pages.
  *
- * Copy and CTA on the left, a short price list on the right drawn from the
- * menu itself, in the same ruled rows as /menus/*. The list is the pitch:
- * prices show before the click, and they can't disagree with the menu page.
- * Stacks below 992px.
+ * Paper option C: a full-bleed photo (the callout image, else the menu
+ * banner) with a cream card on the right — title, one line, CTA. Below
+ * 992px the card drops under the photo on beige, since cream-on-cream would
+ * vanish into the page.
  */
 import { btn, typeScale } from '../../lib/ui'
+import { imageAlt, imageObjectPosition, imageSrcset, imageUrl } from '../../lib/image'
 import { displayHeading, menuTitle, restaurantCopy } from '../../data/copy'
 
 interface Props {
-  /** Already passed through resolveMenuLinks, so linked items carry their names. */
   menu: any
 }
 const { menu } = Astro.props
 const callout = menu.callout ?? {}
+const image = callout.image?.asset ? callout.image : menu.banner
 const url = `/menus/${menu.slug.current}`
 const title = menuTitle(menu.title)
 const line = restaurantCopy(callout.line)
-
-const MAX_ITEMS = 6
-/* Round-robin across categories, so a Food / Drinks menu shows some of each
-   rather than six dishes and no cocktails. */
-const lists: any[][] = (menu.categories ?? []).map((category: any) =>
-  (category.items ?? []).filter((item: any) => item?.title && item.price),
-)
-const items: any[] = []
-for (let i = 0; items.length < MAX_ITEMS && lists.some((list) => i < list.length); i++) {
-  for (const list of lists) if (list[i] && items.length < MAX_ITEMS) items.push(list[i])
-}
-
-/* Same split as MenuCategories: "Pink Pantheress (2oz)" keeps its size on one line. */
-function splitTitleSize(text: string) {
-  const match = text.match(/^(.*?)(\s*\([^)]+\))$/)
-  return match ? { name: match[1], suffix: match[2] } : { name: text, suffix: '' }
-}
+// The bar banner's subject sits left of centre; keep him clear of the card.
+const position = imageObjectPosition(image) ?? '30% 50%'
 ---
 
-<div class="menu-callout mt-space-96 bg-beige wf-sm:mt-space-64">
-  <div class="flex items-start gap-[96px] p-[72px] wf-md:flex-col wf-md:items-stretch wf-md:gap-space-48 wf-md:p-space-48 wf-sm:px-space-24">
-    <div class="flex w-[440px] shrink-0 flex-col items-start gap-space-24 wf-md:w-auto">
-      {/* Larger than the section H2 tokens on purpose: the title carries the band.
-          76px keeps "Happy Hour" on one line in the 440px column. */}
-      <h2 class="my-0 text-left font-body text-[76px] font-medium leading-[0.95] tracking-[-0.035em] text-green text-balance wf-md:text-[64px] wf-sm:text-[52px] wf-xs:text-[44px]">
-        {title}
-      </h2>
-      {line && <p class:list={['my-0 text-charcoal', typeScale.intro]}>{line}</p>}
-      <a href={url} class:list={['mt-space-8 inline-block', btn.green]}>
-        <span>{displayHeading(callout.ctaLabel, 'View the menu')}</span>
-      </a>
-    </div>
-    {
-      items.length > 0 && (
-        <ul role="list" class="m-0 flex-1 list-none border-b-2 border-charcoal p-0">
-          {items.map((item, index) => {
-            const { name, suffix } = splitTitleSize(menuTitle(item.title))
-            return (
-              <li
-                class:list={[
-                  'flex items-baseline justify-between gap-space-16 border-t-2 border-charcoal py-[18px] wf-sm:py-[14px]',
-                  /* Phones get four rows; the full list is one tap away. */
-                  index >= 4 && 'wf-sm:hidden',
-                ]}
-              >
-                <span class="font-body text-[24px] font-medium leading-[120%] text-charcoal wf-sm:text-[20px]">
-                  {name}
-                  {suffix && <span class="whitespace-nowrap">{suffix}</span>}
-                </span>
-                <span class="w-12 shrink-0 text-right font-body text-[24px] font-medium leading-[120%] text-green wf-sm:text-[20px]">
-                  {item.price}
-                </span>
-              </li>
-            )
-          })}
-        </ul>
-      )
-    }
+<div class="menu-callout relative mt-space-96 flex h-[640px] items-center justify-end overflow-hidden bg-charcoal wf-md:h-auto wf-md:flex-col wf-md:items-stretch wf-md:bg-beige wf-sm:mt-space-64">
+  {
+    image?.asset && (
+      <img
+        src={imageUrl(image)}
+        srcset={imageSrcset(image)}
+        sizes="(min-width: 1440px) 1390px, 100vw"
+        alt={imageAlt(image) || ''}
+        width="1920"
+        height="720"
+        loading="lazy"
+        class="absolute inset-0 h-full w-full object-cover wf-md:static wf-md:aspect-[3/2] wf-md:h-auto"
+        style={`object-position: ${position};`}
+      />
+    )
+  }
+  <div class="relative mr-[96px] flex w-[480px] flex-col items-start gap-space-24 bg-cream p-space-48 wf-md:mr-0 wf-md:w-auto wf-md:bg-beige wf-sm:px-space-24">
+    <h2 class="my-0 text-left font-body text-[64px] font-medium leading-[0.95] tracking-[-0.03em] text-green wf-sm:text-[48px] wf-xs:text-[44px]">
+      {title}
+    </h2>
+    {line && <p class:list={['my-0 text-charcoal', typeScale.intro]}>{line}</p>}
+    <a href={url} class:list={['mt-space-8 inline-block', btn.primary]}>
+      <span>{displayHeading(callout.ctaLabel, 'View the menu')}</span>
+    </a>
   </div>
 </div>
