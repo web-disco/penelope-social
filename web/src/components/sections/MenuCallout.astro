@@ -1,63 +1,85 @@
 ---
 /**
- * Featured menu callout — a green band under the four menu cards on the
+ * Featured menu callout — a beige band under the four menu cards on the
  * homepage and /menus, for a menu that isn't one of the four (Happy Hour).
  * Driven by the menu document's `callout` fields: switch it on in the Studio
  * and it appears; no page-builder block to place on two pages.
  *
- * Image left (falls back to the menu banner), copy right; stacks below 992px.
+ * Copy and CTA on the left, a short price list on the right drawn from the
+ * menu itself, in the same ruled rows as /menus/*. The list is the pitch:
+ * prices show before the click, and they can't disagree with the menu page.
+ * Stacks below 992px.
  */
-import { btn, eyebrow, typeScale } from '../../lib/ui'
-import { imageAlt, imageObjectPosition, imageSrcset, imageUrl } from '../../lib/image'
+import { btn, typeScale } from '../../lib/ui'
 import { displayHeading, menuTitle, restaurantCopy } from '../../data/copy'
 
 interface Props {
+  /** Already passed through resolveMenuLinks, so linked items carry their names. */
   menu: any
 }
 const { menu } = Astro.props
 const callout = menu.callout ?? {}
-const image = callout.image?.asset ? callout.image : menu.banner
 const url = `/menus/${menu.slug.current}`
 const title = menuTitle(menu.title)
 const line = restaurantCopy(callout.line)
-const position = imageObjectPosition(image)
+
+const MAX_ITEMS = 6
+/* Round-robin across categories, so a Food / Drinks menu shows some of each
+   rather than six dishes and no cocktails. */
+const lists: any[][] = (menu.categories ?? []).map((category: any) =>
+  (category.items ?? []).filter((item: any) => item?.title && item.price),
+)
+const items: any[] = []
+for (let i = 0; items.length < MAX_ITEMS && lists.some((list) => i < list.length); i++) {
+  for (const list of lists) if (list[i] && items.length < MAX_ITEMS) items.push(list[i])
+}
+
+/* Same split as MenuCategories: "Pink Pantheress (2oz)" keeps its size on one line. */
+function splitTitleSize(text: string) {
+  const match = text.match(/^(.*?)(\s*\([^)]+\))$/)
+  return match ? { name: match[1], suffix: match[2] } : { name: text, suffix: '' }
+}
 ---
 
-<a
-  href={url}
-  class="menu-callout group mt-space-48 grid grid-cols-12 overflow-hidden bg-green text-beige no-underline wf-sm:mt-space-32 wf-md:grid-cols-1"
->
-  {
-    image?.asset && (
-      <div class="col-span-5 overflow-hidden isolate wf-md:col-span-1">
-        <img
-          src={imageUrl(image)}
-          srcset={imageSrcset(image)}
-          sizes="(min-width: 992px) 40vw, 100vw"
-          alt={imageAlt(image) || ''}
-          width="1200"
-          height="800"
-          loading="lazy"
-          class="block h-full w-full aspect-[3/2] object-cover transition-transform duration-500 will-change-transform [backface-visibility:hidden] motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]"
-          style={position ? `object-position: ${position};` : undefined}
-        />
-      </div>
-    )
-  }
-  <div
-    class:list={[
-      'flex flex-col items-start justify-center gap-space-24 p-space-48 wf-sm:p-space-24',
-      image?.asset ? 'col-span-7 wf-md:col-span-1' : 'col-span-12 wf-md:col-span-1',
-    ]}
-  >
-    <div class="flex flex-col gap-space-16">
-      {callout.eyebrow && <p class:list={[eyebrow.light, 'my-0']}>{callout.eyebrow}</p>}
-      <h2 class:list={['my-0 text-left text-beige', typeScale.displayL]}>{title}</h2>
-      {line && <p class:list={['my-0 max-w-[40rem] text-beige', typeScale.bodyLg]}>{line}</p>}
+<div class="menu-callout mt-space-48 bg-beige wf-sm:mt-space-32">
+  <div class="flex items-center gap-[96px] p-[72px] wf-md:flex-col wf-md:items-stretch wf-md:gap-space-48 wf-md:p-space-48 wf-sm:px-space-24">
+    <div class="flex w-[440px] shrink-0 flex-col items-start gap-space-24 wf-md:w-auto">
+      {callout.eyebrow && <p class:list={['my-0 text-green', typeScale.label]}>{callout.eyebrow}</p>}
+      {/* Larger than the section H2 tokens on purpose: as in the Paper comp (D), the
+          title carries the band, so it wraps to two big lines at 440px. */}
+      <h2 class="my-0 text-left font-body text-[88px] font-medium leading-[0.95] tracking-[-0.035em] text-green text-balance wf-md:text-[64px] wf-sm:text-[52px] wf-xs:text-[44px]">
+        {title}
+      </h2>
+      {line && <p class:list={['my-0 text-charcoal', typeScale.intro]}>{line}</p>}
+      <a href={url} class:list={['mt-space-8 inline-block', btn.green]}>
+        <span>{displayHeading(callout.ctaLabel, 'View the menu')}</span>
+      </a>
     </div>
-    {/* The whole band is the link; this is its visible affordance, not a second link. */}
-    <span class:list={['inline-block', btn.secondary]}>
-      <span>{displayHeading(callout.ctaLabel, 'View the menu')}</span>
-    </span>
+    {
+      items.length > 0 && (
+        <ul role="list" class="m-0 flex-1 list-none border-b-2 border-charcoal p-0">
+          {items.map((item, index) => {
+            const { name, suffix } = splitTitleSize(menuTitle(item.title))
+            return (
+              <li
+                class:list={[
+                  'flex items-baseline justify-between gap-space-16 border-t-2 border-charcoal py-[18px] wf-sm:py-[14px]',
+                  /* Phones get four rows; the full list is one tap away. */
+                  index >= 4 && 'wf-sm:hidden',
+                ]}
+              >
+                <span class="font-body text-[24px] font-medium leading-[120%] text-charcoal wf-sm:text-[20px]">
+                  {name}
+                  {suffix && <span class="whitespace-nowrap">{suffix}</span>}
+                </span>
+                <span class="w-12 shrink-0 text-right font-body text-[24px] font-medium leading-[120%] text-green wf-sm:text-[20px]">
+                  {item.price}
+                </span>
+              </li>
+            )
+          })}
+        </ul>
+      )
+    }
   </div>
-</a>
+</div>
