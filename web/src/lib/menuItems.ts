@@ -129,3 +129,39 @@ export function resolveMenuLinks(menu: any, menus: any[]): any {
   }))
   return { ...menu, categories }
 }
+
+export interface MenuItemOffer {
+  /** The menu offering it — "Happy Hour". */
+  label: string
+  /** Its price there. */
+  price: string
+  /** Straight to the section that lists it: "/menus/happy-hour#food". */
+  url: string
+}
+
+/**
+ * The reverse of resolveMenuLinks: for one menu, which of its items another
+ * menu borrows, and at what price. Dinner's Crunchwrap is on Happy Hour at
+ * 12, so Dinner can say so next to it. Keyed by the item's _key, the same
+ * key the link stores.
+ */
+export function offersFor(menu: any, menus: any[]): Map<string, MenuItemOffer> {
+  const id = String(menu._id).replace(/^drafts\./, '')
+  const offers = new Map<string, MenuItemOffer>()
+  for (const other of menus) {
+    if (!other.slug?.current || String(other._id).replace(/^drafts\./, '') === id) continue
+    for (const category of other.categories ?? []) {
+      for (const item of category.items ?? []) {
+        if (item?._type !== 'menuItemLink' || !item.itemKey || !item.price) continue
+        if (String(item.menu?._ref ?? '').replace(/^drafts\./, '') !== id) continue
+        const anchor = category.anchor?.current ? `#${category.anchor.current}` : ''
+        offers.set(item.itemKey, {
+          label: menuTitle(other.title),
+          price: item.price,
+          url: `/menus/${other.slug.current}${anchor}`,
+        })
+      }
+    }
+  }
+  return offers
+}

@@ -13,8 +13,10 @@ interface Props {
   categories: any[]
   /** After a banner that already has mb-section-gap-y. False when another cream block sits above. */
   flushTop?: boolean
+  /** Items another menu borrows (Happy Hour), by _key — each gets a link to it. */
+  offers?: Map<string, { label: string; price: string; url: string }>
 }
-const { categories, flushTop = true } = Astro.props
+const { categories, flushTop = true, offers } = Astro.props
 
 const isUnavailable = (item: any) => /unavailable/i.test(item?.title ?? '')
 
@@ -147,6 +149,23 @@ function isMultiPrice(price?: string) {
                         <div class="menu-item-description">
                           <p class:list={['mb-0 text-charcoal', typeScale.body]}>{item.description}</p>
                         </div>
+                      )}
+                      {offers?.get(item._key) && (
+                        <a
+                          href={offers.get(item._key)!.url}
+                          class:list={[
+                            'menu-item-offer mt-space-16 inline-flex items-center gap-space-8 text-green no-underline',
+                            'transition-opacity duration-[350ms] hover:opacity-70',
+                            typeScale.label,
+                          ]}
+                        >
+                          <span>
+                            {offers.get(item._key)!.label} · {offers.get(item._key)!.price}
+                          </span>
+                          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                            <path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" />
+                          </svg>
+                        </a>
                       )}
                     </div>
                   )

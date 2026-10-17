@@ -88,6 +88,13 @@ export const menu = defineType({
           description: 'Defaults to “View the menu”.',
         }),
         defineField({
+          name: 'alsoOn',
+          title: 'Also show on these menus',
+          type: 'array',
+          of: [{ type: 'reference', to: [{ type: 'menu' }] }],
+          description: 'The callout also appears at the bottom of these menu pages, e.g. Dinner and Bar.',
+        }),
+        defineField({
           name: 'image',
           title: 'Image',
           type: 'image',

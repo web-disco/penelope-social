@@ -8,7 +8,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
 import MenuCategories from '../../components/MenuCategories.astro'
 import { getAll } from '../../lib/data'
-import { resolveMenuLinks } from '../../lib/menuItems'
+import { offersFor, resolveMenuLinks } from '../../lib/menuItems'
+import MenuCallout from '../../components/sections/MenuCallout.astro'
 import { resolveSeo } from '../../data/seo'
 import { restaurantCopy, displayHeading, menuTitle } from '../../data/copy'
 import { cateringMenuCopy } from '../../data/menus'
@@ -25,16 +26,32 @@ import {
 } from '../../lib/schema'
 
 export async function getStaticPaths() {
+  // Inside: Astro runs getStaticPaths on its own, without the rest of the frontmatter.
+  /** Featured menus (Happy Hour) whose callout lists this menu under "Also show on". */
+  function calloutsFor(menu: any, menus: any[]): any[] {
+    const id = String(menu._id).replace(/^drafts\./, '')
+    return menus.filter(
+      (other) =>
+        other.callout?.enabled &&
+        other.slug?.current &&
+        (other.callout.alsoOn ?? []).some((ref: any) => String(ref?._ref ?? '').replace(/^drafts\./, '') === id),
+    )
+  }
+
   const menus = await getAll<any>('menu')
   return menus
     .filter((menu) => menu.slug?.current)
     .map((menu) => ({
       params: { slug: menu.slug.current },
-      props: { menu: resolveMenuLinks(menu, menus) },
+      props: {
+        menu: resolveMenuLinks(menu, menus),
+        offers: offersFor(menu, menus),
+        callouts: calloutsFor(menu, menus),
+      },
     }))
 }
 
-const { menu } = Astro.props
+const { menu, offers, callouts = [] } = Astro.props
 const slug = menu.slug.current as string
 const MENU_CRUMBS: Record<string, string> = {
   lunch: 'Lunch',
@@ -120,5 +137,12 @@ const canonical = `${SITE_ORIGIN}${path}`
       </section>
     )
   }
-  <MenuCategories categories={menu.categories ?? []} flushTop={!isCateringMenu} />
+  <MenuCategories categories={menu.categories ?? []} flushTop={!isCateringMenu} offers={offers} />
+  {
+    callouts.length > 0 && (
+      <div class:list={[layout.shell, 'pb-section-gap-y wf-sm:pb-section-gap-y-sm']}>
+        {callouts.map((featured: any) => <MenuCallout menu={featured} />)}
+      </div>
+    )
+  }
 </BaseLayout>
