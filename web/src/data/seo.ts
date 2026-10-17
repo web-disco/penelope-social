@@ -46,6 +46,11 @@ export const PAGE_SEO: Record<string, SeoMeta> = {
     description:
       'Cocktails, wine, and a late bar at Penelope Social in Woodbridge. Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am.',
   },
+  '/menus/happy-hour': {
+    title: 'Happy hour | 5pm to 7pm daily in Woodbridge | Penelope Social',
+    description:
+      'Happy hour every day from 5pm to 7pm at Penelope Social in Woodbridge: $12 cocktails, sliders, bao, and fries at 125 Hawkview Blvd.',
+  },
   '/menus/catering': {
     title: 'Catering tray menu | Pizza, focaccia, salads | Penelope Social',
     description:

@@ -58,8 +58,10 @@ export const menuCategory = defineType({
       name: 'items',
       title: 'Items',
       type: 'array',
-      of: [defineArrayMember({ type: 'menuItem' })],
-      description: 'Drag to reorder — the order here is the order on the page.',
+      of: [defineArrayMember({ type: 'menuItem' }), defineArrayMember({ type: 'menuItemLink' })],
+      description:
+        'Drag to reorder — the order here is the order on the page. “Item from another menu” reuses ' +
+        'a dish from Dinner, Bar or Lunch at a different price, without retyping it.',
     }),
   ],
   preview: {

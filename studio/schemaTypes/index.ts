@@ -4,6 +4,7 @@ import { link } from './objects/link'
 import { button } from './objects/button'
 import { quickLink } from './objects/quickLink'
 import { menuItem } from './objects/menuItem'
+import { menuItemLink } from './objects/menuItemLink'
 import { menuCategory } from './objects/menuCategory'
 import { teamMember } from './objects/teamMember'
 import { formField } from './objects/formField'
@@ -74,6 +75,7 @@ export const objectTypes = [
   button,
   quickLink,
   menuItem,
+  menuItemLink,
   menuCategory,
   teamMember,
   formField,

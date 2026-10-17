@@ -1,0 +1,55 @@
+---
+/**
+ * Featured menu callout — under the four menu cards on the homepage and
+ * /menus, for a menu that isn't one of the four (Happy Hour). Driven by the
+ * menu document's `callout` fields: switch it on in the Studio and it
+ * appears; no page-builder block to place on two pages.
+ *
+ * Paper option C: a full-bleed photo (the callout image, else the menu
+ * banner) with a cream card on the right — title, one line, CTA. Below
+ * 992px the card drops under the photo on beige, since cream-on-cream would
+ * vanish into the page.
+ */
+import { btn, typeScale } from '../../lib/ui'
+import { imageAlt, imageObjectPosition, imageSrcset, imageUrl } from '../../lib/image'
+import { displayHeading, menuTitle, restaurantCopy } from '../../data/copy'
+
+interface Props {
+  menu: any
+}
+const { menu } = Astro.props
+const callout = menu.callout ?? {}
+const image = callout.image?.asset ? callout.image : menu.banner
+const url = `/menus/${menu.slug.current}`
+const title = menuTitle(menu.title)
+const line = restaurantCopy(callout.line)
+// The bar banner's subject sits left of centre; keep him clear of the card.
+const position = imageObjectPosition(image) ?? '30% 50%'
+---
+
+<div class="menu-callout relative mt-space-96 flex h-[640px] items-center justify-end overflow-hidden bg-charcoal wf-md:h-auto wf-md:flex-col wf-md:items-stretch wf-md:bg-beige wf-sm:mt-space-64">
+  {
+    image?.asset && (
+      <img
+        src={imageUrl(image)}
+        srcset={imageSrcset(image)}
+        sizes="(min-width: 1440px) 1390px, 100vw"
+        alt={imageAlt(image) || ''}
+        width="1920"
+        height="720"
+        loading="lazy"
+        class="absolute inset-0 h-full w-full object-cover wf-md:static wf-md:aspect-[3/2] wf-md:h-auto"
+        style={`object-position: ${position};`}
+      />
+    )
+  }
+  <div class="relative mr-[96px] flex w-[480px] flex-col items-start gap-space-24 bg-cream p-space-48 wf-md:mr-0 wf-md:w-auto wf-md:bg-beige wf-sm:px-space-24">
+    <h2 class="my-0 text-left font-body text-[64px] font-medium leading-[0.95] tracking-[-0.03em] text-green wf-sm:text-[48px] wf-xs:text-[44px]">
+      {title}
+    </h2>
+    {line && <p class:list={['my-0 text-charcoal', typeScale.intro]}>{line}</p>}
+    <a href={url} class:list={['mt-space-8 inline-block', btn.primary]}>
+      <span>{displayHeading(callout.ctaLabel, 'View the menu')}</span>
+    </a>
+  </div>
+</div>
