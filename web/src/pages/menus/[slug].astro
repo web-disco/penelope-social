@@ -13,6 +13,7 @@ import { resolveSeo } from '../../data/seo'
 import { restaurantCopy, displayHeading, menuTitle } from '../../data/copy'
 import { cateringMenuCopy } from '../../data/menus'
 import { plainText } from '../../lib/portableText'
+import { imageObjectPosition } from '../../lib/image'
 import { SITE_ORIGIN } from '../../data/site'
 import { btn, layout, space, typeScale, heading } from '../../lib/ui'
 import {
@@ -94,7 +95,16 @@ const canonical = `${SITE_ORIGIN}${path}`
   canonical={canonical}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
-  <PageHero block={{ image: menu.banner, heading: headingText, intro: introText }} breadcrumbs={breadcrumbs} />
+  {/* The banner's Studio hotspot steers the crop; without one it stays centred. */}
+  <PageHero
+    block={{
+      image: menu.banner,
+      heading: headingText,
+      intro: introText,
+      objectPosition: imageObjectPosition(menu.banner),
+    }}
+    breadcrumbs={breadcrumbs}
+  />
   {
     isCateringMenu && (
       <section class="catering-menu-note">
