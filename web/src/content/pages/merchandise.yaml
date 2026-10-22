@@ -1,0 +1,14 @@
+title: Merchandise
+breadcrumb: Merch
+seo:
+  title: Merch | Penelope Social
+  description: Hoodies, tees, totes from Penelope Social, the Woodbridge cafe and bar. Take a piece of the restaurant home.
+  ogImage: /images/og/merch.jpg
+sections:
+  - type: pageHero
+    image:
+      src: merch-banner.avif
+      alt: Photo of Penlope Merch
+    heading: Merch
+    intro: Hoodies, tees, totes. Purchase and pick them up in store.
+  - type: merchListing

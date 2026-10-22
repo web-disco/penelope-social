@@ -2,28 +2,25 @@
 /**
  * Menu-item cards in the MenuCards mosaic style: 4-up grid at desktop, Swiper
  * below 992px (same script and breakpoints). Each card picks a dish from a
- * menu document, so name, description and price come from the live menu;
+ * menu file, so name, description and price come from the live menu;
  * the photo is authored on the card because menu items carry no image.
  *
- * block: { heading, intro, rating: { score, label, url }, items: [{ menu, item, image, link }], cta: { label, url } }
+ * block: { heading, intro, rating, items: [{ item, link, image }], cta: { label, url } }
  */
 import { btn, heading, layout, radius, space, typeScale } from '../../lib/ui'
-import { imageAlt, imageObjectPosition, imageSrcset, imageUrl } from '../../lib/image'
-import { resolveMenuItem } from '../../lib/menuItems'
+import { resolveMenuItem, site, type SectionOf } from '../../lib/content'
 import GoogleRating from '../GoogleRating.astro'
+import ResponsivePicture from '../ResponsivePicture.astro'
 
 interface Props {
-  block: any
+  block: SectionOf<'menuItemCards'>
 }
 const { block } = Astro.props
 
-const resolved = await Promise.all(
-  (block.items ?? []).map(async (card: any) => {
-    const item = await resolveMenuItem(card)
-    return item ? { ...item, image: card.image, href: card.link || item.menuUrl } : null
-  }),
-)
-const cards = resolved.filter(Boolean) as any[]
+/* The dish's name, description and price come from its menu file; content.ts
+   fails the build if a card names a dish that isn't there. */
+const cards = block.items.map((card) => ({ ...resolveMenuItem(card), image: card.image, href: card.link }))
+const rating = block.rating ? site.googleRating : undefined
 
 ---
 
@@ -37,32 +34,20 @@ const cards = resolved.filter(Boolean) as any[]
             {block.intro}
           </p>
         )}
-        <GoogleRating rating={block.rating} />
+        <GoogleRating rating={rating} />
         <div class:list={['swiper menu-mosaic-swiper w-full', space.sectionGapTop]} data-menu-mosaic-swiper>
           <ul role="list" class="swiper-wrapper m-0 list-none p-0">
             {cards.map((card) => (
               <li class="swiper-slide">
                 <a href={card.href} class="menu-item-card flex h-full flex-col text-charcoal no-underline">
                   <div class={`overflow-hidden isolate ${radius.none}`}>
-                    {imageUrl(card.image) ? (
-                    <img
-                      src={imageUrl(card.image)}
-                      srcset={imageSrcset(card.image)}
+                    <ResponsivePicture
+                      image={card.image}
+                      alt={card.image.alt || card.title}
                       sizes="(min-width: 992px) 25vw, (min-width: 768px) 40vw, 90vw"
-                      alt={imageAlt(card.image) || card.title}
-                      width="800"
-                      height="1000"
-                      loading="lazy"
-                      draggable="false"
-                      class="block aspect-[4/5] w-full object-cover transition-transform duration-500 will-change-transform [backface-visibility:hidden] hover:scale-[1.03]"
-                      style={imageObjectPosition(card.image) ? `object-position: ${imageObjectPosition(card.image)};` : undefined}
+                      draggable={false}
+                      imgClass="block aspect-[4/5] w-full object-cover transition-transform duration-500 will-change-transform [backface-visibility:hidden] hover:scale-[1.03]"
                     />
-                    ) : (
-                      /* No photo yet: a plain tile, so a missing image never ships as a borrowed one. */
-                      <div class:list={['flex aspect-[4/5] w-full items-center justify-center bg-charcoal/[0.06] text-charcoal/50', typeScale.label]}>
-                        Photo coming soon
-                      </div>
-                    )}
                   </div>
                   {/* Name | price on one line. When the price wraps, the inner row's negative
                       margin pushes its leading pipe under the clip instead of starting line two. */}

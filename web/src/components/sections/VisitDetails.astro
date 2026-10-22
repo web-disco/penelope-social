@@ -9,9 +9,10 @@
  */
 import LocationDetails, { type LocationDetailRow } from './LocationDetails.astro'
 import { barHours, cafeHours, woodbridgeNap } from '../../data/site'
+import type { SectionOf } from '../../lib/content'
 
 interface Props {
-  block: any
+  block: SectionOf<'visitDetails'>
 }
 const { block } = Astro.props
 const nap = woodbridgeNap
@@ -42,8 +43,7 @@ const rows: LocationDetailRow[] = [
   ...(hours === 'both' || hours === 'cafe' ? cafeHours : []).map((b) => ({ label: b.label, lines: b.lines })),
   ...(hours === 'both' || hours === 'bar' ? barHours : []).map((b) => ({ label: b.label, lines: b.lines })),
   ...(block.rows ?? [])
-    .filter((row: any) => row?.label && row?.body)
-    .map((row: any) => ({
+    .map((row) => ({
       label: row.label,
       lines: String(row.body).split('\n').filter(Boolean),
       href: contactHref(String(row.body)),

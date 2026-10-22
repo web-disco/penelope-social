@@ -1,36 +1,13 @@
 ---
 /**
- * The front page reads the `homepage` singleton, not a `page` with the slug
- * "home", so there is no way to end up with two of them — and no way to delete
- * the one there is.
+ * The front page: src/content/pages/home.yaml, then the home FAQs.
  */
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
-import WaveMoment from '../components/sections/WaveMoment.astro'
-import TextWithMediaSection from '../components/sections/TextWithMediaSection.astro'
 import FaqSection from '../components/sections/FaqSection.astro'
-import { getSingleton, missingContentMessage } from '../lib/data'
-import { resolveSeo } from '../data/seo'
+import { home } from '../lib/content'
 import { homeFaq } from '../data/faq'
-import { homeSpecialtiesBlock } from '../data/home'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
-
-const home = await getSingleton<any>('homepage')
-if (!home) throw new Error(missingContentMessage('homepage'))
-const seo = resolveSeo('/', home.seo)
-
-const allSections: any[] = home.sections ?? []
-/** Bakehouse bread story sits below the merch band, not under the mosaic. */
-const isBreadStory = (block: any) =>
-  block?._type === 'textWithMediaSection' &&
-  (block._key === 'bread' ||
-    block.layout === 'image-first' ||
-    /good bread/i.test(block.heading ?? ''))
-const breadSection = allSections.find(isBreadStory)
-/** The dish landing pages go straight after "On the menu" (see home.ts). */
-const pageSections = allSections
-  .filter((block) => block !== breadSection)
-  .flatMap((block) => (block?._key === 'menus' ? [block, homeSpecialtiesBlock] : [block]))
 
 const graph = pageGraph([
   restaurantSchema(),
@@ -41,15 +18,13 @@ const graph = pageGraph([
 ---
 
 <BaseLayout
-  title={seo.title}
-  description={seo.description}
-  ogImage={home.seo?.ogImage}
-  noIndex={home.seo?.noIndex}
+  title={home.seo.title}
+  description={home.seo.description}
+  ogImage={home.seo.ogImage}
+  noIndex={home.seo.noIndex}
   isHome
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
-  <PageBuilder sections={pageSections} />
-  <WaveMoment />
-  {breadSection && <TextWithMediaSection block={breadSection} />}
+  <PageBuilder sections={home.sections} />
   <FaqSection headingText="FAQs" items={homeFaq} includeSchema={false} />
 </BaseLayout>

@@ -4,33 +4,30 @@
  * H1 + supporting line + dual CTAs on a bottom-weighted scrim (Bakehouse pattern).
  */
 import { btn, heading, layout, typeScale } from '../../lib/ui'
-import { imageUrl, imageAlt } from '../../lib/image'
-import { homeHeroFallback } from '../../data/home'
+import type { SectionOf } from '../../lib/content'
+import ResponsivePicture from '../ResponsivePicture.astro'
 
 interface Props {
-  block: any
+  block: SectionOf<'hero'>
 }
 const { block } = Astro.props
 
-/* Repo wins. Sanity `hero.body` is ignored so a stale Studio lede cannot paint. */
-const headingText = homeHeroFallback.heading
-const bodyText = homeHeroFallback.body
-const primaryCta = block.orderOnline
-const secondaryCta = block.reservations
+const headingText = block.heading
+const bodyText = block.body
+const primaryCta = block.primaryCta
+const secondaryCta = block.secondaryCta
 ---
 
 <!-- Minus the announcement bar (AnnouncementBar.astro), so the headline and
      buttons stay above the fold when it is showing. -->
 <div class="section-home-hero relative mb-section-gap-y block h-[calc(100dvh-var(--announcement-height,0px))] w-full flex-col wf-sm:mb-section-gap-y-sm">
   <div class="home-hero relative h-full overflow-hidden">
-    <img
-      src={imageUrl(block.image)}
+    <ResponsivePicture
+      image={block.image}
+      sizes="100vw"
       loading="eager"
       fetchpriority="high"
-      width="1440"
-      height="810"
-      alt={imageAlt(block.image)}
-      class="home-hero-image absolute inset-0 h-full w-full object-cover animate-hero-ken"
+      imgClass="home-hero-image absolute inset-0 h-full w-full object-cover animate-hero-ken"
     />
     <div class="home-hero-overlay absolute inset-0 h-full w-full bg-black/35"></div>
     <div

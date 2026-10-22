@@ -1,6 +1,12 @@
 ---
+/** Centred lede and catering-menu button under the /catering-events banner. */
 import { btn, layout, typeScale } from '../../lib/ui'
-import { cateringEventsIntro, cateringMenuLink } from '../../data/catering'
+import { inlineHtml, type SectionOf } from '../../lib/content'
+
+interface Props {
+  block: SectionOf<'cateringIntro'>
+}
+const { block } = Astro.props
 ---
 
 <section class="catering-events-lede mb-section-gap-y wf-sm:mb-section-gap-y-sm">
@@ -12,11 +18,11 @@ import { cateringEventsIntro, cateringMenuLink } from '../../data/catering'
         '[&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70',
         typeScale.bodyLg,
       ]}
-      set:html={cateringEventsIntro}
+      set:html={inlineHtml(block.body)}
     />
     <div class="mt-space-24 flex justify-center">
-      <a href={cateringMenuLink.url} class={btn.outline}>
-        <span>{cateringMenuLink.label}</span>
+      <a href={block.cta.url} class={btn.outline}>
+        <span>{block.cta.label}</span>
       </a>
     </div>
   </div>

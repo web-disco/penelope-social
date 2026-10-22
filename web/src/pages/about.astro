@@ -32,8 +32,7 @@ const graph = pageGraph([
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
   <main>
     <BannerHero
-      src={aboutPage.banner.src}
-      alt={aboutPage.banner.alt}
+      image={aboutPage.banner}
       headingText={aboutPage.heading}
       intro={aboutPage.subheading}
       objectPosition="center 50%"

@@ -4,26 +4,14 @@
  * (Bakehouse catering style). Never a second cream-section title.
  */
 import BannerHero from './BannerHero.astro'
-import { imageAlt } from '../../lib/image'
-import { bannerCopyFor } from '../../data/banners'
+import type { Image } from '../../lib/content'
 
 interface Props {
-  block: any
+  block: { image: Image; heading: string; intro: string }
   /** The page's trail, shown as a bar under the banner. Same list as its BreadcrumbList. */
   breadcrumbs?: { name: string; path: string }[]
 }
 const { block, breadcrumbs } = Astro.props
-
-const path = Astro.url.pathname.replace(/\/$/, '') || '/'
-const copy = bannerCopyFor(path, { heading: block.heading, intro: block.intro })
 ---
 
-<BannerHero
-  image={block.image}
-  src={block.src}
-  alt={block.alt || imageAlt(block.image)}
-  headingText={copy.heading}
-  intro={copy.intro}
-  objectPosition={block.objectPosition}
-  breadcrumbs={breadcrumbs}
-/>
+<BannerHero image={block.image} headingText={block.heading} intro={block.intro} breadcrumbs={breadcrumbs} />

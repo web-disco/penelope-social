@@ -4,18 +4,17 @@
  * homepage bread block, but split 50/50 with a portrait
  * 4:5 image. Only used by the SEO landing pages.
  *
- * block: { eyebrow, heading, body: PortableText[], image, layout: 'image-first' | 'copy-first', ctas: Cta[] }
+ * block: { eyebrow, heading, body: Markdown paragraphs, image, layout: 'image-first' | 'copy-first', ctas: Cta[] }
  */
-import { PortableText } from 'astro-portabletext'
-import { withoutEmptyBlocks } from '../../lib/portableText'
 import { btn, eyebrow, layout, space, story, typeScale } from '../../lib/ui'
-import { imageAlt, imageObjectPosition, imageSrcset, imageUrl } from '../../lib/image'
+import { paragraphsHtml, type SectionOf } from '../../lib/content'
+import ResponsivePicture from '../ResponsivePicture.astro'
 
 interface Props {
-  block: any
+  block: SectionOf<'mediaTextCta'>
 }
 const { block } = Astro.props
-const body = withoutEmptyBlocks(block.body)
+const body = paragraphsHtml(block.body)
 const imageFirst = block.layout !== 'copy-first'
 
 /* The shared story tokens stay 7/5 and 3:2 for TextWithMediaSection;
@@ -28,7 +27,7 @@ const copy = story.copy
   .replace('justify-end', 'justify-center')
   .replace('pb-space-48', 'pb-0')
 const image = story.image.replace('aspect-[3/2]', 'aspect-[4/5]')
-const ctas: any[] = block.ctas ?? []
+const ctas = block.ctas ?? []
 
 const bodyClass =
   'flex flex-col gap-space-16 text-charcoal [&_p]:my-0 ' +
@@ -40,28 +39,14 @@ const bodyClass =
   <div class:list={[layout.shell, space.sectionY]}>
     <div class={story.grid}>
       <div class:list={[media, !imageFirst && 'order-2 wf-md:order-1']}>
-        <img
-          src={imageUrl(block.image)}
-          srcset={imageSrcset(block.image)}
-          sizes="(min-width: 992px) 50vw, 100vw"
-          alt={imageAlt(block.image)}
-          width="800"
-          height="1000"
-          loading="lazy"
-          class={image}
-          style={imageObjectPosition(block.image) ? `object-position: ${imageObjectPosition(block.image)};` : undefined}
-        />
+        <ResponsivePicture image={block.image} sizes="(min-width: 992px) 50vw, 100vw" imgClass={image} />
       </div>
       <div class:list={[copy, !imageFirst && 'order-1 wf-md:order-2']}>
         <div class="max-w-[40rem]">
           {block.eyebrow && <p class:list={[eyebrow.base, 'mt-0 mb-space-16']}>{block.eyebrow}</p>}
           <h2 class:list={['my-0 text-left text-charcoal', typeScale.displayM]}>{block.heading}</h2>
           {
-            body.length > 0 && (
-              <div class:list={['mt-space-16', bodyClass, typeScale.bodyLg]}>
-                <PortableText value={body} />
-              </div>
-            )
+            body && <div class:list={['mt-space-16', bodyClass, typeScale.bodyLg]} set:html={body} />
           }
         </div>
         {

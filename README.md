@@ -1,62 +1,68 @@
 # Penelope Social
 
-The penelopesocial.com website, ported off Webflow to **Astro + Sanity**, hosted
-on **Cloudflare Workers**.
+The penelopesocial.com website: **Astro**, with all content in **YAML files in
+git**, hosted on **Cloudflare Workers**. It was ported off Webflow onto Sanity,
+then moved off Sanity onto YAML content collections (see
+[docs/sanity-to-yaml.md](docs/sanity-to-yaml.md)), the same setup as Penelope
+Bakehouse.
 
 ```
 penelope/
 ├─ web/      Astro static site + the Cloudflare Worker that handles forms
-├─ studio/   Sanity Studio (content editing)
-└─ scripts/  migrate.js (scrape Webflow → Sanity) and compare.js (parity check)
+│  └─ src/content/   every page, menu and merch item, as YAML
+├─ studio/   Legacy Sanity Studio. The site no longer reads it (see the migration doc)
+└─ scripts/  migrate.js (Webflow → Sanity, legacy) and compare.js (parity check)
 ```
 
 ## Getting started
 
 ```bash
 pnpm install
-pnpm migrate:dry   # scrape the Webflow original into scripts/output/*.json
 pnpm dev           # http://localhost:4380
 ```
 
-The site builds with **no Sanity project configured**. `web/src/lib/data.ts`
-reads from Sanity when `PUBLIC_SANITY_PROJECT_ID` is set and otherwise falls
-back to the scraped JSON in `scripts/output/`, which is committed. That is what
-lets the whole thing be reviewed before any accounts exist.
+The build needs `PUBLIC_TURNSTILE_SITE_KEY` to be present (empty is allowed
+locally); see `.env.example`.
 
 | Command | What it does |
 | --- | --- |
 | `pnpm dev` | Astro dev server |
-| `pnpm build` | Static build into `web/dist` |
-| `pnpm studio` | Sanity Studio on :3333 (pass `--port` to change it; the port must be an allowed CORS origin — `sanity cors add http://localhost:<port> --credentials`) |
-| `pnpm migrate:dry` | Scrape the Webflow original → `scripts/output/*.json` |
-| `pnpm migrate` | Upload assets and import into Sanity (needs a write token) |
+| `pnpm build` | Static build into `web/dist`. Fails on any content error |
 | `pnpm compare` | Structural DOM diff of every route vs the Webflow original |
 | `pnpm deploy:web` | Build and deploy the Worker (`deploy:web:dry` to validate only) |
-| `pnpm deploy:studio` | Deploy the hosted Studio |
+
+## Editing content
+
+See [AGENTS.md](AGENTS.md) for the full guide. In short: all copy, prices,
+links and photos live in `web/src/content/` as YAML, validated at build time.
+
+| To change | Edit |
+|---|---|
+| A menu item or price | `menus/<menu>.yaml`. Landing-page dish cards and Happy Hour's linked items update themselves |
+| A new menu page | Add `menus/<slug>.yaml`. It routes at `/menus/<slug>` |
+| A page (contact, catering, /menus, merch, the Vaughan landing pages) | `pages/<slug>.yaml`. A new file routes at `/<slug>` |
+| The homepage | `pages/home.yaml` |
+| Header, nav, Menus dropdown, footer, announcement bar, popup | `site.yaml` |
+| A merch product | `merch/<slug>.yaml` |
+| Hours, address, phone, FAQs, /about, /locations | Still TypeScript in `web/src/data/` (next phase) |
+
+Photos go in `web/src/assets/images/` and are referenced by bare filename. Astro
+turns them into responsive WebP at build time.
 
 ## How it fits together
 
-**Page builder.** Pages hold a `sections` array of typed blocks, shared between
-the homepage and every other page via `pageBuilderField`
-(`studio/schemaTypes/objects/pageBuilder.ts`). Adding a section is four edits:
-one schema in `studio/schemaTypes/sections/`, one entry in that shared field, one
-component in `web/src/components/sections/`, and one entry in
-`web/src/components/PageBuilder.astro`. Nothing else.
+**Page builder.** Pages hold a `sections:` list of typed blocks. Adding a
+section type is three edits: one schema in `web/src/lib/content-schema.ts`
+(added to `section`), one component in `web/src/components/sections/`, and one
+entry in `web/src/components/PageBuilder.astro`.
 
-Every section is one file, named for what it is rather than for the copy that
-happens to be in it, and every one carries the shared `blockIcon` so the builder
-reads as a uniform stack rather than a mix of photo thumbnails and generic
-icons. The insert menu is set to grid view.
-
-**Content types.** Two singletons — `homepage` and `siteSettings` (header,
-drawer, footer, newsletter, SEO) — plus `page`, `menu` (the four menus, each
-with its categories and items inline), and `merchProduct`.
-
-The homepage is its **own document type**, not a `page` with the slug "home". It
-cannot be created, duplicated or deleted, and the `page` schema rejects a "home"
-slug, so a second homepage is unrepresentable. `structure.ts` owns the
-`singletonTypes` / `singletonActions` sets that `sanity.config.ts` reads to strip
-those actions and hide singletons from the global "create new" menu.
+**Content.** `web/src/content.config.ts` defines five collections: `site`
+(header, nav, footer, announcement, popup), `home`, `pages`, `menus` and
+`merch`. Schemas are strict (an unknown key fails the build). Components read
+content only through `web/src/lib/content.ts`, which swaps image filenames for
+optimised assets, renders Markdown links, and fails the build on cross-file
+mistakes: a link to a page that doesn't exist, a dish card or Happy Hour item
+naming a dish that isn't on its menu, a callout naming a missing menu.
 
 **Styling.** The design is re-expressed in Tailwind v4, with every value read
 from Webflow's compiled stylesheet rather than eyeballed.
@@ -142,40 +148,29 @@ whatever wrangler version it resolves that day instead of the one in the
 lockfile.
 
 **Build variables must be set in Cloudflare.** There is no `.env` in CI — it is
-gitignored, and rightly so, since it also holds the Sanity write token and the
-Turnstile secret. Anything the build reads has to come from the build
-environment:
+gitignored, and rightly so, since it also holds the Turnstile secret. Anything
+the build reads has to come from the build environment:
 
 | Variable | Value | Omitted |
 | --- | --- | --- |
 | `PUBLIC_TURNSTILE_SITE_KEY` | the widget's sitekey | build fails, deliberately |
-| `PUBLIC_SANITY_DATASET` | `production` | defaults to `production` |
-| `PUBLIC_SANITY_PROJECT_ID` | leave unset | falls back to `DEFAULT_PROJECT_ID` |
-| `SANITY_PREVIEW_DRAFTS` | leave unset on production | published-only (the default) |
-| `SANITY_API_READ_TOKEN` | leave unset on production | drafts stay invisible |
 
-Leave `PUBLIC_SANITY_PROJECT_ID` genuinely unset rather than blank — `data.ts`
-treats an empty value as "use the committed fixtures on purpose" and would
-deploy stale content without complaint.
+The `PUBLIC_SANITY_*` and `SANITY_*` variables are no longer read by anything
+and can be deleted from the Workers Builds settings.
 
-**Do not set `SANITY_PREVIEW_DRAFTS` or `SANITY_API_READ_TOKEN` on the
-production Workers Builds trigger.** Those two are build-time only (never
-`PUBLIC_*`) and exist so a laptop or a *preview* trigger can overlay Sanity
-drafts. See `.env.example`.
-
-Publishing in Sanity triggers a rebuild through a Workers Builds **Deploy Hook**
-registered as a Sanity webhook. Builds read the dataset live (`useCdn: false`),
-so a build kicked off moments after a publish still sees the new content.
+Every push to `main` rebuilds and deploys. A content edit is a commit, so it
+ships the same way as a code change, and a content mistake fails that build
+instead of reaching the live site.
 
 ## Go-live checklist
 
 **The site is live.** Everything below is done; it is kept as the record of what
 was set up and why, because most of it is invisible from the code — which
 records are in the DNS zone, which values the build needs, and which of them
-fail silently when they are missing. Item 1 is the only one a new developer
-still has to do, and only to run the project locally.
+fail silently when they are missing. Items 1–3 and 5 describe the Sanity setup
+the site has since moved off (see docs/sanity-to-yaml.md for the cutover).
 
-1. **Sanity project.** Already created: `wlwg9juj` ("Penelope Social"), and it is
+1. ~~**Sanity project.**~~ *Legacy.* Already created: `wlwg9juj` ("Penelope Social"), and it is
    the `DEFAULT_PROJECT_ID` in `web/src/lib/data.ts`. Symlink the env into both
    workspaces — the Sanity CLI and Astro each resolve env from their own
    directory, not the repo root: `ln -sfn ../.env studio/.env && ln -sfn ../.env web/.env`.

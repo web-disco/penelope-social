@@ -1,0 +1,52 @@
+title: Happy Hour
+heading: Happy hour
+intro: Every day from 5pm to 7pm.
+breadcrumb: Happy Hour
+banner:
+  src: happy-hour-giuliano.jpg
+  alt: Giuliano pouring a cocktail behind the bar at Penelope Social
+  objectPosition: 28% 10%
+seo:
+  title: Happy hour | 5pm to 7pm daily in Woodbridge | Penelope Social
+  description: "Happy hour every day from 5pm to 7pm at Penelope Social in Woodbridge: $12 cocktails, sliders, bao, and fries at 125 Hawkview Blvd."
+callout:
+  line: Every day from 5pm to 7pm.
+  ctaLabel: View happy hour
+  image:
+    src: happy-hour-giuliano.jpg
+    alt: Giuliano pouring a cocktail behind the bar at Penelope Social
+    objectPosition: 28% 32%
+  alsoOn:
+    - dinner
+    - bar
+categories:
+  - title: The Food
+    anchor: food
+    items:
+      - title: Penny Fries
+        description: Hand-Cut Fries, Salt
+        price: "5"
+      - from: dinner
+        item: Roasted Beet Salad
+        price: "12"
+      - from: dinner
+        item: Crunchwrap Supreme
+        price: "12"
+      - from: dinner
+        item: General Tso Bao (2pc)
+        price: "12"
+      - from: dinner
+        item: Penny Burger Sliders (2pc)
+        price: "12"
+  - title: The Drinks
+    anchor: drinks
+    items:
+      - title: Arancia Fresca (2oz)
+        description: Canvas Gin, Aperol, Amaro Arànciu, Passionfruit, Strawberry, Lemon, Orange Bitters
+        price: "12"
+      - title: Pink Pantheress (2oz)
+        description: El Jimador Tequila Blanco, Aperol, Strawberry, Lime, Grapefruit Soda
+        price: "12"
+      - title: Penny's Local Smash (2oz)
+        description: True Theory Vodka, St-Germain, Lemon, Local Fruit, Mint
+        price: "12"

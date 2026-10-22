@@ -1,5 +1,7 @@
 import type { Cta } from './types'
 import { PAGE_SEO } from './seo'
+import dinnerGathering from '../assets/images/dinner-gathering.avif'
+import bakehouseCounter from '../assets/images/bakehouse-counter.jpg'
 import {
   BAKEHOUSE_CATERING_URL,
   BAKEHOUSE_ORDER_ONLINE_URL,
@@ -26,7 +28,7 @@ export const woodbridgeLocation = {
   heading: 'Penelope Social',
   hubTitle: 'Penelope Social',
   hubImage: {
-    src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/6738fc337434df480308980c_penelope-social-gathering.avif',
+    src: dinnerGathering,
     alt: 'Dinner service at Penelope Social',
     objectPosition: 'center 40%',
   },
@@ -74,7 +76,7 @@ export const scarboroughLocation = {
   heading: 'Our Scarborough bakehouse',
   hubTitle: 'Penelope Bakehouse',
   hubImage: {
-    src: 'https://penelopebakehouse.com/images/location-bakehouse.jpg',
+    src: bakehouseCounter,
     alt: 'Counter at Penelope Bakehouse in Scarborough',
     objectPosition: 'center 50%',
   },

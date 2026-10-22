@@ -1,0 +1,123 @@
+seo:
+  title: Penelope Social | Cafe and bar in Woodbridge
+  description: Cafe and bar at 125 Hawkview Blvd, Woodbridge. Focaccia sandwiches, sourdough pizza, and cocktails, made fresh daily.
+sections:
+  - type: hero
+    image:
+      src: dinner-gathering.avif
+      alt: People having dinner at Penelope Social.
+    heading: Good food, better company at Penelope Social in Woodbridge
+    body: Focaccia sandwiches at lunch, sourdough pizza at dinner, and cocktails whenever you sit down.
+    primaryCta:
+      label: Order Online
+      url: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+      newTab: true
+    secondaryCta:
+      label: Reservations
+      url: /reservations
+      newTab: true
+  - type: menuCards
+    main: true
+    heading: On the menu
+    intro: Lunch, dinner, the bar, and catering trays, all from this kitchen.
+    rating: true
+    cta:
+      label: Explore our menus
+      url: /menus
+    cards:
+      - title: Lunch
+        line: Pizza and focaccia sandwiches
+        url: /menus/lunch
+        image:
+          src: focaccia-in-hand.avif
+          alt: Focaccia Sandwich
+      - title: Bar
+        line: Cocktails till late
+        url: /menus/bar
+        image:
+          src: cocktail.avif
+          alt: Crafted Cocktail
+      - title: Dinner
+        line: Pizza and shareables
+        url: /menus/dinner
+        image:
+          src: penny-burger.avif
+          alt: Penelope Burger
+      - title: Catering
+        line: Trays for your event
+        url: /menus/catering
+        image:
+          src: catering-sandwich-trays.jpg
+          alt: Two catering trays of focaccia sandwiches
+  - type: menuCards
+    layout: sentence
+    heading: What we're known for
+    cards:
+      - title: Italian Cafe
+        line: Espresso and Bakehouse pastries from 9am
+        url: /cafe-in-vaughan
+        image:
+          src: latte-art.jpg
+          alt: A latte with latte art at Penelope Social
+      - title: Sourdough Pizza
+        line: Roman slices at lunch, 14-inch pies at dinner
+        url: /pizza-vaughan
+        image:
+          src: margherita-pizza.jpg
+          alt: Sourdough pizza at Penelope Social
+      - title: Focaccia Sandwiches
+        line: Italian sandwiches on sourdough focaccia
+        url: /sandwiches-vaughan
+        image:
+          src: italian-sandwich.jpg
+          alt: An Italian focaccia sandwich
+      - title: Sourdough Bakery
+        line: Loaves, focaccia and pizza dough to take home
+        url: /bakery-vaughan
+        image:
+          src: bread-loaves-stack.avif
+          alt: Sourdough loaves from Penelope Bakehouse
+    sentence:
+      - text: Come in for
+      - url: /pizza-vaughan
+        label: sourdough pizza
+        after: ","
+      - url: /sandwiches-vaughan
+        label: Italian sandwiches
+        after: ","
+      - text: coffee at our
+      - url: /cafe-in-vaughan
+        label: Italian cafe
+      - text: and
+      - url: /bakery-vaughan
+        label: bread to take home
+        after: .
+  - type: textWithMedia
+    layout: copy-first
+    heading: Events at Penelope
+    body: Birthdays, work dinners, and nights in the room, with food, drinks, and a table we will set.
+    image:
+      src: event-at-penelope.avif
+      alt: Event at Penelope
+    cta:
+      label: Plan event
+      url: /catering-events
+      style: primary
+  - type: waveMoment
+    wave: Take a shirt home from Social
+    line: Hoodies, tees, totes. Purchase and pick them up in store.
+    cta:
+      label: See merch
+      url: /merchandise
+  - type: textWithMedia
+    layout: image-first
+    heading: Good bread, served here every day
+    body: Loaves start at Penelope Bakehouse and land here as [sandwiches](/sandwiches-vaughan) and [pizza](/pizza-vaughan), or as bread with dinner.
+    image:
+      src: sourdough-loaves-stack.avif
+      alt: Loaves of Sourdough Bread
+    cta:
+      label: Visit the Bakehouse
+      url: https://penelopebakehouse.com
+      style: outline
+      newTab: true

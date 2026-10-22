@@ -60,8 +60,7 @@ const graph = pageGraph([
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
   <main>
     <BannerHero
-      src={scarboroughLocation.hubImage.src}
-      alt={scarboroughLocation.hubImage.alt}
+      image={scarboroughLocation.hubImage}
       headingText={scarboroughLocation.heading}
       intro={scarboroughLocation.intro}
       objectPosition={scarboroughLocation.hubImage.objectPosition}

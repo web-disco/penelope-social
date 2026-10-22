@@ -1,0 +1,17 @@
+title: Tote Bag
+heading: Tote bag
+order: 0
+price: "10"
+description: This grey tote bag combines style and function, featuring Penelope’s iconic bicycle and bread graphic on one side and the Penelope Social logo on the other. Perfectly sized for daily essentials or market runs, it’s durable, lightweight, and versatile, making it an eco-friendly companion for any occasion.
+banner:
+  src: merch-hero.jpg
+  alt: Person holding up a Penelope Social sweatshirt
+images:
+  - src: tote-bag.jpg
+    alt: ""
+cta:
+  label: available in store
+  url: /contact
+seo:
+  title: Tote Bag | Penelope Social
+  description: This grey tote bag combines style and function, featuring Penelope’s iconic bicycle and bread graphic on one side and the Penelope Social logo on the other. Perfectly sized for daily essentials or market runs, it’s durable, lightweight, and versatile, making it an eco-friendly companion for any occasion.

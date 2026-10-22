@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import BannerHero from '../../components/sections/BannerHero.astro'
+import ResponsivePicture from '../../components/ResponsivePicture.astro'
 import { btn, containerNoTop, heading, radius, space, typeScale } from '../../lib/ui'
 import {
   locationsHub,
@@ -31,8 +32,7 @@ const graph = pageGraph([
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
   <main>
     <BannerHero
-      src={woodbridgeLocation.hubImage.src}
-      alt="Penelope Social in Woodbridge and Penelope Bakehouse in Scarborough"
+      image={{ ...woodbridgeLocation.hubImage, alt: 'Penelope Social in Woodbridge and Penelope Bakehouse in Scarborough' }}
       headingText={locationsHub.heading}
       intro={locationsHub.intro}
       objectPosition="center 40%"
@@ -46,18 +46,10 @@ const graph = pageGraph([
             hubs.map((location) => (
               <div class:list={['location-block flex flex-col', radius.none]}>
                 <div class={`overflow-hidden ${radius.none}`}>
-                  <img
-                    src={location.hubImage.src}
-                    alt={location.hubImage.alt}
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                    class="aspect-[4/3] w-full object-cover"
-                    style={
-                      location.hubImage.objectPosition
-                        ? `object-position: ${location.hubImage.objectPosition};`
-                        : undefined
-                    }
+                  <ResponsivePicture
+                    image={location.hubImage}
+                    sizes="(min-width: 992px) 50vw, 100vw"
+                    imgClass="aspect-[4/3] w-full object-cover"
                   />
                 </div>
                 <h2 class:list={[heading.medium, 'mt-space-24 text-left']}>{location.hubTitle}</h2>

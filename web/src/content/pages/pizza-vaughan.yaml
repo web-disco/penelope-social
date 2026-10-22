@@ -1,0 +1,136 @@
+title: Sourdough Pizza in Vaughan
+breadcrumb: Sourdough Pizza
+seo:
+  title: Best Sourdough Pizza in Vaughan | Penelope Social
+  description: Roman-style sourdough slices at lunch, 14-inch New York pies at dinner. At 125 Hawkview Blvd in Woodbridge, Vaughan. Book a table or order online.
+schemaMenu:
+  - menu: lunch
+    category: pizza-slices
+    name: Sourdough pizza by the slice (lunch)
+  - menu: dinner
+    category: pizza
+    name: Sourdough pizza, 14-inch pies (dinner)
+sections:
+  - type: pageHero
+    image:
+      src: pizza-squares.jpg
+      alt: Sourdough pizza squares at Penelope Social
+    heading: Sourdough Pizza in Vaughan
+    intro: Roman slices at lunch, New York pies at dinner, all from one sourdough starter.
+  - type: richTextIntro
+    heading: What makes a pizza sourdough?
+    body: |-
+      Most pizza dough rises on commercial yeast, and it rises fast. Sourdough rises on a starter instead: a live culture of flour and water that does the work slowly. That natural ferment is the whole difference.
+
+      You can taste it. The crust has a light tang and more depth than a standard base, with a crisp bottom and an open, airy middle. It holds up under the toppings instead of going soft. And because the long ferment breaks down more of the flour before it ever reaches the oven, a lot of people find it sits lighter, too.
+  - type: menuItemCards
+    heading: The pizzas people keep coming back for
+    intro: Here are some of the best selling sourdough pizzas at Penelope Social
+    rating: true
+    items:
+      - item: Margherita
+        link: /menus/lunch#pizza-slices
+        image:
+          src: margherita-pizza.jpg
+          alt: Margherita pizza
+      - item: NY Pepperoni
+        link: /menus/lunch#pizza-slices
+        image:
+          src: ny-pepperoni-pizza.jpg
+          alt: NY Pepperoni pizza
+      - item: Lovechild
+        link: /menus/dinner#pizza
+        image:
+          src: lovechild-pizza.jpg
+          alt: Lovechild pizza
+      - item: Truffle Mushroom
+        link: /menus/dinner#pizza
+        image:
+          src: funghi-pizza.jpg
+          alt: Truffle mushroom pizza
+  - type: mediaTextCta
+    layout: image-first
+    heading: A starter called Penelope
+    body: |-
+      It began in 2018 as a starter called Anastasia. It was nearly lost while the restaurant was opening, brought back to life, and renamed Penelope. The restaurant and the Bakehouse both grew from it.
+
+      Today it lives at Penelope [Bakehouse in Scarborough](/locations/scarborough), where the dough is made and naturally fermented. From there it comes to our [Woodbridge location](/locations/woodbridge) in Vaughan to be topped and baked.
+    image:
+      src: penelope-starter.jpg
+      alt: The Penelope sourdough starter
+      objectPosition: 50% 53%
+    ctas:
+      - label: About the Bakehouse
+        url: https://penelopebakehouse.com/about
+        style: outline
+        newTab: true
+  - type: comparisonTable
+    heading: Sourdough pizza vs regular pizza
+    intro: The difference starts long before the toppings go on.
+    columns:
+      - Penelope sourdough pizza
+      - Regular pizza
+    rows:
+      - label: Rises with
+        values:
+          - A live sourdough starter
+          - Commercial yeast
+      - label: Ferment
+        values:
+          - Cold-fermented for 48 hours
+          - Often a few hours, sometimes a day in the fridge
+      - label: Flavour
+        values:
+          - A light tang and more depth, from the long ferment
+          - Mild, mostly there to carry the toppings
+      - label: Crust
+        values:
+          - Crisp underneath and airy inside, and it holds up under the toppings
+          - Softer, and more likely to go limp in the middle
+      - label: Made
+        values:
+          - Dough made at our Scarborough bakehouse, baked in Woodbridge
+          - Often made in bulk, sometimes frozen
+  - type: mediaTextCta
+    layout: copy-first
+    heading: Cater your event in Vaughan with sourdough pizza from Penelope
+    body: |-
+      Having a party or event in Vaughan? Treat your guests right with hot and fresh sourdough pizza from Penelope Social.
+
+      We also host events at our location in Woodbridge. Contact us to learn more about hosting your event at our space.
+    image:
+      src: pizza-assortment.jpg
+      alt: Photo of various styles of pizza
+    ctas:
+      - label: See the catering menu
+        url: /menus/catering
+        style: primary
+      - label: Contact Us
+        url: /catering-events
+        style: outline
+  - type: faqSection
+    heading: FAQs
+    items:
+      - question: Where can I get sourdough pizza in Vaughan?
+        answer: At Penelope Social, 125 Hawkview Blvd in Woodbridge. We serve Roman-style slices at lunch and 14-inch New York-style pies at dinner, all made with our own sourdough starter.
+      - question: What's the difference between the lunch and dinner pizza?
+        answer: Lunch is Roman-style sourdough sold by the slice, cold-fermented for 48 hours, at $6 to $7 a slice. Dinner is 14-inch New York-style pies from the same starter, from $25 to $31.
+      - question: Is the dough really sourdough?
+        answer: Yes. Every dough is naturally leavened with Penelope, the starter we've kept going since 2018. It's made at Penelope Bakehouse in Scarborough, then topped and baked here in Woodbridge.
+      - question: When can I get pizza?
+        answer: Slices are on the lunch menu. Whole pies are on the dinner menu, served at the bar from 5pm, Monday to Saturday. The bar is closed Sunday night.
+      - question: Can I order pizza online?
+        answer: Yes. Use the Order online button on this page to order from Penelope Social through Toast.
+      - question: Do you do pizza catering for events in Vaughan?
+        answer: Yes. Full-size 24-piece pizzas are on our catering menu, and catering orders need at least 24 hours' notice. We can also host your event at our space in Woodbridge.
+  - type: finalCta
+    heading: Looking for pizza in Vaughan tonight?
+    body: Book a table at our location in Woodbridge, or order online.
+    ctas:
+      - label: Book a table
+        url: /reservations
+        style: primary
+      - label: Order online
+        url: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+        style: outline
+        newTab: true

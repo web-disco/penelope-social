@@ -1,0 +1,72 @@
+title: Catering & Events
+breadcrumb: Catering and events
+seo:
+  title: Catering and events in Woodbridge | Penelope Social
+  description: Plan catering or a private event at Penelope Social, 125 Hawkview Blvd, Woodbridge. Trays to-go or a night in the restaurant. 24 hours’ notice for catering.
+sections:
+  - type: pageHero
+    image:
+      src: event-banner.avif
+      alt: Image of Lunch menu platter
+    heading: Catering and events
+    intro: Trays to-go, or a night in the room.
+  - type: cateringIntro
+    body: Trays of [focaccia sandwiches](/sandwiches-vaughan) and [pizza](/pizza-vaughan), plus shareables from the Woodbridge kitchen. Tell us the headcount and what you need. We'll help size it.
+    cta:
+      label: See the catering menu
+      url: /menus/catering
+  - type: contactForm
+    variant: events
+    heading: Plan your event
+    intro: Submit the form below and someone from our team will reach back out to you within 24 to 48 hours.
+    fields:
+      - id: Event-Form-Name
+        name: Event-Form-Name
+        type: text
+        placeholder: First Name
+        required: true
+      - id: Event-Form-Last-Name
+        name: Event-Form-Last-Name
+        type: text
+        placeholder: Last Name
+        required: true
+      - id: Event-Form-Email
+        name: Event-Form-Email
+        type: email
+        placeholder: Email
+        required: true
+      - id: Event-Form-Phone
+        name: Event-Form-Phone
+        type: tel
+        placeholder: Phone Number
+        required: true
+      - id: Reason-For-Inquiry
+        name: Reason-For-Inquiry
+        type: select
+        placeholder: Reason For Inquiry
+        required: true
+        options:
+          - Catering
+          - Event
+          - General Inquiry
+      - id: Event-Form-Amount-of-Guests
+        name: Event-Form-Amount-of-Guests
+        type: number
+        placeholder: Number of Guests
+        required: true
+      - id: Date
+        name: Date
+        type: text
+        placeholder: Date
+        required: true
+        fullWidth: true
+        note: We need 24 hrs notice for catering orders. *
+      - id: Event-Form-Message
+        name: Event-Form-Message
+        type: textarea
+        placeholder: Let us know how we can make your day special.
+        required: true
+        fullWidth: true
+    submitLabel: Submit
+    successMessage: Thank you! Your submission has been received!
+    errorMessage: Oops! Something went wrong while submitting the form.

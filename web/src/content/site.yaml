@@ -1,0 +1,154 @@
+seo:
+  ogImage: /images/og/default.png
+googleRating:
+  score: 4.7
+  label: 600+ reviews on Google
+  url: https://www.google.com/search?q=penelope+social#lrd=0x882b2f14f3cd3fbb:0x3e54ffff5191a9bd,1,,,,
+header:
+  logo: /images/penelope-logo-nav.svg
+  logoAlt: Penelope Logo
+  orderOnline:
+    label: Order Online
+    url: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+    newTab: true
+  reservations:
+    label: Reservations
+    url: /reservations
+    newTab: true
+nav:
+  - label: Menus
+    url: /menus
+  - label: About
+    url: /about
+  - label: Locations
+    url: /locations
+  - label: Gift Cards
+    url: https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard
+    newTab: true
+  - label: Catering
+    url: /catering-events
+  - label: Merch
+    url: /merchandise
+menusDropdown:
+  - heading: Menus
+    links:
+      - label: Lunch
+        url: /menus/lunch
+        description: Focaccia sandwiches, pizza slices and salads
+        image:
+          src: focaccia-in-hand.avif
+          alt: ""
+      - label: Dinner
+        url: /menus/dinner
+        description: Shareables, handhelds and 14-inch pies
+        image:
+          src: penny-burger.avif
+          alt: ""
+      - label: Bar
+        url: /menus/bar
+        description: Cocktails till late
+        image:
+          src: cocktail.avif
+          alt: ""
+      - label: Catering
+        url: /menus/catering
+        description: Trays for your office or event
+        image:
+          src: catering-sandwich-trays.jpg
+          alt: ""
+  - heading: Specialties
+    links:
+      - label: Italian Cafe
+        url: /cafe-in-vaughan
+        description: Espresso and Bakehouse pastries from 9am
+        image:
+          src: latte-art.jpg
+          alt: ""
+      - label: Sourdough Pizza
+        url: /pizza-vaughan
+        description: Roman slices at lunch, 14-inch pies at dinner
+        image:
+          src: margherita-pizza.jpg
+          alt: ""
+      - label: Focaccia Sandwiches
+        url: /sandwiches-vaughan
+        description: Italian sandwiches on sourdough focaccia
+        image:
+          src: italian-sandwich.jpg
+          alt: ""
+      - label: Sourdough Bakery
+        url: /bakery-vaughan
+        description: Loaves, focaccia and pizza dough to take home
+        image:
+          src: bread-loaves-stack.avif
+          alt: ""
+footer:
+  logo: /images/penelope-logo-footer.svg
+  logoAlt: Penelope Social Logo
+  newsletter:
+    heading: Stay in the loop
+    text: Sign up for our newsletter and be the first to know about exclusive offers.
+    placeholder: Enter your email address
+    buttonLabel: Subscribe
+    consentText: I agree to receive marketing emails from Penelope Social. Unsubscribe at any time.
+    successMessage: Thank you! Your submission has been received!
+    errorMessage: Oops! Something went wrong while submitting the form.
+  menus:
+    heading: Menus
+    blurb: Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.
+    blurbUrl: /menus
+    links:
+      - label: Lunch
+        url: /menus/lunch
+      - label: Bar
+        url: /menus/bar
+      - label: Dinner
+        url: /menus/dinner
+      - label: Catering
+        url: /menus/catering
+  specialties:
+    heading: Specialties
+    blurb: Sourdough pizza, Italian sandwiches on focaccia, our cafe, and bread to take home.
+  hours:
+    heading: Hours & location
+    locationLabel: LOCATION
+    address: 125 Hawkview Blvd, Woodbridge, ON L4H 2E2
+    mapUrl: https://www.google.com/maps/dir//125+Hawkview+Blvd,+Woodbridge,+ON+L4H+2E2/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x882b2f5c52cae66f:0xd9f3c33a869788c9?sa=X&ved=1t:707&ictx=111
+  contact:
+    heading: Contact
+    phone: (905) 607 0606
+    phoneDigits: "9056070606"
+    email: info@penelopesocial.com
+    socialsLabel: FOLLOW OUR SOCIALS
+    socials:
+      - platform: instagram
+        url: https://www.instagram.com/penelope.social/?hl=en
+        icon: /icons/instagram.svg
+      - platform: tiktok
+        url: https://www.tiktok.com/@penelope.social?_t=8rVjknXtEaF&_r=1
+        icon: /icons/tiktok.svg
+    googleReview:
+      label: Google Reviews
+      url: https://www.google.com/search?q=penelope+social&oq=penelope+social&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDsyBggCEEUYQTIGCAMQRRg8MgYIBBBFGDwyBggFEC4YQNIBCDM0NTRqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8#lrd=0x882b2f14f3cd3fbb:0x3e54ffff5191a9bd,1,,,,
+announcement:
+  enabled: true
+  text: Christmas party dates are filling up fast, book now!
+  mobileText: Book your Christmas party
+  url: /catering-events?event
+popup:
+  enabled: true
+  title: Booking a Corporate Christmas Party?
+  text: |-
+    December dates are starting to fill up, so we wanted to show our appreciation to our most loyal customers by giving you first dibs on our most sought-after Christmas event dates.
+
+    Give your team something a little different this year. Cocktails and passed hors d'oeuvres or a seated four-course dinner, tailored to your group.
+  image:
+    src: popup-event.jpg
+    alt: Event at Penelope
+  primaryCta:
+    label: Book Now
+    url: /catering-events?event
+  secondaryLabel: No thanks
+  startDate: "2026-09-22"
+  endDate: "2026-12-01"
+  dismissDays: 30

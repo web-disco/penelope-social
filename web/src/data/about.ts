@@ -1,5 +1,6 @@
 import { PAGE_SEO } from './seo'
 import { BAKEHOUSE_SITE_URL } from './site'
+import aboutBanner from '../assets/images/about-banner.avif'
 
 export const aboutMeta = PAGE_SEO['/about']!
 
@@ -55,7 +56,7 @@ export const aboutPage = {
     ],
   },
   banner: {
-    src: 'https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/673feab787ea61dbd3013e50_about-banner.avif',
+    src: aboutBanner,
     alt: 'The room at Penelope Social',
   },
 }

@@ -1,0 +1,19 @@
+title: Hoodie
+heading: Hoodie
+order: 1
+price: "40"
+description: Grey hoodie. Penelope logo on the left chest. Bike on the back, carrying sourdough and coffee. Relaxed fit.
+banner:
+  src: merch-hero.jpg
+  alt: Person holding up a Penelope Social sweatshirt
+images:
+  - src: hoodie-grey-front.jpg
+    alt: ""
+  - src: hoodie-grey-back.jpg
+    alt: ""
+cta:
+  label: available in store
+  url: /contact
+seo:
+  title: Hoodie | Penelope Social
+  description: Grey hoodie. Penelope logo on the left chest. Bike on the back, carrying sourdough and coffee. Relaxed fit.

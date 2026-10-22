@@ -1,0 +1,158 @@
+title: Catering Menu
+heading: Catering tray menu
+intro: Party pizzas, sandwiches, breads, salads.
+breadcrumb: Catering
+banner:
+  src: catering-banner.avif
+  alt: Image of Bar Tender
+seo:
+  title: Catering tray menu | Pizza, focaccia, salads | Penelope Social
+  description: "Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8 to 10. Prices on this page. Book trays on Catering and events. We prefer 24 hours notice."
+  ogImage: /images/og/catering.jpg
+note:
+  heading: How to order these trays
+  body: This page is the list and prices. Inquire on Catering and events for trays to-go, or a night in the restaurant.
+  cta:
+    label: Inquire about catering
+    url: /catering-events
+categories:
+  - title: Sourdough Loaves
+    anchor: sourdough-loaves
+    description: Loaves and focaccia. 24-hour lead time.
+    items:
+      - title: Classic Sourdough Loaves
+        description: Crusty White, Country Style, Sesame-Crusted
+        price: "9"
+      - title: Specialty Sourdough Loaves
+        description: Marbled Rye, Olive
+        price: "12"
+  - title: Sourdough Focaccia
+    anchor: sourdough-focaccia
+    description: Focaccia to take home. 24-hour lead time.
+    items:
+      - title: Focaccia-Craft Focaccia Romana
+        price: "15"
+      - title: Sea Salt Mini
+        description: Semolina-Series Focaccia
+        price: "5"
+      - title: Sea Salt/Rosemary
+        description: Semolina-Series Focaccia
+        price: SM 9 | LG 15
+      - title: Barese
+        description: Semolina-Series Focaccia
+        price: SM 12 | LG 20
+  - title: Retail
+    anchor: retail
+    description: Retail take-home goods. 24-hour lead time.
+    items:
+      - title: Sourdough Bread Crumbs
+        description: ~500g
+        price: "5"
+      - title: Sourdough Pizza Dough
+        price: "4"
+      - title: Sourdough Croutons
+        description: ~150g
+        price: "5"
+  - title: Treat Boxes
+    anchor: treat-boxes
+    description: Crullers, cookies, Nutella Bombe. 24-hour lead time.
+    items:
+      - title: 6pc
+        description: Single or Assortment of Crullers, Cookies, Nutella Bombe
+        price: "24"
+      - title: 12pc
+        description: Single or Assortment of Crullers, Cookies, Nutella Bombe
+        price: "45"
+  - title: Full-Size Pizza (24pc)
+    anchor: full-size-pizza
+    description: Whole [sourdough pizzas](/pizza-vaughan) for the table. 72-hour lead time.
+    items:
+      - title: Margherita
+        description: San Marzano DOP Tomato Sauce, Mozzarella, Fior di Latte Mozzarella, Basil, EVOO
+        price: "45"
+      - title: Vodka
+        description: Penny Rosé Sauce, Mozzarella, Basil Pesto
+        price: "50"
+      - title: NY Pepperoni
+        description: San Marzano DOP Tomato Sauce, Mozzarella, Mini Pepperoni, Oregano
+        price: "50"
+      - title: Spicy Vodka Pepp
+        description: Penny Rosé Sauce, Mozzarella, Mini Pepperoni, Jalapeño, Hot Honey
+        price: "55"
+      - title: Bee Sting
+        description: San Marzano DOP Tomato Sauce, Mozzarella, Calabrese Soppressata, Stracciatella, Hot Honey
+        price: "55"
+      - title: Funghi
+        description: Mozzarella, Parmigiano Reggiano, EVOO, Roasted Wild Mushrooms, White Truffle Oil
+        price: "100"
+      - title: Focaccia Rossa
+        description: San Marzano DOP Tomato Sauce, Oregano, EVOO
+        price: "25"
+      - title: Focaccia Bianca
+        description: EVOO, Salt, Oregano
+        price: "20"
+  - title: Penny Dips (8oz)
+    anchor: penny-dips
+    description: 8oz jars. 24-hour lead time.
+    items:
+      - title: Garlic Aioli
+        price: "9"
+      - title: Calabrese Aioli
+        price: "9"
+      - title: "'Nduja Aioli"
+        price: "9"
+      - title: Basil Pesto Aioli
+        price: "9"
+      - title: Hot Honey
+        price: "9"
+      - title: Sweety Drop Pepper Jelly
+        price: "8"
+      - title: Café Chili Oil
+        price: "8"
+  - title: Focaccia Sandwiches (4pc)
+    anchor: focaccia-sandwiches
+    description: Minimum six [focaccia sandwiches](/sandwiches-vaughan). 24-hour lead time.
+    items:
+      - title: Veggie
+        description: Sourdough Focaccia Romana, Roasted Red Bell Pepper, Red Onion, Zucchini, Eggplant, Whipped Goat Cheese, Penny Basil Pesto Aioli
+        price: "19"
+      - title: Spicy Mushroom Melt
+        description: Sourdough Focaccia Romana, Roasted Wild Mushroom, Provolone, Baby Arugula, Sweety Drop Pepper Jelly, Penny Garlic Aioli
+        price: "23"
+      - title: Italian
+        description: Sourdough Focaccia Romana, Salami, Capicollo, Prosciutto di Parma, Provolone, Olive Tapenade, Pepperoncini, Iceberg Lettuce, Sweety Drop Pepper Jelly, Penny Garlic Aioli
+        price: "20"
+      - title: Calabrese
+        description: Sourdough Focaccia Romana, Calabrese Soppressata, Fior di Latte Mozzarella, Cured Black Olives, Sweety Drop Pepper Jelly, Penny 'Nduja Aioli
+        price: "20"
+      - title: The Canadian
+        description: Sourdough Focaccia Romana, Smoked Turkey, Roasted Beef, Iceberg Lettuce, Roma Tomatoes, Red Onion, Mayo, Salt, Pepper
+        price: "20"
+      - title: Bianca
+        description: Sourdough Focaccia Romana, Mortadella, Stracciatella, Pistachio Pesto, Baby Arugula
+        price: "21"
+      - title: Classico
+        description: Sourdough Focaccia Romana, Prosciutto di Parma, Baby Arugula, Stracciatella, Parmigiano Reggiano
+        price: "21"
+      - title: Roasted Chicken
+        description: Sourdough Focaccia Romana, Roasted Chicken, Sundried Tomato, Baby Arugula, Asiago, Penny Basil Pesto Aioli
+        price: "23"
+      - title: Bistecca
+        description: Sourdough Focaccia Romana, Grilled Striploin Steak, Baby Arugula, Dijon, Penny Horseradish Aioli
+        price: "23"
+  - title: Salads
+    anchor: salads
+    description: Trays that serve 8 to 10. 24-hour lead time.
+    items:
+      - title: Kale Caesar
+        description: Kale, Housemade Sourdough Croutons, Crispy Prosciutto Crudo, Penny Caesar Dressing, Shaved Parmigiano Reggiano
+        price: "90"
+      - title: Amaro
+        description: Kale, Radicchio, Red Cabbage, Green Cabbage, Lemon, Shallot Vinaigrette, Oregano
+        price: "60"
+      - title: Arugula
+        description: Baby Arugula, Cherry Tomato, Shallot Vinaigrette, Aged Balsamic, Shaved Parmigiano Reggiano
+        price: "50"
+      - title: Mixed Green
+        description: Kale, Arugula, Shallot Vinaigrette
+        price: "50"

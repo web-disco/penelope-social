@@ -1,0 +1,151 @@
+title: Italian Cafe in Vaughan
+breadcrumb: Cafe
+seo:
+  title: Italian Cafe & Coffee Shop in Vaughan | Penelope Social
+  description: Espresso, cappuccino and lattes with fresh Bakehouse pastries from 9am. An Italian cafe at 125 Hawkview Blvd, Woodbridge. Cafe by day, bar by night.
+schemaMenu:
+  - menu: lunch
+    category: cafe
+    name: Espresso bar
+  - menu: lunch
+    category: treats
+    name: Pastries and treats
+sections:
+  - type: pageHero
+    image:
+      src: about-banner.avif
+      alt: The room at Penelope Social
+    heading: Italian Cafe in Vaughan
+    intro: Espresso at the counter and pastries from our own bakehouse, every morning from 9am.
+  - type: richTextIntro
+    heading: An Italian cafe counter, open from 9am
+    body: |-
+      Before Penelope Social is a bar, it's a cafe. The doors open at 9am with espresso, cappuccino and lattes pulled at the counter, and a case of pastries that came in from the bakehouse that morning.
+
+      The bombe, the crullers and the cookie of the day are all baked at [Penelope Bakehouse](/locations/scarborough) in Scarborough, the same place our sourdough comes from. Order at the counter, then take it with you or stay a while.
+  - type: menuItemCards
+    heading: Your morning coffee, and something sweet
+    intro: Italian espresso drinks at the counter and pastries baked fresh at Penelope Bakehouse. The crullers and cookies change daily.
+    rating: true
+    items:
+      - item: Latte
+        link: /menus/lunch#cafe
+        image:
+          src: latte-art.jpg
+          alt: Latte with latte art at Penelope Social
+      - item: Rotating Cookies
+        link: /menus/lunch#treats
+        image:
+          src: sea-salt-cookies.jpg
+          alt: Chocolate chunk sea salt cookies from Penelope Bakehouse
+      - item: Nutella Bombe
+        link: /menus/lunch#treats
+        image:
+          src: nutella-bombe.jpg
+          alt: Nutella bombe from Penelope Bakehouse
+      - item: Rotating Crullers
+        link: /menus/lunch#treats
+        image:
+          src: glazed-cruller.jpg
+          alt: Glazed cruller from Penelope Bakehouse
+    cta:
+      label: See the full cafe menu
+      url: /menus/lunch#cafe
+  - type: stepTimeline
+    heading: What's on, and when
+    steps:
+      - title: "9am: Coffee and pastries"
+        body: The counter opens with espresso, cappuccino, lattes and the day's pastries.
+      - title: "10am: Lunch starts"
+        body: "[Focaccia sandwiches](/sandwiches-vaughan), pizza by the slice and salads join the counter for lunch."
+      - title: "3pm: The cafe closes"
+        body: Last call for coffee and lunch. The room resets for the evening.
+      - title: "5pm: The bar opens"
+        body: Dinner, cocktails and [14-inch sourdough pizza pies](/pizza-vaughan).
+  - type: comparisonTable
+    heading: Cafe by day, bar by night
+    intro: Same room, two different moods.
+    columns:
+      - The cafe
+      - The bar
+    rows:
+      - label: Hours
+        values:
+          - Mon to Sat 9am to 3pm, Sun 8am to noon
+          - Mon to Thu 5pm to 10pm, Fri and Sat 5pm to 1am
+      - label: How it works
+        values:
+          - Order at the counter, stay or take it to go
+          - Book a table or sit at the bar
+      - label: To eat
+        values:
+          - Bakehouse pastries, then focaccia sandwiches and pizza slices from 10am
+          - Shareable plates, handhelds and 14-inch pies
+      - label: To drink
+        values:
+          - Espresso, cappuccino, latte, americano, tea
+          - Cocktails, Italian wine, amari and zero-proof spritzes
+      - label: The room
+        values:
+          - Bright and quiet, easy to talk or work
+          - Lights down, music up, busy on weekends
+      - label: Good for
+        values:
+          - A morning coffee, a laptop hour, a quick lunch
+          - Dinner, drinks with friends, a late night
+  - type: mediaTextCta
+    layout: image-first
+    heading: Somewhere to sit for a while
+    body: |-
+      Mornings are the quiet part of the day here. Grab a table with a coffee and a pastry, catch up with a friend, or open the laptop before the lunch crowd arrives at noon.
+
+      There's Wi-Fi and outlets if you're working through the morning. In the summer, take your coffee out to the patio.
+    image:
+      src: dining-room-day.jpg
+      alt: The Penelope Social dining room during the day, with wooden tables and guests working on laptops
+    ctas:
+      - label: See the lunch menu
+        url: /menus/lunch
+        style: outline
+  - type: visitDetails
+    heading: Getting to the cafe
+    intro: We're at 125 Hawkview Blvd in Woodbridge, Vaughan, a 5-minute drive from Vaughan Mills.
+    ctas:
+      - label: Get directions
+        url: https://www.google.com/maps/dir/?api=1&destination=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2
+        newTab: true
+        style: primary
+    hours: cafe
+    rows:
+      - label: Parking
+        body: Free parking in the lot out front.
+      - label: Phone
+        body: (905) 607-0606
+    showMap: false
+  - type: faqSection
+    heading: FAQs
+    items:
+      - question: What time does the cafe open?
+        answer: 9am Monday to Saturday, and 8am on Sunday. The cafe closes at 3pm, or noon on Sunday. The lunch menu starts at 10am.
+      - question: Is Penelope Social a cafe or a restaurant?
+        answer: Both. It's an Italian cafe counter by day, with coffee, pastries and lunch. From 5pm it's a bar and restaurant with dinner and cocktails.
+      - question: What coffee do you serve?
+        answer: Espresso, macchiato, cortado, americano, cappuccino and latte, plus herbal tea.
+      - question: Where do the pastries come from?
+        answer: Penelope Bakehouse, our bakery in Scarborough. The Nutella bombe, crullers and cookies come in fresh each morning. Crullers and cookies change daily.
+      - question: Can I work or study at the cafe?
+        answer: Yes. There's Wi-Fi and outlets for laptops. Mornings before lunch are the quietest time.
+      - question: Is there parking?
+        answer: Yes, there's free parking in the lot out front.
+  - type: finalCta
+    heading: Looking for a cafe in Vaughan this morning?
+    body: Come by 125 Hawkview Blvd from 9am, or order lunch online.
+    ctas:
+      - label: Get directions
+        url: https://www.google.com/maps/dir/?api=1&destination=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2
+        newTab: true
+        style: primary
+      - label: Order online
+        url: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+        style: outline
+        newTab: true

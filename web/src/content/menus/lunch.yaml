@@ -1,0 +1,178 @@
+title: Lunch
+heading: Lunch
+intro: Focaccia sandwiches and pizza, plus salads.
+breadcrumb: Lunch
+banner:
+  src: lunch-banner.avif
+  alt: Image of Lunch menu platter
+seo:
+  title: Lunch Menu | Sourdough Focaccia, Pizzas & Salads at Penelope Social
+  description: "Lunch at Penelope Social in Woodbridge: focaccia sandwiches and pizza, plus salads. Monday to Saturday, 10am to 3pm at 125 Hawkview Blvd."
+  ogImage: /images/og/lunch.jpg
+categories:
+  - title: Focaccia
+    anchor: focaccia
+    description: "[Sourdough focaccia sandwiches](/sandwiches-vaughan) from our Woodbridge kitchen."
+    items:
+      - title: Veggie
+        description: Sourdough Focaccia Romana, Roasted Red Bell Pepper, Red Onion, Zucchini, Eggplant, Whipped Goat Cheese, Penny Basil Pesto Aioli
+        price: "19"
+      - title: Spicy Mushroom Melt
+        description: Sourdough Focaccia Romana, Roasted Wild Mushroom, Provolone, Baby Arugula, Sweety Drop Pepper Jelly, Penny Garlic Aioli
+        price: "23"
+      - title: Italian
+        description: Sourdough Focaccia Romana, Salami, Capicollo, Prosciutto di Parma, Provolone, Olive Tapenade, Pepperoncini, Iceberg Lettuce, Sweety Drop Pepper Jelly, Penny Garlic Aioli
+        price: "20"
+      - title: Calabrese
+        description: Sourdough Focaccia Romana, Calabrese Soppressata, Fior di Latte Mozzarella, Cured Black Olives, Sweety Drop Pepper Jelly, Penny 'Nduja Aioli
+        price: "20"
+      - title: The Canadian
+        description: Sourdough Focaccia Romana, Smoked Turkey, Roasted Beef, Iceberg Lettuce, Roma Tomatoes, Red Onion, Mayo, Salt, Pepper
+        price: "20"
+      - title: Bianca
+        description: Sourdough Focaccia Romana, Mortadella, Stracciatella, Pistachio Pesto, Baby Arugula
+        price: "21"
+      - title: Classico
+        description: Sourdough Focaccia Romana, Prosciutto di Parma, Baby Arugula, Stracciatella, Parmigiano Reggiano
+        price: "21"
+      - title: Roasted Chicken
+        description: Sourdough Focaccia Romana, Roasted Chicken, Sundried Tomato, Baby Arugula, Asiago, Penny Basil Pesto Aioli
+        price: "23"
+      - title: Bistecca
+        description: Sourdough Focaccia Romana, Grilled Striploin Steak, Baby Arugula, Dijon, Penny Horseradish Aioli
+        price: "23"
+  - title: Pizza Slices
+    anchor: pizza-slices
+    description: Roman-style [sourdough pizza](/pizza-vaughan), cold-fermented 48 hours.
+    items:
+      - title: Margherita
+        description: San Marzano DOP Tomato Sauce, Mozzarella, Fior di Latte Mozzarella, Basil, EVOO
+        price: "6"
+      - title: Vodka
+        description: Penny Rosé Sauce, Mozzarella, Basil Pesto
+        price: "6"
+      - title: NY Pepperoni
+        description: San Marzano DOP Tomato Sauce, Mozzarella, Mini Pepperoni, Oregano
+        price: "7"
+      - title: Spicy Vodka Pepp
+        description: Penny Rosé Sauce, Mozzarella, Mini Pepperoni, Jalapeño, Hot Honey
+        price: "7"
+      - title: Bee Sting
+        description: San Marzano DOP Tomato Sauce, Mozzarella, Calabrese Soppressata, Stracciatella, Hot Honey
+        price: "7"
+  - title: Penny Dips
+    anchor: penny-dips
+    description: Housemade dips for your pizza slice.
+    items:
+      - title: Garlic Aioli
+        price: "3"
+      - title: Calabrese Aioli
+        price: "3"
+      - title: "'Nduja Aioli"
+        price: "3"
+      - title: Basil Pesto Aioli
+        price: "3"
+      - title: Hot Honey
+        price: "3"
+      - title: Sweety Drop Pepper Jelly
+        price: "3"
+      - title: Café Chili Oil
+        price: "3"
+  - title: Salads
+    anchor: salads
+    description: Fresh salads. Add chicken or steak if you want.
+    items:
+      - title: Kale Caesar
+        description: Kale, Housemade Sourdough Croutons, Crispy Prosciutto Crudo, Penny Caesar Dressing, Shaved Parmigiano Reggiano
+        price: "15"
+      - title: Amaro
+        description: Kale, Radicchio, Red Cabbage, Green Cabbage, Lemon, Shallot Vinaigrette, Oregano
+        price: "14"
+      - title: Arugula
+        description: Baby Arugula, Cherry Tomato, Shallot Vinaigrette, Aged Balsamic, Shaved Parmigiano Reggiano
+        price: "15"
+      - title: Chicken
+        description: Protein add-on
+        price: "10"
+      - title: Steak
+        description: Protein add-on
+        price: "13"
+  - title: Treats
+    anchor: treats
+    description: Crullers, cookies, and the Nutella Bombe.
+    items:
+      - title: Rotating Crullers
+        description: Honey Glazed, Churro, Toasted Coconut...
+        price: 1pc 4.50 | 6pc 24 | 12pc 45
+      - title: Nutella Bombe
+        description: Nutella Filled Doughnuts Tossed in Sugar
+        price: 1pc 4.50 | 6pc 24 | 12pc 45
+      - title: Rotating Cookies
+        description: Dark Chocolate Sea Salt, Pecan Skor, Matcha White Chocolate...
+        price: 1pc 4.50 | 6pc 24 | 12pc 45
+  - title: Bakery
+    anchor: bakery
+    description: Sourdough loaves and focaccia to take home.
+    items:
+      - title: Classic Sourdough Loaves
+        description: Crusty White, Country Style, Sesame-Crusted
+        price: "9"
+      - title: Specialty Sourdough Loaves
+        description: Marbled Rye, Olive
+        price: "12"
+      - title: Focaccia-Craft Focaccia Romana
+        price: "15"
+      - title: Sea Salt Mini
+        description: Semolina-Series Focaccia
+        price: "5"
+      - title: Sea Salt/Rosemary
+        description: Semolina-Series Focaccia
+        price: SM 9 | LG 15
+      - title: Barese
+        description: Semolina-Series Focaccia
+        price: SM 12 | LG 20
+      - title: Sourdough Bread Crumbs
+        description: ~500g
+        price: "5"
+      - title: Sourdough Pizza Dough
+        price: "4"
+      - title: Sourdough Croutons
+        description: ~150g
+        price: "5"
+  - title: Cafe
+    anchor: cafe
+    description: "[Espresso drinks](/cafe-in-vaughan) and tea."
+    items:
+      - title: Espresso
+        price: "3"
+      - title: Espresso Macchiato
+        price: "4"
+      - title: Espresso Cortado
+        price: "4"
+      - title: Americano
+        price: "4"
+      - title: Cappuccino
+        price: "5"
+      - title: Latte
+        price: "5"
+      - title: Herbal Tea
+        description: Green, Earl Grey, Chamomile, Peppermint
+        price: "3"
+  - title: Water
+    anchor: water
+    description: Bottled water, pops, and juice.
+    items:
+      - title: Small Natural (Bottle)
+        price: "3"
+      - title: Small Sparkling (Can)
+        price: "4"
+      - title: San Benedetto Natural/Sparkling Mineral Water (1L)
+        price: "7"
+      - title: Canned Pops
+        description: Coca-Cola (Regular/Diet/Zero), Canada Dry (Ginger Ale/Club Soda/Tonic), Fuze Iced Tea, Sprite
+        price: "3"
+      - title: Imported Pops
+        description: San Pellegrino (Aranciata/Limonata/Aranciata Rossa), Brio Chinotto, Ting Grapefruit Soda
+      - title: Juice
+        description: Orange/Apple/Cranberry/Pineapple
+        price: "3"

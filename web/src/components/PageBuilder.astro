@@ -1,23 +1,19 @@
 ---
 /**
- * Maps a page-builder section's `_type` to its component.
+ * Maps a YAML section's `type` to its component.
  *
  * The rule that keeps this scalable: a new section on the site = one schema in
- * studio/schemaTypes/sections/ + one entry in studio/schemaTypes/objects/pageBuilder.ts
- * + one component in `sections/` + one entry in this map.
+ * src/lib/content-schema.ts (added to `section`) + one component in
+ * `sections/` + one entry in this map.
  */
 import Hero from './sections/Hero.astro'
 import PageHero from './sections/PageHero.astro'
-import IntroSection from './sections/IntroSection.astro'
-import PageHeading from './sections/PageHeading.astro'
 import MenuCards from './sections/MenuCards.astro'
 import TextWithMediaSection from './sections/TextWithMediaSection.astro'
-import TeamGrid from './sections/TeamGrid.astro'
-import StorySection from './sections/StorySection.astro'
+import WaveMoment from './sections/WaveMoment.astro'
 import MerchListing from './sections/MerchListing.astro'
 import ContactFormSection from './sections/ContactFormSection.astro'
 import CateringEventsIntro from './sections/CateringEventsIntro.astro'
-import ImageGrid from './sections/ImageGrid.astro'
 import FaqSection from './sections/FaqSection.astro'
 import StepTimeline from './sections/StepTimeline.astro'
 import RichTextIntro from './sections/RichTextIntro.astro'
@@ -26,80 +22,51 @@ import MediaTextCta from './sections/MediaTextCta.astro'
 import ComparisonTable from './sections/ComparisonTable.astro'
 import FinalCta from './sections/FinalCta.astro'
 import VisitDetails from './sections/VisitDetails.astro'
+import { paragraphsHtml, type Section } from '../lib/content'
 
-const COMPONENTS: Record<string, any> = {
+const COMPONENTS: Record<Section['type'], any> = {
   hero: Hero,
   pageHero: PageHero,
-  introSection: IntroSection,
-  pageHeading: PageHeading,
   menuCards: MenuCards,
-  textWithMediaSection: TextWithMediaSection,
-  teamGrid: TeamGrid,
-  storySection: StorySection,
+  textWithMedia: TextWithMediaSection,
+  waveMoment: WaveMoment,
   merchListing: MerchListing,
-  contactFormSection: ContactFormSection,
-  imageGrid: ImageGrid,
-  faqSection: FaqSection,
-  stepTimeline: StepTimeline,
+  contactForm: ContactFormSection,
+  cateringIntro: CateringEventsIntro,
   richTextIntro: RichTextIntro,
   menuItemCards: MenuItemCards,
   mediaTextCta: MediaTextCta,
   comparisonTable: ComparisonTable,
   visitDetails: VisitDetails,
   finalCta: FinalCta,
+  faqSection: FaqSection,
+  stepTimeline: StepTimeline,
 }
 
 interface Props {
-  sections: any[]
+  sections: Section[]
   /** Breadcrumb trail for the page hero's bar. */
   breadcrumbs?: { name: string; path: string }[]
 }
 const { sections = [], breadcrumbs } = Astro.props
-const path = Astro.url.pathname.replace(/\/$/, '') || '/'
 ---
 
 {
   sections.map((block) => {
-    const Component = COMPONENTS[block._type]
-    if (!Component) {
-      console.warn(`[PageBuilder] no component registered for section type "${block._type}"`)
-      return null
-    }
-    const hasPageHero = sections.some((section) => section._type === 'pageHero')
-    if (block._type === 'pageHero' && path === '/catering-events') {
-      return (
-        <>
-          <Component block={block} breadcrumbs={breadcrumbs} />
-          <CateringEventsIntro />
-        </>
-      )
-    }
-    /* Homepage hero is the H1. The old “Cafe and bar in Woodbridge” intro is gone. */
-    if (block._type === 'introSection' && sections.some((section) => section._type === 'hero')) {
-      return null
-    }
-    /* Title + lede live on the photo. Never a second cream H1. */
-    if (block._type === 'pageHeading' && hasPageHero) {
-      return null
-    }
-    if (block._type === 'introSection' && hasPageHero) {
-      if (block.ctas?.length) {
-        return <Component block={{ ...block, heading: '' }} headingLevel="h2" />
-      }
-      return null
-    }
-    /* Individual menu pages have no FAQ block; the /menus hub does. */
-    if (block._type === 'faqSection' && /^\/menus\//.test(Astro.url.pathname.replace(/\/$/, '') || '/')) {
-      return null
-    }
-    if (block._type === 'pageHero') {
+    const Component = COMPONENTS[block.type]
+    if (block.type === 'pageHero') {
       return <Component block={block} breadcrumbs={breadcrumbs} />
     }
-    if (block._type === 'faqSection') {
-      return <FaqSection headingText={block.heading} items={block.items ?? []} />
+    if (block.type === 'faqSection') {
+      return <FaqSection headingText={block.heading} markdownItems={block.items} />
     }
-    if (block._type === 'stepTimeline') {
-      return <StepTimeline headingText={block.heading} steps={block.steps ?? []} />
+    if (block.type === 'stepTimeline') {
+      return (
+        <StepTimeline
+          headingText={block.heading}
+          steps={block.steps.map((step) => ({ title: step.title, bodyHtml: paragraphsHtml(step.body) }))}
+        />
+      )
     }
     return <Component block={block} />
   })
