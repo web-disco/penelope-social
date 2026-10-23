@@ -43,8 +43,10 @@ links and photos live in `web/src/content/` as YAML, validated at build time.
 | A page (contact, catering, /menus, merch, the Vaughan landing pages) | `pages/<slug>.yaml`. A new file routes at `/<slug>` |
 | The homepage | `pages/home.yaml` |
 | Header, nav, Menus dropdown, footer, announcement bar, popup | `site.yaml` |
+| Hours, address, phone, shared links (`@order`, …) | `site.yaml` |
+| FAQs (Home, /about, /contact, /catering-events, /locations/*) | `faqs.yaml` |
+| /about, /locations/* | `about.yaml`, `locations.yaml` |
 | A merch product | `merch/<slug>.yaml` |
-| Hours, address, phone, FAQs, /about, /locations | Still TypeScript in `web/src/data/` (next phase) |
 
 Photos go in `web/src/assets/images/` and are referenced by bare filename. Astro
 turns them into responsive WebP at build time.
@@ -56,9 +58,9 @@ section type is three edits: one schema in `web/src/lib/content-schema.ts`
 (added to `section`), one component in `web/src/components/sections/`, and one
 entry in `web/src/components/PageBuilder.astro`.
 
-**Content.** `web/src/content.config.ts` defines five collections: `site`
-(header, nav, footer, announcement, popup), `home`, `pages`, `menus` and
-`merch`. Schemas are strict (an unknown key fails the build). Components read
+**Content.** `web/src/content.config.ts` defines the collections: `site`
+(links, address, hours, header, nav, footer, announcement, popup), `faqs`,
+`about`, `locations`, `home`, `pages`, `menus` and `merch`. Schemas are strict (an unknown key fails the build). Components read
 content only through `web/src/lib/content.ts`, which swaps image filenames for
 optimised assets, renders Markdown links, and fails the build on cross-file
 mistakes: a link to a page that doesn't exist, a dish card or Happy Hour item

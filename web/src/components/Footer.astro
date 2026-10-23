@@ -12,8 +12,7 @@
  */
 import { heading, containerFooter, container, typeScale } from '../lib/ui'
 import NewsletterForm from './NewsletterForm.astro'
-import { site, specialties } from '../lib/content'
-import { stackedHoursBlocks } from '../data/site'
+import { footerContact, site, specialties, stackedHoursBlocks } from '../lib/content'
 
 interface Props {
   isHome?: boolean
@@ -31,7 +30,7 @@ const hourBlocks = stackedHoursBlocks
 /* `specialties`: the dish landing pages, under the menu links, so every page
    links all four from crawlable footer text rather than only from the hover
    dropdown. */
-const emailHref = `mailto:${contact.email}`
+const emailHref = `mailto:${footerContact.email}`
 
 const logoSrc = footer.logo
 
@@ -204,7 +203,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
             <strong class={typeScale.label}>{hours.locationLabel}</strong>
             <br />
             <a href={hours.mapUrl} target="_blank" data-ga-event="get_directions" class={footerTextSpan}>
-              {hours.address}<br />&zwj;
+              {footerContact.address}<br />&zwj;
             </a>
           </p>
           {
@@ -238,9 +237,9 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
           {contact.heading}
         </h4>
         <p class={footerText}>
-          P: <a href={`tel:${contact.phoneDigits}`} data-ga-event="click_to_call" class={footerTextSpan}>{contact.phone}</a>
+          P: <a href={`tel:${footerContact.phoneDigits}`} data-ga-event="click_to_call" class={footerTextSpan}>{footerContact.phone}</a>
           <br />
-          E: <a href={emailHref} class={footerTextSpan}>{contact.email}<br />&zwj;</a>
+          E: <a href={emailHref} class={footerTextSpan}>{footerContact.email}<br />&zwj;</a>
         </p>
         <div class="footer-socials gap-3">
           <div class={footerText}>{contact.socialsLabel}</div>

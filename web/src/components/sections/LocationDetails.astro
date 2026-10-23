@@ -3,7 +3,7 @@
  * Location details — copy left, labelled rows right, optional map below.
  */
 import { btn, typeScale } from '../../lib/ui'
-import type { Cta } from '../../data/types'
+import type { Cta } from '../../lib/content'
 import {
   isCateringHref,
   isMapsDirectionsHref,
@@ -30,6 +30,8 @@ export interface LocationDetailRow {
 interface Props {
   headingText?: string
   intro?: string
+  /** Intro as rendered Markdown (links). Takes the place of `intro`. */
+  introHtml?: string
   ctas?: Cta[]
   rows: LocationDetailRow[]
   mapQuery?: string
@@ -41,7 +43,7 @@ interface Props {
   detailsFirst?: boolean
 }
 
-const { headingText, intro, ctas = [], rows, mapQuery, mapTitle, padTop = false, detailsFirst = false } = Astro.props
+const { headingText, intro, introHtml, ctas = [], rows, mapQuery, mapTitle, padTop = false, detailsFirst = false } = Astro.props
 const shell = `${shellBase} ${padTop ? 'pt-section-pad wf-sm:pt-section-pad-sm' : 'pt-0'}`
 
 function ctaClass(style?: Cta['style']) {
@@ -86,9 +88,21 @@ const mapSrc = mapQuery
             </h2>
           )
         }
-        <p class={`mb-0 max-w-[640px] text-left text-charcoal ${typeScale.bodyLg}`}>
-          <slot name="intro">{intro}</slot>
-        </p>
+        {
+          introHtml ? (
+            <p
+              class:list={[
+                'mb-0 max-w-[640px] text-left text-charcoal',
+                '[&_a]:text-charcoal [&_a]:underline [&_a]:underline-offset-[0.18em] [&_a]:decoration-charcoal/40',
+                '[&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70',
+                typeScale.bodyLg,
+              ]}
+              set:html={introHtml}
+            />
+          ) : (
+            <p class={`mb-0 max-w-[640px] text-left text-charcoal ${typeScale.bodyLg}`}>{intro}</p>
+          )
+        }
         {
           ctas.length > 0 && (
             <div class="intros-cta mt-space-32 flex flex-wrap items-center gap-space-16 wf-xs:flex-col wf-xs:items-stretch">

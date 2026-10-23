@@ -1,3 +1,81 @@
+# Site-wide settings: links, address, hours, header, footer, announcement bar
+# and promo popup.
+#
+# Hours: change the `lines` AND the `schedule` (the schedule drives Google's
+# structured data), then search src/content for the old times in prose.
+# Phone, email and address are typed once, in `nap`. Every other format
+# (footer, tel: links, map queries) is derived from it.
+
+# Shared links. Write `url: "@order"` or `[Order online](@order)` anywhere a
+# link goes; a path can follow, e.g. `@bakehouse/about`.
+links:
+  order: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+  giftCards: https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard
+  directions: https://www.google.com/maps/dir/?api=1&destination=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2
+  instagram: https://www.instagram.com/penelopesocial/?hl=en
+  tiktok: https://www.tiktok.com/@penelope.social?_t=8rVjknXtEaF&_r=1
+  bakehouse: https://penelopebakehouse.com
+  bakehouseMenu: https://penelopebakehouse.com/menu
+  bakehouseCatering: https://penelopebakehouse.com/catering
+  bakehouseOrder: https://order.toasttab.com/online/penelope-bakehouse-scarborough-71-howden-road?diningOption=takeout&rwg_token=AE37R_ia7EAZEVcG9NpbtfhSwTVvmCeGwEAHkDzGsiouYTQl4FQHPdw2vVFRRzlSLmtTqQLuqAjNDwNCl8DpKxGNTJ4TST6CLQ%3D%3D
+
+# Penelope Social, Woodbridge. Vaughan is the wider area, never the city.
+nap:
+  name: Penelope Social
+  street: 125 Hawkview Blvd
+  city: Woodbridge
+  region: ON
+  postal: L4H 2E2
+  country: Canada
+  phone: (905) 607-0606
+  email: info@penelopesocial.com
+  geo:
+    latitude: 43.828533
+    longitude: -79.552276
+
+hours:
+  cafe:
+    label: Cafe
+    lines:
+      - "Mon-Sat: 9am-3pm"
+      - "Sun: 8am-12pm"
+    # Days: Mon Tue Wed Thu Fri Sat Sun. Times: 24-hour, in quotes.
+    schedule:
+      - days: [Mon, Tue, Wed, Thu, Fri, Sat]
+        opens: "09:00"
+        closes: "15:00"
+      - days: [Sun]
+        opens: "08:00"
+        closes: "12:00"
+  bar:
+    label: Bar
+    lines:
+      - "Mon-Thu: 5pm-10pm"
+      - "Fri-Sat: 5pm-1am"
+      - Closed Sunday night.
+    schedule:
+      - days: [Mon, Tue, Wed, Thu]
+        opens: "17:00"
+        closes: "22:00"
+      - days: [Fri, Sat]
+        opens: "17:00"
+        closes: "01:00"
+
+# The sister bakehouse in Scarborough. Its own site is links.bakehouse.
+bakehouse:
+  name: Penelope Bakehouse
+  street: 71 Howden Rd
+  city: Scarborough
+  region: ON
+  postal: M1R 3C7
+  phone: (647) 812-0104
+  email: info@penelopebakehouse.com
+  hours:
+    - label: Hours
+      lines:
+        - "Monday to Friday: 9am to 3pm"
+        - "Saturday and Sunday: Closed"
+
 seo:
   ogImage: /images/og/default.png
 googleRating:
@@ -9,7 +87,7 @@ header:
   logoAlt: Penelope Logo
   orderOnline:
     label: Order Online
-    url: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+    url: "@order"
     newTab: true
   reservations:
     label: Reservations
@@ -23,7 +101,7 @@ nav:
   - label: Locations
     url: /locations
   - label: Gift Cards
-    url: https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard
+    url: "@giftCards"
     newTab: true
   - label: Catering
     url: /catering-events
@@ -112,13 +190,9 @@ footer:
   hours:
     heading: Hours & location
     locationLabel: LOCATION
-    address: 125 Hawkview Blvd, Woodbridge, ON L4H 2E2
     mapUrl: https://www.google.com/maps/dir//125+Hawkview+Blvd,+Woodbridge,+ON+L4H+2E2/data=!4m6!4m5!1m1!4e2!1m2!1m1!1s0x882b2f5c52cae66f:0xd9f3c33a869788c9?sa=X&ved=1t:707&ictx=111
   contact:
     heading: Contact
-    phone: (905) 607 0606
-    phoneDigits: "9056070606"
-    email: info@penelopesocial.com
     socialsLabel: FOLLOW OUR SOCIALS
     socials:
       - platform: instagram

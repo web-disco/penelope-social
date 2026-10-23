@@ -81,7 +81,7 @@ sections:
       alt: A stack of Penelope sourdough loaves
     ctas:
       - label: About the Bakehouse
-        url: https://penelopebakehouse.com/about
+        url: "@bakehouse/about"
         style: outline
         newTab: true
   - type: mediaTextCta
@@ -106,7 +106,7 @@ sections:
     intro: We're at 125 Hawkview Blvd in Woodbridge, Vaughan, a 5-minute drive from Vaughan Mills.
     ctas:
       - label: Get directions
-        url: https://www.google.com/maps/dir/?api=1&destination=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2
+        url: "@directions"
         newTab: true
         style: primary
     hours: cafe
@@ -139,7 +139,7 @@ sections:
     body: Order ahead for pickup, or come by the counter at our location in Woodbridge.
     ctas:
       - label: Order online
-        url: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+        url: "@order"
         newTab: true
         style: primary
       - label: See the lunch menu

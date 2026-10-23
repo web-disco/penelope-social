@@ -1,0 +1,77 @@
+# FAQs, by the page they appear on. Each set also becomes that page's FAQPage
+# structured data.
+#
+# `hours: true` instead of an answer prints the cafe and bar hours from
+# site.yaml, so they can't drift from the footer.
+#
+# Facts written into answers (address, phone, prices, notice periods) are
+# plain text: after changing one in site.yaml or a menu, search this file.
+
+home:
+  - question: Where is Penelope Social?
+    answer: Penelope Social is at [125 Hawkview Blvd, Woodbridge, ON L4H 2E2](/locations/woodbridge), in Vaughan. Phone [(905) 607-0606](tel:+19056070606).
+  - question: What does Penelope Social serve?
+    answer: Coffee and pastries from 9am, focaccia sandwiches and pizza slices at lunch, then 14-inch pies, shareables and cocktails at night. All of it is on our own sourdough. See [our sourdough pizza](/pizza-vaughan), [Italian sandwiches](/sandwiches-vaughan), [the cafe](/cafe-in-vaughan) and [bread to take home](/bakery-vaughan).
+  - question: What are the cafe and bar hours?
+    hours: true
+  - question: Do you take reservations?
+    answer: Yes. [Book a table](/reservations) on Toast for dinner and the bar. Cafe lunch is mostly walk-in.
+  - question: Where does your bread come from?
+    answer: Our sister bakehouse in Scarborough, [Penelope Bakehouse](@bakehouse), bakes it from the same starter. Its menu, hours and online ordering are on penelopebakehouse.com.
+  - question: Do you offer catering and events?
+    answer: Yes. Book trays or a night in the room on [catering and events](/catering-events). View the tray list on our [catering menu](/menus/catering). We prefer 24 hours' notice for catering.
+  - question: Can I order online?
+    answer: Yes. [Order online](@order) through Toast for pickup.
+about:
+  - question: Who runs Penelope Social?
+    answer: "The Stalteri brothers: Franco, Vince, Giuliano. Vince started the sourdough starter named Penelope. The restaurant and the Bakehouse grew from that."
+  - question: Where is the restaurant?
+    answer: "[125 Hawkview Blvd, Woodbridge, ON L4H 2E2](/locations/woodbridge). Woodbridge is in Vaughan. Cafe by day, kitchen and bar at night."
+  - question: Where is the bread baked?
+    answer: At our sister bakehouse in Scarborough, [Penelope Bakehouse](@bakehouse). Loaves and focaccia, plus pizza dough for Social, start there.
+  - question: Why is the starter named Penelope?
+    answer: Vince made his first starter, Anastasia, in February 2018. He nearly lost it while opening the restaurant, revived it, and renamed it Penelope. The restaurant and the Bakehouse grew from that starter.
+contact:
+  - question: How do I reach Penelope Social?
+    answer: Phone [(905) 607-0606](tel:+19056070606) or email [info@penelopesocial.com](mailto:info@penelopesocial.com). We're at [125 Hawkview Blvd, Woodbridge, ON L4H 2E2](/locations/woodbridge), in Vaughan.
+  - question: How do I book a table?
+    answer: Use [reservations](/reservations) on Toast, or ask us on this form. Party size and time help.
+  - question: What are your hours?
+    hours: true
+catering:
+  - question: What is the difference between catering and events?
+    answer: "Catering is food to-go, trays from the [catering menu](/menus/catering). Events are hosted here: birthdays and work dinners, or a private night. Book both on this page."
+  - question: How much notice do you need?
+    answer: We prefer 24 hours' notice for catering orders. Events need more lead time so we can hold the room and the kitchen.
+  - question: Where is the event space?
+    answer: At Penelope Social, [125 Hawkview Blvd, Woodbridge, ON L4H 2E2](/locations/woodbridge), in Vaughan.
+  - question: Can I just order trays?
+    answer: Yes. See the [catering menu](/menus/catering), then send the form on this page. Choose “Catering” as the reason.
+woodbridge:
+  - question: Where is Penelope Social?
+    answer: 125 Hawkview Blvd, Woodbridge, ON L4H 2E2. Phone (905) 607-0606.
+  - question: What are the cafe and bar hours?
+    hours: true
+  - question: Do you take reservations?
+    answer: Yes. [Book a table](/reservations) on Toast, or see [menus](/menus) and more.
+  - question: Can I order online?
+    answer: Yes. [Order online through Toast](@order), or use Order online on this page.
+  - question: Where is the bread baked?
+    answer: At our sister bakehouse in Scarborough, [Penelope Bakehouse](@bakehouse). Penelope Social is the Woodbridge cafe and bar that serves it.
+  - question: Do you offer catering and events?
+    answer: Yes. Plan catering and events through our [catering and events page](/catering-events).
+scarborough:
+  - question: Where is Penelope Bakehouse?
+    answer: "[71 Howden Rd, Scarborough, ON M1R 3C7](/locations). Phone [(647) 812-0104](tel:+16478120104)."
+  - question: What do you sell?
+    answer: Sourdough bread, [focaccia sandwiches, pizza by the slice](@bakehouseMenu), focaccia loaves, sweets, coffee, and drinks.
+  - question: Do you make focaccia sandwiches?
+    answer: Yes. Our focacceria is inside the bakehouse. You'll find [Bianca, Classico, Calabrese](@bakehouseMenu#sandwiches), Italian, Canadian, Caprese, and more.
+  - question: Do you have pizza by the slice?
+    answer: Yes. Slices include [Margherita, NY Pepperoni, Vodka](@bakehouseMenu#pizza), Spicy Vodka Pepp, and Bee Sting.
+  - question: Is the sourdough baked in-house?
+    answer: Yes. Every loaf is naturally fermented, shaped, and baked fresh daily at our Scarborough bakehouse, including the bread for our other locations.
+  - question: Do you offer catering?
+    answer: Yes. Request catering through our [catering page form](@bakehouseCatering) (24 hours' notice preferred). Trays of sandwiches, pizza, and more.
+  - question: Is this the same as Penelope Social?
+    answer: We're [sister spots](/locations). Penelope Bakehouse is the Scarborough bakehouse and focacceria at 71 Howden Rd. [Penelope Social](/locations/woodbridge) is the Woodbridge cafe and bar at 125 Hawkview Blvd.

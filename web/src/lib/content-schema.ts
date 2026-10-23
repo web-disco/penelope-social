@@ -29,12 +29,15 @@ export const markdown = text.refine(
   'HTML is not allowed. Use a Markdown link, [text](/path), instead of an <a> tag.',
 )
 
+/** `@order`, `@bakehouse/about`, … resolved from site.yaml `links` by content.ts. */
+export const TOKEN = /^@([A-Za-z]+)([/#?].*)?$/
+
 export const url = z
   .string()
   .trim()
   .refine(
-    (s) => /^(\/|#|https:\/\/|mailto:|tel:)/.test(s),
-    'Must be /path, #anchor, https://…, mailto: or tel:.',
+    (s) => TOKEN.test(s) || /^(\/|#|https:\/\/|mailto:|tel:)/.test(s),
+    'Must be /path, #anchor, https://…, mailto:, tel: or a link token like @order.',
   )
 
 /** A file under public/, referenced by its public path. Must exist. */
@@ -92,6 +95,12 @@ export const seo = z.strictObject({
 })
 
 const faqItem = z.strictObject({ question: plain, answer: markdown })
+
+/** A shared FAQ: a Markdown answer, or `hours: true` to print the cafe and bar hours. */
+const sharedFaqItem = z.union([
+  faqItem,
+  z.strictObject({ question: plain, hours: z.literal(true) }),
+])
 
 /* ------------------------------------------------------------------ */
 /* Page-builder sections                                              */
@@ -386,7 +395,44 @@ export const merchSchema = z.strictObject({
 
 const footerLink = z.strictObject({ label: plain, url })
 
+const time = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, 'Write the time as "HH:MM", 24-hour, in quotes: "17:00".')
+const day = z.enum(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'])
+
+const hoursGroup = z.strictObject({
+  label: plain,
+  /** As printed: footer, /locations/woodbridge, the hours FAQs. */
+  lines: z.array(plain).min(1),
+  /** The same hours as data, for Google's structured data. Keep it in step with `lines`. */
+  schedule: z.array(z.strictObject({ days: z.array(day).min(1), opens: time, closes: time })).min(1),
+})
+
+const phone = z.string().regex(/^\(\d{3}\) \d{3}-\d{4}$/, 'Write the phone as (905) 607-0606.')
+
+const address = {
+  name: plain,
+  street: plain,
+  city: plain,
+  region: plain,
+  postal: plain,
+}
+
 export const siteSchema = z.strictObject({
+  /** Shared links, used as `@name` tokens in any url or Markdown link. */
+  links: z.record(z.string().regex(/^[A-Za-z]+$/), z.string().url().startsWith('https://')),
+  nap: z.strictObject({
+    ...address,
+    country: plain,
+    phone,
+    email: z.string().email(),
+    geo: z.strictObject({ latitude: z.number(), longitude: z.number() }),
+  }),
+  hours: z.strictObject({ cafe: hoursGroup, bar: hoursGroup }),
+  bakehouse: z.strictObject({
+    ...address,
+    phone,
+    email: z.string().email(),
+    hours: z.array(z.strictObject({ label: plain, lines: z.array(plain).min(1) })).min(1),
+  }),
   /** Default share image when a page sets none. */
   seo: z.strictObject({ ogImage: publicFile }),
   googleRating: z.strictObject({ score: z.number().min(0).max(5), label: plain, url }),
@@ -424,12 +470,11 @@ export const siteSchema = z.strictObject({
     menus: z.strictObject({ heading: plain, blurb: plain, blurbUrl: url, links: z.array(footerLink).min(1) }),
     /** The footer's Specialties column lists the Specialties group of menusDropdown. */
     specialties: z.strictObject({ heading: plain, blurb: plain }),
-    hours: z.strictObject({ heading: plain, locationLabel: plain, address: plain, mapUrl: url }),
+    /** The address itself comes from `nap`. */
+    hours: z.strictObject({ heading: plain, locationLabel: plain, mapUrl: url }),
+    /** Phone and email come from `nap`. */
     contact: z.strictObject({
       heading: plain,
-      phone: plain,
-      phoneDigits: z.string().regex(/^\d{10}$/, 'Ten digits, no spaces.'),
-      email: z.string().email(),
       socialsLabel: plain,
       socials: z.array(z.strictObject({ platform: plain, url, icon: publicFile })),
       googleReview: footerLink,
@@ -461,4 +506,52 @@ export const siteSchema = z.strictObject({
     /** Days a closed popup stays hidden. */
     dismissDays: z.number().int().min(1),
   }),
+})
+
+/** src/content/faqs.yaml: FAQ sets by page. */
+export const faqsSchema = z.strictObject({
+  home: z.array(sharedFaqItem).min(1),
+  about: z.array(sharedFaqItem).min(1),
+  contact: z.array(sharedFaqItem).min(1),
+  catering: z.array(sharedFaqItem).min(1),
+  woodbridge: z.array(sharedFaqItem).min(1),
+  scarborough: z.array(sharedFaqItem).min(1),
+})
+
+const banner = z.strictObject({ image, heading: plain, intro: plain })
+
+/** src/content/about.yaml */
+export const aboutSchema = z.strictObject({
+  seo,
+  banner,
+  body: markdown,
+  timeline: z.strictObject({
+    heading: plain,
+    steps: z.array(z.strictObject({ title: plain, body: plain })).min(1),
+  }),
+  video: z.strictObject({
+    heading: plain,
+    body: plain,
+    /** A file in public/, or a https URL. */
+    file: z.string().trim().refine((s) => s.startsWith('https://') || s.startsWith('/'), 'Must be https://… or /path.'),
+    alt: plain,
+    ctas: z.array(cta),
+  }),
+})
+
+const location = z.strictObject({
+  seo,
+  heading: plain,
+  intro: plain,
+  image,
+  /** The location's card on /locations. */
+  card: z.strictObject({ title: plain, blurb: plain, cta: navLink }),
+  details: z.strictObject({ heading: plain, body: markdown, ctas: z.array(cta) }),
+})
+
+/** src/content/locations.yaml */
+export const locationsSchema = z.strictObject({
+  hub: z.strictObject({ seo, heading: plain, intro: plain, image }),
+  woodbridge: location,
+  scarborough: location,
 })

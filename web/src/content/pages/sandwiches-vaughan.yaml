@@ -125,7 +125,7 @@ sections:
     body: Order ahead for pickup, or come in for lunch at our location in Woodbridge.
     ctas:
       - label: Order online
-        url: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+        url: "@order"
         newTab: true
         style: primary
       - label: See the lunch menu

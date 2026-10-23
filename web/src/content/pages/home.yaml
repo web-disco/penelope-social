@@ -10,7 +10,7 @@ sections:
     body: Focaccia sandwiches at lunch, sourdough pizza at dinner, and cocktails whenever you sit down.
     primaryCta:
       label: Order Online
-      url: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+      url: "@order"
       newTab: true
     secondaryCta:
       label: Reservations
@@ -118,6 +118,6 @@ sections:
       alt: Loaves of Sourdough Bread
     cta:
       label: Visit the Bakehouse
-      url: https://penelopebakehouse.com
+      url: "@bakehouse"
       style: outline
       newTab: true

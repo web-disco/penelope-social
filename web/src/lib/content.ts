@@ -12,6 +12,7 @@ import { getImage } from 'astro:assets'
 import { getCollection, getEntry } from 'astro:content'
 import type { z } from 'astro/zod'
 import type * as S from './content-schema'
+import { TOKEN } from './content-schema'
 
 /* ------------------------------------------------------------------ */
 /* Problems                                                           */
@@ -96,14 +97,17 @@ const linksInCopy: { where: string; href: string }[] = []
 
 /**
  * One line of copy with `[text](url)` links, `**bold**` and `*italics*`, to HTML.
- * Links render as plain <a href>, exactly as the Sanity rich text did.
+ * External (https) links open in a new tab, like every other off-site link on
+ * the site; on-site, tel: and mailto: links don't.
  */
 export function inlineHtml(text: string): string {
   let out = ''
   let last = 0
   for (const match of text.matchAll(LINK)) {
+    const href = match[2]!
+    const newTab = href.startsWith('https://') ? ' target="_blank" rel="noopener"' : ''
     out += emphasis(escapeHtml(text.slice(last, match.index)))
-    out += `<a href="${escapeAttr(match[2]!)}">${emphasis(escapeHtml(match[1]!))}</a>`
+    out += `<a href="${escapeAttr(href)}"${newTab}>${emphasis(escapeHtml(match[1]!))}</a>`
     last = match.index! + match[0].length
   }
   return out + emphasis(escapeHtml(text.slice(last)))
@@ -149,6 +153,9 @@ type HomeData = z.infer<typeof S.homeSchema>
 type PageData = z.infer<typeof S.pageSchema>
 type MenuData = z.infer<typeof S.menuSchema>
 type MerchData = z.infer<typeof S.merchSchema>
+type FaqsData = z.infer<typeof S.faqsSchema>
+type AboutData = z.infer<typeof S.aboutSchema>
+type LocationsData = z.infer<typeof S.locationsSchema>
 
 export type Section = Resolved<z.infer<typeof S.section>>
 export type SectionOf<T extends Section['type']> = Extract<Section, { type: T }>
@@ -157,38 +164,171 @@ export type Menu = Resolved<MenuData> & { slug: string }
 export type MenuCategory = Menu['categories'][number]
 export type Merch = Resolved<MerchData> & { slug: string }
 
-const siteEntry = await getEntry('site', 'site')
-const homeEntry = await getEntry('home', 'home')
-if (!siteEntry) throw new Error('src/content/site.yaml is missing.')
-if (!homeEntry) throw new Error('src/content/pages/home.yaml is missing.')
+async function singleton<T>(collection: 'site' | 'home' | 'faqs' | 'about' | 'locations', file: string): Promise<T> {
+  const entry = await getEntry(collection, collection)
+  if (!entry) throw new Error(`src/content/${file} is missing.`)
+  return entry.data as T
+}
 
-export const site = resolveImages(siteEntry.data as SiteData, 'site.yaml')
-export const home = resolveImages(homeEntry.data as HomeData, 'pages/home.yaml')
-collectLinks(siteEntry.data, 'site.yaml')
-collectLinks(homeEntry.data, 'pages/home.yaml')
+const siteData = await singleton<SiteData>('site', 'site.yaml')
+
+/* ------------------------------------------------------------------ */
+/* Link tokens                                                        */
+/* ------------------------------------------------------------------ */
+
+const LINKS: Record<string, string> = siteData.links
+
+/** "@order" → the order URL; "@bakehouse/about" → its site + "/about". */
+function resolveToken(value: string, where: string): string {
+  const match = TOKEN.exec(value)
+  if (!match) return value
+  const base = LINKS[match[1]!]
+  if (!base) {
+    problem(where, `unknown link token "@${match[1]}". Add it to site.yaml → links, or use one of: ${Object.keys(LINKS).map((k) => `@${k}`).join(', ')}.`)
+    return value
+  }
+  return base + (match[2] ?? '')
+}
+
+/** Every `@token` in a url field or a Markdown link, swapped for its URL, at any depth. */
+function resolveTokens<T>(value: T, where: string): T {
+  if (typeof value === 'string') {
+    if (TOKEN.test(value)) return resolveToken(value, where) as T
+    return value.replace(LINK, (whole, text, href) =>
+      href.startsWith('@') ? `[${text}](${resolveToken(href, where)})` : whole,
+    ) as T
+  }
+  if (Array.isArray(value)) return value.map((v, i) => resolveTokens(v, `${where}[${i}]`)) as T
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, resolveTokens(v, `${where}.${k}`)])) as T
+  }
+  return value
+}
+
+/** Tokens, then the link check list, then images. */
+function load<T>(data: T, file: string): Resolved<T> {
+  const resolved = resolveTokens(data, file)
+  collectLinks(resolved, file)
+  return resolveImages(resolved, file)
+}
+
+/* ------------------------------------------------------------------ */
+/* Load                                                               */
+/* ------------------------------------------------------------------ */
+
+export const site = load(siteData, 'site.yaml')
+export const home = load(await singleton<HomeData>('home', 'pages/home.yaml'), 'pages/home.yaml')
+const faqsData = load(await singleton<FaqsData>('faqs', 'faqs.yaml'), 'faqs.yaml')
+export const about = load(await singleton<AboutData>('about', 'about.yaml'), 'about.yaml')
+export const locations = load(await singleton<LocationsData>('locations', 'locations.yaml'), 'locations.yaml')
 
 const bySlug = <T extends { slug: string }>(a: T, b: T) => a.slug.localeCompare(b.slug)
 
 export const pages: Page[] = (await getCollection('pages'))
-  .map((entry) => {
-    collectLinks(entry.data, `pages/${entry.id}.yaml`)
-    return { ...resolveImages(entry.data as PageData, `pages/${entry.id}.yaml`), slug: entry.id }
-  })
+  .map((entry) => ({ ...load(entry.data as PageData, `pages/${entry.id}.yaml`), slug: entry.id }))
   .sort(bySlug)
 
 export const menus: Menu[] = (await getCollection('menus'))
-  .map((entry) => {
-    collectLinks(entry.data, `menus/${entry.id}.yaml`)
-    return { ...resolveImages(entry.data as MenuData, `menus/${entry.id}.yaml`), slug: entry.id }
-  })
+  .map((entry) => ({ ...load(entry.data as MenuData, `menus/${entry.id}.yaml`), slug: entry.id }))
   .sort(bySlug)
 
 export const merch: Merch[] = (await getCollection('merch'))
-  .map((entry) => {
-    collectLinks(entry.data, `merch/${entry.id}.yaml`)
-    return { ...resolveImages(entry.data as MerchData, `merch/${entry.id}.yaml`), slug: entry.id }
-  })
+  .map((entry) => ({ ...load(entry.data as MerchData, `merch/${entry.id}.yaml`), slug: entry.id }))
   .sort((a, b) => a.order - b.order || a.slug.localeCompare(b.slug))
+
+/* ------------------------------------------------------------------ */
+/* Address, phone and hours (typed once in site.yaml, derived here)    */
+/* ------------------------------------------------------------------ */
+
+/** The site's origin, from astro.config.mjs `site`. */
+export const SITE_ORIGIN = (import.meta.env.SITE as string).replace(/\/$/, '')
+
+export const links = LINKS
+
+const addressLine = (a: { street: string; city: string; region: string; postal: string }) =>
+  `${a.street}, ${a.city}, ${a.region} ${a.postal}`
+/** "(905) 607-0606" → "+19056070606". */
+const e164 = (phone: string) => `+1${phone.replace(/\D/g, '')}`
+
+export interface HourBlock {
+  label: string
+  lines: string[]
+}
+
+/** Penelope Social, Woodbridge. */
+export const nap = {
+  ...site.nap,
+  phoneDigits: e164(site.nap.phone),
+  address: addressLine(site.nap),
+  mapQuery: addressLine(site.nap),
+  mapUrl: LINKS.directions!,
+}
+
+/** The sister bakehouse, Scarborough. */
+export const bakehouse = {
+  ...site.bakehouse,
+  phoneDigits: e164(site.bakehouse.phone),
+  address: addressLine(site.bakehouse),
+  url: LINKS.bakehouse!,
+  mapQuery: addressLine(site.bakehouse),
+  mapUrl: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(addressLine(site.bakehouse)).replace(/%20/g, '+')}`,
+}
+
+export const cafeHours: HourBlock[] = [{ label: site.hours.cafe.label, lines: site.hours.cafe.lines }]
+export const barHours: HourBlock[] = [{ label: site.hours.bar.label, lines: site.hours.bar.lines }]
+/** Footer, location and hours-FAQ lines. One day-range per line. */
+export const stackedHoursBlocks: HourBlock[] = [...cafeHours, ...barHours]
+export const hoursSchedule = { cafe: site.hours.cafe.schedule, bar: site.hours.bar.schedule }
+
+/** The footer's formats: "(905) 607 0606", tel:9056070606. */
+export const footerContact = {
+  phone: site.nap.phone.replace('-', ' '),
+  phoneDigits: site.nap.phone.replace(/\D/g, ''),
+  email: site.nap.email,
+  address: nap.address,
+}
+
+/** The four main menus, for the restaurant's `hasMenu`: the Menus group of the dropdown. */
+export const MENU_URLS = (site.menusDropdown.find((g) => g.heading === 'Menus')?.links ?? []).map(
+  (link) => `${SITE_ORIGIN}${link.url}`,
+)
+/** Social profiles only. Never penelopebakehouse.com: that mixes the two entities. */
+export const SAME_AS = [LINKS.instagram!, LINKS.tiktok!]
+
+/* ------------------------------------------------------------------ */
+/* FAQs                                                               */
+/* ------------------------------------------------------------------ */
+
+export interface Cta {
+  label: string
+  url: string
+  style?: 'primary' | 'outline'
+  newTab?: boolean
+}
+
+export interface FaqItem {
+  question: string
+  /** HTML: links rendered, stripped to text for FAQPage JSON-LD. */
+  answer: string
+}
+
+/** The hours as one FAQ answer: each group's label in bold, one range per line. */
+const hoursFaqHtml = stackedHoursBlocks
+  .map((block, i) =>
+    // inline-block so the top margin applies; it separates the two groups.
+    [i ? `<strong class="mt-space-12 inline-block">${block.label}</strong>` : `<strong>${block.label}</strong>`, ...block.lines.map(escapeHtml)].join('<br>'),
+  )
+  .join('<br>')
+
+export const faqs = Object.fromEntries(
+  Object.entries(faqsData).map(([set, items]) => [
+    set,
+    items.map((item): FaqItem => ({
+      question: item.question,
+      answer: 'hours' in item ? hoursFaqHtml : inlineHtml(item.answer),
+    })),
+  ]),
+) as Record<keyof FaqsData, FaqItem[]>
 
 export const getPage = (slug: string) => pages.find((p) => p.slug === slug)
 export const getMenu = (slug: string) => menus.find((m) => m.slug === slug)
