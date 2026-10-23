@@ -167,6 +167,11 @@ export const typeScale = {
     'font-body font-medium normal-case text-[40px] leading-none text-balance ' +
     'wf-md:text-[34px] wf-sm:text-[30px] wf-xs:text-[26px]',
 
+  /** Menu category H2 — Bakehouse /menu ladder. 40 → 34 / 30 / 24. */
+  displayMenuCategory:
+    'font-body font-medium normal-case text-[40px] leading-none text-balance ' +
+    'wf-md:text-[34px] wf-sm:text-[30px] wf-xs:text-[24px]',
+
   /** Section H2. 36 → 32 / 28 / 26. */
   displayM:
     'font-body font-medium normal-case text-[36px] leading-none text-balance ' +
