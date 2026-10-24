@@ -188,9 +188,11 @@ categories:
     anchor: drinks
     description: Bottled water, pops, juice and imported beer.
     items:
-      - title: Small Natural Water (Bottle)
+      - title: Small Natural Water
+        description: In a bottle
         price: "3"
-      - title: Small Sparkling Water (Can)
+      - title: Small Sparkling Water
+        description: In a can
         price: "4"
       - title: San Benedetto Mineral Water (750ml)
         description: Natural or Sparkling
@@ -210,7 +212,8 @@ categories:
         price: "4"
       - title: Brio Chinotto
         price: "4"
-      - title: Ting Grapefruit Soda
+      - title: Ting
+        description: Grapefruit Soda
         price: "4"
       - title: Juice
         description: Orange, Apple
