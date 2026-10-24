@@ -4,12 +4,11 @@
  * H1 is painted immediately — no GSAP / .reveal hide.
  */
 import { heading, layout, typeScale } from '../../lib/ui'
-import { imageUrl, imageAlt } from '../../lib/image'
+import type { Image } from '../../lib/content'
+import ResponsivePicture from '../ResponsivePicture.astro'
 
 interface Props {
-  src?: string
-  image?: any
-  alt?: string
+  image: Image
   headingText?: string
   intro?: string
   objectPosition?: string
@@ -20,18 +19,13 @@ interface Props {
 }
 
 const {
-  src,
   image,
-  alt,
   headingText,
   intro,
-  objectPosition = 'center',
+  objectPosition = image.objectPosition ?? 'center',
   introClass,
   breadcrumbs,
 } = Astro.props
-
-const imgSrc = src || imageUrl(image)
-const imgAlt = alt || imageAlt(image)
 const bannerHeight = 'h-[550px] wf-md:h-[420px] wf-sm:h-[440px] wf-xs:h-[400px]'
 const hasBreadcrumbs = !!breadcrumbs && breadcrumbs.length > 1
 // The section gap sits under whatever closes the banner: the photo, or the breadcrumb bar.
@@ -39,20 +33,14 @@ const gapBelow = 'mb-section-gap-y wf-sm:mb-section-gap-y-sm'
 ---
 
 <div class:list={['page-banner relative w-full overflow-hidden', !hasBreadcrumbs && gapBelow, bannerHeight]}>
-  {
-    imgSrc && (
-      <img
-        src={imgSrc}
-        alt={imgAlt}
-        width="1440"
-        height="810"
-        loading="eager"
-        fetchpriority="high"
-        class="page-banner-image absolute inset-0 h-full w-full object-cover"
-        style={`object-position: ${objectPosition};`}
-      />
-    )
-  }
+  <ResponsivePicture
+    image={{ ...image, objectPosition: undefined }}
+    sizes="100vw"
+    loading="eager"
+    fetchpriority="high"
+    imgClass="page-banner-image absolute inset-0 h-full w-full object-cover"
+    style={`object-position: ${objectPosition};`}
+  />
   <div class="page-banner-overlay pointer-events-none absolute inset-0 bg-black/35" aria-hidden="true"></div>
   <div
     class="page-banner-scrim pointer-events-none absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-black/92 via-black/55 to-transparent"

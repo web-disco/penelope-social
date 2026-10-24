@@ -2,55 +2,19 @@
 /**
  * Menu category blocks. Bakehouse /menu type and spacing:
  * 40px category title, one-line blurb, 60px grid, 24px item / price.
- * Empty lists stay titled with small body copy. Unavailable categories hide.
+ * An empty list stays titled, with a "nothing right now" line.
  */
-import { PortableText } from 'astro-portabletext'
 import { layout, typeScale } from '../lib/ui'
-import { withoutEmptyBlocks } from '../lib/portableText'
-import { menuTitle, restaurantCopy } from '../data/copy'
+import { offerFor, paragraphsHtml, type MenuItemOffer } from '../lib/content'
 
 interface Props {
-  categories: any[]
+  categories: { title: string; anchor: string; description?: string; items: { title: string; description?: string; price?: string }[] }[]
   /** After a banner that already has mb-section-gap-y. False when another cream block sits above. */
   flushTop?: boolean
-  /** Items another menu borrows (Happy Hour), by _key — each gets a link to it. */
-  offers?: Map<string, { label: string; price: string; url: string }>
+  /** Dishes another menu borrows (Happy Hour), by name: each gets a link to it. */
+  offers?: Map<string, MenuItemOffer>
 }
 const { categories, flushTop = true, offers } = Astro.props
-
-const isUnavailable = (item: any) => /unavailable/i.test(item?.title ?? '')
-
-const isPlaceholderCategory = (category: any) =>
-  /^(appetizers?|pasta)$/i.test(String(category.title ?? '').trim())
-
-const listableItems = (category: any) =>
-  (category.items ?? []).filter((item: any) => item?.title && !isUnavailable(item))
-
-/** Hide unavailable placeholders (catering Appetizers / Pasta). Empty lists stay. */
-const visibleCategories = (categories ?? []).filter((category: any) => {
-  const items = category.items ?? []
-  if (listableItems(category).length > 0) return true
-  if (items.some(isUnavailable) || isPlaceholderCategory(category)) return false
-  return true
-})
-
-function categoryBlurb(text?: string) {
-  if (typeof text !== 'string') return ''
-  let raw = restaurantCopy(text)
-  if (!raw) return ''
-  raw = raw
-    .replace(/<br\s*\/?>/gi, ' ')
-    .replace(/\s*\n+\s*/g, ' ')
-    .replace(/\s{2,}/g, ' ')
-    .trim()
-
-  if (/minimum of 6 sandwiches/i.test(raw) && /cut into 4/i.test(raw)) {
-    return 'Minimum of 6 sandwiches, cut into 4.'
-  }
-  if (/each salad serves/i.test(raw)) return 'Each salad serves 8 to 10.'
-  if (/penne or spaghetti/i.test(raw)) return 'Choice of penne or spaghetti.'
-  return raw
-}
 
 function splitTitleSize(title: string) {
   const match = title.match(/^(.*?)(\s*\([^)]+\))$/)
@@ -64,18 +28,12 @@ function isMultiPrice(price?: string) {
 ---
 
 {
-  visibleCategories.map((category, index) => {
-    // Rich text (links allowed) renders as-is; older plain strings keep the copy cleanup.
-    // Cloned: astro-portabletext rewrites linked spans in place, and the menu
-    // docs are shared across renders (and with the JSON-LD built from them).
-    const richBlurb = Array.isArray(category.description)
-      ? structuredClone(withoutEmptyBlocks(category.description))
-      : []
-    const blurb = richBlurb.length ? '' : categoryBlurb(category.description)
-    const items = (category.items ?? []).filter((item: any) => item?.title && !isUnavailable(item))
+  categories.map((category, index) => {
+    const blurb = category.description ? paragraphsHtml(category.description) : ''
+    const items = category.items
     return (
       <section
-        id={category.anchor?.current}
+        id={category.anchor}
         class:list={[
           'menu-category',
           index === 0
@@ -87,9 +45,9 @@ function isMultiPrice(price?: string) {
       >
         <div class={layout.shell}>
           <h2 class:list={['page-sub-heading mt-0 mb-space-12 text-charcoal', typeScale.displayL]}>
-            {menuTitle(category.title)}
+            {category.title}
           </h2>
-          {richBlurb.length > 0 && (
+          {blurb && (
             <div
               class:list={[
                 'menu-description mb-space-24 text-charcoal [&_p]:my-0',
@@ -97,20 +55,8 @@ function isMultiPrice(price?: string) {
                 '[&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70 [&_strong]:font-medium',
                 typeScale.bodyLg,
               ]}
-            >
-              <PortableText value={richBlurb} />
-            </div>
-          )}
-          {blurb && (
-            <p
-              class:list={[
-                'menu-description mb-space-24 text-charcoal whitespace-nowrap',
-                'wf-md:whitespace-normal',
-                typeScale.bodyLg,
-              ]}
-            >
-              {blurb}
-            </p>
+              set:html={blurb}
+            />
           )}
           {items.length ? (
             <div class="menu-category-wrapper w-dyn-list">
@@ -118,8 +64,9 @@ function isMultiPrice(price?: string) {
                 role="list"
                 class="menu-category-list grid auto-cols-[1fr] grid-cols-3 grid-rows-[auto] gap-[60px] wf-md:grid-cols-2 wf-md:gap-10 wf-sm:grid-cols-1 wf-xs:gap-5"
               >
-                {items.map((item: any) => {
-                  const { name, suffix } = splitTitleSize(menuTitle(item.title))
+                {items.map((item) => {
+                  const { name, suffix } = splitTitleSize(item.title)
+                  const offer = offers && offerFor(offers, item.title)
                   const multi = isMultiPrice(item.price)
                   return (
                     <div role="listitem" class="menu-category-item border-t-2 border-charcoal">
@@ -130,7 +77,7 @@ function isMultiPrice(price?: string) {
                             for that reason; this heading was hand-rolled and did
                             not, which put every menu item name in Arial while the
                             category heading beside it rendered in Sweet Sans. */}
-                        <h3 class="menu-item-title mt-0 mb-0 font-body text-[24px] font-medium leading-[120%] text-pretty text-charcoal">
+                        <h3 class="menu-item-title mt-0 mb-0 font-body text-[24px] font-medium leading-[120%] text-pretty text-charcoal wf-sm:text-[20px] wf-xs:text-[18px]">
                           {name}
                           {suffix && <span class="whitespace-nowrap">{suffix}</span>}
                         </h3>
@@ -138,7 +85,8 @@ function isMultiPrice(price?: string) {
                           <p
                             class:list={[
                               'heading-menu-price mt-0 mb-0 whitespace-nowrap text-charcoal',
-                              multi ? 'text-[16px] leading-[150%]' : 'text-[24px] leading-[120%]',
+                              /* Same steps as the item name, so name and price stay on one line. */
+                              multi ? 'text-[16px] leading-[150%] wf-xs:text-[14px]' : 'text-[24px] leading-[120%] wf-sm:text-[20px] wf-xs:text-[18px]',
                             ]}
                           >
                             {item.price}
@@ -150,9 +98,9 @@ function isMultiPrice(price?: string) {
                           <p class:list={['mb-0 text-charcoal', typeScale.body]}>{item.description}</p>
                         </div>
                       )}
-                      {offers?.get(item._key) && (
+                      {offer && (
                         <a
-                          href={offers.get(item._key)!.url}
+                          href={offer.url}
                           class:list={[
                             'menu-item-offer mt-space-16 inline-flex items-center gap-space-8 text-green no-underline',
                             'transition-opacity duration-[350ms] hover:opacity-70',
@@ -160,7 +108,7 @@ function isMultiPrice(price?: string) {
                           ]}
                         >
                           <span>
-                            {offers.get(item._key)!.label} · {offers.get(item._key)!.price}
+                            {offer.label} · {offer.price}
                           </span>
                           <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                             <path d="M2 6h8M6.5 2.5 10 6l-3.5 3.5" stroke="currentColor" stroke-width="1.5" />

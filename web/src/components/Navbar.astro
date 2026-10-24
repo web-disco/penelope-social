@@ -5,22 +5,21 @@
  * Social keeps two CTAs (Order / Reservations) and Merch in the drawer.
  */
 import { btn, heading, layout } from '../lib/ui'
-import { imageUrl } from '../lib/image'
-import { MENUS_DROPDOWN, isMerchNav, resolveNavLinks } from '../data/nav'
+import { menusDropdown as MENUS_DROPDOWN, site } from '../lib/content'
 
 interface Props {
-  settings: any
   isHome?: boolean
   solidNav?: boolean
 }
-const { settings, isHome = false, solidNav = false } = Astro.props
+const { isHome = false, solidNav = false } = Astro.props
 
-const header = settings.header ?? {}
-const socials = settings.footer?.contact?.socials ?? []
-const logoSrc = imageUrl(header.logo) || '/penelope-logo.svg'
+const header = site.header
+const socials = site.footer.contact.socials
+const logoSrc = header.logo
 
-const navLinks = resolveNavLinks(header.drawerLinks)
-const desktopNavLinks = navLinks.filter((link) => !isMerchNav(link))
+const navLinks = site.nav
+/* Merch is a drawer-only link. */
+const desktopNavLinks = navLinks.filter((link) => link.url !== '/merchandise')
 
 const pathname = Astro.url.pathname.replace(/\/$/, '') || '/'
 const currentHash = Astro.url.hash
@@ -44,11 +43,6 @@ const linkClass =
 
 const navScrolled = solidNav
 
-/**
- * Square thumbnails for the dropdown (68px), 2x for retina. Not lazy: a lazy image
- * inside the hidden panel only starts loading on first open and shows blank.
- */
-const thumbUrl = (ref: string) => imageUrl({ asset: { _ref: ref } }, 136)
 
 /** The Menus item carries the Menus / Specialties dropdown. */
 const isMenusLink = (url: string) => (url.replace(/\/$/, '') || '/') === '/menus'
@@ -113,8 +107,8 @@ function gaEventForNav(url: string) {
                               data-ga-item={item.label}
                             >
                               <span class="nav-dropdown__thumb">
-                                {thumbUrl(item.image) && (
-                                  <img src={thumbUrl(item.image)} alt="" width="68" height="68" decoding="async" fetchpriority="low" />
+                                {item.thumb && (
+                                  <img src={item.thumb} alt="" width="68" height="68" decoding="async" fetchpriority="low" />
                                 )}
                               </span>
                               <span class="nav-dropdown__text">
@@ -170,7 +164,7 @@ function gaEventForNav(url: string) {
             class:list={[btn.navOutline, 'navbar__cta']}
           >
             <span>
-              {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
+              {header.reservations.label}
             </span>
           </a>
         )
@@ -201,7 +195,7 @@ function gaEventForNav(url: string) {
     <img
       src={logoSrc}
       loading="eager"
-      alt={header.logoAlt ?? 'Penelope Logo'}
+      alt={header.logoAlt}
       class="navbar-logo block w-[128px] wf-md:w-[110px] wf-xs:w-[84px]"
     />
     <span
@@ -303,8 +297,8 @@ function gaEventForNav(url: string) {
                   data-menu-link
                 >
                   <span class="menu-drawer__screen-thumb">
-                    {thumbUrl(item.image) && (
-                      <img src={thumbUrl(item.image)} alt="" width="64" height="64" decoding="async" fetchpriority="low" />
+                    {item.thumb && (
+                      <img src={item.thumb} alt="" width="64" height="64" decoding="async" fetchpriority="low" />
                     )}
                   </span>
                   <span class="menu-drawer__screen-text">
@@ -333,7 +327,7 @@ function gaEventForNav(url: string) {
               class="menu-drawer__social"
             >
               <img
-                src={social.icon ?? `/icons/${social.platform}.svg`}
+                src={social.icon}
                 alt=""
                 width="28"
                 height="28"
@@ -367,7 +361,7 @@ function gaEventForNav(url: string) {
           class:list={[btn.secondaryOutline, 'menu-drawer__cta']}
         >
           <span>
-            {header.reservations.label === 'reservations' ? 'Reservations' : header.reservations.label}
+            {header.reservations.label}
           </span>
         </a>
       )

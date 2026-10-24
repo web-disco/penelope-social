@@ -1,0 +1,147 @@
+title: Sourdough Bakery in Vaughan
+breadcrumb: Sourdough Bakery
+seo:
+  title: Sourdough Bakery in Vaughan | Penelope Social
+  description: Sourdough loaves, focaccia, pizza dough and breadcrumbs to take home from Penelope Social in Woodbridge, Vaughan. Baked at our Scarborough bakehouse.
+  ogImage: /images/og/bread.jpg
+schemaMenu:
+  - menu: lunch
+    category: bakery
+    name: Sourdough loaves, focaccia and dough to take home
+sections:
+  - type: pageHero
+    image:
+      src: bakery-banner.avif
+      alt: Sourdough loaves cooling on a rack
+    heading: Sourdough Bakery in Vaughan
+    intro: Sourdough loaves, focaccia and pizza dough to take home from our Woodbridge counter.
+  - type: richTextIntro
+    heading: Real sourdough, a short drive from home
+    body: Every loaf starts with Penelope, the sourdough starter we've kept going since 2018. The bread is naturally leavened, baked at our bakehouse in Scarborough and brought to Penelope Social in Woodbridge, so you can pick up a loaf in Vaughan without the drive across the city.
+  - type: menuItemCards
+    heading: From the bakery shelf
+    intro: Sourdough loaves, focaccia, pizza dough and croutons to take home.
+    rating: true
+    items:
+      - item: Barese
+        link: /menus/lunch#bakery
+        image:
+          src: barese-focaccia.jpg
+          alt: Barese focaccia with olives and tomatoes
+      - item: Sourdough Pizza Dough
+        link: /menus/lunch#bakery
+        image:
+          src: pizza-dough-balls.avif
+          alt: Balls of sourdough pizza dough
+      - item: Sourdough Croutons
+        link: /menus/lunch#bakery
+        image:
+          src: sourdough-croutons.jpg
+          alt: Bags of Penelope Social sourdough croutons
+      - item: Country Style
+        link: /menus/lunch#bakery
+        image:
+          src: bread-cooling-rack.avif
+          alt: A sourdough loaf on a cooling rack
+    cta:
+      label: See everything on the bakery shelf
+      url: /menus/lunch#bakery
+  - type: comparisonTable
+    heading: Sourdough vs supermarket bread
+    intro: The difference is time, and what the bread rises on.
+    columns:
+      - Penelope sourdough
+      - Supermarket bread
+    rows:
+      - label: Rises with
+        values:
+          - A live sourdough starter
+          - Commercial yeast
+      - label: Ingredients
+        values:
+          - Flour, water, salt and the starter
+          - Often sugar, oils and preservatives
+      - label: Crust and crumb
+        values:
+          - A thick, crackly crust and an open, chewy crumb
+          - Soft all the way through
+      - label: Baked
+        values:
+          - At our bakehouse in Scarborough
+          - In a factory, days before you buy it
+  - type: mediaTextCta
+    layout: image-first
+    heading: One starter, every loaf
+    body: |-
+      It began in 2018 as a starter called Anastasia. It was nearly lost, brought back to life and renamed Penelope. The restaurant and the bakehouse both grew from it.
+
+      The same starter raises our [sourdough pizza](/pizza-vaughan) and the focaccia under our [focaccia sandwiches](/sandwiches-vaughan), so the bread you take home is the bread we serve.
+    image:
+      src: sourdough-loaves-stack.avif
+      alt: A stack of Penelope sourdough loaves
+    ctas:
+      - label: About the Bakehouse
+        url: "@bakehouse/about"
+        style: outline
+        newTab: true
+  - type: mediaTextCta
+    layout: copy-first
+    heading: Order bread ahead
+    body: |-
+      Need a few loaves for a dinner party, or focaccia for the whole table? Order sourdough loaves, focaccia, pizza dough, breadcrumbs and croutons ahead and we'll have them ready to pick up in Woodbridge.
+
+      Bread orders need 24 hours' notice.
+    image:
+      src: bread-loaves.avif
+      alt: Sourdough loaves from Penelope
+    ctas:
+      - label: See the catering menu
+        url: /menus/catering
+        style: primary
+      - label: Contact Us
+        url: /catering-events
+        style: outline
+  - type: visitDetails
+    heading: Picking up in Woodbridge
+    intro: We're at 125 Hawkview Blvd in Woodbridge, Vaughan, a 5-minute drive from Vaughan Mills.
+    ctas:
+      - label: Get directions
+        url: "@directions"
+        newTab: true
+        style: primary
+    hours: cafe
+    rows:
+      - label: Parking
+        body: Free parking in the lot out front.
+      - label: Phone
+        body: (905) 607-0606
+    showMap: false
+    layout: details-first
+  - type: faqSection
+    heading: FAQs
+    items:
+      - question: Where can I buy sourdough bread in Vaughan?
+        answer: At Penelope Social, 125 Hawkview Blvd in Woodbridge. We sell classic and specialty sourdough loaves, focaccia, pizza dough, breadcrumbs and croutons to take home.
+      - question: Is this Penelope Bakehouse?
+        answer: No. This is Penelope Social in Woodbridge, Vaughan. Penelope Bakehouse is our bakehouse and focacceria at 71 Howden Rd in Scarborough, where the bread is baked. Its menu and hours are on penelopebakehouse.com.
+      - question: What sourdough loaves do you sell?
+        answer: "Classic sourdough loaves are $9: Crusty White, Country Style and Sesame-Crusted White. Specialty loaves are $12: Marbled Rye and Olive."
+      - question: Do you sell focaccia to take home?
+        answer: Yes. Focaccia Romana is $15. Semolina focaccia comes as a Sea Salt Mini ($5), Sea Salt/Rosemary ($9 small, $15 large) and Barese ($12 small, $20 large).
+      - question: Can I order bread ahead?
+        answer: Yes. Loaves, focaccia, pizza dough, breadcrumbs and croutons are on our catering menu and need 24 hours' notice.
+      - question: Do you sell sourdough pizza dough?
+        answer: Yes, for $4. We also sell sourdough breadcrumbs and croutons for $5 each.
+      - question: Is there parking?
+        answer: Yes, there's free parking in the lot out front.
+  - type: finalCta
+    heading: Looking for sourdough bread in Vaughan?
+    body: Order ahead for pickup, or come by the counter at our location in Woodbridge.
+    ctas:
+      - label: Order online
+        url: "@order"
+        newTab: true
+        style: primary
+      - label: See the lunch menu
+        url: /menus/lunch
+        style: outline

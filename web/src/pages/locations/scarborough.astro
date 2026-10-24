@@ -6,21 +6,20 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import BannerHero from '../../components/sections/BannerHero.astro'
 import LocationDetails from '../../components/sections/LocationDetails.astro'
 import FaqSection from '../../components/sections/FaqSection.astro'
-import { scarboroughLocation, scarboroughLocationMeta } from '../../data/locations'
-import { scarboroughFaq } from '../../data/faq'
+import { bakehouse, faqs, inlineHtml, locations } from '../../lib/content'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../../lib/schema'
-import { BAKEHOUSE_SITE_URL } from '../../data/site'
 
-const bakehouse = scarboroughLocation.bakehouse
+const page = locations.scarborough
+const scarboroughFaq = faqs.scarborough
 
 const detailRows = [
   {
     label: 'Hours',
-    lines: scarboroughLocation.hours.flatMap((block) => block.lines),
+    lines: bakehouse.hours.flatMap((block) => block.lines),
   },
   {
     label: 'Address',
-    lines: [`${bakehouse.street}, ${bakehouse.city}, ${bakehouse.region} ${bakehouse.postal}`],
+    lines: [bakehouse.address],
     href: bakehouse.mapUrl,
     external: true,
   },
@@ -37,7 +36,7 @@ const detailRows = [
   {
     label: 'Website',
     lines: ['penelopebakehouse.com'],
-    href: BAKEHOUSE_SITE_URL,
+    href: bakehouse.url,
     external: true,
   },
 ]
@@ -56,22 +55,16 @@ const graph = pageGraph([
 ])
 ---
 
-<BaseLayout title={scarboroughLocationMeta.title} description={scarboroughLocationMeta.description}>
+<BaseLayout title={page.seo.title} description={page.seo.description}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
   <main>
-    <BannerHero
-      src={scarboroughLocation.hubImage.src}
-      alt={scarboroughLocation.hubImage.alt}
-      headingText={scarboroughLocation.heading}
-      intro={scarboroughLocation.intro}
-      objectPosition={scarboroughLocation.hubImage.objectPosition}
-      breadcrumbs={breadcrumbs}
-    />
+    <BannerHero image={page.image} headingText={page.heading} intro={page.intro} breadcrumbs={breadcrumbs} />
 
     <LocationDetails
-      headingText={scarboroughLocation.offeringsHeading}
-      intro={scarboroughLocation.offeringsBody}
-      ctas={scarboroughLocation.ctas}
+      headingText={page.details.heading}
+      intro={page.details.body}
+      introHtml={/\]\(/.test(page.details.body) ? inlineHtml(page.details.body) : undefined}
+      ctas={page.details.ctas}
       rows={detailRows}
       mapQuery={bakehouse.mapQuery}
       mapTitle="Map to Penelope Bakehouse Scarborough"

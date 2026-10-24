@@ -1,0 +1,23 @@
+title: T-Shirt
+heading: T-shirt
+order: 2
+price: "20"
+description: Green or white. Logo on the left chest. The white one has the bike on the back, sourdough and coffee. Relaxed fit.
+banner:
+  src: merch-hero.jpg
+  alt: Person holding up a Penelope Social sweatshirt
+images:
+  - src: shirt-white-front.jpg
+    alt: ""
+  - src: shirt-white-back.jpg
+    alt: ""
+  - src: shirt-green-front.jpg
+    alt: ""
+  - src: shirt-green-back.jpg
+    alt: ""
+cta:
+  label: available in store
+  url: /contact
+seo:
+  title: T-Shirt | Penelope Social
+  description: Green or white. Logo on the left chest. The white one has the bike on the back, sourdough and coffee. Relaxed fit.

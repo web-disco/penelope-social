@@ -5,32 +5,23 @@
  */
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
-import { getAll } from '../../lib/data'
-import { resolveSeo } from '../../data/seo'
-import { displayHeading, restaurantCopy } from '../../data/copy'
-import { merchProductCopy } from '../../data/merch'
-import { pageBannerCopy } from '../../data/banners'
+import ResponsivePicture from '../../components/ResponsivePicture.astro'
+import { getPage, imageSrc, merch, type Merch, type SectionOf } from '../../lib/content'
 import { breadcrumbSchema, pageGraph, restaurantSchema } from '../../lib/schema'
-import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
 import { container, btn, typeScale } from '../../lib/ui'
 
 export async function getStaticPaths() {
-  const products = await getAll<any>('merchProduct')
-  return products
-    .filter((product) => product.slug?.current)
-    .map((product) => ({ params: { slug: product.slug.current }, props: { product } }))
+  return merch.map((product) => ({ params: { slug: product.slug }, props: { product } }))
 }
 
-const { product } = Astro.props
-const path = `/merchandise/${product.slug.current}`
-const seo = resolveSeo(path, product.seo)
+const { product } = Astro.props as { product: Merch }
+const path = `/merchandise/${product.slug}`
+const seo = product.seo
 const price = 'merch-details-price mt-0 mb-0 font-heading text-[32px] text-charcoal wf-md:text-[38px] wf-sm:text-[28px] wf-xs:flex-none wf-xs:text-[22px]'
-const PRODUCT_TITLES: Record<string, string> = {
-  hoodie: 'Hoodie',
-  't-shirt': 'T-shirt',
-  'tote-bag': 'Tote bag',
-}
-const productName = PRODUCT_TITLES[product.slug.current] || displayHeading(product.title)
+const productName = product.heading
+/* Same on-photo heading and lede as /merchandise, over this product's banner. */
+const hub = getPage('merchandise')?.sections.find((block): block is SectionOf<'pageHero'> => block.type === 'pageHero')
+const images = await Promise.all(product.images.map(async (image) => ({ image, full: await imageSrc(image) })))
 const breadcrumbs = [
   { name: 'Home', path: '/' },
   { name: 'Merch', path: '/merchandise' },
@@ -42,16 +33,12 @@ const graph = pageGraph([restaurantSchema(), breadcrumbSchema(breadcrumbs)])
 <BaseLayout
   title={seo.title}
   description={seo.description}
-  ogImage={product.seo?.ogImage}
-  noIndex={product.seo?.noIndex}
+  ogImage={seo.ogImage}
+  noIndex={seo.noIndex}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
   <PageHero
-    block={{
-      image: product.banner,
-      heading: pageBannerCopy['/merchandise']?.heading || 'Merch',
-      intro: pageBannerCopy['/merchandise']?.intro,
-    }}
+    block={{ image: product.banner, heading: hub?.heading ?? 'Merch', intro: hub?.intro ?? '' }}
     breadcrumbs={breadcrumbs}
   />
 
@@ -66,20 +53,17 @@ const graph = pageGraph([restaurantSchema(), breadcrumbSchema(breadcrumbs)])
             class="merch-details-images-list grid auto-cols-[1fr] grid-cols-1 grid-rows-[auto] gap-4 wf-md:grid-cols-2 wf-sm:grid-cols-2"
           >
             {
-              (product.images ?? []).map((image: any) => (
+              images.map(({ image, full }) => (
                 <div role="listitem" class="merch-details-images-item w-dyn-item">
                   <a
-                    href={imageUrl(image)}
-                    data-gallery={`merch-${product.slug.current}`}
+                    href={full}
+                    data-gallery={`merch-${product.slug}`}
                     class="merch-lightbox glightbox group block w-full overflow-hidden isolate"
                   >
-                    <img
-                      src={imageUrl(image)}
-                      loading="lazy"
-                      alt={imageAlt(image)}
-                      sizes={imageSizes(image)}
-                      srcset={imageSrcset(image)}
-                      class="merch-image block w-full transition-transform duration-500 will-change-transform [backface-visibility:hidden] motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]"
+                    <ResponsivePicture
+                      image={image}
+                      sizes="(min-width: 992px) 50vw, 50vw"
+                      imgClass="merch-image block w-full transition-transform duration-500 will-change-transform [backface-visibility:hidden] motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]"
                     />
                   </a>
                 </div>
@@ -103,7 +87,7 @@ const graph = pageGraph([restaurantSchema(), breadcrumbSchema(breadcrumbs)])
               <p class={price}>{product.price}</p>
             </div>
             <p class:list={['mb-0 text-charcoal', typeScale.body]}>
-              {merchProductCopy[product.slug.current] || restaurantCopy(product.description)}
+              {product.description}
             </p>
             {
               product.cta?.url && (

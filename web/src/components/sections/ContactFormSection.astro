@@ -10,26 +10,22 @@
  * verifies Turnstile and emails the submission on — see web/worker/index.ts.
  */
 import { containerNoTop, pageSubHeadingSmall, formField, formFieldTextarea, btn } from '../../lib/ui'
-import { displayHeading } from '../../data/copy'
 import Turnstile from '../Turnstile.astro'
+import type { SectionOf } from '../../lib/content'
 
 interface Props {
-  block: any
+  block: SectionOf<'contactForm'>
 }
 const { block } = Astro.props
 
 const isEvents = block.variant === 'events'
-const fields: any[] = block.fields ?? []
+const fields = block.fields
 ---
 
 <div class="section-events-form">
   <div class={containerNoTop}>
     <div class="form-block w-form mx-auto mb-0 max-w-[900px] text-center">
-      {/* Sanity holds this as "plan your event". Every other heading on the
-          site goes through displayHeading, which repairs a value that arrived
-          all lowercase or ALL CAPS and leaves a deliberately cased one alone —
-          this one rendered raw, so the form sat under a lowercase h2. */}
-      {block.heading && <h2 class={pageSubHeadingSmall}>{displayHeading(block.heading)}</h2>}
+      <h2 class={pageSubHeadingSmall}>{block.heading}</h2>
       {block.intro && <p class="mb-0 mt-space-16 text-charcoal font-body text-[18px] leading-[150%] wf-xs:text-[16px]">{block.intro}</p>}
 
       <form
@@ -54,7 +50,7 @@ const fields: any[] = block.fields ?? []
                   class={`${formField} w-select`}
                 >
                   <option value="">{field.placeholder}</option>
-                  {(field.options ?? []).map((option: string) => (
+                  {(field.options ?? []).map((option) => (
                     <option value={option}>{option}</option>
                   ))}
                 </select>
@@ -120,17 +116,17 @@ const fields: any[] = block.fields ?? []
             data-wait="Please wait..."
             class={`${btn.primary} w-button cursor-pointer rounded-none`}
           >
-            <span>{block.submitLabel ?? 'Submit'}</span>
+            <span>{block.submitLabel}</span>
           </button>
         </div>
       </form>
 
       <div class="success-message-3 w-form-done bg-charcoal p-5 text-center font-body text-beige">
-        <div>{block.successMessage ?? 'Thank you! Your submission has been received!'}</div>
+        <div>{block.successMessage}</div>
       </div>
       <div class="w-form-fail mt-[10px] bg-[#ffdede] p-[10px]">
         <div>
-          {block.errorMessage ?? 'Oops! Something went wrong while submitting the form.'}
+          {block.errorMessage}
         </div>
       </div>
     </div>

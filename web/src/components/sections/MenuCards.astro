@@ -6,75 +6,38 @@
  * so the next card peeks at every width the slider runs.
  */
 import { btn, heading, layout, radius, space, typeScale } from '../../lib/ui'
-import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
-import { displayHeading, menuTitle, restaurantCopy } from '../../data/copy'
-import { homeMenusFallback } from '../../data/home'
+import { featuredMenus, imageSrc, site, type SectionOf } from '../../lib/content'
 import GoogleRating from '../GoogleRating.astro'
 import MenuCallout from './MenuCallout.astro'
-import { getAll } from '../../lib/data'
+import ResponsivePicture from '../ResponsivePicture.astro'
 
 interface Props {
-  block: any
+  block: SectionOf<'menuCards'>
 }
 const { block } = Astro.props
-const path = Astro.url.pathname.replace(/\/$/, '') || '/'
-const isHome = path === '/'
-const isMenusHub = path === '/menus'
-/* The "menus" block on the homepage and the hub is chrome-owned. Any other card
-   block, e.g. "What we're known for" on either page, is authored. */
-const isChromeBlock = (isHome || isMenusHub) && block._key === 'menus'
+/* The page's main menu row (homepage and /menus): anchored at #menu, display
+   heading, and followed by any featured menu's callout (Happy Hour). */
+const isMain = Boolean(block.main)
 /* "sentence": the cards as one large line of type, each a photo pill plus a
    link, with plain words between (block.sentence). Used by the homepage's
    "What we're known for" so it doesn't read as a second copy of the menu row
    above it, or echo the text-and-photo split of "Events" below it. */
 const isSentence = block.layout === 'sentence'
-const authored: any[] = block.cards ?? []
-const fallbackByUrl = new Map(homeMenusFallback.cards.map((card) => [card.url, card]))
+const cards = await Promise.all(
+  block.cards.map(async (card) => ({ ...card, pill: isSentence ? await imageSrc(card.image, 240) : undefined })),
+)
+const featured = isMain ? featuredMenus : []
 
-const cards = (authored.length ? authored : homeMenusFallback.cards).map((card: any, index: number) => {
-  if (!isChromeBlock && !fallbackByUrl.has(card.url)) {
-    return { ...card, title: menuTitle(card.title), line: restaurantCopy(card.line) }
-  }
-  const fallback =
-    fallbackByUrl.get(card.url) ?? homeMenusFallback.cards[index] ?? homeMenusFallback.cards[0]
-  return {
-    ...card,
-    title: menuTitle(card.title, fallback.title),
-    line: isChromeBlock ? fallback.line : restaurantCopy(card.line, fallback.line),
-    url: card.url || fallback.url,
-  }
-})
+const cardByUrl = new Map(cards.map((card) => [card.url, card]))
+const sentence = isSentence ? (block.sentence ?? []) : []
 
-/* A menu outside the four cards (Happy Hour) can ask to be featured under them.
-   Only on the chrome row, so an authored card block elsewhere stays as authored. */
-const featuredMenus: any[] = isChromeBlock
-  ? (await getAll<any>('menu')).filter((menu) => menu.callout?.enabled && menu.slug?.current)
-  : []
-
-const cardByUrl = new Map(cards.map((card: any) => [card.url, card]))
-const sentence: any[] = isSentence ? block.sentence ?? [] : []
-
-const staleHeading = /woodbridge|explore our menus|menus at penelope/i.test(block.heading ?? '')
-const staleIntro = /woodbridge|hawkview|125\s|bakehouse/i.test(block.intro ?? '')
-const sectionHeading = isMenusHub && isChromeBlock
-  ? ''
-  : (isHome && isChromeBlock) || staleHeading
-    ? homeMenusFallback.heading
-    : displayHeading(block.heading)
-const sectionIntro = isMenusHub && isChromeBlock
-  ? ''
-  : isHome && isChromeBlock
-    ? homeMenusFallback.intro
-    : staleIntro
-      ? homeMenusFallback.hubIntro
-      : restaurantCopy(block.intro)
-// Authored hub blocks only show a button when they set one (no self-link to /menus).
-const ctaUrl = block.cta?.url || (isChromeBlock ? homeMenusFallback.ctaUrl : undefined)
+const sectionHeading = block.heading
+const sectionIntro = block.intro
+const ctaUrl = block.cta?.url
 // Optional Google rating under the intro (homepage "On the menu", /menus "What we're known for").
-const hasRating = !!block.rating?.url && !!sectionIntro
-const ctaLabel = /view all menus/i.test(block.cta?.label ?? '')
-  ? homeMenusFallback.ctaLabel
-  : displayHeading(block.cta?.label, homeMenusFallback.ctaLabel)
+const rating = block.rating && sectionIntro ? site.googleRating : undefined
+const hasRating = Boolean(rating)
+const ctaLabel = block.cta?.label
 
 const tileClass = 'menu-mosaic-tile group flex h-full flex-col no-underline'
 // isolate: the clip holds while the image scales (Safari).
@@ -89,15 +52,15 @@ const labelClass = `mt-space-16 mb-0 text-charcoal ${typeScale.title}`
 const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
 ---
 
-<section id={isChromeBlock ? 'menu' : undefined} class="section-menu-mosaic overflow-x-hidden">
-  <div class:list={[layout.shell, isChromeBlock ? space.sectionYFirst : space.sectionY]}>
+<section id={isMain ? 'menu' : undefined} class="section-menu-mosaic overflow-x-hidden">
+  <div class:list={[layout.shell, isMain ? space.sectionYFirst : space.sectionY]}>
     {
       sectionHeading && !isSentence && (
         <h2
           class:list={[
             /* The homepage mosaic keeps the large display heading; an authored
                mid-page block (e.g. "What we're known for") uses the section size. */
-            isChromeBlock ? heading.base : heading.medium,
+            isMain ? heading.base : heading.medium,
             'text-center',
             sectionIntro ? 'mb-0' : 'mb-space-48 wf-sm:mb-space-32',
           ]}
@@ -124,7 +87,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
     {
       hasRating && (
         <div class="mb-space-48 wf-sm:mb-space-32">
-          <GoogleRating rating={block.rating} />
+          <GoogleRating rating={rating} />
         </div>
       )
     }
@@ -137,15 +100,15 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
           {
             sentence.map((part, index) => {
               const gap = index ? ' ' : ''
-              const card: any = part.url ? cardByUrl.get(part.url) : undefined
-              if (!card) return <>{gap}{part.text ?? part.label}</>
+              const card = 'url' in part ? cardByUrl.get(part.url) : undefined
+              if (!card || !('url' in part)) return <>{gap}{'text' in part ? part.text : part.label}</>
               return (
                 <>
                   {gap}
                   <span class="whitespace-nowrap">
                     <a href={card.url} class="group no-underline">
                       <img
-                        src={imageUrl(card.image, 240)}
+                        src={card.pill}
                         loading="lazy"
                         alt=""
                         width="84"
@@ -170,16 +133,11 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
             <div class="swiper-slide">
               <a href={card.url} class={tileClass}>
                 <div class={frameClass}>
-                  <img
-                    src={imageUrl(card.image)}
-                    srcset={imageSrcset(card.image)}
-                    sizes={imageSizes(card.image) ?? '(min-width: 992px) 25vw, (min-width: 768px) 40vw, 90vw'}
-                    loading="lazy"
-                    alt={imageAlt(card.image)}
-                    width="800"
-                    height="1000"
-                    draggable="false"
-                    class={imageClass}
+                  <ResponsivePicture
+                    image={card.image}
+                    sizes="(min-width: 992px) 25vw, (min-width: 768px) 40vw, 90vw"
+                    draggable={false}
+                    imgClass={imageClass}
                   />
                 </div>
                 <p class={labelClass}>{card.title}</p>
@@ -192,7 +150,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
     </div>
     )}
     {
-      ctaUrl && !isMenusHub && (
+      ctaUrl && (
         <div class="mt-space-48 flex justify-center wf-sm:mt-space-32">
           <a
             href={ctaUrl}
@@ -204,7 +162,7 @@ const lineClass = `mt-space-8 mb-0 text-charcoal/80 ${typeScale.body}`
         </div>
       )
     }
-    {featuredMenus.map((menu) => <MenuCallout menu={menu} />)}
+    {featured.map((menu) => <MenuCallout menu={menu} />)}
   </div>
 </section>
 

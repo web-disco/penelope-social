@@ -6,17 +6,8 @@
  * `display:none` at every breakpoint on the live site; the image is the link.
  */
 import { containerNoTop, menuBtn } from '../../lib/ui'
-import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
-import { getAll } from '../../lib/data'
-
-interface Props {
-  block: any
-}
-const { block } = Astro.props
-
-const products = (await getAll<any>('merchProduct')).sort(
-  (a, b) => (a.order ?? 0) - (b.order ?? 0),
-)
+import { merch as products } from '../../lib/content'
+import ResponsivePicture from '../ResponsivePicture.astro'
 
 const title = 'merch-item-title font-heading text-[28px] text-charcoal'
 ---
@@ -31,14 +22,12 @@ const title = 'merch-item-title font-heading text-[28px] text-charcoal'
         {
           products.map((product) => (
             <div role="listitem" class="merch-listing-item w-dyn-item">
-              <a href={`/merchandise/${product.slug.current}`} data-ga-event="merch_click" class="merch-item-link-wrap group block w-full overflow-hidden isolate">
-                <img
-                  src={imageUrl(product.images?.[0])}
-                  loading="lazy"
-                  alt={imageAlt(product.images?.[0]) || product.title}
-                  sizes={imageSizes(product.images?.[0])}
-                  srcset={imageSrcset(product.images?.[0])}
-                  class="merch-item-image block w-full transition-transform duration-500 will-change-transform [backface-visibility:hidden] motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]"
+              <a href={`/merchandise/${product.slug}`} data-ga-event="merch_click" class="merch-item-link-wrap group block w-full overflow-hidden isolate">
+                <ResponsivePicture
+                  image={product.images[0]!}
+                  alt={product.images[0]!.alt || product.title}
+                  sizes="(min-width: 992px) 33vw, (min-width: 768px) 50vw, 100vw"
+                  imgClass="merch-item-image block w-full transition-transform duration-500 will-change-transform [backface-visibility:hidden] motion-safe:group-hover:scale-[1.03] motion-safe:group-focus-visible:scale-[1.03]"
                 />
               </a>
               <div class="merch-item-heading flex justify-between">
@@ -49,7 +38,7 @@ const title = 'merch-item-title font-heading text-[28px] text-charcoal'
                 </div>
               </div>
               <div class="menu-btn-wrap is-product mt-[15px] hidden wf-sm:mt-[5px]">
-                <a href={`/merchandise/${product.slug.current}`} class={menuBtn}>
+                <a href={`/merchandise/${product.slug}`} class={menuBtn}>
                   View Product
                 </a>
               </div>

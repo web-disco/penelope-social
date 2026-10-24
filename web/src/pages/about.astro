@@ -8,12 +8,14 @@ import BannerHero from '../components/sections/BannerHero.astro'
 import StepTimeline from '../components/sections/StepTimeline.astro'
 import FaqSection from '../components/sections/FaqSection.astro'
 import { layout, space, typeScale, heading, btn } from '../lib/ui'
-import { aboutMeta, aboutPage } from '../data/about'
-import { aboutFaq } from '../data/faq'
+import { about, faqs, inlineHtml } from '../lib/content'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
 
-const video = aboutPage.videoTeaser
+const aboutFaq = faqs.about
+const video = about.video
 const videoCtas = video.ctas
+/* Paragraphs, separated by a blank line in about.yaml. */
+const paragraphs = about.body.split(/\n\s*\n/).map((p) => inlineHtml(p.replace(/\s*\n\s*/g, ' ').trim()))
 
 const breadcrumbs = [
   { name: 'Home', path: '/' },
@@ -28,22 +30,20 @@ const graph = pageGraph([
 ])
 ---
 
-<BaseLayout title={aboutMeta.title} description={aboutMeta.description}>
+<BaseLayout title={about.seo.title} description={about.seo.description}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
   <main>
     <BannerHero
-      src={aboutPage.banner.src}
-      alt={aboutPage.banner.alt}
-      headingText={aboutPage.heading}
-      intro={aboutPage.subheading}
-      objectPosition="center 50%"
+      image={about.banner.image}
+      headingText={about.banner.heading}
+      intro={about.banner.intro}
       breadcrumbs={breadcrumbs}
     />
 
     <section class="about-content">
       <div class:list={[layout.shell, 'pt-0 pb-0', 'flex flex-col gap-space-24']}>
         {
-          aboutPage.paragraphs.map((p) => (
+          paragraphs.map((p) => (
             <p
               class:list={[
                 'mx-auto mb-0 max-w-[720px] text-center text-charcoal',
@@ -59,8 +59,8 @@ const graph = pageGraph([
     </section>
 
     <StepTimeline
-      headingText={aboutPage.timeline.heading}
-      steps={aboutPage.timeline.steps}
+      headingText={about.timeline.heading}
+      steps={about.timeline.steps}
       gapTop
     />
 
@@ -72,14 +72,15 @@ const graph = pageGraph([
           <div class="story-media overflow-hidden rounded-none w-full max-w-[360px] shrink-0 wf-md:mx-auto">
             <video
               class="story-image story-video block h-full w-full object-cover"
-              src={video.video.src}
+              src={video.file}
+              poster={video.poster}
               controls
               playsinline
               muted
               loop
               autoplay
               preload="metadata"
-              aria-label={video.image.alt}
+              aria-label={video.alt}
               style="aspect-ratio: 9/16; object-position: center center;"
             ></video>
           </div>

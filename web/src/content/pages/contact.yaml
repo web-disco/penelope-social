@@ -1,0 +1,46 @@
+title: Contact
+breadcrumb: Contact
+seo:
+  title: Contact Penelope Social in Woodbridge
+  description: Call (905) 607-0606, email info@penelopesocial.com, or write us at 125 Hawkview Blvd, Woodbridge. Reservations and catering, plus general questions.
+sections:
+  - type: pageHero
+    image:
+      src: lunch-platter-banner.avif
+      alt: Image of Lunch menu platter
+    heading: Get in touch
+    intro: Questions, a table, or an event.
+  - type: contactForm
+    variant: contact
+    heading: Leave Us a Message
+    intro: Submit the form below and someone from our team will reach back out to you within 24 to 48 hours.
+    fields:
+      - id: Contact-Form-Name
+        name: Contact-Form-Name
+        type: text
+        placeholder: First Name
+        required: true
+      - id: Contact-Form-Last-Name
+        name: Contact-Form-Last-Name
+        type: text
+        placeholder: Last Name
+        required: true
+      - id: Contact-Form-Email
+        name: Contact-Form-Email
+        type: email
+        placeholder: Email
+        required: true
+      - id: Contact-Form-Phone
+        name: Contact-Form-Phone
+        type: tel
+        placeholder: Phone Number
+        required: true
+      - id: Contact-Form-Message
+        name: Contact-Form-Message
+        type: textarea
+        placeholder: Leave a message!
+        required: true
+        fullWidth: true
+    submitLabel: Submit
+    successMessage: Thank you! Your submission has been received!
+    errorMessage: Oops! Something went wrong while submitting the form.

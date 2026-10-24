@@ -1,17 +1,29 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import BannerHero from '../../components/sections/BannerHero.astro'
+import ResponsivePicture from '../../components/ResponsivePicture.astro'
 import { btn, containerNoTop, heading, radius, space, typeScale } from '../../lib/ui'
-import {
-  locationsHub,
-  locationsHubMeta,
-  scarboroughLocation,
-  woodbridgeLocation,
-} from '../../data/locations'
+import { bakehouse, locations, nap } from '../../lib/content'
 import { bakehouseSchema, breadcrumbSchema, pageGraph, restaurantSchema } from '../../lib/schema'
 import { isMapsDirectionsHref, isSocialTelHref } from '../../lib/analytics'
 
-const hubs = [woodbridgeLocation, scarboroughLocation] as const
+/** Each location's card: copy from locations.yaml, contact lines from site.yaml. */
+const hubs = [
+  { place: locations.woodbridge, contact: nap },
+  { place: locations.scarborough, contact: bakehouse },
+].map(({ place, contact }) => ({
+  hubTitle: place.card.title,
+  hubBlurb: place.card.blurb,
+  hubCta: place.card.cta,
+  hubImage: place.image,
+  hubContact: {
+    address: { label: contact.address, href: contact.mapUrl },
+    phone: { label: contact.phone, href: `tel:${contact.phoneDigits}` },
+    email: { label: contact.email, href: `mailto:${contact.email}` },
+  },
+}))
+const hub = locations.hub
+
 const contactLink =
   'text-charcoal font-body no-underline transition-opacity duration-[350ms] hover:opacity-70'
 
@@ -27,15 +39,13 @@ const graph = pageGraph([
 ])
 ---
 
-<BaseLayout title={locationsHubMeta.title} description={locationsHubMeta.description} solidNav={false}>
+<BaseLayout title={hub.seo.title} description={hub.seo.description} solidNav={false}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
   <main>
     <BannerHero
-      src={woodbridgeLocation.hubImage.src}
-      alt="Penelope Social in Woodbridge and Penelope Bakehouse in Scarborough"
-      headingText={locationsHub.heading}
-      intro={locationsHub.intro}
-      objectPosition="center 40%"
+      image={hub.image}
+      headingText={hub.heading}
+      intro={hub.intro}
       breadcrumbs={breadcrumbs}
     />
 
@@ -46,18 +56,10 @@ const graph = pageGraph([
             hubs.map((location) => (
               <div class:list={['location-block flex flex-col', radius.none]}>
                 <div class={`overflow-hidden ${radius.none}`}>
-                  <img
-                    src={location.hubImage.src}
-                    alt={location.hubImage.alt}
-                    width="800"
-                    height="600"
-                    loading="lazy"
-                    class="aspect-[4/3] w-full object-cover"
-                    style={
-                      location.hubImage.objectPosition
-                        ? `object-position: ${location.hubImage.objectPosition};`
-                        : undefined
-                    }
+                  <ResponsivePicture
+                    image={location.hubImage}
+                    sizes="(min-width: 992px) 50vw, 100vw"
+                    imgClass="aspect-[4/3] w-full object-cover"
                   />
                 </div>
                 <h2 class:list={[heading.medium, 'mt-space-24 text-left']}>{location.hubTitle}</h2>

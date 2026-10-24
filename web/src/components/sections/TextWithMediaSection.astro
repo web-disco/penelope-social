@@ -8,28 +8,22 @@
  * Events puts the image first on mobile (wf-md:order).
  */
 import { container, heading, btn, typeScale, story } from '../../lib/ui'
-import { imageUrl, imageSrcset, imageSizes, imageAlt } from '../../lib/image'
-import { displayHeading } from '../../data/copy'
-import { homeBreadFallback, homeEventsFallback } from '../../data/home'
+import { inlineHtml, type SectionOf } from '../../lib/content'
+import ResponsivePicture from '../ResponsivePicture.astro'
 
 interface Props {
-  block: any
+  block: SectionOf<'textWithMedia'>
 }
 const { block } = Astro.props
 const imageFirst = block.layout !== 'copy-first'
-const fallback = imageFirst ? homeBreadFallback : homeEventsFallback
-const headingText = fallback.heading
-const bodyText = fallback.body
-const bodyHtml = 'bodyHtml' in fallback ? fallback.bodyHtml : undefined
-const ctaUrl = imageFirst ? homeBreadFallback.ctaUrl : (block.cta?.url ?? ('ctaUrl' in fallback ? fallback.ctaUrl : undefined))
-const ctaLabel = imageFirst
-  ? homeBreadFallback.ctaLabel
-  : displayHeading(block.cta?.label, 'ctaLabel' in fallback ? fallback.ctaLabel : undefined)
-// The bread CTA used to be hardcoded to a new tab because it always left for
-// penelopebakehouse.com. It now points at /locations/scarborough, so derive the
-// flag from the destination instead: off-site opens a tab, on-site navigates.
-const ctaNewTab = imageFirst ? /^https?:\/\//i.test(ctaUrl ?? '') : Boolean(block.cta?.newTab)
-const ctaStyle = imageFirst ? 'outline' : block.cta?.style
+const headingText = block.heading
+/* Copy with a link gets link styling; plain copy renders as plain text. */
+const bodyHtml = /\]\(/.test(block.body) ? inlineHtml(block.body) : undefined
+const bodyText = block.body
+const ctaUrl = block.cta?.url
+const ctaLabel = block.cta?.label
+const ctaNewTab = Boolean(block.cta?.newTab)
+const ctaStyle = block.cta?.style
 
 const mediaOrder = imageFirst ? '' : 'wf-md:order-1'
 const copyOrder = imageFirst ? '' : 'wf-md:order-2'
@@ -41,13 +35,11 @@ const copyOrder = imageFirst ? '' : 'wf-md:order-2'
       {
         imageFirst && (
           <div class={story.media}>
-            <img
-              src={imageUrl(block.image)}
+            <ResponsivePicture
+              image={block.image}
+              sizes="(min-width: 992px) 58vw, 100vw"
               loading="eager"
-              sizes={imageSizes(block.image)}
-              srcset={imageSrcset(block.image)}
-              alt={imageAlt(block.image)}
-              class={story.image}
+              imgClass={story.image}
             />
           </div>
         )
@@ -90,13 +82,11 @@ const copyOrder = imageFirst ? '' : 'wf-md:order-2'
       {
         !imageFirst && (
           <div class:list={[story.media, mediaOrder]}>
-            <img
-              src={imageUrl(block.image)}
+            <ResponsivePicture
+              image={block.image}
+              sizes="(min-width: 992px) 58vw, 100vw"
               loading="eager"
-              sizes={imageSizes(block.image)}
-              srcset={imageSrcset(block.image)}
-              alt={imageAlt(block.image)}
-              class={story.image}
+              imgClass={story.image}
             />
           </div>
         )

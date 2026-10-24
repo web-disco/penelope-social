@@ -1,0 +1,114 @@
+title: Menus
+breadcrumb: Menus
+seo:
+  title: Menus | Lunch, dinner, bar, and catering | Penelope Social
+  description: Lunch, dinner, bar, and catering menus at Penelope Social in Woodbridge. Focaccia sandwiches, pizza, handhelds, plus cocktails.
+  ogImage: /images/og/menus.jpg
+sections:
+  - type: pageHero
+    image:
+      src: menus-banner.avif
+      alt: Image of Lunch menu platter
+    heading: On the menu
+    intro: Lunch, dinner, drinks, plus catering.
+  - type: richTextIntro
+    heading: Lunch, dinner and a proper bar
+    body: |-
+      Lunch is quick and made to share the table: [focaccia sandwiches](/sandwiches-vaughan), Roman-style [sourdough pizza](/pizza-vaughan) by the slice and salads. From 5pm, dinner moves to 14-inch pies, handhelds and plates for the middle of the table.
+
+      The bar pours cocktails, wine by the glass, zero-proof drinks and a long list of amari. Mornings start at the [cafe](/cafe-in-vaughan), and our [sourdough bread](/bakery-vaughan) is there to take home.
+  - type: menuCards
+    main: true
+    cards:
+      - title: Lunch
+        line: Pizza and focaccia sandwiches
+        url: /menus/lunch
+        image:
+          src: focaccia-in-hand.avif
+          alt: Focaccia Sandwich
+      - title: Bar
+        line: Cocktails till late
+        url: /menus/bar
+        image:
+          src: cocktail.avif
+          alt: Crafted Cocktail
+      - title: Dinner
+        line: Pizza and shareables
+        url: /menus/dinner
+        image:
+          src: penny-burger.avif
+          alt: Penelope Burger
+      - title: Catering
+        line: Trays for your event
+        url: /menus/catering
+        image:
+          src: catering-sandwich-trays.jpg
+          alt: Two catering trays of focaccia sandwiches
+  - type: stepTimeline
+    heading: What's on, and when
+    steps:
+      - title: "9am: Coffee and pastries"
+        body: The counter opens with espresso, cappuccino, lattes and the day's pastries. On Sundays the cafe opens at 8am.
+      - title: "10am: Lunch"
+        body: Focaccia sandwiches, pizza by the slice and salads, Monday to Saturday. See the [lunch menu](/menus/lunch).
+      - title: "3pm: The cafe closes"
+        body: Lunch wraps up and the room resets for the evening.
+      - title: "5pm: Dinner and the bar"
+        body: The [dinner menu](/menus/dinner) and the [bar](/menus/bar) open Monday to Saturday. Open until 10pm Monday to Thursday and 1am on Friday and Saturday.
+  - type: menuCards
+    heading: What we're known for
+    intro: From the first espresso to a loaf to take home, here's what we do best, right here in the heart of Vaughan.
+    rating: true
+    cards:
+      - title: Italian Cafe
+        line: Espresso and Bakehouse pastries from 9am
+        url: /cafe-in-vaughan
+        image:
+          src: latte-art.jpg
+          alt: A latte with latte art at Penelope Social
+      - title: Sourdough Pizza
+        line: Roman slices at lunch, 14-inch pies at dinner
+        url: /pizza-vaughan
+        image:
+          src: pizza-assortment.jpg
+          alt: Sourdough pizza at Penelope Social
+      - title: Focaccia Sandwiches
+        line: Italian sandwiches on sourdough focaccia
+        url: /sandwiches-vaughan
+        image:
+          src: italian-sandwich.jpg
+          alt: An Italian focaccia sandwich
+      - title: Sourdough Bakery
+        line: Loaves, focaccia and pizza dough to take home
+        url: /bakery-vaughan
+        image:
+          src: bread-loaves-stack.avif
+          alt: A stack of sourdough loaves
+  - type: faqSection
+    heading: FAQs
+    items:
+      - question: When is lunch served?
+        answer: Lunch is 10am to 3pm, Monday to Saturday. The cafe opens at 9am for coffee and pastries.
+      - question: When is dinner served?
+        answer: Dinner and the bar open at 5pm, Monday to Saturday. We're open until 10pm Monday to Thursday and 1am on Friday and Saturday, and closed Sunday night.
+      - question: Do you have vegetarian options?
+        answer: Yes. At lunch, the Veggie and Spicy Mushroom Melt sandwiches and the Margherita slice. At dinner, the Margherita and Truffle Mushroom pizzas, Korean Cauliflower, Truffle Fries and the Greek and Roasted Beet salads. Ask us about ingredients when you order.
+      - question: Do you have non-alcoholic drinks?
+        answer: Yes. The bar menu has zero-proof drinks like the Rosé Spritz, Hugo Boss and a rotating No-Jito, plus 0% sparkling rosé and Peroni 0.0. The cafe has espresso drinks, tea and soft drinks.
+      - question: Can I order online?
+        answer: Yes. Order through Toast for pickup at 125 Hawkview Blvd in Woodbridge.
+      - question: Do you take reservations?
+        answer: Yes. Book a table on Toast for dinner and the bar. Lunch is mostly walk-in.
+      - question: Do you cater?
+        answer: Yes. Trays of focaccia sandwiches, pizza, salads and treats are on our catering menu, with 24 hours' notice. We also host events in the room.
+  - type: finalCta
+    heading: Hungry now?
+    body: Order online for pickup, or book a table for dinner at our location in Woodbridge.
+    ctas:
+      - label: Order online
+        url: "@order"
+        newTab: true
+        style: primary
+      - label: Book a table
+        url: /reservations
+        style: outline

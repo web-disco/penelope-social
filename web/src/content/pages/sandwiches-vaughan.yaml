@@ -1,0 +1,133 @@
+title: Italian Focaccia Sandwiches in Vaughan
+breadcrumb: Focaccia Sandwiches
+seo:
+  title: Italian Focaccia Sandwiches in Vaughan | Penelope Social
+  description: Italian sandwiches on sourdough focaccia, $19 to $23. Mortadella, prosciutto, steak and more at lunch, 125 Hawkview Blvd, Woodbridge. Order online.
+schemaMenu:
+  - menu: lunch
+    category: focaccia
+    name: Sourdough focaccia sandwiches
+sections:
+  - type: pageHero
+    image:
+      src: mortadella-sandwich-tray.jpg
+      alt: A tray of mortadella focaccia sandwiches at Penelope Social in Vaughan
+    heading: Italian Focaccia Sandwiches in Vaughan
+    intro: Focaccia sandwiches on our own sourdough, at lunch in Woodbridge.
+  - type: richTextIntro
+    heading: What makes a focaccia sandwich different?
+    body: |-
+      Most sandwiches are built on a soft sub roll. Ours start with Focaccia Romana, a sourdough focaccia baked at Penelope Bakehouse from the same starter as our pizza. It's crisp on the outside, open and soft inside, and sturdy enough to carry Prosciutto di Parma, mortadella and stracciatella without falling apart.
+
+      Our Italian sandwiches are on the lunch menu, served Monday to Saturday from 10am at our Woodbridge kitchen in Vaughan, alongside [sourdough pizza](/pizza-vaughan) by the slice.
+  - type: menuItemCards
+    heading: Focaccia sandwiches worth the drive
+    intro: Italian sandwiches on sourdough focaccia, from $19 to $23. Here are four to start with.
+    rating: true
+    items:
+      - item: Italian
+        link: /menus/lunch#focaccia
+        image:
+          src: italian-sandwich.jpg
+          alt: Italian focaccia sandwich with salami, capicollo, prosciutto and provolone
+      - item: Bianca
+        link: /menus/lunch#focaccia
+        image:
+          src: bianca-sandwich.jpg
+          alt: Bianca mortadella sandwich with stracciatella, pistachio pesto and arugula
+      - item: Classico
+        link: /menus/lunch#focaccia
+        image:
+          src: classico-sandwich.jpg
+          alt: Classico prosciutto sandwich with stracciatella, arugula and Parmigiano Reggiano
+      - item: Bistecca
+        link: /menus/lunch#focaccia
+        image:
+          src: bistecca-sandwich.jpg
+          alt: Bistecca steak sandwich with arugula and horseradish aioli on sourdough focaccia
+    cta:
+      label: See all the sandwiches
+      url: /menus/lunch#focaccia
+  - type: mediaTextCta
+    layout: image-first
+    heading: A lunch spot near Vaughan Mills
+    body: |-
+      We're at 125 Hawkview Blvd in Woodbridge, a 5-minute drive from Vaughan Mills, with free parking out front. Sit in for lunch, or order ahead and pick up.
+
+      Lunch runs from 10am to 3pm, Monday to Saturday. Come earlier and the [cafe](/cafe-in-vaughan) is open for coffee from 9am.
+    image:
+      src: canadian-sandwich.jpg
+      alt: The Canadian focaccia sandwich with smoked turkey, roast beef, tomato and lettuce
+      objectPosition: 54% 52%
+    ctas:
+      - label: See the lunch menu
+        url: /menus/lunch
+        style: outline
+  - type: comparisonTable
+    heading: Sourdough focaccia vs a regular sub
+    intro: The bread is where an Italian sandwich is won or lost.
+    columns:
+      - Penelope focaccia sandwich
+      - Regular sub
+    rows:
+      - label: Bread
+        values:
+          - Sourdough Focaccia Romana from Penelope Bakehouse
+          - A soft white sub roll
+      - label: Texture
+        values:
+          - Crisp outside, open and soft inside
+          - Soft all the way through, and easily squashed
+      - label: Fillings
+        values:
+          - Prosciutto di Parma, mortadella, Calabrese soppressata, stracciatella
+          - Pre-sliced deli meats and processed cheese
+      - label: Sauces
+        values:
+          - Housemade aiolis, pistachio pesto and pepper jelly
+          - Bottled sauces and dressings
+  - type: mediaTextCta
+    layout: copy-first
+    heading: Sandwich trays for your office or event in Vaughan
+    body: |-
+      Feeding a team or a party? Our focaccia sandwiches come cut into four pieces and laid out on trays, with a minimum of six sandwiches per order. Add pizza, salads or a box of treats.
+
+      We prefer 24 hours' notice for catering.
+    image:
+      src: catering-sandwich-trays.jpg
+      alt: Two catering trays of focaccia sandwiches from Penelope Social
+    ctas:
+      - label: See the catering menu
+        url: /menus/catering
+        style: primary
+      - label: Contact Us
+        url: /catering-events
+        style: outline
+  - type: faqSection
+    heading: FAQs
+    items:
+      - question: Where can I get Italian sandwiches in Vaughan?
+        answer: At Penelope Social, 125 Hawkview Blvd in Woodbridge. We serve Italian sandwiches on sourdough focaccia at lunch, 10am to 3pm, Monday to Saturday.
+      - question: What bread do you use?
+        answer: Focaccia Romana, a sourdough focaccia made with Penelope, our sourdough starter since 2018. It's baked at Penelope Bakehouse in Scarborough.
+      - question: How much are the sandwiches?
+        answer: $19 to $23. The Italian, Calabrese and The Canadian are $20, the Bianca and Classico are $21, and the Bistecca, Roasted Chicken and Spicy Mushroom Melt are $23. The Veggie is $19.
+      - question: Do you have vegetarian sandwiches?
+        answer: Yes, two. The Veggie has roasted red pepper, zucchini, eggplant, whipped goat cheese and basil pesto aioli. The Spicy Mushroom Melt has roasted wild mushrooms, provolone, arugula and pepper jelly.
+      - question: Can I order sandwiches online?
+        answer: Yes. Use the Order online button on this page to order for pickup through Toast.
+      - question: Do you cater sandwiches in Vaughan?
+        answer: Yes. Focaccia sandwiches come on trays, cut into four pieces, with a minimum of six sandwiches. We prefer 24 hours' notice.
+      - question: Is there parking?
+        answer: Yes, there's free parking in the lot out front.
+  - type: finalCta
+    heading: Looking for a sandwich in Vaughan today?
+    body: Order ahead for pickup, or come in for lunch at our location in Woodbridge.
+    ctas:
+      - label: Order online
+        url: "@order"
+        newTab: true
+        style: primary
+      - label: See the lunch menu
+        url: /menus/lunch
+        style: outline

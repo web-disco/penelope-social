@@ -1,6 +1,6 @@
 ---
 /**
- * The seasonal promo modal, fed by the `marketingPopup` singleton.
+ * The seasonal promo modal, fed by site.yaml → popup.
  *
  * Built so it can't become the popup people hate:
  * - never on page load — it waits for SHOW_AFTER_MS on the page or half a page
@@ -9,7 +9,7 @@
  * - closing it (button, ✕, Esc, backdrop) hides it for `dismissDays`;
  *   clicking through hides it for the rest of the campaign.
  *
- * A campaign is keyed on the title, so retitling it in Sanity shows the new
+ * A campaign is keyed on the title, so retitling it in site.yaml shows the new
  * popup to people who closed the old one.
  *
  * Two ways to force it open straight away, ignoring all of the above, for
@@ -21,26 +21,22 @@
  * build baked on 1 December would otherwise keep the popup up long after the
  * end date.
  */
-import { PortableText } from 'astro-portabletext'
-import { withoutEmptyBlocks } from '../lib/portableText'
-import { imageAlt, imageObjectPosition, imageSrcset, imageUrl } from '../lib/image'
 import { btn, typeScale } from '../lib/ui'
+import { paragraphsHtml, site } from '../lib/content'
+import ResponsivePicture from './ResponsivePicture.astro'
 
 interface Props {
-  popup: any
+  popup: (typeof site)['popup']
 }
 const { popup } = Astro.props
 
-const cta = popup?.primaryCta
-/* A plain string is what the field held before it became rich text. */
-const text = typeof popup?.text === 'string' ? popup.text : null
-const blocks = text ? [] : withoutEmptyBlocks(popup?.text)
-const hasText = Boolean(text || blocks.length)
+const cta = popup.primaryCta
+const textHtml = popup.text ? paragraphsHtml(popup.text) : ''
+const hasText = Boolean(textHtml)
 
-const image = popup?.image
-const bannerSrc = imageUrl(image, 1120)
+const image = popup.image
 
-const show = Boolean((popup?.enabled || popup?.test) && popup?.title && cta?.url && cta?.label)
+const show = Boolean(popup.enabled || popup.test)
 
 const SECONDARY_BTN =
   'btn outline text-center uppercase font-body font-medium leading-none no-underline ' +
@@ -60,23 +56,17 @@ const SECONDARY_BTN =
       data-test={popup.test ? 'true' : 'false'}
       data-start={popup.startDate ?? ''}
       data-end={popup.endDate ?? ''}
-      data-dismiss-days={popup.dismissDays ?? 14}
+      data-dismiss-days={popup.dismissDays}
       data-cta-url={cta.url}
       data-lenis-prevent
     >
       <div class="relative bg-cream text-charcoal">
-        {bannerSrc && (
-          <img
-            src={bannerSrc}
-            srcset={imageSrcset(image, [560, 840, 1120])}
+        {image && (
+          <ResponsivePicture
+            image={image}
             sizes="(max-width: 591px) calc(100vw - 32px), 560px"
-            alt={imageAlt(image)}
-            width="1120"
-            height="630"
-            loading="lazy"
+            imgClass="block aspect-video w-full object-cover"
             decoding="async"
-            class="block aspect-video w-full object-cover"
-            style={imageObjectPosition(image) ? `object-position: ${imageObjectPosition(image)}` : undefined}
             data-popup-image
           />
         )}
@@ -85,7 +75,7 @@ const SECONDARY_BTN =
           type="button"
           class:list={[
             'marketing-popup__x absolute top-space-16 right-space-16 grid h-10 w-10 cursor-pointer place-items-center border-0 text-charcoal',
-            bannerSrc ? 'rounded-full bg-cream' : 'bg-transparent',
+            image ? 'rounded-full bg-cream' : 'bg-transparent',
           ]}
           aria-label="Close"
           data-popup-close
@@ -98,7 +88,7 @@ const SECONDARY_BTN =
         <div
           class:list={[
             'px-space-48 pb-space-48 wf-sm:px-space-24 wf-sm:pb-space-32',
-            bannerSrc ? 'pt-space-48 wf-sm:pt-space-32' : 'pt-space-64 wf-sm:pt-space-48',
+            image ? 'pt-space-48 wf-sm:pt-space-32' : 'pt-space-64 wf-sm:pt-space-48',
           ]}
         >
           <h2 id="marketing-popup-title" class:list={['my-0 text-left', typeScale.displayM]}>
@@ -111,9 +101,8 @@ const SECONDARY_BTN =
                 'marketing-popup__text mt-space-16 flex flex-col gap-space-12 text-charcoal/85',
                 typeScale.body,
               ]}
-            >
-              {text ? <p>{text}</p> : <PortableText value={blocks} />}
-            </div>
+              set:html={textHtml}
+            />
           )}
 
           <div class="mt-space-32 flex flex-wrap items-center gap-space-16 wf-xs:flex-col wf-xs:items-stretch">
@@ -127,7 +116,7 @@ const SECONDARY_BTN =
               <span>{cta.label}</span>
             </a>
             <button type="button" class={SECONDARY_BTN} data-popup-close>
-              <span>{popup.secondaryLabel || 'Not right now'}</span>
+              <span>{popup.secondaryLabel}</span>
             </button>
           </div>
         </div>

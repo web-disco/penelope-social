@@ -3,22 +3,19 @@
  * Vaughan is areaServed, never addressLocality.
  */
 
-import type { FaqItem, HourBlock } from '../data/types'
 import {
-  BAKEHOUSE_SITE_URL,
-  INSTAGRAM_URL,
   MENU_URLS,
   SAME_AS,
-  SITE_NAME,
   SITE_ORIGIN,
-  TIKTOK_URL,
-  barHours,
-  cafeHours,
-  scarboroughBakehouse,
-  woodbridgeNap,
-} from '../data/site'
+  bakehouse as scarboroughBakehouse,
+  hoursSchedule,
+  nap as woodbridgeNap,
+  type FaqItem,
+} from './content'
 
-const SITE = SITE_ORIGIN.replace(/\/$/, '')
+const SITE = SITE_ORIGIN
+const SITE_NAME = woodbridgeNap.name
+const BAKEHOUSE_SITE_URL = scarboroughBakehouse.url
 
 function stripHtml(html: string): string {
   // Tags become spaces so block tags don't glue words; then drop the space a
@@ -26,50 +23,24 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').replace(/\s+([.,;:!?])/g, '$1').trim()
 }
 
-function daysFromLabel(line: string): string[] {
-  const d = line.toLowerCase()
-  if (d.includes('mon') && d.includes('sat') && !d.includes('sun')) {
-    return ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  }
-  if (d.includes('mon') && d.includes('thu')) {
-    return ['Monday', 'Tuesday', 'Wednesday', 'Thursday']
-  }
-  if (d.includes('fri') && d.includes('sat')) {
-    return ['Friday', 'Saturday']
-  }
-  if (d.startsWith('sun')) return ['Sunday']
-  return []
-}
+const DAY_NAMES = {
+  Mon: 'Monday',
+  Tue: 'Tuesday',
+  Wed: 'Wednesday',
+  Thu: 'Thursday',
+  Fri: 'Friday',
+  Sat: 'Saturday',
+  Sun: 'Sunday',
+} as const
 
-function to24h(raw?: string): string {
-  if (!raw) return ''
-  const cleaned = raw.replace(/\s/g, '').toLowerCase()
-  const match = cleaned.match(/^(\d{1,2})(?::(\d{2}))?(am|pm)$/)
-  if (!match) return raw.trim()
-  let hour = Number(match[1])
-  const minute = match[2] ?? '00'
-  const meridiem = match[3]
-  if (meridiem === 'pm' && hour < 12) hour += 12
-  if (meridiem === 'am' && hour === 12) hour = 0
-  return `${String(hour).padStart(2, '0')}:${minute}`
-}
-
-function hoursFromBlocks(blocks: HourBlock[]) {
-  return blocks.flatMap((block) =>
-    block.lines
-      .filter((line) => !/closed/i.test(line) && line.trim() && line !== '‍')
-      .map((line) => {
-        const [daysPart, timePart] = line.split(':').map((s) => s.trim())
-        const times = (timePart ?? '').split(/[–-]/).map((s) => s.trim())
-        return {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: daysFromLabel(daysPart ?? ''),
-          opens: to24h(times[0]),
-          closes: to24h(times[1]),
-        }
-      })
-      .filter((spec) => spec.dayOfWeek.length && spec.opens && spec.closes),
-  )
+/** site.yaml → hours.*.schedule as OpeningHoursSpecification. */
+function hoursFromSchedule(schedule: { days: (keyof typeof DAY_NAMES)[]; opens: string; closes: string }[]) {
+  return schedule.map((rule) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: rule.days.map((day) => DAY_NAMES[day]),
+    opens: rule.opens,
+    closes: rule.closes,
+  }))
 }
 
 export function restaurantSchema() {
@@ -105,18 +76,18 @@ export function restaurantSchema() {
       { '@type': 'City', name: 'Woodbridge' },
       { '@type': 'City', name: 'Vaughan' },
     ],
-    openingHoursSpecification: [...hoursFromBlocks(cafeHours), ...hoursFromBlocks(barHours)],
+    openingHoursSpecification: [...hoursFromSchedule(hoursSchedule.cafe), ...hoursFromSchedule(hoursSchedule.bar)],
     sameAs: [...SAME_AS],
     department: [
       {
         '@type': 'FoodEstablishment',
         name: 'Cafe',
-        openingHoursSpecification: hoursFromBlocks(cafeHours),
+        openingHoursSpecification: hoursFromSchedule(hoursSchedule.cafe),
       },
       {
         '@type': 'BarOrPub',
         name: 'Bar',
-        openingHoursSpecification: hoursFromBlocks(barHours),
+        openingHoursSpecification: hoursFromSchedule(hoursSchedule.bar),
       },
     ],
   }
@@ -267,4 +238,3 @@ export function pageGraph(nodes: Record<string, unknown>[]) {
   }
 }
 
-export { INSTAGRAM_URL, TIKTOK_URL }

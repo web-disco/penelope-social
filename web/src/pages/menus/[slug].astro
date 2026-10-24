@@ -7,15 +7,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
 import MenuCategories from '../../components/MenuCategories.astro'
-import { getAll } from '../../lib/data'
-import { offersFor, resolveMenuLinks } from '../../lib/menuItems'
 import MenuCallout from '../../components/sections/MenuCallout.astro'
-import { resolveSeo } from '../../data/seo'
-import { restaurantCopy, displayHeading, menuTitle } from '../../data/copy'
-import { cateringMenuCopy } from '../../data/menus'
-import { plainText } from '../../lib/portableText'
-import { imageObjectPosition } from '../../lib/image'
-import { SITE_ORIGIN } from '../../data/site'
+import { SITE_ORIGIN, calloutsFor, menuCategories, menus, offersFor, plainText, type Menu } from '../../lib/content'
 import { btn, layout, space, typeScale, heading } from '../../lib/ui'
 import {
   bakehouseSchema,
@@ -26,67 +19,30 @@ import {
 } from '../../lib/schema'
 
 export async function getStaticPaths() {
-  // Inside: Astro runs getStaticPaths on its own, without the rest of the frontmatter.
-  /** Featured menus (Happy Hour) whose callout lists this menu under "Also show on". */
-  function calloutsFor(menu: any, menus: any[]): any[] {
-    const id = String(menu._id).replace(/^drafts\./, '')
-    return menus.filter(
-      (other) =>
-        other.callout?.enabled &&
-        other.slug?.current &&
-        (other.callout.alsoOn ?? []).some((ref: any) => String(ref?._ref ?? '').replace(/^drafts\./, '') === id),
-    )
-  }
-
-  const menus = await getAll<any>('menu')
-  return menus
-    .filter((menu) => menu.slug?.current)
-    .map((menu) => ({
-      params: { slug: menu.slug.current },
-      props: {
-        menu: resolveMenuLinks(menu, menus),
-        offers: offersFor(menu, menus),
-        callouts: calloutsFor(menu, menus),
-      },
-    }))
+  return menus.map((menu) => ({ params: { slug: menu.slug }, props: { menu } }))
 }
 
-const { menu, offers, callouts = [] } = Astro.props
-const slug = menu.slug.current as string
-const MENU_CRUMBS: Record<string, string> = {
-  lunch: 'Lunch',
-  dinner: 'Dinner',
-  bar: 'Bar',
-  catering: 'Catering',
-  'happy-hour': 'Happy Hour',
-}
+const { menu } = Astro.props as { menu: Menu }
+const slug = menu.slug
 const path = `/menus/${slug}`
-const isCateringMenu = slug === 'catering'
-const seo = resolveSeo(path, menu.seo)
-const headingText = isCateringMenu
-  ? cateringMenuCopy.heading
-  : displayHeading(menu.heading, menu.title)
-const introText = isCateringMenu ? cateringMenuCopy.intro : restaurantCopy(menu.intro)
+const seo = menu.seo
+const categories = menuCategories(menu)
+const offers = offersFor(menu)
+const callouts = calloutsFor(menu)
 
-const menuSections = (menu.categories ?? [])
-  .map((category: any) => ({
-    name: menuTitle(category.title),
+const menuSections = categories
+  .map((category) => ({
+    name: category.title,
     description: plainText(category.description),
-    items: (category.items ?? [])
-      .filter((item: any) => item.title && !/unavailable/i.test(item.title))
-      .map((item: any) => ({
-        name: menuTitle(item.title),
-        description: item.description,
-        price: item.price,
-      })),
+    items: category.items.map((item) => ({ name: item.title, description: item.description, price: item.price })),
   }))
-  .filter((section: { items: unknown[] }) => section.items.length > 0)
+  .filter((section) => section.items.length > 0)
 
 const breadcrumbs = [
   { name: 'Home', path: '/' },
   { name: 'Menus', path: '/menus' },
   // Short names, so the trail reads Lunch / Dinner / Bar / Catering whatever the H1 says.
-  { name: MENU_CRUMBS[slug] ?? headingText, path },
+  { name: menu.breadcrumb, path },
 ]
 
 const graph = pageGraph([
@@ -94,7 +50,7 @@ const graph = pageGraph([
   bakehouseSchema(),
   breadcrumbSchema(breadcrumbs),
   menuSchema({
-    name: headingText,
+    name: menu.heading,
     path,
     description: seo.description,
     sections: menuSections,
@@ -107,41 +63,33 @@ const canonical = `${SITE_ORIGIN}${path}`
 <BaseLayout
   title={seo.title}
   description={seo.description}
-  ogImage={menu.seo?.ogImage}
-  noIndex={menu.seo?.noIndex}
+  ogImage={seo.ogImage}
+  noIndex={seo.noIndex}
   canonical={canonical}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(graph)} />
-  {/* The banner's Studio hotspot steers the crop; without one it stays centred. */}
-  <PageHero
-    block={{
-      image: menu.banner,
-      heading: headingText,
-      intro: introText,
-      objectPosition: imageObjectPosition(menu.banner),
-    }}
-    breadcrumbs={breadcrumbs}
-  />
+  {/* The banner's objectPosition steers the crop; without one it stays centred. */}
+  <PageHero block={{ image: menu.banner, heading: menu.heading, intro: menu.intro }} breadcrumbs={breadcrumbs} />
   {
-    isCateringMenu && (
+    menu.note && (
       <section class="catering-menu-note">
         <div class:list={[layout.shell, space.sectionYFirst, 'flex flex-col items-start gap-space-24']}>
-          <h2 class:list={[heading.medium, 'text-left my-0']}>{cateringMenuCopy.noteHeading}</h2>
+          <h2 class:list={[heading.medium, 'text-left my-0']}>{menu.note.heading}</h2>
           <p class:list={['mb-0 max-w-[720px] text-charcoal', typeScale.bodyLg]}>
-            {cateringMenuCopy.noteBody}
+            {menu.note.body}
           </p>
-          <a href={cateringMenuCopy.cta.url} data-ga-event="catering_click" class={btn.primary}>
-            <span>{cateringMenuCopy.cta.label}</span>
+          <a href={menu.note.cta.url} data-ga-event="catering_click" class={btn.primary}>
+            <span>{menu.note.cta.label}</span>
           </a>
         </div>
       </section>
     )
   }
-  <MenuCategories categories={menu.categories ?? []} flushTop={!isCateringMenu} offers={offers} />
+  <MenuCategories categories={categories} flushTop={!menu.note} offers={offers} />
   {
     callouts.length > 0 && (
       <div class:list={[layout.shell, 'pb-section-gap-y wf-sm:pb-section-gap-y-sm']}>
-        {callouts.map((featured: any) => <MenuCallout menu={featured} />)}
+        {callouts.map((featured) => <MenuCallout menu={featured} />)}
       </div>
     )
   }

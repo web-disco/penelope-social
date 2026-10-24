@@ -2,22 +2,21 @@
 /**
  * Closing band, full-bleed green with the content held to the page shell:
  * heading, line and buttons on the left; a Google map of 125 Hawkview Blvd on
- * the right. Same keyless embed as LocationDetails.astro, fed from data/site so
+ * the right. Same keyless embed as LocationDetails.astro, fed from site.yaml → nap so
  * the pin matches the footer and /locations/woodbridge.
  *
- * block: { heading, body, ctas: Cta[], showVisitDetails }
- * showVisitDetails now toggles the map.
+ * block: { heading, body, ctas: Cta[], showMap }
  */
 import { btn, layout, typeScale } from '../../lib/ui'
-import { woodbridgeNap } from '../../data/site'
+import { nap as woodbridgeNap, type SectionOf } from '../../lib/content'
 
 interface Props {
-  block: any
+  block: SectionOf<'finalCta'>
 }
 const { block } = Astro.props
-const ctas: any[] = block.ctas ?? []
+const ctas = block.ctas ?? []
 const nap = woodbridgeNap
-const showMap = block.showVisitDetails !== false
+const showMap = block.showMap !== false
 const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(nap.mapQuery)}&output=embed`
 const mapTitle = `Map to ${nap.name}, ${nap.street}, ${nap.city}`
 ---

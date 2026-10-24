@@ -1,0 +1,170 @@
+title: Dinner
+heading: Dinner
+intro: Pizza, handhelds, shareable plates.
+breadcrumb: Dinner
+banner:
+  src: dinner-banner.avif
+  alt: Image of dinner plate
+seo:
+  title: Dinner Menu | Pizzas, Handhelds & Shareables at Penelope Social
+  description: "Dinner in Woodbridge: pizza, handhelds, shareable plates at Penelope Social. Monday to Saturday from 5pm at 125 Hawkview Blvd."
+  ogImage: /images/og/dinner.jpg
+categories:
+  - title: Handhelds
+    anchor: handhelds
+    description: Small plates you eat with your hands.
+    items:
+      - title: Chef's Toast (1pc)
+        description: Our sourdough is good, so Chef put some good stuff on it!
+        price: "3"
+      - title: Seasonal Arancini (1pc)
+        description: Rotating Risotto & Seasonal Accompaniment
+        price: "5"
+      - title: Crunchwrap Supreme
+        description: Taco Beef, Penny Queso, Sour Cream, Tomato, Iceberg Lettuce, Tostado, Nacho Cheese
+        price: "19"
+      - title: General Tso Bao (2pc)
+        description: Housemade Steamed Bao Bun, Double-Fried General Tso Chicken, Kewpie Mayo, House-Pickled Daikon, Scallions, Cilantro, Toasted Sesame Seeds
+        price: "19"
+      - title: Penny Burger Sliders (2pc)
+        description: Housemade Milk Bun, Double Chuck/Brisket Smashburger Patty, American Cheese, White Onion, Jalapeño, Penny Queso, Sour Cream, Mayo
+        price: "19"
+      - title: Southern Fried Chicken Sliders (2pc)
+        description: Housemade Milk Bun, Buttermilk Fried Chicken, Bread & Butter Pickles, Penny Coleslaw, Penny Buttermilk Ranch, Frank’s Red Hot, Mayo
+        price: "19"
+      - title: Shrimp Po'Boy Sliders (2pc)
+        description: Housemade Milk Bun, Fried Shrimp Po’Boy, Iceberg Lettuce, Bread & Butter Pickles, Penny Chipotle Mayo
+        price: "19"
+      - title: Carnitas Tacos (2pc)
+        description: Corn Tortilla, Confit Pork Shoulder, White Onion, Cilantro, Penny Salsa Verde, Lime
+        price: "19"
+  - title: Middle Table
+    anchor: middle-table
+    description: Shareables for the middle of the table.
+    items:
+      - title: Sourdough & Olives
+        description: Fresh Housemade Sourdough Bread, Whipped Butter, EVOO w/ Assorted Olives, Citrus Mix, Penny Chili Oil, Herb & Spice Blend
+        price: "11"
+      - title: Fritto Misto
+        description: Fried Calamari, Black Tiger Shrimp, Jalapeños, Penny Calabrese Aioli
+        price: "27"
+      - title: Korean Cauliflower
+        description: Fried Cauliflower, Penny Gochujang, Toasted Sesame Seeds, Scallions
+        price: "17"
+      - title: NY Striploin
+        description: 8oz Canadian Prime Striploin, Nonna’s Herb & Garlic Oil
+        price: "45"
+      - title: Mexican Octopus
+        description: Grilled Octopus, Mexican Chili Crisp, Tangerine, Citrus Mignonette, Citrus Yogurt, Fingerling Chips, Cilantro
+        price: "39"
+      - title: Galbi Short Ribs
+        description: Korean Galbi Beef Short Ribs, Crushed Noodles, Dehydrated Penny Kimchi, Pickled Chillies, Scallions, Sesame Seeds
+        price: "35"
+      - title: Jerk Chicken
+        description: Jerk Chicken, Pineapple Habanero Coleslaw
+        price: "29"
+      - title: Truffle Fries
+        description: Hand-Cut Fries, Parsley, White Truffle Oil, Shaved Parmigiano Reggiano
+        price: "15"
+  - title: Pizza (14" Round)
+    anchor: pizza
+    description: 48-hour cold-fermented New York-style [sourdough pizza](/pizza-vaughan).
+    items:
+      - title: Margherita
+        description: San Marzano DOP Tomato Sauce, Mozzarella, Fior di Latte Mozzarella, Fresh Basil
+        price: "25"
+      - title: NY Pepperoni
+        description: San Marzano DOP Tomato Sauce, Mozzarella, Mini Pepperoni, Oregano
+        price: "25"
+      - title: Vodka
+        description: Penny Rosé Sauce, Mozzarella, Basil Pesto
+        price: "25"
+      - title: Calabrese
+        description: San Marzano DOP Tomato Sauce, Mozzarella, Calabrese Soppressata, Cured Black Olives, Pepperoncini
+        price: "27"
+      - title: Big Mac
+        description: Mozzarella, Burger Beef, American Cheese, Iceberg Lettuce, White Onion, Bread & Butter Pickles, Penny Mac Sauce
+        price: "27"
+      - title: Spicy Vodka Pepp
+        description: Penny Rosé Sauce, Mozzarella, Mini Pepperoni, Jalapeño, Hot Honey
+        price: "29"
+      - title: Lovechild
+        description: Mozzarella, Calabrese Soppressata, Housemade ‘Nduja, Cured Black Olives, Sweety Drop Pepper Jelly, Stracciatella, Hot Honey
+        price: "29"
+      - title: Truffle Mushroom
+        description: Mozzarella, Cream, Wild Mushrooms, White Truffle Oil, Shaved Parmigiano Reggiano, Baby Arugula
+        price: "31"
+  - title: Salads
+    anchor: salads
+    description: Dinner salads from the Woodbridge kitchen.
+    items:
+      - title: Caesar Salad
+        description: Romaine Lettuce, Housemade Sourdough Croutons, Crispy Prosciutto Crudo, Penny Caesar Dressing, Shaved Parmigiano Reggiano
+        price: "19"
+      - title: Roasted Beet Salad
+        description: Slow-Roasted Ontario Beets, Penny Tzatziki, Oregano Vinaigrette, Pumpkin Seed Dukkah Crisp
+        price: "19"
+      - title: Smashed Cucumber Salad
+        description: Cucumber, Sweet Sesame Vinaigrette, Asian Chili Crisp, Cilantro, Scallions, Toasted Sesame Seeds, Crispy Onions
+        price: "19"
+      - title: Greek Salad
+        description: Cucumber, Tomato, Red Onion, Kalamata Olives, Feta Cheese, Greek Dressing
+        price: "19"
+      - title: Add ¼ Lb Chicken Breast
+        price: "11"
+      - title: Add ½ Lb Chicken Breast
+        price: "17"
+      - title: Add 3oz AAA Ribeye Steak
+        price: "13"
+      - title: Add 6oz AAA Ribeye Steak
+        price: "19"
+      - title: Add ⅓ Lb Sautéed Black Tiger Shrimp
+        price: "15"
+  - title: Features
+    anchor: features
+    description: Specials that rotate on and off.
+    items:
+      - title: Penny Chicken Tendies
+        description: Buttermilk Fried Chicken Tenders, Penny Signature Accompaniment. See Penny’s Pairings for dips & sauces.
+        price: "21"
+      - title: Masala Maple Carrots
+        description: Penny Masala Spiced Yogurt, Maple Soy Heirloom Carrots, Mint Chutney, Crispy Sourdough
+        price: "13"
+      - title: Pulled Pork Sliders (2pc)
+        description: Housemade Milk Bun, 16-Hour Slow Roasted BBQ Pork Shoulder, Sweet Baby Ray’s BBQ, Dijonaise, Bread & Butter Pickles, Penny Creamy Coleslaw
+        price: "19"
+      - title: Apple Pecan Salad
+        description: Baby Arugula, Ontario Honey Crisp Apples, Whipped Honey Goat Cheese, Spiced Cranberry, Candied Pecans, Raspberry Apple Sauce, Honey Dijon Vinaigrette
+        price: "19"
+      - title: Spicy Hawaiian Pizza
+        description: Mozzarella, Smoked Ham Hock, Slow Roasted Spiced Pineapple, Sweety Drop Pepper Jelly, Scallions
+        price: "27"
+  - title: Dessert
+    anchor: dessert
+    description: Housemade sweets to close the night.
+    items:
+      - title: Pumpkin Spice NY Cheesecake
+        description: Housemade Pumpkin Spice NY Cheesecake, Vanilla Maple Glaze, Winter Cookie Crumble
+        price: "15"
+      - title: Death By Penelope™
+        description: White Chocolate Vanilla Zabaglione, Chocolate Crémeux, Devil’s Food Cake, Skor Crumble, Biscoff Crumble
+        price: "15"
+      - title: Penny Coffee Cake
+        description: Brown Butter Toasted Coffee Cake, Penny Vanilla Gelato
+        price: "15"
+      - title: Apple Pie Ravioli
+        description: Housemade Puff Pastry, Penny Apple Pie Filling, Penny Vanilla Gelato, Brown Sugar-Cinnamon Dusting, Penny Caramel
+        price: "15"
+  - title: Penny's Pairings
+    anchor: pairings
+    description: Penny originals 3. Starred dips and sauces 2. Or pick any four for 10.
+    items:
+      - title: Penny's Pairings Flight
+        description: Pick any 4
+        price: "10"
+      - title: The Dips
+        description: Mayo*, Garlic Aioli, Calabrese Aioli, Basil Pesto Aioli, Hot Honey, Chipotle Mayo, BBQ (Sweet Baby Ray’s)*, Buttermilk Ranch, Hot Honey Dijon, Caesar Dressing
+        price: "3"
+      - title: The Sauces
+        description: Sweety Drop Pepper Jelly, Mac Sauce, Tzatziki, Sour Cream*, Queso, Frank’s Red Hot (Cayenne)*, Gochujang, Basil Pesto, Salsa Verde, General Tso
+        price: "3"

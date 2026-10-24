@@ -1,0 +1,76 @@
+# /locations and the two location pages. Addresses, phones, emails and hours
+# come from site.yaml (nap, bakehouse, hours). FAQs are in faqs.yaml.
+
+hub:
+  seo:
+    title: Locations | Penelope Social and Penelope Bakehouse
+    description: Penelope Social is the Woodbridge restaurant at 125 Hawkview Blvd. Penelope Bakehouse is the Scarborough bakehouse at 71 Howden Rd.
+  heading: Our locations
+  intro: Two sister spots. Woodbridge cafe and bar, Scarborough bakery.
+  image:
+    src: dinner-gathering.avif
+    alt: Penelope Social in Woodbridge and Penelope Bakehouse in Scarborough
+    objectPosition: center 40%
+
+woodbridge:
+  seo:
+    title: Woodbridge | Penelope Social | 125 Hawkview Blvd
+    description: Visit Penelope Social at 125 Hawkview Blvd, Woodbridge. Cafe hours, bar hours, phone, plus directions. Reservations on Toast.
+  heading: Penelope Social
+  intro: Cafe, kitchen, and bar in Woodbridge
+  image:
+    src: dinner-gathering.avif
+    alt: Dinner service at Penelope Social
+    objectPosition: center 40%
+  # The card on /locations.
+  card:
+    title: Penelope Social
+    blurb: Cafe lunch and dinner, then late drinks.
+    cta:
+      label: Visit Penelope Social
+      url: /locations/woodbridge
+  details:
+    heading: Cafe by day, bar by night
+    body: Penelope Social is the Woodbridge [cafe](/cafe-in-vaughan) and bar. [Focaccia sandwiches](/sandwiches-vaughan) and [pizza](/pizza-vaughan) at lunch, dinner plates and drinks after. Bread starts at [Penelope Bakehouse](@bakehouse) in Scarborough.
+    ctas:
+      - label: Order online
+        url: "@order"
+        style: primary
+        newTab: true
+      - label: Reservations
+        url: /reservations
+        style: outline
+
+# Social's page for the sister bakehouse. Its H1 deliberately doesn't name the
+# Bakehouse: naming it in both the title and H1 made this page outrank
+# penelopebakehouse.com for "penelope bakehouse". The card still says
+# "Penelope Bakehouse", and the copy and buttons hand off to its site.
+scarborough:
+  seo:
+    title: Scarborough | Penelope Social
+    description: Our sister bakehouse and focacceria at 71 Howden Rd, Scarborough, where the bread for Penelope Social is baked. Hours, directions, and phone.
+  heading: Our Scarborough bakehouse
+  intro: Sister bakehouse in Scarborough
+  image:
+    src: bakehouse-counter.jpg
+    alt: Counter at Penelope Bakehouse in Scarborough
+    objectPosition: center 50%
+  card:
+    title: Penelope Bakehouse
+    blurb: Sourdough and focaccia, pizza by the slice.
+    cta:
+      label: Visit Penelope Bakehouse
+      url: /locations/scarborough
+  details:
+    heading: Sourdough and focaccia, baked there
+    body: Penelope Bakehouse is the Scarborough bakery. Loaves, focaccia sandwiches, pizza by the slice. Hours and the bakery menu live on penelopebakehouse.com.
+    # The same pair penelopebakehouse.com puts in its own hero.
+    ctas:
+      - label: Order online
+        url: "@bakehouseOrder"
+        style: primary
+        newTab: true
+      - label: Catering
+        url: "@bakehouseCatering"
+        style: outline
+        newTab: true

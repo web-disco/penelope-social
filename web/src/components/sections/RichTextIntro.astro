@@ -1,17 +1,16 @@
 ---
 /**
  * Centred intro: H2 and a Portable Text body in an 850px reading column.
- * block: { heading, body: PortableText[] }
+ * block: { heading, body: Markdown paragraphs }
  */
-import { PortableText } from 'astro-portabletext'
-import { withoutEmptyBlocks } from '../../lib/portableText'
 import { layout, space, typeScale } from '../../lib/ui'
+import { paragraphsHtml, type SectionOf } from '../../lib/content'
 
 interface Props {
-  block: any
+  block: SectionOf<'richTextIntro'>
 }
 const { block } = Astro.props
-const body = withoutEmptyBlocks(block.body)
+const body = paragraphsHtml(block.body)
 
 const bodyClass =
   'rich-text-intro-body flex flex-col gap-space-16 text-center text-charcoal [&_p]:my-0 ' +
@@ -24,11 +23,7 @@ const bodyClass =
     <div class:list={['mx-auto', layout.measure]}>
       {block.heading && <h2 class:list={['mt-0 mb-space-24 text-center text-charcoal', typeScale.displayM]}>{block.heading}</h2>}
       {
-        body.length > 0 && (
-          <div class:list={[bodyClass, typeScale.bodyLg]}>
-            <PortableText value={body} />
-          </div>
-        )
+        body && <div class:list={[bodyClass, typeScale.bodyLg]} set:html={body} />
       }
     </div>
   </div>

@@ -1,0 +1,134 @@
+title: Bar
+heading: Bar
+intro: Cocktails, wine, beer. Till late.
+breadcrumb: Bar
+banner:
+  src: bar-banner.avif
+  alt: Image of Bar Tender
+seo:
+  title: Bar Menu | Craft Cocktails & Drinks at Penelope Social
+  description: Cocktails, wine, and a late bar at Penelope Social in Woodbridge. Monday to Thursday 5pm to 10pm, Friday to Saturday 5pm to 1am.
+  ogImage: /images/og/bar.jpg
+categories:
+  - title: Cocktails
+    anchor: cocktails
+    description: House cocktails from the Woodbridge bar.
+    items:
+      - title: Freeze the World (2oz)
+        description: Empress 1908 Indigo Gin, St-Germain, Amaro Lumìa, Lemon, Mint, Serenissima Prosecco
+        price: "20"
+      - title: Currant Mood (2oz)
+        description: Gordon’s London Dry Gin, Chambord Royale, St-Germain, Lillet Blanc, Blackberry, Lemon, Egg White
+        price: "19"
+      - title: Cherry Cola (2oz)
+        description: True Theory Vodka, Amaro Meletti, Luxardo Amaretto, Luxardo Maraschino, Lemon, Fabbri Amarena, Coca-Cola
+        price: "18"
+      - title: Apple Bobber (2oz)
+        description: After Six Bourbon, Fireball Cinnamon Rye Whisky, Amaro Nonino, Penny Apple Pie, Lemon
+        price: "20"
+      - title: Ski Club (3oz)
+        description: Gooderham & Worts Whisky, Campari, Cocchi Vermouth di Torino, Licor 43, Espresso Infused
+        price: "20"
+      - title: Penny's Rotating Marg (2oz)
+        description: El Jimador Tequila Blanco, Cointreau, Lime, Local Fruit
+        price: "19"
+      - title: Pumpkin Spice Latte Martini (2.5oz)
+        description: Captain Morgan Spiced Rum, Kahlúa, Frangelico, Penny Pumpkin Spice, Espresso
+        price: "19"
+  - title: Free-Spirits
+    anchor: free-spirits
+    description: Zero-proof pours and spritzes.
+    items:
+      - title: Cosmo-Naut
+        description: Stappi White Bitter, Lime, Cranberry, Simple
+        price: "12"
+      - title: Penny's Rotating No-Jito
+        description: Rotating Fruit, Lime, Mint
+        price: "12"
+      - title: Shakerato
+        description: Double Espresso, Brown Sugar, Orange
+        price: "10"
+      - title: Tempranillo Sparkling Rosé (6oz)
+        description: Pour Sport, Spain. 0% ABV
+        price: "14"
+      - title: Peroni Nastro Azzurro 0.0
+        description: Rome, Italy, 0% ABV
+        price: "8"
+  - title: Red Wine
+    anchor: red-wine
+    description: By the glass or bottle.
+    items:
+      - title: Doline Primitivo
+        description: Puglia, Italy — 6oz/750ml
+        price: 17/68
+      - title: Campi Deatera Negroamaro
+        description: Salento, Italy — 6oz/750ml
+        price: 16/64
+      - title: Commisso Estate Winery Cabernet Franc
+        description: Niagara Bench, Canada — 6oz/750ml
+        price: 16/64
+      - title: Grotta Del Ninfeo Valpolicella
+        description: Veneto, Italy — 6oz/750ml
+        price: 16/64
+  - title: White Wine
+    anchor: white-wine
+    description: By the glass or bottle.
+    items:
+      - title: Crowded House Sauvignon Blanc
+        description: Marlborough, New Zealand — 6oz/750ml
+        price: 17/68
+      - title: Vinicola Tombacco Pecorino
+        description: Abruzzo, Italy — 6oz/750ml
+        price: 17/68
+      - title: Campi Deatera Verdeca
+        description: Salento, Italy — 6oz/750ml
+        price: 16/64
+      - title: Commisso Estate Winery Chardonnay
+        description: Niagara Bench, Canada — 6oz/750ml
+        price: 16/64
+  - title: Amari 1.5oz
+    anchor: amari
+    description: Italian amari. Ask the bar for more.
+    items:
+      - title: Amaro Montenegro
+        price: "10"
+      - title: Amaro Del Capo
+        price: "10"
+      - title: Amaro Lucano
+        price: "10"
+      - title: Amaro Averna
+        price: "10"
+      - title: Amaro Amara Blood Orange
+        price: "15"
+      - title: Mille Lumìe Limoncello
+        price: "16"
+      - title: Amaro Nonino
+        price: "17"
+      - title: Amaro Meletti
+        price: "18"
+      - title: Amaro Dli Amis
+        price: "18"
+      - title: Amaro Berta Lingera
+        price: "18"
+      - title: Amaro La Miscela al 30
+        price: "18"
+      - title: Amaro Lumìa
+        price: "19"
+      - title: Amaro Arànciu
+        price: "19"
+      - title: Amaro Punagrò All'Arancia
+        price: "19"
+      - title: Amaro Punico
+        price: "19"
+      - title: Amaro Jefferson
+        price: "19"
+      - title: Amaro Washington
+        price: "19"
+      - title: Amaro Roger
+        price: "19"
+      - title: Amaro Giocondo
+        price: "19"
+      - title: Amaro Frack
+        price: "22"
+      - title: + More (Ask the Bar)
+        price: MP

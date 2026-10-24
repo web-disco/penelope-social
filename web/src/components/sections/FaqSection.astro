@@ -3,19 +3,24 @@
  * FAQ accordion with optional FAQPage JSON-LD.
  */
 import { heading, layout, radius, space, typeScale } from '../../lib/ui'
-import type { FaqItem } from '../../data/types'
 import { faqPageSchema } from '../../lib/schema'
+import { inlineHtml, type FaqItem } from '../../lib/content'
 
 interface Props {
   headingText?: string
-  items: FaqItem[]
+  /** `answer` is HTML: a set from faqs.yaml, via content.ts `faqs`. */
+  items?: FaqItem[]
+  /** `answer` is Markdown: a YAML faqSection. */
+  markdownItems?: { question: string; answer: string }[]
   includeSchema?: boolean
 }
 const {
   headingText = 'FAQs',
-  items,
+  markdownItems,
   includeSchema = true,
 } = Astro.props
+const items: FaqItem[] =
+  Astro.props.items ?? (markdownItems ?? []).map((item) => ({ question: item.question, answer: inlineHtml(item.answer) }))
 ---
 
 <section class="section-faq" id="faq">

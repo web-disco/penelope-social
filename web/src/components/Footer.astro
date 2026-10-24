@@ -11,34 +11,33 @@
  * below as `col-span-2`.
  */
 import { heading, containerFooter, container, typeScale } from '../lib/ui'
-import { imageUrl } from '../lib/image'
 import NewsletterForm from './NewsletterForm.astro'
-import LineText from './LineText.astro'
-import { displayHeading, displayLinkLabel, displayMenusHeading, restaurantCopy } from '../data/copy'
-import { mailtoHref, stackedHoursBlocks } from '../data/site'
-import { MENUS_DROPDOWN } from '../data/nav'
+import { footerContact, site, specialties, stackedHoursBlocks } from '../lib/content'
 
 interface Props {
-  settings: any
   isHome?: boolean
   /** Drop the green newsletter band, e.g. on pages that close on their own CTA band. */
   hideNewsletter?: boolean
 }
-const { settings, isHome = false, hideNewsletter = false } = Astro.props
+const { isHome = false, hideNewsletter = false } = Astro.props
 
-const footer = settings.footer ?? {}
-const newsletter = footer.newsletter ?? {}
-const menus = footer.menus ?? {}
-const hours = footer.hours ?? {}
-const contact = footer.contact ?? {}
+const footer = site.footer
+const newsletter = footer.newsletter
+const menus = footer.menus
+const hours = footer.hours
+const contact = footer.contact
 const hourBlocks = stackedHoursBlocks
-/* The dish landing pages, under the menu links, so every page links all four
-   from crawlable footer text rather than only from the hover dropdown. */
-const specialties = MENUS_DROPDOWN.find((group) => group.heading === 'Specialties')?.links ?? []
-const SPECIALTIES_BLURB = 'Sourdough pizza, Italian sandwiches on focaccia, our cafe, and bread to take home.'
-const emailHref = mailtoHref(contact.emailHref, contact.email)
+/* `specialties`: the dish landing pages, under the menu links, so every page
+   links all four from crawlable footer text rather than only from the hover
+   dropdown. */
+const emailHref = `mailto:${footerContact.email}`
 
-const logoSrc = imageUrl(footer.logo) || '/penelope-logo-lockup-white.svg'
+const logoSrc = footer.logo
+
+/* The address and the email each end on an empty line (<br /> plus a
+   zero-width joiner, so the line keeps its height). That spacing used to be
+   typed into the Sanity strings as "\n&zwj;"; it lives here so the YAML holds
+   clean values. */
 
 /* Fixed chrome. These were Sanity fields; they are never meaningfully edited
    and a text field only invites drift — the copyright still read “© 2024”. */
@@ -54,15 +53,8 @@ const YEAR = new Intl.DateTimeFormat('en-CA', {
 
 const copyrightText = `© ${YEAR} Penelope Social`
 
-const FOOTER_MENUS_BLURB =
-  'Lunch, bar, dinner, catering. Sourdough focaccia sandwiches and pizza, plus cocktails.'
-const NEWSLETTER_SUPPORT =
-  'Sign up for our newsletter and be the first to know about exclusive offers.'
-const menusBlurbRaw = restaurantCopy(menus.blurb, FOOTER_MENUS_BLURB)
-const menusBlurb = /featuring the best|shareable['’]s|handcrafted/i.test(menusBlurbRaw)
-  ? FOOTER_MENUS_BLURB
-  : menusBlurbRaw || FOOTER_MENUS_BLURB
-const newsletterText = restaurantCopy(newsletter.text, NEWSLETTER_SUPPORT) || NEWSLETTER_SUPPORT
+const menusBlurb = menus.blurb
+const newsletterText = newsletter.text
 
 /* Subtle hover for every footer link, matching the .35s of the buttons around
    it. Not applied to the Google Reviews button, which has its own colour
@@ -86,7 +78,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
   <div class="footer-newsletter bg-green">
     <div class={container}>
       <h2 class:list={[heading.light, typeScale.displayXl]}>
-        {displayHeading(newsletter.heading, 'Stay in the loop')}
+        {newsletter.heading}
       </h2>
       <div class="footer-newsletter-wrap mx-auto max-w-[650px] text-center">
         <p
@@ -133,7 +125,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
           <img
             src={logoSrc}
             loading="lazy"
-            alt={footer.logoAlt ?? 'Penelope Social Logo'}
+            alt={footer.logoAlt}
             class="footer-logo w-full max-w-[75%] min-[992px]:max-[1279px]:max-w-[200px] wf-md:mx-auto wf-md:mb-10 wf-md:block wf-md:max-w-[50%] wf-md:text-left wf-xs:mb-0 wf-xs:max-w-full"
           />
         </a>
@@ -144,18 +136,18 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         <h4
           class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
         >
-          {displayMenusHeading(menus.heading, 'Menus')}
+          {menus.heading}
         </h4>
         <!-- Capped so the blurb wraps inside its column instead of setting the
              column's natural width from its longest line. -->
         <div class={`${footerText} max-w-[230px]`}>
-          <a href={menus.blurbUrl ?? '/menus'} class={footerTextSpan}>
-            <LineText text={menusBlurb} />
+          <a href={menus.blurbUrl} class={footerTextSpan}>
+            {menusBlurb}
           </a>
         </div>
         <div class="footer-menu-wrap mt-[30px] flex flex-col gap-[10px] wf-md:mt-5">
           {
-            (menus.links ?? []).map((link: any) => (
+            menus.links.map((link) => (
               <a
                 href={link.url}
                 class:list={[
@@ -163,7 +155,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
                   hover,
                 ]}
               >
-                {displayLinkLabel(link.label)}
+                {link.label}
               </a>
             ))
           }
@@ -175,11 +167,11 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         <h4
           class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
         >
-          Specialties
+          {footer.specialties.heading}
         </h4>
         <div class={`${footerText} max-w-[230px]`}>
           <span class="font-normal text-beige">
-            <LineText text={SPECIALTIES_BLURB} />
+            {footer.specialties.blurb}
           </span>
         </div>
         <div class="footer-menu-wrap mt-[30px] flex flex-col gap-[10px] wf-md:mt-5">
@@ -204,21 +196,21 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         <h4
           class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
         >
-          {displayHeading(hours.heading, 'Hours & location')}
+          {hours.heading}
         </h4>
         <div class="hours-wrap flex flex-col">
           <p class={`${footerText} is-location mb-0 normal-case`}>
             <strong class={typeScale.label}>{hours.locationLabel}</strong>
             <br />
             <a href={hours.mapUrl} target="_blank" data-ga-event="get_directions" class={footerTextSpan}>
-              <LineText text={hours.address} />
+              {footerContact.address}<br />&zwj;
             </a>
           </p>
           {
             hourBlocks.map((block) => (
               <p class={`${footerTextHours} is-hours`}>
                 <strong class={typeScale.label}>
-                  {displayHeading(block.label)}
+                  {block.label}
                   <br />
                 </strong>
                 {block.lines.map((line) => (
@@ -242,18 +234,18 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
         <h4
           class="footer-heading mt-0 mb-[30px] font-body text-[18px] leading-[130%] font-normal text-beige uppercase wf-md:mb-5"
         >
-          {displayHeading(contact.heading, 'Contact')}
+          {contact.heading}
         </h4>
         <p class={footerText}>
-          P: <a href={`tel:${contact.phoneDigits}`} data-ga-event="click_to_call" class={footerTextSpan}>{contact.phone}</a>
+          P: <a href={`tel:${footerContact.phoneDigits}`} data-ga-event="click_to_call" class={footerTextSpan}>{footerContact.phone}</a>
           <br />
-          E: <a href={emailHref} class={footerTextSpan}><LineText text={contact.email} /></a>
+          E: <a href={emailHref} class={footerTextSpan}>{footerContact.email}<br />&zwj;</a>
         </p>
         <div class="footer-socials gap-3">
           <div class={footerText}>{contact.socialsLabel}</div>
           <div class="footer-socials-wrap mt-[5px] flex justify-end gap-3 wf-md:justify-start">
             {
-              (contact.socials ?? []).map((social: any) => (
+              contact.socials.map((social) => (
                 <a
                   href={social.url}
                   target="_blank"
@@ -261,7 +253,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
                   class={`footer-social-link w-inline-block ${hover}`}
                 >
                   <img
-                    src={social.icon ?? `/icons/${social.platform}.svg`}
+                    src={social.icon}
                     loading="lazy"
                     alt=""
                     class="footer-social-icon w-7"
@@ -272,7 +264,7 @@ const footerTextSpan = `footer-text-span text-beige font-normal no-underline ${h
           </div>
         </div>
         {
-          contact.googleReview?.url && (
+          contact.googleReview && (
             <div class="footer-google-review mt-[60px] wf-sm:mt-10">
               <a
                 href={contact.googleReview.url}

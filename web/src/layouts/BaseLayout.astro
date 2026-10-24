@@ -4,15 +4,14 @@ import Navbar from '../components/Navbar.astro'
 import Footer from '../components/Footer.astro'
 import MarketingPopup from '../components/MarketingPopup.astro'
 import AnnouncementBar from '../components/AnnouncementBar.astro'
-import { getSiteSettings, getSingleton } from '../lib/data'
-import { imageUrl } from '../lib/image'
+import { site } from '../lib/content'
 import { GA_MEASUREMENT_ID_DEFAULT } from '../lib/analytics'
-import { restaurantCopy } from '../data/copy'
 
 interface Props {
   title: string
   description?: string
-  ogImage?: any
+  /** Path of a share image in public/. Defaults to site.yaml → seo.ogImage. */
+  ogImage?: string
   canonical?: string
   noIndex?: boolean
   isHome?: boolean
@@ -33,14 +32,8 @@ const {
   hideNewsletter = false,
 } = Astro.props
 
-const settings = await getSiteSettings()
-const marketingPopup = await getSingleton('marketingPopup')
-const announcementBar = await getSingleton('announcementBar')
-const seo = settings.seo ?? {}
-
-const metaDescription =
-  description ?? restaurantCopy(seo.metaDescription) ?? ''
-const ogImageUrl = imageUrl(ogImage) || imageUrl(seo.ogImage)
+const metaDescription = description ?? ''
+const ogImageUrl = new URL(ogImage ?? site.seo.ogImage, Astro.site).href
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, Astro.site).href.replace(/\/$/, '')
 
 const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY
@@ -270,19 +263,19 @@ const gaMeasurementId =
   </head>
 
   <body>
-    <AnnouncementBar bar={announcementBar} />
+    <AnnouncementBar bar={site.announcement} />
 
     <div class="page-wrapper relative">
-      <Navbar settings={settings} isHome={isHome} solidNav={solidNav} />
+      <Navbar isHome={isHome} solidNav={solidNav} />
 
       <div class="main-wrapper">
         <slot />
       </div>
 
-      <Footer settings={settings} isHome={isHome} hideNewsletter={hideNewsletter} />
+      <Footer isHome={isHome} hideNewsletter={hideNewsletter} />
     </div>
 
-    <MarketingPopup popup={marketingPopup} />
+    <MarketingPopup popup={site.popup} />
 
     <script>
       import '../scripts/main'
