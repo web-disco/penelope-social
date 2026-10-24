@@ -111,18 +111,17 @@ categories:
     description: Cookies, crullers and the Nutella Bombe.
     items:
       - title: Dark Chocolate Sea Salt Cookie
-        price: 1pc 4.50 | 6pc 24 | 12pc 45
+        description: 1pc $4.50 | 6pc $24 | 12pc $45
       - title: Pecan Skor Cookie
-        price: 1pc 4.50 | 6pc 24 | 12pc 45
+        description: 1pc $4.50 | 6pc $24 | 12pc $45
       - title: Honey Cruller
-        price: 1pc 4.50 | 6pc 24 | 12pc 45
+        description: 1pc $4.50 | 6pc $24 | 12pc $45
       - title: Churro Cruller
-        price: 1pc 4.50 | 6pc 24 | 12pc 45
+        description: 1pc $4.50 | 6pc $24 | 12pc $45
       - title: Toasted Coconut Cruller
-        price: 1pc 4.50 | 6pc 24 | 12pc 45
+        description: 1pc $4.50 | 6pc $24 | 12pc $45
       - title: Nutella Bombe
-        description: Nutella Filled Doughnuts Tossed in Sugar
-        price: 1pc 4.50 | 6pc 24 | 12pc 45
+        description: 1pc $4.50 | 6pc $24 | 12pc $45
   - title: Bakery
     anchor: bakery
     description: Sourdough loaves, whole or sliced, and focaccia to take home.
