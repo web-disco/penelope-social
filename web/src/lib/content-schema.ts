@@ -73,6 +73,17 @@ export const image = z.strictObject({
   objectPosition: plain.optional(),
 })
 
+/**
+ * Video and other large files live in the R2 bucket `penelope`, served from
+ * this domain (shared with Penelope Bakehouse). Upload under a new filename:
+ * files are cached for a year.
+ */
+export const MEDIA_ORIGIN = 'https://media.penelopebakehouse.com/'
+const mediaFile = z
+  .string()
+  .trim()
+  .refine((s) => s.startsWith(MEDIA_ORIGIN), `Must be a ${MEDIA_ORIGIN}… URL (R2).`)
+
 export const cta = z.strictObject({
   label: plain,
   url,
@@ -532,8 +543,10 @@ export const aboutSchema = z.strictObject({
   video: z.strictObject({
     heading: plain,
     body: plain,
-    /** A file in public/, or a https URL. */
-    file: z.string().trim().refine((s) => s.startsWith('https://') || s.startsWith('/'), 'Must be https://… or /path.'),
+    /** The video file: a URL on the R2 media domain. */
+    file: mediaFile,
+    /** Still shown before the video plays: a URL on the R2 media domain. */
+    poster: mediaFile,
     alt: plain,
     ctas: z.array(cta),
   }),

@@ -121,6 +121,11 @@ computed style and box identical at 375 and 1440px. The differences:
   Bakehouse rule. Nine links; the home "Order online" one already did, and
   drops `noreferrer`.
 - The Woodbridge intro's link styling moved from each `<a>` to the paragraph.
+- **/about video** moved off Webflow's CDN to R2:
+  `media.penelopebakehouse.com/penelope-reel.mp4` (the same 10.5 MB file,
+  `faststart`, range requests work) with a poster,
+  `penelope-reel.jpg`, that the page didn't have before. Nothing on the site
+  loads from Webflow any more.
 - **Instagram** is `https://www.instagram.com/penelopesocial` everywhere
   (`site.yaml → links.instagram`, also used by the footer and drawer icons).
   The footer and drawer used to link `instagram.com/penelope.social`, and the
@@ -132,9 +137,6 @@ An unknown `@token` and a malformed schedule time both fail the build.
 
 - **Two directions URLs.** The footer address links to a long Google Maps URL
   (`footer.hours.mapUrl`); everything else uses `@directions`. Kept as-is.
-- The /about video (`PENNY BREAD-transcode.mp4`, about 10 MB) is still served
-  from Webflow's CDN. Move it to R2 like the Bakehouse video (needs a bucket /
-  domain decision).
 - A little fixed copy is still in `.astro` files: the 404 page, the catering
   notice checkbox on the events form, and row labels on the location pages.
 

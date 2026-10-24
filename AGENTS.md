@@ -60,6 +60,14 @@ plenty). Put it in `web/src/assets/images/` and reference it by filename:
 sizes; there is nothing else to run. `web/public/images/` only holds files that
 need a fixed URL: share images (`og/`) and the logos.
 
+**Video / files over 5 MB:** R2 bucket `penelope`, served from
+`https://media.penelopebakehouse.com/` (shared with the Bakehouse; the build
+only accepts URLs there). Upload under a new filename, with a year's cache:
+`npx wrangler r2 object put penelope/<file> --file <file> --cache-control "public, max-age=31536000, immutable" --remote`.
+Compress video first and keep `faststart` so it starts before it has fully
+downloaded: `ffmpeg -i in.mp4 -c:v libx264 -preset slow -crf 26 -pix_fmt yuv420p -movflags +faststart -an out.mp4`.
+Export a poster with `ffmpeg -ss 2 -i out.mp4 -frames:v 1 -q:v 3 poster.jpg`.
+
 **Before pushing:** `pnpm build` must pass (set `PUBLIC_TURNSTILE_SITE_KEY=` in
 `.env` locally). Content errors name the file and field: schema errors from
 Astro, cross-file errors as "Content problems in src/content". Never push a

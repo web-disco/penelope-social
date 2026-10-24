@@ -33,7 +33,9 @@ timeline:
 video:
   heading: Inside the bake
   body: Vince’s starter still works the dough, and we serve that bread here as sandwiches and pizza, and as loaves.
-  file: https://cdn.prod.website-files.com/67356446e4922c58f5ca76c0/674cc19b8d4f507a7318ec10_PENNY%20BREAD-transcode.mp4
+  # R2 bucket `penelope`, served from media.penelopebakehouse.com.
+  file: https://media.penelopebakehouse.com/penelope-reel.mp4
+  poster: https://media.penelopebakehouse.com/penelope-reel.jpg
   alt: Hands shaping dough for Penelope
   ctas:
     # The sister site, not /locations/scarborough: "Bakehouse" links belong on its domain.
