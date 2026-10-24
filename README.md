@@ -302,6 +302,8 @@ each other, which is the thing that broke.
   still shows `Sun - 8-12 pm` and links the old `instagram.com/penelopesocial`
   handle. The migration takes the inner-page version (`Sun — 8am - 12pm`,
   `instagram.com/penelope.social`) for all pages and warns when it runs.
+  (The handle has since been confirmed as `instagram.com/penelopesocial`; all
+  links now use `site.yaml → links.instagram`.)
 - **The enquiry-reason prefill never worked.** Links like
   `/catering-events?general-inquiry` are meant to preselect the dropdown, but
   the inline script targets `#Event-Type`, an id that doesn't exist (the select

@@ -121,15 +121,15 @@ computed style and box identical at 375 and 1440px. The differences:
   Bakehouse rule. Nine links; the home "Order online" one already did, and
   drops `noreferrer`.
 - The Woodbridge intro's link styling moved from each `<a>` to the paragraph.
+- **Instagram** is `https://www.instagram.com/penelopesocial` everywhere
+  (`site.yaml → links.instagram`, also used by the footer and drawer icons).
+  The footer and drawer used to link `instagram.com/penelope.social`, and the
+  JSON-LD `sameAs` and Woodbridge row `penelopesocial/?hl=en`.
 
 An unknown `@token` and a malformed schedule time both fail the build.
 
 ### Still open
 
-- **Instagram handle mismatch.** The footer and drawer link
-  `instagram.com/penelope.social`; the JSON-LD `sameAs` and the Woodbridge
-  "Social" row use `instagram.com/penelopesocial` (`site.yaml → links.instagram`).
-  Kept as-is; confirm which is current and make `links.instagram` match.
 - **Two directions URLs.** The footer address links to a long Google Maps URL
   (`footer.hours.mapUrl`); everything else uses `@directions`. Kept as-is.
 - The /about video (`PENNY BREAD-transcode.mp4`, about 10 MB) is still served

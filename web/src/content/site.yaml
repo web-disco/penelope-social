@@ -12,7 +12,7 @@ links:
   order: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
   giftCards: https://order.toasttab.com/egiftcards/penelope-social-125-hawkview-boulevard
   directions: https://www.google.com/maps/dir/?api=1&destination=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2
-  instagram: https://www.instagram.com/penelopesocial/?hl=en
+  instagram: https://www.instagram.com/penelopesocial
   tiktok: https://www.tiktok.com/@penelope.social?_t=8rVjknXtEaF&_r=1
   bakehouse: https://penelopebakehouse.com
   bakehouseMenu: https://penelopebakehouse.com/menu
@@ -196,7 +196,7 @@ footer:
     socialsLabel: FOLLOW OUR SOCIALS
     socials:
       - platform: instagram
-        url: https://www.instagram.com/penelope.social/?hl=en
+        url: "@instagram"
         icon: /icons/instagram.svg
       - platform: tiktok
         url: https://www.tiktok.com/@penelope.social?_t=8rVjknXtEaF&_r=1
