@@ -108,7 +108,7 @@ categories:
         price: "15"
   - title: Treats
     anchor: treats
-    description: Cookies, crullers and the Nutella Bombe. 1pc $4.50, 6pc $24, 12pc $45.
+    description: Cookies, crullers and the Nutella Bombe.
     items:
       - title: Dark Chocolate Sea Salt Cookie
         price: 1pc 4.50 | 6pc 24 | 12pc 45
