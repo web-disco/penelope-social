@@ -108,26 +108,39 @@ categories:
         price: "15"
   - title: Treats
     anchor: treats
-    description: Crullers, cookies, and the Nutella Bombe.
+    description: Cookies, crullers and the Nutella Bombe. 1pc $4.50, 6pc $24, 12pc $45.
     items:
-      - title: Rotating Crullers
-        description: Honey Glazed, Churro, Toasted Coconut...
+      - title: Dark Chocolate Sea Salt Cookie
+        price: 1pc 4.50 | 6pc 24 | 12pc 45
+      - title: Pecan Skor Cookie
+        price: 1pc 4.50 | 6pc 24 | 12pc 45
+      - title: Honey Cruller
+        price: 1pc 4.50 | 6pc 24 | 12pc 45
+      - title: Churro Cruller
+        price: 1pc 4.50 | 6pc 24 | 12pc 45
+      - title: Toasted Coconut Cruller
         price: 1pc 4.50 | 6pc 24 | 12pc 45
       - title: Nutella Bombe
         description: Nutella Filled Doughnuts Tossed in Sugar
         price: 1pc 4.50 | 6pc 24 | 12pc 45
-      - title: Rotating Cookies
-        description: Dark Chocolate Sea Salt, Pecan Skor, Matcha White Chocolate...
-        price: 1pc 4.50 | 6pc 24 | 12pc 45
   - title: Bakery
     anchor: bakery
-    description: Sourdough loaves and focaccia to take home.
+    description: Sourdough loaves, whole or sliced, and focaccia to take home.
     items:
-      - title: Classic Sourdough Loaves
-        description: Crusty White, Country Style, Sesame-Crusted
+      - title: Crusty White
+        description: Sourdough Loaf
         price: "9"
-      - title: Specialty Sourdough Loaves
-        description: Marbled Rye, Olive
+      - title: Country Style
+        description: Sourdough Loaf
+        price: "9"
+      - title: Sesame-Crusted White
+        description: Sourdough Loaf
+        price: "9"
+      - title: Marbled Rye
+        description: Sourdough Loaf
+        price: "12"
+      - title: Olive
+        description: Sourdough Loaf
         price: "12"
       - title: Focaccia-Craft Focaccia Romana
         price: "15"
@@ -150,7 +163,7 @@ categories:
         price: "5"
   - title: Cafe
     anchor: cafe
-    description: "[Espresso drinks](/cafe-in-vaughan) and tea."
+    description: "[Espresso drinks](/cafe-in-vaughan) and tea, hot or iced. Add a shot for $1.50."
     items:
       - title: Espresso
         price: "3"
@@ -164,24 +177,45 @@ categories:
         price: "5"
       - title: Latte
         price: "5"
-      - title: Herbal Tea
-        description: Green, Earl Grey, Chamomile, Peppermint
+      - title: Green Tea
         price: "3"
-  - title: Water
-    anchor: water
-    description: Bottled water, pops, and juice.
+      - title: Earl Grey
+        price: "3"
+      - title: Chamomile
+        price: "3"
+      - title: Peppermint
+        price: "3"
+  - title: Drinks
+    anchor: drinks
+    description: Bottled water, pops, juice and imported beer.
     items:
-      - title: Small Natural (Bottle)
+      - title: Small Natural Water (Bottle)
         price: "3"
-      - title: Small Sparkling (Can)
+      - title: Small Sparkling Water (Can)
         price: "4"
-      - title: San Benedetto Natural/Sparkling Mineral Water (1L)
+      - title: San Benedetto Mineral Water (750ml)
+        description: Natural or Sparkling
         price: "7"
-      - title: Canned Pops
-        description: Coca-Cola (Regular/Diet/Zero), Canada Dry (Ginger Ale/Club Soda/Tonic), Fuze Iced Tea, Sprite
+      - title: Coca-Cola
+        description: Regular, Diet, Zero
         price: "3"
-      - title: Imported Pops
-        description: San Pellegrino (Aranciata/Limonata/Aranciata Rossa), Brio Chinotto, Ting Grapefruit Soda
+      - title: Canada Dry
+        description: Ginger Ale, Club Soda, Tonic
+        price: "3"
+      - title: Fuze Iced Tea
+        price: "3"
+      - title: Sprite
+        price: "3"
+      - title: San Pellegrino
+        description: Aranciata, Aranciata Rossa, Limonata
+        price: "4"
+      - title: Brio Chinotto
+        price: "4"
+      - title: Ting Grapefruit Soda
+        price: "4"
       - title: Juice
-        description: Orange/Apple/Cranberry/Pineapple
+        description: Orange, Apple
         price: "3"
+      - title: Imported Bottled Beer (12oz)
+        description: Varies
+        price: "10"

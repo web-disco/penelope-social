@@ -33,7 +33,7 @@ sections:
         image:
           src: latte-art.jpg
           alt: Latte with latte art at Penelope Social
-      - item: Rotating Cookies
+      - item: Dark Chocolate Sea Salt Cookie
         link: /menus/lunch#treats
         image:
           src: sea-salt-cookies.jpg
@@ -43,7 +43,7 @@ sections:
         image:
           src: nutella-bombe.jpg
           alt: Nutella bombe from Penelope Bakehouse
-      - item: Rotating Crullers
+      - item: Honey Cruller
         link: /menus/lunch#treats
         image:
           src: glazed-cruller.jpg

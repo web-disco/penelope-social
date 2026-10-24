@@ -38,7 +38,7 @@ sections:
         image:
           src: sourdough-croutons.jpg
           alt: Bags of Penelope Social sourdough croutons
-      - item: Classic Sourdough Loaves
+      - item: Country Style
         link: /menus/lunch#bakery
         image:
           src: bread-cooling-rack.avif
@@ -125,7 +125,7 @@ sections:
       - question: Is this Penelope Bakehouse?
         answer: No. This is Penelope Social in Woodbridge, Vaughan. Penelope Bakehouse is our bakehouse and focacceria at 71 Howden Rd in Scarborough, where the bread is baked. Its menu and hours are on penelopebakehouse.com.
       - question: What sourdough loaves do you sell?
-        answer: "Classic sourdough loaves are $9: Crusty White, Country Style and Sesame-Crusted. Specialty loaves are $12: Marbled Rye and Olive."
+        answer: "Classic sourdough loaves are $9: Crusty White, Country Style and Sesame-Crusted White. Specialty loaves are $12: Marbled Rye and Olive."
       - question: Do you sell focaccia to take home?
         answer: Yes. Focaccia Romana is $15. Semolina focaccia comes as a Sea Salt Mini ($5), Sea Salt/Rosemary ($9 small, $15 large) and Barese ($12 small, $20 large).
       - question: Can I order bread ahead?
