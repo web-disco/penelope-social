@@ -80,7 +80,7 @@ categories:
         price: "3"
   - title: Salads
     anchor: salads
-    description: Fresh salads. Add chicken or steak if you want.
+    description: Fresh salads. Add chicken, steak or shrimp.
     items:
       - title: Kale Caesar
         description: Kale, Housemade Sourdough Croutons, Crispy Prosciutto Crudo, Penny Caesar Dressing, Shaved Parmigiano Reggiano
@@ -91,12 +91,21 @@ categories:
       - title: Arugula
         description: Baby Arugula, Cherry Tomato, Shallot Vinaigrette, Aged Balsamic, Shaved Parmigiano Reggiano
         price: "15"
-      - title: Chicken
+      - title: Chicken Breast (¼ lb)
         description: Protein add-on
-        price: "10"
-      - title: Steak
+        price: "11"
+      - title: Chicken Breast (½ lb)
+        description: Protein add-on
+        price: "17"
+      - title: AAA Ribeye Steak (3oz)
         description: Protein add-on
         price: "13"
+      - title: AAA Ribeye Steak (6oz)
+        description: Protein add-on
+        price: "19"
+      - title: Sautéed Black Tiger Shrimp (⅓ lb)
+        description: Protein add-on
+        price: "15"
   - title: Treats
     anchor: treats
     description: Crullers, cookies, and the Nutella Bombe.
