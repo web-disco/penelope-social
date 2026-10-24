@@ -61,7 +61,7 @@ sections:
       objectPosition: 50% 53%
     ctas:
       - label: About the Bakehouse
-        url: https://penelopebakehouse.com/about
+        url: "@bakehouse/about"
         style: outline
         newTab: true
   - type: comparisonTable
@@ -131,6 +131,6 @@ sections:
         url: /reservations
         style: primary
       - label: Order online
-        url: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+        url: "@order"
         style: outline
         newTab: true

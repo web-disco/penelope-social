@@ -33,7 +33,7 @@ sections:
         image:
           src: latte-art.jpg
           alt: Latte with latte art at Penelope Social
-      - item: Rotating Cookies
+      - item: Dark Chocolate Sea Salt Cookie
         link: /menus/lunch#treats
         image:
           src: sea-salt-cookies.jpg
@@ -43,7 +43,7 @@ sections:
         image:
           src: nutella-bombe.jpg
           alt: Nutella bombe from Penelope Bakehouse
-      - item: Rotating Crullers
+      - item: Honey Cruller
         link: /menus/lunch#treats
         image:
           src: glazed-cruller.jpg
@@ -112,7 +112,7 @@ sections:
     intro: We're at 125 Hawkview Blvd in Woodbridge, Vaughan, a 5-minute drive from Vaughan Mills.
     ctas:
       - label: Get directions
-        url: https://www.google.com/maps/dir/?api=1&destination=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2
+        url: "@directions"
         newTab: true
         style: primary
     hours: cafe
@@ -142,10 +142,10 @@ sections:
     body: Come by 125 Hawkview Blvd from 9am, or order lunch online.
     ctas:
       - label: Get directions
-        url: https://www.google.com/maps/dir/?api=1&destination=125+Hawkview+Blvd%2C+Woodbridge%2C+ON+L4H+2E2
+        url: "@directions"
         newTab: true
         style: primary
       - label: Order online
-        url: https://order.toasttab.com/online/penelope-social-125-hawkview-boulevard
+        url: "@order"
         style: outline
         newTab: true

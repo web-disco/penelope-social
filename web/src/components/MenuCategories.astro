@@ -77,7 +77,7 @@ function isMultiPrice(price?: string) {
                             for that reason; this heading was hand-rolled and did
                             not, which put every menu item name in Arial while the
                             category heading beside it rendered in Sweet Sans. */}
-                        <h3 class="menu-item-title mt-0 mb-0 font-body text-[24px] font-medium leading-[120%] text-pretty text-charcoal">
+                        <h3 class="menu-item-title mt-0 mb-0 font-body text-[24px] font-medium leading-[120%] text-pretty text-charcoal wf-sm:text-[20px] wf-xs:text-[18px]">
                           {name}
                           {suffix && <span class="whitespace-nowrap">{suffix}</span>}
                         </h3>
@@ -85,7 +85,8 @@ function isMultiPrice(price?: string) {
                           <p
                             class:list={[
                               'heading-menu-price mt-0 mb-0 whitespace-nowrap text-charcoal',
-                              multi ? 'text-[16px] leading-[150%]' : 'text-[24px] leading-[120%]',
+                              /* Same steps as the item name, so name and price stay on one line. */
+                              multi ? 'text-[16px] leading-[150%] wf-xs:text-[14px]' : 'text-[24px] leading-[120%] wf-sm:text-[20px] wf-xs:text-[18px]',
                             ]}
                           >
                             {item.price}

@@ -8,12 +8,24 @@
  */
 import { defineCollection } from 'astro:content'
 import { glob } from 'astro/loaders'
-import { homeSchema, menuSchema, merchSchema, pageSchema, siteSchema } from './lib/content-schema'
+import {
+  aboutSchema,
+  faqsSchema,
+  homeSchema,
+  locationsSchema,
+  menuSchema,
+  merchSchema,
+  pageSchema,
+  siteSchema,
+} from './lib/content-schema'
 
 const pages = './src/content/pages'
 
 export const collections = {
   site: defineCollection({ loader: glob({ pattern: 'site.yaml', base: './src/content' }), schema: siteSchema }),
+  faqs: defineCollection({ loader: glob({ pattern: 'faqs.yaml', base: './src/content' }), schema: faqsSchema }),
+  about: defineCollection({ loader: glob({ pattern: 'about.yaml', base: './src/content' }), schema: aboutSchema }),
+  locations: defineCollection({ loader: glob({ pattern: 'locations.yaml', base: './src/content' }), schema: locationsSchema }),
   home: defineCollection({ loader: glob({ pattern: 'home.yaml', base: pages }), schema: homeSchema }),
   /** Every other file in pages/ routes at /<filename>. */
   pages: defineCollection({ loader: glob({ pattern: ['*.yaml', '!home.yaml'], base: pages }), schema: pageSchema }),

@@ -89,15 +89,56 @@ the site. Before or right after merging:
    `scripts/migrate.js` and `scripts/output/`, undeploy the Studio, and archive
    the Sanity project.
 
-## Next (phase 2)
+## Phase 2: on branch `claude/social-yaml-phase-2` (stacked on phase 1)
 
-- Move the remaining TypeScript content into YAML: `data/site.ts` (NAP, hours,
-  URLs), `data/faq.ts` (HTML FAQ answers to Markdown), `data/about.ts`,
-  `data/locations.ts`, and the rest of `data/seo.ts`.
-- Single-source the Toast and directions URLs (Bakehouse's `@order`-style link
-  tokens). They are repeated in several files today.
-- The /about video (`PENNY BREAD-transcode.mp4`, about 10 MB) is still served
-  from Webflow's CDN. Move it to R2 like the Bakehouse video.
+`web/src/data/` is gone. Everything it held is YAML:
+
+- `site.yaml` gains `links` (the `@order`, `@giftCards`, `@directions`,
+  `@bakehouse`, … tokens, usable as any `url:` or Markdown link, with an
+  optional path: `@bakehouse/about`), `nap`, `bakehouse` and `hours`. 14 literal
+  Toast, directions and Bakehouse URLs across the page files became tokens.
+- **Hours drive the structured data from a `schedule`**, not from the display
+  strings. `lib/schema.ts` used to regex-parse "Mon-Sat: 9am-3pm" into
+  OpeningHoursSpecification, so rewording a line silently broke the JSON-LD.
+  The output is identical.
+- Phone, email and address are typed once (`nap`). The footer's
+  "(905) 607 0606" / `tel:9056070606` and the address line are derived from it,
+  so they can't drift from the FAQs and location pages.
+- `faqs.yaml` holds the six shared FAQ sets as Markdown. The hours answers are
+  `hours: true`, printed from `site.yaml`.
+- `about.yaml` and `locations.yaml` hold /about and /locations/*, including the
+  SEO that `data/seo.ts` had, and the Woodbridge intro that was hand-written
+  HTML in `woodbridge.astro`.
+- The unused `cateringMenuFaq` set wasn't carried over.
+
+Verified against the phase-1 build: normalised HTML identical on 18 of 22 pages,
+CSS rules identical on all, and on the four that differ (/, /about,
+/locations/woodbridge, /locations/scarborough) page height and every link's
+computed style and box identical at 375 and 1440px. The differences:
+
+- **External links in FAQ answers open in a new tab** (`target="_blank"
+  rel="noopener"`), like every other off-site link on the site and the
+  Bakehouse rule. Nine links; the home "Order online" one already did, and
+  drops `noreferrer`.
+- The Woodbridge intro's link styling moved from each `<a>` to the paragraph.
+- **/about video** moved off Webflow's CDN to R2:
+  `media.penelopebakehouse.com/penelope-reel.mp4` (the same 10.5 MB file,
+  `faststart`, range requests work) with a poster,
+  `penelope-reel.jpg`, that the page didn't have before. Nothing on the site
+  loads from Webflow any more.
+- **Instagram** is `https://www.instagram.com/penelopesocial` everywhere
+  (`site.yaml → links.instagram`, also used by the footer and drawer icons).
+  The footer and drawer used to link `instagram.com/penelope.social`, and the
+  JSON-LD `sameAs` and Woodbridge row `penelopesocial/?hl=en`.
+
+An unknown `@token` and a malformed schedule time both fail the build.
+
+### Still open
+
+- **Two directions URLs.** The footer address links to a long Google Maps URL
+  (`footer.hours.mapUrl`); everything else uses `@directions`. Kept as-is.
+- A little fixed copy is still in `.astro` files: the 404 page, the catering
+  notice checkbox on the events form, and row labels on the location pages.
 
 ## Re-running the export
 

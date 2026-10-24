@@ -5,9 +5,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PageBuilder from '../components/PageBuilder.astro'
 import FaqSection from '../components/sections/FaqSection.astro'
-import { home } from '../lib/content'
-import { homeFaq } from '../data/faq'
+import { faqs, home } from '../lib/content'
 import { bakehouseSchema, breadcrumbSchema, faqPageSchema, pageGraph, restaurantSchema } from '../lib/schema'
+
+const homeFaq = faqs.home
 
 const graph = pageGraph([
   restaurantSchema(),

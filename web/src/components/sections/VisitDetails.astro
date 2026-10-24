@@ -2,14 +2,13 @@
 /**
  * Page-builder wrapper around LocationDetails: the /locations/woodbridge
  * layout, for landing pages that need an address, parking and directions block.
- * Address and hours come from data/site so they match the footer; authored
+ * Address and hours come from site.yaml so they match the footer; authored
  * rows (parking, getting here) follow them.
  *
  * block: { heading, intro, ctas, showAddress, hours: 'both'|'cafe'|'bar'|'none', rows: [{ label, body }], showMap, layout: 'copy-first'|'details-first' }
  */
 import LocationDetails, { type LocationDetailRow } from './LocationDetails.astro'
-import { barHours, cafeHours, woodbridgeNap } from '../../data/site'
-import type { SectionOf } from '../../lib/content'
+import { barHours, cafeHours, nap as woodbridgeNap, type SectionOf } from '../../lib/content'
 
 interface Props {
   block: SectionOf<'visitDetails'>

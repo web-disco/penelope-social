@@ -3,13 +3,12 @@
  * FAQ accordion with optional FAQPage JSON-LD.
  */
 import { heading, layout, radius, space, typeScale } from '../../lib/ui'
-import type { FaqItem } from '../../data/types'
 import { faqPageSchema } from '../../lib/schema'
-import { inlineHtml } from '../../lib/content'
+import { inlineHtml, type FaqItem } from '../../lib/content'
 
 interface Props {
   headingText?: string
-  /** `answer` is HTML: the repo FAQs in data/faq.ts. */
+  /** `answer` is HTML: a set from faqs.yaml, via content.ts `faqs`. */
   items?: FaqItem[]
   /** `answer` is Markdown: a YAML faqSection. */
   markdownItems?: { question: string; answer: string }[]
