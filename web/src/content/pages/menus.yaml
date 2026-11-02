@@ -48,7 +48,7 @@ sections:
     heading: What's on, and when
     steps:
       - title: "9am: Coffee and pastries"
-        body: The counter opens with espresso, cappuccino, lattes and the day's pastries. On Sundays the cafe opens at 8am.
+        body: The counter opens with espresso, cappuccino, lattes and the day's pastries. On Sundays the cafe closes at noon.
       - title: "10am: Lunch"
         body: Focaccia sandwiches, pizza by the slice and salads, Monday to Saturday. See the [lunch menu](/menus/lunch).
       - title: "3pm: The cafe closes"

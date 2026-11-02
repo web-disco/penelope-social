@@ -71,7 +71,7 @@ sections:
     rows:
       - label: Hours
         values:
-          - Mon to Sat 9am to 3pm, Sun 8am to noon
+          - Mon to Sat 9am to 3pm, Sun 9am to noon
           - Mon to Thu 5pm to 10pm, Fri and Sat 5pm to 1am
       - label: How it works
         values:
@@ -126,7 +126,7 @@ sections:
     heading: FAQs
     items:
       - question: What time does the cafe open?
-        answer: 9am Monday to Saturday, and 8am on Sunday. The cafe closes at 3pm, or noon on Sunday. The lunch menu starts at 10am.
+        answer: 9am every day. The cafe closes at 3pm, or noon on Sunday. The lunch menu starts at 10am.
       - question: Is Penelope Social a cafe or a restaurant?
         answer: Both. It's an Italian cafe counter by day, with coffee, pastries and lunch. From 5pm it's a bar and restaurant with dinner and cocktails.
       - question: What coffee do you serve?
