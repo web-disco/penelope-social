@@ -38,14 +38,14 @@ hours:
     label: Cafe
     lines:
       - "Mon-Sat: 9am-3pm"
-      - "Sun: 8am-12pm"
+      - "Sun: 9am-12pm"
     # Days: Mon Tue Wed Thu Fri Sat Sun. Times: 24-hour, in quotes.
     schedule:
       - days: [Mon, Tue, Wed, Thu, Fri, Sat]
         opens: "09:00"
         closes: "15:00"
       - days: [Sun]
-        opens: "08:00"
+        opens: "09:00"
         closes: "12:00"
   bar:
     label: Bar
