@@ -10,8 +10,7 @@ Bakehouse.
 penelope/
 ├─ web/      Astro static site + the Cloudflare Worker that handles forms
 │  └─ src/content/   every page, menu and merch item, as YAML
-├─ studio/   Legacy Sanity Studio. The site no longer reads it (see the migration doc)
-└─ scripts/  migrate.js (Webflow → Sanity, legacy) and compare.js (parity check)
+└─ scripts/  compare.js (structural parity check against the Webflow original)
 ```
 
 ## Getting started
@@ -169,39 +168,18 @@ instead of reaching the live site.
 **The site is live.** Everything below is done; it is kept as the record of what
 was set up and why, because most of it is invisible from the code — which
 records are in the DNS zone, which values the build needs, and which of them
-fail silently when they are missing. Items 1–3 and 5 describe the Sanity setup
-the site has since moved off (see docs/sanity-to-yaml.md for the cutover).
+fail silently when they are missing. The Sanity project, Studio and
+rebuild-on-publish webhook from the first launch are retired: content moved to
+YAML (docs/sanity-to-yaml.md) and `studio/` and the migrate script are deleted.
 
-1. ~~**Sanity project.**~~ *Legacy.* Already created: `wlwg9juj` ("Penelope Social"), and it is
-   the `DEFAULT_PROJECT_ID` in `web/src/lib/data.ts`. Symlink the env into both
-   workspaces — the Sanity CLI and Astro each resolve env from their own
-   directory, not the repo root: `ln -sfn ../.env studio/.env && ln -sfn ../.env web/.env`.
-2. ~~**Import the content.**~~ **Done.** The dataset holds 1 siteSettings,
-   1 homepage, 6 pages, 4 menus, 3 merch products and 43 image assets, plus the
-   two bakery video transcodes. `pnpm migrate` is re-runnable — it re-scrapes
-   the Webflow original and uses deterministic ids, and Sanity dedupes assets by
-   content hash. The token it needs was created with
-   `sanity tokens create "content-migration" --role=editor`; revoke it with
-   `sanity tokens delete` once the site no longer needs re-importing.
-3. ~~**Deploy the Studio.**~~ **Done** — live at
-   https://penelope-social.sanity.studio/ (`pnpm deploy:studio`). `studioHost`
-   and the `deployment.appId` are pinned in `studio/sanity.cli.ts`, so a later
-   deploy can neither prompt for a hostname nor quietly create a second
-   application and strand the client on a Studio URL that stops updating.
-4. ~~**Deploy the site.**~~ **Done** — live at https://penelopesocial.com and at
+1. ~~**Deploy the site.**~~ **Done** — live at https://penelopesocial.com and at
    https://penelope-social.web-disco.workers.dev (`pnpm deploy:web`, or
    `pnpm deploy:web:dry` to validate first).
-5. ~~**Rebuild on publish.**~~ **Done.** A Workers Builds Deploy Hook is
-   registered as a Sanity webhook on publish — see Continuous deployment above.
-   The webhook filters drafts with `!(_id in path("drafts.**"))`; without that
-   it fires on every draft autosave, so editing a page in the Studio would queue
-   a build every few seconds. Verified end to end: publishing in the Studio
-   produced a deployment whose output matched a local build of the same content.
-6. ~~**Turnstile.**~~ **Done.** Widget "penelopesocial.com" (Managed), scoped to
+2. ~~**Turnstile.**~~ **Done.** Widget "penelopesocial.com" (Managed), scoped to
    the apex, `www`, and the workers.dev host so it works on staging too. The
    site key is in `.env`; the secret is a Worker secret. Verified: a POST with
    no token is rejected on every form.
-7. ~~**Decide where form submissions go.**~~ **Done** — Postmark.
+3. ~~**Decide where form submissions go.**~~ **Done** — Postmark.
    `EMAIL_PROVIDER=postmark` and `NOTIFY_EMAIL_TO` (comma-separated:
    `info@penelopesocial.com` and `penelopesocial23@gmail.com`) are in
    `web/wrangler.jsonc`; `POSTMARK_SERVER_TOKEN` is a Worker secret, and
@@ -224,12 +202,12 @@ the site has since moved off (see docs/sanity-to-yaml.md for the cutover).
    it — a custom Return-Path moves the SPF check onto Postmark's own bounce
    domain. Adding a second SPF record, or appending Postmark's include to this
    one, risks the client's outbound mail.
-8. ~~**Set the subscriber export credentials.**~~ **Done.** `SUBSCRIBERS_USER`
+4. ~~**Set the subscriber export credentials.**~~ **Done.** `SUBSCRIBERS_USER`
    and `SUBSCRIBERS_PASSWORD` are Worker secrets; `/api/subscribers.csv` returns
    401 without them and 200 with. Basic Auth rather than a `?key=` token because
    the export is a list of customer email addresses, and a token in a URL ends
    up in browser history and leaks via `Referer`.
-9. ~~**Point penelopesocial.com at the Worker.**~~ **Done.** The domain is on
+5. ~~**Point penelopesocial.com at the Worker.**~~ **Done.** The domain is on
    Cloudflare (`bethany`/`miguel` nameservers) and both the apex and `www` are
    attached to the Worker as custom domains. The Webflow A and `www` CNAME
    records are gone; the Google Workspace MX records, the SPF TXT and the
@@ -246,7 +224,7 @@ the site has since moved off (see docs/sanity-to-yaml.md for the cutover).
    records and would take down the client's Google Workspace inbox. Email
    *Sending* is a different product and does not touch MX — but the site uses
    Postmark now, so neither is needed.
-10. ~~**Send one test submission through each form.**~~ **Done** — submissions
+6. ~~**Send one test submission through each form.**~~ **Done** — submissions
    go through and the notifications arrive.
 
    Worth repeating after any change to the forms, the Worker, or the Postmark

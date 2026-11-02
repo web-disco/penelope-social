@@ -15,7 +15,10 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { JSDOM } from 'jsdom'
-import { SITE } from './lib/scrape.js'
+
+/** The Webflow original, still published on its staging host. Override with
+    SCRAPE_SITE if it is ever unpublished. */
+const SITE = process.env.SCRAPE_SITE || 'https://penelope-social.webflow.io'
 
 const here = path.dirname(fileURLToPath(import.meta.url))
 const distDir = path.resolve(here, '../web/dist')
