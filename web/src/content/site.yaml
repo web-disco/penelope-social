@@ -50,13 +50,17 @@ hours:
   bar:
     label: Bar
     lines:
-      - "Mon-Thu: 5pm-10pm"
+      - "Mon-Wed: 5pm-10pm"
+      - "Thu: 5pm-11pm"
       - "Fri-Sat: 5pm-1am"
       - Closed Sunday night.
     schedule:
-      - days: [Mon, Tue, Wed, Thu]
+      - days: [Mon, Tue, Wed]
         opens: "17:00"
         closes: "22:00"
+      - days: [Thu]
+        opens: "17:00"
+        closes: "23:00"
       - days: [Fri, Sat]
         opens: "17:00"
         closes: "01:00"

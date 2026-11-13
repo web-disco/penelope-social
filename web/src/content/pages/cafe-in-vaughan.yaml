@@ -72,7 +72,7 @@ sections:
       - label: Hours
         values:
           - Mon to Sat 9am to 3pm, Sun 9am to noon
-          - Mon to Thu 5pm to 10pm, Fri and Sat 5pm to 1am
+          - Mon to Wed 5pm to 10pm, Thu 5pm to 11pm, Fri and Sat 5pm to 1am
       - label: How it works
         values:
           - Order at the counter, stay or take it to go

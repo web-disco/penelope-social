@@ -54,7 +54,7 @@ sections:
       - title: "3pm: The cafe closes"
         body: Lunch wraps up and the room resets for the evening.
       - title: "5pm: Dinner and the bar"
-        body: The [dinner menu](/menus/dinner) and the [bar](/menus/bar) open Monday to Saturday. Open until 10pm Monday to Thursday and 1am on Friday and Saturday.
+        body: The [dinner menu](/menus/dinner) and the [bar](/menus/bar) open Monday to Saturday. Open until 10pm Monday to Wednesday, 11pm on Thursday and 1am on Friday and Saturday.
   - type: menuCards
     heading: What we're known for
     intro: From the first espresso to a loaf to take home, here's what we do best, right here in the heart of Vaughan.
@@ -90,7 +90,7 @@ sections:
       - question: When is lunch served?
         answer: Lunch is 10am to 3pm, Monday to Saturday. The cafe opens at 9am for coffee and pastries.
       - question: When is dinner served?
-        answer: Dinner and the bar open at 5pm, Monday to Saturday. We're open until 10pm Monday to Thursday and 1am on Friday and Saturday, and closed Sunday night.
+        answer: Dinner and the bar open at 5pm, Monday to Saturday. We're open until 10pm Monday to Wednesday, 11pm on Thursday and 1am on Friday and Saturday, and closed Sunday night.
       - question: Do you have vegetarian options?
         answer: Yes. At lunch, the Veggie and Spicy Mushroom Melt sandwiches and the Margherita slice. At dinner, the Margherita and Truffle Mushroom pizzas, Korean Cauliflower, Truffle Fries and the Greek and Roasted Beet salads. Ask us about ingredients when you order.
       - question: Do you have non-alcoholic drinks?
