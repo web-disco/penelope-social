@@ -8,7 +8,7 @@ banner:
   objectPosition: 28% 10%
 seo:
   title: Happy hour | 5pm to 7pm daily in Woodbridge | Penelope Social
-  description: "Happy hour every day from 5pm to 7pm at Penelope Social in Woodbridge: $12 cocktails, sliders, bao, and fries at 125 Hawkview Blvd."
+  description: "Happy hour every day from 5pm to 7pm at Penelope Social in Woodbridge: $8 highballs, bellinis, Americanos, sliders, bao, and fries at 125 Hawkview Blvd."
 callout:
   line: Every day from 5pm to 7pm.
   ctaLabel: View happy hour
@@ -41,12 +41,12 @@ categories:
   - title: The Drinks
     anchor: drinks
     items:
-      - title: Arancia Fresca (2oz)
-        description: Canvas Gin, Aperol, Amaro Arànciu, Passionfruit, Strawberry, Lemon, Orange Bitters
-        price: "12"
-      - title: Pink Pantheress (2oz)
-        description: El Jimador Tequila Blanco, Aperol, Strawberry, Lime, Grapefruit Soda
-        price: "12"
-      - title: Penny's Local Smash (2oz)
-        description: True Theory Vodka, St-Germain, Lemon, Local Fruit, Mint
+      - title: Peach Bellini (4oz)
+        description: Serenissima Prosecco, Niagara Peaches
+        price: "10"
+      - title: Rail Highball (1oz | 2oz)
+        description: Rail Liquor (Tequila/Vodka/Gin/Whisky/White Rum) + Mixer
+        price: "8 | 12"
+      - title: Americano (3oz)
+        description: Campari, Cinzano Vermouth Rosso, Soda Water, Orange
         price: "12"
