@@ -14,11 +14,11 @@ categories:
     anchor: handhelds
     description: Small plates you eat with your hands.
     items:
-      - title: Chef's Toast (1pc)
-        description: Our sourdough is good, so Chef put some good stuff on it!
+      - title: Amaretto Pear Chef's Toast (1pc)
+        description: Penny Crusty White Sourdough, Whipped Goat Cheese, Poached Ontario Pear, Amaretto Vinaigrette
         price: "3"
-      - title: Seasonal Arancini (1pc)
-        description: Rotating Risotto & Seasonal Accompaniment
+      - title: Bangkok Squash Arancini (1pc)
+        description: Ontario Squash Risotto, Penny Red Thai Curry Aioli, Tamarind Caramel, Pickled Chilies, Scallions
         price: "5"
       - title: Crunchwrap Supreme
         description: Taco Beef, Penny Queso, Sour Cream, Tomato, Iceberg Lettuce, Tostado, Nacho Cheese
@@ -46,7 +46,7 @@ categories:
         description: Fresh Housemade Sourdough Bread, Whipped Butter, EVOO w/ Assorted Olives, Citrus Mix, Penny Chili Oil, Herb & Spice Blend
         price: "11"
       - title: Fritto Misto
-        description: Fried Calamari, Black Tiger Shrimp, Jalapeños, Penny Calabrese Aioli
+        description: Fried Calamari, Black Tiger Shrimp, Jalapeños, Parsley, Penny Calabrese Aioli
         price: "27"
       - title: Korean Cauliflower
         description: Fried Cauliflower, Penny Gochujang, Toasted Sesame Seeds, Scallions
@@ -71,7 +71,7 @@ categories:
     description: 48-hour cold-fermented New York-style [sourdough pizza](/pizza-vaughan).
     items:
       - title: Margherita
-        description: San Marzano DOP Tomato Sauce, Mozzarella, Fior di Latte Mozzarella, Fresh Basil
+        description: San Marzano DOP Tomato Sauce, Mozzarella, Fior di Latte Mozzarella, Fresh Basil, EVOO
         price: "25"
       - title: NY Pepperoni
         description: San Marzano DOP Tomato Sauce, Mozzarella, Mini Pepperoni, Oregano
@@ -127,18 +127,21 @@ categories:
       - title: Penny Chicken Tendies
         description: Buttermilk Fried Chicken Tenders, Penny Signature Accompaniment. See Penny’s Pairings for dips & sauces.
         price: "21"
-      - title: Masala Maple Carrots
-        description: Penny Masala Spiced Yogurt, Maple Soy Heirloom Carrots, Mint Chutney, Crispy Sourdough
-        price: "13"
+      - title: Candied Yams
+        description: Maple Soy Sweet Potato, Cinnamon Brûlée
+        price: "15"
+      - title: Spicy Brussels
+        description: Sweet Sesame Brussels Sprouts, Asian Chili Crisp, Crispy Onions, Crispy Garlic
+        price: "15"
       - title: Pulled Pork Sliders (2pc)
         description: Housemade Milk Bun, 16-Hour Slow Roasted BBQ Pork Shoulder, Sweet Baby Ray’s BBQ, Dijonaise, Bread & Butter Pickles, Penny Creamy Coleslaw
         price: "19"
       - title: Apple Pecan Salad
         description: Baby Arugula, Ontario Honey Crisp Apples, Whipped Honey Goat Cheese, Spiced Cranberry, Candied Pecans, Raspberry Apple Sauce, Honey Dijon Vinaigrette
         price: "19"
-      - title: Spicy Hawaiian Pizza
-        description: Mozzarella, Smoked Ham Hock, Slow Roasted Spiced Pineapple, Sweety Drop Pepper Jelly, Scallions
-        price: "27"
+      - title: Croqueta Pizza
+        description: Smoked Béchamel, Mozzarella, Mashed Potato, Prosciutto di Parma, Grana Padano, Shaved Manchego, Smoked Paprika, EVOO
+        price: "29"
   - title: Dessert
     anchor: dessert
     description: Housemade sweets to close the night.
@@ -163,7 +166,7 @@ categories:
         description: Pick any 4
         price: "10"
       - title: The Dips
-        description: Mayo*, Garlic Aioli, Calabrese Aioli, Basil Pesto Aioli, Hot Honey, Chipotle Mayo, BBQ (Sweet Baby Ray’s)*, Buttermilk Ranch, Hot Honey Dijon, Caesar Dressing
+        description: Mayo*, Garlic Aioli, Calabrese Aioli, Basil Pesto Aioli, Hot Honey, Chipotle Mayo, BBQ (Sweet Baby Ray’s)*, Buttermilk Ranch, Hot Honey Dijon, Caesar Dressing, Penny’s Teddy’s Sauce
         price: "3"
       - title: The Sauces
         description: Sweety Drop Pepper Jelly, Mac Sauce, Tzatziki, Sour Cream*, Queso, Frank’s Red Hot (Cayenne)*, Gochujang, Basil Pesto, Salsa Verde, General Tso
