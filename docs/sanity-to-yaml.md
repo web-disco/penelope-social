@@ -75,19 +75,18 @@ Against a local build of `main`, which was itself byte-identical to live on all
 - Stale Sanity values the rewrite layer replaced: homepage hero/intro copy,
   "Our Menus" nav labels, the Bakery nav link, SEO fields the repo overrode.
 
-## Cutover (needs a decision)
+## Cutover
 
-Merging this changes nothing visible, but after it Studio edits stop reaching
-the site. Before or right after merging:
+Live on 2026-10-23 (#22, with #23 merged into it). After that:
 
-1. Tell whoever edits in https://penelope-social.sanity.studio/ that edits now
-   go through git (GitHub app, Claude, or a PR).
-2. Remove the Sanity webhook that calls the Workers Builds deploy hook (it is
-   harmless, it just triggers a rebuild of the same content).
-3. Delete the `PUBLIC_SANITY_*` / `SANITY_*` build variables in Workers Builds.
-4. Later, once nobody needs it for reference: delete `studio/`,
-   `scripts/migrate.js` and `scripts/output/`, undeploy the Studio, and archive
-   the Sanity project.
+- **Done:** `studio/`, `scripts/migrate.js`, its `scripts/lib/scrape.js`
+  helpers, `scripts/output/` and the title-case test are deleted, and the
+  workspace no longer includes the Studio.
+- **Still to do, outside the repo:** tell anyone who edits in
+  https://penelope-social.sanity.studio/ that edits go through git now; remove
+  the Sanity webhook that calls the Workers Builds deploy hook; delete the
+  `PUBLIC_SANITY_*` / `SANITY_*` Workers Builds variables; undeploy the Studio
+  and archive the Sanity project.
 
 ## Phase 2: on branch `claude/social-yaml-phase-2` (stacked on phase 1)
 
