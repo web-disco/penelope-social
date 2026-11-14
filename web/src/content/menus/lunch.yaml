@@ -39,7 +39,7 @@ categories:
         description: Sourdough Focaccia Romana, Roasted Chicken, Sundried Tomato, Baby Arugula, Asiago, Penny Basil Pesto Aioli
         price: "23"
       - title: Bistecca
-        description: Sourdough Focaccia Romana, Grilled Striploin Steak, Baby Arugula, Dijon, Penny Horseradish Aioli
+        description: Sourdough Focaccia Romana, Sautéed AAA Ribeye Steak, Baby Arugula, Dijonaise, Penny Horseradish Aioli
         price: "23"
   - title: Pizza Slices
     anchor: pizza-slices
@@ -108,11 +108,13 @@ categories:
         price: "15"
   - title: Treats
     anchor: treats
-    description: Cookies, crullers and the Nutella Bombe.
+    description: Cookies, crullers and bombes.
     items:
       - title: Dark Chocolate Sea Salt Cookie
         description: 1pc $4.50 | 6pc $24 | 12pc $45
       - title: Pecan Skor Cookie
+        description: 1pc $4.50 | 6pc $24 | 12pc $45
+      - title: Gingerbread Molasses Cookie
         description: 1pc $4.50 | 6pc $24 | 12pc $45
       - title: Honey Cruller
         description: 1pc $4.50 | 6pc $24 | 12pc $45
@@ -120,8 +122,12 @@ categories:
         description: 1pc $4.50 | 6pc $24 | 12pc $45
       - title: Toasted Coconut Cruller
         description: 1pc $4.50 | 6pc $24 | 12pc $45
+      - title: Strawberry Glazed Cruller
+        description: 1pc $4.50 | 6pc $24 | 12pc $45
       - title: Nutella Bombe
         description: 1pc $4.50 | 6pc $24 | 12pc $45
+      - title: Plain Bombe
+        description: 1pc $4
   - title: Bakery
     anchor: bakery
     description: Sourdough loaves, whole or sliced, and focaccia to take home.
