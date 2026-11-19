@@ -648,6 +648,6 @@ to {
   display:none!important}
 
 /* Webflow's custom-checkbox rules used to be appended here. Their only consumer
-   was the newsletter pop-up's consent checkbox, and that pop-up is gone — see
-   the note in studio/schemaTypes/documents/siteSettings.ts. The footer signup
+   was the newsletter pop-up's consent checkbox, and that pop-up is gone (README
+   → Deliberate differences). The footer signup
    uses a real styled input, so nothing on the site renders a `.w-checkbox`. */

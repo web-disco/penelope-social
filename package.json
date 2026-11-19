@@ -6,13 +6,9 @@
     "dev": "pnpm --filter web dev",
     "build": "pnpm --filter web build",
     "preview": "pnpm --filter web preview",
-    "studio": "pnpm --filter studio dev",
-    "migrate": "pnpm --filter scripts migrate",
-    "migrate:dry": "pnpm --filter scripts migrate:dry",
     "compare": "pnpm --filter scripts compare",
     "deploy:web": "pnpm --filter web run deploy",
-    "deploy:web:dry": "pnpm --filter web run deploy:dry",
-    "deploy:studio": "pnpm --filter studio run deploy"
+    "deploy:web:dry": "pnpm --filter web run deploy:dry"
   },
   "packageManager": "pnpm@9.0.0"
 }
