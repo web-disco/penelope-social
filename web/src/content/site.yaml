@@ -124,7 +124,7 @@ menusDropdown:
         url: /menus/dinner
         description: Shareables, handhelds and 14-inch pies
         image:
-          src: penny-burger.avif
+          src: dinner-card-pizza-slice.jpg
           alt: ""
       - label: Bar
         url: /menus/bar
