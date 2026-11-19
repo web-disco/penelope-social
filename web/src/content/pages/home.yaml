@@ -41,8 +41,8 @@ sections:
         line: Pizza and shareables
         url: /menus/dinner
         image:
-          src: penny-burger.avif
-          alt: Penelope Burger
+          src: dinner-card-pizza-slice.jpg
+          alt: A hand lifting a slice of pepperoni and hot pepper pizza from the pie
       - title: Catering
         line: Trays for your event
         url: /menus/catering
