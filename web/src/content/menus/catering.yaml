@@ -63,14 +63,28 @@ categories:
       - title: Sourdough Croutons
         description: ~150g
         price: "5"
-  - title: Treat Boxes
-    anchor: treat-boxes
-    description: |-
-      Crullers, cookies, Nutella Bombe. 24-hour lead time.
-
-      **Flavours:** Pecan Skor Cookie, Dark Chocolate Sea Salt Cookie, Ginger Molasses Cookie (seasonal), Honey Cruller, Churro Cruller, Coconut Cruller, Strawberry Glazed Cruller, Nutella Bombe, Plain Bombe.
-
-      Guests pick their box flavours on the form.
+  - title: Treats
+    anchor: treats
+    description: Crullers, cookies, Nutella Bombe. 24-hour lead time.
+    flavours:
+      heading: Box flavours
+      groups:
+        - title: Cookies
+          items:
+            - Pecan Skor Cookie
+            - Dark Chocolate Sea Salt Cookie
+            - Ginger Molasses Cookie (seasonal)
+        - title: Crullers
+          items:
+            - Honey Cruller
+            - Churro Cruller
+            - Coconut Cruller
+            - Strawberry Glazed Cruller
+        - title: Bombes
+          items:
+            - Nutella Bombe
+            - Plain Bombe
+      note: "Guests pick their box flavours on the [Request catering form](@cateringForm)."
     items:
       - title: Single Treat
         description: Each

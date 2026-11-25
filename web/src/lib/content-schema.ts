@@ -392,6 +392,18 @@ export const menuSchema = z.strictObject({
         /** The #anchor for links to this section. */
         anchor: z.string().regex(/^[a-z0-9-]+$/, 'Lower-case letters, numbers and hyphens only.'),
         description: markdown.optional(),
+        /**
+         * A grouped list between the description and the items (the catering
+         * Treats box flavours): a subheading, one column per group, and an
+         * optional note under the columns. Markdown links work in the note.
+         */
+        flavours: z
+          .strictObject({
+            heading: plain,
+            groups: z.array(z.strictObject({ title: plain, items: z.array(plain).min(1) })).min(1),
+            note: markdown.optional(),
+          })
+          .optional(),
         items: z.array(z.union([menuItem, linkedMenuItem])),
       }),
     )
