@@ -2,7 +2,7 @@ title: Catering & Events
 breadcrumb: Catering and events
 seo:
   title: Catering and events in Woodbridge | Penelope Social
-  description: Plan catering or a private event at Penelope Social, 125 Hawkview Blvd, Woodbridge. Trays to-go or a night in the restaurant. 24 hours’ notice for catering.
+  description: Plan catering or a private event at Penelope Social, 125 Hawkview Blvd, Woodbridge. Trays to-go or a night in the room. Catering needs at least 24 hours' notice.
 sections:
   - type: pageHero
     image:
@@ -12,6 +12,10 @@ sections:
     intro: Trays to-go, or a night in the room.
   - type: cateringIntro
     body: Trays of [focaccia sandwiches](/sandwiches-vaughan) and [pizza](/pizza-vaughan), plus shareables from the Woodbridge kitchen. Tell us the headcount and what you need. We'll help size it.
+    primaryCta:
+      label: Request catering
+      url: "@cateringForm"
+      newTab: true
     cta:
       label: See the catering menu
       url: /menus/catering
@@ -19,6 +23,11 @@ sections:
     variant: events
     heading: Plan your event
     intro: Submit the form below and someone from our team will reach back out to you within 24 to 48 hours.
+    cta:
+      label: Request catering
+      url: "@cateringForm"
+      style: primary
+      newTab: true
     fields:
       - id: Event-Form-Name
         name: Event-Form-Name
@@ -46,7 +55,6 @@ sections:
         placeholder: Reason For Inquiry
         required: true
         options:
-          - Catering
           - Event
           - General Inquiry
       - id: Event-Form-Amount-of-Guests
@@ -60,7 +68,7 @@ sections:
         placeholder: Date
         required: true
         fullWidth: true
-        note: We need 24 hrs notice for catering orders. *
+        note: Catering needs at least 24 hours' notice, 48 hours for most of the menu, and 72 hours for full-size pizza, full-size focaccia and sourdough loaves.
       - id: Event-Form-Message
         name: Event-Form-Message
         type: textarea
