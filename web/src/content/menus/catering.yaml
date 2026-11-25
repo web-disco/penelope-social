@@ -7,18 +7,28 @@ banner:
   alt: Image of Bar Tender
 seo:
   title: Catering tray menu | Pizza, focaccia, salads | Penelope Social
-  description: "Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8 to 10. Prices on this page. Book trays on Catering and events. We prefer 24 hours notice."
+  description: "Party trays from the Woodbridge kitchen: 24-slice pizzas, focaccia sandwiches (min 6), breads, and salads for 8 to 10. Lead times vary: 24 to 72 hours."
   ogImage: /images/og/catering.jpg
 note:
   heading: How to order these trays
-  body: This page is the list and prices. Inquire on Catering and events for trays to-go, or a night in the restaurant.
+  body: This page is the list and prices.
   cta:
-    label: Inquire about catering
-    url: /catering-events
+    label: Request catering
+    url: "@cateringForm"
+    newTab: true
+howItWorks:
+  heading: How catering works
+  intro: "Catering needs at least 24 hours' notice, 48 hours for most of the menu, and 72 hours for full-size pizza, full-size focaccia and sourdough loaves."
+  items:
+    - "Pickup or delivery only. We don't provide on-site setup, staffing, rentals or event service."
+    - "Pickup 10 a.m. to 3 p.m. (Sundays until 12 p.m. unless arranged). Delivery 11 a.m. to 2 p.m."
+    - "Delivery: $10 for every 5 km from Penelope Social, rounded up, with a $300 minimum before tax."
+    - "Payment: we email an invoice to pay online. Orders are finalized 48 hours before and paid 72 hours before pickup or delivery."
+    - "Scarborough catering: please contact [info@penelopebakehouse.com](mailto:info@penelopebakehouse.com)."
 categories:
   - title: Sourdough Loaves
     anchor: sourdough-loaves
-    description: Loaves and focaccia. 24-hour lead time.
+    description: Loaves and focaccia. 72-hour lead time.
     items:
       - title: Classic Sourdough Loaves
         description: Crusty White, Country Style, Sesame-Crusted
@@ -28,7 +38,7 @@ categories:
         price: "12"
   - title: Sourdough Focaccia
     anchor: sourdough-focaccia
-    description: Focaccia to take home. 24-hour lead time.
+    description: Focaccia to take home. 48-hour lead time.
     items:
       - title: Focaccia-Craft Focaccia Romana
         price: "15"
@@ -55,8 +65,16 @@ categories:
         price: "5"
   - title: Treat Boxes
     anchor: treat-boxes
-    description: Crullers, cookies, Nutella Bombe. 24-hour lead time.
+    description: |-
+      Crullers, cookies, Nutella Bombe. 24-hour lead time.
+
+      **Flavours:** Pecan Skor Cookie, Dark Chocolate Sea Salt Cookie, Ginger Molasses Cookie (seasonal), Honey Cruller, Churro Cruller, Coconut Cruller, Strawberry Glazed Cruller, Nutella Bombe, Plain Bombe.
+
+      Guests pick their box flavours on the form.
     items:
+      - title: Single Treat
+        description: Each
+        price: "4.50"
       - title: 6pc
         description: Single or Assortment of Crullers, Cookies, Nutella Bombe
         price: "24"
@@ -109,6 +127,8 @@ categories:
         price: "8"
       - title: Café Chili Oil
         price: "8"
+      - title: Caesar Dressing
+        price: "9"
   - title: Focaccia Sandwiches (4pc)
     anchor: focaccia-sandwiches
     description: Minimum six [focaccia sandwiches](/sandwiches-vaughan). 24-hour lead time.
@@ -156,3 +176,12 @@ categories:
       - title: Mixed Green
         description: Kale, Arugula, Shallot Vinaigrette
         price: "50"
+      - title: Add Chicken Breast
+        description: Add protein, 5 portions per tray
+        price: "55"
+      - title: Add AAA Ribeye
+        description: Add protein, 5 portions per tray
+        price: "65"
+      - title: Add Black Tiger Shrimp
+        description: Add protein, 5 portions per tray
+        price: "75"
