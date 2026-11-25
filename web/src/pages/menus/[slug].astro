@@ -8,7 +8,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro'
 import PageHero from '../../components/sections/PageHero.astro'
 import MenuCategories from '../../components/MenuCategories.astro'
 import MenuCallout from '../../components/sections/MenuCallout.astro'
-import { SITE_ORIGIN, calloutsFor, menuCategories, menus, offersFor, plainText, type Menu } from '../../lib/content'
+import { SITE_ORIGIN, calloutsFor, inlineHtml, menuCategories, menus, offersFor, paragraphsHtml, plainText, type Menu } from '../../lib/content'
 import { btn, layout, space, typeScale, heading } from '../../lib/ui'
 import {
   bakehouseSchema,
@@ -29,6 +29,9 @@ const seo = menu.seo
 const categories = menuCategories(menu)
 const offers = offersFor(menu)
 const callouts = calloutsFor(menu)
+/* Off-site (the Request catering form) always opens in a new tab. */
+const noteNewTab = menu.note && (menu.note.cta.newTab || menu.note.cta.url.startsWith('https://'))
+const howItWorks = menu.howItWorks
 
 const menuSections = categories
   .map((category) => ({
@@ -78,14 +81,50 @@ const canonical = `${SITE_ORIGIN}${path}`
           <p class:list={['mb-0 max-w-[720px] text-charcoal', typeScale.bodyLg]}>
             {menu.note.body}
           </p>
-          <a href={menu.note.cta.url} data-ga-event="catering_click" class={btn.primary}>
+          <a
+            href={menu.note.cta.url}
+            target={noteNewTab ? '_blank' : undefined}
+            rel={noteNewTab ? 'noopener noreferrer' : undefined}
+            data-ga-event="catering_click"
+            class={btn.primary}
+          >
             <span>{menu.note.cta.label}</span>
           </a>
         </div>
       </section>
     )
   }
-  <MenuCategories categories={categories} flushTop={!menu.note} offers={offers} />
+  {
+    /* Between the note and the categories: a lead paragraph, then the points. */
+    howItWorks && (
+      <section class="menu-how-it-works">
+        <div class:list={[layout.shell, 'pt-0 pb-0']}>
+          <div class="max-w-[850px] border-t-2 border-charcoal pt-space-24">
+            <h2 class:list={['page-sub-heading mt-0 mb-space-16 text-left text-charcoal', typeScale.displayS]}>
+              {howItWorks.heading}
+            </h2>
+            {howItWorks.intro && (
+              <div
+                class:list={['mb-space-16 text-charcoal [&_p]:my-0 [&_strong]:font-medium', typeScale.bodyLg]}
+                set:html={paragraphsHtml(howItWorks.intro)}
+              />
+            )}
+            <ul
+              class:list={[
+                'my-0 list-disc space-y-space-8 pl-[1.25em] text-charcoal marker:text-charcoal',
+                '[&_a]:text-charcoal [&_a]:underline [&_a]:underline-offset-[0.18em] [&_a]:decoration-charcoal/40',
+                '[&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70',
+                typeScale.body,
+              ]}
+            >
+              {howItWorks.items.map((item) => <li set:html={inlineHtml(item)} />)}
+            </ul>
+          </div>
+        </div>
+      </section>
+    )
+  }
+  <MenuCategories categories={categories} flushTop={!menu.note && !howItWorks} offers={offers} />
   {
     callouts.length > 0 && (
       <div class:list={[layout.shell, 'pb-section-gap-y wf-sm:pb-section-gap-y-sm']}>

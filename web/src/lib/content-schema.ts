@@ -190,6 +190,8 @@ const richTextIntro = z.strictObject({
 const cateringIntro = z.strictObject({
   type: z.literal('cateringIntro'),
   body: markdown,
+  /** Solid button before `cta`, e.g. Request catering (`url: "@cateringForm"`). */
+  primaryCta: navLink.optional(),
   cta: navLink,
 })
 
@@ -278,10 +280,12 @@ const formField = z.strictObject({
 
 const contactForm = z.strictObject({
   type: z.literal('contactForm'),
-  /** "events" posts to /api/events and adds the catering-notice checkbox. */
+  /** "events" posts to /api/events instead of /api/contact. */
   variant: z.enum(['contact', 'events']),
   heading: plain,
   intro: plain.optional(),
+  /** A button between the intro and the form, e.g. Request catering on /catering-events. */
+  cta: cta.optional(),
   fields: z.array(formField).min(1),
   submitLabel: plain,
   successMessage: plain,
@@ -362,6 +366,13 @@ export const menuSchema = z.strictObject({
   seo,
   /** A block between the banner and the categories (the catering menu's "How to order"). */
   note: z.strictObject({ heading: plain, body: plain, cta: navLink }).optional(),
+  /**
+   * A short list under the note (the catering menu's "How catering works"):
+   * an optional lead paragraph, then one bullet per item. Markdown links work.
+   */
+  howItWorks: z
+    .strictObject({ heading: plain, intro: markdown.optional(), items: z.array(markdown).min(1) })
+    .optional(),
   /**
    * Feature this menu in a photo callout under the menu cards on the homepage
    * and /menus, and at the foot of each menu listed in `alsoOn`.

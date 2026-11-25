@@ -8,6 +8,7 @@
  */
 import { btn, eyebrow, layout, space, story, typeScale } from '../../lib/ui'
 import { paragraphsHtml, type SectionOf } from '../../lib/content'
+import { isCateringHref } from '../../lib/analytics'
 import ResponsivePicture from '../ResponsivePicture.astro'
 
 interface Props {
@@ -57,6 +58,7 @@ const bodyClass =
                   href={cta.url}
                   target={cta.newTab ? '_blank' : undefined}
                   rel={cta.newTab ? 'noopener noreferrer' : undefined}
+                  data-ga-event={isCateringHref(cta.url) ? 'catering_click' : undefined}
                   class:list={['inline-block', cta.style === 'outline' ? btn.outline : btn.primary]}
                 >
                   <span>{cta.label}</span>

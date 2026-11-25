@@ -10,6 +10,7 @@
  * verifies Turnstile and emails the submission on — see web/worker/index.ts.
  */
 import { containerNoTop, pageSubHeadingSmall, formField, formFieldTextarea, btn } from '../../lib/ui'
+import { isCateringHref } from '../../lib/analytics'
 import Turnstile from '../Turnstile.astro'
 import type { SectionOf } from '../../lib/content'
 
@@ -20,6 +21,10 @@ const { block } = Astro.props
 
 const isEvents = block.variant === 'events'
 const fields = block.fields
+/* The optional button above the form: Request catering on /catering-events.
+   Off-site (the Google Form) always opens in a new tab. */
+const cta = block.cta
+const ctaNewTab = cta && (cta.newTab || cta.url.startsWith('https://'))
 ---
 
 <div class="section-events-form">
@@ -27,6 +32,21 @@ const fields = block.fields
     <div class="form-block w-form mx-auto mb-0 max-w-[900px] text-center">
       <h2 class={pageSubHeadingSmall}>{block.heading}</h2>
       {block.intro && <p class="mb-0 mt-space-16 text-charcoal font-body text-[18px] leading-[150%] wf-xs:text-[16px]">{block.intro}</p>}
+      {
+        cta && (
+          <div class="mt-space-24 flex justify-center">
+            <a
+              href={cta.url}
+              target={ctaNewTab ? '_blank' : undefined}
+              rel={ctaNewTab ? 'noopener noreferrer' : undefined}
+              data-ga-event={isCateringHref(cta.url) ? 'catering_click' : undefined}
+              class={cta.style === 'outline' ? btn.outline : btn.primary}
+            >
+              <span>{cta.label}</span>
+            </a>
+          </div>
+        )
+      }
 
       <form
         id={isEvents ? 'events-form' : 'contact-form'}
@@ -92,23 +112,6 @@ const fields = block.fields
           child (the usual case, widget hidden) this renders identically to the
           row it replaces: horizontally centred, bottom-aligned.
         */}
-        {
-          isEvents && (
-            <label class="form-consent col-span-2 mt-2 flex cursor-pointer items-start gap-2 text-left">
-              <input
-                type="checkbox"
-                name="catering-notice"
-                value="yes"
-                required
-                class="consent-checkbox consent-checkbox--on-light"
-              />
-              <span class="font-body text-[14px] font-normal leading-[18px] text-charcoal">
-                I understand catering orders need at least 24 hours' notice.
-              </span>
-            </label>
-          )
-        }
-
         <div class="form-btn-wrap col-span-2 mt-space-24 flex flex-col items-center justify-end">
           <Turnstile class="w-full text-center [&.is-visible]:mb-[20px]" theme="light" />
           <button

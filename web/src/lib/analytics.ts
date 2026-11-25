@@ -37,8 +37,15 @@ export function isReservationHref(href: string): boolean {
   return /tables\.toasttab\.com\/restaurants\/bfe7aa9b-9c6d-4de4-b0e5-79d3aaf65ce0/i.test(href)
 }
 
+/** The Request catering form (site.yaml → links.cateringForm) is a Google Form. */
+export function isCateringFormHref(href: string): boolean {
+  if (!href) return false
+  return /^https:\/\/docs\.google\.com\/forms\//i.test(href)
+}
+
 export function isCateringHref(href: string): boolean {
   if (!href) return false
+  if (isCateringFormHref(href)) return true
   const path = href.replace(/^https?:\/\/[^/]+/i, '').replace(/\/$/, '') || '/'
   return path === '/catering-events'
 }
