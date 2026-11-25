@@ -100,7 +100,7 @@ sections:
       - question: Do you take reservations?
         answer: Yes. Book a table on Toast for dinner and the bar. Lunch is mostly walk-in.
       - question: Do you cater?
-        answer: Yes. Trays of focaccia sandwiches, pizza, salads and treats are on our catering menu, with 24 hours' notice. We also host events in the room.
+        answer: Yes. Trays of focaccia sandwiches, pizza, salads and treats are on our catering menu. Catering needs at least 24 hours' notice, 48 hours for most of the menu, and 72 hours for full-size pizza, full-size focaccia and sourdough loaves. We also host events in the room.
   - type: finalCta
     heading: Hungry now?
     body: Order online for pickup, or book a table for dinner at our location in Woodbridge.

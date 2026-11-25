@@ -90,7 +90,7 @@ sections:
     body: |-
       Need a few loaves for a dinner party, or focaccia for the whole table? Order sourdough loaves, focaccia, pizza dough, breadcrumbs and croutons ahead and we'll have them ready to pick up in Woodbridge.
 
-      Bread orders need 24 hours' notice.
+      Loaves need 72 hours' notice, focaccia 48 hours, and pizza dough, breadcrumbs and croutons 24 hours.
     image:
       src: bread-loaves.avif
       alt: Sourdough loaves from Penelope
@@ -99,8 +99,9 @@ sections:
         url: /menus/catering
         style: primary
       - label: Contact Us
-        url: /catering-events
+        url: "@cateringForm"
         style: outline
+        newTab: true
   - type: visitDetails
     heading: Picking up in Woodbridge
     intro: We're at 125 Hawkview Blvd in Woodbridge, Vaughan, a 5-minute drive from Vaughan Mills.
@@ -129,7 +130,7 @@ sections:
       - question: Do you sell focaccia to take home?
         answer: Yes. Focaccia Romana is $15. Semolina focaccia comes as a Sea Salt Mini ($5), Sea Salt/Rosemary ($9 small, $15 large) and Barese ($12 small, $20 large).
       - question: Can I order bread ahead?
-        answer: Yes. Loaves, focaccia, pizza dough, breadcrumbs and croutons are on our catering menu and need 24 hours' notice.
+        answer: Yes. Loaves, focaccia, pizza dough, breadcrumbs and croutons are on our catering menu. Loaves need 72 hours' notice, focaccia 48 hours, and pizza dough, breadcrumbs and croutons 24 hours.
       - question: Do you sell sourdough pizza dough?
         answer: Yes, for $4. We also sell sourdough breadcrumbs and croutons for $5 each.
       - question: Is there parking?

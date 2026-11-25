@@ -101,8 +101,9 @@ sections:
         url: /menus/catering
         style: primary
       - label: Contact Us
-        url: /catering-events
+        url: "@cateringForm"
         style: outline
+        newTab: true
   - type: faqSection
     heading: FAQs
     items:

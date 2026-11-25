@@ -122,7 +122,7 @@ sections:
       - question: Can I order pizza online?
         answer: Yes. Use the Order online button on this page to order from Penelope Social through Toast.
       - question: Do you do pizza catering for events in Vaughan?
-        answer: Yes. Full-size 24-piece pizzas are on our catering menu, and catering orders need at least 24 hours' notice. We can also host your event at our space in Woodbridge.
+        answer: Yes. Full-size 24-piece pizzas are on our catering menu. Catering needs at least 24 hours' notice, 48 hours for most of the menu, and 72 hours for full-size pizza, full-size focaccia and sourdough loaves. We can also host your event at our space in Woodbridge.
   - type: finalCta
     heading: Looking for pizza in Vaughan tonight?
     body: Book a table at our location in Woodbridge, or order online.
