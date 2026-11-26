@@ -1,12 +1,19 @@
 ---
-/** Centred lede and catering-menu button under the /catering-events banner. */
+/**
+ * Centred lede under the /catering-events banner, with an optional solid
+ * button (Request catering) before the catering-menu button.
+ */
 import { btn, layout, typeScale } from '../../lib/ui'
 import { inlineHtml, type SectionOf } from '../../lib/content'
+import { isCateringHref } from '../../lib/analytics'
 
 interface Props {
   block: SectionOf<'cateringIntro'>
 }
 const { block } = Astro.props
+const primary = block.primaryCta
+/* Off-site (the Google Form) always opens in a new tab, like links in copy. */
+const primaryNewTab = primary && (primary.newTab || primary.url.startsWith('https://'))
 ---
 
 <section class="catering-events-lede mb-section-gap-y wf-sm:mb-section-gap-y-sm">
@@ -20,7 +27,20 @@ const { block } = Astro.props
       ]}
       set:html={inlineHtml(block.body)}
     />
-    <div class="mt-space-24 flex justify-center">
+    <div class="mt-space-24 flex flex-wrap justify-center gap-space-16 wf-xs:flex-col">
+      {
+        primary && (
+          <a
+            href={primary.url}
+            target={primaryNewTab ? '_blank' : undefined}
+            rel={primaryNewTab ? 'noopener noreferrer' : undefined}
+            data-ga-event={isCateringHref(primary.url) ? 'catering_click' : undefined}
+            class={btn.primary}
+          >
+            <span>{primary.label}</span>
+          </a>
+        )
+      }
       <a href={block.cta.url} class={btn.outline}>
         <span>{block.cta.label}</span>
       </a>

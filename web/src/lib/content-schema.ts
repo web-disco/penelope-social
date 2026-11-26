@@ -190,6 +190,8 @@ const richTextIntro = z.strictObject({
 const cateringIntro = z.strictObject({
   type: z.literal('cateringIntro'),
   body: markdown,
+  /** Solid button before `cta`, e.g. Request catering (`url: "@cateringForm"`). */
+  primaryCta: navLink.optional(),
   cta: navLink,
 })
 
@@ -278,10 +280,12 @@ const formField = z.strictObject({
 
 const contactForm = z.strictObject({
   type: z.literal('contactForm'),
-  /** "events" posts to /api/events and adds the catering-notice checkbox. */
+  /** "events" posts to /api/events instead of /api/contact. */
   variant: z.enum(['contact', 'events']),
   heading: plain,
   intro: plain.optional(),
+  /** A button between the intro and the form, e.g. Request catering on /catering-events. */
+  cta: cta.optional(),
   fields: z.array(formField).min(1),
   submitLabel: plain,
   successMessage: plain,
@@ -363,6 +367,13 @@ export const menuSchema = z.strictObject({
   /** A block between the banner and the categories (the catering menu's "How to order"). */
   note: z.strictObject({ heading: plain, body: plain, cta: navLink }).optional(),
   /**
+   * A short list under the note (the catering menu's "How catering works"):
+   * an optional lead paragraph, then one bullet per item. Markdown links work.
+   */
+  howItWorks: z
+    .strictObject({ heading: plain, intro: markdown.optional(), items: z.array(markdown).min(1) })
+    .optional(),
+  /**
    * Feature this menu in a photo callout under the menu cards on the homepage
    * and /menus, and at the foot of each menu listed in `alsoOn`.
    */
@@ -381,6 +392,18 @@ export const menuSchema = z.strictObject({
         /** The #anchor for links to this section. */
         anchor: z.string().regex(/^[a-z0-9-]+$/, 'Lower-case letters, numbers and hyphens only.'),
         description: markdown.optional(),
+        /**
+         * A grouped list between the description and the items (the catering
+         * Treats box flavours): a subheading, one column per group, and an
+         * optional note under the columns. Markdown links work in the note.
+         */
+        flavours: z
+          .strictObject({
+            heading: plain,
+            groups: z.array(z.strictObject({ title: plain, items: z.array(plain).min(1) })).min(1),
+            note: markdown.optional(),
+          })
+          .optional(),
         items: z.array(z.union([menuItem, linkedMenuItem])),
       }),
     )

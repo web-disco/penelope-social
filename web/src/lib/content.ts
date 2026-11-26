@@ -361,12 +361,15 @@ function findItem(menu: Menu | undefined, name: string, anchor?: string) {
   return undefined
 }
 
+/** A menu category as the page renders it: linked items already swapped for their dish. */
+export type MenuCategoryView = Omit<MenuCategory, 'items'> & { items: MenuItem[] }
+
 /**
  * A menu's categories with every "from another menu" item swapped for the dish
  * it names: that menu's title and description, at this menu's price. The Happy
  * Hour list is built this way, so its dishes cannot drift from Dinner's.
  */
-export function menuCategories(menu: Menu): { title: string; anchor: string; description?: string; items: MenuItem[] }[] {
+export function menuCategories(menu: Menu): MenuCategoryView[] {
   return menu.categories.map((category) => ({
     ...category,
     items: category.items.map((item) => {

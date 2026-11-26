@@ -5,10 +5,10 @@
  * An empty list stays titled, with a "nothing right now" line.
  */
 import { layout, typeScale } from '../lib/ui'
-import { offerFor, paragraphsHtml, type MenuItemOffer } from '../lib/content'
+import { inlineHtml, offerFor, paragraphsHtml, type MenuCategoryView, type MenuItemOffer } from '../lib/content'
 
 interface Props {
-  categories: { title: string; anchor: string; description?: string; items: { title: string; description?: string; price?: string }[] }[]
+  categories: MenuCategoryView[]
   /** After a banner that already has mb-section-gap-y. False when another cream block sits above. */
   flushTop?: boolean
   /** Dishes another menu borrows (Happy Hour), by name: each gets a link to it. */
@@ -31,6 +31,7 @@ function isMultiPrice(price?: string) {
   categories.map((category, index) => {
     const blurb = category.description ? paragraphsHtml(category.description) : ''
     const items = category.items
+    const flavours = category.flavours
     return (
       <section
         id={category.anchor}
@@ -57,6 +58,34 @@ function isMultiPrice(price?: string) {
               ]}
               set:html={blurb}
             />
+          )}
+          {flavours && (
+            <div class="menu-flavours mb-space-48 wf-sm:mb-space-32">
+              <h3 class:list={['mt-0 mb-space-24 text-charcoal', typeScale.title]}>{flavours.heading}</h3>
+              <div class="grid grid-cols-3 gap-space-32 wf-md:grid-cols-2 wf-sm:grid-cols-1 wf-sm:gap-space-24">
+                {flavours.groups.map((group) => (
+                  <div>
+                    <h4 class:list={['mt-0 mb-space-12 text-charcoal', typeScale.label]}>{group.title}</h4>
+                    <ul role="list" class:list={['my-0 list-none space-y-space-8 pl-0 text-charcoal', typeScale.body]}>
+                      {group.items.map((name) => (
+                        <li>{name}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              {flavours.note && (
+                <p
+                  class:list={[
+                    'mt-space-24 mb-0 text-charcoal',
+                    '[&_a]:text-charcoal [&_a]:underline [&_a]:underline-offset-[0.18em] [&_a]:decoration-charcoal/40',
+                    '[&_a]:transition-opacity [&_a]:duration-[350ms] hover:[&_a]:opacity-70',
+                    typeScale.body,
+                  ]}
+                  set:html={inlineHtml(flavours.note)}
+                />
+              )}
+            </div>
           )}
           {items.length ? (
             <div class="menu-category-wrapper w-dyn-list">

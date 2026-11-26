@@ -17,6 +17,8 @@ links:
   bakehouse: https://penelopebakehouse.com
   bakehouseMenu: https://penelopebakehouse.com/menu
   bakehouseCatering: https://penelopebakehouse.com/catering
+  # The Request catering form (Google Forms). Every Request catering button uses @cateringForm.
+  cateringForm: https://docs.google.com/forms/d/e/1FAIpQLSdmTxQoMoEYKTNIdWPi4p05Yh1ywcZxiQBBG2IJUWdWCgirgg/viewform
   bakehouseOrder: https://order.toasttab.com/online/penelope-bakehouse-scarborough-71-howden-road?diningOption=takeout&rwg_token=AE37R_ia7EAZEVcG9NpbtfhSwTVvmCeGwEAHkDzGsiouYTQl4FQHPdw2vVFRRzlSLmtTqQLuqAjNDwNCl8DpKxGNTJ4TST6CLQ%3D%3D
 
 # Penelope Social, Woodbridge. Vaughan is the wider area, never the city.

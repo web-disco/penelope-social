@@ -19,7 +19,7 @@ home:
   - question: Where does your bread come from?
     answer: Our sister bakehouse in Scarborough, [Penelope Bakehouse](@bakehouse), bakes it from the same starter. Its menu, hours and online ordering are on penelopebakehouse.com.
   - question: Do you offer catering and events?
-    answer: Yes. Book trays or a night in the room on [catering and events](/catering-events). View the tray list on our [catering menu](/menus/catering). We prefer 24 hours' notice for catering.
+    answer: Yes. Book trays or a night in the room on [catering and events](/catering-events). View the tray list on our [catering menu](/menus/catering). Catering needs at least 24 hours' notice, 48 hours for most of the menu, and 72 hours for full-size pizza, full-size focaccia and sourdough loaves.
   - question: Can I order online?
     answer: Yes. [Order online](@order) through Toast for pickup.
 about:
@@ -40,13 +40,13 @@ contact:
     hours: true
 catering:
   - question: What is the difference between catering and events?
-    answer: "Catering is food to-go, trays from the [catering menu](/menus/catering). Events are hosted here: birthdays and work dinners, or a private night. Book both on this page."
+    answer: "Catering is food to-go, trays from the [catering menu](/menus/catering). Events are hosted here: birthdays and work dinners, or a private night. Order catering through the [Request catering form](@cateringForm), and plan events with the Plan your event form on this page."
   - question: How much notice do you need?
-    answer: We prefer 24 hours' notice for catering orders. Events need more lead time so we can hold the room and the kitchen.
+    answer: Catering needs at least 24 hours' notice, 48 hours for most of the menu, and 72 hours for full-size pizza, full-size focaccia and sourdough loaves. Events need more lead time so we can hold the room and the kitchen.
   - question: Where is the event space?
     answer: At Penelope Social, [125 Hawkview Blvd, Woodbridge, ON L4H 2E2](/locations/woodbridge), in Vaughan.
   - question: Can I just order trays?
-    answer: Yes. See the [catering menu](/menus/catering), then send the form on this page. Choose “Catering” as the reason.
+    answer: Yes. See the [catering menu](/menus/catering), then send your order through the [Request catering form](@cateringForm).
 woodbridge:
   - question: Where is Penelope Social?
     answer: 125 Hawkview Blvd, Woodbridge, ON L4H 2E2. Phone (905) 607-0606.

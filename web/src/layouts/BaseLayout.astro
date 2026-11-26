@@ -146,6 +146,8 @@ const gaMeasurementId =
 
         function isCateringHref(href) {
           if (!href) return false
+          // The Request catering form (site.yaml → links.cateringForm).
+          if (/^https:\/\/docs\.google\.com\/forms\//i.test(href)) return true
           var path = href.replace(/^https?:\/\/[^/]+/i, '').replace(/\/$/, '') || '/'
           return path === '/catering-events'
         }
