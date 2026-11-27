@@ -5,9 +5,10 @@
  * Built so it can't become the popup people hate:
  * - never on page load — it waits for SHOW_AFTER_MS on the page or half a page
  *   scrolled, whichever comes first, and shows at most once per visit;
- * - never on the page its main button links to;
+ * - never on a page one of its buttons links to;
  * - closing it (button, ✕, Esc, backdrop) hides it for `dismissDays`;
- *   clicking through hides it for the rest of the campaign.
+ *   clicking through (either button, or a link in the text) hides it for the
+ *   rest of the campaign.
  *
  * A campaign is keyed on the title, so retitling it in site.yaml shows the new
  * popup to people who closed the old one.
@@ -31,6 +32,8 @@ interface Props {
 const { popup } = Astro.props
 
 const cta = popup.primaryCta
+const secondaryCta = popup.secondaryCta
+const ctaUrls = [cta, secondaryCta].filter((link) => link !== undefined).map((link) => link.url)
 const textHtml = popup.text ? paragraphsHtml(popup.text) : ''
 const hasText = Boolean(textHtml)
 
@@ -42,6 +45,12 @@ const SECONDARY_BTN =
   'btn outline text-center uppercase font-body font-medium leading-none no-underline ' +
   'transition-[background-color,color] duration-[350ms] px-6 py-[18px] border-2 border-charcoal ' +
   'bg-brand-transparent text-charcoal hover:bg-charcoal hover:text-beige cursor-pointer wf-xs:w-full'
+
+/* With two buttons, "No thanks" steps down to a text link so it doesn't
+   compete with them. */
+const DISMISS_LINK =
+  'marketing-popup__dismiss cursor-pointer border-0 bg-transparent p-0 font-body text-[14px] ' +
+  'text-charcoal/75 underline underline-offset-4 transition-colors duration-[350ms] hover:text-charcoal'
 ---
 
 {
@@ -57,7 +66,7 @@ const SECONDARY_BTN =
       data-start={popup.startDate ?? ''}
       data-end={popup.endDate ?? ''}
       data-dismiss-days={popup.dismissDays}
-      data-cta-url={cta.url}
+      data-cta-urls={JSON.stringify(ctaUrls)}
       data-lenis-prevent
     >
       <div class="relative bg-cream text-charcoal">
@@ -115,10 +124,29 @@ const SECONDARY_BTN =
             >
               <span>{cta.label}</span>
             </a>
-            <button type="button" class={SECONDARY_BTN} data-popup-close>
-              <span>{popup.secondaryLabel}</span>
-            </button>
+            {secondaryCta ? (
+              <a
+                href={secondaryCta.url}
+                target={secondaryCta.newTab ? '_blank' : undefined}
+                rel={secondaryCta.newTab ? 'noopener noreferrer' : undefined}
+                class={SECONDARY_BTN}
+                data-popup-cta
+              >
+                <span>{secondaryCta.label}</span>
+              </a>
+            ) : (
+              <button type="button" class={SECONDARY_BTN} data-popup-close>
+                <span>{popup.dismissLabel}</span>
+              </button>
+            )}
           </div>
+          {secondaryCta && (
+            <div class="mt-space-24 wf-xs:text-center">
+              <button type="button" class={DISMISS_LINK} data-popup-close>
+                {popup.dismissLabel}
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </dialog>
@@ -168,7 +196,8 @@ const SECONDARY_BTN =
     font-weight: 500;
   }
 
-  .marketing-popup__x:focus-visible {
+  .marketing-popup__x:focus-visible,
+  .marketing-popup__dismiss:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 2px;
   }
@@ -237,6 +266,15 @@ const SECONDARY_BTN =
     }
   }
 
+  function ctaUrls(dialog: HTMLElement): string[] {
+    try {
+      const urls: unknown = JSON.parse(dialog.dataset.ctaUrls ?? '[]')
+      return Array.isArray(urls) ? urls.filter((url): url is string => typeof url === 'string') : []
+    } catch {
+      return []
+    }
+  }
+
   /** YYYY-MM-DD in the visitor's own timezone, to compare with Sanity dates. */
   const today = () => new Date().toLocaleDateString('en-CA')
 
@@ -294,12 +332,15 @@ const SECONDARY_BTN =
       if (event.target === dialog) dialog.close()
     })
 
-    dialog.querySelector('[data-popup-cta]')?.addEventListener('click', () => {
-      closedBy = 'cta'
-      track('popup_click', { popup: campaign })
-      if (forced) return
-      hide(CLICKED_DAYS)
-    })
+    /* Both buttons, and any link in the text, count as clicking through. */
+    dialog.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((link) =>
+      link.addEventListener('click', () => {
+        closedBy = 'cta'
+        track('popup_click', { popup: campaign, link_url: link.getAttribute('href') ?? '' })
+        if (forced) return
+        hide(CLICKED_DAYS)
+      }),
+    )
 
     if (forced) {
       open()
@@ -310,7 +351,7 @@ const SECONDARY_BTN =
     const { start, end } = dialog.dataset
     if (start && date < start) return
     if (end && date > end) return
-    if (isCtaPage(dialog.dataset.ctaUrl ?? '')) return
+    if (ctaUrls(dialog).some(isCtaPage)) return
 
     const stored = read<Stored>(() => localStorage, STORAGE_KEY)
     if (stored === undefined) return
