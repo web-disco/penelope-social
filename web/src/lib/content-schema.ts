@@ -534,7 +534,10 @@ export const siteSchema = z.strictObject({
     text: markdown.optional(),
     image: image.optional(),
     primaryCta: navLink,
-    secondaryLabel: plain,
+    /** A second button, outlined, beside the main one. */
+    secondaryCta: navLink.optional(),
+    /** The button that closes the popup ("No thanks"). */
+    dismissLabel: plain,
     startDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
     endDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
     /** Days a closed popup stays hidden. */

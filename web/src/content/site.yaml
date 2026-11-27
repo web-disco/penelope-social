@@ -212,23 +212,29 @@ footer:
       url: https://www.google.com/search?q=penelope+social&oq=penelope+social&gs_lcrp=EgZjaHJvbWUqBggAEEUYOzIGCAAQRRg7MgYIARBFGDsyBggCEEUYQTIGCAMQRRg8MgYIBBBFGDwyBggFEC4YQNIBCDM0NTRqMGoxqAIAsAIA&sourceid=chrome&ie=UTF-8#lrd=0x882b2f14f3cd3fbb:0x3e54ffff5191a9bd,1,,,,
 announcement:
   enabled: true
-  text: Christmas party dates are filling up fast, book now!
-  mobileText: Book your Christmas party
-  url: /catering-events?event
+  text: Hosting for the holidays? Order catering trays and sourdough bread ahead.
+  mobileText: Order holiday catering and bread
+  url: /menus/catering
+  endDate: "2026-12-24"
 popup:
   enabled: true
-  title: Booking a Corporate Christmas Party?
+  title: Hosting for the holidays?
   text: |-
-    December dates are starting to fill up, so we wanted to show our appreciation to our most loyal customers by giving you first dibs on our most sought-after Christmas event dates.
+    Party trays of focaccia sandwiches, pizza and shareables for the office or the family table. Pickup or delivery from Woodbridge.
 
-    Give your team something a little different this year. Cocktails and passed hors d'oeuvres or a seated four-course dinner, tailored to your group.
+    Pre-order sourdough loaves and focaccia for the holidays too. Loaves need 72 hours' notice.
+
+    Planning a Christmas party? [Ask about event dates](/catering-events?event).
   image:
-    src: popup-event.jpg
-    alt: Event at Penelope
+    src: mortadella-sandwich-tray.jpg
+    alt: A tray of mortadella focaccia sandwiches
   primaryCta:
-    label: Book Now
-    url: /catering-events?event
-  secondaryLabel: No thanks
+    label: Order catering
+    url: /menus/catering
+  secondaryCta:
+    label: Pre-order bread
+    url: /menus/catering#sourdough-loaves
+  dismissLabel: No thanks
   startDate: "2026-09-22"
-  endDate: "2026-12-01"
+  endDate: "2026-12-24"
   dismissDays: 30
