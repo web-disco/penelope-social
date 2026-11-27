@@ -15,19 +15,6 @@
       "autoPort": false
     },
     {
-      "name": "penelope-studio",
-      "runtimeExecutable": "pnpm",
-      "runtimeArgs": [
-        "--filter",
-        "@penelope/studio",
-        "dev",
-        "--port",
-        "3334"
-      ],
-      "port": 3334,
-      "autoPort": false
-    },
-    {
       "name": "penelope-web-4381",
       "runtimeExecutable": "pnpm",
       "runtimeArgs": [
